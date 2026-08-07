@@ -15,6 +15,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Questrial&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <!-- Leaflet 1.9.4, vendored locally so the map has no runtime CDN dependency. -->
 <link rel="stylesheet" href="/seasonal/vendor/leaflet.css" />
+<script>if(window.self!==window.top){document.documentElement.className+=' embedded';}</script>
 <style>
 :root{
   --bg:hsl(48 36% 97%);
@@ -46,6 +47,10 @@ a{color:inherit}
 
 /* header */
 header{border-bottom:1px solid var(--border);background:var(--bg);position:sticky;top:0;z-index:20}
+/* When embedded in the Shopify store the host page already supplies branding and nav,
+   so hide our own header to avoid two stacked navigation bars. */
+html.embedded header{display:none}
+html.embedded .hero{padding-top:26px}
 .hdr{display:flex;align-items:center;justify-content:space-between;gap:16px;height:64px}
 .brand span{white-space:nowrap}
 .brand{display:flex;align-items:center;gap:10px;text-decoration:none}
