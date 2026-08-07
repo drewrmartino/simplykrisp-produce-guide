@@ -59,7 +59,10 @@ html.embedded .hero{padding-top:26px}
    static and unbounded, and this selector would otherwise outrank them. */
 @media (min-width:1001px){
   html.sk-autoheight .mk{align-self:start}
-  html.sk-autoheight .mkinner{position:static;top:auto;max-height:640px}
+  /* No height cap: the rail runs as far down as it needs to, so every market is
+     on the page and .mscroll never has to scroll inside it. */
+  html.sk-autoheight .mkinner{position:static;top:auto;max-height:none;overflow:visible}
+  html.sk-autoheight .mscroll{overflow:visible;min-height:0;margin:0;padding:0}
 }
 .hdr{display:flex;align-items:center;justify-content:space-between;gap:16px;height:64px}
 .brand span{white-space:nowrap}
