@@ -15,7 +15,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Questrial&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <!-- Leaflet 1.9.4, vendored locally so the map has no runtime CDN dependency. -->
 <link rel="stylesheet" href="/seasonal/vendor/leaflet.css" />
-<script>if(window.self!==window.top){document.documentElement.className+=' embedded';}</script>
+<script>if(window.self!==window.top){document.documentElement.className+=' embedded sk-autoheight';}</script>
 <style>
 :root{
   --bg:hsl(48 36% 97%);
@@ -51,6 +51,12 @@ header{border-bottom:1px solid var(--border);background:var(--bg);position:stick
    so hide our own header to avoid two stacked navigation bars. */
 html.embedded header{display:none}
 html.embedded .hero{padding-top:26px}
+/* In auto-height mode the frame is as tall as its content, so it never scrolls:
+   sticky has nothing to travel against and 100vh would resolve to the full
+   content height, ballooning the rail. Pin it to a fixed height instead and let
+   .mscroll keep handling the market list overflow. */
+html.sk-autoheight .mk{align-self:start}
+html.sk-autoheight .mkinner{position:static;top:auto;max-height:640px}
 .hdr{display:flex;align-items:center;justify-content:space-between;gap:16px;height:64px}
 .brand span{white-space:nowrap}
 .brand{display:flex;align-items:center;gap:10px;text-decoration:none}
@@ -941,14 +947,13 @@ footer p{max-width:76ch;margin-bottom:8px}
 
    When this page is iframed into the Shopify store it would otherwise be a
    fixed-height window containing several thousand pixels of content, giving
-   the visitor a scrollbar inside a scrollbar. Below 900px the layout is a
-   single column and the market rail is already static, so we report our real
-   height to the parent and let the iframe grow to fit -- one natural scroll.
+   the visitor a scrollbar inside a scrollbar. Instead we report our real height
+   to the parent and let the iframe grow to fit, so there is one natural scroll
+   at every width.
 
-   Above 900px we deliberately do NOT do this: the market rail is
-   position:sticky with max-height:calc(100vh - 104px), which only works while
-   the frame has a bounded viewport. Reporting height 0 tells the parent to
-   fall back to its CSS height.
+   The trade-off is the sticky market rail, which needs a bounded frame viewport
+   to travel against. The html.sk-autoheight rules above pin it to a fixed
+   height instead; .mscroll still scrolls the market list inside it.
 
    Once the frame stops scrolling, scrollIntoView() inside it does nothing, so
    we expose SK_SCROLL() and ask the parent to scroll instead.
@@ -956,16 +961,12 @@ footer p{max-width:76ch;margin-bottom:8px}
 (function () {
   if (window.self === window.top) return;
 
-  var AUTO_HEIGHT_BELOW = '(max-width: 900px)';
   var lastSent = -1;
 
-  function autoHeightOn() {
-    return window.matchMedia(AUTO_HEIGHT_BELOW).matches;
-  }
-
   function send() {
-    var h = autoHeightOn() ? Math.ceil(document.documentElement.scrollHeight) : 0;
-    if (h === lastSent) return;
+    var h = Math.ceil(document.documentElement.scrollHeight);
+    /* Ignore sub-pixel churn so we don't fight the parent's height transition. */
+    if (Math.abs(h - lastSent) < 2) return;
     lastSent = h;
     parent.postMessage({ sk: 'height', height: h }, '*');
   }
@@ -978,14 +979,8 @@ footer p{max-width:76ch;margin-bottom:8px}
   }
 
   /* Parent-assisted scrolling, used when the frame itself cannot scroll. */
-  window.SK_SCROLL = function (elm, block) {
+  window.SK_SCROLL = function (elm) {
     if (!elm) return;
-    if (!autoHeightOn()) {
-      if (elm.scrollIntoView) {
-        elm.scrollIntoView({ behavior: 'smooth', block: block || 'start', inline: 'nearest' });
-      }
-      return;
-    }
     var top = elm.getBoundingClientRect().top + (window.pageYOffset || 0);
     parent.postMessage({ sk: 'scrollto', top: Math.max(0, Math.round(top) - 12) }, '*');
   };
