@@ -647,8 +647,11 @@ footer p{max-width:76ch;margin-bottom:8px}
     });
     if (fromPin) {
       var card = el('mgrid').querySelector('.mcard[data-id="' + id + '"]');
-      if (card && card.scrollIntoView) {
-        card.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'smooth' });
+      if (card) {
+        if (window.SK_SCROLL) { window.SK_SCROLL(card, 'nearest'); }
+        else if (card.scrollIntoView) {
+          card.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'smooth' });
+        }
       }
     }
   }
@@ -887,7 +890,8 @@ footer p{max-width:76ch;margin-bottom:8px}
       url.searchParams.set('zip', digits);
       if (mstate.radius !== 40) url.searchParams.set('radius', String(mstate.radius));
       history.replaceState(null, '', url.toString());
-      el('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (window.SK_SCROLL) { window.SK_SCROLL(el('results'), 'start'); }
+      else { el('results').scrollIntoView({ behavior: 'smooth', block: 'start' }); }
     }).catch(function () {
       el('go').disabled = false;
       err.textContent = 'Couldn\u2019t load the seasonal data. Please refresh.';
@@ -928,6 +932,73 @@ footer p{max-width:76ch;margin-bottom:8px}
   }
   var pre = qs.get('zip');
   if (pre) { el('zip').value = pre.replace(/\D/g, '').slice(0, 5); submit(el('zip').value); }
+})();
+</script>
+
+<script>
+/* ---------------------------------------------------------------------------
+   Embedded height sync.
+
+   When this page is iframed into the Shopify store it would otherwise be a
+   fixed-height window containing several thousand pixels of content, giving
+   the visitor a scrollbar inside a scrollbar. Below 900px the layout is a
+   single column and the market rail is already static, so we report our real
+   height to the parent and let the iframe grow to fit -- one natural scroll.
+
+   Above 900px we deliberately do NOT do this: the market rail is
+   position:sticky with max-height:calc(100vh - 104px), which only works while
+   the frame has a bounded viewport. Reporting height 0 tells the parent to
+   fall back to its CSS height.
+
+   Once the frame stops scrolling, scrollIntoView() inside it does nothing, so
+   we expose SK_SCROLL() and ask the parent to scroll instead.
+--------------------------------------------------------------------------- */
+(function () {
+  if (window.self === window.top) return;
+
+  var AUTO_HEIGHT_BELOW = '(max-width: 900px)';
+  var lastSent = -1;
+
+  function autoHeightOn() {
+    return window.matchMedia(AUTO_HEIGHT_BELOW).matches;
+  }
+
+  function send() {
+    var h = autoHeightOn() ? Math.ceil(document.documentElement.scrollHeight) : 0;
+    if (h === lastSent) return;
+    lastSent = h;
+    parent.postMessage({ sk: 'height', height: h }, '*');
+  }
+
+  var queued = false;
+  function schedule() {
+    if (queued) return;
+    queued = true;
+    requestAnimationFrame(function () { queued = false; send(); });
+  }
+
+  /* Parent-assisted scrolling, used when the frame itself cannot scroll. */
+  window.SK_SCROLL = function (elm, block) {
+    if (!elm) return;
+    if (!autoHeightOn()) {
+      if (elm.scrollIntoView) {
+        elm.scrollIntoView({ behavior: 'smooth', block: block || 'start', inline: 'nearest' });
+      }
+      return;
+    }
+    var top = elm.getBoundingClientRect().top + (window.pageYOffset || 0);
+    parent.postMessage({ sk: 'scrollto', top: Math.max(0, Math.round(top) - 12) }, '*');
+  };
+
+  if (window.ResizeObserver) {
+    new ResizeObserver(schedule).observe(document.documentElement);
+  }
+  window.addEventListener('resize', schedule);
+  window.addEventListener('load', schedule);
+  document.addEventListener('transitionend', schedule);
+  /* Safety net for anything the observer misses (web fonts, map tiles). */
+  setInterval(send, 1000);
+  schedule();
 })();
 </script>
 </body>
