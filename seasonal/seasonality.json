@@ -1,0 +1,2694 @@
+{
+  "meta": {
+    "sources": [
+      "https://acl.gov/sites/default/files/nutrition/SeasonalProduceChartByRegion.pdf",
+      "https://www.seasonalfoodguide.org/",
+      "https://health.extension.wisc.edu/files/2024/10/Season_Availability_Chart-English.pdf",
+      "https://extension.usu.edu/fscreate/files/2023-26-staff/Harvest-Schedule-Central-Utah-PR.pdf",
+      "https://extension.usu.edu/yardandgarden/research/local-fruit-and-vegetable-availability-along-the-wasatch-front",
+      "https://www.thespruceeats.com/utah-seasonal-fruits-and-vegetables-2217220",
+      "https://site.extension.uga.edu/aaecext/2025/12/georgias-month-by-month-produce-guide/",
+      "https://www.gfb.org/learn/georgia-neighbors/post/georgia-harvest-calendar",
+      "https://producebites.com/wp-content/uploads/2022/06/Round2-Calendar-3.37x6.5-4.pdf",
+      "https://cdn.agclassroom.org/ca/resources/gardens/seasonalchart.pdf",
+      "https://californiagrown.org/wp-content/uploads/2020/05/CAGrown_EatTheSeason_Calendar.pdf",
+      "https://ucanr.edu/site/online-agricultural-resources/harvest-calendar"
+    ],
+    "notes": "Nine custom regions (not individual states) were built by combining the ACL/Farmers' Almanac regional seasonal produce chart (acl.gov) with state-level cross-checks from seasonalfoodguide.org (NRDC + state ag departments + university extension) and direct university extension harvest calendars for Wisconsin (UW-Madison Extension), Utah (USU Extension, Wasatch Front availability chart, Central Utah harvest schedule), Georgia (UGA Extension / Georgia Grows / Georgia Farm Bureau), and California (CDFA seasonal chart, CA Grown, UC ANR harvest calendar). Because our region list groups states differently than ACL's regions (e.g. our 'southwest' adds NM while our 'south' merges ACL's South Central and Southeast regions minus FL), month ranges were re-derived per produce item by blending the relevant ACL sub-regions and validating against the representative-state extension data above. Non-native items (banana, mango, pineapple, papaya, kiwi, lemon, lime, avocado, orange, grapefruit, fig, pomegranate) are included only in regions where they are commercially/locally grown (citrus and avocado in Florida and the Southwest/California; some citrus and pomegranate in the South for Texas; tropical fruit in Hawaii and Florida; kiwi and fig in California). Where cold storage realistically extends farmers-market/grocery availability of a locally grown crop (apples, potatoes, onions, winter squash, cabbage, carrots, garlic), storage months are included in addition to fresh harvest months, consistent with the ACL chart's own winter/storage footnotes for regions like Alaska. Because our regions are broad, tropical/imported items unavailable from local storage anywhere (e.g. banana, papaya, pineapple outside Hawaii/Florida) are simply omitted from that region's season list rather than fabricated. Ranges reflect typical/average conditions; exact timing varies by microclimate, elevation, and year.",
+    "updated": "2026-08-06"
+  },
+  "stateToRegion": {
+    "WA": "northwest",
+    "OR": "northwest",
+    "ID": "northwest",
+    "CA": "southwest",
+    "NV": "southwest",
+    "AZ": "southwest",
+    "UT": "southwest",
+    "NM": "southwest",
+    "MT": "north_central",
+    "WY": "north_central",
+    "CO": "north_central",
+    "ND": "north_central",
+    "SD": "north_central",
+    "NE": "north_central",
+    "KS": "north_central",
+    "MN": "north_central",
+    "IA": "north_central",
+    "MO": "north_central",
+    "WI": "great_lakes",
+    "MI": "great_lakes",
+    "IL": "great_lakes",
+    "IN": "great_lakes",
+    "OH": "great_lakes",
+    "KY": "great_lakes",
+    "ME": "northeast",
+    "NH": "northeast",
+    "VT": "northeast",
+    "MA": "northeast",
+    "RI": "northeast",
+    "CT": "northeast",
+    "NY": "northeast",
+    "NJ": "northeast",
+    "PA": "northeast",
+    "MD": "northeast",
+    "DE": "northeast",
+    "WV": "northeast",
+    "VA": "northeast",
+    "DC": "northeast",
+    "NC": "south",
+    "SC": "south",
+    "GA": "south",
+    "TN": "south",
+    "AL": "south",
+    "MS": "south",
+    "AR": "south",
+    "LA": "south",
+    "OK": "south",
+    "TX": "south",
+    "FL": "florida",
+    "AK": "alaska",
+    "HI": "hawaii"
+  },
+  "regionLabels": {
+    "northwest": "Pacific Northwest",
+    "southwest": "Southwest",
+    "north_central": "North Central / Great Plains",
+    "great_lakes": "Great Lakes / Ohio Valley",
+    "northeast": "Northeast / Mid-Atlantic",
+    "south": "South",
+    "florida": "Florida",
+    "alaska": "Alaska",
+    "hawaii": "Hawaii"
+  },
+  "seasons": {
+    "northwest": {
+      "Apple": [
+        1,
+        2,
+        3,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Cherry": [
+        6,
+        7,
+        8
+      ],
+      "Grape": [
+        9,
+        10
+      ],
+      "Pear": [
+        1,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Plum": [
+        8,
+        9,
+        10
+      ],
+      "Peach": [
+        7,
+        8,
+        9
+      ],
+      "Nectarine": [
+        7,
+        8,
+        9
+      ],
+      "Apricot": [
+        6,
+        7
+      ],
+      "Blueberry": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "Raspberry": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "Blackberry": [
+        7,
+        8,
+        9
+      ],
+      "Strawberry": [
+        5,
+        6,
+        7
+      ],
+      "Cranberry": [
+        9,
+        10,
+        11
+      ],
+      "Watermelon": [
+        8,
+        9
+      ],
+      "Cantaloupe": [
+        8,
+        9
+      ],
+      "Honeydew": [
+        8,
+        9
+      ],
+      "Fig": [
+        9,
+        10
+      ],
+      "Asparagus": [
+        4,
+        5,
+        6
+      ],
+      "Green Beans": [
+        7,
+        8,
+        9
+      ],
+      "Peas": [
+        5,
+        6,
+        7
+      ],
+      "Broccoli": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "Brussels Sprouts": [
+        9,
+        10,
+        11,
+        12
+      ],
+      "Cabbage": [
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "Cauliflower": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "Carrot": [
+        1,
+        2,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Celery": [
+        7,
+        8,
+        9,
+        10
+      ],
+      "Corn": [
+        7,
+        8,
+        9
+      ],
+      "Cucumber": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "Eggplant": [
+        7,
+        8,
+        9
+      ],
+      "Garlic": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Kale": [
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "Lettuce": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "Onion": [
+        1,
+        2,
+        3,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Potato": [
+        1,
+        2,
+        3,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Radish": [
+        4,
+        5,
+        6,
+        9,
+        10
+      ],
+      "Spinach": [
+        4,
+        5,
+        6,
+        9,
+        10
+      ],
+      "Sweet Potato": [
+        9,
+        10,
+        11
+      ],
+      "Zucchini": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "Squash (Winter)": [
+        1,
+        2,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Tomato": [
+        7,
+        8,
+        9,
+        10
+      ],
+      "Bell Pepper": [
+        7,
+        8,
+        9
+      ],
+      "Herbs (Fresh)": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "Mushroom": [
+        4,
+        5,
+        9,
+        10,
+        11
+      ],
+      "Green Onion": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    "southwest": {
+      "Apple": [
+        1,
+        2,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Avocado": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "Lemon": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Lime": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "Orange": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        11,
+        12
+      ],
+      "Grapefruit": [
+        1,
+        2,
+        3,
+        4,
+        11,
+        12
+      ],
+      "Grape": [
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "Kiwi": [
+        1,
+        2,
+        3,
+        10,
+        11,
+        12
+      ],
+      "Fig": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "Pomegranate": [
+        9,
+        10,
+        11,
+        12
+      ],
+      "Cherry": [
+        5,
+        6,
+        7
+      ],
+      "Peach": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "Nectarine": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "Apricot": [
+        5,
+        6,
+        7
+      ],
+      "Plum": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "Pear": [
+        1,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Strawberry": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "Blueberry": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "Blackberry": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "Raspberry": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "Watermelon": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "Cantaloupe": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "Honeydew": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "Asparagus": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "Green Beans": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "Peas": [
+        2,
+        3,
+        4,
+        5,
+        10,
+        11
+      ],
+      "Broccoli": [
+        1,
+        2,
+        3,
+        4,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Brussels Sprouts": [
+        1,
+        2,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Cabbage": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Cauliflower": [
+        1,
+        2,
+        3,
+        4,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Carrot": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Celery": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Corn": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "Cucumber": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "Eggplant": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "Garlic": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Kale": [
+        1,
+        2,
+        3,
+        4,
+        10,
+        11,
+        12
+      ],
+      "Lettuce": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Onion": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Potato": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Radish": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Spinach": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        10,
+        11,
+        12
+      ],
+      "Sweet Potato": [
+        9,
+        10,
+        11,
+        12
+      ],
+      "Zucchini": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "Squash (Winter)": [
+        1,
+        2,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Tomato": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "Bell Pepper": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "Jalapeño": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "Herbs (Fresh)": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Mushroom": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Green Onion": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ]
+    },
+    "north_central": {
+      "Apple": [
+        1,
+        2,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Cherry": [
+        7,
+        8
+      ],
+      "Grape": [
+        9,
+        10
+      ],
+      "Plum": [
+        8,
+        9
+      ],
+      "Peach": [
+        7,
+        8,
+        9
+      ],
+      "Nectarine": [
+        7,
+        8
+      ],
+      "Pear": [
+        9,
+        10
+      ],
+      "Blueberry": [
+        7,
+        8
+      ],
+      "Raspberry": [
+        7,
+        8,
+        9
+      ],
+      "Blackberry": [
+        7,
+        8
+      ],
+      "Strawberry": [
+        6,
+        7
+      ],
+      "Watermelon": [
+        8,
+        9
+      ],
+      "Cantaloupe": [
+        8,
+        9
+      ],
+      "Honeydew": [
+        8,
+        9
+      ],
+      "Asparagus": [
+        4,
+        5,
+        6
+      ],
+      "Green Beans": [
+        7,
+        8,
+        9
+      ],
+      "Peas": [
+        6,
+        7
+      ],
+      "Broccoli": [
+        7,
+        8,
+        9,
+        10
+      ],
+      "Brussels Sprouts": [
+        9,
+        10,
+        11
+      ],
+      "Cabbage": [
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Cauliflower": [
+        8,
+        9,
+        10
+      ],
+      "Carrot": [
+        1,
+        2,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Celery": [
+        8,
+        9
+      ],
+      "Corn": [
+        7,
+        8,
+        9
+      ],
+      "Cucumber": [
+        7,
+        8,
+        9
+      ],
+      "Eggplant": [
+        7,
+        8,
+        9
+      ],
+      "Garlic": [
+        1,
+        2,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Kale": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "Lettuce": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "Onion": [
+        1,
+        2,
+        3,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Potato": [
+        1,
+        2,
+        3,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Radish": [
+        5,
+        6,
+        9,
+        10
+      ],
+      "Spinach": [
+        5,
+        6,
+        9,
+        10
+      ],
+      "Sweet Potato": [
+        9,
+        10
+      ],
+      "Zucchini": [
+        7,
+        8,
+        9
+      ],
+      "Squash (Winter)": [
+        1,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Tomato": [
+        7,
+        8,
+        9
+      ],
+      "Bell Pepper": [
+        8,
+        9
+      ],
+      "Herbs (Fresh)": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "Mushroom": [
+        5,
+        6,
+        9,
+        10
+      ],
+      "Green Onion": [
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    "great_lakes": {
+      "Apple": [
+        1,
+        2,
+        3,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Cherry": [
+        7,
+        8
+      ],
+      "Grape": [
+        9,
+        10
+      ],
+      "Plum": [
+        8,
+        9
+      ],
+      "Peach": [
+        7,
+        8,
+        9
+      ],
+      "Nectarine": [
+        7,
+        8
+      ],
+      "Pear": [
+        9,
+        10
+      ],
+      "Blueberry": [
+        7,
+        8
+      ],
+      "Raspberry": [
+        7,
+        8,
+        9
+      ],
+      "Blackberry": [
+        7,
+        8
+      ],
+      "Strawberry": [
+        6,
+        7
+      ],
+      "Cranberry": [
+        9,
+        10,
+        11
+      ],
+      "Watermelon": [
+        8,
+        9
+      ],
+      "Cantaloupe": [
+        8,
+        9
+      ],
+      "Honeydew": [
+        8,
+        9
+      ],
+      "Asparagus": [
+        5,
+        6
+      ],
+      "Green Beans": [
+        7,
+        8,
+        9
+      ],
+      "Peas": [
+        6,
+        7
+      ],
+      "Broccoli": [
+        7,
+        8,
+        9,
+        10
+      ],
+      "Brussels Sprouts": [
+        8,
+        9,
+        10
+      ],
+      "Cabbage": [
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Cauliflower": [
+        7,
+        8,
+        9,
+        10
+      ],
+      "Carrot": [
+        1,
+        2,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Celery": [
+        8,
+        9,
+        10
+      ],
+      "Corn": [
+        7,
+        8,
+        9
+      ],
+      "Cucumber": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "Eggplant": [
+        7,
+        8,
+        9
+      ],
+      "Garlic": [
+        1,
+        2,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Kale": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "Lettuce": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "Onion": [
+        1,
+        2,
+        3,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Potato": [
+        1,
+        2,
+        3,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Radish": [
+        5,
+        6,
+        8,
+        9
+      ],
+      "Spinach": [
+        5,
+        6,
+        9,
+        10
+      ],
+      "Sweet Potato": [
+        8,
+        9,
+        10
+      ],
+      "Zucchini": [
+        7,
+        8,
+        9
+      ],
+      "Squash (Winter)": [
+        1,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Tomato": [
+        7,
+        8,
+        9
+      ],
+      "Bell Pepper": [
+        7,
+        8,
+        9
+      ],
+      "Herbs (Fresh)": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "Mushroom": [
+        5,
+        6,
+        9,
+        10
+      ],
+      "Green Onion": [
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    "northeast": {
+      "Apple": [
+        1,
+        2,
+        3,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Cherry": [
+        6,
+        7
+      ],
+      "Grape": [
+        9,
+        10
+      ],
+      "Plum": [
+        8,
+        9
+      ],
+      "Peach": [
+        7,
+        8,
+        9
+      ],
+      "Nectarine": [
+        7,
+        8
+      ],
+      "Pear": [
+        9,
+        10
+      ],
+      "Blueberry": [
+        6,
+        7,
+        8
+      ],
+      "Raspberry": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "Blackberry": [
+        7,
+        8
+      ],
+      "Strawberry": [
+        5,
+        6
+      ],
+      "Cranberry": [
+        9,
+        10,
+        11
+      ],
+      "Watermelon": [
+        7,
+        8,
+        9
+      ],
+      "Cantaloupe": [
+        7,
+        8,
+        9
+      ],
+      "Honeydew": [
+        7,
+        8,
+        9
+      ],
+      "Fig": [
+        9
+      ],
+      "Asparagus": [
+        4,
+        5,
+        6
+      ],
+      "Green Beans": [
+        7,
+        8,
+        9
+      ],
+      "Peas": [
+        5,
+        6
+      ],
+      "Broccoli": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "Brussels Sprouts": [
+        9,
+        10,
+        11,
+        12
+      ],
+      "Cabbage": [
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Cauliflower": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "Carrot": [
+        1,
+        2,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Celery": [
+        8,
+        9,
+        10
+      ],
+      "Corn": [
+        7,
+        8,
+        9
+      ],
+      "Cucumber": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "Eggplant": [
+        7,
+        8,
+        9
+      ],
+      "Garlic": [
+        1,
+        2,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Kale": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "Lettuce": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "Onion": [
+        1,
+        2,
+        3,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Potato": [
+        1,
+        2,
+        3,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Radish": [
+        4,
+        5,
+        6,
+        9,
+        10
+      ],
+      "Spinach": [
+        4,
+        5,
+        6,
+        9,
+        10
+      ],
+      "Sweet Potato": [
+        9,
+        10,
+        11
+      ],
+      "Zucchini": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "Squash (Winter)": [
+        1,
+        2,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Tomato": [
+        7,
+        8,
+        9
+      ],
+      "Bell Pepper": [
+        7,
+        8,
+        9
+      ],
+      "Herbs (Fresh)": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "Mushroom": [
+        5,
+        6,
+        9,
+        10
+      ],
+      "Green Onion": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    "south": {
+      "Apple": [
+        1,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Peach": [
+        5,
+        6,
+        7,
+        8
+      ],
+      "Nectarine": [
+        5,
+        6,
+        7
+      ],
+      "Plum": [
+        6,
+        7,
+        8
+      ],
+      "Grape": [
+        8,
+        9,
+        10
+      ],
+      "Fig": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "Pear": [
+        8,
+        9,
+        10
+      ],
+      "Pomegranate": [
+        9,
+        10,
+        11
+      ],
+      "Watermelon": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "Cantaloupe": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "Honeydew": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "Blueberry": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "Blackberry": [
+        5,
+        6,
+        7
+      ],
+      "Raspberry": [
+        5,
+        6
+      ],
+      "Strawberry": [
+        3,
+        4,
+        5
+      ],
+      "Orange": [
+        1,
+        2,
+        3,
+        10,
+        11,
+        12
+      ],
+      "Grapefruit": [
+        1,
+        2,
+        3,
+        10,
+        11,
+        12
+      ],
+      "Lemon": [
+        1,
+        2,
+        10,
+        11,
+        12
+      ],
+      "Asparagus": [
+        3,
+        4,
+        5
+      ],
+      "Green Beans": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "Peas": [
+        4,
+        5,
+        6,
+        9,
+        10
+      ],
+      "Broccoli": [
+        3,
+        4,
+        5,
+        10,
+        11,
+        12
+      ],
+      "Brussels Sprouts": [
+        1,
+        2,
+        11,
+        12
+      ],
+      "Cabbage": [
+        1,
+        2,
+        4,
+        5,
+        6,
+        10,
+        11,
+        12
+      ],
+      "Cauliflower": [
+        3,
+        4,
+        5,
+        10,
+        11,
+        12
+      ],
+      "Carrot": [
+        1,
+        2,
+        4,
+        5,
+        6,
+        10,
+        11,
+        12
+      ],
+      "Celery": [
+        4,
+        5
+      ],
+      "Corn": [
+        5,
+        6,
+        7,
+        8
+      ],
+      "Cucumber": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "Eggplant": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "Garlic": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Kale": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        10,
+        11,
+        12
+      ],
+      "Lettuce": [
+        3,
+        4,
+        5,
+        10,
+        11,
+        12
+      ],
+      "Onion": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Potato": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Radish": [
+        3,
+        4,
+        5,
+        10,
+        11
+      ],
+      "Spinach": [
+        3,
+        4,
+        5,
+        10,
+        11
+      ],
+      "Sweet Potato": [
+        1,
+        2,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Zucchini": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "Squash (Winter)": [
+        1,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Tomato": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "Bell Pepper": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "Jalapeño": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "Herbs (Fresh)": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "Mushroom": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Green Onion": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ]
+    },
+    "florida": {
+      "Orange": [
+        1,
+        2,
+        3,
+        4,
+        10,
+        11,
+        12
+      ],
+      "Grapefruit": [
+        1,
+        2,
+        3,
+        4,
+        10,
+        11,
+        12
+      ],
+      "Lemon": [
+        1,
+        2,
+        3,
+        11,
+        12
+      ],
+      "Lime": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "Avocado": [
+        1,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Mango": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "Papaya": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Pineapple": [
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "Banana": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Fig": [
+        6,
+        7
+      ],
+      "Strawberry": [
+        1,
+        2,
+        3,
+        12
+      ],
+      "Blueberry": [
+        3,
+        4,
+        5
+      ],
+      "Watermelon": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "Cantaloupe": [
+        3,
+        4,
+        5
+      ],
+      "Honeydew": [
+        3,
+        4,
+        5
+      ],
+      "Grape": [
+        6,
+        7,
+        8
+      ],
+      "Tomato": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        11,
+        12
+      ],
+      "Bell Pepper": [
+        1,
+        2,
+        3,
+        4,
+        11,
+        12
+      ],
+      "Jalapeño": [
+        1,
+        2,
+        3,
+        4,
+        11,
+        12
+      ],
+      "Eggplant": [
+        1,
+        2,
+        3,
+        4,
+        11,
+        12
+      ],
+      "Cucumber": [
+        1,
+        2,
+        3,
+        4,
+        11,
+        12
+      ],
+      "Squash (Winter)": [
+        1,
+        2,
+        3,
+        11,
+        12
+      ],
+      "Zucchini": [
+        1,
+        2,
+        3,
+        4,
+        11,
+        12
+      ],
+      "Corn": [
+        4,
+        5,
+        6,
+        11,
+        12
+      ],
+      "Green Beans": [
+        1,
+        2,
+        3,
+        4,
+        11,
+        12
+      ],
+      "Cabbage": [
+        1,
+        2,
+        3,
+        4,
+        11,
+        12
+      ],
+      "Broccoli": [
+        1,
+        2,
+        3,
+        11,
+        12
+      ],
+      "Cauliflower": [
+        1,
+        2,
+        3,
+        11,
+        12
+      ],
+      "Carrot": [
+        1,
+        2,
+        3,
+        4,
+        11,
+        12
+      ],
+      "Celery": [
+        1,
+        2,
+        3,
+        4,
+        12
+      ],
+      "Lettuce": [
+        1,
+        2,
+        3,
+        4,
+        11,
+        12
+      ],
+      "Radish": [
+        1,
+        2,
+        3,
+        4,
+        11,
+        12
+      ],
+      "Potato": [
+        3,
+        4,
+        5
+      ],
+      "Sweet Potato": [
+        9,
+        10,
+        11
+      ],
+      "Onion": [
+        3,
+        4,
+        5
+      ],
+      "Green Onion": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Herbs (Fresh)": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Mushroom": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Peas": [
+        1,
+        2,
+        3,
+        11,
+        12
+      ],
+      "Kale": [
+        1,
+        2,
+        3,
+        4,
+        11,
+        12
+      ],
+      "Spinach": [
+        1,
+        2,
+        3,
+        11,
+        12
+      ]
+    },
+    "alaska": {
+      "Potato": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Carrot": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Cabbage": [
+        1,
+        2,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Broccoli": [
+        7,
+        8,
+        9
+      ],
+      "Brussels Sprouts": [
+        9,
+        10
+      ],
+      "Cauliflower": [
+        7,
+        8,
+        9
+      ],
+      "Celery": [
+        8,
+        9
+      ],
+      "Cucumber": [
+        7,
+        8,
+        9
+      ],
+      "Kale": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "Lettuce": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "Onion": [
+        1,
+        2,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Peas": [
+        7,
+        8
+      ],
+      "Radish": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "Spinach": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "Squash (Winter)": [
+        9,
+        10,
+        11
+      ],
+      "Zucchini": [
+        7,
+        8,
+        9
+      ],
+      "Tomato": [
+        8,
+        9
+      ],
+      "Green Beans": [
+        7,
+        8,
+        9
+      ],
+      "Raspberry": [
+        7,
+        8
+      ],
+      "Strawberry": [
+        7,
+        8
+      ],
+      "Blueberry": [
+        7,
+        8
+      ],
+      "Herbs (Fresh)": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "Green Onion": [
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    "hawaii": {
+      "Banana": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Pineapple": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Papaya": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Mango": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "Avocado": [
+        1,
+        2,
+        3,
+        11,
+        12
+      ],
+      "Lime": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Orange": [
+        1,
+        2,
+        3,
+        4,
+        11,
+        12
+      ],
+      "Lemon": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Watermelon": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "Cantaloupe": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "Honeydew": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "Strawberry": [
+        1,
+        2,
+        3,
+        4,
+        11,
+        12
+      ],
+      "Cabbage": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Green Beans": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "Celery": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "Cucumber": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "Eggplant": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "Bell Pepper": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "Jalapeño": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "Onion": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Green Onion": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "Lettuce": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Mushroom": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Sweet Potato": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "Zucchini": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "Tomato": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "Squash (Winter)": [
+        9,
+        10,
+        11,
+        12
+      ],
+      "Herbs (Fresh)": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ]
+    }
+  }
+}
