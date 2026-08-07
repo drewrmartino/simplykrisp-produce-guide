@@ -1,0 +1,1357 @@
+[
+{
+"name": "Apple",
+"category": "fruit",
+"emoji": "🍎",
+"storageLocation": "refrigerator",
+"ethyleneProduction": "very_high",
+"ethyleneSensitivity": "high",
+"optimalTempF": 32,
+"shelfLife": "4-8 weeks (refrigerated)",
+"storageTips": [
+"Store in the crisper drawer in a plastic bag with holes for air circulation",
+"Keep away from other produce — apples are heavy ethylene producers",
+"Separate any bruised apples to prevent spoilage from spreading",
+"Wash only when ready to eat"
+],
+"krispRecommended": true,
+"krispBenefit": "Apples produce very high levels of ethylene gas that accelerates ripening of nearby produce. A SimplyKrisp absorber in your crisper drawer neutralizes this gas, protecting everything stored alongside your apples.",
+"ripeTip": "A ripe apple is firm with no soft spots and has a sweet fragrance near the stem.",
+"avoidWith": [
+"Lettuce",
+"Broccoli",
+"Carrots",
+"Leafy greens"
+],
+"extraDays": 14,
+"imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f34e.png"
+},
+{
+"name": "Avocado",
+"category": "fruit",
+"emoji": "🥑",
+"storageLocation": "counter_then_fridge",
+"ethyleneProduction": "high",
+"ethyleneSensitivity": "high",
+"optimalTempF": 38,
+"shelfLife": "3-5 days ripe (refrigerated)",
+"storageTips": [
+"Leave on the counter to ripen, then move to the refrigerator",
+"To speed ripening, place in a paper bag with a banana",
+"Once ripe, refrigerate to slow further ripening",
+"Store cut avocado with the pit in, sprinkled with lemon juice, wrapped tightly"
+],
+"krispRecommended": true,
+"krispBenefit": "Avocados both produce and respond to ethylene. Once they're ripe and in the fridge, a SimplyKrisp absorber helps prevent them from becoming overripe too quickly.",
+"ripeTip": "Gently squeeze — a ripe avocado yields to firm pressure without being mushy. The skin darkens when ripe.",
+"avoidWith": [
+"Bananas",
+"Apples",
+"Peaches"
+],
+"extraDays": 4,
+"imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f951.png"
+},
+{
+"name": "Banana",
+"category": "fruit",
+"emoji": "🍌",
+"storageLocation": "counter",
+"ethyleneProduction": "medium",
+"ethyleneSensitivity": "high",
+"optimalTempF": 58,
+"shelfLife": "5-7 days (counter)",
+"storageTips": [
+"Keep on the counter at room temperature — never refrigerate unripe bananas",
+"Wrap the stem in plastic wrap to slow ethylene release and extend freshness",
+"Separate from the bunch to slow ripening",
+"Only refrigerate if very ripe and you need to buy a couple extra days — the peel will brown but the fruit stays good"
+],
+"krispRecommended": true,
+"krispBenefit": "Bananas are highly sensitive to ethylene gas. Placing a SimplyKrisp absorber near your bananas helps slow the ripening process, giving you more days to enjoy them.",
+"ripeTip": "Yellow with small brown speckles means peak sweetness. Green tips mean it needs another day or two.",
+"avoidWith": [
+"Apples",
+"Avocados",
+"Peaches",
+"Tomatoes"
+],
+"extraDays": 4,
+"imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f34c.png"
+},
+{
+"name": "Blueberry",
+"category": "fruit",
+"emoji": "🫐",
+"storageLocation": "refrigerator",
+"ethyleneProduction": "low",
+"ethyleneSensitivity": "low",
+"optimalTempF": 32,
+"shelfLife": "1-2 weeks (refrigerated)",
+"storageTips": [
+"Do not wash until ready to eat — moisture promotes mold",
+"Store in a single layer on a paper towel-lined container",
+"Keep in the coldest part of the refrigerator",
+"Remove any moldy berries immediately"
+],
+"krispRecommended": false,
+"krispBenefit": null,
+"ripeTip": "Look for firm, plump berries with a uniform deep blue color and a silvery frost coating.",
+"avoidWith": null,
+"extraDays": 5,
+"imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1fad0.png"
+},
+{
+"name": "Cantaloupe",
+"category": "fruit",
+"emoji": "🍈",
+"storageLocation": "counter_then_fridge",
+"ethyleneProduction": "high",
+"ethyleneSensitivity": "medium",
+"optimalTempF": 40,
+"shelfLife": "5-7 days ripe (refrigerated)",
+"storageTips": [
+"Store whole melon on the counter until ripe",
+"Once ripe, refrigerate immediately",
+"Cut melon should be wrapped and stored in the fridge for up to 3 days",
+"Keep away from ethylene-sensitive produce"
+],
+"krispRecommended": true,
+"krispBenefit": "Cantaloupe is a high ethylene producer. A SimplyKrisp absorber in your fridge helps prevent the gas from affecting other nearby produce.",
+"ripeTip": "Ripe cantaloupe has a sweet fragrance at the stem end and yields slightly to pressure. The skin should have a golden undertone.",
+"avoidWith": [
+"Leafy greens",
+"Broccoli",
+"Cucumbers"
+],
+"extraDays": 5,
+"imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f348.png"
+},
+{
+"name": "Cherry",
+"category": "fruit",
+"emoji": "🍒",
+"storageLocation": "refrigerator",
+"ethyleneProduction": "very_low",
+"ethyleneSensitivity": "low",
+"optimalTempF": 31,
+"shelfLife": "5-7 days (refrigerated)",
+"storageTips": [
+"Store unwashed in a breathable bag or container",
+"Keep stems attached until ready to eat",
+"Do not stack too deep — they bruise easily",
+"Bring to room temperature before eating for best flavor"
+],
+"krispRecommended": false,
+"krispBenefit": null,
+"ripeTip": "Firm, glossy, and deeply colored with green stems still attached.",
+"avoidWith": null,
+"extraDays": 3,
+"imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f352.png"
+},
+{
+"name": "Grape",
+"category": "fruit",
+"emoji": "🍇",
+"storageLocation": "refrigerator",
+"ethyleneProduction": "very_low",
+"ethyleneSensitivity": "low",
+"optimalTempF": 32,
+"shelfLife": "1-3 weeks (refrigerated)",
+"storageTips": [
+"Store unwashed in their original ventilated bag or container",
+"Keep in the back of the fridge where it's coldest",
+"Do not seal in an airtight container",
+"Wash only before eating"
+],
+"krispRecommended": false,
+"krispBenefit": null,
+"ripeTip": "Plump, firmly attached to the stem, with a powdery bloom on the skin.",
+"avoidWith": null,
+"extraDays": 7,
+"imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f347.png"
+},
+{
+"name": "Kiwi",
+"category": "fruit",
+"emoji": "🥝",
+"storageLocation": "counter_then_fridge",
+"ethyleneProduction": "low",
+"ethyleneSensitivity": "high",
+"optimalTempF": 32,
+"shelfLife": "1-4 weeks (refrigerated when ripe)",
+"storageTips": [
+"Store unripe kiwi at room temperature until soft",
+"Once ripe, move to the refrigerator",
+"Keep away from ethylene-producing fruits until ready to ripen",
+"Place near apples or bananas to speed ripening"
+],
+"krispRecommended": true,
+"krispBenefit": "Kiwi is highly sensitive to ethylene gas. A SimplyKrisp absorber in your fridge helps keep ripe kiwi fresh longer by removing the ethylene that causes rapid softening.",
+"ripeTip": "A ripe kiwi yields to gentle pressure, similar to a ripe pear.",
+"avoidWith": [
+"Apples",
+"Bananas",
+"Pears"
+],
+"extraDays": 7,
+"imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f95d.png"
+},
+{
+"name": "Lemon",
+"category": "fruit",
+"emoji": "🍋",
+"storageLocation": "refrigerator",
+"ethyleneProduction": "very_low",
+"ethyleneSensitivity": "medium",
+"optimalTempF": 54,
+"shelfLife": "3-4 weeks (refrigerated)",
+"storageTips": [
+"Store in the refrigerator in a sealed bag to prevent drying out",
+"Can be left on the counter for about a week",
+"Zest before juicing for maximum use",
+"Store cut lemons face-down on a plate or in a sealed container"
+],
+"krispRecommended": false,
+"krispBenefit": null,
+"ripeTip": "Choose bright yellow, firm lemons that feel heavy for their size.",
+"avoidWith": null,
+"extraDays": 7,
+"imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f34b.png"
+},
+{
+"name": "Lime",
+"category": "fruit",
+"emoji": "🍋‍🟩",
+"storageLocation": "refrigerator",
+"ethyleneProduction": "very_low",
+"ethyleneSensitivity": "medium",
+"optimalTempF": 54,
+"shelfLife": "2-3 weeks (refrigerated)",
+"storageTips": [
+"Store in the refrigerator in a sealed plastic bag",
+"Keeps about a week on the counter",
+"Microwave for 10 seconds before juicing to get more juice",
+"Store cut limes tightly wrapped"
+],
+"krispRecommended": false,
+"krispBenefit": null,
+"ripeTip": "Firm with glossy, bright green skin. Heavier limes have more juice.",
+"avoidWith": null,
+"extraDays": 5,
+"imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3MiA3MiI+PGNpcmNsZSBjeD0iMzYiIGN5PSIzOCIgcj0iMjQiIGZpbGw9IiM2NUEzMEQiLz48Y2lyY2xlIGN4PSIzNiIgY3k9IjM4IiByPSIyNCIgZmlsbD0idXJsKCNsZykiLz48ZWxsaXBzZSBjeD0iMzAiIGN5PSIzMiIgcng9IjgiIHJ5PSIxMCIgZmlsbD0iIzg0Q0MxNiIgb3BhY2l0eT0iMC4zIi8+PGNpcmNsZSBjeD0iMzYiIGN5PSIzOCIgcj0iMTIiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzg0Q0MxNiIgc3Ryb2tlLXdpZHRoPSIwLjUiIG9wYWNpdHk9IjAuMyIvPjxwYXRoIGQ9Ik0zNiAxNGMwLTQgMi04IDQtMTAiIHN0cm9rZT0iIzRBN0MzRiIgc3Ryb2tlLXdpZHRoPSIyLjUiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxkZWZzPjxyYWRpYWxHcmFkaWVudCBpZD0ibGciIGN4PSIzNSUiIGN5PSIzMCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiM4NENDMTYiIHN0b3Atb3BhY2l0eT0iMC40Ii8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjNjVBMzBEIiBzdG9wLW9wYWNpdHk9IjAiLz48L3JhZGlhbEdyYWRpZW50PjwvZGVmcz48L3N2Zz4="
+},
+{
+"name": "Mango",
+"category": "fruit",
+"emoji": "🥭",
+"storageLocation": "counter_then_fridge",
+"ethyleneProduction": "medium",
+"ethyleneSensitivity": "high",
+"optimalTempF": 56,
+"shelfLife": "5-7 days ripe (refrigerated)",
+"storageTips": [
+"Ripen on the counter at room temperature",
+"Once ripe, refrigerate to extend freshness by several days",
+"To speed ripening, place in a paper bag",
+"Store cut mango in an airtight container in the fridge"
+],
+"krispRecommended": true,
+"krispBenefit": "Mangoes are highly sensitive to ethylene. Using a SimplyKrisp absorber once they're in the fridge helps them stay at perfect ripeness longer instead of quickly going soft.",
+"ripeTip": "A ripe mango gives slightly when squeezed and has a fruity aroma at the stem end. Color is not a reliable indicator.",
+"avoidWith": [
+"Apples",
+"Bananas"
+],
+"extraDays": 4,
+"imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f96d.png"
+},
+{
+"name": "Orange",
+"category": "fruit",
+"emoji": "🍊",
+"storageLocation": "refrigerator",
+"ethyleneProduction": "very_low",
+"ethyleneSensitivity": "medium",
+"optimalTempF": 45,
+"shelfLife": "3-4 weeks (refrigerated)",
+"storageTips": [
+"Store in the refrigerator for maximum freshness",
+"Can sit on the counter for about a week",
+"Do not store in sealed plastic bags — they need some air",
+"Keep away from high ethylene producers"
+],
+"krispRecommended": false,
+"krispBenefit": null,
+"ripeTip": "Choose oranges that are firm, heavy for their size, and have smooth skin.",
+"avoidWith": [
+"Apples"
+],
+"extraDays": 7,
+"imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f34a.png"
+},
+{
+"name": "Peach",
+"category": "fruit",
+"emoji": "🍑",
+"storageLocation": "counter_then_fridge",
+"ethyleneProduction": "high",
+"ethyleneSensitivity": "high",
+"optimalTempF": 31,
+"shelfLife": "3-5 days ripe (refrigerated)",
+"storageTips": [
+"Ripen on the counter at room temperature, stem side down",
+"Once slightly soft, move to the refrigerator",
+"Store in a single layer to prevent bruising",
+"Do not store in a sealed bag until ripe"
+],
+"krispRecommended": true,
+"krispBenefit": "Peaches produce high levels of ethylene and ripen quickly. A SimplyKrisp absorber helps slow this process once they're in the fridge, giving you more time to enjoy them.",
+"ripeTip": "A ripe peach has a sweet fragrance, yields to gentle pressure, and has creamy yellow or warm undertones (not green).",
+"avoidWith": [
+"Leafy greens",
+"Broccoli",
+"Cucumbers"
+],
+"extraDays": 4,
+"imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f351.png"
+},
+{
+"name": "Pear",
+"category": "fruit",
+"emoji": "🍐",
+"storageLocation": "counter_then_fridge",
+"ethyleneProduction": "high",
+"ethyleneSensitivity": "high",
+"optimalTempF": 30,
+"shelfLife": "3-5 days ripe, 2-3 months unripe (refrigerated)",
+"storageTips": [
+"Pears ripen from the inside out — check the neck near the stem",
+"Ripen on the counter, then refrigerate",
+"Unripe pears can last months in the fridge",
+"Keep away from strong-smelling foods"
+],
+"krispRecommended": true,
+"krispBenefit": "Pears are both high ethylene producers and highly sensitive to it. A SimplyKrisp absorber in the fridge helps manage their ripening and prevents them from going from perfect to overripe overnight.",
+"ripeTip": "Press gently near the stem. If it yields, it's ripe. Pears ripen from the inside out, so don't wait until they feel soft all over.",
+"avoidWith": [
+"Apples",
+"Bananas"
+],
+"extraDays": 5,
+"imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f350.png"
+},
+{
+"name": "Pineapple",
+"category": "fruit",
+"emoji": "🍍",
+"storageLocation": "refrigerator",
+"ethyleneProduction": "low",
+"ethyleneSensitivity": "low",
+"optimalTempF": 50,
+"shelfLife": "3-5 days (counter), 5-7 days (refrigerated)",
+"storageTips": [
+"Store whole in the refrigerator for up to 5 days",
+"Pineapples do not ripen further after picking — refrigerate right away",
+"Once cut, store in an airtight container in the fridge for 3-4 days",
+"Store upside down briefly to distribute sweetness before cutting"
+],
+"krispRecommended": false,
+"krispBenefit": null,
+"ripeTip": "A ripe pineapple has a sweet fragrance at the base, golden skin, and leaves pull out easily.",
+"avoidWith": null,
+"extraDays": 3,
+"imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f34d.png"
+},
+{
+"name": "Plum",
+"category": "fruit",
+"emoji": "🍑",
+"storageLocation": "counter_then_fridge",
+"ethyleneProduction": "medium",
+"ethyleneSensitivity": "high",
+"optimalTempF": 31,
+"shelfLife": "3-5 days ripe (refrigerated)",
+"storageTips": [
+"Ripen on the counter until slightly soft",
+"Once ripe, refrigerate in the crisper drawer",
+"Store in a single layer to prevent bruising",
+"Do not wash until ready to eat"
+],
+"krispRecommended": true,
+"krispBenefit": "Plums are ethylene-sensitive and ripen quickly. A SimplyKrisp absorber helps extend their window of peak freshness in the fridge.",
+"ripeTip": "Slightly soft to the touch with a sweet fragrance. The skin should have a powdery bloom.",
+"avoidWith": [
+"Apples",
+"Bananas"
+],
+"extraDays": 4,
+"imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3MiA3MiI+PGVsbGlwc2UgY3g9IjM2IiBjeT0iNDAiIHJ4PSIyMiIgcnk9IjI0IiBmaWxsPSIjN0IyRDhFIi8+PGVsbGlwc2UgY3g9IjM2IiBjeT0iNDAiIHJ4PSIyMiIgcnk9IjI0IiBmaWxsPSJ1cmwoI3BnKSIvPjxwYXRoIGQ9Ik0zNiAxNmMtMi02IDItMTIgOC0xNCIgc3Ryb2tlPSIjNEE3QzNGIiBzdHJva2Utd2lkdGg9IjIuNSIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PGVsbGlwc2UgY3g9IjMwIiBjeT0iMzQiIHJ4PSI2IiByeT0iMTAiIGZpbGw9IiM5QjREQ0EiIG9wYWNpdHk9IjAuMyIvPjxkZWZzPjxyYWRpYWxHcmFkaWVudCBpZD0icGciIGN4PSI0MCUiIGN5PSIzNSUiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiM5QjREQ0EiIHN0b3Atb3BhY2l0eT0iMC40Ii8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjN0IyRDhFIiBzdG9wLW9wYWNpdHk9IjAiLz48L3JhZGlhbEdyYWRpZW50PjwvZGVmcz48L3N2Zz4="
+},
+{
+"name": "Strawberry",
+"category": "fruit",
+"emoji": "🍓",
+"storageLocation": "refrigerator",
+"ethyleneProduction": "low",
+"ethyleneSensitivity": "low",
+"optimalTempF": 32,
+"shelfLife": "3-7 days (refrigerated)",
+"storageTips": [
+"Do not wash until ready to eat — moisture causes mold",
+"Store in a single layer on paper towels",
+"Remove any moldy berries immediately",
+"Keep stems on until eating"
+],
+"krispRecommended": false,
+"krispBenefit": null,
+"ripeTip": "Bright red all the way to the stem with a sweet aroma. Avoid berries with white or green tips.",
+"avoidWith": null,
+"extraDays": 4,
+"imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f353.png"
+},
+{
+"name": "Tomato",
+"category": "fruit",
+"emoji": "🍅",
+"storageLocation": "counter",
+"ethyleneProduction": "medium",
+"ethyleneSensitivity": "high",
+"optimalTempF": 56,
+"shelfLife": "5-7 days (counter)",
+"storageTips": [
+"Store stem-side down on the counter at room temperature",
+"Never refrigerate unripe tomatoes — cold kills flavor and texture",
+"Only refrigerate if very ripe and you need to buy time",
+"Keep away from direct sunlight"
+],
+"krispRecommended": true,
+"krispBenefit": "Tomatoes produce ethylene and are also sensitive to it. If you're storing ripe tomatoes in the fridge to extend their life, a SimplyKrisp absorber helps preserve their quality.",
+"ripeTip": "Slightly soft, uniformly colored, and fragrant at the stem end.",
+"avoidWith": [
+"Cucumbers",
+"Leafy greens",
+"Peppers"
+],
+"extraDays": 3,
+"imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f345.png"
+},
+{
+"name": "Watermelon",
+"category": "fruit",
+"emoji": "🍉",
+"storageLocation": "counter_then_fridge",
+"ethyleneProduction": "low",
+"ethyleneSensitivity": "high",
+"optimalTempF": 50,
+"shelfLife": "1-2 weeks whole, 3-5 days cut (refrigerated)",
+"storageTips": [
+"Store whole watermelon on the counter until cut",
+"Once cut, wrap tightly and refrigerate",
+"Keep away from ethylene-producing fruits",
+"Whole melons keep better at cool room temperature than in the fridge"
+],
+"krispRecommended": true,
+"krispBenefit": "Watermelon is highly sensitive to ethylene gas. A SimplyKrisp absorber in the fridge helps cut watermelon stay firm and fresh longer.",
+"ripeTip": "A ripe watermelon sounds hollow when tapped, has a creamy yellow ground spot, and feels heavy for its size.",
+"avoidWith": [
+"Apples",
+"Bananas",
+"Peaches"
+],
+"extraDays": 5,
+"imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f349.png"
+},
+{
+"name": "Nectarine",
+"category": "fruit",
+"emoji": "🍑",
+"storageLocation": "counter_then_fridge",
+"ethyleneProduction": "high",
+"ethyleneSensitivity": "high",
+"optimalTempF": 31,
+"shelfLife": "3-5 days ripe (refrigerated)",
+"storageTips": [
+"Ripen at room temperature stem-side down",
+"Once ripe, refrigerate immediately",
+"Store in a single layer to prevent bruising",
+"Keep away from other ethylene producers"
+],
+"krispRecommended": true,
+"krispBenefit": "Like peaches, nectarines produce and respond to ethylene. A SimplyKrisp absorber in the fridge helps maintain their perfect texture and prevents premature softening.",
+"ripeTip": "Slightly soft along the seam with a fragrant aroma. Avoid green-tinged fruit.",
+"avoidWith": [
+"Apples",
+"Bananas",
+"Leafy greens"
+],
+"extraDays": 4,
+"imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f351.png"
+},
+{
+"name": "Papaya",
+"category": "fruit",
+"emoji": "🥭",
+"storageLocation": "counter_then_fridge",
+"ethyleneProduction": "high",
+"ethyleneSensitivity": "high",
+"optimalTempF": 54,
+"shelfLife": "5-7 days ripe (refrigerated)",
+"storageTips": [
+"Ripen at room temperature until skin is mostly yellow",
+"Refrigerate once ripe",
+"Store cut papaya in an airtight container",
+"Place in a paper bag with a banana to speed ripening"
+],
+"krispRecommended": true,
+"krispBenefit": "Papaya is both a high ethylene producer and highly sensitive. A SimplyKrisp absorber helps ripe papaya maintain quality in the fridge.",
+"ripeTip": "Mostly yellow to orange skin that gives slightly to pressure. A slight sweet aroma at the stem.",
+"avoidWith": [
+"Apples",
+"Bananas"
+],
+"extraDays": 4,
+"imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f96d.png"
+},
+{
+"name": "Pomegranate",
+"category": "fruit",
+"emoji": "🍎",
+"storageLocation": "refrigerator",
+"ethyleneProduction": "low",
+"ethyleneSensitivity": "low",
+"optimalTempF": 41,
+"shelfLife": "1-3 months (refrigerated)",
+"storageTips": [
+"Store whole in the refrigerator for up to 3 months",
+"Arils (seeds) can be stored in an airtight container for up to 5 days",
+"Can also sit on the counter for 1-2 weeks",
+"Freeze arils in a single layer for long-term storage"
+],
+"krispRecommended": false,
+"krispBenefit": null,
+"ripeTip": "Heavy for its size with a deep color. The skin should be smooth and firm.",
+"avoidWith": null,
+"extraDays": 14,
+"imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f34e.png"
+},
+{
+"name": "Asparagus",
+"category": "vegetable",
+"emoji": "🌱",
+"storageLocation": "refrigerator",
+"ethyleneProduction": "very_low",
+"ethyleneSensitivity": "medium",
+"optimalTempF": 36,
+"shelfLife": "3-5 days (refrigerated)",
+"storageTips": [
+"Trim the ends and stand upright in a jar with 1 inch of water",
+"Cover loosely with a plastic bag",
+"Or wrap ends in a damp paper towel",
+"Use as soon as possible for best flavor"
+],
+"krispRecommended": true,
+"krispBenefit": "Asparagus is moderately sensitive to ethylene. A SimplyKrisp absorber helps prevent premature toughening caused by ethylene exposure in the fridge.",
+"ripeTip": "Choose firm, bright green stalks with tight, compact tips.",
+"avoidWith": [
+"Apples",
+"Avocados",
+"Peaches"
+],
+"extraDays": 3,
+"imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3MiA3MiI+PHJlY3QgeD0iMjIiIHk9IjIwIiB3aWR0aD0iNSIgaGVpZ2h0PSI0NCIgcng9IjIuNSIgZmlsbD0iIzRBN0MzRiIvPjxyZWN0IHg9IjMzIiB5PSIxNCIgd2lkdGg9IjUiIGhlaWdodD0iNTAiIHJ4PSIyLjUiIGZpbGw9IiMzRjZCMzUiLz48cmVjdCB4PSI0NCIgeT0iMjIiIHdpZHRoPSI1IiBoZWlnaHQ9IjQyIiByeD0iMi41IiBmaWxsPSIjNEE3QzNGIi8+PGVsbGlwc2UgY3g9IjI0LjUiIGN5PSIyMCIgcng9IjQiIHJ5PSI2IiBmaWxsPSIjNUI4QzRBIi8+PGVsbGlwc2UgY3g9IjM1LjUiIGN5PSIxNCIgcng9IjQiIHJ5PSI2IiBmaWxsPSIjNEE3QzNGIi8+PGVsbGlwc2UgY3g9IjQ2LjUiIGN5PSIyMiIgcng9IjQiIHJ5PSI2IiBmaWxsPSIjNUI4QzRBIi8+PHBhdGggZD0iTTIxIDE4bDMtNE0yNCAxNmwxLTMiIHN0cm9rZT0iIzZCOUI1QSIgc3Ryb2tlLXdpZHRoPSIxIiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTMyIDEybDMtNE0zNSAxMGwxLTMiIHN0cm9rZT0iIzVCOEM0QSIgc3Ryb2tlLXdpZHRoPSIxIiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTQzIDIwbDMtNE00NiAxOGwxLTMiIHN0cm9rZT0iIzZCOUI1QSIgc3Ryb2tlLXdpZHRoPSIxIiBmaWxsPSJub25lIi8+PC9zdmc+"
+},
+{
+"name": "Bell Pepper",
+"category": "vegetable",
+"emoji": "🫑",
+"storageLocation": "refrigerator",
+"ethyleneProduction": "low",
+"ethyleneSensitivity": "low",
+"optimalTempF": 50,
+"shelfLife": "1-2 weeks (refrigerated)",
+"storageTips": [
+"Store whole in the crisper drawer",
+"Do not wash until ready to use",
+"Cut peppers should be stored in an airtight container",
+"Green peppers last longer than red, yellow, or orange"
+],
+"krispRecommended": false,
+"krispBenefit": null,
+"ripeTip": "Firm with glossy, wrinkle-free skin and a fresh green stem.",
+"avoidWith": null,
+"extraDays": 5,
+"imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1fad1.png"
+},
+{
+"name": "Broccoli",
+"category": "vegetable",
+"emoji": "🥦",
+"storageLocation": "refrigerator",
+"ethyleneProduction": "very_low",
+"ethyleneSensitivity": "high",
+"optimalTempF": 32,
+"shelfLife": "3-5 days (refrigerated)",
+"storageTips": [
+"Store unwashed in a loose plastic bag in the crisper",
+"Do not seal tightly — broccoli needs air circulation",
+"Wrap stems in a damp paper towel",
+"Use within a few days for best nutrition and flavor"
+],
+"krispRecommended": true,
+"krispBenefit": "Broccoli is extremely sensitive to ethylene gas, which causes yellowing of the florets. A SimplyKrisp absorber in your crisper drawer keeps broccoli green and fresh significantly longer.",
+"ripeTip": "Tight, dark green florets with firm stems. Avoid any yellowing.",
+"avoidWith": [
+"Apples",
+"Bananas",
+"Peaches",
+"Tomatoes"
+],
+"extraDays": 5,
+"imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f966.png"
+},
+{
+"name": "Brussels Sprouts",
+"category": "vegetable",
+"emoji": "🥬",
+"storageLocation": "refrigerator",
+"ethyleneProduction": "very_low",
+"ethyleneSensitivity": "high",
+"optimalTempF": 32,
+"shelfLife": "3-5 days (refrigerated)",
+"storageTips": [
+"Store in a breathable bag in the crisper drawer",
+"Do not wash until ready to cook",
+"Keep on the stalk if possible for longer freshness",
+"Remove any yellowed outer leaves before storing"
+],
+"krispRecommended": true,
+"krispBenefit": "Brussels sprouts are highly sensitive to ethylene and will yellow quickly when exposed. A SimplyKrisp absorber protects them from ethylene in the fridge.",
+"ripeTip": "Tight, compact heads that are bright green with no yellowing.",
+"avoidWith": [
+"Apples",
+"Pears",
+"Tomatoes"
+],
+"extraDays": 4,
+"imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3MiA3MiI+PGNpcmNsZSBjeD0iMzYiIGN5PSIzNiIgcj0iMjAiIGZpbGw9IiM0QTdDM0YiLz48ZWxsaXBzZSBjeD0iMjYiIGN5PSIyOCIgcng9IjEwIiByeT0iOSIgZmlsbD0iIzVCOEM0QSIvPjxlbGxpcHNlIGN4PSI0NiIgY3k9IjMwIiByeD0iOSIgcnk9IjgiIGZpbGw9IiM1QjhDNEEiLz48ZWxsaXBzZSBjeD0iMzAiIGN5PSI0NCIgcng9IjEwIiByeT0iOCIgZmlsbD0iIzVCOEM0QSIvPjxlbGxpcHNlIGN4PSI0NCIgY3k9IjQyIiByeD0iOCIgcnk9IjciIGZpbGw9IiM1QjhDNEEiLz48ZWxsaXBzZSBjeD0iMzYiIGN5PSIzNCIgcng9IjgiIHJ5PSI3IiBmaWxsPSIjNkI5QjVBIi8+PGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcng9IjMiIGZpbGw9IiM3QkFCNkEiIG9wYWNpdHk9IjAuNCIvPjwvc3ZnPg=="
+},
+{
+"name": "Cabbage",
+"category": "vegetable",
+"emoji": "🥬",
+"storageLocation": "refrigerator",
+"ethyleneProduction": "very_low",
+"ethyleneSensitivity": "high",
+"optimalTempF": 32,
+"shelfLife": "1-2 months (refrigerated)",
+"storageTips": [
+"Store whole in the crisper drawer",
+"Do not cut until ready to use",
+"Wrap cut cabbage tightly in plastic wrap",
+"Outer leaves may wilt but protect the inner head"
+],
+"krispRecommended": true,
+"krispBenefit": "Cabbage is highly sensitive to ethylene which causes leaf yellowing and loss. A SimplyKrisp absorber helps keep your cabbage crisp and green for weeks.",
+"ripeTip": "Choose heads that feel heavy and compact with crisp, tightly packed leaves.",
+"avoidWith": [
+"Apples",
+"Avocados",
+"Peaches"
+],
+"extraDays": 10,
+"imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f96c.png"
+},
+{
+"name": "Carrot",
+"category": "vegetable",
+"emoji": "🥕",
+"storageLocation": "refrigerator",
+"ethyleneProduction": "very_low",
+"ethyleneSensitivity": "low",
+"optimalTempF": 32,
+"shelfLife": "3-4 weeks (refrigerated)",
+"storageTips": [
+"Remove green tops before storing — they draw moisture",
+"Store in a plastic bag in the crisper drawer",
+"Can be stored in water in the fridge for extra crispness",
+"Keep away from ethylene-producing fruits to prevent bitterness"
+],
+"krispRecommended": false,
+"krispBenefit": null,
+"ripeTip": "Firm, smooth, and bright orange. Avoid carrots that bend or have cracks.",
+"avoidWith": [
+"Apples"
+],
+"extraDays": 7,
+"imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f955.png"
+},
+{
+"name": "Cauliflower",
+"category": "vegetable",
+"emoji": "🥦",
+"storageLocation": "refrigerator",
+"ethyleneProduction": "very_low",
+"ethyleneSensitivity": "high",
+"optimalTempF": 32,
+"shelfLife": "1-2 weeks (refrigerated)",
+"storageTips": [
+"Store stem-side up in a loose bag in the crisper",
+"Do not wash until ready to cook",
+"Wrap in a damp paper towel inside a bag",
+"Brown spots can be trimmed — the rest is still good"
+],
+"krispRecommended": true,
+"krispBenefit": "Cauliflower is highly sensitive to ethylene, which causes discoloration and accelerated yellowing. A SimplyKrisp absorber keeps it white and fresh.",
+"ripeTip": "Compact, creamy white heads with no dark spots. Leaves should be green and fresh.",
+"avoidWith": [
+"Apples",
+"Pears",
+"Tomatoes"
+],
+"extraDays": 5,
+"imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f966.png"
+},
+{
+"name": "Celery",
+"category": "vegetable",
+"emoji": "🥬",
+"storageLocation": "refrigerator",
+"ethyleneProduction": "very_low",
+"ethyleneSensitivity": "medium",
+"optimalTempF": 32,
+"shelfLife": "2-4 weeks (refrigerated)",
+"storageTips": [
+"Wrap in aluminum foil — this allows ethylene to escape while retaining moisture",
+"Store whole in the crisper drawer",
+"Cut celery can be stored in water to keep crisp",
+"Keep away from ethylene producers"
+],
+"krispRecommended": true,
+"krispBenefit": "Celery is moderately sensitive to ethylene which causes loss of green color. A SimplyKrisp absorber helps maintain the crisp, green quality of your celery.",
+"ripeTip": "Firm, crisp stalks that snap when bent. Look for bright green color and fresh leaves.",
+"avoidWith": [
+"Apples",
+"Pears"
+],
+"extraDays": 5,
+"imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3MiA3MiI+PHBhdGggZD0iTTI2IDY0IEMyNiA2NCAyNCAzMCAyOCAxNCIgc3Ryb2tlPSIjOEZCRjZBIiBzdHJva2Utd2lkdGg9IjYiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxwYXRoIGQ9Ik0zNiA2NCBDMzYgNjQgMzUgMjYgMzcgMTAiIHN0cm9rZT0iIzdCQUI1NiIgc3Ryb2tlLXdpZHRoPSI2IiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48cGF0aCBkPSJNNDYgNjQgQzQ2IDY0IDQ3IDMyIDQ0IDE2IiBzdHJva2U9IiM4RkJGNkEiIHN0cm9rZS13aWR0aD0iNiIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PGVsbGlwc2UgY3g9IjI3IiBjeT0iMTIiIHJ4PSI1IiByeT0iNCIgZmlsbD0iIzVCOEM0QSIvPjxlbGxpcHNlIGN4PSIzNyIgY3k9IjgiIHJ4PSI1IiByeT0iNCIgZmlsbD0iIzRBN0MzRiIvPjxlbGxpcHNlIGN4PSI0NSIgY3k9IjE0IiByeD0iNSIgcnk9IjQiIGZpbGw9IiM1QjhDNEEiLz48L3N2Zz4="
+},
+{
+"name": "Corn",
+"category": "vegetable",
+"emoji": "🌽",
+"storageLocation": "refrigerator",
+"ethyleneProduction": "very_low",
+"ethyleneSensitivity": "low",
+"optimalTempF": 32,
+"shelfLife": "1-3 days (refrigerated)",
+"storageTips": [
+"Keep in the husk until ready to cook",
+"Refrigerate immediately — corn loses sweetness rapidly",
+"Use as soon as possible after purchase",
+"Store in the crisper drawer without removing silk"
+],
+"krispRecommended": false,
+"krispBenefit": null,
+"ripeTip": "Look for bright green, tightly wrapped husks with moist silk. Kernels should be plump when peeked.",
+"avoidWith": null,
+"extraDays": 1,
+"imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f33d.png"
+},
+{
+"name": "Cucumber",
+"category": "vegetable",
+"emoji": "🥒",
+"storageLocation": "refrigerator",
+"ethyleneProduction": "low",
+"ethyleneSensitivity": "high",
+"optimalTempF": 50,
+"shelfLife": "1 week (refrigerated)",
+"storageTips": [
+"Store in the warmest part of the fridge (door or front)",
+"Wrap individually in a paper towel, then loosely in a bag",
+"Cucumbers are sensitive to cold — too cold causes water-soaked spots",
+"Keep away from ethylene-producing fruits"
+],
+"krispRecommended": true,
+"krispBenefit": "Cucumbers are highly sensitive to ethylene which causes yellowing and accelerated decay. A SimplyKrisp absorber is especially useful if you store cucumbers near other produce.",
+"ripeTip": "Firm, dark green, and medium-sized. Avoid soft spots or yellowing.",
+"avoidWith": [
+"Apples",
+"Bananas",
+"Tomatoes",
+"Cantaloupe"
+],
+"extraDays": 4,
+"imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f952.png"
+},
+{
+"name": "Eggplant",
+"category": "vegetable",
+"emoji": "🍆",
+"storageLocation": "refrigerator",
+"ethyleneProduction": "low",
+"ethyleneSensitivity": "low",
+"optimalTempF": 50,
+"shelfLife": "5-7 days (refrigerated)",
+"storageTips": [
+"Store in the crisper drawer without a bag for air circulation",
+"Use within a few days for best quality",
+"Sensitive to cold — keep in the warmer part of the fridge",
+"Do not cut until ready to cook to prevent browning"
+],
+"krispRecommended": false,
+"krispBenefit": null,
+"ripeTip": "Firm with smooth, glossy, deep purple skin. Should feel heavy for its size.",
+"avoidWith": null,
+"extraDays": 3,
+"imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f346.png"
+},
+{
+"name": "Garlic",
+"category": "vegetable",
+"emoji": "🧄",
+"storageLocation": "pantry",
+"ethyleneProduction": "very_low",
+"ethyleneSensitivity": "low",
+"optimalTempF": 60,
+"shelfLife": "3-6 months (pantry)",
+"storageTips": [
+"Store in a cool, dark, dry place with good ventilation",
+"Do not refrigerate whole bulbs — moisture causes sprouting",
+"Keep in a mesh bag or open container",
+"Once broken from the bulb, use cloves within 10 days"
+],
+"krispRecommended": false,
+"krispBenefit": null,
+"ripeTip": "Firm bulbs with tight, papery skin. Avoid soft, sprouting, or shriveled cloves.",
+"avoidWith": null,
+"extraDays": 14,
+"imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f9c4.png"
+},
+{
+"name": "Green Beans",
+"category": "vegetable",
+"emoji": "🫘",
+"storageLocation": "refrigerator",
+"ethyleneProduction": "low",
+"ethyleneSensitivity": "medium",
+"optimalTempF": 45,
+"shelfLife": "5-7 days (refrigerated)",
+"storageTips": [
+"Store unwashed in a breathable bag in the crisper",
+"Do not snap or trim until ready to cook",
+"Keep away from ethylene-producing fruits",
+"Blanch and freeze for long-term storage"
+],
+"krispRecommended": true,
+"krispBenefit": "Green beans are moderately sensitive to ethylene. A SimplyKrisp absorber helps prevent browning and loss of green color from ethylene exposure.",
+"ripeTip": "Firm, bright green, and snap cleanly when bent. Avoid limp or spotted beans.",
+"avoidWith": [
+"Apples",
+"Bananas"
+],
+"extraDays": 4,
+"imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3MiA3MiI+PHBhdGggZD0iTTE2IDUyIFEyMCAzMCAzNiAyMCBRNTIgMTAgNTggMTgiIHN0cm9rZT0iIzRBN0MzRiIgc3Ryb2tlLXdpZHRoPSI2IiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48cGF0aCBkPSJNMTIgNTggUTE4IDM4IDM0IDI4IFE1MCAxOCA1NiAyNiIgc3Ryb2tlPSIjNUI4QzRBIiBzdHJva2Utd2lkdGg9IjYiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxwYXRoIGQ9Ik0xOCA2MiBRMjQgNDQgMzggMzQgUTUyIDI0IDU4IDMwIiBzdHJva2U9IiM0QTdDM0YiIHN0cm9rZS13aWR0aD0iNiIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PC9zdmc+"
+},
+{
+"name": "Kale",
+"category": "vegetable",
+"emoji": "🥬",
+"storageLocation": "refrigerator",
+"ethyleneProduction": "very_low",
+"ethyleneSensitivity": "medium",
+"optimalTempF": 32,
+"shelfLife": "5-7 days (refrigerated)",
+"storageTips": [
+"Store unwashed in a plastic bag with some air",
+"Wrap in a damp paper towel to maintain moisture",
+"Remove any yellowed or wilted leaves",
+"Can be blanched and frozen for months"
+],
+"krispRecommended": true,
+"krispBenefit": "Kale is moderately ethylene-sensitive. A SimplyKrisp absorber helps slow yellowing and wilting in the crisper.",
+"ripeTip": "Dark green, firm leaves with no yellowing or wilting. Smaller leaves are more tender.",
+"avoidWith": [
+"Apples",
+"Bananas"
+],
+"extraDays": 4,
+"imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f96c.png"
+},
+{
+"name": "Lettuce",
+"category": "vegetable",
+"emoji": "🥬",
+"storageLocation": "refrigerator",
+"ethyleneProduction": "very_low",
+"ethyleneSensitivity": "high",
+"optimalTempF": 32,
+"shelfLife": "7-10 days (refrigerated)",
+"storageTips": [
+"Store unwashed in a bag lined with paper towels",
+"Keep in the crisper drawer on the humid setting",
+"Remove damaged outer leaves to prevent spreading decay",
+"Never store near apples, pears, or bananas"
+],
+"krispRecommended": true,
+"krispBenefit": "Lettuce is extremely sensitive to ethylene, which causes russet spotting and wilting. A SimplyKrisp absorber is one of the best ways to extend the life of your salad greens.",
+"ripeTip": "Crisp, vibrant leaves with no browning or slimy spots.",
+"avoidWith": [
+"Apples",
+"Bananas",
+"Pears",
+"Peaches",
+"Tomatoes"
+],
+"extraDays": 5,
+"imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f96c.png"
+},
+{
+"name": "Mushroom",
+"category": "vegetable",
+"emoji": "🍄",
+"storageLocation": "refrigerator",
+"ethyleneProduction": "low",
+"ethyleneSensitivity": "medium",
+"optimalTempF": 32,
+"shelfLife": "7-10 days (refrigerated)",
+"storageTips": [
+"Store in a paper bag — never in plastic (traps moisture)",
+"Do not wash until ready to cook",
+"Keep in the main section of the fridge, not the crisper",
+"Clean with a damp cloth or brush instead of rinsing"
+],
+"krispRecommended": false,
+"krispBenefit": null,
+"ripeTip": "Firm, dry, and evenly colored. Avoid slimy or darkened mushrooms.",
+"avoidWith": null,
+"extraDays": 3,
+"imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f344.png"
+},
+{
+"name": "Onion",
+"category": "vegetable",
+"emoji": "🧅",
+"storageLocation": "pantry",
+"ethyleneProduction": "very_low",
+"ethyleneSensitivity": "low",
+"optimalTempF": 45,
+"shelfLife": "1-3 months (pantry)",
+"storageTips": [
+"Store in a cool, dark, dry, well-ventilated area",
+"Keep away from potatoes — they cause each other to spoil faster",
+"Do not store in the refrigerator until cut",
+"Cut onions should be refrigerated in an airtight container"
+],
+"krispRecommended": false,
+"krispBenefit": null,
+"ripeTip": "Firm with dry, papery outer skin and no soft spots or sprouting.",
+"avoidWith": [
+"Potatoes"
+],
+"extraDays": 14,
+"imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f9c5.png"
+},
+{
+"name": "Peas",
+"category": "vegetable",
+"emoji": "🫛",
+"storageLocation": "refrigerator",
+"ethyleneProduction": "very_low",
+"ethyleneSensitivity": "medium",
+"optimalTempF": 32,
+"shelfLife": "3-5 days (refrigerated)",
+"storageTips": [
+"Refrigerate immediately — peas lose sweetness fast",
+"Store in a perforated bag in the crisper",
+"Do not shell until ready to eat or cook",
+"Blanch and freeze for long-term storage"
+],
+"krispRecommended": true,
+"krispBenefit": "Peas are moderately sensitive to ethylene which causes yellowing and decay. A SimplyKrisp absorber helps preserve their sweet, fresh flavor.",
+"ripeTip": "Bright green, plump pods that are firm to the touch.",
+"avoidWith": [
+"Apples",
+"Bananas"
+],
+"extraDays": 3,
+"imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1fadb.png"
+},
+{
+"name": "Potato",
+"category": "vegetable",
+"emoji": "🥔",
+"storageLocation": "pantry",
+"ethyleneProduction": "very_low",
+"ethyleneSensitivity": "medium",
+"optimalTempF": 45,
+"shelfLife": "2-5 weeks (pantry)",
+"storageTips": [
+"Store in a cool, dark, well-ventilated area (not the refrigerator)",
+"Keep in a paper bag, basket, or open container",
+"Never store with onions — they release gases that cause sprouting",
+"Avoid exposure to light which causes greening"
+],
+"krispRecommended": false,
+"krispBenefit": null,
+"ripeTip": "Firm with no green spots, sprouts, or soft areas.",
+"avoidWith": [
+"Onions",
+"Apples"
+],
+"extraDays": 14,
+"imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f954.png"
+},
+{
+"name": "Spinach",
+"category": "vegetable",
+"emoji": "🍃",
+"storageLocation": "refrigerator",
+"ethyleneProduction": "very_low",
+"ethyleneSensitivity": "high",
+"optimalTempF": 32,
+"shelfLife": "5-7 days (refrigerated)",
+"storageTips": [
+"Store in a container lined with paper towels",
+"Do not wash until ready to use",
+"Remove any slimy or wilted leaves",
+"Keep away from ethylene-producing fruits"
+],
+"krispRecommended": true,
+"krispBenefit": "Spinach is highly sensitive to ethylene gas which causes rapid yellowing and wilting. A SimplyKrisp absorber in your crisper significantly extends spinach freshness.",
+"ripeTip": "Bright, deep green leaves that are crisp and dry with no slimy or yellow patches.",
+"avoidWith": [
+"Apples",
+"Bananas",
+"Tomatoes",
+"Peaches"
+],
+"extraDays": 4,
+"imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f343.png"
+},
+{
+"name": "Sweet Potato",
+"category": "vegetable",
+"emoji": "🍠",
+"storageLocation": "pantry",
+"ethyleneProduction": "very_low",
+"ethyleneSensitivity": "low",
+"optimalTempF": 56,
+"shelfLife": "3-5 weeks (pantry)",
+"storageTips": [
+"Store in a cool, dark, well-ventilated area",
+"Do not refrigerate — cold temperatures alter texture and flavor",
+"Keep away from heat sources",
+"Use within a month for best quality"
+],
+"krispRecommended": false,
+"krispBenefit": null,
+"ripeTip": "Firm with smooth, even-colored skin and no cracks or soft spots.",
+"avoidWith": null,
+"extraDays": 10,
+"imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f360.png"
+},
+{
+"name": "Zucchini",
+"category": "vegetable",
+"emoji": "🥒",
+"storageLocation": "refrigerator",
+"ethyleneProduction": "very_low",
+"ethyleneSensitivity": "low",
+"optimalTempF": 45,
+"shelfLife": "5-7 days (refrigerated)",
+"storageTips": [
+"Store in a plastic bag in the crisper drawer",
+"Do not wash until ready to cook",
+"Keep away from ethylene producers",
+"Can be stored at cool room temperature for a few days"
+],
+"krispRecommended": false,
+"krispBenefit": null,
+"ripeTip": "Small to medium-sized with firm, glossy, dark green skin.",
+"avoidWith": [
+"Apples",
+"Bananas",
+"Tomatoes"
+],
+"extraDays": 3,
+"imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f952.png"
+},
+{
+"name": "Herbs (Fresh)",
+"category": "vegetable",
+"emoji": "🌿",
+"storageLocation": "refrigerator",
+"ethyleneProduction": "very_low",
+"ethyleneSensitivity": "high",
+"optimalTempF": 32,
+"shelfLife": "5-10 days (refrigerated)",
+"storageTips": [
+"Treat tender herbs (cilantro, parsley, basil) like flowers — trim stems and place in a glass of water",
+"Cover loosely with a bag and refrigerate (except basil — keep on the counter)",
+"Wrap hardy herbs (rosemary, thyme) in a damp paper towel, then seal in a bag",
+"Do not wash until ready to use"
+],
+"krispRecommended": true,
+"krispBenefit": "Fresh herbs are extremely sensitive to ethylene gas. A SimplyKrisp absorber in your fridge helps herbs stay vibrant and aromatic for days longer.",
+"ripeTip": "Bright, vibrant color with a strong aroma and no wilting or dark spots.",
+"avoidWith": [
+"Apples",
+"Bananas",
+"Tomatoes"
+],
+"extraDays": 5,
+"imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f33f.png"
+},
+{
+"name": "Radish",
+"category": "vegetable",
+"emoji": "🥕",
+"storageLocation": "refrigerator",
+"ethyleneProduction": "very_low",
+"ethyleneSensitivity": "low",
+"optimalTempF": 32,
+"shelfLife": "1-2 weeks (refrigerated)",
+"storageTips": [
+"Remove greens before storing — they draw moisture",
+"Store in a plastic bag in the crisper drawer",
+"Keep in water for extra crispness",
+"Greens can be stored separately and used within a day or two"
+],
+"krispRecommended": false,
+"krispBenefit": null,
+"ripeTip": "Firm with smooth, brightly colored skin and fresh-looking greens.",
+"avoidWith": null,
+"extraDays": 5,
+"imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3MiA3MiI+PGVsbGlwc2UgY3g9IjM2IiBjeT0iNDIiIHJ4PSIxNiIgcnk9IjIwIiBmaWxsPSIjRUY0NDQ0Ii8+PGVsbGlwc2UgY3g9IjM2IiBjeT0iNDIiIHJ4PSIxNiIgcnk9IjIwIiBmaWxsPSJ1cmwoI3JnKSIvPjxwYXRoIGQ9Ik0zNiA1OCBRMzYgNjYgMzggNjgiIHN0cm9rZT0iI0Y4RjhGOCIgc3Ryb2tlLXdpZHRoPSIzIiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48ZWxsaXBzZSBjeD0iMzAiIGN5PSIzNiIgcng9IjQiIHJ5PSI2IiBmaWxsPSIjRkNBNUE1IiBvcGFjaXR5PSIwLjMiLz48cGF0aCBkPSJNMzAgMjIgUTI4IDEyIDIyIDgiIHN0cm9rZT0iIzRBN0MzRiIgc3Ryb2tlLXdpZHRoPSIyLjUiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxwYXRoIGQ9Ik0zNiAyMCBRMzYgMTAgMzggNiIgc3Ryb2tlPSIjNEE3QzNGIiBzdHJva2Utd2lkdGg9IjIuNSIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PHBhdGggZD0iTTQyIDIyIFE0NCAxMiA1MCA4IiBzdHJva2U9IiM0QTdDM0YiIHN0cm9rZS13aWR0aD0iMi41IiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48ZWxsaXBzZSBjeD0iMjIiIGN5PSI4IiByeD0iNCIgcnk9IjYiIGZpbGw9IiM1QjhDNEEiIHRyYW5zZm9ybT0icm90YXRlKC0yMCwyMiw4KSIvPjxlbGxpcHNlIGN4PSIzOCIgY3k9IjUiIHJ4PSI0IiByeT0iNiIgZmlsbD0iIzRBN0MzRiIvPjxlbGxpcHNlIGN4PSI1MCIgY3k9IjgiIHJ4PSI0IiByeT0iNiIgZmlsbD0iIzVCOEM0QSIgdHJhbnNmb3JtPSJyb3RhdGUoMjAsNTAsOCkiLz48ZGVmcz48cmFkaWFsR3JhZGllbnQgaWQ9InJnIiBjeD0iMzUlIiBjeT0iMzAlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjRkNBNUE1IiBzdG9wLW9wYWNpdHk9IjAuMyIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI0VGNDQ0NCIgc3RvcC1vcGFjaXR5PSIwIi8+PC9yYWRpYWxHcmFkaWVudD48L2RlZnM+PC9zdmc+"
+},
+{
+"name": "Squash (Winter)",
+"category": "vegetable",
+"emoji": "🎃",
+"storageLocation": "pantry",
+"ethyleneProduction": "low",
+"ethyleneSensitivity": "low",
+"optimalTempF": 54,
+"shelfLife": "1-3 months (pantry)",
+"storageTips": [
+"Store in a cool, dark, dry place with good ventilation",
+"Do not refrigerate whole squash",
+"Once cut, wrap and refrigerate for up to 5 days",
+"Keep each squash from touching to prevent rot from spreading"
+],
+"krispRecommended": false,
+"krispBenefit": null,
+"ripeTip": "Hard skin that can't be dented with a fingernail, heavy for its size, with a dry, corky stem.",
+"avoidWith": null,
+"extraDays": 14,
+"imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f383.png"
+},
+{
+"name": "Grapefruit",
+"category": "fruit",
+"emoji": "🍊",
+"storageLocation": "refrigerator",
+"ethyleneProduction": "very_low",
+"ethyleneSensitivity": "low",
+"optimalTempF": 56,
+"shelfLife": "2-3 weeks (refrigerated)",
+"storageTips": [
+"Store in the refrigerator for longest freshness",
+"Can sit on the counter for about a week",
+"No special storage requirements — quite hardy",
+"Bring to room temperature before eating for best flavor"
+],
+"krispRecommended": false,
+"krispBenefit": null,
+"ripeTip": "Heavy for its size with thin, smooth skin. Color does not indicate ripeness.",
+"avoidWith": null,
+"extraDays": 7,
+"imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f34a.png"
+},
+{
+"name": "Apricot",
+"category": "fruit",
+"emoji": "🍑",
+"storageLocation": "counter_then_fridge",
+"ethyleneProduction": "high",
+"ethyleneSensitivity": "high",
+"optimalTempF": 31,
+"shelfLife": "3-5 days ripe (refrigerated)",
+"storageTips": [
+"Ripen at room temperature until slightly soft",
+"Once ripe, refrigerate immediately",
+"Store in a single layer to prevent bruising",
+"Handle gently — they bruise very easily"
+],
+"krispRecommended": true,
+"krispBenefit": "Apricots produce and respond to ethylene. A SimplyKrisp absorber in the fridge helps slow their rapid ripening once refrigerated.",
+"ripeTip": "Slightly soft to the touch with a deep golden-orange color and a sweet fragrance.",
+"avoidWith": [
+"Apples",
+"Bananas"
+],
+"extraDays": 5,
+"imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f351.png"
+},
+{
+"name": "Honeydew",
+"category": "fruit",
+"emoji": "🍈",
+"storageLocation": "counter_then_fridge",
+"ethyleneProduction": "medium",
+"ethyleneSensitivity": "high",
+"optimalTempF": 50,
+"shelfLife": "5-7 days ripe (refrigerated)",
+"storageTips": [
+"Store whole melon on the counter until ripe",
+"Once ripe, refrigerate whole or cut",
+"Wrap cut melon tightly in plastic",
+"Keep away from ethylene-producing fruits"
+],
+"krispRecommended": true,
+"krispBenefit": "Honeydew is highly sensitive to ethylene which accelerates ripening and decay. A SimplyKrisp absorber helps maintain freshness once stored in the fridge.",
+"ripeTip": "Slightly waxy feel, creamy yellow skin (not white), and a faint sweet smell at the blossom end.",
+"avoidWith": [
+"Apples",
+"Bananas",
+"Peaches"
+],
+"extraDays": 5,
+"imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f348.png"
+},
+{
+"name": "Raspberry",
+"category": "fruit",
+"emoji": "🍓",
+"storageLocation": "refrigerator",
+"ethyleneProduction": "low",
+"ethyleneSensitivity": "low",
+"optimalTempF": 32,
+"shelfLife": "2-3 days (refrigerated)",
+"storageTips": [
+"Do not wash until ready to eat — moisture causes mold rapidly",
+"Store in a single layer on a paper towel-lined container",
+"Remove any moldy berries immediately to prevent spreading",
+"Keep in the coldest part of the refrigerator"
+],
+"krispRecommended": false,
+"krispBenefit": null,
+"ripeTip": "Plump, deeply colored, and easily pulls from the stem. Avoid berries with visible mold or juice staining the container.",
+"avoidWith": null,
+"extraDays": 2,
+"imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3MiA3MiI+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzYsMzgpIj48Y2lyY2xlIGN4PSItOCIgY3k9Ii0xMiIgcj0iNS41IiBmaWxsPSIjREMyNjI2Ii8+PGNpcmNsZSBjeD0iMCIgY3k9Ii0xNCIgcj0iNS41IiBmaWxsPSIjREMyNjI2Ii8+PGNpcmNsZSBjeD0iOCIgY3k9Ii0xMiIgcj0iNS41IiBmaWxsPSIjREMyNjI2Ii8+PGNpcmNsZSBjeD0iLTEyIiBjeT0iLTQiIHI9IjUuNSIgZmlsbD0iI0RDMjYyNiIvPjxjaXJjbGUgY3g9Ii00IiBjeT0iLTUiIHI9IjUuNSIgZmlsbD0iI0I5MUMxQyIvPjxjaXJjbGUgY3g9IjQiIGN5PSItNSIgcj0iNS41IiBmaWxsPSIjQjkxQzFDIi8+PGNpcmNsZSBjeD0iMTIiIGN5PSItNCIgcj0iNS41IiBmaWxsPSIjREMyNjI2Ii8+PGNpcmNsZSBjeD0iLTgiIGN5PSI0IiByPSI1LjUiIGZpbGw9IiNEQzI2MjYiLz48Y2lyY2xlIGN4PSIwIiBjeT0iMyIgcj0iNS41IiBmaWxsPSIjQjkxQzFDIi8+PGNpcmNsZSBjeD0iOCIgY3k9IjQiIHI9IjUuNSIgZmlsbD0iI0RDMjYyNiIvPjxjaXJjbGUgY3g9Ii00IiBjeT0iMTEiIHI9IjUiIGZpbGw9IiNEQzI2MjYiLz48Y2lyY2xlIGN4PSI0IiBjeT0iMTEiIHI9IjUiIGZpbGw9IiNEQzI2MjYiLz48L2c+PHBhdGggZD0iTTM2IDE0Yy0xLTQgMS05IDUtMTFNMzggMTRjMS0zIDQtNyA4LTgiIHN0cm9rZT0iIzRBN0MzRiIgc3Ryb2tlLXdpZHRoPSIyIiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48L3N2Zz4="
+},
+{
+"name": "Blackberry",
+"category": "fruit",
+"emoji": "🫐",
+"storageLocation": "refrigerator",
+"ethyleneProduction": "very_low",
+"ethyleneSensitivity": "low",
+"optimalTempF": 32,
+"shelfLife": "2-3 days (refrigerated)",
+"storageTips": [
+"Do not wash until ready to eat — moisture promotes rapid mold growth",
+"Spread in a single layer on paper towels in a shallow container",
+"Remove any crushed or moldy berries immediately",
+"Eat as soon as possible — blackberries are very perishable"
+],
+"krispRecommended": false,
+"krispBenefit": null,
+"ripeTip": "Deep black color, plump, and slightly soft. Red or purple berries are underripe and will be tart.",
+"avoidWith": null,
+"extraDays": 3,
+"imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3MiA3MiI+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzYsMzgpIj48Y2lyY2xlIGN4PSItOCIgY3k9Ii0xMiIgcj0iNS41IiBmaWxsPSIjM0IwNzY0Ii8+PGNpcmNsZSBjeD0iMCIgY3k9Ii0xNCIgcj0iNS41IiBmaWxsPSIjM0IwNzY0Ii8+PGNpcmNsZSBjeD0iOCIgY3k9Ii0xMiIgcj0iNS41IiBmaWxsPSIjM0IwNzY0Ii8+PGNpcmNsZSBjeD0iLTEyIiBjeT0iLTQiIHI9IjUuNSIgZmlsbD0iIzNCMDc2NCIvPjxjaXJjbGUgY3g9Ii00IiBjeT0iLTUiIHI9IjUuNSIgZmlsbD0iIzFFMDMzOCIvPjxjaXJjbGUgY3g9IjQiIGN5PSItNSIgcj0iNS41IiBmaWxsPSIjMUUwMzM4Ii8+PGNpcmNsZSBjeD0iMTIiIGN5PSItNCIgcj0iNS41IiBmaWxsPSIjM0IwNzY0Ii8+PGNpcmNsZSBjeD0iLTgiIGN5PSI0IiByPSI1LjUiIGZpbGw9IiMzQjA3NjQiLz48Y2lyY2xlIGN4PSIwIiBjeT0iMyIgcj0iNS41IiBmaWxsPSIjMUUwMzM4Ii8+PGNpcmNsZSBjeD0iOCIgY3k9IjQiIHI9IjUuNSIgZmlsbD0iIzNCMDc2NCIvPjxjaXJjbGUgY3g9Ii00IiBjeT0iMTEiIHI9IjUiIGZpbGw9IiMzQjA3NjQiLz48Y2lyY2xlIGN4PSI0IiBjeT0iMTEiIHI9IjUiIGZpbGw9IiMzQjA3NjQiLz48L2c+PHBhdGggZD0iTTM2IDE0Yy0xLTQgMS05IDUtMTFNMzggMTRjMS0zIDQtNyA4LTgiIHN0cm9rZT0iIzRBN0MzRiIgc3Ryb2tlLXdpZHRoPSIyIiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48L3N2Zz4="
+},
+{
+"name": "Jalapeño",
+"category": "vegetable",
+"emoji": "🌶️",
+"storageLocation": "refrigerator",
+"ethyleneProduction": "low",
+"ethyleneSensitivity": "low",
+"optimalTempF": 45,
+"shelfLife": "1-2 weeks (refrigerated)",
+"storageTips": [
+"Store whole in a paper bag or loosely wrapped in the crisper drawer",
+"Do not wash until ready to use",
+"Cut peppers should be stored in an airtight container",
+"Freeze whole for long-term storage — texture changes but flavor is preserved"
+],
+"krispRecommended": false,
+"krispBenefit": null,
+"ripeTip": "Firm with smooth, glossy skin. Red jalapeños are riper and slightly sweeter than green ones.",
+"avoidWith": null,
+"extraDays": 5,
+"imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f336.png"
+},
+{
+"name": "Cranberry",
+"category": "fruit",
+"emoji": "🍒",
+"storageLocation": "refrigerator",
+"ethyleneProduction": "low",
+"ethyleneSensitivity": "low",
+"optimalTempF": 36,
+"shelfLife": "3-4 weeks (refrigerated)",
+"storageTips": [
+"Store in their original bag in the refrigerator",
+"Remove any soft or discolored berries",
+"Do not wash until ready to use",
+"Freeze for up to a year — they freeze exceptionally well"
+],
+"krispRecommended": false,
+"krispBenefit": null,
+"ripeTip": "Firm, plump, and deep red. They should bounce when dropped — soft berries are past their prime.",
+"avoidWith": null,
+"extraDays": 7,
+"imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3MiA3MiI+PGVsbGlwc2UgY3g9IjI0IiBjeT0iNDIiIHJ4PSIxNCIgcnk9IjEyIiBmaWxsPSIjQjkxQzFDIi8+PGVsbGlwc2UgY3g9IjQ4IiBjeT0iNDIiIHJ4PSIxNCIgcnk9IjEyIiBmaWxsPSIjREMyNjI2Ii8+PGVsbGlwc2UgY3g9IjM2IiBjeT0iMzYiIHJ4PSIxNCIgcnk9IjEyIiBmaWxsPSIjRUY0NDQ0Ii8+PGVsbGlwc2UgY3g9IjIyIiBjeT0iNDAiIHJ4PSI0IiByeT0iNSIgZmlsbD0iI0ZDQTVBNSIgb3BhY2l0eT0iMC4zIi8+PGVsbGlwc2UgY3g9IjM0IiBjeT0iMzQiIHJ4PSI0IiByeT0iNSIgZmlsbD0iI0ZDQTVBNSIgb3BhY2l0eT0iMC4zIi8+PGVsbGlwc2UgY3g9IjQ2IiBjeT0iNDAiIHJ4PSI0IiByeT0iNSIgZmlsbD0iI0ZDQTVBNSIgb3BhY2l0eT0iMC4zIi8+PC9zdmc+"
+},
+{
+"name": "Fig",
+"category": "fruit",
+"emoji": "🍐",
+"storageLocation": "refrigerator",
+"ethyleneProduction": "medium",
+"ethyleneSensitivity": "low",
+"optimalTempF": 32,
+"shelfLife": "2-3 days (refrigerated)",
+"storageTips": [
+"Store in a single layer on a paper towel-lined plate",
+"Refrigerate immediately — figs are extremely perishable",
+"Bring to room temperature before eating for best flavor",
+"Do not stack or they will bruise and spoil quickly"
+],
+"krispRecommended": false,
+"krispBenefit": null,
+"ripeTip": "Slightly soft to the touch with a sweet fragrance. The skin may have small cracks near the base when perfectly ripe.",
+"avoidWith": null,
+"extraDays": 2,
+"imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f350.png"
+},
+{
+"name": "Green Onion",
+"category": "vegetable",
+"emoji": "🧅",
+"storageLocation": "refrigerator",
+"ethyleneProduction": "very_low",
+"ethyleneSensitivity": "medium",
+"optimalTempF": 32,
+"shelfLife": "1-2 weeks (refrigerated)",
+"storageTips": [
+"Stand upright in a jar with an inch of water and cover loosely with a bag",
+"Change the water every few days",
+"Alternatively, wrap in a damp paper towel and place in a bag",
+"Trim and freeze for long-term storage"
+],
+"krispRecommended": false,
+"krispBenefit": null,
+"ripeTip": "Firm white bulbs with crisp, bright green tops. Avoid any with slimy or yellowed greens.",
+"avoidWith": null,
+"extraDays": 5,
+"imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3MiA3MiI+PHBhdGggZD0iTTMwIDY0IFEyOSA0MCAyNiAyMCBRMjQgMTAgMjIgNCIgc3Ryb2tlPSIjNEE3QzNGIiBzdHJva2Utd2lkdGg9IjUiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxwYXRoIGQ9Ik00MiA2NCBRNDEgNDAgNDQgMjAgUTQ2IDEwIDQ4IDQiIHN0cm9rZT0iIzVCOEM0QSIgc3Ryb2tlLXdpZHRoPSI1IiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48ZWxsaXBzZSBjeD0iMzAiIGN5PSI2MiIgcng9IjYiIHJ5PSI0IiBmaWxsPSIjRjhGOEYwIiBzdHJva2U9IiNFNUUxRDgiIHN0cm9rZS13aWR0aD0iMSIvPjxlbGxpcHNlIGN4PSI0MiIgY3k9IjYyIiByeD0iNiIgcnk9IjQiIGZpbGw9IiNGOEY4RjAiIHN0cm9rZT0iI0U1RTFEOCIgc3Ryb2tlLXdpZHRoPSIxIi8+PHBhdGggZD0iTTMwIDU4IEwzMCA1NCIgc3Ryb2tlPSIjRTVFMUQ4IiBzdHJva2Utd2lkdGg9IjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxwYXRoIGQ9Ik00MiA1OCBMNDIgNTQiIHN0cm9rZT0iI0U1RTFEOCIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48L3N2Zz4="
+}
+]

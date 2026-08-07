@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>What's In Season Near You | SimplyKrisp</title>
+<meta name="description" content="Enter your ZIP code to see which fruits and vegetables are local and in season right now — plus how to store each one so it lasts." />
+<meta property="og:site_name" content="SimplyKrisp Produce Guide" />
+<meta property="og:title" content="What's In Season Near You | SimplyKrisp" />
+<meta property="og:description" content="Enter your ZIP code to see what produce is local and in season right now, and how to store it." />
+<link rel="icon" type="image/png" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Questrial&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<!-- Leaflet 1.9.4, vendored locally so the map has no runtime CDN dependency. -->
+<link rel="stylesheet" href="/seasonal/vendor/leaflet.css" />
+<style>
+:root{
+  --bg:hsl(48 36% 97%);
+  --fg:hsl(96 14% 14%);
+  --muted-fg:hsl(96 5% 42%);
+  --card:hsl(48 28% 96%);
+  --card-border:hsl(48 12% 91%);
+  --border:hsl(48 10% 87%);
+  --primary:hsl(96 14% 28%);
+  --primary-fg:hsl(48 36% 97%);
+  --accent:hsl(52 80% 51%);
+  --muted:hsl(48 10% 91%);
+  --input:hsl(48 8% 78%);
+  --warn:hsl(16 70% 55%);
+  --ok:hsl(140 40% 38%);
+  --radius:.5rem;
+  --shadow-sm:0 2px 4px 0 hsl(40 20% 20% / .06), 0 1px 2px -1px hsl(40 20% 20% / .04);
+  --shadow:0 4px 8px 0 hsl(40 20% 20% / .06), 0 2px 4px -1px hsl(40 20% 20% / .04);
+  --shadow-md:0 6px 12px 0 hsl(40 20% 20% / .08), 0 3px 6px -1px hsl(40 20% 20% / .04);
+  --sans:"Questrial","DM Sans",system-ui,sans-serif;
+  --body:"DM Sans",system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3,.font-display{font-family:var(--sans);letter-spacing:-.01em}
+a{color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+
+/* header */
+header{border-bottom:1px solid var(--border);background:var(--bg);position:sticky;top:0;z-index:20}
+.hdr{display:flex;align-items:center;justify-content:space-between;gap:16px;height:64px}
+.brand span{white-space:nowrap}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.brand .mark{width:32px;height:32px;border-radius:50%;background:var(--muted);display:grid;place-items:center;flex:0 0 auto}
+.brand .name{font-family:var(--sans);font-size:15px;font-weight:700;line-height:1.1}
+.brand .sub{font-size:9.5px;letter-spacing:.14em;color:var(--muted-fg);text-transform:uppercase}
+nav{display:flex;gap:20px;font-size:14px}
+nav a{text-decoration:none;color:var(--muted-fg)}
+nav a:hover{color:var(--fg)}
+nav a.shop{color:var(--fg);font-weight:600}
+
+/* hero */
+.hero{padding:52px 0 8px}
+.eyebrow{display:inline-flex;align-items:center;gap:7px;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted-fg);margin-bottom:14px}
+.eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--accent)}
+h1{font-size:clamp(30px,5.2vw,46px);line-height:1.08;max-width:19ch}
+.lede{margin-top:14px;font-size:17px;color:var(--muted-fg);max-width:56ch}
+
+/* zip form */
+.zipform{margin-top:26px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.zipfield{position:relative}
+input[type=text]{font-family:var(--body);font-size:17px;padding:13px 15px;width:170px;border:1px solid var(--input);border-radius:var(--radius);background:#fff;color:var(--fg);letter-spacing:.06em}
+input[type=text]:focus{outline:2px solid var(--primary);outline-offset:1px;border-color:var(--primary)}
+select{font-family:var(--body);font-size:15px;padding:13px 12px;border:1px solid var(--input);border-radius:var(--radius);background:#fff;color:var(--fg)}
+.btn{font-family:var(--body);font-size:15.5px;font-weight:600;padding:13.5px 24px;border:1px solid transparent;border-radius:var(--radius);background:var(--primary);color:var(--primary-fg);cursor:pointer;transition:opacity .15s;text-decoration:none;display:inline-block;text-align:center}
+.btn:hover{opacity:.88}
+.btn:disabled{opacity:.5;cursor:default}
+.btn-ghost{background:transparent;color:var(--fg);border-color:var(--input);font-weight:500}
+.hint{font-size:13.5px;color:var(--muted-fg);margin-top:10px}
+.err{color:var(--warn);font-size:14px;margin-top:10px;font-weight:500}
+
+/* results header */
+#results{scroll-margin-top:64px}
+.rhead{margin-top:44px;padding-top:30px;border-top:1px solid var(--border);display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px}
+.rhead h2{font-size:clamp(22px,3.4vw,29px)}
+.rhead .sub{font-size:14.5px;color:var(--muted-fg);margin-top:6px}
+.monthpick{display:flex;gap:8px;align-items:center;font-size:14px;color:var(--muted-fg)}
+
+/* filter chips */
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:0}
+
+/* two-column results: produce grid + sticky local-markets rail */
+.cols{margin-top:26px;display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:34px;align-items:start}
+.col-main{min-width:0}
+.chip{font-family:var(--body);font-size:13.5px;font-weight:500;padding:7px 14px;border-radius:999px;border:1px solid var(--border);background:transparent;color:var(--fg);cursor:pointer;transition:all .15s}
+.chip:hover{background:var(--muted)}
+.chip[aria-pressed=true]{background:var(--primary);color:var(--primary-fg);border-color:var(--primary)}
+.count{margin-left:auto;font-size:13.5px;color:var(--muted-fg);align-self:center}
+
+/* grid */
+.grid{margin-top:16px;display:grid;grid-template-columns:repeat(auto-fill,minmax(262px,1fr));gap:14px}
+.pcard{background:var(--card);border:1px solid var(--card-border);border-radius:var(--radius);padding:16px;display:flex;flex-direction:column;box-shadow:var(--shadow-sm);transition:box-shadow .18s,transform .18s}
+.pcard:hover{box-shadow:var(--shadow-md);transform:translateY(-1px)}
+.ptop{display:flex;gap:12px;align-items:flex-start}
+.pimg{width:38px;height:38px;flex:0 0 auto;object-fit:contain}
+.pname{font-family:var(--sans);font-size:18px;line-height:1.2}
+.pmeta{font-size:12.5px;color:var(--muted-fg);margin-top:3px}
+.badges{display:flex;flex-wrap:wrap;gap:5px;margin-top:11px}
+.badge{font-size:10.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;padding:3.5px 8px;border-radius:4px;background:var(--muted);color:var(--muted-fg);border:1px solid rgba(0,0,0,.05)}
+.badge.sens{background:hsl(16 70% 55% / .13);color:hsl(16 62% 34%);border-color:hsl(16 70% 55% / .25)}
+.badge.prod{background:hsl(52 80% 51% / .2);color:hsl(45 60% 26%);border-color:hsl(52 60% 45% / .3)}
+.badge.krisp{background:var(--primary);color:var(--primary-fg);border-color:var(--primary);text-transform:none;letter-spacing:.02em;font-size:11px}
+.badge.krisp b{font-weight:700}
+.badge.krisp{white-space:nowrap}
+.tip{margin-top:12px;font-size:13.8px;line-height:1.5;color:var(--fg)}
+.tip .lbl{display:block;font-size:10.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--muted-fg);margin-bottom:4px}
+details{margin-top:auto;padding-top:10px;border-top:1px solid var(--card-border)}
+.tip{margin-bottom:12px}
+.gain{margin-top:11px;display:flex;flex-wrap:wrap;align-items:baseline;gap:7px;padding:9px 11px;border-radius:6px;background:hsl(140 40% 38% / .09);border:1px solid hsl(140 40% 38% / .2)}
+.gain .g-base{font-size:12.5px;color:var(--muted-fg)}
+.gain .g-arrow{font-size:12.5px;color:hsl(140 40% 30%)}
+.gain .g-plus{font-size:13px;font-weight:600;color:hsl(140 45% 25%)}
+summary{font-size:13px;font-weight:600;color:var(--primary);cursor:pointer;list-style:none;display:flex;align-items:center;gap:6px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"";width:6px;height:6px;border-right:1.6px solid currentColor;border-bottom:1.6px solid currentColor;transform:rotate(45deg);transition:transform .2s;margin-top:-3px}
+details[open] summary::after{transform:rotate(-135deg);margin-top:2px}
+.dbody{font-size:13.5px;line-height:1.55;color:var(--muted-fg);padding-top:10px}
+.dbody ul{margin:0 0 10px 16px}
+.dbody li{margin-bottom:5px}
+.dbody .sec{font-size:10.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--muted-fg);margin:12px 0 5px}
+.dbody .sec:first-child{margin-top:0}
+.kb{background:hsl(96 14% 28% / .07);border-left:2px solid var(--primary);padding:9px 11px;border-radius:0 4px 4px 0;color:var(--fg);font-size:13.2px}
+.avoid{color:hsl(16 62% 34%);font-weight:500}
+
+/* krisp band */
+.band{margin:24px 0 0;background:var(--primary);color:var(--primary-fg);border-radius:var(--radius);padding:24px 28px;display:flex;flex-wrap:wrap;gap:22px;align-items:center;justify-content:space-between}
+.band>div{flex:1 1 420px}
+.band>.btn{flex:0 0 auto}
+.band h3{font-size:23px;line-height:1.2;max-width:30ch}
+.band p{font-size:14.5px;opacity:.86;margin-top:8px;max-width:70ch}
+.band .btn{background:var(--accent);color:hsl(96 14% 14%);font-weight:700}
+.band .sensrow{margin-top:14px;display:flex;flex-wrap:wrap;gap:7px}
+.band .sensrow span{font-size:12.5px;padding:4px 10px;border-radius:999px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.16)}
+.band .sensrow b{font-weight:700;color:var(--accent)}
+
+/* markets rail */
+/* align-self:stretch gives the sticky child a full-height track to travel in;
+   without it the grid item collapses to content height and sticky does nothing. */
+.mk{min-width:0;align-self:stretch}
+.mkinner{position:sticky;top:80px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px 18px;max-height:calc(100vh - 104px);display:flex;flex-direction:column;overflow:hidden}
+.mscroll{flex:1 1 auto;min-height:120px;overflow-y:auto;overscroll-behavior:contain;margin:0 -4px;padding:0 4px}
+.mscroll::-webkit-scrollbar{width:6px}
+.mscroll::-webkit-scrollbar-thumb{background:hsl(96 10% 78%);border-radius:3px}
+
+/* --- map --- */
+.mapwrap{margin-top:14px;flex:0 0 auto;position:relative;border:1px solid var(--card-border);border-radius:var(--radius);overflow:hidden;background:var(--muted)}
+#map{height:240px;width:100%}
+.leaflet-container{background:hsl(48 20% 92%);font-family:var(--sans);font-size:12.6px}
+.leaflet-popup-content-wrapper{border-radius:10px;box-shadow:0 6px 22px hsl(96 14% 14% / .18)}
+.leaflet-popup-content{margin:11px 13px;line-height:1.4}
+.leaflet-popup-content b{font-family:var(--sans);font-size:14px;display:block;margin-bottom:3px}
+.leaflet-popup-content .ptype{font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted-fg)}
+.leaflet-popup-content a{color:var(--primary);font-weight:600}
+.leaflet-bar a{color:var(--fg)}
+.mpin{border-radius:50%;border:2px solid #fff;box-shadow:0 1px 5px hsl(96 14% 14% / .4);transition:transform .12s ease}
+.mpin.on{transform:scale(1.45);z-index:600}
+
+/* --- inline radius picker, sits inside the rail's sentence --- */
+.vh{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.radsel{display:inline-block;vertical-align:baseline}
+.radsel select{font-family:var(--body);font-size:12.8px;font-weight:600;line-height:1.2;color:var(--fg);
+  padding:3px 24px 3px 10px;border:1px solid var(--card-border);border-radius:999px;background-color:#fff;
+  cursor:pointer;-webkit-appearance:none;-moz-appearance:none;appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='7' viewBox='0 0 10 7'%3E%3Cpath d='M1 1.5 5 5.5 9 1.5' fill='none' stroke='%23566152' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 9px center}
+.radsel select:hover{border-color:hsl(96 12% 62%)}
+.radsel select:focus-visible{outline:2px solid var(--primary);outline-offset:1px}
+
+/* --- market type filters --- */
+.mfilters{margin-top:13px;flex:0 0 auto;display:flex;flex-wrap:wrap;gap:6px}
+.tchip{font:inherit;font-size:12.4px;font-weight:600;cursor:pointer;background:#fff;color:var(--fg);
+  border:1px solid var(--card-border);border-radius:999px;padding:5px 11px;display:inline-flex;align-items:center;gap:6px;line-height:1.2}
+.tchip:hover{border-color:hsl(96 12% 62%)}
+.tchip .dot{width:8px;height:8px;border-radius:50%;flex:0 0 auto}
+.tchip .n{color:var(--muted-fg);font-variant-numeric:tabular-nums;font-weight:500}
+.tchip[aria-pressed="true"]{background:var(--primary);color:#fff;border-color:var(--primary)}
+.tchip[aria-pressed="true"] .n{color:hsl(96 14% 82%)}
+.tchip .dot{box-shadow:0 0 0 1.5px #fff}
+.mcard.on{border-color:var(--primary);box-shadow:0 0 0 2px hsl(96 14% 28% / .16)}
+.mk h2{font-size:20px;line-height:1.25}
+.mk .sub{font-size:13.2px;color:var(--muted-fg);margin-top:6px}
+.mgrid{margin-top:14px;display:flex;flex-direction:column;gap:10px}
+.mcard{background:#fff;border:1px solid var(--card-border);border-radius:var(--radius);padding:13px 14px;cursor:pointer;
+  transition:border-color .12s ease,box-shadow .12s ease}
+.mcard:hover{border-color:hsl(96 12% 66%)}
+.mcard .mtype{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted-fg)}
+.mcard .mname{font-family:var(--sans);font-size:15.5px;margin-top:4px;line-height:1.25}
+.mcard .maddr{font-size:12.6px;color:var(--muted-fg);margin-top:4px}
+.mcard .mlinks{margin-top:9px;display:flex;flex-wrap:wrap;gap:12px;font-size:12.6px}
+.mcard .mlinks a{color:var(--primary);font-weight:600;text-decoration:none}
+.mcard .mlinks a:hover{text-decoration:underline}
+.mdist{float:right;font-size:12.5px;color:var(--muted-fg);font-variant-numeric:tabular-nums}
+
+/* misc */
+.skel{background:var(--muted);border-radius:var(--radius);height:104px;flex:0 0 auto;animation:pulse 1.5s ease-in-out infinite}
+@media (max-width:1000px){.skel{width:258px}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.55}}
+.empty{background:var(--card);border:1px dashed var(--border);border-radius:var(--radius);padding:26px;text-align:center;color:var(--muted-fg);font-size:14.5px;margin-top:18px}
+footer{margin-top:64px;border-top:1px solid var(--border);padding:28px 0 46px;font-size:13px;color:var(--muted-fg)}
+footer a{color:var(--primary);text-decoration:none}
+footer a:hover{text-decoration:underline}
+footer p{max-width:76ch;margin-bottom:8px}
+.hide{display:none!important}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+/* Below the two-column breakpoint the rail becomes a horizontal card reel
+   placed above the produce grid, so "where to buy it" is still visible
+   without a scroll on a phone. */
+@media (max-width:1000px){
+  .cols{grid-template-columns:1fr;gap:24px}
+  .col-main{order:2}
+  .mk{order:1;align-self:auto}
+  .mkinner{position:static;max-height:none;overflow:visible;display:block;padding:18px 16px}
+  .mscroll{overflow:visible;min-height:0;margin:0;padding:0}
+  #map{height:230px}
+  .mgrid{flex-direction:row;overflow-x:auto;scroll-snap-type:x mandatory;
+         padding-bottom:6px;margin-left:-16px;margin-right:-16px;
+         padding-left:16px;padding-right:16px;gap:10px}
+  .mgrid>.mcard{flex:0 0 258px;scroll-snap-align:start}
+  .mk .sub{max-width:60ch}
+}
+@media (max-width:720px){
+  nav a.mobile-hide{display:none}
+}
+@media (max-width:560px){
+  .hero{padding:34px 0 4px}
+  h1{max-width:none}
+  input[type=text]{width:100%}
+  .zipform{flex-direction:column;align-items:stretch}
+  .zipform .btn{width:100%}
+  .band{padding:22px 18px}
+  .band h3{font-size:20px}
+  nav{gap:14px;font-size:13px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap hdr">
+    <a class="brand" href="/">
+      <span class="mark" aria-hidden="true">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M12 3.2c3.6 3.5 6.2 6.6 6.2 10a6.2 6.2 0 1 1-12.4 0c0-3.4 2.6-6.5 6.2-10z" fill="hsl(96 14% 28%)"/>
+          <path d="M12 8.5v8.2" stroke="hsl(48 36% 97%)" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <span>
+        <span class="name">SimplyKrisp</span><br>
+        <span class="sub">Produce Guide</span>
+      </span>
+    </a>
+    <nav>
+      <a class="mobile-hide" href="/">Storage Guide</a>
+      <a class="mobile-hide" href="#seasonal">What's in Season</a>
+      <a class="shop" href="https://simplykrisp.com/?utm_source=produce-guide&amp;utm_medium=referral&amp;utm_campaign=seasonal-page&amp;utm_content=header" target="_blank" rel="noopener">Shop Krisp</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap" id="seasonal">
+
+  <section class="hero">
+    <div class="eyebrow"><span class="dot"></span> Seasonal &amp; local</div>
+    <h1>What's in season near you right now?</h1>
+    <p class="lede">Enter your ZIP code to see which fruits and vegetables are being harvested locally this month — and exactly how to store each one so it doesn't end up in the compost pail.</p>
+
+    <form class="zipform" id="zipform" novalidate>
+      <div class="zipfield">
+        <label class="sr" for="zip">ZIP code</label>
+        <input id="zip" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="5" placeholder="ZIP code" aria-describedby="ziperr" />
+      </div>
+      <button class="btn" type="submit" id="go">See what's in season</button>
+    </form>
+    <p class="hint" id="hint">We use your ZIP only to look up your growing region and nearby markets. Nothing is stored.</p>
+    <p class="err hide" id="ziperr" role="alert"></p>
+  </section>
+
+  <section id="results" class="hide">
+    <div class="rhead">
+      <div>
+        <h2 id="rtitle"></h2>
+        <p class="sub" id="rsub"></p>
+      </div>
+      <div class="monthpick">
+        <label for="month">Month</label>
+        <select id="month"></select>
+      </div>
+    </div>
+
+    <div class="band" id="band">
+      <div>
+        <h3 id="bandh">These are the ones ethylene ruins first</h3>
+        <p id="bandp"></p>
+        <div class="sensrow" id="sensrow"></div>
+      </div>
+      <a class="btn" href="https://simplykrisp.com/?utm_source=produce-guide&amp;utm_medium=referral&amp;utm_campaign=seasonal-page&amp;utm_content=hero-band" target="_blank" rel="noopener">Shop SimplyKrisp</a>
+    </div>
+
+    <div class="cols">
+      <div class="col-main">
+        <div class="chips" id="chips">
+          <button class="chip" data-f="sensitive" aria-pressed="true">Ethylene-sensitive first</button>
+          <button class="chip" data-f="all" aria-pressed="false">Show everything</button>
+          <button class="chip" data-f="fruit" aria-pressed="false">Fruits</button>
+          <button class="chip" data-f="vegetable" aria-pressed="false">Vegetables</button>
+          <span class="count" id="count"></span>
+        </div>
+
+        <div class="grid" id="grid"></div>
+        <div class="empty hide" id="gempty"></div>
+      </div>
+
+      <aside class="mk" id="mk">
+        <div class="mkinner">
+          <h2>Where to buy it local</h2>
+          <p class="sub">Farmers markets, CSAs, on-farm markets, and food hubs from the USDA Local Food Directory, within
+            <label class="radsel"><span class="vh">Search radius</span><select id="mradius">
+              <option value="10">10 miles</option>
+              <option value="25">25 miles</option>
+              <option value="40" selected>40 miles</option>
+              <option value="60">60 miles</option>
+              <option value="100">100 miles</option>
+            </select></label>
+            of <span id="mkzip"></span>.</p>
+          <div class="mapwrap hide" id="mapwrap"><div id="map"></div></div>
+          <div class="mfilters hide" id="mfilters" role="group" aria-label="Filter local sources by type"></div>
+          <div class="mscroll">
+            <div class="mgrid" id="mgrid"></div>
+            <div class="empty hide" id="mempty"></div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><strong>Seasonality data</strong> is compiled by region from the
+      <a href="https://acl.gov/sites/default/files/nutrition/SeasonalProduceChartByRegion.pdf" target="_blank" rel="noopener">ACL/Farmers' Almanac regional seasonal produce chart</a>,
+      the <a href="https://www.seasonalfoodguide.org/" target="_blank" rel="noopener">Seasonal Food Guide</a> (NRDC and state agriculture departments), and state university extension harvest calendars.
+      Harvest windows shift with weather and microclimate — treat these as a guide, and your local market as the final word.</p>
+    <p><strong>Market listings</strong> come from the
+      <a href="https://www.usdalocalfoodportal.com/" target="_blank" rel="noopener">USDA Local Food Directory</a>,
+      including the coordinates plotted on the map. Map tiles are served by
+      <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors.
+      <strong>Storage guidance and ethylene ratings</strong> are the same data behind the
+      <a href="/">SimplyKrisp Produce Storage Guide</a>.</p>
+    <p style="margin-top:14px">&copy; <span id="yr"></span> SimplyKrisp. 1% for the Planet member.</p>
+  </div>
+</footer>
+
+<script src="/seasonal/vendor/leaflet.js"></script>
+<script src="/seasonal/zip-to-state.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  // The USDA proxy is the serverless function at /api/markets, same origin.
+  // Point this at http://localhost:8000 to run against server.py locally.
+  var API_BASE = '';
+
+  var MONTHS = ['January','February','March','April','May','June',
+                'July','August','September','October','November','December'];
+
+  var LOC_LABEL = {
+    refrigerator: 'Refrigerate',
+    counter: 'Countertop',
+    counter_then_fridge: 'Counter, then fridge',
+    pantry: 'Cool, dark pantry',
+    freezer: 'Freezer'
+  };
+
+  var el = function (id) { return document.getElementById(id); };
+  // Default view is the ethylene-sensitive set — the produce that spoils first
+  // and the produce a Krisp absorber actually changes the outcome for.
+  var state = { produce: null, seasons: null, st: null, month: new Date().getMonth() + 1, filter: 'sensitive' };
+
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  // month picker
+  var msel = el('month');
+  MONTHS.forEach(function (m, i) {
+    var o = document.createElement('option');
+    o.value = i + 1; o.textContent = m;
+    msel.appendChild(o);
+  });
+  msel.value = state.month;
+
+  function loadData() {
+    if (state.produce && state.seasons) return Promise.resolve();
+    return Promise.all([
+      fetch('/seasonal/produce.json').then(function (r) { return r.json(); }),
+      fetch('/seasonal/seasonality.json').then(function (r) { return r.json(); })
+    ]).then(function (res) {
+      state.produce = {};
+      res[0].forEach(function (p) { state.produce[p.name] = p; });
+      state.seasons = res[1];
+    });
+  }
+
+  function inSeason() {
+    var region = state.seasons.stateToRegion[state.st];
+    var table = state.seasons.seasons[region] || {};
+    var names = Object.keys(table).filter(function (n) {
+      return table[n].indexOf(state.month) !== -1 && state.produce[n];
+    });
+    names.sort(function (a, b) {
+      var pa = state.produce[a], pb = state.produce[b];
+      // Krisp-relevant items first, then by how many days it buys, then A-Z.
+      var ka = pa.krispRecommended ? 0 : 1, kb = pb.krispRecommended ? 0 : 1;
+      if (ka !== kb) return ka - kb;
+      var sa = pa.ethyleneSensitivity === 'high' ? 0 : pa.ethyleneSensitivity === 'medium' ? 1 : 2;
+      var sb = pb.ethyleneSensitivity === 'high' ? 0 : pb.ethyleneSensitivity === 'medium' ? 1 : 2;
+      if (sa !== sb) return sa - sb;
+      return relGain(pb) - relGain(pa) || a.localeCompare(b);
+    });
+    return { region: region, names: names };
+  }
+
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
+    });
+  }
+
+  // Only ever emit http(s) links. Market URLs come from a third-party API,
+  // so never trust them into an href unescaped or with an arbitrary scheme.
+  function safeUrl(u) {
+    if (!u) return '';
+    var s = String(u).trim();
+    if (/^(https?:)?\/\//i.test(s)) return s.indexOf('//') === 0 ? 'https:' + s : s;
+    if (/^[a-z][a-z0-9+.-]*:/i.test(s)) return ''; // reject javascript:, data:, etc.
+    return 'https://' + s.replace(/^\/+/, '');
+  }
+
+  // Parse "3-5 days (refrigerated)" / "4-8 weeks" / "1 week".
+  // Returns { lo, hi, unit } in days, plus the original unit so we only do
+  // day arithmetic on items actually measured in days.
+  function shelfDays(s) {
+    if (!s) return null;
+    var m = String(s).match(/(\d+)\s*(?:[-\u2013]\s*(\d+))?\s*(day|week|month)/i);
+    if (!m) return null;
+    var unit = m[3].toLowerCase();
+    var mult = { day: 1, week: 7, month: 30 }[unit];
+    var lo = parseInt(m[1], 10) * mult;
+    var hi = m[2] ? parseInt(m[2], 10) * mult : lo;
+    // "1-2 weeks whole, 3-5 days cut (refrigerated)" -> "1-2 weeks whole"
+    var label = String(s).replace(/\s*\([^)]*\)\s*$/, '').split(',')[0].trim();
+    return { lo: lo, hi: hi, unit: unit, label: label };
+  }
+
+  // How much a Krisp absorber changes the outcome, as a share of normal shelf life.
+  // Five extra days on broccoli matters far more than five on a cabbage.
+  function relGain(p) {
+    if (!p.krispRecommended || !p.extraDays) return -1;
+    var b = shelfDays(p.shelfLife);
+    if (!b) return 0;
+    return p.extraDays / ((b.lo + b.hi) / 2);
+  }
+
+  function card(p) {
+    var sens = p.ethyleneSensitivity;
+    var prod = p.ethyleneProduction;
+    var b = [];
+    b.push('<span class="badge">' + esc(LOC_LABEL[p.storageLocation] || p.storageLocation) + '</span>');
+    if (sens === 'high') b.push('<span class="badge sens">Ethylene-sensitive</span>');
+    else if (sens === 'medium') b.push('<span class="badge sens">Somewhat sensitive</span>');
+    if (prod === 'very_high' || prod === 'high') b.push('<span class="badge prod">Ethylene producer</span>');
+    if (p.krispRecommended && p.extraDays) {
+      b.push('<span class="badge krisp">Krisp adds <b>~' + p.extraDays + ' day' +
+             (p.extraDays === 1 ? '' : 's') + '</b></span>');
+    } else if (p.krispRecommended) {
+      b.push('<span class="badge krisp">Krisp helps</span>');
+    }
+
+    var tips = (p.storageTips || []).map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('');
+    var avoid = (p.avoidWith && p.avoidWith.length)
+      ? '<div class="sec">Store away from</div><p class="avoid">' + esc(p.avoidWith.join(' · ')) + '</p>' : '';
+    var kb = p.krispBenefit
+      ? '<div class="sec">With SimplyKrisp</div><p class="kb">' + esc(p.krispBenefit) + '</p>' : '';
+    var ripe = p.ripeTip ? '<div class="sec">Picking a good one</div><p>' + esc(p.ripeTip) + '</p>' : '';
+
+    // "3-5 days on its own -> about 8-10 days with a Krisp absorber"
+    var gain = '';
+    if (p.krispRecommended && p.extraDays) {
+      var base = shelfDays(p.shelfLife);
+      var left, right;
+      // Anything up to ~3 weeks reads better as a concrete day range.
+      if (base && base.hi <= 21) {
+        // Short shelf life: spell out the new window, it's the whole point.
+        left = (base.hi !== base.lo ? base.lo + '\u2013' + base.hi : String(base.lo)) + ' days on its own';
+        right = 'about ' + (base.lo + p.extraDays) +
+                (base.hi !== base.lo ? '\u2013' + (base.hi + p.extraDays) : '') +
+                ' days with a Krisp absorber';
+      } else {
+        // Weeks or months: keep the original units, just state the gain.
+        left = (base ? base.label : 'Normal shelf life') + ' on its own';
+        right = 'about ' + p.extraDays + ' days longer with a Krisp absorber';
+      }
+      gain = '<div class="gain">' +
+        '<span class="g-base">' + esc(left) + '</span>' +
+        '<span class="g-arrow" aria-hidden="true">\u2192</span>' +
+        '<span class="g-plus">' + esc(right) + '</span>' +
+      '</div>';
+    }
+
+    return '<article class="pcard">' +
+      '<div class="ptop">' +
+        '<img class="pimg" src="' + esc(p.imageUrl) + '" alt="" loading="lazy" />' +
+        '<div><h3 class="pname">' + esc(p.name) + '</h3>' +
+        '<div class="pmeta">' + esc(p.shelfLife) + ' &middot; best at ' + esc(p.optimalTempF) + '&deg;F</div></div>' +
+      '</div>' +
+      '<div class="badges">' + b.join('') + '</div>' + gain +
+      '<div class="tip"><span class="lbl">Store it like this</span>' + esc((p.storageTips || [''])[0]) + '</div>' +
+      '<details><summary>All storage tips</summary><div class="dbody">' +
+        '<div class="sec">Full guidance</div><ul>' + tips + '</ul>' + ripe + avoid + kb +
+      '</div></details>' +
+    '</article>';
+  }
+
+  function render() {
+    var r = inSeason();
+    var all = r.names.map(function (n) { return state.produce[n]; });
+    var shown = all.filter(function (p) {
+      if (state.filter === 'all') return true;
+      if (state.filter === 'sensitive') return p.ethyleneSensitivity === 'high' || p.ethyleneSensitivity === 'medium';
+      return p.category === state.filter;
+    });
+
+    el('rtitle').textContent = 'In season in ' + window.STATE_NAMES[state.st] + ' in ' + MONTHS[state.month - 1];
+    var sub = state.seasons.regionLabels[r.region] + ' growing region \u00b7 ' +
+              all.length + ' items being harvested locally';
+    if (state.filter === 'sensitive') {
+      sub += ' \u00b7 showing the ones ethylene ruins first';
+    }
+    el('rsub').textContent = sub;
+    el('count').textContent = shown.length + ' of ' + all.length + ' shown';
+
+    var g = el('grid'), ge = el('gempty');
+    if (!shown.length) {
+      g.innerHTML = '';
+      ge.textContent = all.length
+        ? 'Nothing in that category this month. Try another filter.'
+        : 'Very little is harvested locally here this month. Check the storage guide to make what you have last longer.';
+      ge.classList.remove('hide');
+    } else {
+      g.innerHTML = shown.map(card).join('');
+      ge.classList.add('hide');
+    }
+
+    // ethylene band
+    var krispItems = all.filter(function (p) { return p.krispRecommended && p.extraDays; });
+    var band = el('band');
+    if (krispItems.length) {
+      var avg = Math.round(
+        krispItems.reduce(function (s, p) { return s + p.extraDays; }, 0) / krispItems.length
+      );
+      var best = krispItems.slice().sort(function (a, b) { return b.extraDays - a.extraDays; })[0];
+      el('bandh').textContent = krispItems.length === 1
+        ? 'Krisp buys you about ' + avg + ' more days on ' + best.name.toLowerCase()
+        : 'Krisp buys you about ' + avg + ' more days on ' + krispItems.length +
+          ' of the ' + all.length + ' below';
+      el('bandp').textContent = 'Ethylene is the ripening hormone your apples and tomatoes give off, ' +
+        'and it\u2019s what turns a good market haul into compost by Thursday. A Krisp absorber in the ' +
+        'drawer neutralizes it \u2014 ' + best.name.toLowerCase() + ' alone gains roughly ' +
+        best.extraDays + ' days.';
+      el('sensrow').innerHTML = krispItems.slice(0, 12).map(function (p) {
+        return '<span>' + esc(p.name) + ' <b>+' + p.extraDays + 'd</b></span>';
+      }).join('');
+      band.classList.remove('hide');
+    } else {
+      band.classList.add('hide');
+    }
+
+    el('results').classList.remove('hide');
+  }
+
+  // ---------- local sources: map, type filters, card <-> pin linking ----------
+
+  var MTYPES = [
+    ['farmersmarket', 'Farmers market', 'Farmers markets', 'hsl(96 14% 32%)'],
+    ['csa',           'CSA',            'CSAs',            'hsl(44 84% 46%)'],
+    ['onfarmmarket',  'On-farm market', 'On-farm',         'hsl(18 62% 50%)'],
+    ['foodhub',       'Food hub',       'Food hubs',       'hsl(205 42% 44%)']
+  ];
+
+  function mtype(k) {
+    for (var i = 0; i < MTYPES.length; i++) if (MTYPES[i][0] === k) return MTYPES[i];
+    return ['other', 'Local source', 'Other', 'hsl(96 5% 45%)'];
+  }
+
+  var mstate = { rows: [], type: 'all', radius: 40, zip: '', req: 0,
+                 map: null, layer: null, pins: {}, active: null };
+
+  function ensureMap() {
+    if (mstate.map || !window.L) return mstate.map;
+    mstate.map = L.map('map', {
+      zoomControl: false,
+      scrollWheelZoom: false, // don't hijack page scrolling
+      attributionControl: true
+    });
+    // Bottom-right keeps the control clear of popups in a small map.
+    L.control.zoom({ position: 'bottomright' }).addTo(mstate.map);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 18,
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a>'
+    }).addTo(mstate.map);
+    // Wheel-zoom only once the user has clicked into the map.
+    mstate.map.on('click', function () { mstate.map.scrollWheelZoom.enable(); });
+    mstate.map.on('mouseout', function () { mstate.map.scrollWheelZoom.disable(); });
+    mstate.layer = L.layerGroup().addTo(mstate.map);
+    return mstate.map;
+  }
+
+  function visibleRows() {
+    if (mstate.type === 'all') return mstate.rows;
+    return mstate.rows.filter(function (m) { return m.type === mstate.type; });
+  }
+
+  function highlight(id, fromPin) {
+    if (mstate.active === id) return;
+    mstate.active = id;
+    var cards = el('mgrid').querySelectorAll('.mcard');
+    for (var i = 0; i < cards.length; i++) {
+      cards[i].classList.toggle('on', cards[i].getAttribute('data-id') === String(id));
+    }
+    Object.keys(mstate.pins).forEach(function (k) {
+      // getElement() returns the divIcon wrapper; the styled dot is inside it.
+      var root = mstate.pins[k].getElement();
+      var dot = root && root.querySelector ? root.querySelector('.mpin') : null;
+      if (dot) dot.classList.toggle('on', k === String(id));
+    });
+    if (fromPin) {
+      var card = el('mgrid').querySelector('.mcard[data-id="' + id + '"]');
+      if (card && card.scrollIntoView) {
+        card.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'smooth' });
+      }
+    }
+  }
+
+  function drawPins() {
+    var map = ensureMap();
+    if (!map) return;
+    mstate.layer.clearLayers();
+    mstate.pins = {};
+
+    var pts = [];
+    visibleRows().forEach(function (m) {
+      if (m.lat == null || m.lng == null) return;
+      var t = mtype(m.type);
+      var pin = L.marker([m.lat, m.lng], {
+        title: m.name,
+        icon: L.divIcon({
+          className: '',
+          html: '<div class="mpin" style="width:14px;height:14px;background:' + t[3] + '"></div>',
+          iconSize: [14, 14],
+          iconAnchor: [7, 7]
+        })
+      });
+      // Kept deliberately short — the map is small, and the card list directly
+      // below already carries the full address and every link.
+      var best = safeUrl(m.website) || safeUrl(m.url);
+      pin.bindPopup(
+        '<span class="ptype">' + esc(t[1]) + (m.distance != null ? ' &middot; ' + m.distance + ' mi' : '') + '</span>' +
+        '<b>' + esc(m.name) + '</b>' +
+        esc(m.city ? m.city + (m.state ? ', ' + m.state : '') : '') +
+        (best ? '<div style="margin-top:5px"><a href="' + esc(best) +
+                '" target="_blank" rel="noopener noreferrer">Details &rarr;</a></div>' : ''),
+        { maxWidth: 214, minWidth: 150, autoPanPadding: [14, 14], closeButton: true }
+      );
+      pin.on('click', function () { highlight(m.id, true); });
+      pin.addTo(mstate.layer);
+      mstate.pins[m.id] = pin;
+      pts.push([m.lat, m.lng]);
+    });
+
+    if (pts.length > 1) map.fitBounds(pts, { padding: [26, 26], maxZoom: 12 });
+    else if (pts.length === 1) map.setView(pts[0], 11);
+    else map.setView([39.5, -98.35], 3);
+    setTimeout(function () { map.invalidateSize(); }, 40);
+  }
+
+  function drawMarketCards() {
+    var mg = el('mgrid'), me = el('mempty');
+    var rows = visibleRows();
+    if (!rows.length) {
+      mg.innerHTML = '';
+      me.textContent = 'No ' + mtype(mstate.type)[2].toLowerCase() + ' listed within ' + mstate.radius + ' miles.';
+      me.classList.remove('hide');
+      return;
+    }
+    me.classList.add('hide');
+    mg.innerHTML = rows.map(function (m) {
+      var links = [];
+      var w = safeUrl(m.website), f = safeUrl(m.facebook), u = safeUrl(m.url);
+      if (w) links.push('<a href="' + esc(w) + '" target="_blank" rel="noopener noreferrer">Website</a>');
+      if (f) links.push('<a href="' + esc(f) + '" target="_blank" rel="noopener noreferrer">Facebook</a>');
+      if (u) links.push('<a href="' + esc(u) + '" target="_blank" rel="noopener noreferrer">USDA listing</a>');
+      var t = mtype(m.type);
+      return '<article class="mcard" data-id="' + esc(String(m.id)) + '">' +
+        (m.distance != null ? '<span class="mdist">' + m.distance + ' mi</span>' : '') +
+        '<div class="mtype"><span class="dot" style="display:inline-block;width:7px;height:7px;border-radius:50%;' +
+          'background:' + t[3] + ';margin-right:5px;vertical-align:1px"></span>' + esc(t[1]) + '</div>' +
+        '<div class="mname">' + esc(m.name) + '</div>' +
+        '<div class="maddr">' + esc(m.address || [m.city, m.state].filter(Boolean).join(', ')) + '</div>' +
+        '<div class="mlinks">' + links.join('') + '</div>' +
+      '</article>';
+    }).join('');
+  }
+
+  function drawMarketFilters() {
+    var wrap = el('mfilters');
+    var counts = {};
+    mstate.rows.forEach(function (m) { counts[m.type] = (counts[m.type] || 0) + 1; });
+    var avail = MTYPES.filter(function (t) { return counts[t[0]]; });
+
+    // With only one kind of source nearby, a filter row is noise.
+    if (avail.length < 2) { wrap.classList.add('hide'); wrap.innerHTML = ''; return; }
+
+    var html = '<button type="button" class="tchip" data-t="all" aria-pressed="' +
+      (mstate.type === 'all') + '">All <span class="n">' + mstate.rows.length + '</span></button>';
+    avail.forEach(function (t) {
+      html += '<button type="button" class="tchip" data-t="' + t[0] + '" aria-pressed="' +
+        (mstate.type === t[0]) + '"><span class="dot" style="background:' + t[3] + '"></span>' +
+        esc(t[2]) + ' <span class="n">' + counts[t[0]] + '</span></button>';
+    });
+    wrap.innerHTML = html;
+    wrap.classList.remove('hide');
+  }
+
+  function renderMarkets(zip, keepType) {
+    if (zip) mstate.zip = zip;
+    zip = mstate.zip;
+    if (!zip) return;
+
+    el('mkzip').textContent = zip;
+    var mg = el('mgrid'), me = el('mempty');
+    me.classList.add('hide');
+    el('mapwrap').classList.add('hide');
+    el('mfilters').classList.add('hide');
+    mstate.rows = [];
+    mstate.active = null;
+    if (!keepType) mstate.type = 'all';
+    mg.innerHTML = '<div class="skel"></div><div class="skel"></div><div class="skel"></div>';
+
+    // Changing the radius fires a new request while the old one may still be in
+    // flight; only the newest response is allowed to paint.
+    var req = ++mstate.req;
+    var radius = mstate.radius;
+
+    // The USDA directory can be slow for remote ZIPs. Cap the wait so the
+    // loading placeholders never hang indefinitely.
+    var ctrl = window.AbortController ? new AbortController() : null;
+    var timer = setTimeout(function () { if (ctrl) ctrl.abort(); }, 15000);
+
+    fetch(API_BASE + '/api/markets?zip=' + encodeURIComponent(zip) + '&radius=' + encodeURIComponent(radius),
+          ctrl ? { signal: ctrl.signal } : undefined)
+      .then(function (r) { clearTimeout(timer); return r.json(); })
+      .then(function (d) {
+        if (req !== mstate.req) return; // superseded by a newer request
+        var rows = [];
+        MTYPES.forEach(function (t) {
+          (d[t[0]] || []).forEach(function (m) { m.type = t[0]; rows.push(m); });
+        });
+        // USDA's radius filter is approximate — a 25-mile query comes back with
+        // listings at 29.9 miles. Clamp to the distance we actually display so
+        // the label on screen is true.
+        rows = rows.filter(function (m) { return m.distance == null || m.distance <= radius; });
+        rows.sort(function (a, b) { return (a.distance == null ? 999 : a.distance) - (b.distance == null ? 999 : b.distance); });
+        mstate.rows = rows.slice(0, 40);
+
+        if (!mstate.rows.length) {
+          mg.innerHTML = '';
+          me.textContent = 'No listings within ' + radius + ' miles of ' + zip + '. Try a wider radius.';
+          me.classList.remove('hide');
+          return;
+        }
+
+        // A radius change can wipe out the type that was selected.
+        if (mstate.type !== 'all' && !mstate.rows.some(function (m) { return m.type === mstate.type; })) {
+          mstate.type = 'all';
+        }
+
+        var hasCoords = mstate.rows.some(function (m) { return m.lat != null && m.lng != null; });
+        if (hasCoords && window.L) el('mapwrap').classList.remove('hide');
+
+        drawMarketFilters();
+        drawMarketCards();
+        if (hasCoords && window.L) drawPins();
+      })
+      .catch(function () {
+        clearTimeout(timer);
+        if (req !== mstate.req) return;
+        mg.innerHTML = '';
+        me.textContent = 'Couldn\u2019t reach the USDA directory just now. Try again in a moment.';
+        me.classList.remove('hide');
+      });
+  }
+
+  function syncRadiusUrl() {
+    if (!mstate.zip || !window.history || !history.replaceState) return;
+    var url = new URL(window.location.href);
+    if (mstate.radius === 40) url.searchParams.delete('radius');
+    else url.searchParams.set('radius', String(mstate.radius));
+    history.replaceState(null, '', url.toString());
+  }
+
+  // Radius picker — refetches, keeping the source-type filter if it survives.
+  el('mradius').addEventListener('change', function () {
+    var v = parseInt(this.value, 10);
+    mstate.radius = isNaN(v) ? 40 : Math.max(5, Math.min(v, 100));
+    syncRadiusUrl();
+    renderMarkets(null, true);
+  });
+
+  // Type filter clicks
+  el('mfilters').addEventListener('click', function (e) {
+    var b = e.target.closest ? e.target.closest('.tchip') : null;
+    if (!b) return;
+    mstate.type = b.getAttribute('data-t');
+    mstate.active = null;
+    drawMarketFilters();
+    drawMarketCards();
+    drawPins();
+  });
+
+  // Clicking a card focuses its pin
+  el('mgrid').addEventListener('click', function (e) {
+    if (e.target.closest && e.target.closest('a')) return; // let links win
+    var card = e.target.closest ? e.target.closest('.mcard') : null;
+    if (!card) return;
+    var id = card.getAttribute('data-id');
+    highlight(id, false);
+    var pin = mstate.pins[id];
+    if (pin && mstate.map) {
+      // Pan, don't zoom — a zoom jump is disorienting in a rail-sized map.
+      mstate.map.panTo(pin.getLatLng(), { animate: true });
+      pin.openPopup();
+    }
+  });
+
+  // The rail switches between a sticky column and a mobile reel; Leaflet needs
+  // to be told its container changed size.
+  var mresize;
+  window.addEventListener('resize', function () {
+    clearTimeout(mresize);
+    mresize = setTimeout(function () { if (mstate.map) mstate.map.invalidateSize(); }, 180);
+  });
+
+  function submit(zip) {
+    var err = el('ziperr');
+    var digits = String(zip).replace(/\D/g, '');
+    if (digits.length !== 5) {
+      err.textContent = 'Enter a 5-digit ZIP code.';
+      err.classList.remove('hide');
+      return;
+    }
+    var st = window.zipToState(digits);
+    if (!st) {
+      err.textContent = 'We couldn\u2019t match that ZIP to a US state. Double-check it?';
+      err.classList.remove('hide');
+      return;
+    }
+    err.classList.add('hide');
+    state.st = st;
+    el('go').disabled = true;
+    loadData().then(function () {
+      el('go').disabled = false;
+      render();
+      renderMarkets(digits);
+      var url = new URL(window.location.href);
+      url.searchParams.set('zip', digits);
+      if (mstate.radius !== 40) url.searchParams.set('radius', String(mstate.radius));
+      history.replaceState(null, '', url.toString());
+      el('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }).catch(function () {
+      el('go').disabled = false;
+      err.textContent = 'Couldn\u2019t load the seasonal data. Please refresh.';
+      err.classList.remove('hide');
+    });
+  }
+
+  el('zipform').addEventListener('submit', function (e) {
+    e.preventDefault();
+    submit(el('zip').value);
+  });
+
+  msel.addEventListener('change', function () {
+    state.month = parseInt(msel.value, 10);
+    if (state.st) render();
+  });
+
+  el('chips').addEventListener('click', function (e) {
+    var b = e.target.closest('.chip');
+    if (!b) return;
+    state.filter = b.dataset.f;
+    [].forEach.call(el('chips').querySelectorAll('.chip'), function (c) {
+      c.setAttribute('aria-pressed', String(c === b));
+    });
+    if (state.st) render();
+  });
+
+  // ?zip=54220 deep link — this is what the sticker QR code points at.
+  // ?radius=25 optionally narrows the market search, for partner sticker runs.
+  var qs = new URLSearchParams(window.location.search);
+  var prad = parseInt(qs.get('radius'), 10);
+  if (!isNaN(prad)) {
+    // Snap to the nearest offered option so the select always matches the data.
+    var opts = [].map.call(el('mradius').options, function (o) { return parseInt(o.value, 10); });
+    var best = opts.reduce(function (a, b) { return Math.abs(b - prad) < Math.abs(a - prad) ? b : a; });
+    mstate.radius = best;
+    el('mradius').value = String(best);
+  }
+  var pre = qs.get('zip');
+  if (pre) { el('zip').value = pre.replace(/\D/g, '').slice(0, 5); submit(el('zip').value); }
+})();
+</script>
+</body>
+</html>
