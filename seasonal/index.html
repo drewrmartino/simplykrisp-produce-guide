@@ -217,6 +217,67 @@ details[open] summary::after{transform:rotate(-135deg);margin-top:2px}
 .mcard .mlinks a:hover{text-decoration:underline}
 .mdist{float:right;font-size:12.5px;color:var(--muted-fg);font-variant-numeric:tabular-nums}
 
+/* season transitions: what's leaving and what's arriving next month */
+.transbar{margin-top:14px;display:flex;flex-wrap:wrap;gap:8px 20px;font-size:13px}
+.tgroup{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px;min-width:0}
+.tgroup .tlbl{font-size:10.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--muted-fg);white-space:nowrap}
+.tgroup span.ti{font-size:12.4px;padding:3px 9px;border-radius:999px;line-height:1.35}
+.tgroup.go span.ti{background:hsl(16 70% 55% / .13);border:1px solid hsl(16 70% 55% / .22);color:hsl(16 62% 32%)}
+.tgroup.come span.ti{background:hsl(140 40% 38% / .11);border:1px solid hsl(140 40% 38% / .2);color:hsl(140 45% 24%)}
+.tgroup button.tmore{font:inherit;font-size:12.4px;font-weight:600;color:var(--primary);background:none;border:0;padding:3px 4px;cursor:pointer;text-decoration:underline}
+
+/* crisper conflict checker */
+.ck{margin-top:24px;background:var(--card);border:1px solid var(--card-border);border-radius:var(--radius);padding:20px 22px}
+.ck h2{font-size:21px;line-height:1.25}
+.ck>.sub{font-size:13.6px;color:var(--muted-fg);margin-top:6px;max-width:76ch}
+.ckpick{margin-top:15px;display:flex;flex-wrap:wrap;gap:6px}
+.ckchip{font:inherit;font-size:12.8px;font-weight:500;cursor:pointer;background:#fff;color:var(--fg);
+  border:1px solid var(--card-border);border-radius:999px;padding:5px 12px;display:inline-flex;align-items:center;gap:6px;line-height:1.3}
+.ckchip:hover{border-color:hsl(96 12% 62%)}
+.ckchip[aria-pressed="true"]{background:var(--primary);color:#fff;border-color:var(--primary)}
+.ckchip .pd{width:7px;height:7px;border-radius:50%;background:var(--accent);flex:0 0 auto;box-shadow:0 0 0 1px hsl(45 60% 40% / .45)}
+.ckbar{margin-top:12px;display:flex;flex-wrap:wrap;align-items:center;gap:14px;font-size:12.6px;color:var(--muted-fg)}
+.ckbar .lg{display:inline-flex;align-items:center;gap:6px}
+.ckbar button.ckclear{font:inherit;font-size:12.6px;font-weight:600;color:var(--primary);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline}
+.ckout{margin-top:6px}
+.cksum{font-family:var(--sans);font-size:16.5px;line-height:1.35;margin-top:16px;padding-top:16px;border-top:1px solid var(--card-border)}
+.ckrow{display:flex;gap:12px;padding:13px 0;border-top:1px solid var(--card-border)}
+.ckrow:first-child{border-top:0}
+.ckrow .ckimg{width:30px;height:30px;flex:0 0 auto;object-fit:contain;margin-top:1px}
+.ckrow .ckbody{min-width:0}
+.ckrow .ckwhat{font-size:14.2px;line-height:1.4}
+.ckrow .ckwhat b{font-weight:600}
+.ckvic{margin-top:6px;display:flex;flex-wrap:wrap;gap:5px}
+.ckvic span{font-size:12px;padding:3px 9px;border-radius:999px;line-height:1.35}
+.ckvic span.s2{background:hsl(16 70% 55% / .15);border:1px solid hsl(16 70% 55% / .26);color:hsl(16 62% 30%)}
+.ckvic span.s1{background:var(--muted);border:1px solid var(--card-border);color:var(--muted-fg)}
+.ckfix{font-size:13px;color:var(--muted-fg);margin-top:7px}
+.ckfix b{color:var(--fg);font-weight:600}
+.ckclean{margin-top:16px;padding-top:16px;border-top:1px solid var(--card-border);font-size:14.2px}
+.ckclean .sub2{font-size:13px;color:var(--muted-fg);margin-top:6px;max-width:74ch}
+.ckcta{margin-top:15px;display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+.ckcta .btn{font-size:14.5px;padding:11px 20px}
+.ckcta .ckcp{font-size:12.8px;color:var(--muted-fg);max-width:44ch}
+
+/* buy path */
+.buy{margin-top:38px;background:var(--primary);color:var(--primary-fg);border-radius:var(--radius);
+  padding:26px 28px;display:grid;grid-template-columns:142px minmax(0,1fr) auto;gap:26px;align-items:center}
+.buy .bimg{width:142px;height:142px;object-fit:cover;border-radius:8px;background:rgba(255,255,255,.09);display:block}
+.buy h2{font-size:22px;line-height:1.25}
+.buy .bp{font-size:14.2px;opacity:.88;margin-top:8px;max-width:60ch}
+.buy .bwhy{font-size:13.4px;margin-top:10px;padding:9px 12px;border-radius:6px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.14);max-width:60ch}
+.buy .bcta{display:flex;flex-direction:column;gap:9px;min-width:196px}
+.buy .price{font-family:var(--sans);font-size:25px;line-height:1.1}
+.buy .price .per{font-family:var(--body);font-size:12.5px;opacity:.75;display:block;margin-top:3px}
+.buy .btn{background:var(--accent);color:hsl(96 14% 14%);font-weight:700}
+.buy .btn.b2{background:transparent;border-color:rgba(255,255,255,.42);color:var(--primary-fg);font-weight:600;font-size:14px;padding:10px 18px}
+.buy .fine{font-size:11.8px;opacity:.72;line-height:1.45}
+@media (max-width:900px){
+  .buy{grid-template-columns:96px minmax(0,1fr);gap:18px 20px}
+  .buy .bimg{width:96px;height:96px}
+  .buy .bcta{grid-column:1 / -1;min-width:0}
+}
+
 /* misc */
 .skel{background:var(--muted);border-radius:var(--radius);height:104px;flex:0 0 auto;animation:pulse 1.5s ease-in-out infinite}
 @media (max-width:1000px){.skel{width:258px}}
@@ -248,6 +309,13 @@ footer p{max-width:76ch;margin-bottom:8px}
   nav a.mobile-hide{display:none}
 }
 @media (max-width:560px){
+  .ck{padding:17px 15px}
+  .ck h2{font-size:19px}
+  /* One column on a phone — a 96px thumbnail beside a paragraph leaves the
+     text in a 200px gutter, so the image becomes a full-width banner. */
+  .buy{grid-template-columns:1fr;padding:20px 17px;gap:16px}
+  .buy .bimg{width:100%;height:150px;object-fit:cover}
+  .buy .bcta{grid-column:auto}
   .hero{padding:34px 0 4px}
   h1{max-width:none}
   input[type=text]{width:100%}
@@ -313,6 +381,10 @@ footer p{max-width:76ch;margin-bottom:8px}
       </div>
     </div>
 
+    <!-- What's about to disappear and what's about to arrive, derived from the
+         same regional month table as the main list. -->
+    <div class="transbar hide" id="transbar"></div>
+
     <div class="band" id="band">
       <div>
         <h3 id="bandh">These are the ones ethylene ruins first</h3>
@@ -321,6 +393,20 @@ footer p{max-width:76ch;margin-bottom:8px}
       </div>
       <a class="btn" href="https://simplykrisp.com/?utm_source=produce-guide&amp;utm_medium=referral&amp;utm_campaign=seasonal-page&amp;utm_content=hero-band" target="_blank" rel="noopener">Shop SimplyKrisp</a>
     </div>
+
+    <!-- Crisper conflict checker. Pairs what the visitor actually has against
+         the ethylene production/sensitivity ratings to name specific culprits. -->
+    <section class="ck" id="ck" aria-labelledby="ckh">
+      <h2 id="ckh">What's fighting in your crisper?</h2>
+      <p class="sub">Ethylene is a gas, so storage is not a one-item problem — a single apple can pull the plug on everything around it. Tap what you have in the house and see which pairs are working against each other.</p>
+      <div class="ckpick" id="ckpick"></div>
+      <div class="ckbar">
+        <span class="lg"><span class="pd" aria-hidden="true" style="width:7px;height:7px;border-radius:50%;background:var(--accent);display:inline-block"></span> gives off ethylene</span>
+        <span id="ckcount">Nothing selected yet</span>
+        <button type="button" class="ckclear hide" id="ckclear">Clear all</button>
+      </div>
+      <div class="ckout" id="ckout"></div>
+    </section>
 
     <div class="cols">
       <div class="col-main">
@@ -357,6 +443,23 @@ footer p{max-width:76ch;margin-bottom:8px}
         </div>
       </aside>
     </div>
+
+    <!-- Buy path. Price, availability and variant id are refreshed from the
+         storefront's public product JSON so this can't go stale. -->
+    <section class="buy" id="buy" aria-labelledby="buyh">
+      <img class="bimg" id="buyimg" src="https://cdn.shopify.com/s/files/1/0944/5353/0943/files/simplykrisp_sq_hero.jpg?v=1775524052" alt="SimplyKrisp Double Krisp ethylene absorber" loading="lazy" />
+      <div>
+        <h2 id="buyh">Double Krisp</h2>
+        <p class="bp">Two ethylene-absorbing casings — one for each crisper drawer. Peel, stick inside the drawer, and the gas that ripens your produce early gets absorbed instead of building up. Each sachet works for about 30 days.</p>
+        <p class="bwhy hide" id="buywhy"></p>
+      </div>
+      <div class="bcta">
+        <div class="price" id="buyprice">$11.99<span class="per">covers both drawers</span></div>
+        <a class="btn" id="buyadd" data-buy="buy-panel" href="https://simplykrisp.com/products/double-krisp" rel="noopener">Add to cart</a>
+        <a class="btn b2" id="buysub" href="https://simplykrisp.com/products/double-krisp-subscription" target="_blank" rel="noopener">Monthly refills — $8.99</a>
+        <p class="fine">Ships from Utah. Cancel refills any time.</p>
+      </div>
+    </section>
   </section>
 
 </main>
@@ -401,7 +504,8 @@ footer p{max-width:76ch;margin-bottom:8px}
   var el = function (id) { return document.getElementById(id); };
   // Default view is the ethylene-sensitive set — the produce that spoils first
   // and the produce a Krisp absorber actually changes the outcome for.
-  var state = { produce: null, seasons: null, st: null, month: new Date().getMonth() + 1, filter: 'sensitive' };
+  var state = { produce: null, seasons: null, st: null, month: new Date().getMonth() + 1, filter: 'sensitive',
+                have: {}, ckAll: false, ckNames: [], ckCands: [] };
 
   document.getElementById('yr').textContent = new Date().getFullYear();
 
@@ -600,7 +704,296 @@ footer p{max-width:76ch;margin-bottom:8px}
       band.classList.add('hide');
     }
 
+    // leaving soon / arriving next, the conflict picker and the buy panel all
+    // key off the same in-season set, so they refresh together.
+    renderTrans(r.region);
+    state.ckNames = r.names.slice();
+    renderPicker(state.ckNames);
+    renderCk();
+    var sens = all.filter(function (p) {
+      return p.ethyleneSensitivity === 'high' || p.ethyleneSensitivity === 'medium';
+    }).length;
+    renderBuy(sens, all.length);
+
     el('results').classList.remove('hide');
+  }
+
+  // ---------- season transitions: leaving soon / arriving next month ----------
+
+  // The month table is the same one that drives the main list, so "leaving" and
+  // "arriving" are just set differences between this month and next.
+  function transitions(region) {
+    var table = state.seasons.seasons[region] || {};
+    var next = state.month === 12 ? 1 : state.month + 1;
+    var going = [], coming = [];
+    Object.keys(table).forEach(function (n) {
+      if (!state.produce[n]) return;
+      var now = table[n].indexOf(state.month) !== -1;
+      var soon = table[n].indexOf(next) !== -1;
+      if (now && !soon) going.push(n);
+      else if (!now && soon) coming.push(n);
+    });
+    going.sort(); coming.sort();
+    return { going: going, coming: coming, next: next };
+  }
+
+  var TRANS_CAP = 7;
+  var transOpen = { go: false, come: false };
+
+  function transGroup(cls, key, label, names) {
+    if (!names.length) return '';
+    var open = transOpen[key];
+    var show = open ? names : names.slice(0, TRANS_CAP);
+    var h = '<div class="tgroup ' + cls + '"><span class="tlbl">' + esc(label) + '</span>';
+    h += show.map(function (n) { return '<span class="ti">' + esc(n) + '</span>'; }).join('');
+    if (names.length > TRANS_CAP) {
+      h += '<button type="button" class="tmore" data-tg="' + key + '">' +
+           (open ? 'show fewer' : '+' + (names.length - TRANS_CAP) + ' more') + '</button>';
+    }
+    return h + '</div>';
+  }
+
+  function renderTrans(region) {
+    var t = transitions(region);
+    var bar = el('transbar');
+    var html = transGroup('go', 'go', 'Last weeks for', t.going) +
+               transGroup('come', 'come', 'New in ' + MONTHS[t.next - 1], t.coming);
+    bar.innerHTML = html;
+    bar.classList.toggle('hide', !html);
+  }
+
+  el('transbar').addEventListener('click', function (e) {
+    var b = e.target.closest('button[data-tg]');
+    if (!b) return;
+    var k = b.getAttribute('data-tg');
+    transOpen[k] = !transOpen[k];
+    if (state.st) renderTrans(state.seasons.stateToRegion[state.st]);
+  });
+
+  // ---------- crisper conflict checker ----------
+
+  // USDA/extension ratings, scored so a pair can be judged numerically.
+  var PROD_SCORE = { very_high: 4, high: 3, medium: 2, low: 1, very_low: 0 };
+  var SENS_SCORE = { high: 3, medium: 2, low: 1 };
+
+  // Things most kitchens have year-round, offered even when they aren't in
+  // season locally — the apple in your fruit bowl is the usual culprit.
+  var CK_STAPLES = ['Apple', 'Banana', 'Avocado', 'Tomato', 'Potato', 'Onion',
+                    'Lettuce', 'Carrot', 'Broccoli', 'Cucumber', 'Spinach',
+                    'Bell Pepper', 'Strawberry', 'Mushroom', 'Grape', 'Lemon'];
+  // Enough to cover every ethylene producer plus a few staples without turning
+  // the picker into ten rows of chips on a phone.
+  var CK_CAP = 18;
+
+  function ckCandidates(names) {
+    var seen = {}, out = [];
+    names.concat(CK_STAPLES).forEach(function (n) {
+      if (seen[n] || !state.produce[n]) return;
+      seen[n] = 1; out.push(n);
+    });
+    // Producers first — they're what the visitor needs to find and move.
+    out.sort(function (a, b) {
+      var pa = PROD_SCORE[state.produce[a].ethyleneProduction] || 0;
+      var pb = PROD_SCORE[state.produce[b].ethyleneProduction] || 0;
+      var ga = pa >= 2 ? 0 : 1, gb = pb >= 2 ? 0 : 1;
+      if (ga !== gb) return ga - gb;
+      if (ga === 0 && pa !== pb) return pb - pa;
+      return a.localeCompare(b);
+    });
+    return out;
+  }
+
+  function renderPicker(names) {
+    var cands = ckCandidates(names);
+    state.ckCands = cands;
+    var show = state.ckAll ? cands : cands.slice(0, CK_CAP);
+    var html = show.map(function (n) {
+      var p = state.produce[n];
+      var isProd = (PROD_SCORE[p.ethyleneProduction] || 0) >= 2;
+      return '<button type="button" class="ckchip" data-ck="' + esc(n) + '" aria-pressed="' +
+        (state.have[n] ? 'true' : 'false') + '">' +
+        (isProd ? '<span class="pd" aria-hidden="true"></span>' : '') + esc(n) + '</button>';
+    }).join('');
+    if (cands.length > CK_CAP) {
+      html += '<button type="button" class="ckchip" data-ckall="1">' +
+        (state.ckAll ? 'Show fewer' : '+' + (cands.length - CK_CAP) + ' more') + '</button>';
+    }
+    el('ckpick').innerHTML = html;
+  }
+
+  function conflicts() {
+    var have = Object.keys(state.have).filter(function (n) { return state.have[n]; });
+    var rows = [];
+    have.forEach(function (a) {
+      var ps = PROD_SCORE[state.produce[a].ethyleneProduction] || 0;
+      if (ps < 2) return;
+      var vics = [];
+      have.forEach(function (b) {
+        if (b === a) return;
+        var ss = SENS_SCORE[state.produce[b].ethyleneSensitivity] || 0;
+        // A strong producer next to a sensitive item is the real problem; a
+        // moderate producer only matters against a highly sensitive neighbour.
+        var sev = (ps >= 3 && ss >= 3) ? 2
+                : ((ps >= 3 && ss === 2) || (ps === 2 && ss >= 3)) ? 1 : 0;
+        if (sev) vics.push({ name: b, sev: sev });
+      });
+      if (!vics.length) return;
+      vics.sort(function (x, y) { return y.sev - x.sev || x.name.localeCompare(y.name); });
+      rows.push({ producer: a, ps: ps, vics: vics });
+    });
+    rows.sort(function (x, y) {
+      var bx = x.vics.filter(function (v) { return v.sev === 2; }).length;
+      var by = y.vics.filter(function (v) { return v.sev === 2; }).length;
+      return by - bx || y.vics.length - x.vics.length || y.ps - x.ps;
+    });
+    return rows;
+  }
+
+  function ckFix(p) {
+    var loc = p.storageLocation;
+    if (loc === 'counter' || loc === 'counter_then_fridge') {
+      return 'Keep <b>' + esc(p.name.toLowerCase()) + '</b> on the counter rather than in the drawer.';
+    }
+    if (loc === 'pantry') {
+      return 'Keep <b>' + esc(p.name.toLowerCase()) + '</b> in a cool pantry, well away from the fridge drawer.';
+    }
+    return 'Give <b>' + esc(p.name.toLowerCase()) + '</b> its own drawer, or bag it on its own.';
+  }
+
+  function renderCk() {
+    var have = Object.keys(state.have).filter(function (n) { return state.have[n]; });
+    el('ckcount').textContent = have.length
+      ? have.length + (have.length === 1 ? ' item selected' : ' items selected')
+      : 'Nothing selected yet';
+    el('ckclear').classList.toggle('hide', !have.length);
+
+    var out = el('ckout');
+    if (have.length < 2) {
+      out.innerHTML = '';
+      return;
+    }
+
+    var rows = conflicts();
+    if (!rows.length) {
+      out.innerHTML = '<div class="ckclean">Nothing in that list is ripening anything else.' +
+        '<p class="sub2">Worth knowing that ethylene still collects in a closed drawer even ' +
+        'without a strong producer in there, and every item on your list is still giving off ' +
+        'some. It just isn\u2019t enough to matter against these particular neighbours.</p></div>';
+      return;
+    }
+
+    var victims = {};
+    rows.forEach(function (r) { r.vics.forEach(function (v) { victims[v.name] = 1; }); });
+    var nv = Object.keys(victims).length;
+
+    var html = '<div class="cksum">' + rows.length +
+      (rows.length === 1 ? ' thing on your list is' : ' things on your list are') +
+      ' speeding up ' + nv + (nv === 1 ? ' other' : ' others') + '.</div>';
+
+    html += rows.map(function (r) {
+      var p = state.produce[r.producer];
+      return '<div class="ckrow">' +
+        '<img class="ckimg" src="' + esc(p.imageUrl) + '" alt="" loading="lazy" />' +
+        '<div class="ckbody">' +
+          '<div class="ckwhat"><b>' + esc(p.name) + '</b> is ripening ' + r.vics.length +
+            (r.vics.length === 1 ? ' of them' : ' of them') + ' faster</div>' +
+          '<div class="ckvic">' + r.vics.map(function (v) {
+            return '<span class="s' + v.sev + '">' + esc(v.name) + '</span>';
+          }).join('') + '</div>' +
+          '<div class="ckfix">' + ckFix(p) + '</div>' +
+        '</div></div>';
+    }).join('');
+
+    html += '<div class="ckcta">' +
+      '<a class="btn" data-buy="conflict-checker" href="#">Add a Krisp to each drawer</a>' +
+      '<span class="ckcp">Or absorb the gas instead of rearranging the fridge every time you shop.</span>' +
+      '</div>';
+
+    out.innerHTML = html;
+    wireBuyLinks();
+  }
+
+  el('ckpick').addEventListener('click', function (e) {
+    var all = e.target.closest('button[data-ckall]');
+    if (all) {
+      state.ckAll = !state.ckAll;
+      renderPicker(state.ckNames || []);
+      return;
+    }
+    var b = e.target.closest('button[data-ck]');
+    if (!b) return;
+    var n = b.getAttribute('data-ck');
+    state.have[n] = !state.have[n];
+    b.setAttribute('aria-pressed', state.have[n] ? 'true' : 'false');
+    renderCk();
+  });
+
+  el('ckclear').addEventListener('click', function () {
+    state.have = {};
+    renderPicker(state.ckNames || []);
+    renderCk();
+  });
+
+  // ---------- buy path ----------
+
+  // Fallbacks in case the storefront JSON can't be reached; refreshed below.
+  var BUY = {
+    variant: 51083780030783,
+    price: 1199,
+    available: true,
+    url: 'https://simplykrisp.com/products/double-krisp'
+  };
+
+  function money(cents) {
+    return '$' + (cents / 100).toFixed(2).replace(/\.00$/, '');
+  }
+
+  function cartUrl(content) {
+    return 'https://simplykrisp.com/cart/add?id=' + BUY.variant + '&quantity=1' +
+      '&utm_source=produce-guide&utm_medium=referral&utm_campaign=seasonal-page' +
+      '&utm_content=' + encodeURIComponent(content);
+  }
+
+  // Inside the store iframe a cart link has to break out of the frame, or the
+  // visitor ends up with the cart page rendered in a 360px column.
+  var LINK_TARGET = window.self !== window.top ? '_top' : '_self';
+
+  function wireBuyLinks() {
+    [].forEach.call(document.querySelectorAll('a[data-buy]'), function (a) {
+      a.href = BUY.available ? cartUrl(a.getAttribute('data-buy')) : BUY.url;
+      a.target = LINK_TARGET;
+      a.rel = 'noopener';
+      if (!BUY.available) a.textContent = 'Currently sold out \u2014 see the product';
+    });
+  }
+
+  function renderBuy(sensCount, total) {
+    el('buyprice').innerHTML = money(BUY.price) +
+      '<span class="per">' + (BUY.available ? 'covers both drawers' : 'currently sold out') + '</span>';
+    el('buysub').target = LINK_TARGET;
+    if (sensCount) {
+      var w = el('buywhy');
+      w.textContent = sensCount + ' of the ' + total + ' items in season near you right now are ' +
+        'ethylene-sensitive, which is exactly what the absorber is for.';
+      w.classList.remove('hide');
+    } else {
+      el('buywhy').classList.add('hide');
+    }
+    wireBuyLinks();
+  }
+
+  // Live price, stock and variant id straight from the storefront, so this
+  // section can't drift out of date if the product changes.
+  function loadPrice() {
+    return fetch('https://simplykrisp.com/products/double-krisp.js')
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (p) {
+        if (!p || !p.variants || !p.variants.length) return;
+        BUY.price = p.price;
+        BUY.available = !!p.available;
+        BUY.variant = p.variants[0].id;
+      })
+      .catch(function () { /* keep the fallbacks */ });
   }
 
   // ---------- local sources: map, type filters, card <-> pin linking ----------
@@ -943,6 +1336,10 @@ footer p{max-width:76ch;margin-bottom:8px}
     mstate.radius = best;
     el('mradius').value = String(best);
   }
+  // Refresh price/stock in the background; the panel already has fallbacks so
+  // there's nothing to wait for.
+  loadPrice().then(function () { if (state.st) render(); else wireBuyLinks(); });
+
   var pre = qs.get('zip');
   if (pre) { el('zip').value = pre.replace(/\D/g, '').slice(0, 5); submit(el('zip').value); }
 })();
