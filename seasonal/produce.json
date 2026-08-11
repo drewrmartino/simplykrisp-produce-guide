@@ -267,7 +267,7 @@
     "emoji": "🥭",
     "storageLocation": "counter_then_fridge",
     "ethyleneProduction": "medium",
-    "ethyleneSensitivity": "high",
+    "ethyleneSensitivity": "medium",
     "optimalTempF": 56,
     "shelfLife": "5-7 days ripe (refrigerated)",
     "storageTips": [
@@ -319,8 +319,8 @@
     "category": "fruit",
     "emoji": "🍑",
     "storageLocation": "counter_then_fridge",
-    "ethyleneProduction": "high",
-    "ethyleneSensitivity": "high",
+    "ethyleneProduction": "medium",
+    "ethyleneSensitivity": "medium",
     "optimalTempF": 31,
     "shelfLife": "3-5 days ripe (refrigerated)",
     "storageTips": [
@@ -399,7 +399,7 @@
     "emoji": "🍑",
     "storageLocation": "counter_then_fridge",
     "ethyleneProduction": "medium",
-    "ethyleneSensitivity": "high",
+    "ethyleneSensitivity": "medium",
     "optimalTempF": 31,
     "shelfLife": "3-5 days ripe (refrigerated)",
     "storageTips": [
@@ -477,7 +477,7 @@
     "category": "fruit",
     "emoji": "🍉",
     "storageLocation": "counter_then_fridge",
-    "ethyleneProduction": "low",
+    "ethyleneProduction": "very_low",
     "ethyleneSensitivity": "high",
     "optimalTempF": 50,
     "shelfLife": "1-2 weeks whole, 3-5 days cut (refrigerated)",
@@ -505,8 +505,8 @@
     "category": "fruit",
     "emoji": "🍑",
     "storageLocation": "counter_then_fridge",
-    "ethyleneProduction": "high",
-    "ethyleneSensitivity": "high",
+    "ethyleneProduction": "medium",
+    "ethyleneSensitivity": "medium",
     "optimalTempF": 31,
     "shelfLife": "3-5 days ripe (refrigerated)",
     "storageTips": [
@@ -533,8 +533,8 @@
     "category": "fruit",
     "emoji": "🥭",
     "storageLocation": "counter_then_fridge",
-    "ethyleneProduction": "high",
-    "ethyleneSensitivity": "high",
+    "ethyleneProduction": "medium",
+    "ethyleneSensitivity": "medium",
     "optimalTempF": 54,
     "shelfLife": "5-7 days ripe (refrigerated)",
     "storageTips": [
@@ -560,7 +560,7 @@
     "category": "fruit",
     "emoji": "🍎",
     "storageLocation": "refrigerator",
-    "ethyleneProduction": "low",
+    "ethyleneProduction": "very_low",
     "ethyleneSensitivity": "low",
     "optimalTempF": 41,
     "shelfLife": "1-3 months (refrigerated)",
@@ -722,7 +722,7 @@
     "emoji": "🥕",
     "storageLocation": "refrigerator",
     "ethyleneProduction": "very_low",
-    "ethyleneSensitivity": "low",
+    "ethyleneSensitivity": "high",
     "optimalTempF": 32,
     "shelfLife": "3-4 weeks (refrigerated)",
     "storageTips": [
@@ -856,7 +856,7 @@
     "emoji": "🍆",
     "storageLocation": "refrigerator",
     "ethyleneProduction": "low",
-    "ethyleneSensitivity": "low",
+    "ethyleneSensitivity": "medium",
     "optimalTempF": 50,
     "shelfLife": "5-7 days (refrigerated)",
     "storageTips": [
@@ -931,7 +931,7 @@
     "emoji": "🥬",
     "storageLocation": "refrigerator",
     "ethyleneProduction": "very_low",
-    "ethyleneSensitivity": "medium",
+    "ethyleneSensitivity": "high",
     "optimalTempF": 32,
     "shelfLife": "5-7 days (refrigerated)",
     "storageTips": [
@@ -987,7 +987,7 @@
     "category": "vegetable",
     "emoji": "🍄",
     "storageLocation": "refrigerator",
-    "ethyleneProduction": "low",
+    "ethyleneProduction": "very_low",
     "ethyleneSensitivity": "medium",
     "optimalTempF": 32,
     "shelfLife": "7-10 days (refrigerated)",
@@ -1144,8 +1144,8 @@
     "category": "vegetable",
     "emoji": "🥒",
     "storageLocation": "refrigerator",
-    "ethyleneProduction": "very_low",
-    "ethyleneSensitivity": "low",
+    "ethyleneProduction": "low",
+    "ethyleneSensitivity": "medium",
     "optimalTempF": 45,
     "shelfLife": "5-7 days (refrigerated)",
     "storageTips": [
@@ -1225,7 +1225,7 @@
     "emoji": "🎃",
     "storageLocation": "pantry",
     "ethyleneProduction": "low",
-    "ethyleneSensitivity": "low",
+    "ethyleneSensitivity": "medium",
     "optimalTempF": 54,
     "shelfLife": "1-3 months (pantry)",
     "storageTips": [
@@ -1249,7 +1249,7 @@
     "emoji": "🍊",
     "storageLocation": "refrigerator",
     "ethyleneProduction": "very_low",
-    "ethyleneSensitivity": "low",
+    "ethyleneSensitivity": "medium",
     "optimalTempF": 56,
     "shelfLife": "2-3 weeks (refrigerated)",
     "storageTips": [
@@ -1264,7 +1264,7 @@
     "avoidWith": null,
     "extraDays": 0,
     "imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f34a.png",
-    "noBenefitReason": "Citrus keeps for weeks regardless; ethylene changes the peel colour rather than the fruit.",
+    "noBenefitReason": "Citrus is only moderately sensitive and keeps for weeks regardless — ethylene changes the peel colour rather than the fruit inside.",
     "evidence": "estimated"
   },
   {
@@ -1272,8 +1272,8 @@
     "category": "fruit",
     "emoji": "🍑",
     "storageLocation": "counter_then_fridge",
-    "ethyleneProduction": "high",
-    "ethyleneSensitivity": "high",
+    "ethyleneProduction": "medium",
+    "ethyleneSensitivity": "medium",
     "optimalTempF": 31,
     "shelfLife": "3-5 days ripe (refrigerated)",
     "storageTips": [
@@ -1351,7 +1351,7 @@
     "category": "fruit",
     "emoji": "🫐",
     "storageLocation": "refrigerator",
-    "ethyleneProduction": "very_low",
+    "ethyleneProduction": "low",
     "ethyleneSensitivity": "low",
     "optimalTempF": 32,
     "shelfLife": "2-3 days (refrigerated)",
@@ -1376,7 +1376,7 @@
     "emoji": "🌶️",
     "storageLocation": "refrigerator",
     "ethyleneProduction": "low",
-    "ethyleneSensitivity": "low",
+    "ethyleneSensitivity": "medium",
     "optimalTempF": 45,
     "shelfLife": "1-2 weeks (refrigerated)",
     "storageTips": [
@@ -1391,7 +1391,7 @@
     "avoidWith": null,
     "extraDays": 0,
     "imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f336.png",
-    "noBenefitReason": "Chiles are not ethylene-sensitive enough for an absorber to change the outcome.",
+    "noBenefitReason": "Chiles respond to ethylene only mildly, and they give way to water loss and soft spots long before ripening gas becomes the problem.",
     "evidence": "estimated"
   },
   {
@@ -1447,8 +1447,8 @@
     "category": "vegetable",
     "emoji": "🧅",
     "storageLocation": "refrigerator",
-    "ethyleneProduction": "very_low",
-    "ethyleneSensitivity": "medium",
+    "ethyleneProduction": "low",
+    "ethyleneSensitivity": "high",
     "optimalTempF": 32,
     "shelfLife": "1-2 weeks (refrigerated)",
     "storageTips": [
