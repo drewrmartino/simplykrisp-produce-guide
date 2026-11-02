@@ -16,12 +16,12 @@
     },
     {
       "id": "broccoli-01",
-      "title": "Run 1: Broccoli crowns, with and without",
-      "status": "planned",
-      "started": null,
+      "title": "Run 1: Broccoli next to an apple, with and without",
+      "status": "in progress",
+      "started": "2026-11-02",
       "produce": "Broccoli",
-      "question": "UC Davis reports broccoli at 50°F loses half its shelf life at 2 ppm ethylene. Does removing ethylene from a home crisper visibly slow yellowing over 7–10 days?",
-      "result": "Not started. First run begins once the camera rig passes a 72-hour commissioning check.",
+      "question": "UC Davis reports broccoli at 50°F loses half its shelf life at 2 ppm ethylene. A first two-week attempt with broccoli alone showed no visible difference on either side, which makes sense: with no ethylene producer in the container there was little for the absorber to remove. This run adds one ripe apple to each lidded container, same variety and ripeness, so both sides face the same ethylene load and the only difference is the Simply Krisp case in one of them.",
+      "result": "Started November 2, 2026. Fresh broccoli crowns from the same bunch, one apple per container, photographed once a day under timed light with a thermometer in frame. First photos due the week of November 9.",
       "images": []
     },
     {
