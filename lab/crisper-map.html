@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Crisper Drawer Map | SimplyKrisp</title>
+<meta name="description" content="A one-page printable map of what goes where in your refrigerator so produce lasts long enough to eat." />
+<link rel="icon" type="image/png" href="/favicon.png" />
+<link href="https://fonts.googleapis.com/css2?family=Questrial&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+:root{--bg:hsl(48 36% 97%);--fg:hsl(96 14% 14%);--muted-fg:hsl(96 5% 42%);--card:hsl(48 28% 96%);--border:hsl(48 10% 87%);--primary:hsl(96 14% 28%);--primary-fg:hsl(48 36% 97%);--accent:hsl(52 80% 51%);--warn:hsl(16 70% 55%);--sans:"Questrial","DM Sans",system-ui,sans-serif;--body:"DM Sans",system-ui,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:15px;line-height:1.45}
+h1,h2,h3{font-family:var(--sans);letter-spacing:-.01em}
+.page{max-width:816px;margin:0 auto;padding:36px 40px}
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;border-bottom:2px solid var(--fg);padding-bottom:12px}
+.top h1{font-size:30px;line-height:1.1}
+.top .sub{color:var(--muted-fg);font-size:14px;margin-top:4px}
+.brand{text-align:right;font-size:12px;color:var(--muted-fg)}
+.brand b{display:block;font-family:var(--sans);font-size:15px;color:var(--fg)}
+.fridge{margin-top:22px;border:2px solid var(--fg);border-radius:10px;overflow:hidden}
+.shelf{display:grid;grid-template-columns:150px 1fr;border-bottom:1px solid var(--border)}
+.shelf:last-child{border-bottom:0}
+.shelf .lbl{background:var(--card);padding:12px 14px;font-family:var(--sans);font-size:14px;border-right:1px solid var(--border)}
+.shelf .lbl small{display:block;font-family:var(--body);font-size:11px;color:var(--muted-fg);margin-top:2px}
+.shelf .items{padding:12px 14px;font-size:14px}
+.shelf .items b{font-weight:600}
+.drawers{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.drawer{padding:12px 14px;font-size:14px;border-right:1px solid var(--border)}
+.drawer:last-child{border-right:0}
+.drawer h3{font-size:15px;margin-bottom:4px}
+.drawer .tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:2px 7px;border-radius:4px;background:var(--primary);color:var(--primary-fg);margin-left:6px;vertical-align:middle}
+.drawer .tag.warn{background:hsl(16 70% 55% / .15);color:hsl(16 62% 34%)}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:20px}
+.box{border:1px solid var(--border);border-radius:8px;padding:12px 14px;font-size:13.5px}
+.box h3{font-size:14px;margin-bottom:6px}
+.box ul{padding-left:16px}
+.box li{margin-bottom:3px}
+.foot{margin-top:18px;display:flex;justify-content:space-between;align-items:center;gap:16px;font-size:12px;color:var(--muted-fg);border-top:1px solid var(--border);padding-top:12px}
+.foot .partner{font-family:var(--sans);color:var(--fg);font-size:13px}
+.qr{width:72px;height:72px;border:1px dashed var(--border);display:grid;place-items:center;font-size:9px;text-align:center;color:var(--muted-fg)}
+.print{position:fixed;right:16px;bottom:16px;font-family:var(--body);font-size:14px;font-weight:600;padding:10px 16px;border:0;border-radius:8px;background:var(--primary);color:var(--primary-fg);cursor:pointer}
+@media print{.print{display:none}body{background:#fff}.page{padding:0.3in 0.4in}@page{size:letter;margin:0.4in}}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="top">
+    <div><h1>The Crisper Drawer Map</h1><div class="sub">Where things go so you eat them before they turn. Print it, stick it on the fridge.</div></div>
+    <div class="brand"><b>SimplyKrisp</b>guide.simplykrisp.com</div>
+  </div>
+
+  <div class="fridge">
+    <div class="shelf"><div class="lbl">Door<small>warmest spot</small></div><div class="items">Condiments, juice, butter. <b>Not milk, not eggs, not greens.</b></div></div>
+    <div class="shelf"><div class="lbl">Top shelf<small>steady temp</small></div><div class="items">Leftovers, ready-to-eat food, herbs standing in a jar of water with a loose bag over the top.</div></div>
+    <div class="shelf"><div class="lbl">Middle shelf</div><div class="items">Dairy, eggs. Berries in their vented clamshell, unwashed until you eat them.</div></div>
+    <div class="shelf"><div class="lbl">Bottom shelf<small>coldest</small></div><div class="items">Raw meat and fish on a tray so nothing drips on produce below.</div></div>
+    <div class="shelf"><div class="lbl">Crisper drawers<small>one absorber per drawer</small></div>
+      <div class="drawers">
+        <div class="drawer"><h3>High humidity (vent closed) <span class="tag">Krisp here</span></h3>Things that wilt: lettuce, romaine, spinach, kale, broccoli, cauliflower, cucumbers, peppers, carrots, celery, green beans, asparagus, fresh herbs. These are the produce ethylene ruins first.</div>
+        <div class="drawer"><h3>Low humidity (vent open) <span class="tag warn">Producers</span></h3>Things that rot: apples, pears, ripe stone fruit, grapes, melon. Apples and pears are strong ethylene producers; keep them here, away from the greens.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cols">
+    <div class="box"><h3>Counter, not fridge</h3><ul><li>Bananas, tomatoes, avocados, whole melons, stone fruit until ripe</li><li>Potatoes, onions, garlic, winter squash in a cool dark cupboard</li><li>Move avocados and stone fruit to the fridge once ripe to hold them a few more days</li></ul></div>
+    <div class="box"><h3>Three habits that matter more than any gadget</h3><ul><li><b>Eat-first shelf.</b> One spot at eye level for what is closest to turning.</li><li><b>Shop the drawer before the store.</b> Thirty seconds, phone photo, then go.</li><li><b>Prevent first, compost the rest.</b> What you can't save still shouldn't go to landfill.</li></ul></div>
+  </div>
+
+  <div class="foot">
+    <div><span class="partner" id="partner"></span><div>Storage guidance from the SimplyKrisp Produce Storage Guide, built on UC Davis Postharvest Technology Center data. More at guide.simplykrisp.com</div></div>
+    <div class="qr">QR to<br/>guide.simplykrisp.com</div>
+  </div>
+</div>
+<button class="print" onclick="window.print()">Print</button>
+<script>
+// ?partner=Momentum%20Recycling prints a partner credit line so haulers can hand this out.
+(function(){var p=new URLSearchParams(location.search).get('partner');if(p){document.getElementById('partner').textContent='Shared by '+p+' · ';}})();
+</script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+{
+  "meta": {
+    "updated": "2026-11-02",
+    "method": "Two matched containers of the same produce from the same purchase, one in a crisper drawer with a Simply Krisp case on the wall and one in a drawer without, same refrigerator, door opened on a normal household schedule. A Wyze Cam v4 photographs both containers morning and evening under a timed white light with a thermometer/hygrometer in frame. We publish every run, including the ones that show little or no difference. A home test like this shows what happened in one fridge; it does not establish a universal shelf-life number."
+  },
+  "runs": [
+    {
+      "id": "capacity-2026-11",
+      "title": "How long does a sachet really last?",
+      "status": "in progress",
+      "started": "2026-11-02",
+      "produce": "Sachet media (potassium permanganate on mineral carrier)",
+      "question": "The absorbent changes from purple to brown as it is used up. We are opening sachets from normal household drawers at day 30, 60 and 90 to see how much capacity is left. The result sets our swap schedule and refill plan.",
+      "result": "Day 30 photos due early December 2026.",
+      "images": []
+    },
+    {
+      "id": "broccoli-01",
+      "title": "Run 1: Broccoli crowns, with and without",
+      "status": "planned",
+      "started": null,
+      "produce": "Broccoli",
+      "question": "UC Davis reports broccoli at 50°F loses half its shelf life at 2 ppm ethylene. Does removing ethylene from a home crisper visibly slow yellowing over 7–10 days?",
+      "result": "Not started. First run begins once the camera rig passes a 72-hour commissioning check.",
+      "images": []
+    },
+    {
+      "id": "romaine-01",
+      "title": "Run 2: Romaine hearts",
+      "status": "planned",
+      "started": null,
+      "produce": "Romaine",
+      "question": "Romaine reacts to as little as 1 ppm ethylene (russet spotting, rib browning). Does a drawer with an absorber show less of it?",
+      "result": "Not started.",
+      "images": []
+    }
+  ]
+}
