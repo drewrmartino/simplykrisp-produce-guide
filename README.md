@@ -7,6 +7,8 @@ Two customer-facing tools, one Vercel project.
 | `/` | Produce Storage Guide — how to store each item so it lasts |
 | `/seasonal` | What's In Season — ZIP-based seasonality, ethylene flags, nearby markets |
 | `/api/markets` | Serverless proxy for the USDA Local Food Directory |
+| `/lab` | Lab Notebook — side-by-side fridge tests, rendered from `lab/runs.json` |
+| `/lab/crisper-map` | Printable one-page Crisper Drawer Map; `?partner=Name` adds a partner credit line |
 
 Both are embedded into Shopify pages as iframes. `vercel.json` sets
 `X-Frame-Options: ALLOWALL` and `frame-ancestors *` specifically to allow that —
@@ -19,7 +21,7 @@ its client-side routes. The rewrite **must** keep excluding `api/` and
 `seasonal`:
 
 ```json
-{ "source": "/((?!api/|seasonal).*)", "destination": "/index.html" }
+{ "source": "/((?!api/|seasonal|lab).*)", "destination": "/index.html" }
 ```
 
 Without that exclusion a request for `/seasonal` gets the storage guide instead,
@@ -29,6 +31,13 @@ Note that Vercel serves `/seasonal` without a trailing slash, so every
 same-project reference inside `seasonal/index.html` is root-absolute
 (`/seasonal/produce.json`, not `./produce.json`). Relative paths silently
 resolve one level too high and 404.
+
+## The lab notebook
+
+Static page; add a run by appending an object to `lab/runs.json` (`id`, `title`,
+`status` = planned | in progress | complete, `started`, `produce`, `question`, `result`,
+`images[]` of `{src, alt, caption}`). Put photos in `lab/img/` and reference them
+root-absolute (`/lab/img/broccoli-01-day7.jpg`). Update `meta.updated`.
 
 ## The seasonal page
 
