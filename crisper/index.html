@@ -504,6 +504,7 @@ footer a{color:var(--muted-fg)}
 <script>
 (function () {
   'use strict';
+  var API = window.CRISPER_API || '';
   var SHOP = 'https://simplykrisp.com/?utm_source=produce-guide&utm_medium=referral&utm_campaign=crisper&utm_content=';
   // Amazon is off by default: its filter forwards every Amazon order, not just
   // groceries. We'd discard the non-produce lines, but testers should opt in.
@@ -529,7 +530,7 @@ footer a{color:var(--muted-fg)}
     opts = opts || {};
     var h = { 'Content-Type': 'application/json' };
     if (S.key) h['X-Crisper-Key'] = S.key;
-    return fetch(path, { method: opts.method || (opts.body ? 'POST' : 'GET'), headers: h, body: opts.body ? JSON.stringify(opts.body) : undefined })
+    return fetch(API + path, { method: opts.method || (opts.body ? 'POST' : 'GET'), headers: h, body: opts.body ? JSON.stringify(opts.body) : undefined })
       .then(function (r) {
         return r.json().catch(function () { return {}; }).then(function (j) {
           if (!r.ok) { var e = new Error(j.error || 'Something went wrong. Try again.'); e.status = r.status; throw e; }
@@ -555,7 +556,7 @@ footer a{color:var(--muted-fg)}
       history.replaceState(null, '', u.pathname + (u.search || '') + u.hash);
     }
     S.key = ls(KEY_LS);
-    fetch('/crisper/catalog.json').then(function (r) { return r.json(); }).then(function (c) {
+    fetch(API + '/crisper/catalog.json').then(function (r) { return r.json(); }).then(function (c) {
       S.catalog = c; c.forEach(function (p) { S.byName[p.name] = p; });
       if (S.st) render();
     }).catch(function () {});

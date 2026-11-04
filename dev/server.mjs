@@ -29,7 +29,30 @@ export function createServer() {
   return http.createServer(async (req, res) => {
     shim(res);
     const url = new URL(req.url, 'http://x');
+    // CORS so a hosted copy of the page (demo build) can call this server.
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, X-Crisper-Key');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+    if (req.method === 'OPTIONS') { res.statusCode = 204; return res.end(); }
     try {
+      // Demo-only: pretend a store email was forwarded to a tester's address.
+      if (url.pathname === '/dev/simulate' && req.method === 'POST') {
+        let body = '';
+        for await (const chunk of req) body += chunk;
+        const { address, fixture } = JSON.parse(body || '{}');
+        const F = await import('./fixtures.mjs');
+        const e = F[fixture];
+        const slug = (String(address || '').match(/\+([a-z0-9]{10})@/i) || [])[1];
+        if (!e || !slug) { res.statusCode = 400; return res.json({ error: 'bad fixture or address' }); }
+        const inbound = (await import('../api/crisper/inbound.js')).default;
+        req.query = {};
+        req.body = {
+          From: e.from, FromFull: { Email: (e.from.match(/<(.+)>/) || [])[1] || e.from, Name: e.from.split('<')[0].trim() },
+          To: 'tester@gmail.com', OriginalRecipient: address, MailboxHash: slug,
+          Subject: e.subject, TextBody: e.text || '', HtmlBody: e.html || '', Headers: [],
+        };
+        return await inbound(req, res);
+      }
       if (url.pathname.startsWith('/api/')) {
         const file = path.join(root, url.pathname.replace(/\/$/, '') + '.js');
         const mod = await import(pathToFileURL(file).href);
