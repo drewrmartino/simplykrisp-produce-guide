@@ -194,6 +194,17 @@ test('settings and reminders', async () => {
   assert.equal(noAdmin.status, 403);
 });
 
+test('store newsletters are ignored, real orders still count', async () => {
+  const { parseEmail } = await import('../api/_crisper/parser.js');
+  const promo = parseEmail({ from: 'Walmart <news@walmart.com>', subject: 'Fresh deals: avocados 2 for $5, strawberries $2.98', text: 'Shop this week\nAvocados 2 for $5\nStrawberries 1 lb $2.98\nBananas 58 cents/lb\nShop now. Unsubscribe', requireOrder: true });
+  assert.equal(promo.type, 'promo');
+  const amazonBook = parseEmail({ from: 'Amazon <shipment-tracking@amazon.com>', subject: 'Your Amazon.com order has shipped', text: 'Order #112-3344556-7788990\nThe Hobbit (Paperback)\nQty: 1', requireOrder: true });
+  assert.equal(amazonBook.type, 'order');
+  assert.equal(amazonBook.items.length, 0);
+  const paste = parseEmail({ text: 'Bananas 2.1 lb 1.23\nStrawberries 1 lb 2.98' });
+  assert.equal(paste.type, 'order');
+});
+
 test('unknown slug is ignored, not an error', async () => {
   const r = await api('/api/crisper/inbound', { method: 'POST', body: postmark('zzzzzzzzzz', F.walmartDelivered) });
   assert.equal(r.status, 200);
