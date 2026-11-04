@@ -139,6 +139,17 @@ export function detectKind(subject, body) {
   return 'receipt';
 }
 
+// Store newsletters and sale flyers mention produce too ("Avocados 2 for $5").
+// An email only counts as an order if it carries order evidence: an order
+// number, an order-style subject, or receipt-style lines in the body.
+export function looksLikeOrder(subject, body, orderRef) {
+  if (orderRef) return true;
+  const s = normalize(subject);
+  if (/(your order|order #|order no|receipt|delivered|delivery|pickup|picked up|has arrived|on its way|out for delivery|shopping for you|thanks for your order|thank you for your order|order (is )?(confirmed|complete|received|placed))/.test(s)) return true;
+  const b = normalize(String(body || '').slice(0, 8000));
+  return /(subtotal|order total|order summary|items in your order|your order|order number|order #|qty|quantity|final total|total charged|amount charged|receipt)/.test(b);
+}
+
 export function detectOrderRef(subject, body) {
   const hay = `${subject}\n${String(body || '').slice(0, 6000)}`;
   for (const m of hay.matchAll(/order\s*(?:number|no\.?|#|id)?\s*[:#]?\s*([A-Z0-9][A-Z0-9-]{5,})/gi)) {
@@ -283,7 +294,7 @@ export function unwrapForward(subject, body) {
 }
 
 // One call for everything: returns what the API needs to store.
-export function parseEmail({ from = '', subject = '', text = '', html = '' }) {
+export function parseEmail({ from = '', subject = '', text = '', html = '', requireOrder = false }) {
   let body = text && text.trim().length > 40 ? text : htmlToText(html) || text;
   let sender = from;
   let subj = subject;
@@ -302,6 +313,7 @@ export function parseEmail({ from = '', subject = '', text = '', html = '' }) {
   const retailer = detectRetailer(sender, subj, body);
   const kind = detectKind(subj, body);
   const orderRef = detectOrderRef(subj, body);
+  if (requireOrder && !looksLikeOrder(subj, body, orderRef)) return { type: 'promo', retailer, subject: subj.slice(0, 200) };
   const { items, skipped, unknown } = extractItems(body);
   return { type: 'order', retailer, kind, orderRef, subject: subj.slice(0, 200), sender: sender.slice(0, 200), items, skipped, unknown };
 }

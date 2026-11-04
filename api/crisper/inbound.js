@@ -52,7 +52,7 @@ export default handle(['POST'], async (req) => {
   if (!user) return { ok: true, ignored: 'unknown recipient' };
 
   const from = p.FromFull?.Email ? `${p.FromFull.Name || ''} <${p.FromFull.Email}>` : p.From || '';
-  const parsed = parseEmail({ from, subject: p.Subject || '', text: p.TextBody || '', html: p.HtmlBody || '' });
+  const parsed = parseEmail({ from, subject: p.Subject || '', text: p.TextBody || '', html: p.HtmlBody || '', requireOrder: true });
 
   if (parsed.type === 'gmail_verification') {
     await q('UPDATE crisper_users SET gmail_verification = $1::jsonb WHERE id = $2', [
@@ -67,6 +67,12 @@ export default handle(['POST'], async (req) => {
     return { ok: true, type: 'setup_message' };
   }
 
+  if (parsed.type === 'promo') {
+    // Newsletters and sale emails from a store: counted, never turned into items.
+    await q('UPDATE crisper_users SET first_email_at = COALESCE(first_email_at, now()) WHERE id = $1', [user.id]);
+    await logEvent(user.id, 'promo_ignored', { retailer: parsed.retailer });
+    return { ok: true, type: 'promo', ignored: 'not an order' };
+  }
   await q('UPDATE crisper_users SET first_email_at = COALESCE(first_email_at, now()) WHERE id = $1', [user.id]);
   const result = await applyOrder(user, parsed, 'email');
   return { ok: true, type: 'order', retailer: parsed.retailer, kind: parsed.kind, added: result.added, duplicate: !!result.duplicate };
