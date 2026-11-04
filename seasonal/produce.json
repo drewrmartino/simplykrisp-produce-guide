@@ -71,7 +71,7 @@
       "Separate from the bunch to slow ripening",
       "Only refrigerate if very ripe and you need to buy a couple extra days — the peel will brown but the fruit stays good"
     ],
-    "krispRecommended": true,
+    "krispRecommended": false,
     "krispBenefit": "Bananas are highly sensitive to ethylene gas. Placing a SimplyKrisp absorber near your bananas helps slow the ripening process, giving you more days to enjoy them.",
     "ripeTip": "Yellow with small brown speckles means peak sweetness. Green tips mean it needs another day or two.",
     "avoidWith": [
@@ -80,10 +80,11 @@
       "Peaches",
       "Tomatoes"
     ],
-    "extraDays": 2,
+    "extraDays": 0,
     "imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f34c.png",
-    "extraDaysRange": "2–3",
-    "evidence": "related"
+    "extraDaysRange": null,
+    "evidence": "related",
+    "noBenefitReason": "Bananas belong on the counter, and a Krisp works inside the closed crisper drawer, so it can't reach them. Keep bananas away from your other produce instead. They give off ethylene too."
   },
   {
     "name": "Blueberry",
@@ -459,7 +460,7 @@
       "Only refrigerate if very ripe and you need to buy time",
       "Keep away from direct sunlight"
     ],
-    "krispRecommended": true,
+    "krispRecommended": false,
     "krispBenefit": "Tomatoes produce ethylene and are also sensitive to it. If you're storing ripe tomatoes in the fridge to extend their life, a SimplyKrisp absorber helps preserve their quality.",
     "ripeTip": "Slightly soft, uniformly colored, and fragrant at the stem end.",
     "avoidWith": [
@@ -467,10 +468,11 @@
       "Leafy greens",
       "Peppers"
     ],
-    "extraDays": 2,
+    "extraDays": 0,
     "imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f345.png",
-    "extraDaysRange": "2–3",
-    "evidence": "related"
+    "extraDaysRange": null,
+    "evidence": "related",
+    "noBenefitReason": "Tomatoes keep their flavor best on the counter, out of reach of a Krisp in the drawer. If you move ripe ones into the fridge to hold them a couple more days, a Krisp in that drawer helps a little."
   },
   {
     "name": "Watermelon",

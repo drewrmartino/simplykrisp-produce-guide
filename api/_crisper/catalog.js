@@ -81,10 +81,10 @@ export const CATALOG = [
   "minDays": 5,
   "maxDays": 7,
   "ripensFirst": false,
-  "krispRecommended": true,
+  "krispRecommended": false,
   "krispExtra": [
-   2,
-   3
+   0,
+   0
   ],
   "ethyleneProduction": "medium",
   "ethyleneSensitivity": "high",
@@ -496,10 +496,10 @@ export const CATALOG = [
   "minDays": 5,
   "maxDays": 7,
   "ripensFirst": false,
-  "krispRecommended": true,
+  "krispRecommended": false,
   "krispExtra": [
-   2,
-   3
+   0,
+   0
   ],
   "ethyleneProduction": "medium",
   "ethyleneSensitivity": "high",
