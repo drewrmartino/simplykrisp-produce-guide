@@ -1,6 +1,7 @@
 // POST /api/crisper/items
 //   { add: [{ produce, qty, date }] }         -> adds items by hand
-//   { id, op: used|tossed|undo|delete|arrived|ripening|edit, days?, qty?, date? }
+//   { id, op: used|tossed|finish|trim|undo|delete|arrived|ripening|edit, days?, qty?, date?, portion?, trim? }
+//   finish: portion = share of the edible part tossed (0, .25, .5, .75, 1); trim = trash|compost|used|null
 // Returns fresh dashboard state.
 
 import { handle, bad } from '../_crisper/http.js';

@@ -14,6 +14,8 @@
 //  - Driving: EPA, ~400 g CO2 per mile for a typical passenger vehicle.
 //    https://www.epa.gov/greenvehicles/greenhouse-gas-emissions-typical-passenger-vehicle
 
+import { scrapFor } from './scraps.js';
+
 const CO2 = { // kg CO2e per kg of food
   apples: 0.43, bananas: 0.86, berries: 1.53, brassicas: 0.51, citrus: 0.39, onions: 0.48,
   fruit: 1.05, veg: 0.53, peas: 0.98, potatoes: 0.46, roots: 0.43, tomatoes: 2.09,
@@ -112,21 +114,42 @@ export function itemImpact(row) {
 const r1 = (n) => Math.round(n * 10) / 10;
 const r2 = (n) => Math.round(n * 100) / 100;
 
+// Share of the edible part that was tossed: 1 for a full toss, else the logged portion.
+export function tossedShare(r) {
+  return r.state === 'tossed' ? 1 : Math.max(0, Math.min(1, Number(r.tossed_frac) || 0));
+}
+
 function totals(rows) {
-  const t = { usedCount: 0, tossedCount: 0, usedLb: 0, tossedLb: 0, usedUsd: 0, tossedUsd: 0, usedCo2Kg: 0, tossedCo2Kg: 0, rescued: 0 };
+  const t = { usedCount: 0, tossedCount: 0, partialCount: 0, usedLb: 0, tossedLb: 0, usedUsd: 0, tossedUsd: 0, usedCo2Kg: 0, tossedCo2Kg: 0, rescued: 0,
+    trimLogged: 0, trimUsedLb: 0, trimCompostLb: 0, trimTrashLb: 0, trimUsed: 0, trimCompost: 0 };
   for (const r of rows) {
     const i = itemImpact(r);
-    const k = r.state === 'used' ? 'used' : 'tossed';
-    t[`${k}Count`] += 1;
-    t[`${k}Lb`] += i.lb;
-    t[`${k}Usd`] += i.usd;
-    t[`${k}Co2Kg`] += i.co2Kg;
+    const refuse = (scrapFor(r.produce)?.pct || 0) / 100;
+    const edible = i.lb * (1 - refuse);
+    const f = tossedShare(r);
+    if (r.state === 'tossed') t.tossedCount += 1;
+    else { t.usedCount += 1; if (f > 0) t.partialCount += 1; }
+    t.usedLb += edible * (1 - f);
+    t.tossedLb += edible * f;
+    // Money and emissions follow the whole purchase, split by the tossed share.
+    t.usedUsd += i.usd * (1 - f);
+    t.tossedUsd += i.usd * f;
+    t.usedCo2Kg += i.co2Kg * (1 - f);
+    t.tossedCo2Kg += i.co2Kg * f;
     if (r.state === 'used' && r.rescued) t.rescued += 1;
+    if (r.trim) {
+      const tl = i.lb * refuse;
+      t.trimLogged += 1;
+      if (r.trim === 'used') { t.trimUsedLb += tl; t.trimUsed += 1; }
+      else if (r.trim === 'compost') { t.trimCompostLb += tl; t.trimCompost += 1; }
+      else t.trimTrashLb += tl;
+    }
   }
-  const done = t.usedCount + t.tossedCount;
+  const done = t.usedLb + t.tossedLb;
   return {
     usedCount: t.usedCount,
     tossedCount: t.tossedCount,
+    partialCount: t.partialCount,
     rescued: t.rescued,
     usedLb: r1(t.usedLb),
     tossedLb: r1(t.tossedLb),
@@ -135,11 +158,19 @@ function totals(rows) {
     tossedCo2Kg: r1(t.tossedCo2Kg),
     tossedCo2Lb: r1(t.tossedCo2Kg / KG_PER_LB),
     tossedMiles: Math.round(t.tossedCo2Kg / KG_CO2_PER_MILE),
-    // Share of finished produce (by weight) that was eaten, not tossed.
-    eatenRate: done ? Math.round((t.usedLb / (t.usedLb + t.tossedLb || 1)) * 1000) / 1000 : null,
-    // CO2e you avoided vs. a household tossing the US-average share of the same haul.
-    avoidedCo2Kg: done ? r1(Math.max(0, (t.usedCo2Kg + t.tossedCo2Kg) * BENCHMARK_TOSS_RATE - t.tossedCo2Kg)) : 0,
-    avoidedUsd: done ? r2(Math.max(0, (t.usedUsd + t.tossedUsd) * BENCHMARK_TOSS_RATE - t.tossedUsd)) : 0,
+    // Share of the edible part of finished produce (by weight) that was eaten.
+    eatenRate: rows.length ? Math.round((t.usedLb / (done || 1)) * 1000) / 1000 : null,
+    // vs. a household tossing the US-average share of the same haul.
+    avoidedCo2Kg: rows.length ? r1(Math.max(0, (t.usedCo2Kg + t.tossedCo2Kg) * BENCHMARK_TOSS_RATE - t.tossedCo2Kg)) : 0,
+    avoidedUsd: rows.length ? r2(Math.max(0, (t.usedUsd + t.tossedUsd) * BENCHMARK_TOSS_RATE - t.tossedUsd)) : 0,
+    trim: {
+      logged: t.trimLogged,
+      usedLb: r1(t.trimUsedLb),
+      compostLb: r1(t.trimCompostLb),
+      trashLb: r1(t.trimTrashLb),
+      usedCount: t.trimUsed,
+      compostCount: t.trimCompost,
+    },
   };
 }
 
@@ -158,7 +189,8 @@ function localDate(ts, tz) {
   }
 }
 
-// A "clean week" = Mon–Sun with at least one item eaten and nothing tossed.
+// A "clean week" = Mon–Sun with at least one item eaten and nothing tossed
+// (a toss = the whole item, or half or more of it; a little trimmed-off bit is fine).
 // The current week counts once it qualifies so far; it never breaks a streak
 // until a toss actually happens.
 function streaks(rows, today, tz) {
@@ -168,9 +200,10 @@ function streaks(rows, today, tz) {
     const day = localDate(r.state_at, tz);
     const w = weekStart(day);
     const e = weeks.get(w) || { used: 0, tossed: 0 };
-    e[r.state === 'used' ? 'used' : 'tossed'] += 1;
+    const bad = tossedShare(r) >= 0.5;
+    e[bad ? 'tossed' : 'used'] += 1;
     weeks.set(w, e);
-    if (r.state === 'tossed' && (!lastToss || day > lastToss)) lastToss = day;
+    if (bad && (!lastToss || day > lastToss)) lastToss = day;
   }
   const clean = (w) => { const e = weeks.get(w); return !!e && e.used > 0 && e.tossed === 0; };
   const prev = (w) => new Date(new Date(`${w}T00:00:00Z`).getTime() - 7 * 86400000).toISOString().slice(0, 10);
@@ -230,8 +263,9 @@ export function buildImpact(rows, { today, tz, krisp }) {
   const d30 = totals(last30);
   const s = streaks(rows, today, tz);
 
-  // Points: 1 per item eaten, +1 bonus if it was eaten in its last couple of days.
-  const points = all.usedCount + all.rescued;
+  // Points: 1 per item eaten, +1 if eaten in its last couple of days,
+  // +1 when the trim is used or composted instead of trashed.
+  const points = all.usedCount + all.rescued + all.trim.usedCount + all.trim.compostCount;
   const recent90 = (() => { // 90% club looks at the last 30 days, min 15 finished items
     const n = d30.usedCount + d30.tossedCount;
     return n >= 15 && d30.eatenRate >= 0.9;
@@ -241,6 +275,8 @@ export function buildImpact(rows, { today, tz, krisp }) {
     { id: 'first', name: 'First bite', desc: 'Mark your first item eaten', earned: all.usedCount >= 1 },
     { id: 'rescue', name: 'Rescuer', desc: 'Eat something in its last 2 days', earned: all.rescued >= 1 },
     { id: 'ten', name: '10 eaten', desc: 'Eat 10 tracked items', earned: all.usedCount >= 10 },
+    { id: 'scrap', name: 'Scrap saver', desc: 'Use the trim from an item (stems, peels, cobs)', earned: all.trim.usedCount >= 1 },
+    { id: 'compost', name: 'Composter', desc: 'Compost trim 5 times', earned: all.trim.compostCount >= 5 },
     { id: 'clean1', name: 'Clean week', desc: 'A week with nothing tossed', earned: s.bestCleanWeeks >= 1 },
     { id: 'clean3', name: '3-week streak', desc: '3 clean weeks in a row', earned: s.bestCleanWeeks >= 3 },
     { id: 'usd25', name: '$25 eaten', desc: 'Eat $25 of tracked produce', earned: all.usedUsd >= 25 },

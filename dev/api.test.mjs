@@ -131,7 +131,7 @@ test('impact math: weights, money, CO2, streaks, badges', () => {
   assert.equal(im.allTime.usedCount, 3);
   assert.equal(im.allTime.tossedCount, 1);
   assert.equal(im.allTime.rescued, 1);
-  assert.equal(im.allTime.tossedLb, 1);
+  assert.equal(im.allTime.tossedLb, 0.9); // 1 lb lettuce minus its 6% core
   assert.equal(im.allTime.tossedUsd, 2);
   assert.ok(im.allTime.tossedCo2Kg === 0.2 && im.allTime.tossedCo2Lb === 0.5);
   assert.equal(im.streak.cleanWeeks, 3);
@@ -139,9 +139,36 @@ test('impact math: weights, money, CO2, streaks, badges', () => {
   assert.equal(im.level.points, 4);
   const ids = im.badges.filter((b) => b.earned).map((b) => b.id);
   assert.deepEqual(ids.sort(), ['clean1', 'clean3', 'first', 'rescue']);
+  // partial toss + trim
+  const part = buildImpact([
+    { produce: 'Broccoli', qty: 1, weight: '1 lb', state: 'used', tossed_frac: 0.5, trim: 'compost', state_at: at('2026-11-03') },
+    { produce: 'Corn', qty: 2, state: 'used', tossed_frac: 0, trim: 'used', state_at: at('2026-11-03') },
+  ], { today, tz: 'UTC' });
+  assert.equal(part.allTime.partialCount, 1);
+  assert.equal(part.allTime.tossedUsd, 1.51); // half of $3.02
+  assert.equal(part.allTime.trim.compostLb, 0.4); // 39% of 1 lb
+  assert.equal(part.allTime.trim.usedLb, 0.8); // 64% of 1.2 lb
+  assert.equal(part.level.points, 4); // 2 eaten + 2 scraps saved
+  assert.equal(part.streak.cleanWeeks, 0, 'half or more tossed breaks a clean week');
+  assert.ok(part.badges.find((b) => b.id === 'scrap').earned);
   const tossedNow = buildImpact(rows.concat({ produce: 'Kale', qty: 1, state: 'tossed', state_at: at('2026-11-04') }), { today, tz: 'UTC' });
   assert.equal(tossedNow.streak.cleanWeeks, 0);
   assert.equal(tossedNow.streak.bestCleanWeeks, 2); // this week no longer counts
+});
+
+test('finish: partial toss with trim, then edit trim', async () => {
+  const me = await api('/api/crisper/me', { key });
+  const it = me.data.items.find((i) => i.scrap);
+  assert.ok(it && it.scrap.ideas.length >= 2);
+  let r = await api('/api/crisper/items', { method: 'POST', key, body: { id: it.id, op: 'finish', portion: 0.25, trim: 'compost' } });
+  assert.equal(r.status, 200, JSON.stringify(r.data));
+  const d = r.data.recentDone.find((x) => x.id === it.id);
+  assert.equal(d.state, 'used'); assert.equal(d.tossedFrac, 0.25); assert.equal(d.trim, 'compost');
+  r = await api('/api/crisper/items', { method: 'POST', key, body: { id: it.id, op: 'trim', trim: 'used' } });
+  assert.equal(r.data.recentDone.find((x) => x.id === it.id).trim, 'used');
+  assert.ok(r.data.impact.allTime.trim.usedCount >= 1);
+  r = await api('/api/crisper/items', { method: 'POST', key, body: { id: it.id, op: 'undo' } });
+  assert.ok(r.data.items.find((x) => x.id === it.id));
 });
 
 test('paste a receipt: preview then save', async () => {

@@ -5,6 +5,7 @@ import { q, one, logEvent } from './db.js';
 import { BY_NAME, itemView, sortViews, todayIn, toISODate, addDays, daysBetween, krispStatus } from './shelf.js';
 import { trackEvent } from './klaviyo.js';
 import { buildImpact } from './impact.js';
+import { scrapFor, STOCK_BAG_TIP, TRIM_FATES } from './scraps.js';
 
 // ---------- secrets & links ----------
 
@@ -25,6 +26,8 @@ export function hashKey(key) {
 }
 
 export function siteOrigin() {
+  // Preview builds link to their own stable branch URL, not production.
+  if (process.env.VERCEL_ENV === 'preview' && process.env.VERCEL_BRANCH_URL) return `https://${process.env.VERCEL_BRANCH_URL}`;
   return (process.env.CRISPER_PUBLIC_ORIGIN || 'https://guide.simplykrisp.com').replace(/\/$/, '');
 }
 export function dashboardUrl(userId) {
@@ -127,7 +130,7 @@ export async function buildState(user, { touch = true } = {}) {
   const pending = rows.filter((r) => r.state === 'pending').map((r) => itemView(r, user, today)).filter(Boolean);
 
   const recentDone = await q(
-    `SELECT id, produce, state, state_at, qty FROM crisper_items WHERE user_id = $1 AND state IN ('used','tossed') ORDER BY state_at DESC LIMIT 12`,
+    `SELECT id, produce, state, state_at, qty, tossed_frac, trim FROM crisper_items WHERE user_id = $1 AND state IN ('used','tossed') ORDER BY state_at DESC LIMIT 12`,
     [user.id],
   );
   const stats = await one(
@@ -139,7 +142,7 @@ export async function buildState(user, { touch = true } = {}) {
     [user.id],
   );
   const finished = await q(
-    `SELECT produce, qty, weight, state, state_at, rescued FROM crisper_items WHERE user_id = $1 AND state IN ('used','tossed') AND state_at IS NOT NULL`,
+    `SELECT produce, qty, weight, state, state_at, rescued, tossed_frac, trim FROM crisper_items WHERE user_id = $1 AND state IN ('used','tossed') AND state_at IS NOT NULL`,
     [user.id],
   );
   const krisp = krispStatus(user, today);
@@ -168,7 +171,8 @@ export async function buildState(user, { touch = true } = {}) {
     krisp,
     items: active,
     pending,
-    recentDone: recentDone.map((r) => ({ id: r.id, name: r.produce, state: r.state, at: r.state_at, qty: r.qty, imageUrl: BY_NAME[r.produce]?.imageUrl })),
+    recentDone: recentDone.map((r) => ({ id: r.id, name: r.produce, state: r.state, at: r.state_at, qty: r.qty, tossedFrac: Number(r.tossed_frac) || 0, trim: r.trim || null, scrap: scrapFor(r.produce), imageUrl: BY_NAME[r.produce]?.imageUrl })),
+    stockBagTip: STOCK_BAG_TIP,
     stats,
     impact,
     receipts: receipts.map((r) => ({
@@ -203,7 +207,7 @@ export async function addItem(user, { produce, qty = 1, weight = null, date, sou
   );
 }
 
-export async function itemAction(user, { id, op, days, qty, date }) {
+export async function itemAction(user, { id, op, days, qty, date, portion, trim }) {
   const item = await one('SELECT * FROM crisper_items WHERE id = $1 AND user_id = $2', [id, user.id]);
   if (!item) throw Object.assign(new Error('Item not found'), { status: 404 });
   switch (op) {
@@ -212,11 +216,32 @@ export async function itemAction(user, { id, op, days, qty, date }) {
       // A "rescue" = eaten in its last couple of days (or past the usual window).
       const v = op === 'used' ? itemView(item, user, todayIn(user.tz)) : null;
       const rescued = !!v && ['check', 'today', 'soon'].includes(v.status);
-      await q('UPDATE crisper_items SET state = $1, state_at = now(), rescued = $2 WHERE id = $3', [op, rescued, id]);
+      await q('UPDATE crisper_items SET state = $1, state_at = now(), rescued = $2, tossed_frac = $3 WHERE id = $4', [op, rescued, op === 'tossed' ? 1 : 0, id]);
+      break;
+    }
+    case 'finish': {
+      // Eaten some, tossed some; optionally what happened to the trim. Works on
+      // active items and on items already marked used/tossed (to fix or add trim).
+      const p = [0, 0.25, 0.5, 0.75, 1].reduce((a, b) => (Math.abs(b - Number(portion)) < Math.abs(a - Number(portion)) ? b : a), 0);
+      const t = TRIM_FATES.includes(trim) ? trim : null;
+      const state = p >= 1 ? 'tossed' : 'used';
+      let rescued = item.rescued;
+      if (item.state === 'active') {
+        const v = state === 'used' ? itemView(item, user, todayIn(user.tz)) : null;
+        rescued = !!v && ['check', 'today', 'soon'].includes(v.status);
+      }
+      if (state === 'tossed') rescued = false;
+      const keepAt = item.state === 'used' || item.state === 'tossed';
+      await q(`UPDATE crisper_items SET state = $1, tossed_frac = $2, trim = $3, rescued = $4, state_at = ${keepAt ? 'COALESCE(state_at, now())' : 'now()'} WHERE id = $5`, [state, p, t, rescued, id]);
+      break;
+    }
+    case 'trim': {
+      if (item.state !== 'used' && item.state !== 'tossed') throw Object.assign(new Error('Finish the item first'), { status: 400 });
+      await q('UPDATE crisper_items SET trim = $1 WHERE id = $2', [TRIM_FATES.includes(trim) ? trim : null, id]);
       break;
     }
     case 'undo':
-      await q(`UPDATE crisper_items SET state = 'active', state_at = now(), rescued = false WHERE id = $1`, [id]);
+      await q(`UPDATE crisper_items SET state = 'active', state_at = now(), rescued = false, tossed_frac = 0, trim = NULL WHERE id = $1`, [id]);
       break;
     case 'delete':
       await q(`UPDATE crisper_items SET state = 'deleted', state_at = now() WHERE id = $1`, [id]);
@@ -238,7 +263,7 @@ export async function itemAction(user, { id, op, days, qty, date }) {
     default:
       throw Object.assign(new Error(`Unknown action: ${op}`), { status: 400 });
   }
-  await logEvent(user.id, `item_${op}`, { produce: item.produce, source: item.source });
+  await logEvent(user.id, `item_${op}`, { produce: item.produce, source: item.source, ...(op === 'finish' ? { portion: Number(portion) || 0, trim: trim || null } : op === 'trim' ? { trim: trim || null } : {}) });
 }
 
 // ---------- receipts ----------
