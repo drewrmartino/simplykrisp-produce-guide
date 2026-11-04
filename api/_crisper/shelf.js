@@ -3,6 +3,7 @@
 // and a confident wrong countdown costs more trust than a range does.
 
 import { CATALOG } from './catalog.js';
+import { typicalWaste } from './impact.js';
 import { scrapFor } from './scraps.js';
 
 export const BY_NAME = Object.fromEntries(CATALOG.map((c) => [c.name, c]));
@@ -109,6 +110,11 @@ export function itemView(row, user, today) {
     tip: c.tip,
     ripeTip: c.ripeTip,
     scrap: scrapFor(c.name),
+    avoidWith: c.avoidWith || [],
+    ethyleneProduction: c.ethyleneProduction,
+    ethyleneSensitivity: c.ethyleneSensitivity,
+    krispRecommended: !!c.krispRecommended,
+    waste: typicalWaste(row),
   };
 }
 

@@ -7,6 +7,7 @@
 //   Krisper Signed Up       — welcome + forwarding instructions + dashboard link
 //   Krisper Link Requested  — "here's your dashboard link" (lost link)
 //   Krisper Order Added     — optional confirmation that a receipt was read
+//   Krisper Storage Guide   — how to store each item just bought (any receipt channel)
 //   Krisper Use Soon        — the reminder: what to eat first
 //   Krisper Krisp Change Due — time to swap the sachet
 //

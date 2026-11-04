@@ -1,0 +1,23 @@
+{
+  "id": "/krisper",
+  "name": "Simply Krisp",
+  "short_name": "Simply Krisp",
+  "description": "Track the produce you buy, learn how to store it, and eat it before it goes bad.",
+  "start_url": "/krisper?source=app",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#fcfbf5",
+  "theme_color": "#2e431f",
+  "categories": ["food", "lifestyle", "utilities"],
+  "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "My Krisper", "url": "/krisper?source=app", "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Produce Storage Guide", "url": "/", "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }] },
+    { "name": "What's in season", "url": "/seasonal", "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }] }
+  ]
+}

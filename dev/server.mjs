@@ -17,7 +17,7 @@ process.env.CRISPER_INBOUND_ADDRESS ||= 'devhash@inbound.postmarkapp.com';
 process.env.CRISPER_PUBLIC_ORIGIN ||= `http://localhost:${process.env.PORT || 3000}`;
 process.env.CRISPER_ADMIN_KEY ||= 'dev-admin';
 
-const TYPES = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.json': 'application/json', '.css': 'text/css', '.png': 'image/png', '.svg': 'image/svg+xml' };
+const TYPES = { '.webmanifest': 'application/manifest+json', '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.json': 'application/json', '.css': 'text/css', '.png': 'image/png', '.svg': 'image/svg+xml' };
 
 function shim(res) {
   res.status = (c) => { res.statusCode = c; return res; };

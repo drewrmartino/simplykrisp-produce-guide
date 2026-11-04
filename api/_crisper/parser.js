@@ -74,6 +74,57 @@ for (const item of CATALOG) {
     }
   }
 }
+// Abbreviations printed on paper register receipts (and what receipt-photo OCR
+// reads back). Matched as whole words, no plural forms generated.
+const RECEIPT_ABBREV = {
+  'Apple': ['appl', 'apl', 'hny crsp', 'honeycrsp', 'gala', 'fuji', 'grny smth'],
+  'Avocado': ['avoc', 'avo', 'avos', 'hass avo', 'avocad'],
+  'Banana': ['bnna', 'bnnas', 'banan', 'bana', 'bananas org'],
+  'Blueberry': ['blubry', 'bluebry', 'blueb', 'blu berry', 'blubrry'],
+  'Raspberry': ['raspb', 'rspbry', 'raspbry', 'rasp'],
+  'Blackberry': ['blkbry', 'blackb', 'blkberry'],
+  'Strawberry': ['strawb', 'strwb', 'strwbry', 'strbry', 'strawbry', 'strwberry'],
+  'Grape': ['grps', 'red grp', 'grn grp', 'grp red', 'grp grn', 'seedless grp'],
+  'Orange': ['orng', 'navel', 'cara cara'],
+  'Cantaloupe': ['cantal', 'canta', 'cantlp'],
+  'Watermelon': ['wtrmln', 'wmelon', 'watermln', 'wtrmelon'],
+  'Pineapple': ['pnapl', 'pineappl', 'pine apple', 'pnappl'],
+  'Honeydew': ['hnydew', 'honeydw', 'hnydw'],
+  'Grapefruit': ['grpfrt', 'grapefrt', 'grpfruit'],
+  'Pear': ['bartlett', 'danjou', 'd anjou', 'bosc'],
+  'Mango': ['mngo'],
+  'Lemon': ['lemn', 'lmn'],
+  'Tomato': ['tomat', 'tomatoe', 'roma tom', 'tom roma', 'grape tom', 'cherry tom', 'tom vine', 'tov', 'hthse tom', 'toms'],
+  'Lettuce': ['rom hrts', 'romaine hrts', 'rom hearts', 'ltc', 'lttc', 'lett', 'grn leaf', 'red leaf', 'ice berg'],
+  'Broccoli': ['broc', 'brocc', 'broc crwn', 'broc crown', 'brocoli', 'brccli'],
+  'Cauliflower': ['caulif', 'cauli', 'cauliflwr', 'caulflwr'],
+  'Brussels Sprouts': ['bruss spr', 'brussel', 'brsl spr', 'brussels spr'],
+  'Cabbage': ['cabb', 'cbbg', 'cabbge'],
+  'Carrot': ['carr', 'crts', 'crrt', 'crrts', 'baby crt'],
+  'Celery': ['clry', 'celry', 'celery hrts'],
+  'Cucumber': ['cuke', 'cukes', 'cucumb', 'eng cuc', 'cucmbr'],
+  'Bell Pepper': ['bell pep', 'bell ppr', 'ppr bell', 'pep red', 'pep grn', 'red bell', 'grn bell', 'orng bell', 'yel bell', 'grn pepper', 'red pepper'],
+  'Jalapeno': ['jalap', 'jalpeno', 'jal pepper'],
+  'Potato': ['potat', 'russet pot', 'pot russet', 'yukon', 'ykn gld', 'red pot', 'gold pot', 'russets'],
+  'Sweet Potato': ['swt pot', 'swt potato', 'sweet pot', 'yam', 'yams'],
+  'Onion': ['onon', 'yel onion', 'onion yel', 'wht onion', 'onion wht', 'yel onon'],
+  'Green Onion': ['grn onion', 'grn onions', 'grn onon', 'scall'],
+  'Garlic': ['grlc', 'garlc'],
+  'Mushroom': ['mush', 'mshrm', 'mshrms', 'mushrm', 'bella mush', 'wht mush', 'crimini'],
+  'Zucchini': ['zucc', 'zuke', 'zucch', 'zuchini', 'zucchin'],
+  'Spinach': ['spnch', 'baby spin', 'spinch'],
+  'Asparagus': ['aspar', 'asprgs', 'asparg'],
+  'Green Beans': ['grn bean', 'grn beans', 'haricot'],
+  'Corn': ['swt corn', 'corn ear', 'corn on cob'],
+  'Eggplant': ['eggplt', 'egg plant'],
+  'Radish': ['rdsh', 'radsh'],
+  'Herbs (Fresh)': ['cilant', 'cilantr', 'prsly', 'parsly'],
+};
+for (const [name, forms] of Object.entries(RECEIPT_ABBREV)) {
+  const item = CATALOG.find((c) => normalize(c.name) === normalize(name));
+  if (!item) continue;
+  for (const form of forms) MATCHERS.push({ name: item.name, form, re: new RegExp(`(^|[^a-z])${escapeRe(form)}(?![a-z])`) });
+}
 MATCHERS.sort((a, b) => b.form.length - a.form.length);
 
 // A line containing any of these is not fresh produce, even if it names one.

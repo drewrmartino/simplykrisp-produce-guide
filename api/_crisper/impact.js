@@ -82,6 +82,67 @@ const T = {
 };
 const DEFAULT = [0.5, 2.0, 'veg', true];
 
+
+// Share of the edible part bought for home use that goes uneaten at the consumer
+// level ("Other (cooking loss and uneaten food)"), latest year in USDA ERS
+// Loss-Adjusted Food Availability (LAFA) data: Fruit (Apr 2023), Vegetables (May 2024).
+// https://www.ers.usda.gov/data-products/food-availability-per-capita-data-system
+// name: [percent uneaten, data year, LAFA series]. Items LAFA doesn't cover fall
+// back to the EPA 27% all-produce figure.
+const LAFA = {
+  'Apple': [20, 2021, 'Fresh apples'],
+  'Avocado': [33, 2021, 'Fresh avocados'],
+  'Banana': [20, 2021, 'Fresh bananas'],
+  'Blueberry': [8, 2021, 'Fresh blueberries'],
+  'Cantaloupe': [43, 2021, 'Fresh cantaloupe'],
+  'Cherry': [51, 2021, 'Fresh cherries'],
+  'Grape': [33, 2021, 'Fresh grapes'],
+  'Kiwi': [45, 2021, 'Fresh kiwi'],
+  'Lemon': [44, 2022, 'Fresh lemons'],
+  'Lime': [44, 2022, 'Fresh limes'],
+  'Mango': [13, 2021, 'Fresh mangoes'],
+  'Orange': [36, 2022, 'Fresh oranges'],
+  'Peach': [42, 2021, 'Fresh peaches'],
+  'Pear': [20, 2021, 'Fresh pears'],
+  'Pineapple': [37, 2021, 'Fresh pineapple'],
+  'Plum': [27, 2021, 'Fresh plums'],
+  'Strawberry': [35, 2021, 'Fresh strawberries'],
+  'Tomato': [7, 2022, 'Fresh tomatoes'],
+  'Watermelon': [13, 2021, 'Fresh watermelon'],
+  'Nectarine': [42, 2021, 'Fresh peaches'],
+  'Papaya': [20, 2021, 'Fresh papaya'],
+  'Grapefruit': [20, 2022, 'Fresh grapefruit'],
+  'Apricot': [10, 2021, 'Fresh apricots'],
+  'Honeydew': [43, 2021, 'Fresh honeydew'],
+  'Raspberry': [20, 2021, 'Fresh raspberries'],
+  'Cranberry': [26, 2021, 'Fresh cranberries'],
+  'Asparagus': [18, 2022, 'Fresh asparagus'],
+  'Bell Pepper': [39, 2022, 'Fresh bell peppers'],
+  'Broccoli': [12, 2022, 'Fresh broccoli'],
+  'Brussels Sprouts': [12, 2022, 'Fresh brussels sprouts'],
+  'Cabbage': [24, 2022, 'Fresh cabbage'],
+  'Carrot': [34, 2022, 'Fresh carrots'],
+  'Cauliflower': [9, 2022, 'Fresh cauliflower'],
+  'Celery': [39, 2022, 'Fresh celery'],
+  'Corn': [32, 2022, 'Fresh sweet corn'],
+  'Cucumber': [32, 2022, 'Fresh cucumbers'],
+  'Eggplant': [26, 2022, 'Fresh eggplant'],
+  'Garlic': [43, 2022, 'Fresh garlic'],
+  'Green Beans': [24, 2022, 'Fresh snap beans'],
+  'Kale': [38, 2022, 'Fresh kale'],
+  'Lettuce': [24, 2022, 'Fresh leaf lettuce'],
+  'Mushroom': [21, 2021, 'Fresh mushrooms'],
+  'Onion': [43, 2022, 'Fresh onions'],
+  'Potato': [16, 2022, 'Fresh potatoes'],
+  'Spinach': [9, 2022, 'Fresh spinach'],
+  'Sweet Potato': [44, 2022, 'Fresh sweet potatoes'],
+  'Zucchini': [25, 2022, 'Fresh squash'],
+  'Radish': [47, 2022, 'Fresh radishes'],
+  'Squash (Winter)': [69, 2022, 'Fresh pumpkin'],
+  'Blackberry': [20, 2021, 'Fresh raspberries (proxy)'],
+  'Jalapeño': [39, 2022, 'Fresh bell peppers (proxy)'],
+};
+
 export const BENCHMARK_TOSS_RATE = 0.27; // EPA 2025, fresh fruit + vegetables
 const KG_PER_LB = 0.45359237;
 const KG_CO2_PER_MILE = 0.4;
@@ -103,6 +164,26 @@ export function parseWeightLb(w) {
     : u === 'kg' ? n / KG_PER_LB
     : n / 453.592;
   return lb > 0 && lb < 200 ? lb : null;
+}
+
+// Typical household waste for one item, and what that means for this purchase.
+export function wasteFor(name) {
+  const w = LAFA[name];
+  return w ? { rate: w[0] / 100, year: w[1], series: w[2], source: 'usda' }
+    : { rate: BENCHMARK_TOSS_RATE, year: 2025, series: 'All fresh fruit and vegetables', source: 'epa' };
+}
+
+export function typicalWaste(row) {
+  const w = wasteFor(row.produce);
+  const i = itemImpact(row);
+  const refuse = (scrapFor(row.produce)?.pct || 0) / 100;
+  return {
+    rate: w.rate,
+    source: w.source,
+    lb: r2(i.lb * (1 - refuse) * w.rate),
+    usd: r2(i.usd * w.rate),
+    co2Lb: r2((i.co2Kg / KG_PER_LB) * w.rate),
+  };
 }
 
 export function itemImpact(row) {
