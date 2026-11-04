@@ -63,8 +63,8 @@ export function createServer() {
         return await mod.default(req, res);
       }
       let p = url.pathname;
-      if (p === '/crisper' || p === '/crisper/') p = '/crisper/index.html';
-      if (p === '/crisper/admin') p = '/crisper/admin.html';
+      if (p === '/crisper' || p === '/crisper/' || p === '/krisper' || p === '/krisper/') p = '/crisper/index.html';
+      if (p === '/crisper/admin' || p === '/krisper/admin') p = '/crisper/admin.html';
       if (p === '/') p = '/index.html';
       const file = path.join(root, p);
       if (!file.startsWith(root)) throw new Error('bad path');

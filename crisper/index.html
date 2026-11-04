@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>My Crisper | SimplyKrisp</title>
+<title>My Krisper | SimplyKrisp</title>
 <meta name="description" content="Forward your grocery order emails and see what to eat first. Shelf-life ranges from the SimplyKrisp Produce Storage Guide." />
 <meta name="robots" content="noindex" />
 <link rel="icon" type="image/png" href="/favicon.png" />
@@ -239,24 +239,24 @@ footer a{color:var(--muted-fg)}
       <span class="mark" aria-hidden="true">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 3.2c3.6 3.5 6.2 6.6 6.2 10a6.2 6.2 0 1 1-12.4 0c0-3.4 2.6-6.5 6.2-10z" fill="hsl(96 14% 28%)"/><path d="M12 8.5v8.2" stroke="hsl(48 36% 97%)" stroke-width="1.5" stroke-linecap="round"/></svg>
       </span>
-      <span><span class="name">SimplyKrisp</span><br><span class="sub">My Crisper</span></span>
+      <span><span class="name">SimplyKrisp</span><br><span class="sub">My Krisper</span></span>
     </a>
     <nav>
       <a class="mobile-hide" href="/">Storage Guide</a>
       <button id="navSettings" class="hide" type="button">Settings</button>
-      <a href="https://simplykrisp.com/?utm_source=produce-guide&amp;utm_medium=referral&amp;utm_campaign=crisper&amp;utm_content=header" target="_blank" rel="noopener" style="color:var(--fg);font-weight:600">Shop Krisp</a>
+      <a href="https://simplykrisp.com/?utm_source=produce-guide&amp;utm_medium=referral&amp;utm_campaign=krisper&amp;utm_content=header" target="_blank" rel="noopener" style="color:var(--fg);font-weight:600">Shop Krisp</a>
     </nav>
   </div>
 </header>
 
 <main class="wrap" id="app">
-  <div class="loading" id="loading"><span class="spin"></span> Loading your crisper…</div>
+  <div class="loading" id="loading"><span class="spin"></span> Loading your Krisper…</div>
 
   <!-- ============ LANDING / SIGNUP ============ -->
   <div id="vLanding" class="hide">
     <div class="hero">
       <div>
-        <div class="eyebrow"><span class="dot"></span> My Crisper <span class="pilot">Pilot</span></div>
+        <div class="eyebrow"><span class="dot"></span> My Krisper <span class="pilot">Pilot</span></div>
         <h1>Know what to eat first, without typing in your groceries.</h1>
         <p class="lede">Forward your grocery order emails (or set it up once so they forward themselves). We read the produce, look up how long each item lasts from the Storage Guide, and show you what needs using first.</p>
         <ul class="how">
@@ -272,7 +272,7 @@ footer a{color:var(--muted-fg)}
       </div>
       <div class="card stack" id="signupCard">
         <div>
-          <h2>Start your crisper</h2>
+          <h2>Start your Krisper</h2>
           <p class="muted small">Free while we test it. Takes about two minutes to set up.</p>
         </div>
         <form id="fSignup" class="stack" novalidate>
@@ -284,11 +284,11 @@ footer a{color:var(--muted-fg)}
           <div id="suKrispDate" class="hide"><label class="f" for="suKrispOn">When did you last put in a fresh one?</label><input class="inp" id="suKrispOn" type="date" /><p class="note" style="margin-top:4px">We use this to remind you when it's time to swap. Leave blank if you're not sure.</p></div>
           <label class="check"><input type="checkbox" id="suConsent" /> <span>Also send me SimplyKrisp tips and offers <span class="muted">(optional)</span></span></label>
           <div class="err hide" id="suErr" role="alert"></div>
-          <button class="btn" type="submit" id="suBtn">Create my crisper</button>
+          <button class="btn" type="submit" id="suBtn">Create my Krisper</button>
           <p class="note">We keep the produce names and dates from your receipts, never the email itself, prices or your address. Reminder emails come from SimplyKrisp; turn them off or delete everything in Settings at any time.</p>
         </form>
         <div id="suExists" class="hide stack">
-          <h3>You already have a crisper</h3>
+          <h3>You already have a Krisper</h3>
           <p class="muted small" id="suExistsMsg">We just emailed your private link. Open it on this device and you'll be back in.</p>
         </div>
         <p class="small muted" style="border-top:1px solid var(--border);padding-top:12px">Already signed up? <button class="link" type="button" id="toLost">Email me my link</button></p>
@@ -309,14 +309,14 @@ footer a{color:var(--muted-fg)}
 
     <section class="card stack" id="setupNoInbox">
       <h3>Email forwarding isn't switched on for this test yet</h3>
-      <p class="muted">You can still try everything: paste a receipt or add produce by hand from your crisper.</p>
-      <div class="row"><button class="btn" type="button" data-go="dash">Go to my crisper</button></div>
+      <p class="muted">You can still try everything: paste a receipt or add produce by hand from your Krisper.</p>
+      <div class="row"><button class="btn" type="button" data-go="dash">Go to my Krisper</button></div>
     </section>
 
     <div id="setupInbox" class="stack">
       <section class="card">
         <h3>Your private forwarding address</h3>
-        <p class="muted small">Only you have this address. Anything sent to it shows up in your crisper.</p>
+        <p class="muted small">Only you have this address. Anything sent to it shows up in your Krisper.</p>
         <div class="addr"><code id="inboxAddr"></code><button class="btn ghost sm" type="button" data-copy="inboxAddr">Copy</button></div>
       </section>
 
@@ -341,15 +341,15 @@ footer a{color:var(--muted-fg)}
               In the Gmail search bar, paste this, then click the sliders icon and choose <b>Create filter</b>:
               <div class="addr"><code id="gmailFilter"></code><button class="btn ghost sm" type="button" data-copy="gmailFilter">Copy</button></div>
             </li>
-            <li>Tick <b>Forward it to</b>, choose your crisper address, tick <b>Also apply filter to matching conversations</b> if you want, and click <b>Create filter</b>.</li>
+            <li>Tick <b>Forward it to</b>, choose your Krisper address, and click <b>Create filter</b>. <span class="muted">Filters only forward new emails, so forward one recent receipt by hand to test it.</span></li>
           </ol>
         </div>
 
         <div data-pane="outlook" class="hide">
           <ol class="steps">
             <li>In Outlook on the web, open <b>Settings → Mail → Rules → Add new rule</b>.</li>
-            <li>Name it "Crisper". Condition: <b>From</b> → add <span class="kbd">instacart.com</span>, <span class="kbd">walmart.com</span>, <span class="kbd">kroger.com</span>, <span class="kbd">smithsfoodanddrug.com</span>, <span class="kbd">harmonsgrocery.com</span> (only the stores you use).</li>
-            <li>Action: <b>Forward to</b> → paste your crisper address. Save.</li>
+            <li>Name it "Krisper". Condition: <b>From</b> → add <span class="kbd">instacart.com</span>, <span class="kbd">walmart.com</span>, <span class="kbd">kroger.com</span>, <span class="kbd">smithsfoodanddrug.com</span>, <span class="kbd">harmonsgrocery.com</span> (only the stores you use).</li>
+            <li>Action: <b>Forward to</b> → paste your Krisper address. Save.</li>
           </ol>
           <p class="note" style="margin-top:10px">Some work and school accounts block automatic forwarding. If nothing shows up within a day, use "Forward by hand" or paste a receipt.</p>
         </div>
@@ -357,12 +357,12 @@ footer a{color:var(--muted-fg)}
         <div data-pane="icloud" class="hide">
           <ol class="steps">
             <li>On a computer, open <a href="https://www.icloud.com/mail" target="_blank" rel="noopener">iCloud Mail</a>, click the gear icon, then <b>Rules → Add a rule</b>.</li>
-            <li>If a message <b>is from</b> <span class="kbd">instacart.com</span> → <b>Forward to</b> your crisper address. Repeat for each store you order from.</li>
+            <li>If a message <b>is from</b> <span class="kbd">instacart.com</span> → <b>Forward to</b> your Krisper address. Repeat for each store you order from.</li>
           </ol>
         </div>
 
         <div data-pane="manual" class="hide">
-          <p>Forward any grocery order or receipt email to your crisper address. Forwarding from your phone works too. We'll pick out the produce and ignore everything else.</p>
+          <p>Forward any grocery order or receipt email to your Krisper address. Forwarding from your phone works too. We'll pick out the produce and ignore everything else.</p>
         </div>
       </section>
 
@@ -371,7 +371,7 @@ footer a{color:var(--muted-fg)}
       </section>
 
       <div class="row">
-        <button class="btn" type="button" data-go="dash" id="setupDone">Go to my crisper</button>
+        <button class="btn" type="button" data-go="dash" id="setupDone">Go to my Krisper</button>
         <button class="btn ghost" type="button" data-open="paste">Paste a receipt instead</button>
       </div>
     </div>
@@ -381,8 +381,8 @@ footer a{color:var(--muted-fg)}
   <div id="vDash" class="hide">
     <div class="top">
       <div>
-        <div class="eyebrow"><span class="dot"></span> My Crisper <span class="pilot">Pilot</span></div>
-        <h1 id="greet">Your crisper</h1>
+        <div class="eyebrow"><span class="dot"></span> My Krisper <span class="pilot">Pilot</span></div>
+        <h1 id="greet">Your Krisper</h1>
         <p class="muted" id="summary"></p>
       </div>
       <div class="acts">
@@ -444,7 +444,7 @@ footer a{color:var(--muted-fg)}
           <button class="btn ghost sm" type="button" id="signOut">Sign out</button>
         </div>
         <div class="setrow">
-          <div><b>Delete my crisper</b><div class="note">Removes your account, items and order history now. This can't be undone.</div></div>
+          <div><b>Delete my Krisper</b><div class="note">Removes your account, items and order history now. This can't be undone.</div></div>
           <button class="btn ghost sm" type="button" id="delStart" style="color:var(--warn);border-color:var(--warn)">Delete</button>
         </div>
         <div id="delConfirm" class="hide status" style="background:var(--warn-bg);flex-wrap:wrap">
@@ -457,7 +457,7 @@ footer a{color:var(--muted-fg)}
   </div>
 
   <div id="vDeleted" class="hide empty-state">
-    <h1>Your crisper has been deleted</h1>
+    <h1>Your Krisper has been deleted</h1>
     <p class="lede" style="margin:0 auto">Everything is gone from our database. Thanks for trying it.</p>
     <div class="row"><a class="btn ghost" href="/">Back to the Storage Guide</a></div>
   </div>
@@ -474,7 +474,7 @@ footer a{color:var(--muted-fg)}
     <div class="sel" id="addSel"></div>
     <div class="row" style="margin-top:14px;justify-content:space-between">
       <label class="small">Bought <input class="inp" type="date" id="addDate" style="width:auto;display:inline-block;margin-left:6px"></label>
-      <button class="btn" type="button" id="addSave" disabled>Add to crisper</button>
+      <button class="btn" type="button" id="addSave" disabled>Add to Krisper</button>
     </div>
     <div class="err hide" id="addErr" role="alert"></div>
   </div>
@@ -505,7 +505,7 @@ footer a{color:var(--muted-fg)}
 (function () {
   'use strict';
   var API = window.CRISPER_API || '';
-  var SHOP = 'https://simplykrisp.com/?utm_source=produce-guide&utm_medium=referral&utm_campaign=crisper&utm_content=';
+  var SHOP = 'https://simplykrisp.com/?utm_source=produce-guide&utm_medium=referral&utm_campaign=krisper&utm_content=';
   // Amazon is off by default: its filter forwards every Amazon order, not just
   // groceries. We'd discard the non-produce lines, but testers should opt in.
   var STORES = [['Instacart', 'instacart.com', 1], ['Walmart', 'walmart.com', 1], ["Smith's / Kroger", 'smithsfoodanddrug.com OR kroger.com', 1],
@@ -567,7 +567,7 @@ footer a{color:var(--muted-fg)}
       if (needsSetup || u.hash === '#setup') openSetup(); else { view('vDash'); render(); }
     }).catch(function (e) {
       if (e.status === 401) { ls(KEY_LS, null); S.key = null; view('vLanding'); showErr('suErr', e.message); }
-      else { view('vLanding'); showErr('suErr', 'Could not reach your crisper. Check your connection and refresh.'); }
+      else { view('vLanding'); showErr('suErr', 'Could not reach your Krisper. Check your connection and refresh.'); }
     });
   }
 
@@ -590,13 +590,13 @@ footer a{color:var(--muted-fg)}
     } }).then(function (r) {
       if (r.exists) {
         show('fSignup', false); show('suExists', true);
-        if (!r.emailed) el('suExistsMsg').textContent = 'That email already has a crisper. Use the private link from your welcome email to get back in.';
+        if (!r.emailed) el('suExistsMsg').textContent = 'That email already has a Krisper. Use the private link from your welcome email to get back in.';
         return;
       }
       S.key = r.key; ls(KEY_LS, r.key); S.st = r.state;
       openSetup();
     }).catch(function (e) { showErr('suErr', e.message); })
-      .then(function () { b.disabled = false; b.textContent = 'Create my crisper'; });
+      .then(function () { b.disabled = false; b.textContent = 'Create my Krisper'; });
   });
   el('toLost').addEventListener('click', function () { show('fLost', true); el('lostEmail').focus(); });
   el('fLost').addEventListener('submit', function (ev) {
@@ -605,7 +605,7 @@ footer a{color:var(--muted-fg)}
     if (!email) return;
     api('/api/crisper/signup', { body: { email: email, resend: true } }).then(function (r) {
       var m = el('lostMsg'); m.classList.remove('hide');
-      m.textContent = r.emailed ? 'If that email has a crisper, a fresh link is on its way.' : 'Link emails are not switched on in this test build yet.';
+      m.textContent = r.emailed ? 'If that email has a Krisper, a fresh link is on its way.' : 'Link emails are not switched on in this test build yet.';
     }).catch(function (e) { var m = el('lostMsg'); m.classList.remove('hide'); m.textContent = e.message; });
   });
 
@@ -636,8 +636,8 @@ footer a{color:var(--muted-fg)}
     var n = st.items.length + st.pending.length;
     if (st.inbox.firstEmailAt || st.receipts.some(function (r) { return r.channel === 'email'; })) {
       fs.className = 'status good';
-      fs.innerHTML = '<span aria-hidden="true">✓</span><span><b>Connected.</b> Your first grocery email arrived' + (n ? ' and ' + plural(n, 'item') + ' are in your crisper.' : '. It had no fresh produce, so the next order will fill it in.') + '</span>';
-      el('setupDone').textContent = 'See my crisper';
+      fs.innerHTML = '<span aria-hidden="true">✓</span><span><b>Connected.</b> Your first grocery email arrived' + (n ? ' and ' + plural(n, 'item') + ' are in your Krisper.' : '. It had no fresh produce, so the next order will fill it in.') + '</span>';
+      el('setupDone').textContent = 'See my Krisper';
     }
   }
   function startPoll() {
@@ -709,7 +709,7 @@ footer a{color:var(--muted-fg)}
     var urgent = items.filter(function (i) { return i.status === 'today' || i.status === 'check'; }).length;
     var soon = items.filter(function (i) { return i.status === 'soon'; }).length;
     el('summary').textContent = !items.length && !pend.length ? 'Nothing tracked yet.'
-      : plural(items.length, 'item') + ' in your crisper' + (urgent ? ' · ' + urgent + ' to use today' : '') + (soon ? ' · ' + soon + ' in the next 2 days' : '') + (pend.length ? ' · ' + pend.length + ' on the way' : '');
+      : plural(items.length, 'item') + ' in your Krisper' + (urgent ? ' · ' + urgent + ' to use today' : '') + (soon ? ' · ' + soon + ' in the next 2 days' : '') + (pend.length ? ' · ' + pend.length + ' on the way' : '');
 
     renderStrip(items);
     renderConflict(items);
@@ -799,8 +799,8 @@ footer a{color:var(--muted-fg)}
     var box = el('groups');
     if (!items.length && !pend.length) {
       var hasAddr = !!S.st.inbox.address;
-      box.innerHTML = '<div class="card empty-state" style="margin-top:22px"><h2>Your crisper is empty</h2><p class="muted">' +
-        (hasAddr ? 'Forward a grocery receipt to your crisper address, paste one, or add a few things by hand.' : 'Paste a receipt or add a few things by hand to try it.') +
+      box.innerHTML = '<div class="card empty-state" style="margin-top:22px"><h2>Your Krisper is empty</h2><p class="muted">' +
+        (hasAddr ? 'Forward a grocery receipt to your Krisper address, paste one, or add a few things by hand.' : 'Paste a receipt or add a few things by hand to try it.') +
         '</p><div class="row"><button class="btn" type="button" data-open="add">+ Add produce</button><button class="btn ghost" type="button" data-open="paste">Paste receipt</button>' +
         (hasAddr ? '<button class="btn ghost" type="button" data-go="setup">Email setup</button>' : '') + '</div></div>';
       return;
@@ -981,7 +981,7 @@ footer a{color:var(--muted-fg)}
       return '<div class="selr"><img src="' + esc(img(n)) + '" alt=""><b>' + esc(n) + '</b><div class="stp"><button type="button" data-qty="-1" data-n="' + esc(n) + '" aria-label="Fewer">−</button><span>' + S.sel[n] + '</span><button type="button" data-qty="1" data-n="' + esc(n) + '" aria-label="More">+</button></div></div>';
     }).join('');
     el('addSave').disabled = !names.length;
-    el('addSave').textContent = names.length ? 'Add ' + plural(names.length, 'item') : 'Add to crisper';
+    el('addSave').textContent = names.length ? 'Add ' + plural(names.length, 'item') : 'Add to Krisper';
   }
   el('addSearch').addEventListener('input', renderChips);
   el('addSearch').addEventListener('keydown', function (ev) {

@@ -4,11 +4,11 @@
 // without a deploy.
 //
 // Metrics this app emits (each becomes a flow trigger in Klaviyo):
-//   Crisper Signed Up       — welcome + forwarding instructions + dashboard link
-//   Crisper Link Requested  — "here's your dashboard link" (lost link)
-//   Crisper Order Added     — optional confirmation that a receipt was read
-//   Crisper Use Soon        — the reminder: what to eat first
-//   Crisper Krisp Change Due — time to swap the sachet
+//   Krisper Signed Up       — welcome + forwarding instructions + dashboard link
+//   Krisper Link Requested  — "here's your dashboard link" (lost link)
+//   Krisper Order Added     — optional confirmation that a receipt was read
+//   Krisper Use Soon        — the reminder: what to eat first
+//   Krisper Krisp Change Due — time to swap the sachet
 //
 // If KLAVIYO_PRIVATE_KEY is not set every call is a logged no-op, so the app
 // still works end to end for testing without sending anything.
@@ -78,7 +78,7 @@ export function subscribeToList(email) {
     data: {
       type: 'profile-subscription-bulk-create-job',
       attributes: {
-        custom_source: 'Crisper Tracker signup',
+        custom_source: 'My Krisper signup',
         profiles: {
           data: [{ type: 'profile', attributes: { email, subscriptions: { email: { marketing: { consent: 'SUBSCRIBED' } } } } }],
         },

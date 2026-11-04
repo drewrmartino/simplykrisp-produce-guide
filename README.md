@@ -113,9 +113,9 @@ attribute sessions that start on these tools. Page views themselves do not
 appear in Shopify analytics, because the content is served from Vercel rather
 than from the store.
 
-## My Crisper (pilot)
+## My Krisper (pilot)
 
-`/crisper` is a tester-facing pilot: people forward grocery order emails and see
+`/krisper` (also `/crisper`) is the "My Krisper" tester-facing pilot: people forward grocery order emails and see
 what to use first. Shelf-life ranges come from the Storage Guide (56 items,
 built into `api/_crisper/catalog.js` by `npm run catalog`).
 
@@ -131,8 +131,8 @@ How it works:
    setup screen.
 4. Order confirmations become "On the way" items, and the final receipt replaces them.
 5. A daily cron (`/api/crisper/cron`, 14:00 UTC) sends Klaviyo events
-   (`Crisper Use Soon`, `Crisper Krisp Change Due`), and Klaviyo flows send the emails.
-6. `/crisper/admin` shows the pilot scorecard (needs `CRISPER_ADMIN_KEY`).
+   (`Krisper Use Soon`, `Krisper Krisp Change Due`), and Klaviyo flows send the emails.
+6. `/krisper/admin` shows the pilot scorecard (needs `CRISPER_ADMIN_KEY`).
 
 Environment variables:
 

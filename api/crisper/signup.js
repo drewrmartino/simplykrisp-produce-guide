@@ -13,7 +13,7 @@ async function sendLink(user) {
   await trackEvent({
     email: user.email,
     firstName: user.first_name,
-    metric: 'Crisper Link Requested',
+    metric: 'Krisper Link Requested',
     properties: { dashboard_url: dashboardUrl(user.id) },
   });
   await logEvent(user.id, 'link_requested');
@@ -52,7 +52,7 @@ export default handle(['POST'], async (req) => {
   await trackEvent({
     email,
     firstName,
-    metric: 'Crisper Signed Up',
+    metric: 'Krisper Signed Up',
     uniqueId: `signup-${user.id}`,
     properties: {
       dashboard_url: dashboardUrl(user.id),

@@ -27,7 +27,7 @@ export function siteOrigin() {
   return (process.env.CRISPER_PUBLIC_ORIGIN || 'https://guide.simplykrisp.com').replace(/\/$/, '');
 }
 export function dashboardUrl(userId) {
-  return `${siteOrigin()}/crisper?k=${keyFor(userId)}&utm_source=crisper&utm_medium=email`;
+  return `${siteOrigin()}/krisper?k=${keyFor(userId)}&utm_source=krisper&utm_medium=email`;
 }
 
 // Personal forwarding address: plus-addressing on the Postmark inbound address,
@@ -307,7 +307,7 @@ export async function applyOrder(user, parsed, channel) {
     trackEvent({
       email: user.email,
       firstName: user.first_name,
-      metric: 'Crisper Order Added',
+      metric: 'Krisper Order Added',
       uniqueId: `order-${receipt.id}`,
       properties: {
         retailer: parsed.retailer,

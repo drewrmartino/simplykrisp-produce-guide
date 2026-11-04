@@ -1,6 +1,14 @@
 {
   "rewrites": [
     {
+      "source": "/krisper",
+      "destination": "/crisper/index.html"
+    },
+    {
+      "source": "/krisper/admin",
+      "destination": "/crisper/admin.html"
+    },
+    {
       "source": "/crisper",
       "destination": "/crisper/index.html"
     },
@@ -9,7 +17,7 @@
       "destination": "/crisper/admin.html"
     },
     {
-      "source": "/((?!api/|seasonal|lab|crisper).*)",
+      "source": "/((?!api/|seasonal|lab|crisper|krisper).*)",
       "destination": "/index.html"
     },
     {
@@ -73,6 +81,19 @@
     },
     {
       "source": "/crisper",
+      "headers": [
+        {
+          "key": "Referrer-Policy",
+          "value": "no-referrer"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "no-cache"
+        }
+      ]
+    },
+    {
+      "source": "/krisper(.*)",
       "headers": [
         {
           "key": "Referrer-Policy",

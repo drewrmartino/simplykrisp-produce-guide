@@ -77,7 +77,7 @@ export async function runReminders({ dryRun = false } = {}) {
 
     if (send && list.length) {
       if (!dryRun) {
-        await trackEvent({ email: user.email, firstName: user.first_name, metric: 'Crisper Use Soon', properties: props, uniqueId: `use-soon-${user.id}-${today}` });
+        await trackEvent({ email: user.email, firstName: user.first_name, metric: 'Krisper Use Soon', properties: props, uniqueId: `use-soon-${user.id}-${today}` });
         await q('UPDATE crisper_users SET last_reminder_at = now(), last_reminder_items = $1 WHERE id = $2', [dueKey, user.id]);
         await logEvent(user.id, 'reminder_sent', { count: list.length, reason });
       }
@@ -92,7 +92,7 @@ export async function runReminders({ dryRun = false } = {}) {
         await trackEvent({
           email: user.email,
           firstName: user.first_name,
-          metric: 'Crisper Krisp Change Due',
+          metric: 'Krisper Krisp Change Due',
           uniqueId: `krisp-${user.id}-${today}`,
           properties: { first_name: user.first_name || '', due_in_days: krisp.dueInDays, changed_on: krisp.changedOn, dashboard_url: dashboardUrl(user.id) },
         });
