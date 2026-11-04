@@ -5,6 +5,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { createServer } from './server.mjs';
 import * as F from './fixtures.mjs';
+import { buildImpact, parseWeightLb, itemImpact } from '../api/_crisper/impact.js';
 
 const server = createServer();
 await new Promise((r) => server.listen(0, r));
@@ -101,6 +102,46 @@ test('item actions: used, tossed, undo, ripening, manual add', async () => {
   assert.equal(me.items[0].name, 'Raspberry', 'past-window item sorts first');
   const bad = await api('/api/crisper/items', { method: 'POST', key, body: { add: [{ produce: 'Durian' }] } });
   assert.equal(bad.status, 400);
+});
+
+test('impact tracker is returned with the dashboard', async () => {
+  const me = await api('/api/crisper/me', { key });
+  const im = me.data.impact;
+  assert.ok(im && im.last30 && im.allTime && im.streak && im.level && Array.isArray(im.badges));
+  assert.equal(im.last30.usedCount + im.last30.tossedCount >= 1, true);
+  assert.ok(im.allTime.usedLb >= 0 && im.allTime.tossedUsd >= 0);
+});
+
+test('impact math: weights, money, CO2, streaks, badges', () => {
+  assert.equal(parseWeightLb('1.5 lb'), 1.5);
+  assert.equal(parseWeightLb('8 oz'), 0.5);
+  assert.equal(parseWeightLb('2 ct'), null);
+  const banana = itemImpact({ produce: 'Banana', qty: 6, weight: null });
+  assert.ok(Math.abs(banana.lb - 1.98) < 0.01);
+  assert.ok(Math.abs(banana.usd - 1.98 * 0.61) < 0.01);
+  const today = '2026-11-04'; // a Wednesday
+  const at = (d) => `${d}T18:00:00Z`;
+  const rows = [
+    { produce: 'Apple', qty: 4, state: 'used', state_at: at('2026-10-20'), rescued: true },  // week of 10/19: clean
+    { produce: 'Strawberry', qty: 1, weight: '1 lb', state: 'used', state_at: at('2026-10-28') }, // week of 10/26: clean
+    { produce: 'Spinach', qty: 1, state: 'used', state_at: at('2026-11-03') }, // this week: clean so far
+    { produce: 'Lettuce', qty: 1, state: 'tossed', state_at: at('2026-10-14') }, // week of 10/12: toss
+  ];
+  const im = buildImpact(rows, { today, tz: 'UTC', krisp: { owned: false } });
+  assert.equal(im.allTime.usedCount, 3);
+  assert.equal(im.allTime.tossedCount, 1);
+  assert.equal(im.allTime.rescued, 1);
+  assert.equal(im.allTime.tossedLb, 1);
+  assert.equal(im.allTime.tossedUsd, 2);
+  assert.ok(im.allTime.tossedCo2Kg === 0.2 && im.allTime.tossedCo2Lb === 0.5);
+  assert.equal(im.streak.cleanWeeks, 3);
+  assert.equal(im.streak.daysSinceToss, 21);
+  assert.equal(im.level.points, 4);
+  const ids = im.badges.filter((b) => b.earned).map((b) => b.id);
+  assert.deepEqual(ids.sort(), ['clean1', 'clean3', 'first', 'rescue']);
+  const tossedNow = buildImpact(rows.concat({ produce: 'Kale', qty: 1, state: 'tossed', state_at: at('2026-11-04') }), { today, tz: 'UTC' });
+  assert.equal(tossedNow.streak.cleanWeeks, 0);
+  assert.equal(tossedNow.streak.bestCleanWeeks, 2); // this week no longer counts
 });
 
 test('paste a receipt: preview then save', async () => {

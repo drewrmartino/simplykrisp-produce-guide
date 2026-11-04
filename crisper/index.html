@@ -200,7 +200,7 @@ ol.steps li::marker{color:var(--muted-fg);font-weight:700}
 .pl li{display:flex;align-items:center;gap:8px;font-size:14.5px}
 .pl img{width:22px;height:22px}
 
-.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:var(--fg);color:var(--bg);border-radius:99px;padding:10px 12px 10px 18px;display:flex;gap:14px;align-items:center;z-index:60;box-shadow:var(--shadow-md);font-size:14.5px;max-width:calc(100% - 24px)}
+.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:var(--fg);color:var(--bg);border-radius:14px;width:max-content;padding:10px 12px 10px 18px;display:flex;gap:14px;align-items:center;z-index:60;box-shadow:var(--shadow-md);font-size:14.5px;max-width:min(520px,calc(100% - 24px));line-height:1.35}
 .toast button{background:none;border:0;color:var(--accent);font-weight:700;cursor:pointer;padding:4px 8px}
 .seg{display:inline-flex;border:1px solid var(--input);border-radius:var(--radius);overflow:hidden;flex-wrap:wrap}
 .seg label{padding:8px 12px;cursor:pointer;font-size:14px;border-right:1px solid var(--input)}
@@ -213,6 +213,46 @@ ol.steps li::marker{color:var(--muted-fg);font-weight:700}
 .loading{display:flex;gap:12px;align-items:center;justify-content:center;padding:80px 0;color:var(--muted-fg)}
 footer{border-top:1px solid var(--border);padding:22px 0 30px;font-size:13px;color:var(--muted-fg)}
 footer a{color:var(--muted-fg)}
+
+/* impact tracker */
+.imp{margin-top:20px;padding:16px 18px}
+.imp .ih{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.imp .ih h2{margin:0;font-size:19px}
+.imp .lvl{font-size:12px;border-radius:99px;padding:2px 9px;background:hsl(52 90% 88%);color:hsl(52 60% 22%);margin-left:8px;vertical-align:middle;font-family:var(--body);font-weight:600}
+.tog{display:inline-flex;border:1px solid var(--input);border-radius:99px;overflow:hidden}
+.tog button{border:0;background:none;padding:5px 12px;font-size:13px;cursor:pointer;color:var(--muted-fg)}
+.tog button[aria-pressed="true"]{background:var(--primary);color:var(--primary-fg)}
+.ibody{display:grid;grid-template-columns:150px 1fr;gap:18px;align-items:center}
+.ering{text-align:center}
+.ering svg{width:124px;height:124px;display:block;margin:0 auto}
+.ering .cap{font-size:12.5px;color:var(--muted-fg);margin-top:4px;line-height:1.35}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.tile{background:var(--bg);border:1px solid var(--card-border);border-radius:var(--radius);padding:10px 12px;min-width:0}
+.tile .v{font-family:var(--sans);font-size:22px;line-height:1.15;white-space:nowrap}
+.tile .v small{font-size:13px;color:var(--muted-fg);font-family:var(--body);margin-left:2px}
+.tile .l{font-size:12.5px;color:var(--muted-fg);line-height:1.3}
+.tile.bad .v{color:var(--warn)}
+.tile.good .v{color:var(--ok)}
+.ivs{margin-top:12px;font-size:13.5px;background:var(--ok-bg);color:hsl(140 40% 22%);border-radius:var(--radius);padding:8px 11px}
+.lbar{margin-top:14px;display:flex;align-items:center;gap:10px;font-size:13px;color:var(--muted-fg)}
+.lbar .track{flex:1;height:7px;background:var(--muted);border-radius:99px;overflow:hidden}
+.lbar .track i{display:block;height:100%;background:var(--accent);border-radius:99px}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+.badge{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;border-radius:99px;padding:3px 10px 3px 4px;border:1px solid var(--card-border);background:var(--bg);color:var(--muted-fg)}
+.badge .bi{width:18px;height:18px;border-radius:50%;display:grid;place-items:center;font-size:11px;background:var(--muted)}
+.badge.on{background:var(--ok-bg);border-color:hsl(140 30% 82%);color:hsl(140 40% 22%);font-weight:600}
+.badge.on .bi{background:var(--ok);color:#fff}
+.imp details{margin-top:12px;font-size:12.5px;color:var(--muted-fg)}
+.imp summary{cursor:pointer}
+.imp details p{margin-top:6px;line-height:1.45}
+.imp details a{color:var(--muted-fg)}
+@media (max-width:760px){
+  .ibody{grid-template-columns:1fr;gap:12px}
+  .ering{display:flex;align-items:center;gap:14px;text-align:left}
+  .ering svg{width:96px;height:96px;margin:0;flex:0 0 auto}
+  .tiles{grid-template-columns:repeat(2,1fr)}
+  .tile .v{font-size:20px}
+}
 
 @media (max-width:760px){
   .hero{grid-template-columns:1fr;gap:24px}
@@ -391,6 +431,8 @@ footer a{color:var(--muted-fg)}
       </div>
     </div>
 
+    <section class="card imp" id="impact" aria-label="Your impact"></section>
+
     <div class="strip" id="strip" aria-label="What to use each day this week"></div>
     <p class="note" id="stripNote" style="margin-top:6px">Each day shows items reaching the end of their usual window. Tap a day to filter.</p>
 
@@ -402,9 +444,8 @@ footer a{color:var(--muted-fg)}
     <section id="secKrisp"></section>
 
     <section>
-      <div class="sechd"><h2>Last 30 days</h2><span class="note">Items you marked used or tossed</span></div>
-      <div class="stats" id="stats"></div>
-      <div class="done" id="recentDone" style="margin-top:12px"></div>
+      <div class="sechd"><h2>Recently finished</h2><span class="note">Items you marked used or tossed</span></div>
+      <div class="done" id="recentDone"></div>
     </section>
 
     <section>
@@ -515,7 +556,7 @@ footer a{color:var(--muted-fg)}
     return on.length ? 'from:(' + on.join(' OR ') + ')' : 'Pick at least one store';
   }
   var KEY_LS = 'crisperKey', SKIP_LS = 'crisperSetupSkipped';
-  var S = { key: null, st: null, catalog: null, byName: {}, filterDay: null, sel: {}, pastePreview: null, poll: null };
+  var S = { impactRange: (function () { try { return localStorage.getItem('krisperRange') || '30'; } catch (e) { return '30'; } })(), key: null, st: null, catalog: null, byName: {}, filterDay: null, sel: {}, pastePreview: null, poll: null };
 
   function el(id) { return document.getElementById(id); }
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
@@ -851,15 +892,73 @@ footer a{color:var(--muted-fg)}
   }
 
   function renderStats(st) {
-    var s = st.stats || {}, fin = (s.used30 || 0) + (s.tossed30 || 0);
-    var rate = fin ? Math.round((s.used30 / fin) * 100) + '%' : '—';
-    el('stats').innerHTML = '<div class="stat"><div class="v">' + (s.used30 || 0) + '</div><div class="l">Used</div></div>' +
-      '<div class="stat"><div class="v">' + (s.tossed30 || 0) + '</div><div class="l">Tossed</div></div>' +
-      '<div class="stat"><div class="v">' + rate + '</div><div class="l">Eaten, not tossed</div></div>';
-    el('recentDone').innerHTML = (st.recentDone || []).map(function (r) {
+    renderImpact(st);
+    var rd = st.recentDone || [];
+    el('recentDone').innerHTML = rd.length ? rd.map(function (r) {
       return '<span class="' + (r.state === 'tossed' ? 't' : '') + '" title="' + esc(r.state + ' ' + fmtDate(r.at)) + '"><img src="' + esc(r.imageUrl || img(r.name)) + '" alt="">' + esc(r.name) + (r.state === 'tossed' ? ' · tossed' : '') + '</span>';
-    }).join('');
+    }).join('') : '<p class="muted small">Nothing yet. Tap "Used it" or "Tossed" on an item when it\'s gone.</p>';
   }
+
+  var BICON = { first: '1', rescue: '+', ten: '10', clean1: '7', clean3: '3', usd25: '$', club90: '%', beat: '✓', krisp: 'K' };
+  function money(n) { return n >= 100 ? '$' + Math.round(n) : '$' + n.toFixed(2); }
+  function num(n) { return n >= 100 ? String(Math.round(n)) : String(Math.round(n * 10) / 10); }
+  function renderImpact(st) {
+    var im = st.impact, box = el('impact');
+    if (!im) { box.innerHTML = ''; return; }
+    var all = S.impactRange === 'all', t = all ? im.allTime : im.last30;
+    var fin = t.usedCount + t.tossedCount, avg = Math.round((1 - im.benchmark.tossRate) * 100);
+    var pct = t.eatenRate == null ? null : Math.round(t.eatenRate * 100);
+    var col = pct == null ? 'hsl(48 10% 80%)' : pct >= avg ? 'hsl(140 40% 34%)' : pct >= 50 ? 'hsl(38 85% 45%)' : 'hsl(16 70% 50%)';
+    var C = 2 * Math.PI * 15.5, mark = (avg / 100) * 360 - 90;
+    var mx = 18 + 15.5 * Math.cos(mark * Math.PI / 180), my = 18 + 15.5 * Math.sin(mark * Math.PI / 180);
+    var ring = '<svg viewBox="0 0 36 36" role="img" aria-label="' + (pct == null ? 'No items finished yet' : pct + '% eaten') + '">' +
+      '<circle cx="18" cy="18" r="15.5" fill="none" stroke="hsl(48 10% 90%)" stroke-width="3.6"/>' +
+      (pct ? '<circle cx="18" cy="18" r="15.5" fill="none" stroke="' + col + '" stroke-width="3.6" stroke-linecap="round" stroke-dasharray="' + (C * pct / 100).toFixed(2) + ' ' + C.toFixed(2) + '" transform="rotate(-90 18 18)"/>' : '') +
+      '<circle cx="' + mx.toFixed(2) + '" cy="' + my.toFixed(2) + '" r="1.3" fill="hsl(96 14% 14%)"><title>US average ' + avg + '%</title></circle>' +
+      '<text x="18" y="18.6" text-anchor="middle" font-size="8.5" font-family="Questrial, DM Sans, sans-serif" fill="hsl(96 14% 14%)">' + (pct == null ? '—' : pct + '%') + '</text>' +
+      '<text x="18" y="24.2" text-anchor="middle" font-size="3.4" font-family="DM Sans, sans-serif" fill="hsl(96 5% 40%)">EATEN</text></svg>';
+    var cap = pct == null ? 'Mark items <b>Used it</b> or <b>Tossed</b> to see your rate.'
+      : (pct >= avg ? 'Ahead of' : 'Behind') + ' the US average of ~' + avg + '% (the dot)<br>' + plural(fin, 'item') + ' finished';
+    var s = im.streak, lv = im.level;
+    var streakV = s.cleanWeeks + '<small>wk</small>';
+    var streakL = 'Clean-week streak' + (s.daysSinceToss != null && s.everTossed ? (s.daysSinceToss === 0 ? ' · last toss today' : ' · ' + plural(s.daysSinceToss, 'day') + ' since a toss') : '') + (s.bestCleanWeeks > s.cleanWeeks ? ' · best ' + s.bestCleanWeeks : '');
+    var tiles = [
+      { v: num(t.tossedLb) + '<small>lb</small>', l: 'Tossed', c: t.tossedLb > 0 ? 'bad' : '' },
+      { v: money(t.tossedUsd), l: 'Wasted produce', c: t.tossedUsd > 0 ? 'bad' : '' },
+      { v: num(t.tossedCo2Lb) + '<small>lb CO₂e</small>', l: t.tossedMiles ? 'From tossed food · ≈ ' + plural(t.tossedMiles, 'mile') + ' driven' : 'From tossed food' },
+      { v: money(t.usedUsd), l: 'Produce eaten · ' + num(t.usedLb) + ' lb', c: t.usedUsd > 0 ? 'good' : '' },
+      { v: String(t.rescued), l: 'Rescues · eaten in the last 2 days', c: t.rescued ? 'good' : '' },
+      { v: streakV, l: streakL, c: s.cleanWeeks ? 'good' : '' },
+    ];
+    var earned = im.badges.filter(function (b) { return b.earned; }).length;
+    var vs = fin >= 3 && (t.avoidedUsd > 0.5 || t.avoidedCo2Kg > 0.2)
+      ? '<div class="ivs">Compared with a household tossing the US-average ' + Math.round(im.benchmark.tossRate * 100) + '% of the same produce, you kept about <b>' + money(t.avoidedUsd) + '</b> and <b>' + num(t.avoidedCo2Kg / 0.4536) + ' lb CO₂e</b> out of the bin.</div>' : '';
+    box.innerHTML =
+      '<div class="ih"><h2>Your impact<span class="lvl" title="' + lv.points + ' points">' + esc(lv.name) + '</span></h2>' +
+      '<div class="tog" role="group" aria-label="Time range"><button type="button" data-range="30" aria-pressed="' + !all + '">30 days</button><button type="button" data-range="all" aria-pressed="' + all + '">All time</button></div></div>' +
+      '<div class="ibody"><div class="ering">' + ring + '<div class="cap">' + cap + '</div></div>' +
+      '<div class="tiles">' + tiles.map(function (x) { return '<div class="tile ' + (x.c || '') + '"><div class="v">' + x.v + '</div><div class="l">' + x.l + '</div></div>'; }).join('') + '</div></div>' +
+      vs +
+      '<div class="lbar"><span><b style="color:var(--fg)">' + plural(lv.points, 'pt') + '</b></span><span class="track"><i style="width:' + Math.max(3, Math.round(lv.progress * 100)) + '%"></i></span><span>' +
+      (lv.next ? lv.toNext + ' to ' + esc(lv.next) : 'Top level') + '</span></div>' +
+      '<div class="badges" aria-label="Badges, ' + earned + ' of ' + im.badges.length + ' earned">' + im.badges.map(function (b) {
+        return '<span class="badge' + (b.earned ? ' on' : '') + '" title="' + esc(b.desc) + (b.earned ? ' (earned)' : '') + '"><span class="bi">' + (BICON[b.id] || '•') + '</span>' + esc(b.name) + '</span>';
+      }).join('') + '</div>' +
+      '<details><summary>How these are estimated</summary><p>Points: 1 per item eaten, +1 if you rescued it in its last couple of days. ' +
+      'Weights use the receipt weight when there is one, otherwise a typical weight per item (one apple ≈ 0.4 lb, one bag of carrots ≈ 1 lb). ' +
+      'Dollars use average retail prices from <a href="https://www.ers.usda.gov/data-products/fruit-and-vegetable-prices" target="_blank" rel="noopener">USDA ERS (2023)</a>, so your store may differ. ' +
+      'CO₂e uses production and supply-chain emissions by food type from <a href="https://ourworldindata.org/grapher/food-emissions-supply-chain" target="_blank" rel="noopener">Poore &amp; Nemecek via Our World in Data</a>; landfill methane would add more. ' +
+      'Miles use <a href="https://www.epa.gov/greenvehicles/greenhouse-gas-emissions-typical-passenger-vehicle" target="_blank" rel="noopener">EPA\'s ~400 g CO₂ per mile</a>. ' +
+      'The ~' + Math.round(im.benchmark.tossRate * 100) + '% US average is consumer waste of fresh fruit and vegetables from <a href="https://www.epa.gov/system/files/documents/2025-04/costoffoodwastereport_508.pdf" target="_blank" rel="noopener">EPA (2025)</a>. ' +
+      'Only items you mark count, so honest taps make it accurate.</p></details>';
+  }
+  document.addEventListener('click', function (ev) {
+    var b = ev.target.closest('[data-range]');
+    if (!b) return;
+    S.impactRange = b.getAttribute('data-range');
+    try { localStorage.setItem('krisperRange', S.impactRange); } catch (e) {}
+    renderImpact(S.st);
+  });
 
   var RET = {};
   var STATUS = { applied: '', pending: 'On the way', superseded: 'Replaced by receipt', duplicate: 'Duplicate, skipped', assumed: 'Delivered (no receipt)', no_produce: 'No fresh produce found' };
@@ -932,11 +1031,15 @@ footer a{color:var(--muted-fg)}
   function itemAct(id, op, days) {
     closeMenus();
     var it = S.st.items.concat(S.st.pending).filter(function (i) { return i.id === id; })[0];
+    var had = {}; ((S.st.impact || {}).badges || []).forEach(function (b) { if (b.earned) had[b.id] = 1; });
     api('/api/crisper/items', { body: { id: id, op: op, days: days ? +days : undefined } }).then(function (st) {
       S.st = st; render();
       var n = it ? it.name : 'Item';
-      if (op === 'used') toast(n + ' marked used', id);
-      else if (op === 'tossed') toast(n + ' marked tossed', id);
+      var fresh = ((st.impact || {}).badges || []).filter(function (b) { return b.earned && !had[b.id]; });
+      var rescue = it && /^(check|today|soon)$/.test(it.status);
+      var extra = (op === 'used' ? ' · +' + (rescue ? 2 : 1) + ' pts' : '') + (fresh.length ? ' · Badge: ' + fresh.map(function (b) { return b.name; }).join(', ') : '');
+      if (op === 'used') toast(n + (rescue ? ' rescued' : ' marked used') + extra, id);
+      else if (op === 'tossed') toast(n + ' marked tossed' + extra, id);
       else if (op === 'delete') toast(n + ' removed', id);
       else if (op === 'arrived') toast(n + ' is now counting from today');
       else if (op === 'ripening') toast(+days > 0 ? 'Gave ' + n.toLowerCase() + ' 2 more days to ripen' : n + ' marked ripe');

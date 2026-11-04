@@ -4,6 +4,7 @@ import { createHmac, createHash, randomBytes } from 'node:crypto';
 import { q, one, logEvent } from './db.js';
 import { BY_NAME, itemView, sortViews, todayIn, toISODate, addDays, daysBetween, krispStatus } from './shelf.js';
 import { trackEvent } from './klaviyo.js';
+import { buildImpact } from './impact.js';
 
 // ---------- secrets & links ----------
 
@@ -137,6 +138,12 @@ export async function buildState(user, { touch = true } = {}) {
      FROM crisper_items WHERE user_id = $1`,
     [user.id],
   );
+  const finished = await q(
+    `SELECT produce, qty, weight, state, state_at, rescued FROM crisper_items WHERE user_id = $1 AND state IN ('used','tossed') AND state_at IS NOT NULL`,
+    [user.id],
+  );
+  const krisp = krispStatus(user, today);
+  const impact = buildImpact(finished, { today, tz: user.tz, krisp });
   const receipts = await q(
     `SELECT id, received_at, channel, retailer, kind, order_ref, subject, status, item_count, matched, skipped, unknown
        FROM crisper_receipts WHERE user_id = $1 ORDER BY received_at DESC LIMIT 10`,
@@ -158,11 +165,12 @@ export async function buildState(user, { touch = true } = {}) {
       gmailVerification: user.gmail_verification || null,
       firstEmailAt: user.first_email_at,
     },
-    krisp: krispStatus(user, today),
+    krisp,
     items: active,
     pending,
     recentDone: recentDone.map((r) => ({ id: r.id, name: r.produce, state: r.state, at: r.state_at, qty: r.qty, imageUrl: BY_NAME[r.produce]?.imageUrl })),
     stats,
+    impact,
     receipts: receipts.map((r) => ({
       id: r.id,
       receivedAt: r.received_at,
@@ -200,11 +208,15 @@ export async function itemAction(user, { id, op, days, qty, date }) {
   if (!item) throw Object.assign(new Error('Item not found'), { status: 404 });
   switch (op) {
     case 'used':
-    case 'tossed':
-      await q('UPDATE crisper_items SET state = $1, state_at = now() WHERE id = $2', [op, id]);
+    case 'tossed': {
+      // A "rescue" = eaten in its last couple of days (or past the usual window).
+      const v = op === 'used' ? itemView(item, user, todayIn(user.tz)) : null;
+      const rescued = !!v && ['check', 'today', 'soon'].includes(v.status);
+      await q('UPDATE crisper_items SET state = $1, state_at = now(), rescued = $2 WHERE id = $3', [op, rescued, id]);
       break;
+    }
     case 'undo':
-      await q(`UPDATE crisper_items SET state = 'active', state_at = now() WHERE id = $1`, [id]);
+      await q(`UPDATE crisper_items SET state = 'active', state_at = now(), rescued = false WHERE id = $1`, [id]);
       break;
     case 'delete':
       await q(`UPDATE crisper_items SET state = 'deleted', state_at = now() WHERE id = $1`, [id]);

@@ -77,6 +77,7 @@ const SCHEMA = [
     state_at timestamptz,
     created_at timestamptz NOT NULL DEFAULT now()
   )`,
+  `ALTER TABLE crisper_items ADD COLUMN IF NOT EXISTS rescued boolean NOT NULL DEFAULT false`,
   `CREATE INDEX IF NOT EXISTS crisper_items_user ON crisper_items(user_id, state)`,
   `CREATE TABLE IF NOT EXISTS crisper_events (
     id bigserial PRIMARY KEY,
