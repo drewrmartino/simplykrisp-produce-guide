@@ -97,6 +97,15 @@ textarea.inp{min-height:150px;resize:vertical;font-size:14px;line-height:1.45}
 .tabs{display:flex;gap:6px;border-bottom:1px solid var(--border);margin:6px 0 14px;overflow-x:auto}
 .tab{background:none;border:0;border-bottom:2px solid transparent;padding:9px 12px;cursor:pointer;color:var(--muted-fg);font-weight:600;white-space:nowrap}
 .tab[aria-selected="true"]{color:var(--fg);border-bottom-color:var(--primary)}
+.gpart{border:1px solid var(--card-border);border-radius:var(--radius);padding:14px 14px 14px;margin-top:12px;background:var(--bg)}
+.gph{display:flex;gap:10px;align-items:flex-start;margin-bottom:10px}
+.gnum{flex:0 0 26px;height:26px;border-radius:50%;background:var(--primary);color:var(--primary-fg);display:grid;place-items:center;font-weight:700;font-size:13px}
+.gpart ol.steps{gap:10px}
+.gpart ol.steps li{font-size:15px;line-height:1.45}
+.gtrouble{margin-top:14px;font-size:14px}
+.gtrouble summary{cursor:pointer;font-weight:600}
+.gtrouble ul{margin:8px 0 0 18px;display:grid;gap:6px;color:var(--muted-fg)}
+.gtrouble b{color:var(--fg)}
 ol.steps{padding-left:22px;display:grid;gap:9px}
 ol.steps li::marker{color:var(--muted-fg);font-weight:700}
 .kbd{font-family:ui-monospace,Menlo,monospace;font-size:13px;background:var(--muted);border-radius:4px;padding:1px 5px;overflow-wrap:anywhere}
@@ -388,19 +397,56 @@ footer a{color:var(--muted-fg)}
         </div>
 
         <div data-pane="gmail">
-          <p class="small muted" style="margin-bottom:10px">Easiest on a computer. Gmail asks you to confirm the address first, and we'll show the code right here.</p>
-          <ol class="steps">
-            <li>Open <a href="https://mail.google.com/mail/u/0/#settings/fwdandpop" target="_blank" rel="noopener">Gmail forwarding settings</a> and click <b>Add a forwarding address</b>. Paste your address above and click <b>Next → Proceed</b>.
-              <div class="status" id="gmailStatus" style="margin-top:10px"><span class="spin"></span><span>Waiting for Gmail's confirmation code…</span></div>
-            </li>
-            <li>Back in Gmail, paste the code and click <b>Verify</b>. <span class="muted">Leave "Disable forwarding" selected. You're only forwarding grocery emails, not everything.</span></li>
-            <li>Pick the stores you order from:
-              <div class="stores" id="stores"></div>
-              In the Gmail search bar, paste this, then click the sliders icon and choose <b>Create filter</b>:
-              <div class="addr"><code id="gmailFilter"></code><button class="btn ghost sm" type="button" data-copy="gmailFilter">Copy</button></div>
-            </li>
-            <li>Tick <b>Forward it to</b>, choose your Krisper address, and click <b>Create filter</b>. <span class="muted">Filters only forward new emails, so forward one recent receipt by hand to test it.</span></li>
-          </ol>
+          <p class="small muted" style="margin-bottom:12px">About 5 minutes, <b>on a computer</b> (the Gmail phone app can't set up forwarding). Keep this page open in one tab and Gmail in another. You'll come back here once for a code.</p>
+
+          <div class="gpart">
+            <div class="gph"><span class="gnum">A</span><div><b>Add your Krisper address to Gmail</b><div class="note">Gmail makes you confirm any address before it will forward to it.</div></div></div>
+            <ol class="steps">
+              <li>Copy your forwarding address from the box above.</li>
+              <li>Open <a href="https://mail.google.com/mail/u/0/#settings/fwdandpop" target="_blank" rel="noopener">Gmail → Settings → Forwarding and POP/IMAP</a>. <span class="muted">(Or in Gmail: gear icon at top right → <b>See all settings</b> → <b>Forwarding and POP/IMAP</b> tab. If you have more than one Gmail account, check you're in the right one, top right.)</span></li>
+              <li>Click <b>Add a forwarding address</b>, paste your address, and click <b>Next</b>.</li>
+              <li>A small window opens. Click <b>Proceed</b>, then <b>OK</b>. Gmail now emails a confirmation code to your Krisper address.</li>
+              <li>Come back to this tab. The code appears here within a minute:
+                <div class="status" id="gmailStatus" style="margin-top:8px"><span class="spin"></span><span>Waiting for Gmail's confirmation code…</span></div>
+              </li>
+              <li>Back in Gmail, on the same Forwarding page, paste the code into the <b>confirmation code</b> box and click <b>Verify</b>.</li>
+              <li>Important: make sure <b>Disable forwarding</b> is still selected. That keeps the rest of your email private, and the filter in Part B forwards only grocery emails. If you changed anything, click <b>Save Changes</b> at the bottom of the page.</li>
+            </ol>
+          </div>
+
+          <div class="gpart">
+            <div class="gph"><span class="gnum">B</span><div><b>Forward only grocery emails</b><div class="note">A filter sends new emails from your stores to Krisper automatically.</div></div></div>
+            <ol class="steps">
+              <li>Tick the stores you order from:
+                <div class="stores" id="stores"></div>
+              </li>
+              <li>Copy this search:
+                <div class="addr"><code id="gmailFilter"></code><button class="btn ghost sm" type="button" data-copy="gmailFilter">Copy</button></div>
+              </li>
+              <li>Go to your Gmail inbox, paste it into the <b>search bar</b> at the top, and press <b>Enter</b>. You should see your past grocery emails. That means the search works.</li>
+              <li>At the right end of the search bar, click the <b>sliders icon</b> (Show search options). A box opens with the search already filled in.</li>
+              <li>Click <b>Create filter</b> at the bottom right of that box.</li>
+              <li>Tick <b>Forward it to</b>, pick your Krisper address from the dropdown, then click <b>Create filter</b>. <span class="muted">If the dropdown says "choose an address", Part A isn't verified yet.</span></li>
+            </ol>
+          </div>
+
+          <div class="gpart">
+            <div class="gph"><span class="gnum">C</span><div><b>Test it now</b><div class="note">Filters only work on new emails, so send one old receipt by hand.</div></div></div>
+            <ol class="steps">
+              <li>Open a recent grocery receipt or order email in Gmail and click <b>Forward</b>.</li>
+              <li>Paste your Krisper address in the <b>To</b> line and click <b>Send</b>.</li>
+              <li>Watch the box at the bottom of this page. It turns green when the receipt arrives, usually within a minute.</li>
+            </ol>
+          </div>
+
+          <details class="gtrouble"><summary>Something not working?</summary>
+            <ul>
+              <li><b>No code after 2 minutes:</b> check you pasted the full Krisper address (it's long, so use the Copy button), then click Add a forwarding address again.</li>
+              <li><b>No "Forwarding" tab:</b> work or school Gmail accounts sometimes turn forwarding off. Use "Forward by hand" or paste receipts instead.</li>
+              <li><b>Gmail shows a banner saying forwarding is on:</b> that's normal for a week after you add a filter that forwards.</li>
+              <li><b>Want to stop:</b> Gmail → Settings → <b>Filters and Blocked Addresses</b> → delete the Krisper filter.</li>
+            </ul>
+          </details>
         </div>
 
         <div data-pane="outlook" class="hide">
@@ -698,8 +744,8 @@ footer a{color:var(--muted-fg)}
     var st = S.st, gv = st.inbox.gmailVerification, gs = el('gmailStatus');
     if (gv && (gv.code || gv.link)) {
       gs.className = 'status good';
-      gs.innerHTML = '<div><div class="small">Gmail confirmation code</div>' +
-        (gv.code ? '<div class="code">' + esc(gv.code) + '</div>' : '') +
+      gs.innerHTML = '<div><div class="small"><b>Got it.</b> Your Gmail confirmation code:</div>' +
+        (gv.code ? '<div class="row" style="align-items:center;gap:10px"><span class="code" id="gvCode">' + esc(gv.code) + '</span><button class="btn ghost sm" type="button" data-copy="gvCode">Copy</button></div><div class="small">Paste it into Gmail and click Verify.</div>' : '') +
         (gv.link ? '<a class="small" href="' + esc(gv.link) + '" target="_blank" rel="noopener">Or confirm with this link</a>' : '') + '</div>';
     }
     var fs = el('firstStatus');
