@@ -116,8 +116,9 @@ ol.steps li::marker{color:var(--muted-fg);font-weight:700}
 .code{font-size:26px;font-weight:700;letter-spacing:.08em;font-family:ui-monospace,Menlo,monospace}
 
 .stores{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
-.stores label{display:inline-flex;gap:6px;align-items:center;border:1px solid var(--input);border-radius:99px;padding:4px 11px;font-size:13.5px;cursor:pointer;background:#fff}
+.stores label{display:inline-flex;gap:6px;align-items:center;border:1px solid var(--input);border-radius:16px;padding:4px 11px;font-size:13.5px;cursor:pointer;background:#fff}
 .stores input{accent-color:var(--primary)}
+.sgroup{margin-top:10px}.sglabel{font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--muted-foreground,#6b6b6b)}
 /* dashboard */
 .top{display:flex;justify-content:space-between;align-items:flex-end;gap:14px;flex-wrap:wrap}
 .acts{display:flex;gap:8px;flex-wrap:wrap}
@@ -388,6 +389,13 @@ footer a{color:var(--muted-fg)}
       </section>
 
       <section class="card">
+        <h3>Which stores do you order groceries from?</h3>
+        <p class="muted small">Tick every store that emails you order confirmations or receipts. Your forwarding setup below updates to match.</p>
+        <div id="stores"></div>
+        <p class="note" style="margin-top:8px">This also forwards each store's sale emails and non-food orders (like an Amazon book). That's fine: Krisper only adds produce from real orders, ignores everything else, and never saves the email itself. Some stores (often Costco, Publix, Aldi and Sprouts) deliver through Instacart, so those emails come from Instacart. Keep Instacart ticked if you use any of them.</p>
+      </section>
+
+      <section class="card">
         <h3>Set up automatic forwarding</h3>
         <div class="tabs" role="tablist">
           <button class="tab" role="tab" aria-selected="true" data-tab="gmail">Gmail</button>
@@ -417,11 +425,7 @@ footer a{color:var(--muted-fg)}
           <div class="gpart">
             <div class="gph"><span class="gnum">B</span><div><b>Forward only grocery emails</b><div class="note">A filter sends new emails from your stores to Krisper automatically.</div></div></div>
             <ol class="steps">
-              <li>Tick the stores you order from:
-                <div class="stores" id="stores"></div>
-                <div class="note">This also forwards the store's sale emails and non-food orders (like an Amazon book). That's fine: Krisper only adds produce from real orders, ignores everything else, and never saves the email itself.</div>
-              </li>
-              <li>Copy this search:
+              <li>Copy this search. It's built from the stores you ticked above:
                 <div class="addr"><code id="gmailFilter"></code><button class="btn ghost sm" type="button" data-copy="gmailFilter">Copy</button></div>
               </li>
               <li>Go to your Gmail inbox, paste it into the <b>search bar</b> at the top, and press <b>Enter</b>. You should see your past grocery emails. That means the search works.</li>
@@ -453,7 +457,7 @@ footer a{color:var(--muted-fg)}
         <div data-pane="outlook" class="hide">
           <ol class="steps">
             <li>In Outlook on the web, open <b>Settings → Mail → Rules → Add new rule</b>.</li>
-            <li>Name it "Krisper". Condition: <b>From</b> → add <span class="kbd">instacart.com</span>, <span class="kbd">walmart.com</span>, <span class="kbd">kroger.com</span>, <span class="kbd">smithsfoodanddrug.com</span>, <span class="kbd">harmonsgrocery.com</span> (only the stores you use).</li>
+            <li>Name it "Krisper". Condition: <b>From</b> → add each of these (from the stores you ticked above): <span id="olDomains"></span></li>
             <li>Action: <b>Forward to</b> → paste your Krisper address. Save.</li>
           </ol>
           <p class="note" style="margin-top:10px">Some work and school accounts block automatic forwarding. If nothing shows up within a day, use "Forward by hand" or paste a receipt.</p>
@@ -462,7 +466,7 @@ footer a{color:var(--muted-fg)}
         <div data-pane="icloud" class="hide">
           <ol class="steps">
             <li>On a computer, open <a href="https://www.icloud.com/mail" target="_blank" rel="noopener">iCloud Mail</a>, click the gear icon, then <b>Rules → Add a rule</b>.</li>
-            <li>If a message <b>is from</b> <span class="kbd">instacart.com</span> → <b>Forward to</b> your Krisper address. Repeat for each store you order from.</li>
+            <li>If a message <b>is from</b> <span class="kbd">instacart.com</span> → <b>Forward to</b> your Krisper address. Repeat for each of these (from the stores you ticked above): <span id="icDomains"></span></li>
           </ol>
         </div>
 
@@ -623,13 +627,62 @@ footer a{color:var(--muted-fg)}
   'use strict';
   var API = window.CRISPER_API || '';
   var SHOP = 'https://simplykrisp.com/?utm_source=produce-guide&utm_medium=referral&utm_campaign=krisper&utm_content=';
-  // Amazon is off by default: its filter forwards every Amazon order, not just
-  // groceries. We'd discard the non-produce lines, but testers should opt in.
-  var STORES = [['Instacart', 'instacart.com', 1], ['Walmart', 'walmart.com', 1], ["Smith's / Kroger", 'smithsfoodanddrug.com OR kroger.com', 1],
-    ['Harmons', 'harmonsgrocery.com', 1], ['Target', 'target.com', 0], ['Costco', 'costco.com', 0], ['Amazon Fresh / Whole Foods', 'amazon.com', 0]];
+  // Store picker. [label, sender domains, ticked by default]. Gmail's from:
+  // search matches subdomains too (orders@email.kroger.com). Amazon, Target
+  // and Costco are off by default since most of their email isn't groceries.
+  var STORE_GROUPS = [
+    ['Most common', [
+      ['Instacart', 'instacart.com', 1],
+      ['Walmart', 'walmart.com', 1],
+      ["Kroger family (Kroger, Smith's, King Soopers, Fred Meyer, Ralphs, Fry's, QFC, Harris Teeter)", 'kroger.com smithsfoodanddrug.com kingsoopers.com fredmeyer.com ralphs.com frysfood.com qfc.com harristeeter.com', 1],
+      ['Amazon Fresh / Whole Foods', 'amazon.com wholefoodsmarket.com', 0],
+      ['Target', 'target.com', 0],
+      ['Costco', 'costco.com', 0],
+      ["Sam's Club", 'samsclub.com', 0]]],
+    ['Supermarkets', [
+      ['Albertsons family (Safeway, Vons, Jewel-Osco, Acme, Shaw\'s, Randalls, Tom Thumb)', 'albertsons.com safeway.com vons.com jewelosco.com acmemarkets.com shaws.com randalls.com tomthumb.com pavilions.com starmarket.com', 0],
+      ['Publix', 'publix.com', 0],
+      ['H-E-B', 'heb.com', 0],
+      ['Meijer', 'meijer.com', 0],
+      ['Hy-Vee', 'hy-vee.com', 0],
+      ['Wegmans', 'wegmans.com', 0],
+      ['Stop & Shop, Giant, Food Lion, Hannaford', 'stopandshop.com giantfood.com giantfoodstores.com foodlion.com hannaford.com', 0],
+      ['Aldi', 'aldi.us', 0],
+      ['Sprouts', 'sprouts.com', 0],
+      ['Harmons', 'harmonsgrocery.com', 1]]],
+    ['Delivery apps and online grocers', [
+      ['Shipt', 'shipt.com', 0],
+      ['DoorDash', 'doordash.com', 0],
+      ['Uber Eats', 'uber.com', 0],
+      ['Gopuff', 'gopuff.com', 0],
+      ['Thrive Market', 'thrivemarket.com', 0],
+      ['Misfits Market / Imperfect Foods', 'misfitsmarket.com imperfectfoods.com', 0],
+      ['FreshDirect', 'freshdirect.com', 0],
+      ['Hungryroot', 'hungryroot.com', 0]]]];
+  function storeDomains() {
+    var out = [];
+    Array.prototype.slice.call(document.querySelectorAll('#stores input:checked')).forEach(function (c) {
+      c.value.split(' ').forEach(function (d) { if (d && out.indexOf(d) < 0) out.push(d); });
+    });
+    return out;
+  }
   function filterString() {
-    var on = Array.prototype.slice.call(document.querySelectorAll('#stores input:checked')).map(function (c) { return c.value; });
-    return on.length ? 'from:(' + on.join(' OR ') + ')' : 'Pick at least one store';
+    var on = storeDomains();
+    return on.length ? 'from:(' + on.join(' OR ') + ')' : 'Pick at least one store above';
+  }
+  function renderStoreOutputs() {
+    var d = storeDomains();
+    el('gmailFilter').textContent = filterString();
+    var kb = d.length ? d.map(function (x) { return '<span class="kbd">' + esc(x) + '</span>'; }).join(' ') : '<span class="muted">tick at least one store above</span>';
+    el('olDomains').innerHTML = kb; el('icDomains').innerHTML = kb;
+  }
+  function renderStores() {
+    el('stores').innerHTML = STORE_GROUPS.map(function (g) {
+      return '<div class="sgroup"><div class="sglabel">' + esc(g[0]) + '</div><div class="stores">' + g[1].map(function (x) {
+        return '<label><input type="checkbox" value="' + esc(x[1]) + '"' + (x[2] ? ' checked' : '') + '>' + esc(x[0]) + '</label>';
+      }).join('') + '</div></div>';
+    }).join('');
+    el('stores').addEventListener('change', renderStoreOutputs);
   }
   var KEY_LS = 'crisperKey', SKIP_LS = 'crisperSetupSkipped';
   var S = { impactRange: (function () { try { return localStorage.getItem('krisperRange') || '30'; } catch (e) { return '30'; } })(), key: null, st: null, catalog: null, byName: {}, filterDay: null, sel: {}, pastePreview: null, poll: null };
@@ -734,10 +787,9 @@ footer a{color:var(--muted-fg)}
     if (!addr) return;
     el('inboxAddr').textContent = addr;
     if (!el('stores').children.length) {
-      el('stores').innerHTML = STORES.map(function (x) { return '<label><input type="checkbox" value="' + esc(x[1]) + '"' + (x[2] ? ' checked' : '') + '>' + esc(x[0]) + '</label>'; }).join('');
-      el('stores').addEventListener('change', function () { el('gmailFilter').textContent = filterString(); });
+      renderStores();
     }
-    el('gmailFilter').textContent = filterString();
+    renderStoreOutputs();
     renderSetupStatus();
     startPoll();
   }
