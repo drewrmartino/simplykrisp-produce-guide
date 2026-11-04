@@ -1,7 +1,7 @@
 {
   "meta": {
-    "updated": "2026-11-02",
-    "method": "Two matched containers of the same produce from the same purchase, one in a crisper drawer with a Simply Krisp case on the wall and one in a drawer without, same refrigerator, door opened on a normal household schedule. A Wyze Cam v4 photographs both containers morning and evening under a timed white light with a thermometer/hygrometer in frame. We publish every run, including the ones that show little or no difference. A home test like this shows what happened in one fridge; it does not establish a universal shelf-life number."
+    "updated": "2026-11-04",
+    "method": "Two matched containers of the same produce from the same purchase, one in a crisper drawer with a Simply Krisp case on the wall and one in a drawer without, same refrigerator, door opened on a normal household schedule. A Wyze camera photographs both containers once a day, at the same time, with its spotlight switched on by a schedule and a thermometer/hygrometer in frame. We publish every run, including the ones that show little or no difference. A home test like this shows what happened in one fridge; it does not establish a universal shelf-life number."
   },
   "runs": [
     {
@@ -11,7 +11,7 @@
       "started": "2026-11-02",
       "produce": "Sachet media (potassium permanganate on mineral carrier)",
       "question": "The absorbent changes from purple to brown as it is used up. We are opening sachets from normal household drawers at day 30, 60 and 90 to see how much capacity is left. The result sets our swap schedule and refill plan.",
-      "result": "Day 30 photos due early December 2026.",
+      "result": "Day 30 photos due around November 16, 2026.",
       "images": []
     },
     {
