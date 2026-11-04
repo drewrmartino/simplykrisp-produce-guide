@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Krisper pilot scorecard | SimplyKrisp</title>
+<meta name="robots" content="noindex" />
+<link rel="icon" type="image/png" href="/favicon.png" />
+<link href="https://fonts.googleapis.com/css2?family=Questrial&family=DM+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+<style>
+:root{--bg:hsl(48 36% 97%);--fg:hsl(96 14% 14%);--muted:hsl(96 5% 40%);--card:#fff;--border:hsl(48 10% 87%);--primary:hsl(96 14% 28%);--warn:hsl(16 70% 50%);--ok:hsl(140 40% 34%)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--fg);font-family:"DM Sans",system-ui,sans-serif;font-size:15px;line-height:1.45;padding:24px 18px 60px}
+.wrap{max-width:1100px;margin:0 auto}
+h1,h2{font-family:Questrial,"DM Sans",sans-serif;font-weight:400}
+h1{font-size:30px;margin-bottom:4px}
+h2{font-size:19px;margin:28px 0 10px}
+.muted{color:var(--muted)}
+.kpis{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-top:18px}
+.kpi{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px}
+.kpi .v{font-family:Questrial,sans-serif;font-size:28px}
+.kpi .l{font-size:12.5px;color:var(--muted)}
+.kpi .t{font-size:12px;margin-top:4px}
+.good{color:var(--ok)}.bad{color:var(--warn)}
+.tw{overflow-x:auto;background:var(--card);border:1px solid var(--border);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:13.5px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--border);white-space:nowrap}
+th{font-weight:600;color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.05em}
+td.wrap{white-space:normal;min-width:260px}
+form{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap}
+input{padding:9px 12px;border:1px solid var(--border);border-radius:8px;font:inherit;min-width:260px}
+button{padding:9px 14px;border-radius:8px;border:0;background:var(--primary);color:#fff;font:inherit;font-weight:600;cursor:pointer}
+.err{color:var(--warn);margin-top:10px;font-weight:600}
+pre{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px;overflow:auto;font-size:12.5px;max-height:360px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Krisper pilot scorecard</h1>
+  <p class="muted">Does setup get finished, does forwarding deliver orders, and do people keep using it?</p>
+  <form id="f"><input id="k" type="password" placeholder="Admin key" autocomplete="current-password" /><button>Load</button><label class="muted" style="align-self:center"><input type="checkbox" id="pv" style="min-width:0"> Include reminder dry-run</label></form>
+  <div class="err" id="err"></div>
+  <div id="out"></div>
+</div>
+<script>
+(function () {
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  function pct(a, b) { return b ? Math.round((a / b) * 100) : 0; }
+  function d(x) { return x ? new Date(x).toLocaleDateString(undefined, { month: 'short', day: 'numeric' }) : ''; }
+  function table(rows, cols) {
+    if (!rows || !rows.length) return '<p class="muted">None yet.</p>';
+    cols = cols || Object.keys(rows[0]);
+    return '<div class="tw"><table><thead><tr>' + cols.map(function (c) { return '<th>' + esc(c.replace(/_/g, ' ')) + '</th>'; }).join('') + '</tr></thead><tbody>' +
+      rows.map(function (r) { return '<tr>' + cols.map(function (c) { var v = r[c]; if (/_at$|week$/.test(c)) v = d(v); return '<td' + (c === 'line' ? ' class="wrap"' : '') + '>' + esc(v === true ? 'yes' : v === false ? '' : v) + '</td>'; }).join('') + '</tr>'; }).join('') + '</tbody></table></div>';
+  }
+  function kpi(v, l, target, ok) {
+    return '<div class="kpi"><div class="v">' + v + '</div><div class="l">' + l + '</div>' + (target ? '<div class="t ' + (ok ? 'good' : 'bad') + '">Target ' + target + '</div>' : '') + '</div>';
+  }
+  function load(key) {
+    document.getElementById('err').textContent = '';
+    fetch('/api/crisper/admin?key=' + encodeURIComponent(key) + (document.getElementById('pv').checked ? '&preview=1' : ''))
+      .then(function (r) { return r.json().then(function (j) { if (!r.ok) throw new Error(j.error || 'Failed'); return j; }); })
+      .then(function (j) {
+        try { sessionStorage.setItem('crisperAdmin', key); } catch (e) {}
+        var f = j.funnel, s = f.signups;
+        var used = 0, tossed = 0; j.outcomes.forEach(function (o) { if (o.state === 'used') used = o.n; if (o.state === 'tossed') tossed = o.n; });
+        var r2s = 0, r2a = 0; j.retention.forEach(function (r) { r2s += r.signups; r2a += r.active_week2; });
+        var html = '<p class="muted" style="margin-top:8px">Generated ' + new Date(j.generatedAt).toLocaleString() + '</p><div class="kpis">' +
+          kpi(s, 'Sign-ups', '20–30', s >= 20) +
+          kpi(pct(f.email_connected, s) + '%', 'Forwarding connected (' + f.email_connected + ')', '≥ 50%', pct(f.email_connected, s) >= 50) +
+          kpi(pct(f.tracked_3plus, s) + '%', 'Tracked 3+ items (' + f.tracked_3plus + ')', '≥ 60%', pct(f.tracked_3plus, s) >= 60) +
+          kpi(pct(r2a, r2s) + '%', 'Active in week 2', '≥ 40%', pct(r2a, r2s) >= 40) +
+          kpi(f.active_7d, 'Active last 7 days') +
+          kpi(pct(used, used + tossed) + '%', 'Marked used vs tossed (' + (used + tossed) + ')') +
+          kpi(f.krisp_owners, 'Krisp owners') +
+          kpi(pct(f.reminders_off, s) + '%', 'Turned reminders off', '≤ 20%', pct(f.reminders_off, s) <= 20) +
+          '</div>';
+        html += '<h2>Funnel</h2>' + table([f]);
+        html += '<h2>Weekly cohorts</h2>' + table(j.retention);
+        html += '<h2>Receipts by store</h2>' + table(j.receipts);
+        html += '<h2>Lines the parser didn\u2019t recognise</h2><p class="muted" style="margin-bottom:8px">Add aliases for real produce here to raise match rates.</p>' + table(j.unknownLines);
+        html += '<h2>Top produce</h2>' + table(j.topProduce);
+        html += '<h2>Item sources</h2>' + table(j.sources);
+        html += '<h2>Testers</h2>' + table(j.users);
+        if (j.reminderPreview) html += '<h2>Reminder dry-run</h2><pre>' + esc(JSON.stringify(j.reminderPreview, null, 2)) + '</pre>';
+        document.getElementById('out').innerHTML = html;
+      })
+      .catch(function (e) { document.getElementById('err').textContent = e.message; });
+  }
+  document.getElementById('f').addEventListener('submit', function (e) { e.preventDefault(); load(document.getElementById('k').value); });
+  var saved = null; try { saved = sessionStorage.getItem('crisperAdmin'); } catch (e) {}
+  if (saved) { document.getElementById('k').value = saved; load(saved); }
+})();
+</script>
+</body>
+</html>
