@@ -1,0 +1,63 @@
+// Local dev server for the Crisper Tracker — no Vercel, no Neon needed.
+//   node dev/server.mjs            -> http://localhost:3000/crisper
+// Uses an in-memory PGlite Postgres (or CRISPER_PGLITE_DIR to persist) and a
+// Vercel-style req/res shim so the real api/crisper/*.js handlers run as-is.
+
+import http from 'node:http';
+import { readFile, stat } from 'node:fs/promises';
+import path from 'node:path';
+import { fileURLToPath, pathToFileURL } from 'node:url';
+import { PGlite } from '@electric-sql/pglite';
+import { setQueryFn } from '../api/_crisper/db.js';
+
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const db = new PGlite(process.env.CRISPER_PGLITE_DIR || undefined);
+setQueryFn(async (text, params) => (await db.query(text, params)).rows);
+process.env.CRISPER_INBOUND_ADDRESS ||= 'devhash@inbound.postmarkapp.com';
+process.env.CRISPER_PUBLIC_ORIGIN ||= `http://localhost:${process.env.PORT || 3000}`;
+process.env.CRISPER_ADMIN_KEY ||= 'dev-admin';
+
+const TYPES = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.json': 'application/json', '.css': 'text/css', '.png': 'image/png', '.svg': 'image/svg+xml' };
+
+function shim(res) {
+  res.status = (c) => { res.statusCode = c; return res; };
+  res.json = (o) => { res.setHeader('Content-Type', 'application/json'); res.end(JSON.stringify(o)); return res; };
+  return res;
+}
+
+export function createServer() {
+  return http.createServer(async (req, res) => {
+    shim(res);
+    const url = new URL(req.url, 'http://x');
+    try {
+      if (url.pathname.startsWith('/api/')) {
+        const file = path.join(root, url.pathname.replace(/\/$/, '') + '.js');
+        const mod = await import(pathToFileURL(file).href);
+        let body = '';
+        for await (const chunk of req) body += chunk;
+        req.query = Object.fromEntries(url.searchParams);
+        req.body = body ? (() => { try { return JSON.parse(body); } catch { return body; } })() : {};
+        return await mod.default(req, res);
+      }
+      let p = url.pathname;
+      if (p === '/crisper' || p === '/crisper/') p = '/crisper/index.html';
+      if (p === '/crisper/admin') p = '/crisper/admin.html';
+      if (p === '/') p = '/index.html';
+      const file = path.join(root, p);
+      if (!file.startsWith(root)) throw new Error('bad path');
+      const s = await stat(file).catch(() => null);
+      if (!s || s.isDirectory()) { res.statusCode = 404; return res.end('not found'); }
+      res.setHeader('Content-Type', TYPES[path.extname(file)] || 'application/octet-stream');
+      res.end(await readFile(file));
+    } catch (e) {
+      console.error(e);
+      res.statusCode = 500;
+      res.end(String(e));
+    }
+  });
+}
+
+if (import.meta.url === pathToFileURL(process.argv[1]).href) {
+  const port = Number(process.env.PORT || 3000);
+  createServer().listen(port, () => console.log(`crisper dev server on http://localhost:${port}/crisper`));
+}

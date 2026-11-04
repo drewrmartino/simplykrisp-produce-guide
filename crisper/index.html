@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>My Crisper | SimplyKrisp</title>
+<meta name="description" content="Forward your grocery order emails and see what to eat first. Shelf-life ranges from the SimplyKrisp Produce Storage Guide." />
+<meta name="robots" content="noindex" />
+<link rel="icon" type="image/png" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Questrial&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<script>if(window.self!==window.top){document.documentElement.className+=' embedded';}</script>
+<style>
+:root{
+  --bg:hsl(48 36% 97%);--fg:hsl(96 14% 14%);--muted-fg:hsl(96 5% 40%);
+  --card:hsl(48 28% 99%);--card-border:hsl(48 12% 89%);--border:hsl(48 10% 87%);
+  --primary:hsl(96 14% 28%);--primary-fg:hsl(48 36% 97%);--accent:hsl(52 80% 51%);
+  --muted:hsl(48 10% 92%);--input:hsl(48 8% 78%);
+  --warn:hsl(16 70% 50%);--warn-bg:hsl(16 80% 95%);--soon:hsl(38 85% 45%);--soon-bg:hsl(42 90% 93%);
+  --ok:hsl(140 40% 34%);--ok-bg:hsl(140 35% 93%);--check:hsl(0 0% 45%);
+  --radius:.6rem;
+  --shadow-sm:0 2px 4px 0 hsl(40 20% 20% / .06),0 1px 2px -1px hsl(40 20% 20% / .04);
+  --shadow-md:0 10px 30px -6px hsl(40 20% 20% / .22);
+  --sans:"Questrial","DM Sans",system-ui,sans-serif;--body:"DM Sans",system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;min-height:100vh}
+h1,h2,h3{font-family:var(--sans);letter-spacing:-.01em;font-weight:400}
+a{color:inherit}
+button,input,select,textarea{font:inherit;color:inherit}
+.wrap{max-width:860px;margin:0 auto;padding:0 18px}
+.hide{display:none!important}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+header{border-bottom:1px solid var(--border);background:var(--bg);position:sticky;top:0;z-index:20}
+html.embedded header{display:none}
+.hdr{display:flex;align-items:center;justify-content:space-between;gap:12px;height:60px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.brand .mark{width:32px;height:32px;border-radius:50%;background:var(--muted);display:grid;place-items:center}
+.brand .name{font-family:var(--sans);font-size:15px;font-weight:700;line-height:1.1}
+.brand .sub{font-size:9.5px;letter-spacing:.14em;color:var(--muted-fg);text-transform:uppercase}
+nav{display:flex;gap:18px;font-size:14px;align-items:center}
+nav a,nav button{text-decoration:none;color:var(--muted-fg);background:none;border:0;cursor:pointer}
+nav a:hover,nav button:hover{color:var(--fg)}
+
+main{padding:36px 0 80px}
+.eyebrow{font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted-fg);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--accent)}
+.pilot{font-size:10.5px;letter-spacing:.08em;border:1px solid var(--border);border-radius:99px;padding:2px 8px}
+h1{font-size:clamp(28px,5vw,40px);line-height:1.12;margin-bottom:12px}
+h2{font-size:22px;line-height:1.2;margin-bottom:6px}
+h3{font-size:17px;margin-bottom:4px}
+.lede{color:var(--muted-fg);font-size:17px;max-width:600px}
+.muted{color:var(--muted-fg)}
+.small{font-size:13.5px}
+.card{background:var(--card);border:1px solid var(--card-border);border-radius:var(--radius);box-shadow:var(--shadow-sm);padding:18px}
+.stack>*+*{margin-top:14px}
+section{margin-top:30px}
+.sechd{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:12px;flex-wrap:wrap}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:42px;padding:9px 16px;border-radius:var(--radius);border:1px solid var(--primary);background:var(--primary);color:var(--primary-fg);font-weight:600;font-size:15px;cursor:pointer;text-decoration:none;white-space:nowrap}
+.btn:hover{filter:brightness(1.08)}
+.btn:disabled{opacity:.55;cursor:default}
+.btn.ghost{background:transparent;color:var(--fg);border-color:var(--input)}
+.btn.ghost:hover{background:var(--muted);filter:none}
+.btn.sm{min-height:34px;padding:5px 11px;font-size:13.5px}
+.btn.danger{background:var(--warn);border-color:var(--warn)}
+.link{background:none;border:0;padding:0;color:var(--primary);text-decoration:underline;text-underline-offset:2px;cursor:pointer;font-weight:600}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+
+label.f{display:block;font-size:14px;font-weight:600;margin-bottom:5px}
+.inp{width:100%;min-height:44px;padding:9px 12px;border:1px solid var(--input);border-radius:var(--radius);background:#fff;font-size:16px}
+.inp:focus,textarea:focus{outline:2px solid var(--primary);outline-offset:1px}
+textarea.inp{min-height:150px;resize:vertical;font-size:14px;line-height:1.45}
+.check{display:flex;gap:10px;align-items:flex-start;font-size:15px;cursor:pointer}
+.check input{width:18px;height:18px;margin-top:3px;accent-color:var(--primary);flex:0 0 auto}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.err{color:var(--warn);font-size:14px;font-weight:600}
+.note{font-size:13px;color:var(--muted-fg)}
+
+/* landing */
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:34px;align-items:start}
+.how{list-style:none;margin-top:22px;display:grid;gap:12px}
+.how li{display:flex;gap:12px;align-items:flex-start}
+.how .n{width:26px;height:26px;border-radius:50%;background:var(--primary);color:var(--primary-fg);display:grid;place-items:center;font-size:13px;font-weight:700;flex:0 0 auto}
+.preview{margin-top:22px;display:grid;gap:8px}
+.pv{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--card-border);border-radius:var(--radius);padding:8px 12px;font-size:14px}
+.pv img{width:26px;height:26px}
+.pv b{flex:1}
+
+/* setup */
+.addr{display:flex;gap:8px;align-items:stretch;margin:8px 0}
+.addr code{flex:1;min-width:0;overflow-wrap:anywhere;background:#fff;border:1px dashed var(--primary);border-radius:var(--radius);padding:10px 12px;font-size:15px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.tabs{display:flex;gap:6px;border-bottom:1px solid var(--border);margin:6px 0 14px;overflow-x:auto}
+.tab{background:none;border:0;border-bottom:2px solid transparent;padding:9px 12px;cursor:pointer;color:var(--muted-fg);font-weight:600;white-space:nowrap}
+.tab[aria-selected="true"]{color:var(--fg);border-bottom-color:var(--primary)}
+ol.steps{padding-left:22px;display:grid;gap:9px}
+ol.steps li::marker{color:var(--muted-fg);font-weight:700}
+.kbd{font-family:ui-monospace,Menlo,monospace;font-size:13px;background:var(--muted);border-radius:4px;padding:1px 5px;overflow-wrap:anywhere}
+.status{display:flex;gap:12px;align-items:center;padding:14px;border-radius:var(--radius);background:var(--muted)}
+.status.good{background:var(--ok-bg)}
+.spin{width:16px;height:16px;border-radius:50%;border:2px solid var(--input);border-top-color:var(--primary);animation:sp 1s linear infinite;flex:0 0 auto}
+@keyframes sp{to{transform:rotate(360deg)}}
+.code{font-size:26px;font-weight:700;letter-spacing:.08em;font-family:ui-monospace,Menlo,monospace}
+
+.stores{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.stores label{display:inline-flex;gap:6px;align-items:center;border:1px solid var(--input);border-radius:99px;padding:4px 11px;font-size:13.5px;cursor:pointer;background:#fff}
+.stores input{accent-color:var(--primary)}
+/* dashboard */
+.top{display:flex;justify-content:space-between;align-items:flex-end;gap:14px;flex-wrap:wrap}
+.acts{display:flex;gap:8px;flex-wrap:wrap}
+.strip{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-top:20px}
+.day{background:var(--card);border:1px solid var(--card-border);border-radius:var(--radius);padding:8px 4px 10px;text-align:center;min-height:96px;cursor:pointer}
+.day[aria-pressed="true"]{outline:2px solid var(--primary)}
+.day .dn{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted-fg)}
+.day .dd{font-family:var(--sans);font-size:19px;line-height:1.2}
+.day .em{display:flex;flex-wrap:wrap;justify-content:center;gap:1px;margin-top:5px;min-height:22px}
+.day .em img{width:20px;height:20px}
+.day .ct{font-size:11.5px;color:var(--muted-fg);margin-top:2px}
+.day.d0{background:var(--warn-bg);border-color:hsl(16 60% 85%)}
+.day.d1,.day.d2{background:var(--soon-bg);border-color:hsl(42 60% 82%)}
+.day.empty .em{opacity:.4}
+
+.banner{display:flex;gap:12px;align-items:flex-start;border-radius:var(--radius);padding:14px 16px;border:1px solid hsl(52 60% 70%);background:hsl(52 90% 92%)}
+.banner .ic{font-size:20px;line-height:1}
+.banner b{font-weight:700}
+
+.grp{margin-top:26px}
+.grp h3{display:flex;align-items:center;gap:8px;font-size:15px;font-family:var(--body);font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+.grp h3 .pill{font-size:12px;border-radius:99px;padding:1px 8px;background:var(--muted);color:var(--muted-fg);letter-spacing:0}
+.grp .gsub{font-size:13.5px;color:var(--muted-fg);margin-bottom:10px}
+.items{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
+.it{background:var(--card);border:1px solid var(--card-border);border-left:4px solid var(--ok);border-radius:var(--radius);padding:12px 12px 10px;box-shadow:var(--shadow-sm);display:flex;flex-direction:column;gap:8px;position:relative}
+.it.s-check{border-left-color:var(--check)}
+.it.s-today{border-left-color:var(--warn)}
+.it.s-soon{border-left-color:var(--soon)}
+.it.s-week{border-left-color:hsl(80 40% 45%)}
+.it.s-pending{border-left-color:var(--input);border-style:dashed;border-left-style:solid}
+.ith{display:flex;gap:10px;align-items:flex-start}
+.ith img{width:34px;height:34px;flex:0 0 auto}
+.itn{font-weight:700;line-height:1.25}
+.itn .q{font-weight:500;color:var(--muted-fg);font-size:13.5px}
+.itl{font-size:14px}
+.s-today .itl,.s-check .itl{color:var(--warn);font-weight:600}
+.s-soon .itl{color:var(--soon);font-weight:600}
+.bar{height:6px;border-radius:99px;background:var(--muted);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--ok);border-radius:99px}
+.s-today .bar i,.s-check .bar i{background:var(--warn)}
+.s-soon .bar i{background:var(--soon)}
+.tags{display:flex;gap:6px;flex-wrap:wrap}
+.tag{font-size:12px;border-radius:99px;padding:2px 8px;background:var(--muted);color:var(--muted-fg)}
+.tag.k{background:hsl(52 90% 88%);color:hsl(52 60% 22%)}
+.tip{font-size:13.5px;color:var(--muted-fg);border-top:1px dashed var(--border);padding-top:7px}
+.itf{display:flex;gap:6px;align-items:center;margin-top:auto}
+.itf .btn{flex:1}
+.more{width:34px;flex:0 0 34px!important;padding:0}
+.menu{position:absolute;right:10px;bottom:48px;background:#fff;border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow-md);z-index:5;min-width:200px;padding:5px}
+.menu button{display:block;width:100%;text-align:left;background:none;border:0;padding:9px 11px;border-radius:6px;cursor:pointer;font-size:14px}
+.menu button:hover{background:var(--muted)}
+.empty-state{text-align:center;padding:34px 18px}
+.empty-state .row{justify-content:center;margin-top:14px}
+
+.kcard{display:flex;gap:16px;align-items:center}
+.kring{width:62px;height:62px;flex:0 0 auto}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.stat{background:var(--card);border:1px solid var(--card-border);border-radius:var(--radius);padding:14px;text-align:center}
+.stat .v{font-family:var(--sans);font-size:28px;line-height:1.1}
+.stat .l{font-size:12.5px;color:var(--muted-fg)}
+.rc{border-top:1px solid var(--border);padding:12px 0}
+.rc:first-child{border-top:0}
+.rc .rh{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.rc details{margin-top:6px;font-size:13.5px;color:var(--muted-fg)}
+.rc summary{cursor:pointer}
+.done{display:flex;gap:6px;flex-wrap:wrap}
+.done span{display:inline-flex;align-items:center;gap:5px;font-size:13px;border-radius:99px;padding:3px 9px 3px 4px;background:var(--muted)}
+.done img{width:18px;height:18px}
+.done .t{background:var(--warn-bg)}
+
+/* sheets */
+.scrim{position:fixed;inset:0;background:hsl(96 14% 10% / .45);z-index:40;display:flex;align-items:flex-end;justify-content:center}
+.sheet{background:var(--bg);width:100%;max-width:620px;max-height:92vh;overflow:auto;border-radius:16px 16px 0 0;padding:20px 18px 24px;box-shadow:var(--shadow-md)}
+@media (min-width:700px){.scrim{align-items:center}.sheet{border-radius:16px}}
+.sheet .sh{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.x{background:none;border:0;font-size:26px;line-height:1;cursor:pointer;color:var(--muted-fg);width:36px;height:36px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;max-height:260px;overflow:auto;padding:2px}
+.chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--input);background:#fff;border-radius:99px;padding:5px 11px 5px 6px;font-size:14px;cursor:pointer}
+.chip img{width:20px;height:20px}
+.chip[aria-pressed="true"]{background:var(--primary);color:var(--primary-fg);border-color:var(--primary)}
+.sel{display:grid;gap:6px;margin-top:12px}
+.selr{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--card-border);border-radius:var(--radius);padding:6px 10px}
+.selr img{width:24px;height:24px}
+.selr b{flex:1;font-weight:600}
+.stp{display:flex;align-items:center;border:1px solid var(--input);border-radius:8px;overflow:hidden}
+.stp button{width:32px;height:32px;border:0;background:#fff;cursor:pointer;font-size:18px}
+.stp span{min-width:26px;text-align:center;font-weight:600}
+.pl{list-style:none;display:grid;gap:6px}
+.pl li{display:flex;align-items:center;gap:8px;font-size:14.5px}
+.pl img{width:22px;height:22px}
+
+.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:var(--fg);color:var(--bg);border-radius:99px;padding:10px 12px 10px 18px;display:flex;gap:14px;align-items:center;z-index:60;box-shadow:var(--shadow-md);font-size:14.5px;max-width:calc(100% - 24px)}
+.toast button{background:none;border:0;color:var(--accent);font-weight:700;cursor:pointer;padding:4px 8px}
+.seg{display:inline-flex;border:1px solid var(--input);border-radius:var(--radius);overflow:hidden;flex-wrap:wrap}
+.seg label{padding:8px 12px;cursor:pointer;font-size:14px;border-right:1px solid var(--input)}
+.seg label:last-child{border-right:0}
+.seg input{position:absolute;opacity:0;pointer-events:none}
+.seg input:checked+span{font-weight:700}
+.seg label:has(input:checked){background:var(--primary);color:var(--primary-fg)}
+.setrow{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:14px 0;border-top:1px solid var(--border);flex-wrap:wrap}
+.setrow:first-child{border-top:0;padding-top:0}
+.loading{display:flex;gap:12px;align-items:center;justify-content:center;padding:80px 0;color:var(--muted-fg)}
+footer{border-top:1px solid var(--border);padding:22px 0 30px;font-size:13px;color:var(--muted-fg)}
+footer a{color:var(--muted-fg)}
+
+@media (max-width:760px){
+  .hero{grid-template-columns:1fr;gap:24px}
+  .preview{display:none}
+  .how{margin-top:16px}
+  .grid2{grid-template-columns:1fr}
+  .mobile-hide{display:none}
+  .strip{gap:4px}
+  .day{padding:6px 2px 8px;min-height:84px}
+  .day .dd{font-size:16px}
+  .day .em img{width:16px;height:16px}
+  .day .ct{font-size:10.5px}
+  .items{grid-template-columns:1fr}
+  .top .acts{width:100%}
+  .top .acts .btn{flex:1}
+}
+@media (prefers-reduced-motion:reduce){.spin{animation:none}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap hdr">
+    <a class="brand" href="/">
+      <span class="mark" aria-hidden="true">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 3.2c3.6 3.5 6.2 6.6 6.2 10a6.2 6.2 0 1 1-12.4 0c0-3.4 2.6-6.5 6.2-10z" fill="hsl(96 14% 28%)"/><path d="M12 8.5v8.2" stroke="hsl(48 36% 97%)" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </span>
+      <span><span class="name">SimplyKrisp</span><br><span class="sub">My Crisper</span></span>
+    </a>
+    <nav>
+      <a class="mobile-hide" href="/">Storage Guide</a>
+      <button id="navSettings" class="hide" type="button">Settings</button>
+      <a href="https://simplykrisp.com/?utm_source=produce-guide&amp;utm_medium=referral&amp;utm_campaign=crisper&amp;utm_content=header" target="_blank" rel="noopener" style="color:var(--fg);font-weight:600">Shop Krisp</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap" id="app">
+  <div class="loading" id="loading"><span class="spin"></span> Loading your crisper…</div>
+
+  <!-- ============ LANDING / SIGNUP ============ -->
+  <div id="vLanding" class="hide">
+    <div class="hero">
+      <div>
+        <div class="eyebrow"><span class="dot"></span> My Crisper <span class="pilot">Pilot</span></div>
+        <h1>Know what to eat first, without typing in your groceries.</h1>
+        <p class="lede">Forward your grocery order emails (or set it up once so they forward themselves). We read the produce, look up how long each item lasts from the Storage Guide, and show you what needs using first.</p>
+        <ul class="how">
+          <li><span class="n">1</span><span><b>Sign up</b> with just your email. No password.</span></li>
+          <li><span class="n">2</span><span><b>Get a private forwarding address</b> and add a one-time filter in Gmail, Outlook or iCloud.</span></li>
+          <li><span class="n">3</span><span><b>Order like normal.</b> Instacart, Walmart, Kroger, Smith's, Amazon Fresh and Harmons receipts show up here on their own.</span></li>
+        </ul>
+        <div class="preview" aria-hidden="true">
+          <div class="pv"><img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f353.png" alt=""><b>Strawberry</b><span style="color:var(--warn);font-weight:600">Use today</span></div>
+          <div class="pv"><img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f96c.png" alt=""><b>Spinach</b><span style="color:var(--soon);font-weight:600">1–3 days left</span></div>
+          <div class="pv"><img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f966.png" alt=""><b>Broccoli</b><span>5–9 days left</span></div>
+        </div>
+      </div>
+      <div class="card stack" id="signupCard">
+        <div>
+          <h2>Start your crisper</h2>
+          <p class="muted small">Free while we test it. Takes about two minutes to set up.</p>
+        </div>
+        <form id="fSignup" class="stack" novalidate>
+          <div class="grid2">
+            <div><label class="f" for="suName">First name</label><input class="inp" id="suName" autocomplete="given-name" maxlength="60" /></div>
+            <div><label class="f" for="suEmail">Email</label><input class="inp" id="suEmail" type="email" autocomplete="email" required /></div>
+          </div>
+          <label class="check"><input type="checkbox" id="suKrisp" /> <span>I have a Krisp in my fridge</span></label>
+          <div id="suKrispDate" class="hide"><label class="f" for="suKrispOn">When did you last put in a fresh one?</label><input class="inp" id="suKrispOn" type="date" /><p class="note" style="margin-top:4px">We use this to remind you when it's time to swap. Leave blank if you're not sure.</p></div>
+          <label class="check"><input type="checkbox" id="suConsent" /> <span>Also send me SimplyKrisp tips and offers <span class="muted">(optional)</span></span></label>
+          <div class="err hide" id="suErr" role="alert"></div>
+          <button class="btn" type="submit" id="suBtn">Create my crisper</button>
+          <p class="note">We keep the produce names and dates from your receipts, never the email itself, prices or your address. Reminder emails come from SimplyKrisp; turn them off or delete everything in Settings at any time.</p>
+        </form>
+        <div id="suExists" class="hide stack">
+          <h3>You already have a crisper</h3>
+          <p class="muted small" id="suExistsMsg">We just emailed your private link. Open it on this device and you'll be back in.</p>
+        </div>
+        <p class="small muted" style="border-top:1px solid var(--border);padding-top:12px">Already signed up? <button class="link" type="button" id="toLost">Email me my link</button></p>
+        <form id="fLost" class="hide stack" novalidate>
+          <label class="f" for="lostEmail">Your email</label>
+          <div class="row"><input class="inp" id="lostEmail" type="email" style="flex:1;min-width:200px" /><button class="btn ghost" type="submit">Send link</button></div>
+          <p class="note hide" id="lostMsg" role="status"></p>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ SETUP ============ -->
+  <div id="vSetup" class="hide">
+    <div class="eyebrow"><span class="dot"></span> Step 2 of 2</div>
+    <h1>Connect your grocery emails</h1>
+    <p class="lede">Set this up once. After that, any grocery receipt that lands in your inbox is copied here automatically.</p>
+
+    <section class="card stack" id="setupNoInbox">
+      <h3>Email forwarding isn't switched on for this test yet</h3>
+      <p class="muted">You can still try everything: paste a receipt or add produce by hand from your crisper.</p>
+      <div class="row"><button class="btn" type="button" data-go="dash">Go to my crisper</button></div>
+    </section>
+
+    <div id="setupInbox" class="stack">
+      <section class="card">
+        <h3>Your private forwarding address</h3>
+        <p class="muted small">Only you have this address. Anything sent to it shows up in your crisper.</p>
+        <div class="addr"><code id="inboxAddr"></code><button class="btn ghost sm" type="button" data-copy="inboxAddr">Copy</button></div>
+      </section>
+
+      <section class="card">
+        <h3>Set up automatic forwarding</h3>
+        <div class="tabs" role="tablist">
+          <button class="tab" role="tab" aria-selected="true" data-tab="gmail">Gmail</button>
+          <button class="tab" role="tab" aria-selected="false" data-tab="outlook">Outlook</button>
+          <button class="tab" role="tab" aria-selected="false" data-tab="icloud">iCloud</button>
+          <button class="tab" role="tab" aria-selected="false" data-tab="manual">Forward by hand</button>
+        </div>
+
+        <div data-pane="gmail">
+          <p class="small muted" style="margin-bottom:10px">Easiest on a computer. Gmail asks you to confirm the address first, and we'll show the code right here.</p>
+          <ol class="steps">
+            <li>Open <a href="https://mail.google.com/mail/u/0/#settings/fwdandpop" target="_blank" rel="noopener">Gmail forwarding settings</a> and click <b>Add a forwarding address</b>. Paste your address above and click <b>Next → Proceed</b>.
+              <div class="status" id="gmailStatus" style="margin-top:10px"><span class="spin"></span><span>Waiting for Gmail's confirmation code…</span></div>
+            </li>
+            <li>Back in Gmail, paste the code and click <b>Verify</b>. <span class="muted">Leave "Disable forwarding" selected. You're only forwarding grocery emails, not everything.</span></li>
+            <li>Pick the stores you order from:
+              <div class="stores" id="stores"></div>
+              In the Gmail search bar, paste this, then click the sliders icon and choose <b>Create filter</b>:
+              <div class="addr"><code id="gmailFilter"></code><button class="btn ghost sm" type="button" data-copy="gmailFilter">Copy</button></div>
+            </li>
+            <li>Tick <b>Forward it to</b>, choose your crisper address, tick <b>Also apply filter to matching conversations</b> if you want, and click <b>Create filter</b>.</li>
+          </ol>
+        </div>
+
+        <div data-pane="outlook" class="hide">
+          <ol class="steps">
+            <li>In Outlook on the web, open <b>Settings → Mail → Rules → Add new rule</b>.</li>
+            <li>Name it "Crisper". Condition: <b>From</b> → add <span class="kbd">instacart.com</span>, <span class="kbd">walmart.com</span>, <span class="kbd">kroger.com</span>, <span class="kbd">smithsfoodanddrug.com</span>, <span class="kbd">harmonsgrocery.com</span> (only the stores you use).</li>
+            <li>Action: <b>Forward to</b> → paste your crisper address. Save.</li>
+          </ol>
+          <p class="note" style="margin-top:10px">Some work and school accounts block automatic forwarding. If nothing shows up within a day, use "Forward by hand" or paste a receipt.</p>
+        </div>
+
+        <div data-pane="icloud" class="hide">
+          <ol class="steps">
+            <li>On a computer, open <a href="https://www.icloud.com/mail" target="_blank" rel="noopener">iCloud Mail</a>, click the gear icon, then <b>Rules → Add a rule</b>.</li>
+            <li>If a message <b>is from</b> <span class="kbd">instacart.com</span> → <b>Forward to</b> your crisper address. Repeat for each store you order from.</li>
+          </ol>
+        </div>
+
+        <div data-pane="manual" class="hide">
+          <p>Forward any grocery order or receipt email to your crisper address. Forwarding from your phone works too. We'll pick out the produce and ignore everything else.</p>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="status" id="firstStatus"><span class="spin"></span><span>Waiting for your first grocery email. Forward a recent receipt to test it now.</span></div>
+      </section>
+
+      <div class="row">
+        <button class="btn" type="button" data-go="dash" id="setupDone">Go to my crisper</button>
+        <button class="btn ghost" type="button" data-open="paste">Paste a receipt instead</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ DASHBOARD ============ -->
+  <div id="vDash" class="hide">
+    <div class="top">
+      <div>
+        <div class="eyebrow"><span class="dot"></span> My Crisper <span class="pilot">Pilot</span></div>
+        <h1 id="greet">Your crisper</h1>
+        <p class="muted" id="summary"></p>
+      </div>
+      <div class="acts">
+        <button class="btn" type="button" data-open="add">+ Add produce</button>
+        <button class="btn ghost" type="button" data-open="paste">Paste receipt</button>
+      </div>
+    </div>
+
+    <div class="strip" id="strip" aria-label="What to use each day this week"></div>
+    <p class="note" id="stripNote" style="margin-top:6px">Each day shows items reaching the end of their usual window. Tap a day to filter.</p>
+
+    <div id="conflict" class="hide" style="margin-top:18px"></div>
+    <div id="krispNudge" style="margin-top:14px"></div>
+
+    <div id="groups"></div>
+
+    <section id="secKrisp"></section>
+
+    <section>
+      <div class="sechd"><h2>Last 30 days</h2><span class="note">Items you marked used or tossed</span></div>
+      <div class="stats" id="stats"></div>
+      <div class="done" id="recentDone" style="margin-top:12px"></div>
+    </section>
+
+    <section>
+      <div class="sechd"><h2>Orders</h2><button class="link small" type="button" data-go="setup">Email setup</button></div>
+      <div class="card" id="orders"></div>
+    </section>
+
+    <section id="vSettings">
+      <div class="sechd"><h2>Settings</h2></div>
+      <div class="card">
+        <div class="setrow">
+          <div><b>Reminder emails</b><div class="note">Smart: only when something needs using in the next couple of days.</div></div>
+          <div class="seg" id="prefSeg">
+            <label><input type="radio" name="pref" value="smart"><span>Smart</span></label>
+            <label><input type="radio" name="pref" value="weekly"><span>Weekly</span></label>
+            <label><input type="radio" name="pref" value="off"><span>Off</span></label>
+          </div>
+        </div>
+        <div class="setrow">
+          <div><b>I have a Krisp</b><div class="note">Adds the Storage Guide's Krisp ranges to fridge items while your sachet is fresh.</div></div>
+          <label class="check"><input type="checkbox" id="setKrisp"><span>Yes</span></label>
+        </div>
+        <div class="setrow" id="setKrispRow">
+          <div><b>Last sachet change</b><div class="note">Each sachet lasts about 30 days.</div></div>
+          <div class="row"><input class="inp" type="date" id="setKrispOn" style="width:auto"><button class="btn ghost sm" type="button" id="krispToday">Changed today</button></div>
+        </div>
+        <div class="setrow">
+          <div><b>First name</b></div>
+          <div class="row"><input class="inp" id="setName" maxlength="60" style="width:180px"><button class="btn ghost sm" type="button" id="saveName">Save</button></div>
+        </div>
+        <div class="setrow">
+          <div><b>Forwarding address</b><div class="note" id="setAddr" style="overflow-wrap:anywhere"></div></div>
+          <button class="btn ghost sm" type="button" data-go="setup">Setup guide</button>
+        </div>
+        <div class="setrow">
+          <div><b>This device</b><div class="note">Your private link is in your welcome email if you sign out.</div></div>
+          <button class="btn ghost sm" type="button" id="signOut">Sign out</button>
+        </div>
+        <div class="setrow">
+          <div><b>Delete my crisper</b><div class="note">Removes your account, items and order history now. This can't be undone.</div></div>
+          <button class="btn ghost sm" type="button" id="delStart" style="color:var(--warn);border-color:var(--warn)">Delete</button>
+        </div>
+        <div id="delConfirm" class="hide status" style="background:var(--warn-bg);flex-wrap:wrap">
+          <span style="flex:1;min-width:200px">Delete everything for <b id="delEmail"></b>?</span>
+          <button class="btn danger sm" type="button" id="delYes">Yes, delete</button>
+          <button class="btn ghost sm" type="button" id="delNo">Cancel</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div id="vDeleted" class="hide empty-state">
+    <h1>Your crisper has been deleted</h1>
+    <p class="lede" style="margin:0 auto">Everything is gone from our database. Thanks for trying it.</p>
+    <div class="row"><a class="btn ghost" href="/">Back to the Storage Guide</a></div>
+  </div>
+</main>
+
+<footer><div class="wrap">Shelf-life ranges come from the <a href="/">SimplyKrisp Produce Storage Guide</a> and assume each item is stored the way the guide recommends. They're estimates. Trust your eyes and nose. · Pilot feedback: <a href="mailto:hello@simplykrisp.com?subject=My%20Crisper%20feedback">hello@simplykrisp.com</a></div></footer>
+
+<!-- add produce sheet -->
+<div class="scrim hide" id="shAdd" role="dialog" aria-modal="true" aria-labelledby="shAddT">
+  <div class="sheet">
+    <div class="sh"><h2 id="shAddT">Add produce</h2><button class="x" type="button" data-close aria-label="Close">×</button></div>
+    <input class="inp" id="addSearch" placeholder="Search: strawberry, kale, avocado…" autocomplete="off" />
+    <div class="chips" id="addChips" style="margin-top:10px"></div>
+    <div class="sel" id="addSel"></div>
+    <div class="row" style="margin-top:14px;justify-content:space-between">
+      <label class="small">Bought <input class="inp" type="date" id="addDate" style="width:auto;display:inline-block;margin-left:6px"></label>
+      <button class="btn" type="button" id="addSave" disabled>Add to crisper</button>
+    </div>
+    <div class="err hide" id="addErr" role="alert"></div>
+  </div>
+</div>
+
+<!-- paste receipt sheet -->
+<div class="scrim hide" id="shPaste" role="dialog" aria-modal="true" aria-labelledby="shPasteT">
+  <div class="sheet">
+    <div class="sh"><h2 id="shPasteT">Paste a receipt</h2><button class="x" type="button" data-close aria-label="Close">×</button></div>
+    <div id="pasteStep1" class="stack">
+      <p class="muted small">Open an order email or receipt, select all, copy, and paste it here. Works with most stores, including in-store e-receipts.</p>
+      <textarea class="inp" id="pasteText" placeholder="Paste receipt text…"></textarea>
+      <div class="err hide" id="pasteErr" role="alert"></div>
+      <div class="row"><button class="btn" type="button" id="pastePreview">Find the produce</button></div>
+    </div>
+    <div id="pasteStep2" class="hide stack">
+      <p id="pasteFound"></p>
+      <ul class="pl" id="pasteList"></ul>
+      <details id="pasteSkipWrap" class="small muted"><summary id="pasteSkipSum"></summary><ul class="pl" id="pasteSkip" style="margin-top:6px"></ul></details>
+      <div class="row"><button class="btn" type="button" id="pasteSave">Add these</button><button class="btn ghost" type="button" id="pasteBack">Back</button></div>
+    </div>
+  </div>
+</div>
+
+<div class="toast hide" id="toast" role="status" aria-live="polite"><span id="toastMsg"></span><button type="button" id="toastUndo">Undo</button></div>
+
+<script>
+(function () {
+  'use strict';
+  var SHOP = 'https://simplykrisp.com/?utm_source=produce-guide&utm_medium=referral&utm_campaign=crisper&utm_content=';
+  // Amazon is off by default: its filter forwards every Amazon order, not just
+  // groceries. We'd discard the non-produce lines, but testers should opt in.
+  var STORES = [['Instacart', 'instacart.com', 1], ['Walmart', 'walmart.com', 1], ["Smith's / Kroger", 'smithsfoodanddrug.com OR kroger.com', 1],
+    ['Harmons', 'harmonsgrocery.com', 1], ['Target', 'target.com', 0], ['Costco', 'costco.com', 0], ['Amazon Fresh / Whole Foods', 'amazon.com', 0]];
+  function filterString() {
+    var on = Array.prototype.slice.call(document.querySelectorAll('#stores input:checked')).map(function (c) { return c.value; });
+    return on.length ? 'from:(' + on.join(' OR ') + ')' : 'Pick at least one store';
+  }
+  var KEY_LS = 'crisperKey', SKIP_LS = 'crisperSetupSkipped';
+  var S = { key: null, st: null, catalog: null, byName: {}, filterDay: null, sel: {}, pastePreview: null, poll: null };
+
+  function el(id) { return document.getElementById(id); }
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function show(id, on) { el(id).classList.toggle('hide', !on); }
+  function ls(k, v) { try { if (v === undefined) return localStorage.getItem(k); if (v === null) localStorage.removeItem(k); else localStorage.setItem(k, v); } catch (e) { return null; } }
+  function plural(n, w) { return n + ' ' + w + (n === 1 ? '' : 's'); }
+  function todayLocal() { var d = new Date(); return new Date(d.getTime() - d.getTimezoneOffset() * 60000).toISOString().slice(0, 10); }
+  function fmtDate(iso, opts) { var d = new Date(String(iso).length === 10 ? iso + 'T12:00:00' : iso); return d.toLocaleDateString(undefined, opts || { month: 'short', day: 'numeric' }); }
+  function img(name) { var c = S.byName[name]; return c ? c.imageUrl : ''; }
+
+  function api(path, opts) {
+    opts = opts || {};
+    var h = { 'Content-Type': 'application/json' };
+    if (S.key) h['X-Crisper-Key'] = S.key;
+    return fetch(path, { method: opts.method || (opts.body ? 'POST' : 'GET'), headers: h, body: opts.body ? JSON.stringify(opts.body) : undefined })
+      .then(function (r) {
+        return r.json().catch(function () { return {}; }).then(function (j) {
+          if (!r.ok) { var e = new Error(j.error || 'Something went wrong. Try again.'); e.status = r.status; throw e; }
+          return j;
+        });
+      });
+  }
+
+  // ---------- views ----------
+  function view(name) {
+    ['vLanding', 'vSetup', 'vDash', 'vDeleted', 'loading'].forEach(function (v) { show(v, v === name); });
+    show('navSettings', name === 'vDash');
+    if (name !== 'vSetup') stopPoll();
+    window.scrollTo(0, 0);
+  }
+
+  function boot() {
+    var u = new URL(location.href);
+    var k = u.searchParams.get('k');
+    if (k) {
+      ls(KEY_LS, k);
+      u.searchParams.delete('k');
+      history.replaceState(null, '', u.pathname + (u.search || '') + u.hash);
+    }
+    S.key = ls(KEY_LS);
+    fetch('/crisper/catalog.json').then(function (r) { return r.json(); }).then(function (c) {
+      S.catalog = c; c.forEach(function (p) { S.byName[p.name] = p; });
+      if (S.st) render();
+    }).catch(function () {});
+    if (!S.key) { view('vLanding'); return; }
+    api('/api/crisper/me').then(function (st) {
+      S.st = st;
+      var needsSetup = st.inbox.address && !st.inbox.firstEmailAt && !st.items.length && !st.pending.length && !ls(SKIP_LS);
+      if (needsSetup || u.hash === '#setup') openSetup(); else { view('vDash'); render(); }
+    }).catch(function (e) {
+      if (e.status === 401) { ls(KEY_LS, null); S.key = null; view('vLanding'); showErr('suErr', e.message); }
+      else { view('vLanding'); showErr('suErr', 'Could not reach your crisper. Check your connection and refresh.'); }
+    });
+  }
+
+  function showErr(id, msg) { var e = el(id); e.textContent = msg || ''; e.classList.toggle('hide', !msg); }
+
+  // ---------- signup ----------
+  el('suKrisp').addEventListener('change', function () { show('suKrispDate', this.checked); });
+  el('suKrispOn').max = todayLocal();
+  el('fSignup').addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    var email = el('suEmail').value.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return showErr('suErr', 'Enter a valid email address.');
+    showErr('suErr', '');
+    var b = el('suBtn'); b.disabled = true; b.textContent = 'Creating…';
+    var src = new URL(location.href).searchParams.get('utm_source') || (window.self !== window.top ? 'embed' : document.referrer ? 'referral' : 'direct');
+    api('/api/crisper/signup', { body: {
+      email: email, firstName: el('suName').value.trim(), tz: Intl.DateTimeFormat().resolvedOptions().timeZone,
+      hasKrisp: el('suKrisp').checked, krispChangedOn: el('suKrisp').checked ? el('suKrispOn').value : '',
+      marketingConsent: el('suConsent').checked, source: src
+    } }).then(function (r) {
+      if (r.exists) {
+        show('fSignup', false); show('suExists', true);
+        if (!r.emailed) el('suExistsMsg').textContent = 'That email already has a crisper. Use the private link from your welcome email to get back in.';
+        return;
+      }
+      S.key = r.key; ls(KEY_LS, r.key); S.st = r.state;
+      openSetup();
+    }).catch(function (e) { showErr('suErr', e.message); })
+      .then(function () { b.disabled = false; b.textContent = 'Create my crisper'; });
+  });
+  el('toLost').addEventListener('click', function () { show('fLost', true); el('lostEmail').focus(); });
+  el('fLost').addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    var email = el('lostEmail').value.trim();
+    if (!email) return;
+    api('/api/crisper/signup', { body: { email: email, resend: true } }).then(function (r) {
+      var m = el('lostMsg'); m.classList.remove('hide');
+      m.textContent = r.emailed ? 'If that email has a crisper, a fresh link is on its way.' : 'Link emails are not switched on in this test build yet.';
+    }).catch(function (e) { var m = el('lostMsg'); m.classList.remove('hide'); m.textContent = e.message; });
+  });
+
+  // ---------- setup ----------
+  function openSetup() {
+    view('vSetup');
+    var st = S.st, addr = st.inbox.address;
+    show('setupNoInbox', !addr); show('setupInbox', !!addr);
+    if (!addr) return;
+    el('inboxAddr').textContent = addr;
+    if (!el('stores').children.length) {
+      el('stores').innerHTML = STORES.map(function (x) { return '<label><input type="checkbox" value="' + esc(x[1]) + '"' + (x[2] ? ' checked' : '') + '>' + esc(x[0]) + '</label>'; }).join('');
+      el('stores').addEventListener('change', function () { el('gmailFilter').textContent = filterString(); });
+    }
+    el('gmailFilter').textContent = filterString();
+    renderSetupStatus();
+    startPoll();
+  }
+  function renderSetupStatus() {
+    var st = S.st, gv = st.inbox.gmailVerification, gs = el('gmailStatus');
+    if (gv && (gv.code || gv.link)) {
+      gs.className = 'status good';
+      gs.innerHTML = '<div><div class="small">Gmail confirmation code</div>' +
+        (gv.code ? '<div class="code">' + esc(gv.code) + '</div>' : '') +
+        (gv.link ? '<a class="small" href="' + esc(gv.link) + '" target="_blank" rel="noopener">Or confirm with this link</a>' : '') + '</div>';
+    }
+    var fs = el('firstStatus');
+    var n = st.items.length + st.pending.length;
+    if (st.inbox.firstEmailAt || st.receipts.some(function (r) { return r.channel === 'email'; })) {
+      fs.className = 'status good';
+      fs.innerHTML = '<span aria-hidden="true">✓</span><span><b>Connected.</b> Your first grocery email arrived' + (n ? ' and ' + plural(n, 'item') + ' are in your crisper.' : '. It had no fresh produce, so the next order will fill it in.') + '</span>';
+      el('setupDone').textContent = 'See my crisper';
+    }
+  }
+  function startPoll() {
+    stopPoll();
+    S.poll = setInterval(function () {
+      if (document.hidden) return;
+      api('/api/crisper/me').then(function (st) { S.st = st; renderSetupStatus(); }).catch(function () {});
+    }, 5000);
+  }
+  function stopPoll() { if (S.poll) clearInterval(S.poll); S.poll = null; }
+  document.querySelectorAll('.tab').forEach(function (t) {
+    t.addEventListener('click', function () {
+      document.querySelectorAll('.tab').forEach(function (x) { x.setAttribute('aria-selected', x === t ? 'true' : 'false'); });
+      document.querySelectorAll('[data-pane]').forEach(function (p) { p.classList.toggle('hide', p.getAttribute('data-pane') !== t.getAttribute('data-tab')); });
+    });
+  });
+
+  // ---------- global clicks ----------
+  document.addEventListener('click', function (ev) {
+    var t = ev.target.closest('[data-copy],[data-go],[data-open],[data-close],[data-act],[data-more],[data-day]');
+    if (!t) { closeMenus(); return; }
+    if (t.hasAttribute('data-copy')) {
+      var txt = el(t.getAttribute('data-copy')).textContent;
+      (navigator.clipboard ? navigator.clipboard.writeText(txt) : Promise.reject()).then(function () {
+        var o = t.textContent; t.textContent = 'Copied'; setTimeout(function () { t.textContent = o; }, 1500);
+      }).catch(function () { var r = document.createRange(); r.selectNodeContents(el(t.getAttribute('data-copy'))); var s = getSelection(); s.removeAllRanges(); s.addRange(r); });
+    } else if (t.hasAttribute('data-go')) {
+      var g = t.getAttribute('data-go');
+      if (g === 'dash') { ls(SKIP_LS, '1'); view('vDash'); render(); }
+      if (g === 'setup') openSetup();
+    } else if (t.hasAttribute('data-open')) {
+      openSheet(t.getAttribute('data-open'));
+    } else if (t.hasAttribute('data-close')) {
+      closeSheets();
+    } else if (t.hasAttribute('data-more')) {
+      ev.stopPropagation();
+      var m = t.parentNode.parentNode.querySelector('.menu');
+      var open = m && !m.classList.contains('hide');
+      closeMenus();
+      if (m && !open) m.classList.remove('hide');
+    } else if (t.hasAttribute('data-act')) {
+      itemAct(t.getAttribute('data-id'), t.getAttribute('data-act'), t.getAttribute('data-days'));
+    } else if (t.hasAttribute('data-day')) {
+      var d = +t.getAttribute('data-day');
+      S.filterDay = S.filterDay === d ? null : d;
+      render();
+    }
+  });
+  function closeMenus() { document.querySelectorAll('.menu').forEach(function (m) { m.classList.add('hide'); }); }
+  el('navSettings').addEventListener('click', function () { el('vSettings').scrollIntoView({ behavior: 'smooth' }); });
+
+  // ---------- dashboard ----------
+  var GROUPS = [
+    { k: 'check', t: 'Check it', sub: 'Past the usual window. Look, sniff, and use it or toss it.' },
+    { k: 'today', t: 'Use today', sub: 'At or near the end of its range.' },
+    { k: 'soon', t: 'Next 2 days', sub: '' },
+    { k: 'week', t: 'This week', sub: '' },
+    { k: 'later', t: 'Later', sub: '' },
+    { k: 'pending', t: 'On the way', sub: 'From an order confirmation. These start counting the day after you ordered, or when the receipt arrives.' }
+  ];
+
+  function dayIndex(it) { return it.leftMax <= 0 ? 0 : it.leftMax; }
+
+  function render() {
+    var st = S.st; if (!st) return;
+    var u = st.user, items = st.items, pend = st.pending;
+    var h = new Date().getHours();
+    el('greet').textContent = (h < 12 ? 'Good morning' : h < 17 ? 'Good afternoon' : 'Good evening') + (u.firstName ? ', ' + u.firstName : '');
+    var urgent = items.filter(function (i) { return i.status === 'today' || i.status === 'check'; }).length;
+    var soon = items.filter(function (i) { return i.status === 'soon'; }).length;
+    el('summary').textContent = !items.length && !pend.length ? 'Nothing tracked yet.'
+      : plural(items.length, 'item') + ' in your crisper' + (urgent ? ' · ' + urgent + ' to use today' : '') + (soon ? ' · ' + soon + ' in the next 2 days' : '') + (pend.length ? ' · ' + pend.length + ' on the way' : '');
+
+    renderStrip(items);
+    renderConflict(items);
+    renderGroups(items, pend);
+    renderKrisp(st);
+    renderStats(st);
+    renderOrders(st);
+    renderSettings(st);
+  }
+
+  function renderStrip(items) {
+    var html = '', base = new Date(S.st.today + 'T12:00:00');
+    for (var d = 0; d < 7; d++) {
+      var day = new Date(base.getTime() + d * 864e5);
+      var list = items.filter(function (i) { return d === 6 ? dayIndex(i) >= 6 && i.leftMax <= 6 : dayIndex(i) === d; });
+      var names = list.map(function (i) { return i.name; }).join(', ');
+      html += '<button type="button" class="day d' + d + (list.length ? '' : ' empty') + '" data-day="' + d + '" aria-pressed="' + (S.filterDay === d) + '" aria-label="' +
+        esc((d === 0 ? 'Today' : day.toLocaleDateString(undefined, { weekday: 'long' })) + ': ' + (list.length ? names : 'nothing due')) + '">' +
+        '<div class="dn">' + (d === 0 ? 'Today' : day.toLocaleDateString(undefined, { weekday: 'short' })) + '</div>' +
+        '<div class="dd">' + day.getDate() + '</div>' +
+        '<div class="em">' + list.slice(0, 4).map(function (i) { return '<img src="' + esc(i.imageUrl) + '" alt="">'; }).join('') + '</div>' +
+        '<div class="ct">' + (list.length ? (list.length > 4 ? '+' + (list.length - 4) + ' · ' : '') + list.length : '·') + '</div></button>';
+    }
+    el('strip').innerHTML = html;
+    show('strip', items.length > 0); show('stripNote', items.length > 0);
+  }
+
+  // Same scoring as the conflict checker on /seasonal, applied to what's
+  // actually in the fridge right now.
+  var PROD = { very_high: 4, high: 3, medium: 2, low: 1, very_low: 0 }, SENS = { high: 3, medium: 2, low: 1 };
+  function renderConflict(items) {
+    var box = el('conflict');
+    if (!S.catalog) { box.classList.add('hide'); return; }
+    var fridge = {};
+    items.forEach(function (i) { if (i.storage === 'refrigerator' || i.storage === 'counter_then_fridge') fridge[i.name] = 1; });
+    var names = Object.keys(fridge), rows = [];
+    names.forEach(function (a) {
+      var pa = S.byName[a]; if (!pa) return;
+      var ps = PROD[pa.ethyleneProduction] || 0; if (ps < 3) return;
+      var vics = names.filter(function (b) {
+        if (b === a || !S.byName[b]) return false;
+        return (SENS[S.byName[b].ethyleneSensitivity] || 0) >= 3;
+      });
+      if (vics.length) rows.push({ p: a, v: vics });
+    });
+    if (!rows.length) { box.classList.add('hide'); return; }
+    rows.sort(function (x, y) { return y.v.length - x.v.length; });
+    var r = rows[0];
+    var hasK = S.st.krisp && S.st.krisp.active;
+    box.innerHTML = '<div class="banner"><span class="ic" aria-hidden="true">⚠︎</span><div><b>' + esc(r.p) + '</b> gives off a lot of ethylene and is in the fridge with <b>' +
+      esc(r.v.slice(0, 3).join(', ')) + (r.v.length > 3 ? ' and ' + (r.v.length - 3) + ' more' : '') + '</b>, which ' + (r.v.length === 1 ? 'is' : 'are') + ' sensitive to it. ' +
+      'Give ' + esc(r.p.toLowerCase()) + ' its own drawer or bag' + (hasK ? '. Your Krisp helps, but a strong producer can out-gas it.' : ', or add a Krisp to absorb it.') +
+      (rows.length > 1 ? '<div class="note" style="margin-top:4px">Also: ' + rows.slice(1).map(function (x) { return esc(x.p); }).join(', ') + '.</div>' : '') +
+      (hasK ? '' : '<div style="margin-top:6px"><a class="link small" target="_blank" rel="noopener" href="' + SHOP + 'conflict">See how Krisp works</a></div>') +
+      '</div></div>';
+    box.classList.remove('hide');
+  }
+
+  function itemCard(i, pending) {
+    var q = i.qty > 1 ? ' <span class="q">×' + i.qty + '</span>' : (i.weight ? ' <span class="q">' + esc(i.weight) + '</span>' : '');
+    var tags = '';
+    if (i.krispBoost) tags += '<span class="tag k">+' + i.krispBoost[0] + '–' + i.krispBoost[1] + ' days with Krisp</span>';
+    if (i.ripeningDays) tags += '<span class="tag">Ripening +' + i.ripeningDays + 'd</span>';
+    if (i.source === 'manual') tags += '<span class="tag">Added by hand</span>';
+    var storage = { refrigerator: 'Fridge', counter: 'Counter', counter_then_fridge: 'Counter, then fridge', pantry: 'Pantry' }[i.storage] || '';
+    if (storage) tags += '<span class="tag">' + storage + '</span>';
+    var label = pending ? 'Counting starts ' + fmtDate(i.startDate) + ' · lasts ' + i.minDays + '–' + i.maxDays + ' days' : i.label;
+    var tip = i.ripensFirst && i.status === 'later' && i.ripeTip ? i.ripeTip : i.tip;
+    var menu = pending
+      ? '<button type="button" data-act="arrived" data-id="' + i.id + '">It arrived today</button><button type="button" data-act="delete" data-id="' + i.id + '">Remove, didn\'t get it</button>'
+      : (i.ripensFirst ? '<button type="button" data-act="ripening" data-days="2" data-id="' + i.id + '">Still ripening (+2 days)</button>' : '') +
+        (i.ripeningDays ? '<button type="button" data-act="ripening" data-days="-2" data-id="' + i.id + '">Ripe now (−2 days)</button>' : '') +
+        '<button type="button" data-act="delete" data-id="' + i.id + '">Remove (wasn\'t mine / mistake)</button>';
+    var foot = pending
+      ? '<button class="btn ghost sm" type="button" data-act="arrived" data-id="' + i.id + '">Arrived</button>'
+      : '<button class="btn sm" type="button" data-act="used" data-id="' + i.id + '">Used it</button><button class="btn ghost sm" type="button" data-act="tossed" data-id="' + i.id + '">Tossed</button>';
+    return '<article class="it s-' + (pending ? 'pending' : i.status) + '">' +
+      '<div class="ith"><img src="' + esc(i.imageUrl) + '" alt="" loading="lazy"><div><div class="itn">' + esc(i.name) + q + '</div><div class="itl">' + esc(label) + '</div></div></div>' +
+      (pending ? '' : '<div class="bar" role="progressbar" aria-label="Freshness used" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' + Math.round(i.progress * 100) + '"><i style="width:' + Math.max(4, Math.round(i.progress * 100)) + '%"></i></div>') +
+      (tags ? '<div class="tags">' + tags + '</div>' : '') +
+      (tip ? '<div class="tip">' + esc(tip) + '</div>' : '') +
+      '<div class="itf">' + foot + '<button class="btn ghost sm more" type="button" data-more aria-label="More options for ' + esc(i.name) + '">⋯</button></div>' +
+      '<div class="menu hide">' + menu + '</div></article>';
+  }
+
+  function renderGroups(items, pend) {
+    var box = el('groups');
+    if (!items.length && !pend.length) {
+      var hasAddr = !!S.st.inbox.address;
+      box.innerHTML = '<div class="card empty-state" style="margin-top:22px"><h2>Your crisper is empty</h2><p class="muted">' +
+        (hasAddr ? 'Forward a grocery receipt to your crisper address, paste one, or add a few things by hand.' : 'Paste a receipt or add a few things by hand to try it.') +
+        '</p><div class="row"><button class="btn" type="button" data-open="add">+ Add produce</button><button class="btn ghost" type="button" data-open="paste">Paste receipt</button>' +
+        (hasAddr ? '<button class="btn ghost" type="button" data-go="setup">Email setup</button>' : '') + '</div></div>';
+      return;
+    }
+    var filtered = items;
+    var note = '';
+    if (S.filterDay != null) {
+      filtered = items.filter(function (i) { return S.filterDay === 6 ? dayIndex(i) >= 6 && i.leftMax <= 6 : dayIndex(i) === S.filterDay; });
+      var base = new Date(S.st.today + 'T12:00:00'), dd = new Date(base.getTime() + S.filterDay * 864e5);
+      note = '<div class="status" style="margin-top:18px;justify-content:space-between"><span>Showing items whose window ends ' + (S.filterDay === 0 ? 'today' : 'on ' + dd.toLocaleDateString(undefined, { weekday: 'long' })) + ' (' + filtered.length + ')</span><button class="link small" type="button" data-day="' + S.filterDay + '">Show all</button></div>';
+    }
+    var html = note;
+    GROUPS.forEach(function (g) {
+      var list = g.k === 'pending' ? (S.filterDay != null ? [] : pend) : filtered.filter(function (i) { return i.status === g.k; });
+      if (!list.length) return;
+      html += '<div class="grp"><h3>' + g.t + ' <span class="pill">' + list.length + '</span></h3>' + (g.sub ? '<p class="gsub">' + g.sub + '</p>' : '') +
+        '<div class="items">' + list.map(function (i) { return itemCard(i, g.k === 'pending'); }).join('') + '</div></div>';
+    });
+    box.innerHTML = html;
+  }
+
+  function renderKrisp(st) {
+    var k = st.krisp, box = el('secKrisp'), nudge = el('krispNudge');
+    nudge.innerHTML = '';
+    if (k.owned) {
+      var due = k.dueInDays, age = k.ageDays;
+      var pct = age == null ? 0 : Math.max(0, Math.min(1, age / 30));
+      var ring = '<svg class="kring" viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="15.5" fill="none" stroke="hsl(48 10% 90%)" stroke-width="4"/>' +
+        '<circle cx="18" cy="18" r="15.5" fill="none" stroke="' + (due != null && due <= 3 ? 'hsl(16 70% 50%)' : 'hsl(96 14% 28%)') + '" stroke-width="4" stroke-linecap="round" stroke-dasharray="' + (97.4 * (1 - pct)).toFixed(1) + ' 97.4" transform="rotate(-90 18 18)"/>' +
+        '<text x="18" y="21" text-anchor="middle" font-size="9" font-family="DM Sans" fill="hsl(96 14% 14%)">' + (due == null ? '?' : Math.max(0, due) + 'd') + '</text></svg>';
+      var msg = due == null ? 'Add the date you last changed your sachet in Settings and we\'ll remind you when it\'s time.'
+        : due > 3 ? 'Changed ' + plural(age, 'day') + ' ago. About ' + plural(due, 'day') + ' until it\'s time for a fresh one.'
+        : due >= 0 ? 'Time to swap soon: ' + (due === 0 ? 'today' : 'in ' + plural(due, 'day')) + '. A fresh sachet keeps the Krisp ranges accurate.'
+        : 'Your sachet is ' + plural(-due, 'day') + ' past its 30 days.' + (k.active ? '' : ' Krisp credit is paused on your items until you swap it.');
+      box.innerHTML = '<div class="sechd"><h2>Your Krisp</h2></div><div class="card kcard">' + ring + '<div style="flex:1"><p>' + msg + '</p><div class="row" style="margin-top:10px">' +
+        '<button class="btn ghost sm" type="button" id="kSwap">I put in a fresh one today</button>' +
+        (due != null && due <= 5 ? '<a class="btn sm" target="_blank" rel="noopener" href="' + SHOP + 'krisp-due">Get refills</a>' : '') + '</div></div></div>';
+      el('kSwap').addEventListener('click', function () { saveSettings({ krispChangedOn: S.st.today }, 'Sachet date updated'); });
+    } else {
+      box.innerHTML = '';
+      var could = st.items.filter(function (i) { return i.krispCould; });
+      if (could.length >= 2) {
+        var lo = 0, hi = 0; could.forEach(function (i) { lo = Math.max(lo, i.krispCould[0]); hi = Math.max(hi, i.krispCould[1]); });
+        nudge.innerHTML = '<div class="status small" style="justify-content:space-between;flex-wrap:wrap"><span>' + plural(could.length, 'item') + ' in your fridge (' + esc(could.slice(0, 3).map(function (i) { return i.name.toLowerCase(); }).join(', ')) + (could.length > 3 ? '…' : '') +
+          ') would get up to ' + hi + ' extra days with a Krisp, based on the Storage Guide.</span><a class="link" target="_blank" rel="noopener" href="' + SHOP + 'items-nudge">Learn more</a></div>';
+      }
+    }
+  }
+
+  function renderStats(st) {
+    var s = st.stats || {}, fin = (s.used30 || 0) + (s.tossed30 || 0);
+    var rate = fin ? Math.round((s.used30 / fin) * 100) + '%' : '—';
+    el('stats').innerHTML = '<div class="stat"><div class="v">' + (s.used30 || 0) + '</div><div class="l">Used</div></div>' +
+      '<div class="stat"><div class="v">' + (s.tossed30 || 0) + '</div><div class="l">Tossed</div></div>' +
+      '<div class="stat"><div class="v">' + rate + '</div><div class="l">Eaten, not tossed</div></div>';
+    el('recentDone').innerHTML = (st.recentDone || []).map(function (r) {
+      return '<span class="' + (r.state === 'tossed' ? 't' : '') + '" title="' + esc(r.state + ' ' + fmtDate(r.at)) + '"><img src="' + esc(r.imageUrl || img(r.name)) + '" alt="">' + esc(r.name) + (r.state === 'tossed' ? ' · tossed' : '') + '</span>';
+    }).join('');
+  }
+
+  var RET = {};
+  var STATUS = { applied: '', pending: 'On the way', superseded: 'Replaced by receipt', duplicate: 'Duplicate, skipped', assumed: 'Delivered (no receipt)', no_produce: 'No fresh produce found' };
+  function renderOrders(st) {
+    var rs = st.receipts || [];
+    if (!rs.length) {
+      el('orders').innerHTML = '<p class="muted small">No orders yet. ' + (st.inbox.address ? 'Forward a grocery email to <b style="overflow-wrap:anywhere">' + esc(st.inbox.address) + '</b> or paste a receipt.' : 'Paste a receipt to try it.') + '</p>';
+      return;
+    }
+    el('orders').innerHTML = rs.map(function (r) {
+      var name = r.retailer || 'Receipt';
+      var how = r.channel === 'paste' ? 'pasted' : r.kind === 'confirmation' ? 'order confirmation' : 'receipt email';
+      var extra = (r.skipped || []).length + (r.unknown || []).length;
+      return '<div class="rc"><div class="rh"><span><b>' + esc(name) + '</b> <span class="muted small">' + esc(how) + ' · ' + fmtDate(r.receivedAt) + '</span></span>' +
+        '<span class="small">' + (STATUS[r.status] ? '<span class="muted">' + STATUS[r.status] + '</span> · ' : '') + plural((r.matched || []).length, 'item') + '</span></div>' +
+        ((r.matched || []).length ? '<div class="done" style="margin-top:6px">' + r.matched.map(function (m) { return '<span><img src="' + esc(img(m.name)) + '" alt="">' + esc(m.name) + (m.count > 1 ? ' ×' + m.count : '') + '</span>'; }).join('') + '</div>' : '') +
+        (extra ? '<details><summary>' + plural(extra, 'line') + ' we skipped</summary><p style="margin-top:4px">' +
+          (r.skipped || []).map(function (s) { return esc(typeof s === 'string' ? s : (s.line || s.name || '') + (s.reason ? ' (' + s.reason + ')' : '')); }).concat((r.unknown || []).map(function (s) { return esc(typeof s === 'string' ? s : s.line) + ' (not in the guide yet)'; })).join('<br>') +
+          '</p></details>' : '') + '</div>';
+    }).join('');
+  }
+
+  function renderSettings(st) {
+    var u = st.user;
+    document.querySelectorAll('input[name="pref"]').forEach(function (r) { r.checked = r.value === u.reminderPref; });
+    el('setKrisp').checked = !!st.krisp.owned;
+    show('setKrispRow', !!st.krisp.owned);
+    el('setKrispOn').value = st.krisp.changedOn || '';
+    el('setKrispOn').max = st.today;
+    if (document.activeElement !== el('setName')) el('setName').value = u.firstName || '';
+    el('setAddr').textContent = st.inbox.address || 'Not switched on in this test build';
+    el('delEmail').textContent = u.email;
+  }
+
+  function saveSettings(s, msg) {
+    return api('/api/crisper/me', { body: { settings: s } }).then(function (st) { S.st = st; render(); if (msg) toast(msg); }).catch(function (e) { toast(e.message); });
+  }
+  document.querySelectorAll('input[name="pref"]').forEach(function (r) {
+    r.addEventListener('change', function () { saveSettings({ reminderPref: r.value }, r.value === 'off' ? 'Reminder emails off' : 'Reminders: ' + r.value); });
+  });
+  el('setKrisp').addEventListener('change', function () { saveSettings({ hasKrisp: this.checked }, this.checked ? 'Krisp on' : 'Krisp off'); });
+  el('setKrispOn').addEventListener('change', function () { saveSettings({ krispChangedOn: this.value || null }, 'Sachet date saved'); });
+  el('krispToday').addEventListener('click', function () { saveSettings({ krispChangedOn: S.st.today }, 'Sachet date updated'); });
+  el('saveName').addEventListener('click', function () { saveSettings({ firstName: el('setName').value }, 'Saved'); });
+  el('signOut').addEventListener('click', function () { ls(KEY_LS, null); ls(SKIP_LS, null); S.key = null; S.st = null; view('vLanding'); });
+  el('delStart').addEventListener('click', function () { show('delConfirm', true); });
+  el('delNo').addEventListener('click', function () { show('delConfirm', false); });
+  el('delYes').addEventListener('click', function () {
+    var b = this; b.disabled = true;
+    api('/api/crisper/me', { body: { deleteAccount: true } }).then(function () {
+      ls(KEY_LS, null); ls(SKIP_LS, null); S.key = null; S.st = null; view('vDeleted');
+    }).catch(function (e) { b.disabled = false; toast(e.message); });
+  });
+
+  // ---------- item actions ----------
+  var lastUndo = null, toastTimer = null;
+  function toast(msg, undoId) {
+    el('toastMsg').textContent = msg;
+    lastUndo = undoId || null;
+    show('toastUndo', !!undoId);
+    show('toast', true);
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { show('toast', false); lastUndo = null; }, 5000);
+  }
+  el('toastUndo').addEventListener('click', function () {
+    if (!lastUndo) return;
+    var id = lastUndo; lastUndo = null; show('toast', false);
+    itemAct(id, 'undo');
+  });
+  function itemAct(id, op, days) {
+    closeMenus();
+    var it = S.st.items.concat(S.st.pending).filter(function (i) { return i.id === id; })[0];
+    api('/api/crisper/items', { body: { id: id, op: op, days: days ? +days : undefined } }).then(function (st) {
+      S.st = st; render();
+      var n = it ? it.name : 'Item';
+      if (op === 'used') toast(n + ' marked used', id);
+      else if (op === 'tossed') toast(n + ' marked tossed', id);
+      else if (op === 'delete') toast(n + ' removed', id);
+      else if (op === 'arrived') toast(n + ' is now counting from today');
+      else if (op === 'ripening') toast(+days > 0 ? 'Gave ' + n.toLowerCase() + ' 2 more days to ripen' : n + ' marked ripe');
+      else if (op === 'undo') toast('Undone');
+    }).catch(function (e) { toast(e.message); });
+  }
+
+  // ---------- sheets ----------
+  var lastFocus = null;
+  function openSheet(which) {
+    lastFocus = document.activeElement;
+    closeSheets();
+    if (which === 'add') {
+      S.sel = {}; el('addSearch').value = ''; el('addDate').value = (S.st && S.st.today) || todayLocal(); el('addDate').max = el('addDate').value;
+      renderChips(); renderSel(); showErr('addErr', '');
+      show('shAdd', true); setTimeout(function () { el('addSearch').focus(); }, 30);
+    } else if (which === 'paste') {
+      if (!S.st) return;
+      el('pasteText').value = ''; showErr('pasteErr', ''); show('pasteStep1', true); show('pasteStep2', false);
+      show('shPaste', true); setTimeout(function () { el('pasteText').focus(); }, 30);
+    }
+    document.body.style.overflow = 'hidden';
+  }
+  function closeSheets() {
+    show('shAdd', false); show('shPaste', false); document.body.style.overflow = '';
+    if (lastFocus && lastFocus.focus) try { lastFocus.focus(); } catch (e) {}
+  }
+  document.querySelectorAll('.scrim').forEach(function (s) { s.addEventListener('click', function (ev) { if (ev.target === s) closeSheets(); }); });
+  document.addEventListener('keydown', function (ev) { if (ev.key === 'Escape') { closeSheets(); closeMenus(); } });
+
+  function renderChips() {
+    if (!S.catalog) { el('addChips').innerHTML = '<span class="muted small">Loading…</span>'; return; }
+    var q = el('addSearch').value.trim().toLowerCase();
+    var list = S.catalog.filter(function (p) { return !q || p.name.toLowerCase().indexOf(q) >= 0 || p.category.indexOf(q) === 0; });
+    el('addChips').innerHTML = list.map(function (p) {
+      return '<button type="button" class="chip" data-chip="' + esc(p.name) + '" aria-pressed="' + (!!S.sel[p.name]) + '"><img src="' + esc(p.imageUrl) + '" alt="">' + esc(p.name) + '</button>';
+    }).join('') || '<span class="muted small">Not in the Storage Guide yet.</span>';
+  }
+  function renderSel() {
+    var names = Object.keys(S.sel);
+    el('addSel').innerHTML = names.map(function (n) {
+      return '<div class="selr"><img src="' + esc(img(n)) + '" alt=""><b>' + esc(n) + '</b><div class="stp"><button type="button" data-qty="-1" data-n="' + esc(n) + '" aria-label="Fewer">−</button><span>' + S.sel[n] + '</span><button type="button" data-qty="1" data-n="' + esc(n) + '" aria-label="More">+</button></div></div>';
+    }).join('');
+    el('addSave').disabled = !names.length;
+    el('addSave').textContent = names.length ? 'Add ' + plural(names.length, 'item') : 'Add to crisper';
+  }
+  el('addSearch').addEventListener('input', renderChips);
+  el('addSearch').addEventListener('keydown', function (ev) {
+    if (ev.key === 'Enter') { ev.preventDefault(); var f = el('addChips').querySelector('.chip'); if (f) f.click(); }
+  });
+  el('addChips').addEventListener('click', function (ev) {
+    var c = ev.target.closest('[data-chip]'); if (!c) return;
+    var n = c.getAttribute('data-chip');
+    if (S.sel[n]) delete S.sel[n]; else S.sel[n] = 1;
+    c.setAttribute('aria-pressed', !!S.sel[n]); renderSel();
+  });
+  el('addSel').addEventListener('click', function (ev) {
+    var b = ev.target.closest('[data-qty]'); if (!b) return;
+    var n = b.getAttribute('data-n'); S.sel[n] = (S.sel[n] || 1) + +b.getAttribute('data-qty');
+    if (S.sel[n] < 1) delete S.sel[n]; else if (S.sel[n] > 48) S.sel[n] = 48;
+    renderSel(); renderChips();
+  });
+  el('addSave').addEventListener('click', function () {
+    var b = this, names = Object.keys(S.sel); if (!names.length) return;
+    b.disabled = true;
+    api('/api/crisper/items', { body: { add: names.map(function (n) { return { produce: n, qty: S.sel[n], date: el('addDate').value }; }) } }).then(function (st) {
+      S.st = st; closeSheets(); ls(SKIP_LS, '1'); view('vDash'); render(); toast('Added ' + plural(names.length, 'item'));
+    }).catch(function (e) { showErr('addErr', e.message); b.disabled = false; });
+  });
+
+  el('pastePreview').addEventListener('click', function () {
+    var b = this, txt = el('pasteText').value;
+    if (txt.trim().length < 3) return showErr('pasteErr', 'Paste the text of a receipt or order email first.');
+    b.disabled = true; showErr('pasteErr', '');
+    api('/api/crisper/receipt', { body: { text: txt, preview: true } }).then(function (r) {
+      var p = r.preview; S.pastePreview = p;
+      el('pasteFound').innerHTML = p.items.length ? 'Found <b>' + plural(p.items.length, 'produce item') + '</b>' + (p.retailer ? ' from ' + esc(p.retailer) : '') + ':' : '<b>No produce from the Storage Guide found in that text.</b> Try copying the whole email, or add items by hand.';
+      el('pasteList').innerHTML = p.items.map(function (i) { return '<li><img src="' + esc(img(i.name)) + '" alt="">' + esc(i.name) + (i.count > 1 ? ' ×' + i.count : '') + (i.weight ? ' <span class="muted">' + esc(i.weight) + '</span>' : '') + '</li>'; }).join('');
+      var skip = (p.skipped || []).map(function (s) { return typeof s === 'string' ? s : (s.line || s.name) + (s.reason ? ' (' + s.reason + ')' : ''); })
+        .concat((p.unknown || []).map(function (s) { return (typeof s === 'string' ? s : s.line) + ' (not in the guide yet)'; }));
+      el('pasteSkipSum').textContent = plural(skip.length, 'line') + ' skipped';
+      el('pasteSkip').innerHTML = skip.map(function (s) { return '<li>' + esc(s) + '</li>'; }).join('');
+      show('pasteSkipWrap', skip.length > 0);
+      el('pasteSave').disabled = !p.items.length;
+      show('pasteStep1', false); show('pasteStep2', true);
+    }).catch(function (e) { showErr('pasteErr', e.message); }).then(function () { b.disabled = false; });
+  });
+  el('pasteBack').addEventListener('click', function () { show('pasteStep1', true); show('pasteStep2', false); });
+  el('pasteSave').addEventListener('click', function () {
+    var b = this; b.disabled = true;
+    api('/api/crisper/receipt', { body: { text: el('pasteText').value } }).then(function (r) {
+      S.st = r.state; closeSheets(); ls(SKIP_LS, '1'); view('vDash'); render(); toast('Added ' + plural(r.result.added, 'item'));
+    }).catch(function (e) { toast(e.message); b.disabled = false; });
+  });
+
+  boot();
+})();
+</script>
+</body>
+</html>

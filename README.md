@@ -112,3 +112,46 @@ Store links carry UTM parameters (`utm_source=produce-guide`) so Shopify can
 attribute sessions that start on these tools. Page views themselves do not
 appear in Shopify analytics, because the content is served from Vercel rather
 than from the store.
+
+## My Crisper (pilot)
+
+`/crisper` is a tester-facing pilot: people forward grocery order emails and see
+what to use first. Shelf-life ranges come from the Storage Guide (56 items,
+built into `api/_crisper/catalog.js` by `npm run catalog`).
+
+How it works:
+
+1. Sign up with an email (no password). The dashboard link holds a derived key,
+   `HMAC(CRISPER_SECRET, userId)`; only its hash is stored.
+2. Each tester gets `<postmark-hash>+<slug>@inbound.postmarkapp.com`, and a
+   Gmail/Outlook/iCloud filter forwards store emails to it.
+3. Postmark posts each email to `/api/crisper/inbound?token=…`. A rule-based
+   parser (`api/_crisper/parser.js`) keeps the produce names, quantities and date,
+   and the email itself is never stored. Gmail's forwarding code shows up on the
+   setup screen.
+4. Order confirmations become "On the way" items, and the final receipt replaces them.
+5. A daily cron (`/api/crisper/cron`, 14:00 UTC) sends Klaviyo events
+   (`Crisper Use Soon`, `Crisper Krisp Change Due`), and Klaviyo flows send the emails.
+6. `/crisper/admin` shows the pilot scorecard (needs `CRISPER_ADMIN_KEY`).
+
+Environment variables:
+
+| Variable | Purpose |
+| --- | --- |
+| `DATABASE_URL` | Neon Postgres. Tables are created on first request |
+| `CRISPER_SECRET` | Derives dashboard keys. Never change it after launch |
+| `CRISPER_INBOUND_ADDRESS` | Postmark inbound address, e.g. `abc123@inbound.postmarkapp.com` |
+| `CRISPER_INBOUND_TOKEN` | Shared secret in the Postmark webhook URL |
+| `CRON_SECRET` | Vercel sends it to the cron endpoint |
+| `CRISPER_ADMIN_KEY` | Unlocks `/crisper/admin` |
+| `KLAVIYO_PRIVATE_KEY` | Optional. Without it, events are logged and skipped |
+| `KLAVIYO_CRISPER_LIST_ID` | Optional. Marketing-consent list |
+| `CRISPER_PUBLIC_ORIGIN` | Defaults to `https://guide.simplykrisp.com` |
+
+Local dev (embedded Postgres, no accounts needed):
+
+```bash
+npm install
+npm test                                   # parser + end-to-end API tests
+CRISPER_INBOUND_ADDRESS=dev@inbound.postmarkapp.com CRISPER_ADMIN_KEY=dev-admin node dev/server.mjs
+```

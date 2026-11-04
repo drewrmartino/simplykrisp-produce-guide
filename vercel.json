@@ -1,7 +1,15 @@
 {
   "rewrites": [
     {
-      "source": "/((?!api/|seasonal|lab).*)",
+      "source": "/crisper",
+      "destination": "/crisper/index.html"
+    },
+    {
+      "source": "/crisper/admin",
+      "destination": "/crisper/admin.html"
+    },
+    {
+      "source": "/((?!api/|seasonal|lab|crisper).*)",
       "destination": "/index.html"
     },
     {
@@ -49,6 +57,38 @@
           "value": "public, max-age=300, s-maxage=600"
         }
       ]
+    },
+    {
+      "source": "/crisper/(.*)",
+      "headers": [
+        {
+          "key": "Referrer-Policy",
+          "value": "no-referrer"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "no-cache"
+        }
+      ]
+    },
+    {
+      "source": "/crisper",
+      "headers": [
+        {
+          "key": "Referrer-Policy",
+          "value": "no-referrer"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "no-cache"
+        }
+      ]
+    }
+  ],
+  "crons": [
+    {
+      "path": "/api/crisper/cron",
+      "schedule": "0 14 * * *"
     }
   ]
 }
