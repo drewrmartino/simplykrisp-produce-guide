@@ -17,6 +17,10 @@
       "destination": "/crisper/admin.html"
     },
     {
+      "source": "/(apple-touch-icon.*\\.png)",
+      "destination": "/apple-touch-icon.png"
+    },
+    {
       "source": "/((?!api/|seasonal|lab|crisper|krisper).*)",
       "destination": "/index.html"
     },

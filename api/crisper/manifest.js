@@ -21,6 +21,12 @@ export const BASE = {
   ],
   "icons": [
     {
+      "src": "/icons/sk-home-180.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
       "src": "/icons/icon-192.png?v=2",
       "sizes": "192x192",
       "type": "image/png",
