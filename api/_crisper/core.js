@@ -366,7 +366,7 @@ export async function applyOrder(user, parsed, channel) {
         firstName: user.first_name,
         metric: 'Krisper Storage Guide',
         uniqueId: `guide-${receipt.id}`,
-        properties: { ...guide, channel, retailer: parsed.retailer || null, item_names: guide.guide_items.length > 4 ? `these ${guide.item_count} items` : listNames(guide.guide_items.map((i) => i.name)), dashboard_url: dashboardUrl(user.id) },
+        properties: { zones: guide.zones, zone_count: guide.zones.length, item_count: guide.item_count, at_risk_usd: guide.at_risk_usd, at_risk_lb: guide.at_risk_lb, channel, retailer: parsed.retailer || null, item_names: guide.guide_items.length > 4 ? `these ${guide.item_count} items` : listNames(guide.guide_items.map((i) => i.name)), dashboard_url: dashboardUrl(user.id) },
       });
     }
   }
