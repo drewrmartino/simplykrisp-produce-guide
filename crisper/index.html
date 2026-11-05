@@ -363,8 +363,13 @@ details.itd .dbody{display:flex;flex-direction:column;gap:6px;margin-top:6px}
 .bnav button{flex:1;max-width:120px;background:none;border:0;font:inherit;font-size:12px;color:var(--muted-fg);display:flex;flex-direction:column;align-items:center;gap:2px;padding:4px 0;cursor:pointer}
 .bnav button .bi{font-size:18px;line-height:1}
 .bnav button[aria-current="page"]{color:var(--primary);font-weight:700}
-.bnav .badd{flex:0 0 auto;width:52px;height:52px;border-radius:50%;background:var(--primary);color:var(--primary-fg);font-size:28px;line-height:1;margin-top:-22px;box-shadow:0 4px 12px hsl(96 30% 20% / .3);justify-content:center}
+.bnav .bplus{font-size:24px;font-weight:400;line-height:18px;height:18px}
 body.has-bnav main{padding-bottom:96px}
+.usefirst{margin-top:16px;font-size:14px;color:var(--fg);background:var(--muted);border-radius:10px;padding:8px 12px;line-height:1.45}
+.zgrp h3{text-transform:none;letter-spacing:0;font-size:17px}
+.zgrp h3 .zi{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:8px;background:hsl(200 60% 94%);color:hsl(205 55% 35%);font-size:14px}
+.z-counter h3 .zi{background:hsl(40 90% 92%);color:hsl(32 80% 38%)}
+.z-pantry h3 .zi{background:hsl(30 15% 90%);color:hsl(30 15% 35%)}
 body.has-bnav footer{padding-bottom:90px}
 body.has-bnav .toast{bottom:calc(88px + env(safe-area-inset-bottom))}
 details.sd summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;width:100%}
@@ -626,7 +631,7 @@ details.sd{display:block}
 
   <nav class="bnav hide" id="bnav" aria-label="My Krisper">
     <button type="button" data-tab2="fridge" aria-current="page"><span class="bi" aria-hidden="true">&#10052;</span>Fridge</button>
-    <button type="button" class="badd" data-open="choose" aria-label="Add groceries"><span aria-hidden="true">+</span></button>
+    <button type="button" data-open="choose" aria-label="Add groceries"><span class="bi bplus" aria-hidden="true">+</span>Add</button>
     <button type="button" data-tab2="impact"><span class="bi" aria-hidden="true">&#9673;</span>Impact</button>
     <button type="button" data-tab2="more"><span class="bi" aria-hidden="true">&#9881;</span>Settings</button>
   </nav>
@@ -973,6 +978,15 @@ details.sd{display:block}
     { k: 'pending', t: 'On the way', sub: 'Starts counting when it arrives.' }
   ];
 
+  var ZONES = [
+    { k: 'high', t: 'Crisper drawer: high humidity', sub: 'Vent closed. Leafy greens and veggies that wilt.' },
+    { k: 'low', t: 'Crisper drawer: low humidity', sub: 'Vent open. Fruit, kept away from your greens.' },
+    { k: 'shelf', t: 'Fridge shelf', sub: 'Main fridge, not a drawer.' },
+    { k: 'counter', t: 'Counter', sub: 'Room temperature, out of direct sun.' },
+    { k: 'pantry', t: 'Cool, dark cupboard', sub: 'Not the fridge.' }
+  ];
+  var ZONE_IC = { high: '\u2744', low: '\u2744', shelf: '\u2744', counter: '\u2600', pantry: '\u25A2' };
+  function zoneOf(i) { return i.zone || (i.storage === 'pantry' ? 'pantry' : /counter/.test(i.storage) ? 'counter' : i.category === 'fruit' ? 'low' : 'high'); }
   function dayIndex(it) { return it.leftMax <= 0 ? 0 : it.leftMax; }
 
   function render() {
@@ -1057,7 +1071,7 @@ details.sd{display:block}
     var inFridge = S.st && S.st.items ? S.st.items.map(function (x) { return stem(x.name); }) : [];
     var avoid = (i.avoidWith || []).slice().sort(function (a, b) { return (inFridge.indexOf(stem(b)) >= 0) - (inFridge.indexOf(stem(a)) >= 0); }).slice(0, 3);
     var eth = (i.ethyleneProduction === 'high' || i.ethyleneProduction === 'very_high');
-    var store = '<p class="sto1"><span class="sti" aria-hidden="true">' + (WHERE_IC[i.storage] || '❄') + '</span><b>' + esc(WHERE[i.storage] || 'Fridge') + '</b>' + (tip ? ' · ' + esc(tip) : '') + '</p>';
+    var store = tip || i.storage === 'counter_then_fridge' ? '<p class="sto1">' + (i.storage === 'counter_then_fridge' ? '<b>Counter until ripe, then fridge.</b> ' : '') + esc(tip || '') + '</p>' : '';
     var detail = (avoid.length ? '<p class="sta"><b>Keep away from</b> ' + esc(avoid.join(', ')) + (eth ? ' (it gives off ethylene)' : '') + '</p>' : eth ? '<p class="sta">Gives off ethylene. Keep it away from greens.</p>' : '') +
       (i.krispBoost ? '<p class="stk">Your Krisp adds about ' + i.krispBoost[0] + '–' + i.krispBoost[1] + ' days</p>' : i.krispCould ? '<p class="stk off">A Krisp would add about ' + i.krispCould[0] + '–' + i.krispCould[1] + ' days</p>' : '') +
       wasteLine(i);
@@ -1110,12 +1124,17 @@ details.sd{display:block}
       note = '<div class="status" style="margin-top:18px;justify-content:space-between"><span>Showing items whose window ends ' + (S.filterDay === 0 ? 'today' : 'on ' + dd.toLocaleDateString(undefined, { weekday: 'long' })) + ' (' + filtered.length + ')</span><button class="link small" type="button" data-day="' + S.filterDay + '">Show all</button></div>';
     }
     var html = note;
-    GROUPS.forEach(function (g) {
-      var list = g.k === 'pending' ? (S.filterDay != null ? [] : pend) : filtered.filter(function (i) { return i.status === g.k; });
+    // Use-first note: secondary to where things go.
+    var due = filtered.filter(function (i) { return i.status !== 'later'; })
+      .sort(function (a, b) { return a.leftMax - b.leftMax; });
+    if (due.length) html += '<p class="usefirst"><b>Use first:</b> ' + due.slice(0, 5).map(function (i) { return esc(i.name) + ' <span class="muted">(' + (i.status === 'check' ? 'check it' : i.status === 'today' ? 'today' : i.leftMax + 'd') + ')</span>'; }).join(', ') + (due.length > 5 ? ' +' + (due.length - 5) : '') + '</p>';
+    ZONES.forEach(function (z) {
+      var list = filtered.filter(function (i) { return zoneOf(i) === z.k; }).sort(function (a, b) { return a.leftMax - b.leftMax; });
       if (!list.length) return;
-      html += '<div class="grp"><h3>' + g.t + ' <span class="pill">' + list.length + '</span></h3>' + (g.sub ? '<p class="gsub">' + g.sub + '</p>' : '') +
-        '<div class="items">' + list.map(function (i) { return itemCard(i, g.k === 'pending'); }).join('') + '</div></div>';
+      html += '<div class="grp zgrp z-' + z.k + '"><h3><span class="zi" aria-hidden="true">' + ZONE_IC[z.k] + '</span>' + z.t + ' <span class="pill">' + list.length + '</span></h3><p class="gsub">' + z.sub + '</p>' +
+        '<div class="items">' + list.map(function (i) { return itemCard(i, false); }).join('') + '</div></div>';
     });
+    if (pend.length && S.filterDay == null) html += '<div class="grp"><h3>On the way <span class="pill">' + pend.length + '</span></h3><p class="gsub">Starts counting when it arrives.</p><div class="items">' + pend.map(function (i) { return itemCard(i, true); }).join('') + '</div></div>';
     box.innerHTML = html;
   }
 

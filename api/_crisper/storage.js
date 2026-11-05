@@ -3,7 +3,8 @@
 // on the Krisper Storage Guide Klaviyo event, so a flow can email it right
 // after a receipt is read (forwarded email, pasted text or receipt photo).
 
-import { BY_NAME } from './shelf.js';
+import { BY_NAME, zoneFor } from './shelf.js';
+export { zoneFor };
 import { typicalWaste } from './impact.js';
 
 export const WHERE = {
@@ -21,15 +22,8 @@ export const ZONES = [
   { key: 'counter', title: 'Counter', detail: 'Room temperature, out of direct sun.' },
   { key: 'pantry', title: 'Cool, dark cupboard', detail: 'Not the fridge. Keep onions away from potatoes.' },
 ];
-const SHELF = new Set(['Blueberry', 'Strawberry', 'Raspberry', 'Blackberry', 'Cranberry', 'Herbs (Fresh)', 'Mushroom']);
 const SHELF_HOW = { 'Herbs (Fresh)': 'Top shelf, stems in a jar of water with a loose bag over the top.', Mushroom: 'Paper bag on a shelf.' };
 
-export function zoneFor(c) {
-  if (c.storage === 'pantry') return 'pantry';
-  if (c.storage === 'counter' || c.storage === 'counter_then_fridge') return 'counter';
-  if (SHELF.has(c.name)) return 'shelf';
-  return c.category === 'fruit' ? 'low' : 'high';
-}
 const MELON = /melon|cantaloupe|honeydew/i;
 function thenNote(c) {
   if (c.storage !== 'counter_then_fridge' || /refrigerat|fridge/i.test(c.tip || '')) return '';
