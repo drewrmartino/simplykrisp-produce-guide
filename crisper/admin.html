@@ -65,7 +65,7 @@ pre{background:var(--card);border:1px solid var(--border);border-radius:10px;pad
         var f = j.funnel, s = f.signups;
         var used = 0, tossed = 0; j.outcomes.forEach(function (o) { if (o.state === 'used') used = o.n; if (o.state === 'tossed') tossed = o.n; });
         var r2s = 0, r2a = 0; j.retention.forEach(function (r) { r2s += r.signups; r2a += r.active_week2; });
-        var html = '<p class="muted" style="margin-top:8px">Generated ' + new Date(j.generatedAt).toLocaleString() + '</p><div class="kpis">' +
+        var html = '<p class="muted" style="margin-top:8px">Generated ' + new Date(j.generatedAt).toLocaleString() + '</p><p class="muted">Simply Krisp order lookup: <b>' + esc(j.orderLookup || '') + '</b></p><div class="kpis">' +
           kpi(s, 'Sign-ups', '20–30', s >= 20) +
           kpi(pct(f.email_connected, s) + '%', 'Forwarding connected (' + f.email_connected + ')', '≥ 50%', pct(f.email_connected, s) >= 50) +
           kpi(pct(f.tracked_3plus, s) + '%', 'Tracked 3+ items (' + f.tracked_3plus + ')', '≥ 60%', pct(f.tracked_3plus, s) >= 60) +
@@ -73,6 +73,8 @@ pre{background:var(--card);border:1px solid var(--border);border-radius:10px;pad
           kpi(f.active_7d, 'Active last 7 days') +
           kpi(pct(used, used + tossed) + '%', 'Marked used vs tossed (' + (used + tossed) + ')') +
           kpi(f.krisp_owners, 'Krisp owners') +
+          kpi(f.krisp_on_orders, 'Double Krisp on orders') +
+          kpi(f.refills_active, 'Refills subscribed') +
           kpi(pct(f.reminders_off, s) + '%', 'Turned reminders off', '≤ 20%', pct(f.reminders_off, s) <= 20) +
           '</div>';
         html += '<h2>Funnel</h2>' + table([f]);

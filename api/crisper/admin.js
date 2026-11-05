@@ -5,6 +5,7 @@
 import { handle, bad } from '../_crisper/http.js';
 import { q, one } from '../_crisper/db.js';
 import { runReminders } from './cron.js';
+import { readKlaviyo } from '../_crisper/shop.js';
 
 export default handle(['GET'], async (req) => {
   const want = process.env.CRISPER_ADMIN_KEY;
@@ -19,6 +20,8 @@ export default handle(['GET'], async (req) => {
       count(*) FILTER (WHERE EXISTS (SELECT 1 FROM crisper_items i WHERE i.user_id = u.id) AND (SELECT count(*) FROM crisper_items i WHERE i.user_id = u.id) >= 3)::int AS tracked_3plus,
       count(*) FILTER (WHERE last_seen_at > now() - interval '7 days')::int AS active_7d,
       count(*) FILTER (WHERE has_krisp)::int AS krisp_owners,
+      count(*) FILTER (WHERE (shop_status->'doubleKrisp'->>'owned')::boolean)::int AS krisp_on_orders,
+      count(*) FILTER (WHERE shop_status->'subscription'->>'status' = 'active')::int AS refills_active,
       count(*) FILTER (WHERE reminder_pref = 'off')::int AS reminders_off
     FROM crisper_users u`);
 
@@ -46,7 +49,11 @@ export default handle(['GET'], async (req) => {
       (SELECT count(*)::int FROM crisper_items i WHERE i.user_id = u.id AND i.state <> 'deleted') AS items,
       (SELECT count(*)::int FROM crisper_receipts r WHERE r.user_id = u.id AND r.channel = 'email') AS emails
     FROM crisper_users u ORDER BY u.created_at DESC LIMIT 200`);
+  // Can the Klaviyo key read orders? (needs profiles:read, events:read, metrics:read)
+  let orderLookup;
+  try { orderLookup = process.env.KLAVIYO_PRIVATE_KEY ? ((await readKlaviyo('info@simplykrisp.com')), 'working') : 'no KLAVIYO_PRIVATE_KEY'; }
+  catch (e) { orderLookup = `not working (Klaviyo ${e.status || e.message}). The private key needs profiles:read, events:read and metrics:read.`; }
   const reminderPreview = req.query.preview === '1' ? await runReminders({ dryRun: true }) : null;
 
-  return { generatedAt: new Date().toISOString(), funnel, retention, sources, outcomes, receipts, unknownLines, topProduce, users, reminderPreview };
+  return { generatedAt: new Date().toISOString(), orderLookup, funnel, retention, sources, outcomes, receipts, unknownLines, topProduce, users, reminderPreview };
 });

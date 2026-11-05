@@ -181,10 +181,15 @@ export async function readKlaviyo(email) {
   if (!pid) return { orders: [], lifecycle: [] };
   const ids = await metricIds(key);
   const jobs = Object.entries(ids).map(async ([name, id]) => [name, await events(pid, id, key)]);
+  return fromEvents(await Promise.all(jobs));
+}
+
+// [[metricName, [{ at, p: event_properties }]]] -> { orders, lifecycle }
+export function fromEvents(pairs) {
   const out = { orders: [], lifecycle: [] };
-  for (const [name, list] of await Promise.all(jobs)) {
+  for (const [name, list] of pairs) {
     if (name === ORDERED) out.orders.push(...list.map(({ at, p }) => ({ at, productId: String(first(p.ProductID, p.product_id, '') || ''), name: first(p.Name, p.ProductName, '') })));
-    else out.lifecycle.push(...lifecycleFrom(name, list));
+    else if (LIFECYCLE[name]) out.lifecycle.push(...lifecycleFrom(name, list));
   }
   return out;
 }
