@@ -61,10 +61,17 @@ export function krispStatus(user, today) {
   };
 }
 
-// Krisp only gets credit where the guide shows a measured/estimated benefit and
-// the item actually lives in the fridge, where the sachet is.
+// Krisp only gets credit for items it measurably helps (krispTier) that sit in a
+// closed crisper drawer, where the sachet is. Ripen-first fruit (kiwi, avocado,
+// pear) counts for its ripe-in-the-drawer phase. Shelf, counter and pantry
+// items get nothing, even if they react to ethylene.
+export function krispReach(c) {
+  if (!c || !c.krispTier) return false;
+  const z = zoneFor(c);
+  return z === 'high' || z === 'low' || c.storage === 'counter_then_fridge';
+}
 function krispApplies(c, krisp) {
-  return krisp.active && c.krispRecommended && (c.storage === 'refrigerator' || c.storage === 'counter_then_fridge');
+  return krisp.active && krispReach(c);
 }
 
 export function itemView(row, user, today) {
@@ -116,14 +123,19 @@ export function itemView(row, user, today) {
     label,
     progress: Math.max(0, Math.min(1, age / Math.max(1, max))),
     krispBoost: boost[1] > 0 ? boost : null,
-    krispCould: !boost[1] && c.krispRecommended && c.storage !== 'counter' && c.storage !== 'pantry' ? c.krispExtra : null,
+    krispCould: !boost[1] && krispReach(c) ? c.krispExtra : null,
+    krispTier: krispReach(c) ? c.krispTier : null,
+    krispPrevents: krispReach(c) ? c.krispPrevents : '',
+    krispEvidence: krispReach(c) ? c.krispEvidence : '',
+    krispNoBenefit: krispReach(c) ? '' : (c.krispNoBenefit || ''),
+    krispWhen: krispReach(c) && c.storage === 'counter_then_fridge' ? 'once ripe, in the drawer' : '',
     tip: c.tip,
     ripeTip: c.ripeTip,
     scrap: scrapFor(c.name),
     avoidWith: c.avoidWith || [],
     ethyleneProduction: c.ethyleneProduction,
     ethyleneSensitivity: c.ethyleneSensitivity,
-    krispRecommended: !!c.krispRecommended,
+    krispRecommended: krispReach(c),
     waste: typicalWaste(row),
   };
 }

@@ -5,6 +5,7 @@ import { q, one, logEvent } from './db.js';
 import { BY_NAME, itemView, sortViews, todayIn, toISODate, addDays, daysBetween, krispStatus } from './shelf.js';
 import { storageGuide } from './storage.js';
 import { trackEvent } from './klaviyo.js';
+import { shopStatus } from './shop.js';
 import { buildImpact } from './impact.js';
 import { scrapFor, STOCK_BAG_TIP, TRIM_FATES } from './scraps.js';
 
@@ -107,6 +108,57 @@ export async function requireUser(req) {
   return user;
 }
 
+// ---------- Simply Krisp orders ----------
+
+const SHOP_STALE_MS = 6 * 3600 * 1000;
+const SHOP_MIN_MS = 60 * 1000;
+
+// Refresh what we know from simplykrisp.com orders (via Klaviyo) when stale or
+// asked. The first time we see a Double Krisp order we turn on "I have a Krisp"
+// once; if the member later turns it off, we leave it off.
+export async function refreshShop(user, { force = false } = {}) {
+  const age = user.shop_checked_at ? Date.now() - new Date(user.shop_checked_at).getTime() : Infinity;
+  if (age < SHOP_MIN_MS || (!force && age < SHOP_STALE_MS)) return user;
+  const today = todayIn(user.tz);
+  const fresh = await shopStatus(user.email, today);
+  const prev = user.shop_status || {};
+  if (!fresh.available) {
+    // Keep the last good answer; just note the check so we don't hammer Klaviyo.
+    return (await one('UPDATE crisper_users SET shop_checked_at = now() WHERE id = $1 RETURNING *', [user.id])) || user;
+  }
+  const status = { ...fresh, autoSet: !!prev.autoSet };
+  const sets = ['shop_status = $2::jsonb', 'shop_checked_at = now()'];
+  const vals = [user.id, null];
+  if (fresh.doubleKrisp.owned && !user.has_krisp && !prev.autoSet) {
+    status.autoSet = true;
+    sets.push('has_krisp = true');
+    if (!user.krisp_changed_on) {
+      const lastShip = [fresh.refills.lastOrderedOn, fresh.doubleKrisp.lastOrderedOn].filter(Boolean).sort().pop();
+      if (lastShip && daysBetween(lastShip, today) <= 35) { vals.push(lastShip); sets.push(`krisp_changed_on = $${vals.length}`); }
+    }
+    await logEvent(user.id, 'krisp_from_orders', { sub: fresh.subscription.status });
+  }
+  vals[1] = JSON.stringify(status);
+  return (await one(`UPDATE crisper_users SET ${sets.join(', ')} WHERE id = $1 RETURNING *`, vals)) || user;
+}
+
+function shopView(user, krisp) {
+  const s = user.shop_status;
+  if (!s || !s.available) return { checked: false };
+  const sub = s.subscription || {};
+  const shipped = s.refills?.lastOrderedOn || null;
+  return {
+    checked: true,
+    checkedAt: user.shop_checked_at,
+    ownsDoubleKrisp: !!s.doubleKrisp?.owned,
+    firstOrderedOn: s.doubleKrisp?.firstOrderedOn || null,
+    subscription: { status: sub.status || 'none', nextOn: sub.nextOn || null, manageUrl: sub.manageUrl || null, every: sub.every || null },
+    lastRefillOn: shipped,
+    // A fresh pair shipped after the last time they marked a change.
+    newPairWaiting: !!(shipped && krisp.owned && (!krisp.changedOn || shipped > krisp.changedOn) && daysBetween(shipped, todayIn(user.tz)) <= 30),
+  };
+}
+
 // ---------- state ----------
 
 // Pending (ordered, not yet delivered) items go live the day after the order
@@ -170,6 +222,7 @@ export async function buildState(user, { touch = true } = {}) {
       firstEmailAt: user.first_email_at,
     },
     krisp,
+    shop: shopView(user, krisp),
     items: active,
     pending,
     recentDone: recentDone.map((r) => ({ id: r.id, name: r.produce, state: r.state, at: r.state_at, qty: r.qty, tossedFrac: Number(r.tossed_frac) || 0, trim: r.trim || null, scrap: scrapFor(r.produce), imageUrl: BY_NAME[r.produce]?.imageUrl })),

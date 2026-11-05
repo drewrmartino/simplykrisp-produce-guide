@@ -79,8 +79,16 @@ test('items are sorted soonest first with Krisp credit on fridge items', async (
   const broccoli = me.data.items.find((i) => i.name === 'Broccoli');
   assert.deepEqual(broccoli.krispBoost, [2, 4]);
   assert.equal(broccoli.label, '5–9 days left');
+  assert.equal(broccoli.krispTier, 'strong');
+  assert.match(broccoli.krispPrevents, /yellow/);
   const banana = me.data.items.find((i) => i.name === 'Banana');
   assert.equal(banana.krispBoost, null, 'counter items get no Krisp credit');
+  const herbs = me.data.items.find((i) => i.name === 'Herbs (Fresh)');
+  assert.equal(herbs.krispBoost, null, 'shelf items are out of the Krisp\'s reach');
+  assert.match(herbs.krispNoBenefit, /jar on the shelf/);
+  const berry = me.data.items.find((i) => i.name === 'Strawberry');
+  assert.equal(berry.krispBoost, null, 'berries barely react to ethylene');
+  assert.equal(berry.krispCould, null);
 });
 
 test('item actions: used, tossed, undo, ripening, manual add', async () => {

@@ -3,7 +3,7 @@
 // on the Krisper Storage Guide Klaviyo event, so a flow can email it right
 // after a receipt is read (forwarded email, pasted text or receipt photo).
 
-import { BY_NAME, zoneFor } from './shelf.js';
+import { BY_NAME, zoneFor, krispReach } from './shelf.js';
 export { zoneFor };
 import { typicalWaste } from './impact.js';
 
@@ -61,8 +61,8 @@ export function storageGuide(items, { hasKrisp = false } = {}) {
       keep_away_from: avoid.join(', '),
       lasts: c.minDays === c.maxDays ? `about ${c.minDays} days` : `${c.minDays}–${c.maxDays} days`,
       // Krisp sits in the crisper drawers, so only promise days for drawer items.
-      krisp: c.krispRecommended && extra[1] > 0 && (zone === 'high' || zone === 'low')
-        ? (hasKrisp ? `Your Krisp adds about ${extra[0]}–${extra[1]} days` : `A Krisp adds about ${extra[0]}–${extra[1]} days`)
+      krisp: krispReach(c) && extra[1] > 0
+        ? `${hasKrisp ? 'Your Krisp adds' : 'A Krisp adds'} about ${extra[0]}–${extra[1]} days${c.storage === 'counter_then_fridge' ? ' once it is ripe and in the drawer' : ''}. ${c.krispPrevents}`.trim()
         : '',
       typically_wasted_pct: Math.round(w.rate * 100),
       typically_wasted_usd: w.usd.toFixed(2),

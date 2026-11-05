@@ -15,6 +15,10 @@ export const CATALOG = [
    0,
    0
   ],
+  "krispTier": null,
+  "krispPrevents": "",
+  "krispEvidence": "",
+  "krispNoBenefit": "Apples are the biggest ethylene source in the fridge, not a victim of it — and they out-gas any sachet. Store them apart from everything else instead.",
   "ethyleneProduction": "very_high",
   "ethyleneSensitivity": "high",
   "avoidWith": [
@@ -57,6 +61,10 @@ export const CATALOG = [
    2,
    3
   ],
+  "krispTier": "some",
+  "krispPrevents": "Once ripe and chilled, slows it going from ripe to overripe.",
+  "krispEvidence": "Based on published data for closely related produce.",
+  "krispNoBenefit": "",
   "ethyleneProduction": "high",
   "ethyleneSensitivity": "high",
   "avoidWith": [
@@ -86,6 +94,10 @@ export const CATALOG = [
    0,
    0
   ],
+  "krispTier": null,
+  "krispPrevents": "",
+  "krispEvidence": "",
+  "krispNoBenefit": "Bananas belong on the counter, and a Krisp works inside the closed crisper drawer, so it can't reach them. Keep bananas away from your other produce instead. They give off ethylene too.",
   "ethyleneProduction": "medium",
   "ethyleneSensitivity": "high",
   "avoidWith": [
@@ -110,11 +122,15 @@ export const CATALOG = [
   "minDays": 7,
   "maxDays": 14,
   "ripensFirst": false,
-  "krispRecommended": true,
+  "krispRecommended": false,
   "krispExtra": [
-   1,
-   2
+   0,
+   0
   ],
+  "krispTier": null,
+  "krispPrevents": "",
+  "krispEvidence": "",
+  "krispNoBenefit": "Berries barely react to ethylene. Mold is what ends them, so keep them dry and rinse just before eating.",
   "ethyleneProduction": "low",
   "ethyleneSensitivity": "low",
   "avoidWith": [],
@@ -134,11 +150,15 @@ export const CATALOG = [
   "minDays": 5,
   "maxDays": 7,
   "ripensFirst": true,
-  "krispRecommended": true,
+  "krispRecommended": false,
   "krispExtra": [
-   1,
-   2
+   0,
+   0
   ],
+  "krispTier": null,
+  "krispPrevents": "",
+  "krispEvidence": "",
+  "krispNoBenefit": "Whole melons ripen on the counter and are too big for the drawer. Once cut, wrap it and eat it within a few days.",
   "ethyleneProduction": "high",
   "ethyleneSensitivity": "medium",
   "avoidWith": [
@@ -168,6 +188,10 @@ export const CATALOG = [
    0,
    0
   ],
+  "krispTier": null,
+  "krispPrevents": "",
+  "krispEvidence": "",
+  "krispNoBenefit": "Tested directly: continuous ethylene had no effect on sweet cherries in cold storage.",
   "ethyleneProduction": "very_low",
   "ethyleneSensitivity": "low",
   "avoidWith": [],
@@ -194,6 +218,10 @@ export const CATALOG = [
    0,
    0
   ],
+  "krispTier": null,
+  "krispPrevents": "",
+  "krispEvidence": "",
+  "krispNoBenefit": "Tested directly: continuous ethylene had no effect on table grapes in cold storage.",
   "ethyleneProduction": "very_low",
   "ethyleneSensitivity": "low",
   "avoidWith": [],
@@ -222,6 +250,10 @@ export const CATALOG = [
    2,
    4
   ],
+  "krispTier": "strong",
+  "krispPrevents": "Ripe kiwi turns mushy fast around ethylene. This slows the softening.",
+  "krispEvidence": "Based on published data for closely related produce.",
+  "krispNoBenefit": "",
   "ethyleneProduction": "low",
   "ethyleneSensitivity": "high",
   "avoidWith": [
@@ -252,6 +284,10 @@ export const CATALOG = [
    0,
    0
   ],
+  "krispTier": null,
+  "krispPrevents": "",
+  "krispEvidence": "",
+  "krispNoBenefit": "Ethylene de-greens lemons rather than spoiling them, and the baseline life is already months.",
   "ethyleneProduction": "very_low",
   "ethyleneSensitivity": "medium",
   "avoidWith": [],
@@ -277,6 +313,10 @@ export const CATALOG = [
    0,
    0
   ],
+  "krispTier": null,
+  "krispPrevents": "",
+  "krispEvidence": "",
+  "krispNoBenefit": "Long baseline life and little ethylene response.",
   "ethyleneProduction": "very_low",
   "ethyleneSensitivity": "medium",
   "avoidWith": [],
@@ -297,11 +337,15 @@ export const CATALOG = [
   "minDays": 5,
   "maxDays": 7,
   "ripensFirst": true,
-  "krispRecommended": true,
+  "krispRecommended": false,
   "krispExtra": [
-   2,
-   3
+   0,
+   0
   ],
+  "krispTier": null,
+  "krispPrevents": "",
+  "krispEvidence": "",
+  "krispNoBenefit": "Mangoes ripen on the counter, and once ripe they have only a day or two. A Krisp adds little.",
   "ethyleneProduction": "medium",
   "ethyleneSensitivity": "medium",
   "avoidWith": [
@@ -326,11 +370,15 @@ export const CATALOG = [
   "minDays": 21,
   "maxDays": 28,
   "ripensFirst": false,
-  "krispRecommended": true,
+  "krispRecommended": false,
   "krispExtra": [
-   1,
-   2
+   0,
+   0
   ],
+  "krispTier": null,
+  "krispPrevents": "",
+  "krispEvidence": "",
+  "krispNoBenefit": "Citrus barely reacts to ethylene, so a Krisp won't change much. It keeps for weeks in the fridge anyway.",
   "ethyleneProduction": "very_low",
   "ethyleneSensitivity": "medium",
   "avoidWith": [
@@ -361,11 +409,15 @@ export const CATALOG = [
   "minDays": 3,
   "maxDays": 5,
   "ripensFirst": true,
-  "krispRecommended": true,
+  "krispRecommended": false,
   "krispExtra": [
-   1,
-   2
+   0,
+   0
   ],
+  "krispTier": null,
+  "krispPrevents": "",
+  "krispEvidence": "",
+  "krispNoBenefit": "Peaches ripen on the counter, and once ripe they have only a day or two. A Krisp adds little.",
   "ethyleneProduction": "medium",
   "ethyleneSensitivity": "medium",
   "avoidWith": [
@@ -394,6 +446,10 @@ export const CATALOG = [
    1,
    2
   ],
+  "krispTier": "some",
+  "krispPrevents": "Once ripe and chilled, slows it going soft and mealy.",
+  "krispEvidence": "Our estimate from how strongly it reacts to ethylene.",
+  "krispNoBenefit": "",
   "ethyleneProduction": "high",
   "ethyleneSensitivity": "high",
   "avoidWith": [
@@ -425,6 +481,10 @@ export const CATALOG = [
    0,
    0
   ],
+  "krispTier": null,
+  "krispPrevents": "",
+  "krispEvidence": "",
+  "krispNoBenefit": "Pineapple does not ripen further after harvest, so there is nothing for an absorber to slow down.",
   "ethyleneProduction": "low",
   "ethyleneSensitivity": "low",
   "avoidWith": [],
@@ -449,6 +509,10 @@ export const CATALOG = [
    0,
    0
   ],
+  "krispTier": null,
+  "krispPrevents": "",
+  "krispEvidence": "",
+  "krispNoBenefit": "Tested directly: continuous ethylene had no effect on plums in cold storage.",
   "ethyleneProduction": "medium",
   "ethyleneSensitivity": "medium",
   "avoidWith": [
@@ -472,11 +536,15 @@ export const CATALOG = [
   "minDays": 3,
   "maxDays": 7,
   "ripensFirst": false,
-  "krispRecommended": true,
+  "krispRecommended": false,
   "krispExtra": [
-   2,
-   3
+   0,
+   0
   ],
+  "krispTier": null,
+  "krispPrevents": "",
+  "krispEvidence": "",
+  "krispNoBenefit": "Berries barely react to ethylene. Mold is what ends them, so keep them dry and rinse just before eating.",
   "ethyleneProduction": "low",
   "ethyleneSensitivity": "low",
   "avoidWith": [],
@@ -501,6 +569,10 @@ export const CATALOG = [
    0,
    0
   ],
+  "krispTier": null,
+  "krispPrevents": "",
+  "krispEvidence": "",
+  "krispNoBenefit": "Tomatoes keep their flavor best on the counter, out of reach of a Krisp in the drawer. If you move ripe ones into the fridge to hold them a couple more days, a Krisp in that drawer helps a little.",
   "ethyleneProduction": "medium",
   "ethyleneSensitivity": "high",
   "avoidWith": [
@@ -532,11 +604,15 @@ export const CATALOG = [
   "minDays": 7,
   "maxDays": 14,
   "ripensFirst": true,
-  "krispRecommended": true,
+  "krispRecommended": false,
   "krispExtra": [
-   1,
-   2
+   0,
+   0
   ],
+  "krispTier": null,
+  "krispPrevents": "",
+  "krispEvidence": "",
+  "krispNoBenefit": "Whole melons are too big for the drawer. Once cut, wrap it and eat it within a few days.",
   "ethyleneProduction": "very_low",
   "ethyleneSensitivity": "high",
   "avoidWith": [
@@ -565,6 +641,10 @@ export const CATALOG = [
    0,
    0
   ],
+  "krispTier": null,
+  "krispPrevents": "",
+  "krispEvidence": "",
+  "krispNoBenefit": "Tested directly: continuous ethylene had no effect on nectarines in cold storage.",
   "ethyleneProduction": "medium",
   "ethyleneSensitivity": "medium",
   "avoidWith": [
@@ -588,11 +668,15 @@ export const CATALOG = [
   "minDays": 5,
   "maxDays": 7,
   "ripensFirst": true,
-  "krispRecommended": true,
+  "krispRecommended": false,
   "krispExtra": [
-   1,
-   2
+   0,
+   0
   ],
+  "krispTier": null,
+  "krispPrevents": "",
+  "krispEvidence": "",
+  "krispNoBenefit": "Papayas ripen on the counter, and once ripe they have only a day or two. A Krisp adds little.",
   "ethyleneProduction": "medium",
   "ethyleneSensitivity": "medium",
   "avoidWith": [
@@ -620,6 +704,10 @@ export const CATALOG = [
    0,
    0
   ],
+  "krispTier": null,
+  "krispPrevents": "",
+  "krispEvidence": "",
+  "krispNoBenefit": "Loss is water loss and husk scald, not ripening.",
   "ethyleneProduction": "very_low",
   "ethyleneSensitivity": "low",
   "avoidWith": [],
@@ -645,6 +733,10 @@ export const CATALOG = [
    1,
    2
   ],
+  "krispTier": "some",
+  "krispPrevents": "Slows the spears turning tough and woody.",
+  "krispEvidence": "Our estimate from how strongly it reacts to ethylene.",
+  "krispNoBenefit": "",
   "ethyleneProduction": "very_low",
   "ethyleneSensitivity": "medium",
   "avoidWith": [
@@ -673,6 +765,10 @@ export const CATALOG = [
    0,
    0
   ],
+  "krispTier": null,
+  "krispPrevents": "",
+  "krispEvidence": "",
+  "krispNoBenefit": "Low ethylene sensitivity — peppers soften from water loss, not from ethylene.",
   "ethyleneProduction": "low",
   "ethyleneSensitivity": "low",
   "avoidWith": [],
@@ -705,6 +801,10 @@ export const CATALOG = [
    2,
    4
   ],
+  "krispTier": "strong",
+  "krispPrevents": "Keeps the florets green instead of yellowing.",
+  "krispEvidence": "Based on published postharvest data for this item.",
+  "krispNoBenefit": "",
   "ethyleneProduction": "very_low",
   "ethyleneSensitivity": "high",
   "avoidWith": [
@@ -737,6 +837,10 @@ export const CATALOG = [
    2,
    3
   ],
+  "krispTier": "strong",
+  "krispPrevents": "Keeps the outer leaves from yellowing.",
+  "krispEvidence": "Based on published data for closely related produce.",
+  "krispNoBenefit": "",
   "ethyleneProduction": "very_low",
   "ethyleneSensitivity": "high",
   "avoidWith": [
@@ -766,6 +870,10 @@ export const CATALOG = [
    2,
    4
   ],
+  "krispTier": "strong",
+  "krispPrevents": "Slows outer leaves yellowing and loosening from the head.",
+  "krispEvidence": "Based on published postharvest data for this item.",
+  "krispNoBenefit": "",
   "ethyleneProduction": "very_low",
   "ethyleneSensitivity": "high",
   "avoidWith": [
@@ -799,6 +907,10 @@ export const CATALOG = [
    2,
    3
   ],
+  "krispTier": "strong",
+  "krispPrevents": "Stops the bitter taste carrots pick up from ethylene.",
+  "krispEvidence": "Based on published data for closely related produce.",
+  "krispNoBenefit": "",
   "ethyleneProduction": "very_low",
   "ethyleneSensitivity": "high",
   "avoidWith": [
@@ -827,6 +939,10 @@ export const CATALOG = [
    2,
    3
   ],
+  "krispTier": "strong",
+  "krispPrevents": "Slows browning on the head and yellowing leaves.",
+  "krispEvidence": "Based on published data for closely related produce.",
+  "krispNoBenefit": "",
   "ethyleneProduction": "very_low",
   "ethyleneSensitivity": "high",
   "avoidWith": [
@@ -856,6 +972,10 @@ export const CATALOG = [
    1,
    2
   ],
+  "krispTier": "some",
+  "krispPrevents": "Helps the stalks keep their green color.",
+  "krispEvidence": "Our estimate from how strongly it reacts to ethylene.",
+  "krispNoBenefit": "",
   "ethyleneProduction": "very_low",
   "ethyleneSensitivity": "medium",
   "avoidWith": [
@@ -884,6 +1004,10 @@ export const CATALOG = [
    0,
    0
   ],
+  "krispTier": null,
+  "krispPrevents": "",
+  "krispEvidence": "",
+  "krispNoBenefit": "Sweet corn loses its sugar to starch conversion, which is a temperature problem. Chill it fast instead.",
   "ethyleneProduction": "very_low",
   "ethyleneSensitivity": "low",
   "avoidWith": [],
@@ -912,6 +1036,10 @@ export const CATALOG = [
    2,
    3
   ],
+  "krispTier": "strong",
+  "krispPrevents": "Slows yellowing and soft, watery spots.",
+  "krispEvidence": "Based on published data for closely related produce.",
+  "krispNoBenefit": "",
   "ethyleneProduction": "low",
   "ethyleneSensitivity": "high",
   "avoidWith": [
@@ -944,6 +1072,10 @@ export const CATALOG = [
    1,
    2
   ],
+  "krispTier": "some",
+  "krispPrevents": "Slows browning at the cap and softening.",
+  "krispEvidence": "Our estimate from how strongly it reacts to ethylene.",
+  "krispNoBenefit": "",
   "ethyleneProduction": "low",
   "ethyleneSensitivity": "medium",
   "avoidWith": [],
@@ -968,6 +1100,10 @@ export const CATALOG = [
    0,
    0
   ],
+  "krispTier": null,
+  "krispPrevents": "",
+  "krispEvidence": "",
+  "krispNoBenefit": "Garlic is a dry pantry item at 65–70% humidity. Sprouting and damp are what get it, not ethylene.",
   "ethyleneProduction": "very_low",
   "ethyleneSensitivity": "low",
   "avoidWith": [],
@@ -993,6 +1129,10 @@ export const CATALOG = [
    2,
    3
   ],
+  "krispTier": "some",
+  "krispPrevents": "Slows yellowing and browning.",
+  "krispEvidence": "Based on published postharvest data for this item.",
+  "krispNoBenefit": "",
   "ethyleneProduction": "low",
   "ethyleneSensitivity": "medium",
   "avoidWith": [
@@ -1023,6 +1163,10 @@ export const CATALOG = [
    2,
    3
   ],
+  "krispTier": "strong",
+  "krispPrevents": "Slows the leaves yellowing.",
+  "krispEvidence": "Based on published data for closely related produce.",
+  "krispNoBenefit": "",
   "ethyleneProduction": "very_low",
   "ethyleneSensitivity": "high",
   "avoidWith": [
@@ -1053,6 +1197,10 @@ export const CATALOG = [
    2,
    4
   ],
+  "krispTier": "strong",
+  "krispPrevents": "Slows russet spotting, the brown specks on romaine and leaf lettuce.",
+  "krispEvidence": "Based on published postharvest data for this item.",
+  "krispNoBenefit": "",
   "ethyleneProduction": "very_low",
   "ethyleneSensitivity": "high",
   "avoidWith": [
@@ -1096,6 +1244,10 @@ export const CATALOG = [
    0,
    0
   ],
+  "krispTier": null,
+  "krispPrevents": "",
+  "krispEvidence": "",
+  "krispNoBenefit": "The one head-to-head trial of an ethylene absorber in mushroom packaging found no difference in shelf life.",
   "ethyleneProduction": "very_low",
   "ethyleneSensitivity": "medium",
   "avoidWith": [],
@@ -1126,6 +1278,10 @@ export const CATALOG = [
    0,
    0
   ],
+  "krispTier": null,
+  "krispPrevents": "",
+  "krispEvidence": "",
+  "krispNoBenefit": "Onions are a dry pantry item, and ethylene actually suppresses sprouting rather than causing it — it is sold commercially as a sprout inhibitor.",
   "ethyleneProduction": "very_low",
   "ethyleneSensitivity": "low",
   "avoidWith": [
@@ -1158,6 +1314,10 @@ export const CATALOG = [
    1,
    2
   ],
+  "krispTier": "some",
+  "krispPrevents": "Slows the pods yellowing.",
+  "krispEvidence": "Our estimate from how strongly it reacts to ethylene.",
+  "krispNoBenefit": "",
   "ethyleneProduction": "very_low",
   "ethyleneSensitivity": "medium",
   "avoidWith": [
@@ -1190,6 +1350,10 @@ export const CATALOG = [
    0,
    0
   ],
+  "krispTier": null,
+  "krispPrevents": "",
+  "krispEvidence": "",
+  "krispNoBenefit": "The research genuinely disagrees here — some studies show ethylene breaking dormancy, others show it suppressing sprouts. Cool, dark and ventilated is what matters.",
   "ethyleneProduction": "very_low",
   "ethyleneSensitivity": "medium",
   "avoidWith": [
@@ -1224,6 +1388,10 @@ export const CATALOG = [
    2,
    3
   ],
+  "krispTier": "strong",
+  "krispPrevents": "Slows the leaves yellowing.",
+  "krispEvidence": "Based on published data for closely related produce.",
+  "krispNoBenefit": "",
   "ethyleneProduction": "very_low",
   "ethyleneSensitivity": "high",
   "avoidWith": [
@@ -1254,6 +1422,10 @@ export const CATALOG = [
    0,
    0
   ],
+  "krispTier": null,
+  "krispPrevents": "",
+  "krispEvidence": "",
+  "krispNoBenefit": "A pantry item that should not be refrigerated at all.",
   "ethyleneProduction": "very_low",
   "ethyleneSensitivity": "low",
   "avoidWith": [],
@@ -1279,6 +1451,10 @@ export const CATALOG = [
    1,
    2
   ],
+  "krispTier": "some",
+  "krispPrevents": "Slows yellowing and soft spots.",
+  "krispEvidence": "Our estimate from how strongly it reacts to ethylene.",
+  "krispNoBenefit": "",
   "ethyleneProduction": "low",
   "ethyleneSensitivity": "medium",
   "avoidWith": [
@@ -1305,11 +1481,15 @@ export const CATALOG = [
   "minDays": 5,
   "maxDays": 10,
   "ripensFirst": false,
-  "krispRecommended": true,
+  "krispRecommended": false,
   "krispExtra": [
-   2,
-   3
+   0,
+   0
   ],
+  "krispTier": null,
+  "krispPrevents": "",
+  "krispEvidence": "",
+  "krispNoBenefit": "In a jar on the shelf, herbs are out of the Krisp's reach. Bagged in the high-humidity drawer instead, the Krisp helps keep them from yellowing.",
   "ethyleneProduction": "very_low",
   "ethyleneSensitivity": "high",
   "avoidWith": [
@@ -1350,6 +1530,10 @@ export const CATALOG = [
    0,
    0
   ],
+  "krispTier": null,
+  "krispPrevents": "",
+  "krispEvidence": "",
+  "krispNoBenefit": "The roots are not ethylene-sensitive; the tops are. Twist the tops off and the problem goes away.",
   "ethyleneProduction": "very_low",
   "ethyleneSensitivity": "low",
   "avoidWith": [],
@@ -1374,6 +1558,10 @@ export const CATALOG = [
    0,
    0
   ],
+  "krispTier": null,
+  "krispPrevents": "",
+  "krispEvidence": "",
+  "krispNoBenefit": "Winter squash keeps for months in a cool pantry, well away from the fridge.",
   "ethyleneProduction": "low",
   "ethyleneSensitivity": "medium",
   "avoidWith": [],
@@ -1404,6 +1592,10 @@ export const CATALOG = [
    0,
    0
   ],
+  "krispTier": null,
+  "krispPrevents": "",
+  "krispEvidence": "",
+  "krispNoBenefit": "Citrus is only moderately sensitive and keeps for weeks regardless — ethylene changes the peel colour rather than the fruit inside.",
   "ethyleneProduction": "very_low",
   "ethyleneSensitivity": "medium",
   "avoidWith": [],
@@ -1428,6 +1620,10 @@ export const CATALOG = [
    0,
    0
   ],
+  "krispTier": null,
+  "krispPrevents": "",
+  "krispEvidence": "",
+  "krispNoBenefit": "Stone fruit showed no measurable response to ethylene over three to eight weeks of cold storage.",
   "ethyleneProduction": "medium",
   "ethyleneSensitivity": "medium",
   "avoidWith": [
@@ -1450,11 +1646,15 @@ export const CATALOG = [
   "minDays": 5,
   "maxDays": 7,
   "ripensFirst": true,
-  "krispRecommended": true,
+  "krispRecommended": false,
   "krispExtra": [
-   1,
-   2
+   0,
+   0
   ],
+  "krispTier": null,
+  "krispPrevents": "",
+  "krispEvidence": "",
+  "krispNoBenefit": "Whole melons ripen on the counter and are too big for the drawer. Once cut, wrap it and eat it within a few days.",
   "ethyleneProduction": "medium",
   "ethyleneSensitivity": "high",
   "avoidWith": [
@@ -1484,6 +1684,10 @@ export const CATALOG = [
    0,
    0
   ],
+  "krispTier": null,
+  "krispPrevents": "",
+  "krispEvidence": "",
+  "krispNoBenefit": "Grey mould, not ethylene, is what ends a raspberry.",
   "ethyleneProduction": "low",
   "ethyleneSensitivity": "low",
   "avoidWith": [],
@@ -1508,6 +1712,10 @@ export const CATALOG = [
    0,
    0
   ],
+  "krispTier": null,
+  "krispPrevents": "",
+  "krispEvidence": "",
+  "krispNoBenefit": "Berries fail to mould and water loss, not ethylene.",
   "ethyleneProduction": "low",
   "ethyleneSensitivity": "low",
   "avoidWith": [],
@@ -1532,6 +1740,10 @@ export const CATALOG = [
    0,
    0
   ],
+  "krispTier": null,
+  "krispPrevents": "",
+  "krispEvidence": "",
+  "krispNoBenefit": "Chiles respond to ethylene only mildly, and they give way to water loss and soft spots long before ripening gas becomes the problem.",
   "ethyleneProduction": "low",
   "ethyleneSensitivity": "medium",
   "avoidWith": [],
@@ -1558,6 +1770,10 @@ export const CATALOG = [
    0,
    0
   ],
+  "krispTier": null,
+  "krispPrevents": "",
+  "krispEvidence": "",
+  "krispNoBenefit": "Low ethylene sensitivity and a long baseline life.",
   "ethyleneProduction": "low",
   "ethyleneSensitivity": "low",
   "avoidWith": [],
@@ -1583,6 +1799,10 @@ export const CATALOG = [
    0,
    0
   ],
+  "krispTier": null,
+  "krispPrevents": "",
+  "krispEvidence": "",
+  "krispNoBenefit": "Low sensitivity, and figs already give off a fair amount of ethylene themselves.",
   "ethyleneProduction": "medium",
   "ethyleneSensitivity": "low",
   "avoidWith": [],
@@ -1608,6 +1828,10 @@ export const CATALOG = [
    2,
    3
   ],
+  "krispTier": "strong",
+  "krispPrevents": "Slows the green tops yellowing.",
+  "krispEvidence": "Based on published data for closely related produce.",
+  "krispNoBenefit": "",
   "ethyleneProduction": "low",
   "ethyleneSensitivity": "high",
   "avoidWith": [],
