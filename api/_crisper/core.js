@@ -3,6 +3,7 @@
 import { createHmac, createHash, randomBytes } from 'node:crypto';
 import { q, one, logEvent } from './db.js';
 import { BY_NAME, itemView, sortViews, todayIn, toISODate, addDays, daysBetween, krispStatus } from './shelf.js';
+import { storageGuide } from './storage.js';
 import { trackEvent } from './klaviyo.js';
 import { buildImpact } from './impact.js';
 import { scrapFor, STOCK_BAG_TIP, TRIM_FATES } from './scraps.js';
@@ -354,6 +355,20 @@ export async function applyOrder(user, parsed, channel) {
         dashboard_url: dashboardUrl(user.id),
       },
     });
+  }
+  // Storage guide email (all receipt channels). Skip when this receipt just
+  // replaced a confirmation: that order already got its guide.
+  if (!superseded) {
+    const guide = storageGuide(items, { hasKrisp: !!user.has_krisp });
+    if (guide.guide_items.length) {
+      await trackEvent({
+        email: user.email,
+        firstName: user.first_name,
+        metric: 'Krisper Storage Guide',
+        uniqueId: `guide-${receipt.id}`,
+        properties: { ...guide, channel, retailer: parsed.retailer || null, item_names: guide.guide_items.length > 4 ? `these ${guide.item_count} items` : listNames(guide.guide_items.map((i) => i.name)), dashboard_url: dashboardUrl(user.id) },
+      });
+    }
   }
   return { receipt, added: items.length, superseded: !!superseded, pending: kind === 'confirmation' };
 }

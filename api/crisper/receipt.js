@@ -14,6 +14,6 @@ export default handle(['POST'], async (req) => {
   const parsed = parseEmail({ text, subject: '', from: '' });
   if (parsed.type !== 'order') throw bad('That looks like a setup email, not a receipt.');
   if (req.body.preview) return { preview: { retailer: parsed.retailer, items: parsed.items, skipped: parsed.skipped, unknown: parsed.unknown } };
-  const result = await applyOrder(user, parsed, 'paste');
+  const result = await applyOrder(user, parsed, req.body.channel === 'photo' ? 'photo' : 'paste');
   return { result: { added: result.added }, state: await buildState(user, { touch: false }) };
 });

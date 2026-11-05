@@ -7,7 +7,6 @@
 <meta name="description" content="Forward your grocery order emails and see what to eat first. Shelf-life ranges from the SimplyKrisp Produce Storage Guide." />
 <meta name="robots" content="noindex" />
 <link rel="icon" type="image/png" href="/favicon.png" />
-<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Questrial&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -166,6 +165,28 @@ ol.steps li::marker{color:var(--muted-fg);font-weight:700}
 .tip{font-size:13.5px;color:var(--muted-fg);border-top:1px dashed var(--border);padding-top:7px}
 .itf{display:flex;gap:6px;align-items:center;margin-top:auto}
 .itf .btn{flex:1}
+.banner.inst{align-items:flex-start;background:var(--card);border-color:var(--card-border);box-shadow:var(--shadow-sm);margin-top:18px}
+.banner.inst img{border-radius:10px;flex:0 0 auto}
+ol.ios{margin:8px 0 0 18px;font-size:14px;line-height:1.5}
+.photo{display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+.photo .btn.dis{opacity:.55;pointer-events:none}
+.or{display:flex;align-items:center;gap:10px;color:var(--muted-fg);font-size:12.5px;text-transform:uppercase;letter-spacing:.06em}
+.or::before,.or::after{content:"";flex:1;border-top:1px solid var(--border)}
+.sto{background:hsl(140 30% 96%);border:1px solid hsl(140 22% 88%);border-radius:.5rem;padding:8px 10px;display:flex;flex-direction:column;gap:4px}
+.stw{display:flex;align-items:center;gap:6px;font-size:14.5px}
+.sti{font-size:13px;width:22px;height:22px;border-radius:99px;background:var(--card);display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;color:var(--primary)}
+.wl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted-fg);margin-right:2px}
+.stt{font-size:13.5px;line-height:1.4}
+.sta{font-size:13px;color:var(--muted-fg);line-height:1.4}
+.sta b{color:var(--fg);font-weight:600}
+.stk{font-size:12.5px;font-weight:600;color:hsl(52 60% 22%);background:hsl(52 90% 88%);border-radius:99px;padding:1px 8px;align-self:flex-start}
+.stk.off{background:var(--muted);color:var(--muted-fg);font-weight:500}
+.wst{font-size:13px;line-height:1.4;color:var(--muted-fg);display:flex;flex-direction:column;gap:1px}
+.wst b{color:var(--fg)}
+.itf{flex-wrap:wrap}
+.itf .fl{font-size:12px;color:var(--muted-fg);flex:1 0 100%;margin-bottom:-2px;text-transform:uppercase;letter-spacing:.06em;font-weight:700}
+.tiles.st3{grid-template-columns:repeat(3,1fr);margin-top:10px}
+@media (max-width:560px){.tiles.st3{grid-template-columns:1fr 1fr 1fr}.tiles.st3 .v{font-size:19px}}
 .more{width:34px;flex:0 0 34px!important;padding:0}
 .menu{position:absolute;right:10px;bottom:48px;background:#fff;border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow-md);z-index:5;min-width:200px;padding:5px}
 .menu button{display:block;width:100%;text-align:left;background:none;border:0;padding:9px 11px;border-radius:6px;cursor:pointer;font-size:14px}
@@ -299,6 +320,13 @@ footer a{color:var(--muted-fg)}
 }
 @media (prefers-reduced-motion:reduce){.spin{animation:none}}
 </style>
+<link rel="manifest" href="/manifest.webmanifest" />
+<meta name="theme-color" content="#2e431f" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-title" content="Simply Krisp" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<link rel="apple-touch-icon" href="/icons/apple-180.png" />
 </head>
 <body>
 <script src="/assets/sk-header.js"></script>
@@ -492,7 +520,7 @@ footer a{color:var(--muted-fg)}
 
       <div class="row">
         <button class="btn" type="button" data-go="dash" id="setupDone">Go to my Krisper</button>
-        <button class="btn ghost" type="button" data-open="paste">Paste a receipt instead</button>
+        <button class="btn ghost" type="button" data-open="photo">Snap a receipt instead</button>
       </div>
     </div>
   </div>
@@ -507,11 +535,14 @@ footer a{color:var(--muted-fg)}
       </div>
       <div class="acts">
         <button class="btn" type="button" data-open="add">+ Add produce</button>
+        <button class="btn ghost" type="button" data-open="photo">Receipt photo</button>
         <button class="btn ghost" type="button" data-open="paste">Paste receipt</button>
       </div>
     </div>
 
-    <section class="card imp" id="impact" aria-label="Your impact"></section>
+    <div id="installCard"></div>
+
+    <section class="card imp stake" id="stake" aria-label="Store it right"></section>
 
     <div class="strip" id="strip" aria-label="What to use each day this week"></div>
     <p class="note" id="stripNote" style="margin-top:6px">Each day shows items reaching the end of their usual window. Tap a day to filter.</p>
@@ -520,6 +551,8 @@ footer a{color:var(--muted-fg)}
     <div id="krispNudge" style="margin-top:14px"></div>
 
     <div id="groups"></div>
+
+    <section class="card imp" id="impact" aria-label="Your impact" style="margin-top:28px"></section>
 
     <section id="secKrisp"></section>
 
@@ -563,6 +596,10 @@ footer a{color:var(--muted-fg)}
         <div class="setrow">
           <div style="min-width:0;flex:1 1 100%"><b>Your private link</b><div class="note">Open it on your phone or another browser to see the same Krisper. Anyone with it can see your list, so keep it to yourself.</div>
             <div class="addr" style="margin-top:6px"><code id="myLink" style="overflow-wrap:anywhere;font-size:12.5px"></code><button class="btn ghost sm" type="button" data-copy="myLink">Copy</button></div></div>
+        </div>
+        <div class="setrow" id="setInstall">
+          <div><b>Install the app</b><div class="note" id="setInstallNote">Put Simply Krisp on your home screen. It opens straight to My Krisper.</div></div>
+          <button class="btn ghost sm" type="button" data-install>Install</button>
         </div>
         <div class="setrow">
           <div><b>This device</b><div class="note">Sign out here. Your private link brings you back.</div></div>
@@ -615,15 +652,23 @@ footer a{color:var(--muted-fg)}
 <!-- paste receipt sheet -->
 <div class="scrim hide" id="shPaste" role="dialog" aria-modal="true" aria-labelledby="shPasteT">
   <div class="sheet">
-    <div class="sh"><h2 id="shPasteT">Paste a receipt</h2><button class="x" type="button" data-close aria-label="Close">×</button></div>
+    <div class="sh"><h2 id="shPasteT">Add a receipt</h2><button class="x" type="button" data-close aria-label="Close">×</button></div>
     <div id="pasteStep1" class="stack">
-      <p class="muted small">Open an order email or receipt, select all, copy, and paste it here. Works with most stores, including in-store e-receipts.</p>
+      <div class="photo">
+        <label class="btn" for="photoIn" id="photoBtn">Take or choose a receipt photo</label>
+        <input type="file" id="photoIn" accept="image/*" class="sr">
+        <p class="muted small">Lay the receipt flat in good light and fill the frame. The photo is read on your phone and never uploaded; only the text is sent.</p>
+        <div class="status small hide" id="photoStatus"><span class="spin"></span><span id="photoMsg">Reading your receipt…</span></div>
+      </div>
+      <div class="or"><span>or paste the text</span></div>
+      <p class="muted small" id="pasteHelp">Open an order email or e-receipt, select all, copy, and paste it here.</p>
       <textarea class="inp" id="pasteText" placeholder="Paste receipt text…"></textarea>
       <div class="err hide" id="pasteErr" role="alert"></div>
       <div class="row"><button class="btn" type="button" id="pastePreview">Find the produce</button></div>
     </div>
     <div id="pasteStep2" class="hide stack">
       <p id="pasteFound"></p>
+      <p class="note hide" id="photoHint">Read from your photo. If a count or item looks off, tap Back to fix the text, or change it on the card after adding.</p>
       <ul class="pl" id="pasteList"></ul>
       <details id="pasteSkipWrap" class="small muted"><summary id="pasteSkipSum"></summary><ul class="pl" id="pasteSkip" style="margin-top:6px"></ul></details>
       <div class="row"><button class="btn" type="button" id="pasteSave">Add these</button><button class="btn ghost" type="button" id="pasteBack">Back</button></div>
@@ -895,10 +940,12 @@ footer a{color:var(--muted-fg)}
     renderStrip(items);
     renderConflict(items);
     renderGroups(items, pend);
+    renderStake(items, pend);
     renderKrisp(st);
     renderStats(st);
     renderOrders(st);
     renderSettings(st);
+    setManifest(); renderInstall();
   }
 
   function renderStrip(items) {
@@ -949,16 +996,31 @@ footer a{color:var(--muted-fg)}
     box.classList.remove('hide');
   }
 
+  var WHERE = { refrigerator: 'Fridge', counter: 'Counter', counter_then_fridge: 'Counter until ripe, then fridge', pantry: 'Cool, dark pantry' };
+  var WHERE_IC = { refrigerator: '❄', counter: '☀', counter_then_fridge: '☀→❄', pantry: '▢' };
+  function wasteLine(i) {
+    var w = i.waste; if (!w) return '';
+    var pct = Math.round(w.rate * 100);
+    return '<div class="wst"><span class="wl">Typically wasted</span><span><b>' + pct + '%</b> of ' + esc(i.name.toLowerCase()) + ' bought for home goes uneaten' + (w.source === 'epa' ? ' (all-produce average)' : '') +
+      '. On this buy that\'s about <b>' + money(w.usd) + '</b> · ' + num(w.lb) + ' lb · ' + num(w.co2Lb) + ' lb CO₂e.</span></div>';
+  }
+  function stem(x) { return String(x).toLowerCase().replace(/(oes|ies|es|s)$/, function (m) { return m === 'ies' ? 'y' : m === 'oes' ? 'o' : ''; }); }
   function itemCard(i, pending) {
     var q = i.qty > 1 ? ' <span class="q">×' + i.qty + '</span>' : (i.weight ? ' <span class="q">' + esc(i.weight) + '</span>' : '');
-    var tags = '';
-    if (i.krispBoost) tags += '<span class="tag k">+' + i.krispBoost[0] + '–' + i.krispBoost[1] + ' days with Krisp</span>';
-    if (i.ripeningDays) tags += '<span class="tag">Ripening +' + i.ripeningDays + 'd</span>';
-    if (i.source === 'manual') tags += '<span class="tag">Added by hand</span>';
-    var storage = { refrigerator: 'Fridge', counter: 'Counter', counter_then_fridge: 'Counter, then fridge', pantry: 'Pantry' }[i.storage] || '';
-    if (storage) tags += '<span class="tag">' + storage + '</span>';
     var label = pending ? 'Counting starts ' + fmtDate(i.startDate) + ' · lasts ' + i.minDays + '–' + i.maxDays + ' days' : i.label;
     var tip = i.ripensFirst && i.status === 'later' && i.ripeTip ? i.ripeTip : i.tip;
+    var inFridge = S.st && S.st.items ? S.st.items.map(function (x) { return stem(x.name); }) : [];
+    var avoid = (i.avoidWith || []).slice().sort(function (a, b) { return (inFridge.indexOf(stem(b)) >= 0) - (inFridge.indexOf(stem(a)) >= 0); }).slice(0, 3);
+    var eth = (i.ethyleneProduction === 'high' || i.ethyleneProduction === 'very_high');
+    var store = '<div class="sto"><div class="stw"><span class="sti" aria-hidden="true">' + (WHERE_IC[i.storage] || '❄') + '</span><span class="wl">Store it</span><b>' + esc(WHERE[i.storage] || 'Fridge') + '</b></div>' +
+      (tip ? '<p class="stt">' + esc(tip) + '</p>' : '') +
+      (avoid.length ? '<p class="sta"><b>Keep away from</b> ' + esc(avoid.join(', ')) + (eth ? ' (it gives off ethylene)' : '') + '</p>' : eth ? '<p class="sta">Gives off ethylene: keep it apart from greens and other sensitive produce.</p>' : '') +
+      (i.krispBoost ? '<p class="stk">Your Krisp adds about ' + i.krispBoost[0] + '–' + i.krispBoost[1] + ' days</p>' : i.krispCould ? '<p class="stk off">A Krisp would add about ' + i.krispCould[0] + '–' + i.krispCould[1] + ' days</p>' : '') +
+      '</div>';
+    var tags = '';
+    if (i.ripeningDays) tags += '<span class="tag">Ripening +' + i.ripeningDays + 'd</span>';
+    if (i.source === 'manual') tags += '<span class="tag">Added by hand</span>';
+    if (i.source === 'photo') tags += '<span class="tag">From a receipt photo</span>';
     var menu = pending
       ? '<button type="button" data-act="arrived" data-id="' + i.id + '">It arrived today</button><button type="button" data-act="delete" data-id="' + i.id + '">Remove, didn\'t get it</button>'
       : (i.ripensFirst ? '<button type="button" data-act="ripening" data-days="2" data-id="' + i.id + '">Still ripening (+2 days)</button>' : '') +
@@ -967,15 +1029,32 @@ footer a{color:var(--muted-fg)}
         '<button type="button" data-act="delete" data-id="' + i.id + '">Remove (wasn\'t mine / mistake)</button>';
     var foot = pending
       ? '<button class="btn ghost sm" type="button" data-act="arrived" data-id="' + i.id + '">Arrived</button>'
-      : '<button class="btn sm" type="button" data-act="used" data-id="' + i.id + '">Used it</button><button class="btn ghost sm" type="button" data-act="tossed" data-id="' + i.id + '">Tossed</button>';
+      : '<span class="fl">When it\'s gone:</span><button class="btn ghost sm" type="button" data-act="used" data-id="' + i.id + '">Used it</button><button class="btn ghost sm" type="button" data-act="tossed" data-id="' + i.id + '">Tossed</button>';
     return '<article class="it s-' + (pending ? 'pending' : i.status) + '">' +
-      '<div class="ith"><img src="' + esc(i.imageUrl) + '" alt="" loading="lazy"><div><div class="itn">' + esc(i.name) + q + '</div><div class="itl">' + esc(label) + '</div></div></div>' +
+      '<div class="ith"><img src="' + esc(i.imageUrl) + '" alt="" loading="lazy"><div style="flex:1;min-width:0"><div class="itn">' + esc(i.name) + q + '</div><div class="itl">' + esc(label) + '</div></div></div>' +
       (pending ? '' : '<div class="bar" role="progressbar" aria-label="Freshness used" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' + Math.round(i.progress * 100) + '"><i style="width:' + Math.max(4, Math.round(i.progress * 100)) + '%"></i></div>') +
+      store + wasteLine(i) +
       (tags ? '<div class="tags">' + tags + '</div>' : '') +
-      (tip ? '<div class="tip">' + esc(tip) + '</div>' : '') +
       '<div class="itf">' + foot + '<button class="btn ghost sm more" type="button" data-more aria-label="More options for ' + esc(i.name) + '">⋯</button></div>' +
       (pending ? '' : '<button class="partl" type="button" data-fin="' + i.id + '">Tossed some' + (i.scrap ? ' · log the ' + esc(i.scrap.part) : '') + '</button>') +
       '<div class="menu hide">' + menu + '</div></article>';
+  }
+
+  // What's at stake: the typical-household waste for everything on hand now.
+  function renderStake(items, pend) {
+    var box = el('stake'); var all = items.concat(pend);
+    if (!all.length) { box.innerHTML = ''; return; }
+    var usd = 0, lb = 0, co2 = 0;
+    all.forEach(function (i) { if (i.waste) { usd += i.waste.usd; lb += i.waste.lb; co2 += i.waste.co2Lb; } });
+    var fr = all.filter(function (i) { return i.storage === 'refrigerator' || i.storage === 'counter_then_fridge'; }).length;
+    var ct = all.filter(function (i) { return i.storage === 'counter'; }).length, pn = all.filter(function (i) { return i.storage === 'pantry'; }).length;
+    var where = [fr ? fr + ' in the fridge' : '', ct ? ct + ' on the counter' : '', pn ? pn + ' in the pantry' : ''].filter(Boolean).join(' · ');
+    box.innerHTML = '<div class="ih"><h2>Store it right, waste less</h2><span class="note">' + plural(all.length, 'item') + ' · ' + esc(where) + '</span></div>' +
+      '<p class="muted small" style="margin-top:4px">If what you have now went the typical US-household way, this much would end up in the trash. Each card shows where to keep it and what to keep it away from.</p>' +
+      '<div class="tiles st3"><div class="tile bad"><div class="v">' + money(usd) + '</div><div class="l">Typically wasted</div></div>' +
+      '<div class="tile"><div class="v">' + num(lb) + '<small>lb</small></div><div class="l">Food to the landfill</div></div>' +
+      '<div class="tile"><div class="v">' + num(co2) + '<small>lb CO₂e</small></div><div class="l">Emissions behind it' + (co2 >= 1 ? ' · ≈ ' + plural(Math.round(co2 * 0.4536 / 0.4), 'mile') + ' driven' : '') + '</div></div></div>' +
+      '<details><summary>Where these numbers come from</summary><p>Per-item waste rates are USDA ERS <a href="https://www.ers.usda.gov/data-products/food-availability-per-capita-data-system" target="_blank" rel="noopener">Loss-Adjusted Food Availability</a> estimates of the edible share of each fresh fruit or vegetable that goes uneaten at home (cooking loss and uneaten food, latest year, 2021–2022). Items USDA doesn\'t list use the <a href="https://www.epa.gov/system/files/documents/2025-04/costoffoodwastereport_508.pdf" target="_blank" rel="noopener">EPA (2025)</a> 27% average for fresh produce. Weights, prices and CO₂e use the same estimates as Your impact below.</p></details>';
   }
 
   function renderGroups(items, pend) {
@@ -983,7 +1062,7 @@ footer a{color:var(--muted-fg)}
     if (!items.length && !pend.length) {
       var hasAddr = !!S.st.inbox.address;
       box.innerHTML = '<div class="card empty-state" style="margin-top:22px"><h2>Your Krisper is empty</h2><p class="muted">' +
-        (hasAddr ? 'Forward a grocery receipt to your Krisper address, paste one, or add a few things by hand.' : 'Paste a receipt or add a few things by hand to try it.') +
+        (hasAddr ? 'Forward a grocery receipt to your Krisper address, snap a photo of a paper receipt, or add a few things by hand.' : 'Snap a photo of a receipt, paste one, or add a few things by hand.') +
         '</p><div class="row"><button class="btn" type="button" data-open="add">+ Add produce</button><button class="btn ghost" type="button" data-open="paste">Paste receipt</button>' +
         (hasAddr ? '<button class="btn ghost" type="button" data-go="setup">Email setup</button>' : '') + '</div></div>';
       return;
@@ -1192,7 +1271,7 @@ footer a{color:var(--muted-fg)}
     }
     el('orders').innerHTML = rs.map(function (r) {
       var name = r.retailer || 'Receipt';
-      var how = r.channel === 'paste' ? 'pasted' : r.kind === 'confirmation' ? 'order confirmation' : 'receipt email';
+      var how = r.channel === 'photo' ? 'receipt photo' : r.channel === 'paste' ? 'pasted' : r.kind === 'confirmation' ? 'order confirmation' : 'receipt email';
       var extra = (r.skipped || []).length + (r.unknown || []).length;
       return '<div class="rc"><div class="rh"><span><b>' + esc(name) + '</b> <span class="muted small">' + esc(how) + ' · ' + fmtDate(r.receivedAt) + '</span></span>' +
         '<span class="small">' + (STATUS[r.status] ? '<span class="muted">' + STATUS[r.status] + '</span> · ' : '') + plural((r.matched || []).length, 'item') + '</span></div>' +
@@ -1225,7 +1304,7 @@ footer a{color:var(--muted-fg)}
   el('setKrispOn').addEventListener('change', function () { saveSettings({ krispChangedOn: this.value || null }, 'Sachet date saved'); });
   el('krispToday').addEventListener('click', function () { saveSettings({ krispChangedOn: S.st.today }, 'Sachet date updated'); });
   el('saveName').addEventListener('click', function () { saveSettings({ firstName: el('setName').value }, 'Saved'); });
-  el('signOut').addEventListener('click', function () { ls(KEY_LS, null); ls(SKIP_LS, null); S.key = null; S.st = null; view('vLanding'); });
+  el('signOut').addEventListener('click', function () { ls(KEY_LS, null); ls(SKIP_LS, null); S.key = null; S.st = null; setManifest(); view('vLanding'); });
   el('delStart').addEventListener('click', function () { show('delConfirm', true); });
   el('delNo').addEventListener('click', function () { show('delConfirm', false); });
   el('delYes').addEventListener('click', function () {
@@ -1280,10 +1359,12 @@ footer a{color:var(--muted-fg)}
       S.sel = {}; el('addSearch').value = ''; el('addDate').value = (S.st && S.st.today) || todayLocal(); el('addDate').max = el('addDate').value;
       renderChips(); renderSel(); showErr('addErr', '');
       show('shAdd', true); setTimeout(function () { el('addSearch').focus(); }, 30);
-    } else if (which === 'paste') {
+    } else if (which === 'paste' || which === 'photo') {
       if (!S.st) return;
-      el('pasteText').value = ''; showErr('pasteErr', ''); show('pasteStep1', true); show('pasteStep2', false);
-      show('shPaste', true); setTimeout(function () { el('pasteText').focus(); }, 30);
+      S.pasteChannel = 'paste';
+      el('pasteText').value = ''; showErr('pasteErr', ''); show('pasteStep1', true); show('pasteStep2', false); show('photoStatus', false);
+      show('shPaste', true);
+      if (which === 'photo') el('photoIn').click(); else setTimeout(function () { el('pasteText').focus(); }, 30);
     }
     document.body.style.overflow = 'hidden';
   }
@@ -1348,16 +1429,122 @@ footer a{color:var(--muted-fg)}
       el('pasteSkip').innerHTML = skip.map(function (s) { return '<li>' + esc(s) + '</li>'; }).join('');
       show('pasteSkipWrap', skip.length > 0);
       el('pasteSave').disabled = !p.items.length;
+      show('photoHint', S.pasteChannel === 'photo' && p.items.length > 0);
       show('pasteStep1', false); show('pasteStep2', true);
     }).catch(function (e) { showErr('pasteErr', e.message); }).then(function () { b.disabled = false; });
   });
   el('pasteBack').addEventListener('click', function () { show('pasteStep1', true); show('pasteStep2', false); });
   el('pasteSave').addEventListener('click', function () {
     var b = this; b.disabled = true;
-    api('/api/crisper/receipt', { body: { text: el('pasteText').value } }).then(function (r) {
+    api('/api/crisper/receipt', { body: { text: el('pasteText').value, channel: S.pasteChannel || 'paste' } }).then(function (r) {
       S.st = r.state; closeSheets(); ls(SKIP_LS, '1'); view('vDash'); render(); toast('Added ' + plural(r.result.added, 'item'));
     }).catch(function (e) { toast(e.message); b.disabled = false; });
   });
+
+  // ---------- installable app ----------
+  var INST_LS = 'krisperInstallHidden', deferredPrompt = null;
+  function isStandalone() { return (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || window.navigator.standalone === true; }
+  function isIOS() { return /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1); }
+  function setManifest() {
+    var l = document.querySelector('link[rel="manifest"]');
+    if (l) l.href = S.key ? '/api/crisper/manifest?k=' + encodeURIComponent(S.key) : '/manifest.webmanifest';
+  }
+  window.addEventListener('beforeinstallprompt', function (e) { e.preventDefault(); deferredPrompt = e; renderInstall(); });
+  window.addEventListener('appinstalled', function () { deferredPrompt = null; ls(INST_LS, '1'); renderInstall(); toast('Installed. Open Simply Krisp from your home screen.'); });
+  function iosSteps() {
+    // A Home Screen app on iPhone doesn't share Safari's sign-in, so put the
+    // private link in the address bar for the moment it's being added.
+    if (S.key) { var u = new URL(location.href); u.searchParams.set('k', S.key); history.replaceState(null, '', u.pathname + u.search + u.hash); }
+    return '<ol class="ios"><li>Tap the <b>Share</b> button <span aria-hidden="true">(square with an arrow)</span>, at the bottom in Safari or top right in Chrome.</li><li>Scroll and tap <b>Add to Home Screen</b>.</li><li>Tap <b>Add</b>. Simply Krisp opens straight to your Krisper.</li></ol>';
+  }
+  function doInstall(box) {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then(function () { deferredPrompt = null; renderInstall(); });
+    } else if (isIOS()) {
+      if (box) { box.querySelector('.ihow').innerHTML = iosSteps(); var bt = box.querySelector('[data-install]'); if (bt) bt.classList.add('hide'); }
+    } else {
+      toast('Use your browser menu and choose Install or Add to Home screen.');
+    }
+  }
+  function renderInstall() {
+    var box = el('installCard'), row = el('setInstall');
+    var can = !isStandalone() && (deferredPrompt || isIOS());
+    show('setInstall', !isStandalone());
+    if (!can || ls(INST_LS) || !S.st) { box.innerHTML = ''; return; }
+    box.innerHTML = '<div class="banner inst"><img src="/icons/icon-192.png" alt="" width="40" height="40"><div style="flex:1;min-width:0"><b>Get the Simply Krisp app</b><div class="small muted">Add it to your home screen: it opens to My Krisper, works like an app, and makes receipt photos one tap away.</div>' +
+      '<div class="ihow"></div><div class="row" style="margin-top:8px"><button class="btn sm" type="button" data-install>' + (deferredPrompt ? 'Install' : 'Show me how') + '</button><button class="btn ghost sm" type="button" id="instHide">Not now</button></div></div></div>';
+    el('instHide').addEventListener('click', function () { ls(INST_LS, '1'); renderInstall(); });
+  }
+  document.addEventListener('click', function (ev) {
+    var b = ev.target.closest('[data-install]'); if (!b) return;
+    var card = el('installCard').querySelector('.inst');
+    if (!deferredPrompt && isIOS() && !card) { ls(INST_LS, null); renderInstall(); card = el('installCard').querySelector('.inst'); }
+    doInstall(card || null);
+    if (card && !deferredPrompt) card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
+
+  // ---------- receipt photo -> text, all on-device (Tesseract.js) ----------
+  var TESS = 'https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js', tessP = null, worker = null;
+  function loadTess() {
+    if (tessP) return tessP;
+    tessP = new Promise(function (res, rej) {
+      var sc = document.createElement('script'); sc.src = TESS; sc.async = true;
+      sc.onload = function () { res(window.Tesseract); }; sc.onerror = function () { tessP = null; rej(new Error('Could not load the receipt reader. Check your connection and try again.')); };
+      document.head.appendChild(sc);
+    });
+    return tessP;
+  }
+  function getWorker(onProg) {
+    if (worker) return Promise.resolve(worker);
+    return loadTess().then(function (T) {
+      return T.createWorker('eng', 1, { logger: function (m) { if (m && m.status && onProg) onProg(m); } });
+    }).then(function (w) {
+      return w.setParameters({ tessedit_pageseg_mode: '4', preserve_interword_spaces: '1' }).then(function () { worker = w; return w; });
+    });
+  }
+  // Grayscale + contrast stretch at ~1800px on the long side: big enough for
+  // small receipt type, small enough to stay quick on a phone.
+  function prepImage(file) {
+    return new Promise(function (res, rej) {
+      var url = URL.createObjectURL(file), im = new Image();
+      im.onload = function () {
+        var w = im.naturalWidth, h = im.naturalHeight, k = 1800 / Math.max(w, h);
+        if (k > 2.5) k = 2.5;
+        var cw = Math.round(w * k), ch = Math.round(h * k);
+        var c = document.createElement('canvas'); c.width = cw; c.height = ch;
+        var x = c.getContext('2d'); x.drawImage(im, 0, 0, cw, ch);
+        var d = x.getImageData(0, 0, cw, ch), p = d.data, hist = new Array(256).fill(0), n = cw * ch, i;
+        for (i = 0; i < p.length; i += 4) { var g = (p[i] * 0.299 + p[i + 1] * 0.587 + p[i + 2] * 0.114) | 0; p[i] = g; hist[g]++; }
+        var lo = 0, hi = 255, acc = 0;
+        for (i = 0; i < 256; i++) { acc += hist[i]; if (acc > n * 0.02) { lo = i; break; } }
+        acc = 0; for (i = 255; i >= 0; i--) { acc += hist[i]; if (acc > n * 0.02) { hi = i; break; } }
+        var span = Math.max(1, hi - lo);
+        for (i = 0; i < p.length; i += 4) { var v = Math.max(0, Math.min(255, ((p[i] - lo) * 255 / span) | 0)); p[i] = p[i + 1] = p[i + 2] = v; }
+        x.putImageData(d, 0, 0); URL.revokeObjectURL(url); res(c);
+      };
+      im.onerror = function () { URL.revokeObjectURL(url); rej(new Error('That file doesn\'t look like a photo.')); };
+      im.src = url;
+    });
+  }
+  el('photoIn').addEventListener('change', function () {
+    var f = this.files && this.files[0]; this.value = '';
+    if (!f) return;
+    showErr('pasteErr', ''); show('photoStatus', true); el('photoMsg').textContent = worker ? 'Reading your receipt…' : 'Getting the receipt reader ready (first time only)…';
+    el('photoBtn').classList.add('dis');
+    getWorker(function (m) {
+      if (m.status === 'recognizing text') el('photoMsg').textContent = 'Reading your receipt… ' + Math.round((m.progress || 0) * 100) + '%';
+    }).then(function (w) { return prepImage(f).then(function (c) { el('photoMsg').textContent = 'Reading your receipt…'; return w.recognize(c); }); })
+      .then(function (r) {
+        var txt = (r && r.data && r.data.text || '').trim();
+        if (txt.length < 10) throw new Error('Couldn\'t read text in that photo. Try again closer, flatter and in brighter light.');
+        el('pasteText').value = txt; S.pasteChannel = 'photo';
+        el('pastePreview').click();
+      })
+      .catch(function (e) { showErr('pasteErr', e.message || 'Couldn\'t read that photo.'); })
+      .then(function () { show('photoStatus', false); el('photoBtn').classList.remove('dis'); });
+  });
+  el('pasteText').addEventListener('input', function () { if (!this.value.trim()) S.pasteChannel = 'paste'; });
 
   boot();
 })();
