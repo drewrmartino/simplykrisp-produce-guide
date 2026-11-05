@@ -10,7 +10,7 @@ import { scrapFor, STOCK_BAG_TIP, TRIM_FATES } from './scraps.js';
 
 // ---------- secrets & links ----------
 
-function secret() {
+export function secret() {
   const s = process.env.CRISPER_SECRET;
   if (s) return s;
   if (process.env.VERCEL_ENV === 'production') throw Object.assign(new Error('CRISPER_SECRET is not set'), { status: 500 });

@@ -383,6 +383,11 @@ footer a{color:var(--muted-fg)}
           <h2>Start your Krisper</h2>
           <p class="muted small">Free while we test it. Takes about two minutes to set up.</p>
         </div>
+        <div id="shopBlock" class="hide stack" style="gap:8px">
+          <a class="btn" href="/api/crisper/shopify" id="shopBtn" style="text-align:center;text-decoration:none">Sign in with your Simply Krisp account</a>
+          <p class="note" style="margin:0">Same sign-in as simplykrisp.com. We email you a code, no password. New here? This creates your Krisper too.</p>
+          <p class="small muted" style="margin:6px 0 0;text-align:center">or start with just your email</p>
+        </div>
         <form id="fSignup" class="stack" novalidate>
           <div class="grid2">
             <div><label class="f" for="suName">First name</label><input class="inp" id="suName" autocomplete="given-name" maxlength="60" /></div>
@@ -793,7 +798,22 @@ footer a{color:var(--muted-fg)}
       S.catalog = c; c.forEach(function (p) { S.byName[p.name] = p; });
       if (S.st) render();
     }).catch(function () {});
-    if (!S.key) { view('vLanding'); return; }
+    var signin = u.searchParams.get('signin');
+    if (signin) {
+      u.searchParams.delete('signin');
+      history.replaceState(null, '', u.pathname + (u.search || '') + u.hash);
+    }
+    if (!S.key) {
+      view('vLanding');
+      fetch(API + '/api/crisper/shopify?check=1').then(function (r) { return r.json(); }).then(function (c) { if (c.enabled) show('shopBlock', true); }).catch(function () {});
+      if (signin) showErr('suErr', {
+        cancelled: 'Sign-in was cancelled. Try again, or start with your email below.',
+        expired: 'That sign-in took too long. Try again.',
+        noemail: 'Your Simply Krisp account did not share an email. Start with your email below.',
+        unavailable: 'Account sign-in is not turned on yet. Start with your email below.'
+      }[signin] || 'We could not sign you in with your Simply Krisp account. Try again, or use "Email me my link".');
+      return;
+    }
     api('/api/crisper/me').then(function (st) {
       S.st = st;
       var needsSetup = st.inbox.address && !st.inbox.firstEmailAt && !st.items.length && !st.pending.length && !ls(SKIP_LS);
