@@ -3,14 +3,17 @@
 // POST /api/crisper/me {deleteAccount: true} -> removes the account and all data
 
 import { handle, bad } from '../_crisper/http.js';
-import { requireUser, buildState } from '../_crisper/core.js';
+import { requireUser, buildState, refreshShop } from '../_crisper/core.js';
 import { q, one, logEvent } from '../_crisper/db.js';
 
 const PREFS = new Set(['smart', 'weekly', 'off']);
 
 export default handle(['GET', 'POST'], async (req) => {
   let user = await requireUser(req);
-  if (req.method === 'GET') return buildState(user);
+  if (req.method === 'GET') {
+    user = await refreshShop(user, { force: req.query?.refreshShop === '1' });
+    return buildState(user);
+  }
 
   const b = req.body;
   if (b.deleteAccount === true) {
