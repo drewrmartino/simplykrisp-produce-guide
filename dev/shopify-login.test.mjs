@@ -77,7 +77,7 @@ test('full sign-in: redirect with PKCE, callback creates then reuses the Krisper
       const user = await userFromKey(key);
       assert.equal(user.email, 'shopper@example.com');
       assert.equal(user.first_name, 'Sam');
-      assert.equal(b.headers.location.endsWith('#setup'), round === 0); // new account goes to setup
+      assert.ok(!b.headers.location.includes('#'));
     }
     assert.match((await call({ error: 'access_denied', state: 'x' }, '')).headers.location, /signin=cancelled/);
     delete process.env.SHOPIFY_CA_CLIENT_ID;

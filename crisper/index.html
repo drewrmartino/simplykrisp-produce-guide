@@ -319,6 +319,59 @@ footer a{color:var(--muted-fg)}
   .top .acts .btn{flex:1}
 }
 @media (prefers-reduced-motion:reduce){.spin{animation:none}}
+/* simplified layout */
+.c{text-align:center}
+.btn.wide{width:100%}
+.land{max-width:460px;margin:8px auto 0}
+.land h1{margin-bottom:6px}
+.land .lede{font-size:16px;margin-bottom:18px}
+.or{display:flex;align-items:center;gap:10px;color:var(--muted-fg);font-size:13px}
+.or:before,.or:after{content:"";flex:1;border-top:1px solid var(--border)}
+.back{margin-bottom:10px;display:inline-block}
+.stores-d{margin-top:12px}
+.stores-d summary{cursor:pointer;font-size:14px;list-style:none;display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.stores-d summary::-webkit-details-marker{display:none}
+.gph{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.addtop{flex:0 0 auto}
+#stake .stk1{display:flex;align-items:center;gap:12px;margin-top:14px;padding:12px 14px;border-radius:var(--radius);background:hsl(16 70% 96%);border:1px solid hsl(16 60% 88%);font-size:14px;line-height:1.4}
+#stake .stk1 .v{font-size:22px;font-weight:700;color:hsl(16 70% 40%);font-family:var(--display,inherit)}
+#stake details{font-size:12.5px;color:var(--muted-fg);margin-top:6px}
+.it{gap:6px;padding:10px 12px}
+.ith{align-items:center}
+.ith img{width:30px;height:30px}
+.qb{display:flex;gap:6px;flex:0 0 auto}
+.qb .btn{min-height:34px;padding:4px 10px;font-size:13px}
+.sto1{font-size:13.5px;line-height:1.4;color:var(--fg);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.sto1 b{font-weight:700}
+.sto1 .sti{display:inline-flex;width:20px;height:20px;font-size:11px;margin-right:4px;vertical-align:-4px;background:hsl(140 30% 94%)}
+details.itd summary{font-size:12.5px;color:var(--muted-fg);cursor:pointer;list-style:none}
+details.itd summary::-webkit-details-marker{display:none}
+details.itd summary:after{content:" +";}
+details.itd[open] summary:after{content:" −";}
+details.itd .dbody{display:flex;flex-direction:column;gap:6px;margin-top:6px}
+.mact{display:flex;flex-wrap:wrap;gap:4px 14px}
+.mact button{background:none;border:0;padding:2px 0;color:var(--fg);text-decoration:underline;font-size:13px;cursor:pointer}
+.grp{margin-top:20px}
+.choose{display:grid;gap:8px}
+.ch{display:flex;gap:12px;align-items:center;text-align:left;padding:14px;border:1px solid var(--card-border);border-radius:var(--radius);background:var(--card);cursor:pointer;font:inherit;color:inherit}
+.ch:hover{border-color:var(--primary)}
+.ch.primary{background:var(--primary);color:var(--primary-fg);border-color:var(--primary)}
+.ch .ci{font-size:22px;width:30px;text-align:center}
+.ch b{display:block;font-size:15.5px}
+.ch small{display:block;font-size:13px;opacity:.8}
+.bnav{position:fixed;left:0;right:0;bottom:0;z-index:40;display:flex;justify-content:space-around;align-items:center;background:var(--card);border-top:1px solid var(--card-border);padding:6px 8px calc(6px + env(safe-area-inset-bottom));box-shadow:0 -2px 10px hsl(0 0% 0% / .05)}
+.bnav button{flex:1;max-width:120px;background:none;border:0;font:inherit;font-size:12px;color:var(--muted-fg);display:flex;flex-direction:column;align-items:center;gap:2px;padding:4px 0;cursor:pointer}
+.bnav button .bi{font-size:18px;line-height:1}
+.bnav button[aria-current="page"]{color:var(--primary);font-weight:700}
+.bnav .badd{flex:0 0 auto;width:52px;height:52px;border-radius:50%;background:var(--primary);color:var(--primary-fg);font-size:28px;line-height:1;margin-top:-22px;box-shadow:0 4px 12px hsl(96 30% 20% / .3);justify-content:center}
+body.has-bnav main{padding-bottom:96px}
+body.has-bnav footer{padding-bottom:90px}
+body.has-bnav .toast{bottom:calc(88px + env(safe-area-inset-bottom))}
+details.sd summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;width:100%}
+details.sd summary::-webkit-details-marker{display:none}
+details.sd{display:block}
+.badges-d summary{cursor:pointer;font-size:13.5px;margin-top:12px}
+@media (max-width:760px){.addtop{display:none}}
 </style>
 <link rel="manifest" href="/manifest.webmanifest" />
 <meta name="theme-color" content="#2e431f" />
@@ -360,229 +413,165 @@ footer a{color:var(--muted-fg)}
 
   <!-- ============ LANDING / SIGNUP ============ -->
   <div id="vLanding" class="hide">
-    <div class="hero">
-      <div>
-        <div class="eyebrow"><span class="dot"></span> My Krisper <span class="pilot">Beta</span></div>
-        <h1>Know what to eat first, without typing in your groceries.</h1>
-        <p class="lede">Forward your grocery order emails (or set it up once so they forward themselves). We read the produce, look up how long each item lasts from the Storage Guide, and show you what needs using first.</p>
-        <p class="small muted" style="margin-top:-4px">Most produce that ends up in the trash was fine when you bought it. It got buried in the drawer or forgotten. My Krisper keeps it in front of you.</p>
-        <p class="small muted">My Krisper is in beta. It's free, some receipts won't read perfectly yet, and features may change. Your feedback shapes it: <a href="mailto:info@simplykrisp.com">info@simplykrisp.com</a>.</p>
-        <ul class="how">
-          <li><span class="n">1</span><span><b>Sign up</b> with just your email. No password.</span></li>
-          <li><span class="n">2</span><span><b>Get a private forwarding address</b> and add a one-time filter in Gmail, Outlook or iCloud.</span></li>
-          <li><span class="n">3</span><span><b>Order like normal.</b> Receipts from Instacart, Walmart, Kroger, Target, Costco, Amazon Fresh and most other big grocery stores and delivery apps show up here on their own.</span></li>
-        </ul>
-        <div class="preview" aria-hidden="true">
-          <div class="pv"><img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f353.png" alt=""><b>Strawberry</b><span style="color:var(--warn);font-weight:600">Use today</span></div>
-          <div class="pv"><img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f96c.png" alt=""><b>Spinach</b><span style="color:var(--soon);font-weight:600">1–3 days left</span></div>
-          <div class="pv"><img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f966.png" alt=""><b>Broccoli</b><span>5–9 days left</span></div>
-        </div>
-      </div>
+    <div class="land">
+      <div class="eyebrow"><span class="dot"></span> My Krisper <span class="pilot">Free beta</span></div>
+      <h1>Store it right. Eat it in time.</h1>
+      <p class="lede">Snap a grocery receipt. We'll show you how to store each item and what to eat first.</p>
       <div class="card stack" id="signupCard">
-        <div>
-          <h2>Start your Krisper</h2>
-          <p class="muted small">Free while we test it. Takes about two minutes to set up.</p>
-        </div>
         <div id="shopBlock" class="hide stack" style="gap:8px">
-          <a class="btn" href="/api/crisper/shopify" id="shopBtn" style="text-align:center;text-decoration:none">Sign in with your Simply Krisp account</a>
-          <p class="note" style="margin:0">Same sign-in as simplykrisp.com. We email you a code, no password. New here? This creates your Krisper too.</p>
-          <p class="small muted" style="margin:6px 0 0;text-align:center">or start with just your email</p>
+          <a class="btn wide" href="/api/crisper/shopify" id="shopBtn">Sign in with Simply Krisp</a>
+          <p class="note c">Same account as simplykrisp.com. New here? This sets you up.</p>
+          <div class="or"><span>or start with your email</span></div>
         </div>
         <form id="fSignup" class="stack" novalidate>
-          <div class="grid2">
-            <div><label class="f" for="suName">First name</label><input class="inp" id="suName" autocomplete="given-name" maxlength="60" /></div>
-            <div><label class="f" for="suEmail">Email</label><input class="inp" id="suEmail" type="email" autocomplete="email" required /></div>
-          </div>
+          <div><label class="f" for="suEmail">Email</label><input class="inp" id="suEmail" type="email" autocomplete="email" required /></div>
+          <input type="hidden" id="suName" value="" />
           <label class="check"><input type="checkbox" id="suKrisp" /> <span>I have a Krisp in my fridge</span></label>
-          <div id="suKrispDate" class="hide"><label class="f" for="suKrispOn">When did you last put in a fresh one?</label><input class="inp" id="suKrispOn" type="date" /><p class="note" style="margin-top:4px">We use this to remind you when it's time to swap. Leave blank if you're not sure.</p></div>
-          <label class="check"><input type="checkbox" id="suConsent" /> <span>Also send me SimplyKrisp tips and offers <span class="muted">(optional)</span></span></label>
+          <div id="suKrispDate" class="hide"><label class="f" for="suKrispOn">Last changed (optional)</label><input class="inp" id="suKrispOn" type="date" /></div>
+          <label class="check"><input type="checkbox" id="suConsent" /> <span>Send me tips and offers <span class="muted">(optional)</span></span></label>
           <div class="err hide" id="suErr" role="alert"></div>
-          <button class="btn" type="submit" id="suBtn">Create my Krisper</button>
-          <p class="note">We keep the produce names and dates from your receipts, never the email itself, prices or your address. Reminder emails come from SimplyKrisp; turn them off or delete everything in Settings at any time.</p>
+          <button class="btn wide" type="submit" id="suBtn">Start my Krisper</button>
+          <p class="note c">No password. We keep produce names and dates, nothing else.</p>
         </form>
         <div id="suExists" class="hide stack">
           <h3>You already have a Krisper</h3>
-          <p class="muted small" id="suExistsMsg">We just emailed your private link. Open it on this device and you'll be back in.</p>
+          <p class="muted small" id="suExistsMsg">We just emailed your sign-in link. Open it on this device.</p>
         </div>
-        <p class="small muted" style="border-top:1px solid var(--border);padding-top:12px">Already signed up? <button class="link" type="button" id="toLost">Email me my link</button></p>
+        <p class="small muted c" style="border-top:1px solid var(--border);padding-top:12px">Already signed up? <button class="link" type="button" id="toLost">Email me a sign-in link</button></p>
         <form id="fLost" class="hide stack" novalidate>
-          <label class="f" for="lostEmail">Your email</label>
-          <div class="row"><input class="inp" id="lostEmail" type="email" style="flex:1;min-width:200px" /><button class="btn ghost" type="submit">Send link</button></div>
+          <div class="row"><input class="inp" id="lostEmail" type="email" placeholder="Your email" aria-label="Your email" style="flex:1;min-width:180px" /><button class="btn ghost" type="submit">Send</button></div>
           <p class="note hide" id="lostMsg" role="status"></p>
         </form>
       </div>
     </div>
-    <section class="sk-story" aria-label="How SimplyKrisp helps you eat what you buy">
-<style>.sk-story{max-width:1080px;margin:28px auto 8px;padding:0 20px;font-family:'DM Sans',system-ui,sans-serif;color:hsl(96 14% 18%)}.sk-story h2{font-family:Questrial,'DM Sans',sans-serif;font-size:21px;line-height:1.25;margin:0 0 4px;letter-spacing:-.01em}.sk-story p{margin:0 0 14px;font-size:14px;color:hsl(96 6% 38%);max-width:680px}.sk-g{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}.sk-c{display:flex;flex-direction:column;gap:4px;padding:14px;border:1px solid hsl(48 18% 86%);border-radius:12px;background:#fff;text-decoration:none;color:inherit;font-size:13px;line-height:1.4;transition:border-color .15s}.sk-c:hover{border-color:hsl(96 14% 40%)}.sk-c b{font-size:14.5px}.sk-c span:last-child{color:hsl(96 6% 38%)}.sk-n{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:hsl(96 14% 28%);color:#fff;font-size:12px;font-weight:700}.sk-cur{border-color:hsl(96 14% 28%);background:hsl(96 20% 96%)}@media(max-width:900px){.sk-g{grid-template-columns:1fr 1fr}}@media(max-width:480px){.sk-g{grid-template-columns:1fr}}</style>
-<h2>Keep the produce you buy fresh long enough to eat it.</h2>
-<p>Produce usually gets tossed for three reasons: it spoils faster than expected, it gets buried in the fridge, or there’s more than you can use. Each SimplyKrisp tool handles one part of that.</p>
-<div class="sk-g"><a class="sk-c" href="/"><span class="sk-n">1</span><b>Store it right</b><span>The Storage Guide and Crisper Map show where each item lasts longest.</span></a><a class="sk-c" href="/seasonal"><span class="sk-n">2</span><b>Buy what’s in season</b><span>Fresher at the store means more days at home.</span></a><a class="sk-c" href="https://simplykrisp.com/products/double-krisp?utm_source=produce-guide&amp;utm_medium=referral&amp;utm_campaign=story-strip&amp;utm_content=krisper" target="_blank" rel="noopener"><span class="sk-n">3</span><b>Slow the spoiling</b><span>A Krisp in each crisper drawer pulls out the ethylene that ages greens and broccoli.</span></a><a class="sk-c sk-cur" href="/krisper"><span class="sk-n">4</span><b>Eat it in time</b><span>My Krisper (beta) reads your grocery receipts and tells you what to use first.</span></a><a class="sk-c" href="/lab"><span class="sk-n">5</span><b>See the proof</b><span>Every home test, published in the Lab Notebook, including the ones that show no difference.</span></a></div>
-</section>
   </div>
 
   <!-- ============ SETUP ============ -->
   <div id="vSetup" class="hide">
-    <div class="eyebrow"><span class="dot"></span> Step 2 of 2</div>
-    <h1>Connect your grocery emails</h1>
-    <p class="lede">Set this up once. After that, any grocery receipt that lands in your inbox is copied here automatically.</p>
+    <button class="link small back" type="button" data-go="dash">&larr; Back to my Krisper</button>
+    <h1>Forward grocery emails</h1>
+    <p class="lede">Optional. Set it up once and online orders show up on their own.</p>
 
     <section class="card stack" id="setupNoInbox">
-      <h3>Email forwarding isn't switched on for this test yet</h3>
-      <p class="muted">You can still try everything: paste a receipt or add produce by hand from your Krisper.</p>
-      <div class="row"><button class="btn" type="button" data-go="dash">Go to my Krisper</button></div>
+      <h3>Email forwarding isn't on for this test yet</h3>
+      <p class="muted">Use a receipt photo or add items by hand instead.</p>
+      <div class="row"><button class="btn" type="button" data-go="dash">Back to my Krisper</button></div>
     </section>
 
     <div id="setupInbox" class="stack">
       <section class="card">
-        <h3>Your private forwarding address</h3>
-        <p class="muted small">Only you have this address. Anything sent to it shows up in your Krisper.</p>
+        <h3>1. Your Krisper address</h3>
         <div class="addr"><code id="inboxAddr"></code><button class="btn ghost sm" type="button" data-copy="inboxAddr">Copy</button></div>
+        <details class="stores-d"><summary><span id="storeSum">Stores</span> <span class="link small">Change</span></summary>
+          <div id="stores"></div>
+          <p class="note" style="margin-top:8px">Costco, Publix, Aldi and Sprouts deliveries often come from Instacart.</p>
+        </details>
       </section>
 
       <section class="card">
-        <h3>Which stores do you order groceries from?</h3>
-        <p class="muted small">Tick every store that emails you order confirmations or receipts. Your forwarding setup below updates to match.</p>
-        <div id="stores"></div>
-        <p class="note" style="margin-top:8px">This also forwards each store's sale emails and non-food orders (like an Amazon book). That's fine: Krisper only adds produce from real orders, ignores everything else, and never saves the email itself. Some stores (often Costco, Publix, Aldi and Sprouts) deliver through Instacart, so those emails come from Instacart. Keep Instacart ticked if you use any of them.</p>
-      </section>
-
-      <section class="card">
-        <h3>Set up automatic forwarding</h3>
+        <h3>2. Set up forwarding</h3>
         <div class="tabs" role="tablist">
           <button class="tab" role="tab" aria-selected="true" data-tab="gmail">Gmail</button>
           <button class="tab" role="tab" aria-selected="false" data-tab="outlook">Outlook</button>
           <button class="tab" role="tab" aria-selected="false" data-tab="icloud">iCloud</button>
-          <button class="tab" role="tab" aria-selected="false" data-tab="manual">Forward by hand</button>
+          <button class="tab" role="tab" aria-selected="false" data-tab="manual">By hand</button>
         </div>
 
         <div data-pane="gmail">
-          <p class="small muted" style="margin-bottom:12px">About 5 minutes, <b>on a computer</b> (the Gmail phone app can't set up forwarding). Keep this page open in one tab and Gmail in another. You'll come back here once for a code.</p>
-
+          <p class="note" style="margin-bottom:10px">On a computer, about 5 minutes. The Gmail app can't do this.</p>
           <div class="gpart">
-            <div class="gph"><span class="gnum">A</span><div><b>Add your Krisper address to Gmail</b><div class="note">Gmail makes you confirm any address before it will forward to it.</div></div></div>
+            <div class="gph"><span class="gnum">A</span><b>Let Gmail forward to Krisper</b></div>
             <ol class="steps">
-              <li>Copy your forwarding address from the box above.</li>
-              <li>Open <a href="https://mail.google.com/mail/u/0/#settings/fwdandpop" target="_blank" rel="noopener">Gmail → Settings → Forwarding and POP/IMAP</a>. <span class="muted">(Or in Gmail: gear icon at top right → <b>See all settings</b> → <b>Forwarding and POP/IMAP</b> tab. If you have more than one Gmail account, check you're in the right one, top right.)</span></li>
-              <li>Click <b>Add a forwarding address</b>, paste your address, and click <b>Next</b>.</li>
-              <li>A small window opens. Click <b>Proceed</b>, then <b>OK</b>. Gmail now emails a confirmation code to your Krisper address.</li>
-              <li>Come back to this tab. The code appears here within a minute:
-                <div class="status" id="gmailStatus" style="margin-top:8px"><span class="spin"></span><span>Waiting for Gmail's confirmation code…</span></div>
+              <li>Open <a href="https://mail.google.com/mail/u/0/#settings/fwdandpop" target="_blank" rel="noopener">Gmail forwarding settings</a>, click <b>Add a forwarding address</b>, paste your address, then <b>Next</b> and <b>Proceed</b>.</li>
+              <li>Your confirmation code shows up here:
+                <div class="status" id="gmailStatus" style="margin-top:8px"><span class="spin"></span><span>Waiting for Gmail's code…</span></div>
               </li>
-              <li>Back in Gmail, on the same Forwarding page, paste the code into the <b>confirmation code</b> box and click <b>Verify</b>.</li>
-              <li>Important: make sure <b>Disable forwarding</b> is still selected. That keeps the rest of your email private, and the filter in Part B forwards only grocery emails. If you changed anything, click <b>Save Changes</b> at the bottom of the page.</li>
+              <li>Paste the code in Gmail and click <b>Verify</b>. Leave <b>Disable forwarding</b> selected.</li>
             </ol>
           </div>
-
           <div class="gpart">
-            <div class="gph"><span class="gnum">B</span><div><b>Forward only grocery emails</b><div class="note">A filter sends new emails from your stores to Krisper automatically.</div></div></div>
+            <div class="gph"><span class="gnum">B</span><b>Forward only grocery emails</b></div>
             <ol class="steps">
-              <li>Copy this search. It's built from the stores you ticked above:
+              <li>Copy this search:
                 <div class="addr"><code id="gmailFilter"></code><button class="btn ghost sm" type="button" data-copy="gmailFilter">Copy</button></div>
               </li>
-              <li>Go to your Gmail inbox, paste it into the <b>search bar</b> at the top, and press <b>Enter</b>. You should see your past grocery emails. That means the search works.</li>
-              <li>At the right end of the search bar, click the <b>sliders icon</b> (Show search options). A box opens with the search already filled in.</li>
-              <li>Click <b>Create filter</b> at the bottom right of that box.</li>
-              <li>Tick <b>Forward it to</b>, pick your Krisper address from the dropdown, then click <b>Create filter</b>. <span class="muted">If the dropdown says "choose an address", Part A isn't verified yet.</span></li>
+              <li>Paste it in Gmail's search bar, click the <b>sliders icon</b>, then <b>Create filter</b>.</li>
+              <li>Tick <b>Forward it to</b>, pick your Krisper address, and click <b>Create filter</b>.</li>
             </ol>
           </div>
-
           <div class="gpart">
-            <div class="gph"><span class="gnum">C</span><div><b>Test it now</b><div class="note">Filters only work on new emails, so send one old receipt by hand.</div></div></div>
-            <ol class="steps">
-              <li>Open a recent grocery receipt or order email in Gmail and click <b>Forward</b>.</li>
-              <li>Paste your Krisper address in the <b>To</b> line and click <b>Send</b>.</li>
-              <li>Watch the box at the bottom of this page. It turns green when the receipt arrives, usually within a minute.</li>
-            </ol>
+            <div class="gph"><span class="gnum">C</span><b>Test it</b></div>
+            <ol class="steps"><li>Forward one recent grocery email to your Krisper address. The box below turns green.</li></ol>
           </div>
-
           <details class="gtrouble"><summary>Something not working?</summary>
             <ul>
-              <li><b>No code after 2 minutes:</b> check you pasted the full Krisper address (it's long, so use the Copy button), then click Add a forwarding address again.</li>
-              <li><b>No "Forwarding" tab:</b> work or school Gmail accounts sometimes turn forwarding off. Use "Forward by hand" or paste receipts instead.</li>
-              <li><b>Gmail shows a banner saying forwarding is on:</b> that's normal for a week after you add a filter that forwards.</li>
-              <li><b>Want to stop:</b> Gmail → Settings → <b>Filters and Blocked Addresses</b> → delete the Krisper filter.</li>
+              <li><b>No code after 2 minutes:</b> copy the full address with the Copy button and add it again.</li>
+              <li><b>No Forwarding tab:</b> some work or school accounts block it. Forward by hand or use receipt photos.</li>
+              <li><b>To stop:</b> Gmail Settings &rarr; Filters and Blocked Addresses &rarr; delete the Krisper filter.</li>
             </ul>
           </details>
         </div>
 
         <div data-pane="outlook" class="hide">
           <ol class="steps">
-            <li>In Outlook on the web, open <b>Settings → Mail → Rules → Add new rule</b>.</li>
-            <li>Name it "Krisper". Condition: <b>From</b> → add each of these (from the stores you ticked above): <span id="olDomains"></span></li>
-            <li>Action: <b>Forward to</b> → paste your Krisper address. Save.</li>
+            <li>Outlook on the web: <b>Settings &rarr; Mail &rarr; Rules &rarr; Add new rule</b>.</li>
+            <li>Condition <b>From</b>: <span id="olDomains"></span></li>
+            <li>Action <b>Forward to</b>: your Krisper address. Save.</li>
           </ol>
-          <p class="note" style="margin-top:10px">Some work and school accounts block automatic forwarding. If nothing shows up within a day, use "Forward by hand" or paste a receipt.</p>
         </div>
 
         <div data-pane="icloud" class="hide">
           <ol class="steps">
-            <li>On a computer, open <a href="https://www.icloud.com/mail" target="_blank" rel="noopener">iCloud Mail</a>, click the gear icon, then <b>Rules → Add a rule</b>.</li>
-            <li>If a message <b>is from</b> <span class="kbd">instacart.com</span> → <b>Forward to</b> your Krisper address. Repeat for each of these (from the stores you ticked above): <span id="icDomains"></span></li>
+            <li>On a computer, open <a href="https://www.icloud.com/mail" target="_blank" rel="noopener">iCloud Mail</a> &rarr; gear &rarr; <b>Rules &rarr; Add a rule</b>.</li>
+            <li>If a message <b>is from</b> each of these, <b>forward to</b> your Krisper address: <span id="icDomains"></span></li>
           </ol>
         </div>
 
         <div data-pane="manual" class="hide">
-          <p>Forward any grocery order or receipt email to your Krisper address. Forwarding from your phone works too. We'll pick out the produce and ignore everything else.</p>
+          <p>Forward any grocery order or receipt email to your Krisper address, from any device.</p>
         </div>
       </section>
 
-      <section class="card">
-        <div class="status" id="firstStatus"><span class="spin"></span><span>Waiting for your first grocery email. Forward a recent receipt to test it now.</span></div>
-      </section>
+      <div class="status" id="firstStatus"><span class="spin"></span><span>Waiting for your first grocery email…</span></div>
 
       <div class="row">
-        <button class="btn" type="button" data-go="dash" id="setupDone">Go to my Krisper</button>
-        <button class="btn ghost" type="button" data-open="photo">Snap a receipt instead</button>
+        <button class="btn" type="button" data-go="dash" id="setupDone">Done</button>
       </div>
     </div>
   </div>
 
   <!-- ============ DASHBOARD ============ -->
   <div id="vDash" class="hide">
-    <div class="top">
-      <div>
-        <div class="eyebrow"><span class="dot"></span> My Krisper <span class="pilot">Beta</span></div>
-        <h1 id="greet">Your Krisper</h1>
-        <p class="muted" id="summary"></p>
+    <div data-panel="fridge">
+      <div class="top">
+        <div>
+          <h1 id="greet">Your Krisper</h1>
+          <p class="muted" id="summary"></p>
+        </div>
+        <button class="btn addtop" type="button" data-open="choose">+ Add groceries</button>
       </div>
-      <div class="acts">
-        <button class="btn" type="button" data-open="add">+ Add produce</button>
-        <button class="btn ghost" type="button" data-open="photo">Receipt photo</button>
-        <button class="btn ghost" type="button" data-open="paste">Paste receipt</button>
-      </div>
+      <div id="installCard"></div>
+      <section id="stake" aria-label="Store it right"></section>
+      <div id="conflict" class="hide" style="margin-top:12px"></div>
+      <div id="krispNudge" style="margin-top:10px"></div>
+      <div id="groups"></div>
     </div>
 
-    <div id="installCard"></div>
+    <div data-panel="impact" class="hide">
+      <h1>Your impact</h1>
+      <section class="card imp" id="impact" aria-label="Your impact" style="margin-top:14px"></section>
+      <section id="secKrisp"></section>
+      <section>
+        <div class="sechd"><h2>Recently finished</h2></div>
+        <div class="done" id="recentDone"></div>
+      </section>
+    </div>
 
-    <section class="card imp stake" id="stake" aria-label="Store it right"></section>
-
-    <div class="strip" id="strip" aria-label="What to use each day this week"></div>
-    <p class="note" id="stripNote" style="margin-top:6px">Each day shows items reaching the end of their usual window. Tap a day to filter.</p>
-
-    <div id="conflict" class="hide" style="margin-top:18px"></div>
-    <div id="krispNudge" style="margin-top:14px"></div>
-
-    <div id="groups"></div>
-
-    <section class="card imp" id="impact" aria-label="Your impact" style="margin-top:28px"></section>
-
-    <section id="secKrisp"></section>
-
-    <section>
-      <div class="sechd"><h2>Recently finished</h2><span class="note">Tap edit to log a tossed portion or what happened to the scraps</span></div>
-      <div class="done" id="recentDone"></div>
-    </section>
-
-    <section>
-      <div class="sechd"><h2>Orders</h2><button class="link small" type="button" data-go="setup">Email setup</button></div>
-      <div class="card" id="orders"></div>
-    </section>
-
-    <section id="vSettings">
-      <div class="sechd"><h2>Settings</h2></div>
-      <div class="card">
+    <div data-panel="more" class="hide" id="vSettings">
+      <h1>Settings</h1>
+      <div class="card" style="margin-top:14px">
         <div class="setrow">
-          <div><b>Reminder emails</b><div class="note">Smart: only when something needs using in the next couple of days.</div></div>
+          <div><b>Reminder emails</b><div class="note">Smart: only when something needs using soon.</div></div>
           <div class="seg" id="prefSeg">
             <label><input type="radio" name="pref" value="smart"><span>Smart</span></label>
             <label><input type="radio" name="pref" value="weekly"><span>Weekly</span></label>
@@ -590,35 +579,36 @@ footer a{color:var(--muted-fg)}
           </div>
         </div>
         <div class="setrow">
-          <div><b>I have a Krisp</b><div class="note">Adds the Storage Guide's Krisp ranges to fridge items while your sachet is fresh.</div></div>
+          <div><b>I have a Krisp</b></div>
           <label class="check"><input type="checkbox" id="setKrisp"><span>Yes</span></label>
         </div>
         <div class="setrow" id="setKrispRow">
-          <div><b>Last sachet change</b><div class="note">Each sachet lasts about 30 days.</div></div>
-          <div class="row"><input class="inp" type="date" id="setKrispOn" style="width:auto"><button class="btn ghost sm" type="button" id="krispToday">Changed today</button></div>
+          <div><b>Last sachet change</b><div class="note">Lasts about 30 days.</div></div>
+          <div class="row"><input class="inp" type="date" id="setKrispOn" style="width:auto"><button class="btn ghost sm" type="button" id="krispToday">Today</button></div>
         </div>
         <div class="setrow">
           <div><b>First name</b></div>
-          <div class="row"><input class="inp" id="setName" maxlength="60" style="width:180px"><button class="btn ghost sm" type="button" id="saveName">Save</button></div>
+          <div class="row"><input class="inp" id="setName" maxlength="60" style="width:160px"><button class="btn ghost sm" type="button" id="saveName">Save</button></div>
         </div>
         <div class="setrow">
-          <div><b>Forwarding address</b><div class="note" id="setAddr" style="overflow-wrap:anywhere"></div></div>
-          <button class="btn ghost sm" type="button" data-go="setup">Setup guide</button>
-        </div>
-        <div class="setrow">
-          <div style="min-width:0;flex:1 1 100%"><b>Your private link</b><div class="note">Open it on your phone or another browser to see the same Krisper. Anyone with it can see your list, so keep it to yourself.</div>
-            <div class="addr" style="margin-top:6px"><code id="myLink" style="overflow-wrap:anywhere;font-size:12.5px"></code><button class="btn ghost sm" type="button" data-copy="myLink">Copy</button></div></div>
+          <div style="min-width:0"><b>Email forwarding</b><div class="note" id="setAddr" style="overflow-wrap:anywhere"></div></div>
+          <button class="btn ghost sm" type="button" data-go="setup">Set up</button>
         </div>
         <div class="setrow" id="setInstall">
-          <div><b>Install the app</b><div class="note" id="setInstallNote">Put Simply Krisp on your home screen. It opens straight to My Krisper.</div></div>
+          <div><b>Install the app</b></div>
           <button class="btn ghost sm" type="button" data-install>Install</button>
         </div>
+        <details class="setrow sd">
+          <summary><b>Use on another device</b> <span class="link small">Show link</span></summary>
+          <div class="note" style="margin:6px 0">Open this private link on your other device. Keep it to yourself.</div>
+          <div class="addr"><code id="myLink" style="overflow-wrap:anywhere;font-size:12.5px"></code><button class="btn ghost sm" type="button" data-copy="myLink">Copy</button></div>
+        </details>
         <div class="setrow">
-          <div><b>This device</b><div class="note">Sign out here. Your private link brings you back.</div></div>
+          <div><b>Sign out</b></div>
           <button class="btn ghost sm" type="button" id="signOut">Sign out</button>
         </div>
         <div class="setrow">
-          <div><b>Delete my Krisper</b><div class="note">Removes your account, items and order history now. This can't be undone.</div></div>
+          <div><b>Delete my Krisper</b><div class="note">Removes everything. Can't be undone.</div></div>
           <button class="btn ghost sm" type="button" id="delStart" style="color:var(--warn);border-color:var(--warn)">Delete</button>
         </div>
         <div id="delConfirm" class="hide status" style="background:var(--warn-bg);flex-wrap:wrap">
@@ -627,8 +617,19 @@ footer a{color:var(--muted-fg)}
           <button class="btn ghost sm" type="button" id="delNo">Cancel</button>
         </div>
       </div>
-    </section>
+      <section>
+        <div class="sechd"><h2>Receipts</h2></div>
+        <div class="card" id="orders"></div>
+      </section>
+    </div>
   </div>
+
+  <nav class="bnav hide" id="bnav" aria-label="My Krisper">
+    <button type="button" data-tab2="fridge" aria-current="page"><span class="bi" aria-hidden="true">&#10052;</span>Fridge</button>
+    <button type="button" class="badd" data-open="choose" aria-label="Add groceries"><span aria-hidden="true">+</span></button>
+    <button type="button" data-tab2="impact"><span class="bi" aria-hidden="true">&#9673;</span>Impact</button>
+    <button type="button" data-tab2="more"><span class="bi" aria-hidden="true">&#9881;</span>Settings</button>
+  </nav>
 
   <div id="vDeleted" class="hide empty-state">
     <h1>Your Krisper has been deleted</h1>
@@ -637,7 +638,20 @@ footer a{color:var(--muted-fg)}
   </div>
 </main>
 
-<footer><div class="wrap">Shelf-life ranges come from the <a href="/">SimplyKrisp Produce Storage Guide</a> and assume each item is stored the way the guide recommends. They're estimates. Trust your eyes and nose. · Beta feedback: <a href="mailto:info@simplykrisp.com?subject=My%20Krisper%20feedback">info@simplykrisp.com</a></div></footer>
+<footer><div class="wrap">Estimates from the <a href="/">Storage Guide</a>. Trust your eyes and nose. · Feedback: <a href="mailto:info@simplykrisp.com?subject=My%20Krisper%20feedback">info@simplykrisp.com</a></div></footer>
+
+<!-- add groceries chooser -->
+<div class="scrim hide" id="shChoose" role="dialog" aria-modal="true" aria-labelledby="shChooseT">
+  <div class="sheet">
+    <div class="sh"><h2 id="shChooseT">Add groceries</h2><button class="x" type="button" data-close aria-label="Close">×</button></div>
+    <div class="choose">
+      <button type="button" class="ch primary" data-open="photo"><span class="ci" aria-hidden="true">&#128247;</span><span><b>Snap a receipt</b><small>Paper receipt, read on your phone</small></span></button>
+      <button type="button" class="ch" data-open="paste"><span class="ci" aria-hidden="true">&#128203;</span><span><b>Paste receipt text</b><small>From an order email or e-receipt</small></span></button>
+      <button type="button" class="ch" data-open="add"><span class="ci" aria-hidden="true">&#129388;</span><span><b>Pick items</b><small>Tap what you bought</small></span></button>
+      <button type="button" class="ch" data-go="setup" id="chFwd"><span class="ci" aria-hidden="true">&#9993;</span><span><b>Forward emails automatically</b><small>One-time setup for online orders</small></span></button>
+    </div>
+  </div>
+</div>
 
 <!-- add produce sheet -->
 <div class="scrim hide" id="shFin" role="dialog" aria-modal="true" aria-labelledby="shFinT">
@@ -669,18 +683,18 @@ footer a{color:var(--muted-fg)}
       <div class="photo">
         <label class="btn" for="photoIn" id="photoBtn">Take or choose a receipt photo</label>
         <input type="file" id="photoIn" accept="image/*" class="sr">
-        <p class="muted small">Lay the receipt flat in good light and fill the frame. The photo is read on your phone and never uploaded; only the text is sent.</p>
+        <p class="note">Flat, bright, fill the frame. The photo stays on your phone.</p>
         <div class="status small hide" id="photoStatus"><span class="spin"></span><span id="photoMsg">Reading your receipt…</span></div>
       </div>
       <div class="or"><span>or paste the text</span></div>
-      <p class="muted small" id="pasteHelp">Open an order email or e-receipt, select all, copy, and paste it here.</p>
+      <p class="note" id="pasteHelp">Copy the whole order email and paste it here.</p>
       <textarea class="inp" id="pasteText" placeholder="Paste receipt text…"></textarea>
       <div class="err hide" id="pasteErr" role="alert"></div>
       <div class="row"><button class="btn" type="button" id="pastePreview">Find the produce</button></div>
     </div>
     <div id="pasteStep2" class="hide stack">
       <p id="pasteFound"></p>
-      <p class="note hide" id="photoHint">Read from your photo. If a count or item looks off, tap Back to fix the text, or change it on the card after adding.</p>
+      <p class="note hide" id="photoHint">Something off? Tap Back to fix the text.</p>
       <ul class="pl" id="pasteList"></ul>
       <details id="pasteSkipWrap" class="small muted"><summary id="pasteSkipSum"></summary><ul class="pl" id="pasteSkip" style="margin-top:6px"></ul></details>
       <div class="row"><button class="btn" type="button" id="pasteSave">Add these</button><button class="btn ghost" type="button" id="pasteBack">Back</button></div>
@@ -743,6 +757,8 @@ footer a{color:var(--muted-fg)}
     el('gmailFilter').textContent = filterString();
     var kb = d.length ? d.map(function (x) { return '<span class="kbd">' + esc(x) + '</span>'; }).join(' ') : '<span class="muted">tick at least one store above</span>';
     el('olDomains').innerHTML = kb; el('icDomains').innerHTML = kb;
+    var picked = [].map.call(el('stores').querySelectorAll('input:checked'), function (x) { return x.parentNode.textContent.replace(/\s*\(.*\)/, '').trim(); });
+    el('storeSum').innerHTML = picked.length ? 'Stores: <b>' + esc(picked.slice(0, 3).join(', ') + (picked.length > 3 ? ' +' + (picked.length - 3) : '')) + '</b>' : '<b>Pick your stores</b>';
   }
   function renderStores() {
     el('stores').innerHTML = STORE_GROUPS.map(function (g) {
@@ -780,7 +796,8 @@ footer a{color:var(--muted-fg)}
   // ---------- views ----------
   function view(name) {
     ['vLanding', 'vSetup', 'vDash', 'vDeleted', 'loading'].forEach(function (v) { show(v, v === name); });
-    show('navSettings', name === 'vDash');
+    show('navSettings', false);
+    show('bnav', name === 'vDash'); document.body.classList.toggle('has-bnav', name === 'vDash');
     if (name !== 'vSetup') stopPoll();
     window.scrollTo(0, 0);
   }
@@ -811,13 +828,12 @@ footer a{color:var(--muted-fg)}
         expired: 'That sign-in took too long. Try again.',
         noemail: 'Your Simply Krisp account did not share an email. Start with your email below.',
         unavailable: 'Account sign-in is not turned on yet. Start with your email below.'
-      }[signin] || 'We could not sign you in with your Simply Krisp account. Try again, or use "Email me my link".');
+      }[signin] || 'We could not sign you in with your Simply Krisp account. Try again, or use "Email me a sign-in link".');
       return;
     }
     api('/api/crisper/me').then(function (st) {
       S.st = st;
-      var needsSetup = st.inbox.address && !st.inbox.firstEmailAt && !st.items.length && !st.pending.length && !ls(SKIP_LS);
-      if (needsSetup || u.hash === '#setup') openSetup(); else { view('vDash'); render(); }
+      if (u.hash === '#setup') openSetup(); else { view('vDash'); render(); }
     }).catch(function (e) {
       if (e.status === 401) { ls(KEY_LS, null); S.key = null; view('vLanding'); showErr('suErr', e.message); }
       else { view('vLanding'); showErr('suErr', 'Could not reach your Krisper. Check your connection and refresh.'); }
@@ -847,9 +863,9 @@ footer a{color:var(--muted-fg)}
         return;
       }
       S.key = r.key; ls(KEY_LS, r.key); S.st = r.state;
-      openSetup();
+      ls(SKIP_LS, '1'); view('vDash'); render();
     }).catch(function (e) { showErr('suErr', e.message); })
-      .then(function () { b.disabled = false; b.textContent = 'Create my Krisper'; });
+      .then(function () { b.disabled = false; b.textContent = 'Start my Krisper'; });
   });
   el('toLost').addEventListener('click', function () { show('fLost', true); el('lostEmail').focus(); });
   el('fLost').addEventListener('submit', function (ev) {
@@ -858,7 +874,7 @@ footer a{color:var(--muted-fg)}
     if (!email) return;
     api('/api/crisper/signup', { body: { email: email, resend: true } }).then(function (r) {
       var m = el('lostMsg'); m.classList.remove('hide');
-      m.textContent = r.emailed ? 'If that email has a Krisper, a fresh link is on its way.' : 'Link emails are not switched on in this test build yet.';
+      m.textContent = r.emailed ? 'If that email has a Krisper, a sign-in link is on its way.' : 'Link emails are not switched on in this test build yet.';
     }).catch(function (e) { var m = el('lostMsg'); m.classList.remove('hide'); m.textContent = e.message; });
   });
 
@@ -869,9 +885,7 @@ footer a{color:var(--muted-fg)}
     show('setupNoInbox', !addr); show('setupInbox', !!addr);
     if (!addr) return;
     el('inboxAddr').textContent = addr;
-    if (!el('stores').children.length) {
-      renderStores();
-    }
+    if (!el('stores').children.length) renderStores();
     renderStoreOutputs();
     renderSetupStatus();
     startPoll();
@@ -888,7 +902,7 @@ footer a{color:var(--muted-fg)}
     var n = st.items.length + st.pending.length;
     if (st.inbox.firstEmailAt || st.receipts.some(function (r) { return r.channel === 'email'; })) {
       fs.className = 'status good';
-      fs.innerHTML = '<span aria-hidden="true">✓</span><span><b>Connected.</b> Your first grocery email arrived' + (n ? ' and ' + plural(n, 'item') + ' are in your Krisper.' : '. It had no fresh produce, so the next order will fill it in.') + '</span>';
+      fs.innerHTML = '<span aria-hidden="true">✓</span><span><b>Connected.</b>' + (n ? ' ' + plural(n, 'item') + ' in your Krisper.' : ' Your next order will fill it in.') + '</span>';
       el('setupDone').textContent = 'See my Krisper';
     }
   }
@@ -918,8 +932,8 @@ footer a{color:var(--muted-fg)}
       }).catch(function () { var r = document.createRange(); r.selectNodeContents(el(t.getAttribute('data-copy'))); var s = getSelection(); s.removeAllRanges(); s.addRange(r); });
     } else if (t.hasAttribute('data-go')) {
       var g = t.getAttribute('data-go');
-      if (g === 'dash') { ls(SKIP_LS, '1'); view('vDash'); render(); }
-      if (g === 'setup') openSetup();
+      if (g === 'dash') { ls(SKIP_LS, '1'); view('vDash'); tab('fridge'); render(); }
+      if (g === 'setup') { closeSheets(); openSetup(); }
     } else if (t.hasAttribute('data-open')) {
       openSheet(t.getAttribute('data-open'));
     } else if (t.hasAttribute('data-close')) {
@@ -939,16 +953,24 @@ footer a{color:var(--muted-fg)}
     }
   });
   function closeMenus() { document.querySelectorAll('.menu').forEach(function (m) { m.classList.add('hide'); }); }
-  el('navSettings').addEventListener('click', function () { el('vSettings').scrollIntoView({ behavior: 'smooth' }); });
+  S.tab = 'fridge';
+  function tab(name) {
+    S.tab = name;
+    document.querySelectorAll('[data-panel]').forEach(function (p) { p.classList.toggle('hide', p.getAttribute('data-panel') !== name); });
+    document.querySelectorAll('[data-tab2]').forEach(function (b) { if (b.getAttribute('data-tab2') === name) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current'); });
+    window.scrollTo(0, 0);
+  }
+  document.addEventListener('click', function (ev) { var b = ev.target.closest('[data-tab2]'); if (b) tab(b.getAttribute('data-tab2')); });
+  el('navSettings').addEventListener('click', function () { tab('more'); });
 
   // ---------- dashboard ----------
   var GROUPS = [
-    { k: 'check', t: 'Check it', sub: 'Past the usual window. Look, sniff, and use it or toss it.' },
-    { k: 'today', t: 'Use today', sub: 'At or near the end of its range.' },
+    { k: 'check', t: 'Check it', sub: 'Past its usual window. Look and sniff first.' },
+    { k: 'today', t: 'Use today', sub: '' },
     { k: 'soon', t: 'Next 2 days', sub: '' },
     { k: 'week', t: 'This week', sub: '' },
     { k: 'later', t: 'Later', sub: '' },
-    { k: 'pending', t: 'On the way', sub: 'From an order confirmation. These start counting the day after you ordered, or when the receipt arrives.' }
+    { k: 'pending', t: 'On the way', sub: 'Starts counting when it arrives.' }
   ];
 
   function dayIndex(it) { return it.leftMax <= 0 ? 0 : it.leftMax; }
@@ -961,10 +983,9 @@ footer a{color:var(--muted-fg)}
     el('greet').textContent = (h < 12 ? 'Good morning' : h < 17 ? 'Good afternoon' : 'Good evening') + (u.firstName ? ', ' + u.firstName : '');
     var urgent = items.filter(function (i) { return i.status === 'today' || i.status === 'check'; }).length;
     var soon = items.filter(function (i) { return i.status === 'soon'; }).length;
-    el('summary').textContent = !items.length && !pend.length ? 'Nothing tracked yet.'
-      : plural(items.length, 'item') + ' in your Krisper' + (urgent ? ' · ' + urgent + ' to use today' : '') + (soon ? ' · ' + soon + ' in the next 2 days' : '') + (pend.length ? ' · ' + pend.length + ' on the way' : '');
+    el('summary').textContent = !items.length && !pend.length ? 'Add your groceries to get started.'
+      : plural(items.length, 'item') + (urgent ? ' · ' + urgent + ' to use today' : '') + (soon ? ' · ' + soon + ' soon' : '') + (pend.length ? ' · ' + pend.length + ' on the way' : '');
 
-    renderStrip(items);
     renderConflict(items);
     renderGroups(items, pend);
     renderStake(items, pend);
@@ -1014,11 +1035,9 @@ footer a{color:var(--muted-fg)}
     rows.sort(function (x, y) { return y.v.length - x.v.length; });
     var r = rows[0];
     var hasK = S.st.krisp && S.st.krisp.active;
-    box.innerHTML = '<div class="banner"><span class="ic" aria-hidden="true">⚠︎</span><div><b>' + esc(r.p) + '</b> gives off a lot of ethylene and is in the fridge with <b>' +
-      esc(r.v.slice(0, 3).join(', ')) + (r.v.length > 3 ? ' and ' + (r.v.length - 3) + ' more' : '') + '</b>, which ' + (r.v.length === 1 ? 'is' : 'are') + ' sensitive to it. ' +
-      'Give ' + esc(r.p.toLowerCase()) + ' its own drawer or bag' + (hasK ? '. Your Krisp helps, but a strong producer can out-gas it.' : ', or add a Krisp to absorb it.') +
-      (rows.length > 1 ? '<div class="note" style="margin-top:4px">Also: ' + rows.slice(1).map(function (x) { return esc(x.p); }).join(', ') + '.</div>' : '') +
-      (hasK ? '' : '<div style="margin-top:6px"><a class="link small" target="_blank" rel="noopener" href="' + SHOP + 'conflict">See how Krisp works</a></div>') +
+    box.innerHTML = '<div class="banner small"><span class="ic" aria-hidden="true">⚠︎</span><div><b>Keep ' + esc(r.p.toLowerCase()) + ' apart.</b> It speeds up spoiling of ' +
+      esc(r.v.slice(0, 2).join(' and ').toLowerCase()) + (r.v.length > 2 ? ' +' + (r.v.length - 2) : '') + '. Give it its own drawer or bag.' +
+      (hasK ? '' : ' <a class="link" target="_blank" rel="noopener" href="' + SHOP + 'conflict">How Krisp helps</a>') +
       '</div></div>';
     box.classList.remove('hide');
   }
@@ -1028,8 +1047,7 @@ footer a{color:var(--muted-fg)}
   function wasteLine(i) {
     var w = i.waste; if (!w) return '';
     var pct = Math.round(w.rate * 100);
-    return '<div class="wst"><span class="wl">Typically wasted</span><span><b>' + pct + '%</b> of ' + esc(i.name.toLowerCase()) + ' bought for home goes uneaten' + (w.source === 'epa' ? ' (all-produce average)' : '') +
-      '. On this buy that\'s about <b>' + money(w.usd) + '</b> · ' + num(w.lb) + ' lb · ' + num(w.co2Lb) + ' lb CO₂e.</span></div>';
+    return '<p class="wst">Typically wasted: <b>' + pct + '%</b>' + (w.source === 'epa' ? ' (produce average)' : '') + ' · about <b>' + money(w.usd) + '</b> of this</p>';
   }
   function stem(x) { return String(x).toLowerCase().replace(/(oes|ies|es|s)$/, function (m) { return m === 'ies' ? 'y' : m === 'oes' ? 'o' : ''; }); }
   function itemCard(i, pending) {
@@ -1039,32 +1057,28 @@ footer a{color:var(--muted-fg)}
     var inFridge = S.st && S.st.items ? S.st.items.map(function (x) { return stem(x.name); }) : [];
     var avoid = (i.avoidWith || []).slice().sort(function (a, b) { return (inFridge.indexOf(stem(b)) >= 0) - (inFridge.indexOf(stem(a)) >= 0); }).slice(0, 3);
     var eth = (i.ethyleneProduction === 'high' || i.ethyleneProduction === 'very_high');
-    var store = '<div class="sto"><div class="stw"><span class="sti" aria-hidden="true">' + (WHERE_IC[i.storage] || '❄') + '</span><span class="wl">Store it</span><b>' + esc(WHERE[i.storage] || 'Fridge') + '</b></div>' +
-      (tip ? '<p class="stt">' + esc(tip) + '</p>' : '') +
-      (avoid.length ? '<p class="sta"><b>Keep away from</b> ' + esc(avoid.join(', ')) + (eth ? ' (it gives off ethylene)' : '') + '</p>' : eth ? '<p class="sta">Gives off ethylene: keep it apart from greens and other sensitive produce.</p>' : '') +
+    var store = '<p class="sto1"><span class="sti" aria-hidden="true">' + (WHERE_IC[i.storage] || '❄') + '</span><b>' + esc(WHERE[i.storage] || 'Fridge') + '</b>' + (tip ? ' · ' + esc(tip) : '') + '</p>';
+    var detail = (avoid.length ? '<p class="sta"><b>Keep away from</b> ' + esc(avoid.join(', ')) + (eth ? ' (it gives off ethylene)' : '') + '</p>' : eth ? '<p class="sta">Gives off ethylene. Keep it away from greens.</p>' : '') +
       (i.krispBoost ? '<p class="stk">Your Krisp adds about ' + i.krispBoost[0] + '–' + i.krispBoost[1] + ' days</p>' : i.krispCould ? '<p class="stk off">A Krisp would add about ' + i.krispCould[0] + '–' + i.krispCould[1] + ' days</p>' : '') +
-      '</div>';
+      wasteLine(i);
     var tags = '';
     if (i.ripeningDays) tags += '<span class="tag">Ripening +' + i.ripeningDays + 'd</span>';
-    if (i.source === 'manual') tags += '<span class="tag">Added by hand</span>';
-    if (i.source === 'photo') tags += '<span class="tag">From a receipt photo</span>';
-    var menu = pending
-      ? '<button type="button" data-act="arrived" data-id="' + i.id + '">It arrived today</button><button type="button" data-act="delete" data-id="' + i.id + '">Remove, didn\'t get it</button>'
-      : (i.ripensFirst ? '<button type="button" data-act="ripening" data-days="2" data-id="' + i.id + '">Still ripening (+2 days)</button>' : '') +
-        (i.ripeningDays ? '<button type="button" data-act="ripening" data-days="-2" data-id="' + i.id + '">Ripe now (−2 days)</button>' : '') +
-        (i.scrap ? '<button type="button" data-fin="' + i.id + '" data-mode="ideas">Ideas for the ' + esc(i.scrap.part) + '</button>' : '') +
-        '<button type="button" data-act="delete" data-id="' + i.id + '">Remove (wasn\'t mine / mistake)</button>';
-    var foot = pending
-      ? '<button class="btn ghost sm" type="button" data-act="arrived" data-id="' + i.id + '">Arrived</button>'
-      : '<span class="fl">When it\'s gone:</span><button class="btn ghost sm" type="button" data-act="used" data-id="' + i.id + '">Used it</button><button class="btn ghost sm" type="button" data-act="tossed" data-id="' + i.id + '">Tossed</button>';
+    var acts = pending
+      ? '<button type="button" data-act="delete" data-id="' + i.id + '">Remove, didn\'t get it</button>'
+      : '<button type="button" data-fin="' + i.id + '">Tossed some' + (i.scrap ? ' / log the ' + esc(i.scrap.part) : '') + '</button>' +
+        (i.ripensFirst ? '<button type="button" data-act="ripening" data-days="2" data-id="' + i.id + '">Still ripening</button>' : '') +
+        (i.ripeningDays ? '<button type="button" data-act="ripening" data-days="-2" data-id="' + i.id + '">Ripe now</button>' : '') +
+        (i.scrap ? '<button type="button" data-fin="' + i.id + '" data-mode="ideas">Scrap ideas</button>' : '') +
+        '<button type="button" data-act="delete" data-id="' + i.id + '">Remove</button>';
+    var quick = pending
+      ? '<div class="qb"><button class="btn ghost" type="button" data-act="arrived" data-id="' + i.id + '">Arrived</button></div>'
+      : '<div class="qb"><button class="btn ghost" type="button" data-act="used" data-id="' + i.id + '" aria-label="' + esc(i.name) + ': used it">Used</button><button class="btn ghost" type="button" data-act="tossed" data-id="' + i.id + '" aria-label="' + esc(i.name) + ': tossed">Tossed</button></div>';
     return '<article class="it s-' + (pending ? 'pending' : i.status) + '">' +
-      '<div class="ith"><img src="' + esc(i.imageUrl) + '" alt="" loading="lazy"><div style="flex:1;min-width:0"><div class="itn">' + esc(i.name) + q + '</div><div class="itl">' + esc(label) + '</div></div></div>' +
+      '<div class="ith"><img src="' + esc(i.imageUrl) + '" alt="" loading="lazy"><div style="flex:1;min-width:0"><div class="itn">' + esc(i.name) + q + '</div><div class="itl">' + esc(label) + '</div></div>' + quick + '</div>' +
       (pending ? '' : '<div class="bar" role="progressbar" aria-label="Freshness used" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' + Math.round(i.progress * 100) + '"><i style="width:' + Math.max(4, Math.round(i.progress * 100)) + '%"></i></div>') +
-      store + wasteLine(i) +
-      (tags ? '<div class="tags">' + tags + '</div>' : '') +
-      '<div class="itf">' + foot + '<button class="btn ghost sm more" type="button" data-more aria-label="More options for ' + esc(i.name) + '">⋯</button></div>' +
-      (pending ? '' : '<button class="partl" type="button" data-fin="' + i.id + '">Tossed some' + (i.scrap ? ' · log the ' + esc(i.scrap.part) : '') + '</button>') +
-      '<div class="menu hide">' + menu + '</div></article>';
+      store +
+      '<details class="itd"><summary>More</summary><div class="dbody">' + detail + (tags ? '<div class="tags">' + tags + '</div>' : '') + '<div class="mact">' + acts + '</div></div></details>' +
+      '</article>';
   }
 
   // What's at stake: the typical-household waste for everything on hand now.
@@ -1073,25 +1087,19 @@ footer a{color:var(--muted-fg)}
     if (!all.length) { box.innerHTML = ''; return; }
     var usd = 0, lb = 0, co2 = 0;
     all.forEach(function (i) { if (i.waste) { usd += i.waste.usd; lb += i.waste.lb; co2 += i.waste.co2Lb; } });
-    var fr = all.filter(function (i) { return i.storage === 'refrigerator' || i.storage === 'counter_then_fridge'; }).length;
-    var ct = all.filter(function (i) { return i.storage === 'counter'; }).length, pn = all.filter(function (i) { return i.storage === 'pantry'; }).length;
-    var where = [fr ? fr + ' in the fridge' : '', ct ? ct + ' on the counter' : '', pn ? pn + ' in the pantry' : ''].filter(Boolean).join(' · ');
-    box.innerHTML = '<div class="ih"><h2>Store it right, waste less</h2><span class="note">' + plural(all.length, 'item') + ' · ' + esc(where) + '</span></div>' +
-      '<p class="muted small" style="margin-top:4px">If what you have now went the typical US-household way, this much would end up in the trash. Each card shows where to keep it and what to keep it away from.</p>' +
-      '<div class="tiles st3"><div class="tile bad"><div class="v">' + money(usd) + '</div><div class="l">Typically wasted</div></div>' +
-      '<div class="tile"><div class="v">' + num(lb) + '<small>lb</small></div><div class="l">Food to the landfill</div></div>' +
-      '<div class="tile"><div class="v">' + num(co2) + '<small>lb CO₂e</small></div><div class="l">Emissions behind it' + (co2 >= 1 ? ' · ≈ ' + plural(Math.round(co2 * 0.4536 / 0.4), 'mile') + ' driven' : '') + '</div></div></div>' +
-      '<details><summary>Where these numbers come from</summary><p>Per-item waste rates are USDA ERS <a href="https://www.ers.usda.gov/data-products/food-availability-per-capita-data-system" target="_blank" rel="noopener">Loss-Adjusted Food Availability</a> estimates of the edible share of each fresh fruit or vegetable that goes uneaten at home (cooking loss and uneaten food, latest year, 2021–2022). Items USDA doesn\'t list use the <a href="https://www.epa.gov/system/files/documents/2025-04/costoffoodwastereport_508.pdf" target="_blank" rel="noopener">EPA (2025)</a> 27% average for fresh produce. Weights, prices and CO₂e use the same estimates as Your impact below.</p></details>';
+    box.innerHTML = '<div class="stk1"><span class="v">' + money(usd) + '</span><span>of this typically goes to waste. Store each item as shown to keep it.<br><span class="muted small">' + num(lb) + ' lb · ' + num(co2) + ' lb CO₂e</span></span></div>' +
+      '<details><summary>Where this comes from</summary><p>USDA ERS <a href="https://www.ers.usda.gov/data-products/food-availability-per-capita-data-system" target="_blank" rel="noopener">Loss-Adjusted Food Availability</a> at-home waste rates per item; <a href="https://www.epa.gov/system/files/documents/2025-04/costoffoodwastereport_508.pdf" target="_blank" rel="noopener">EPA (2025)</a> 27% average where USDA has no figure.</p></details>';
   }
 
   function renderGroups(items, pend) {
     var box = el('groups');
     if (!items.length && !pend.length) {
       var hasAddr = !!S.st.inbox.address;
-      box.innerHTML = '<div class="card empty-state" style="margin-top:22px"><h2>Your Krisper is empty</h2><p class="muted">' +
-        (hasAddr ? 'Forward a grocery receipt to your Krisper address, snap a photo of a paper receipt, or add a few things by hand.' : 'Snap a photo of a receipt, paste one, or add a few things by hand.') +
-        '</p><div class="row"><button class="btn" type="button" data-open="add">+ Add produce</button><button class="btn ghost" type="button" data-open="paste">Paste receipt</button>' +
-        (hasAddr ? '<button class="btn ghost" type="button" data-go="setup">Email setup</button>' : '') + '</div></div>';
+      box.innerHTML = '<div class="card" style="margin-top:18px"><h2 style="margin-bottom:4px">Add your first groceries</h2><p class="muted small" style="margin-bottom:12px">Pick one. You can always add more later.</p><div class="choose">' +
+        '<button type="button" class="ch primary" data-open="photo"><span class="ci" aria-hidden="true">&#128247;</span><span><b>Snap a receipt</b><small>Paper receipt, read on your phone</small></span></button>' +
+        '<button type="button" class="ch" data-open="add"><span class="ci" aria-hidden="true">&#129388;</span><span><b>Pick items</b><small>Tap what you bought</small></span></button>' +
+        '<button type="button" class="ch" data-open="paste"><span class="ci" aria-hidden="true">&#128203;</span><span><b>Paste receipt text</b><small>From an order email</small></span></button>' +
+        (hasAddr ? '<button type="button" class="ch" data-go="setup"><span class="ci" aria-hidden="true">&#9993;</span><span><b>Forward emails automatically</b><small>One-time setup for online orders</small></span></button>' : '') + '</div></div>';
       return;
     }
     var filtered = items;
@@ -1120,7 +1128,7 @@ footer a{color:var(--muted-fg)}
       var ring = '<svg class="kring" viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="15.5" fill="none" stroke="hsl(48 10% 90%)" stroke-width="4"/>' +
         '<circle cx="18" cy="18" r="15.5" fill="none" stroke="' + (due != null && due <= 3 ? 'hsl(16 70% 50%)' : 'hsl(96 14% 28%)') + '" stroke-width="4" stroke-linecap="round" stroke-dasharray="' + (97.4 * (1 - pct)).toFixed(1) + ' 97.4" transform="rotate(-90 18 18)"/>' +
         '<text x="18" y="21" text-anchor="middle" font-size="9" font-family="DM Sans" fill="hsl(96 14% 14%)">' + (due == null ? '?' : Math.max(0, due) + 'd') + '</text></svg>';
-      var msg = due == null ? 'Add the date you last changed your sachet in Settings and we\'ll remind you when it\'s time.'
+      var msg = due == null ? 'When did you last change your sachet? We\'ll remind you when it\'s time.'
         : due > 3 ? 'Changed ' + plural(age, 'day') + ' ago. About ' + plural(due, 'day') + ' until it\'s time for a fresh one.'
         : due >= 0 ? 'Time to swap soon: ' + (due === 0 ? 'today' : 'in ' + plural(due, 'day')) + '. A fresh sachet keeps the Krisp ranges accurate.'
         : 'Your sachet is ' + plural(-due, 'day') + ' past its 30 days.' + (k.active ? '' : ' Krisp credit is paused on your items until you swap it.');
@@ -1133,8 +1141,7 @@ footer a{color:var(--muted-fg)}
       var could = st.items.filter(function (i) { return i.krispCould; });
       if (could.length >= 2) {
         var lo = 0, hi = 0; could.forEach(function (i) { lo = Math.max(lo, i.krispCould[0]); hi = Math.max(hi, i.krispCould[1]); });
-        nudge.innerHTML = '<div class="status small" style="justify-content:space-between;flex-wrap:wrap"><span>' + plural(could.length, 'item') + ' in your fridge (' + esc(could.slice(0, 3).map(function (i) { return i.name.toLowerCase(); }).join(', ')) + (could.length > 3 ? '…' : '') +
-          ') would get up to ' + hi + ' extra days with a Krisp, based on the Storage Guide.</span><a class="link" target="_blank" rel="noopener" href="' + SHOP + 'items-nudge">Learn more</a></div>';
+        nudge.innerHTML = '<div class="status small" style="justify-content:space-between;flex-wrap:wrap;padding:10px 14px"><span>A Krisp would add up to ' + hi + ' days to ' + plural(could.length, 'item') + ' here.</span><a class="link" target="_blank" rel="noopener" href="' + SHOP + 'items-nudge">Learn more</a></div>';
       }
     }
   }
@@ -1148,7 +1155,7 @@ footer a{color:var(--muted-fg)}
       var bits = [r.state === 'tossed' ? 'tossed' : part, tr].filter(Boolean).join(' · ');
       return '<span class="' + (r.state === 'tossed' ? 't' : part ? 'p' : '') + '" title="' + esc(r.state + ' ' + fmtDate(r.at)) + '"><img src="' + esc(r.imageUrl || img(r.name)) + '" alt="">' + esc(r.name) + (bits ? ' · ' + bits : '') +
         (r.scrap ? ' <button class="link small" type="button" data-fin="' + r.id + '" data-done="1" aria-label="Edit ' + esc(r.name) + '" style="margin-left:2px">edit</button>' : '') + '</span>';
-    }).join('') : '<p class="muted small">Nothing yet. Tap "Used it" or "Tossed" on an item when it\'s gone.</p>';
+    }).join('') : '<p class="muted small">Nothing yet. Tap Used or Tossed on an item when it\'s gone.</p>';
   }
 
   var BICON = { scrap: 'S', compost: 'C', first: '1', rescue: '+', ten: '10', clean1: '7', clean3: '3', usd25: '$', club90: '%', beat: '✓', krisp: 'K' };
@@ -1177,16 +1184,14 @@ footer a{color:var(--muted-fg)}
     var tiles = [
       { v: num(t.tossedLb) + '<small>lb</small>', l: 'Tossed', c: t.tossedLb > 0 ? 'bad' : '' },
       { v: money(t.tossedUsd), l: 'Wasted produce', c: t.tossedUsd > 0 ? 'bad' : '' },
-      { v: num(t.tossedCo2Lb) + '<small>lb CO₂e</small>', l: t.tossedMiles ? 'From tossed food · ≈ ' + plural(t.tossedMiles, 'mile') + ' driven' : 'From tossed food' },
-      { v: money(t.usedUsd), l: 'Produce eaten · ' + num(t.usedLb) + ' lb', c: t.usedUsd > 0 ? 'good' : '' },
-      { v: String(t.rescued), l: 'Rescues · eaten in the last 2 days', c: t.rescued ? 'good' : '' },
-      { v: streakV, l: streakL, c: s.cleanWeeks ? 'good' : '' },
+      { v: money(t.usedUsd), l: 'Produce eaten', c: t.usedUsd > 0 ? 'good' : '' },
+      { v: streakV, l: 'Clean-week streak', c: s.cleanWeeks ? 'good' : '' },
     ];
     var earned = im.badges.filter(function (b) { return b.earned; }).length;
     var vs = fin >= 3 && (t.avoidedUsd > 0.5 || t.avoidedCo2Kg > 0.2)
       ? '<div class="ivs">Compared with a household tossing the US-average ' + Math.round(im.benchmark.tossRate * 100) + '% of the same produce, you kept about <b>' + money(t.avoidedUsd) + '</b> and <b>' + num(t.avoidedCo2Kg / 0.4536) + ' lb CO₂e</b> out of the bin.</div>' : '';
     box.innerHTML =
-      '<div class="ih"><h2>Your impact<span class="lvl" title="' + lv.points + ' points">' + esc(lv.name) + '</span></h2>' +
+      '<div class="ih"><h2>Your level<span class="lvl" title="' + lv.points + ' points">' + esc(lv.name) + '</span></h2>' +
       '<div class="tog" role="group" aria-label="Time range"><button type="button" data-range="30" aria-pressed="' + !all + '">30 days</button><button type="button" data-range="all" aria-pressed="' + all + '">All time</button></div></div>' +
       '<div class="ibody"><div class="ering">' + ring + '<div class="cap">' + cap + '</div></div>' +
       '<div class="tiles">' + tiles.map(function (x) { return '<div class="tile ' + (x.c || '') + '"><div class="v">' + x.v + '</div><div class="l">' + x.l + '</div></div>'; }).join('') + '</div></div>' +
@@ -1194,9 +1199,9 @@ footer a{color:var(--muted-fg)}
       scrapRow(t) +
       '<div class="lbar"><span><b style="color:var(--fg)">' + plural(lv.points, 'pt') + '</b></span><span class="track"><i style="width:' + Math.max(3, Math.round(lv.progress * 100)) + '%"></i></span><span>' +
       (lv.next ? lv.toNext + ' to ' + esc(lv.next) : 'Top level') + '</span></div>' +
-      '<div class="badges" aria-label="Badges, ' + earned + ' of ' + im.badges.length + ' earned">' + im.badges.map(function (b) {
+      '<details class="badges-d"><summary>Badges · ' + earned + ' of ' + im.badges.length + '</summary><div class="badges" aria-label="Badges, ' + earned + ' of ' + im.badges.length + ' earned">' + im.badges.map(function (b) {
         return '<span class="badge' + (b.earned ? ' on' : '') + '" title="' + esc(b.desc) + (b.earned ? ' (earned)' : '') + '"><span class="bi">' + (BICON[b.id] || '•') + '</span>' + esc(b.name) + '</span>';
-      }).join('') + '</div>' +
+      }).join('') + '</div></details>' +
       '<details><summary>How these are estimated</summary><p>Points: 1 per item eaten, +1 if you rescued it in its last couple of days. ' +
       'Weights use the receipt weight when there is one, otherwise a typical weight per item (one apple ≈ 0.4 lb, one bag of carrots ≈ 1 lb). ' +
       'Dollars use average retail prices from <a href="https://www.ers.usda.gov/data-products/fruit-and-vegetable-prices" target="_blank" rel="noopener">USDA ERS (2023)</a>, so your store may differ. ' +
@@ -1207,7 +1212,7 @@ footer a{color:var(--muted-fg)}
   }
   function scrapRow(t) {
     var tr = t.trim || {};
-    if (!tr.logged) return '<div class="scr"><span>Scraps & trim: log stems, peels and cobs with <b>Tossed some</b> or <b>Scraps?</b> to earn points for using or composting them.</span></div>';
+    if (!tr.logged) return '';
     return '<div class="scr"><span><b>Scraps & trim</b></span><span><b>' + num(tr.usedLb) + ' lb</b> used</span><span><b>' + num(tr.compostLb) + ' lb</b> composted</span><span><b>' + num(tr.trashLb) + ' lb</b> trashed</span>' +
       (t.partialCount ? '<span>' + plural(t.partialCount, 'item') + ' partly tossed</span>' : '') + '</div>';
   }
@@ -1317,7 +1322,7 @@ footer a{color:var(--muted-fg)}
     el('setKrispOn').value = st.krisp.changedOn || '';
     el('setKrispOn').max = st.today;
     if (document.activeElement !== el('setName')) el('setName').value = u.firstName || '';
-    el('setAddr').textContent = st.inbox.address || 'Not switched on in this test build';
+    el('setAddr').textContent = st.inbox.address ? (st.inbox.firstEmailAt ? 'Connected' : 'Not set up yet') : 'Not on in this test build';
     el('delEmail').textContent = u.email;
   }
 
@@ -1331,7 +1336,7 @@ footer a{color:var(--muted-fg)}
   el('setKrispOn').addEventListener('change', function () { saveSettings({ krispChangedOn: this.value || null }, 'Sachet date saved'); });
   el('krispToday').addEventListener('click', function () { saveSettings({ krispChangedOn: S.st.today }, 'Sachet date updated'); });
   el('saveName').addEventListener('click', function () { saveSettings({ firstName: el('setName').value }, 'Saved'); });
-  el('signOut').addEventListener('click', function () { ls(KEY_LS, null); ls(SKIP_LS, null); S.key = null; S.st = null; setManifest(); view('vLanding'); });
+  el('signOut').addEventListener('click', function () { ls(KEY_LS, null); ls(SKIP_LS, null); S.key = null; S.st = null; setManifest(); tab('fridge'); view('vLanding'); });
   el('delStart').addEventListener('click', function () { show('delConfirm', true); });
   el('delNo').addEventListener('click', function () { show('delConfirm', false); });
   el('delYes').addEventListener('click', function () {
@@ -1382,7 +1387,10 @@ footer a{color:var(--muted-fg)}
   function openSheet(which) {
     lastFocus = document.activeElement;
     closeSheets();
-    if (which === 'add') {
+    if (which === 'choose') {
+      show('chFwd', !!(S.st && S.st.inbox.address));
+      show('shChoose', true);
+    } else if (which === 'add') {
       S.sel = {}; el('addSearch').value = ''; el('addDate').value = (S.st && S.st.today) || todayLocal(); el('addDate').max = el('addDate').value;
       renderChips(); renderSel(); showErr('addErr', '');
       show('shAdd', true); setTimeout(function () { el('addSearch').focus(); }, 30);
@@ -1396,7 +1404,7 @@ footer a{color:var(--muted-fg)}
     document.body.style.overflow = 'hidden';
   }
   function closeSheets() {
-    show('shAdd', false); show('shPaste', false); show('shFin', false); document.body.style.overflow = '';
+    show('shAdd', false); show('shPaste', false); show('shFin', false); show('shChoose', false); document.body.style.overflow = '';
     if (lastFocus && lastFocus.focus) try { lastFocus.focus(); } catch (e) {}
   }
   document.querySelectorAll('.scrim').forEach(function (s) { s.addEventListener('click', function (ev) { if (ev.target === s) closeSheets(); }); });
@@ -1438,7 +1446,7 @@ footer a{color:var(--muted-fg)}
     var b = this, names = Object.keys(S.sel); if (!names.length) return;
     b.disabled = true;
     api('/api/crisper/items', { body: { add: names.map(function (n) { return { produce: n, qty: S.sel[n], date: el('addDate').value }; }) } }).then(function (st) {
-      S.st = st; closeSheets(); ls(SKIP_LS, '1'); view('vDash'); render(); toast('Added ' + plural(names.length, 'item'));
+      S.st = st; closeSheets(); ls(SKIP_LS, '1'); view('vDash'); tab('fridge'); render(); toast('Added ' + plural(names.length, 'item'));
     }).catch(function (e) { showErr('addErr', e.message); b.disabled = false; });
   });
 
@@ -1464,7 +1472,7 @@ footer a{color:var(--muted-fg)}
   el('pasteSave').addEventListener('click', function () {
     var b = this; b.disabled = true;
     api('/api/crisper/receipt', { body: { text: el('pasteText').value, channel: S.pasteChannel || 'paste' } }).then(function (r) {
-      S.st = r.state; closeSheets(); ls(SKIP_LS, '1'); view('vDash'); render(); toast('Added ' + plural(r.result.added, 'item'));
+      S.st = r.state; closeSheets(); ls(SKIP_LS, '1'); view('vDash'); tab('fridge'); render(); toast('Added ' + plural(r.result.added, 'item'));
     }).catch(function (e) { toast(e.message); b.disabled = false; });
   });
 
@@ -1499,7 +1507,7 @@ footer a{color:var(--muted-fg)}
     var can = !isStandalone() && (deferredPrompt || isIOS());
     show('setInstall', !isStandalone());
     if (!can || ls(INST_LS) || !S.st) { box.innerHTML = ''; return; }
-    box.innerHTML = '<div class="banner inst"><img src="/icons/icon-192.png?v=2" alt="" width="40" height="40"><div style="flex:1;min-width:0"><b>Get the Simply Krisp app</b><div class="small muted">Add it to your home screen: it opens to My Krisper, works like an app, and makes receipt photos one tap away.</div>' +
+    box.innerHTML = '<div class="banner inst"><img src="/icons/icon-192.png?v=2" alt="" width="40" height="40"><div style="flex:1;min-width:0"><b>Add the app to your home screen</b><div class="small muted">Receipt photos are one tap away.</div>' +
       '<div class="ihow"></div><div class="row" style="margin-top:8px"><button class="btn sm" type="button" data-install>' + (deferredPrompt ? 'Install' : 'Show me how') + '</button><button class="btn ghost sm" type="button" id="instHide">Not now</button></div></div></div>';
     el('instHide').addEventListener('click', function () { ls(INST_LS, '1'); renderInstall(); });
   }

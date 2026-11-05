@@ -136,7 +136,7 @@ export default async function handler(req, res) {
 
     const { user, key, created } = await krisperForEmail(email, { firstName });
     await logEvent(user.id, 'shopify_login', { created });
-    return redirect(res, `${siteOrigin()}/krisper?k=${key}${created ? '#setup' : ''}`);
+    return redirect(res, `${siteOrigin()}/krisper?k=${key}`);
   } catch (e) {
     console.error('shopify login', e);
     return back(res, 'failed');
