@@ -21,19 +21,19 @@ export const BASE = {
   ],
   "icons": [
     {
-      "src": "/icons/icon-192.png",
+      "src": "/icons/icon-192.png?v=2",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/icons/icon-512.png",
+      "src": "/icons/icon-512.png?v=2",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/icons/maskable-512.png",
+      "src": "/icons/maskable-512.png?v=2",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
@@ -45,7 +45,7 @@ export const BASE = {
       "url": "/krisper?source=app",
       "icons": [
         {
-          "src": "/icons/icon-192.png",
+          "src": "/icons/icon-192.png?v=2",
           "sizes": "192x192"
         }
       ]
@@ -55,7 +55,7 @@ export const BASE = {
       "url": "/",
       "icons": [
         {
-          "src": "/icons/icon-192.png",
+          "src": "/icons/icon-192.png?v=2",
           "sizes": "192x192"
         }
       ]
@@ -65,7 +65,7 @@ export const BASE = {
       "url": "/seasonal",
       "icons": [
         {
-          "src": "/icons/icon-192.png",
+          "src": "/icons/icon-192.png?v=2",
           "sizes": "192x192"
         }
       ]

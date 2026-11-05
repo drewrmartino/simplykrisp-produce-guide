@@ -70,6 +70,8 @@ export async function runReminders({ dryRun = false } = {}) {
       count: list.length,
       item_names: listNames(list.map((v) => v.name)),
       items: list.map((v) => ({ name: v.name, label: v.label, status: v.status, image: String(v.imageUrl || '').startsWith('http') ? v.imageUrl : '', tip: v.tip })),
+      // Same list under a name that can't collide with dict.items in Klaviyo templates.
+      reminder_items: list.map((v) => ({ name: v.name, label: v.label, status: v.status, image: String(v.imageUrl || '').startsWith('http') ? v.imageUrl : '', tip: v.tip })),
       also_tracking: Math.max(0, views.length - list.length),
       dashboard_url: dashboardUrl(user.id),
       krisp_due_in_days: krisp.owned ? krisp.dueInDays : null,

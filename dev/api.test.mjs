@@ -96,7 +96,7 @@ test('item actions: used, tossed, undo, ripening, manual add', async () => {
   const banana = me.items.find((i) => i.name === 'Banana');
   me = (await api('/api/crisper/items', { method: 'POST', key, body: { id: banana.id, op: 'ripening', days: 2 } })).data;
   assert.equal(me.items.find((i) => i.name === 'Banana').ripeningDays, 2);
-  me = (await api('/api/crisper/items', { method: 'POST', key, body: { add: [{ produce: 'Raspberry', qty: 1, date: new Date(Date.now() - 4 * 864e5).toISOString().slice(0, 10) }] } })).data;
+  me = (await api('/api/crisper/items', { method: 'POST', key, body: { add: [{ produce: 'Raspberry', qty: 1, date: new Date(Date.now() - 5 * 864e5).toISOString().slice(0, 10) }] } })).data;
   const rasp = me.items.find((i) => i.name === 'Raspberry');
   assert.equal(rasp.status, 'check');
   assert.equal(me.items[0].name, 'Raspberry', 'past-window item sorts first');

@@ -6,7 +6,7 @@
 <title>My Krisper | SimplyKrisp</title>
 <meta name="description" content="Forward your grocery order emails and see what to eat first. Shelf-life ranges from the SimplyKrisp Produce Storage Guide." />
 <meta name="robots" content="noindex" />
-<link rel="icon" type="image/png" href="/favicon.png" />
+<link rel="icon" type="image/png" href="/favicon.png?v=2" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Questrial&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -326,7 +326,13 @@ footer a{color:var(--muted-fg)}
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-title" content="Simply Krisp" />
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-<link rel="apple-touch-icon" href="/icons/apple-180.png" />
+<link rel="apple-touch-icon" href="/icons/apple-180.png?v=2" />
+<meta property="og:image" content="https://guide.simplykrisp.com/icons/share-1200x630.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Simply Krisp logo" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://guide.simplykrisp.com/icons/share-1200x630.png" />
 </head>
 <body>
 <script src="/assets/sk-header.js"></script>
@@ -1472,7 +1478,7 @@ footer a{color:var(--muted-fg)}
     var can = !isStandalone() && (deferredPrompt || isIOS());
     show('setInstall', !isStandalone());
     if (!can || ls(INST_LS) || !S.st) { box.innerHTML = ''; return; }
-    box.innerHTML = '<div class="banner inst"><img src="/icons/icon-192.png" alt="" width="40" height="40"><div style="flex:1;min-width:0"><b>Get the Simply Krisp app</b><div class="small muted">Add it to your home screen: it opens to My Krisper, works like an app, and makes receipt photos one tap away.</div>' +
+    box.innerHTML = '<div class="banner inst"><img src="/icons/icon-192.png?v=2" alt="" width="40" height="40"><div style="flex:1;min-width:0"><b>Get the Simply Krisp app</b><div class="small muted">Add it to your home screen: it opens to My Krisper, works like an app, and makes receipt photos one tap away.</div>' +
       '<div class="ihow"></div><div class="row" style="margin-top:8px"><button class="btn sm" type="button" data-install>' + (deferredPrompt ? 'Install' : 'Show me how') + '</button><button class="btn ghost sm" type="button" id="instHide">Not now</button></div></div></div>';
     el('instHide').addEventListener('click', function () { ls(INST_LS, '1'); renderInstall(); });
   }
