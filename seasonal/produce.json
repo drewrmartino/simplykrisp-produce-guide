@@ -15,7 +15,7 @@
       "Wash only when ready to eat"
     ],
     "krispRecommended": false,
-    "krispBenefit": "Apples produce very high levels of ethylene gas that accelerates ripening of nearby produce. A SimplyKrisp absorber in your crisper drawer neutralizes this gas, protecting everything stored alongside your apples.",
+    "krispBenefit": "",
     "ripeTip": "A ripe apple is firm with no soft spots and has a sweet fragrance near the stem.",
     "avoidWith": [
       "Lettuce",
@@ -44,7 +44,7 @@
       "Store cut avocado with the pit in, sprinkled with lemon juice, wrapped tightly"
     ],
     "krispRecommended": true,
-    "krispBenefit": "Avocados both produce and respond to ethylene. Once they're ripe and in the fridge, a SimplyKrisp absorber helps prevent them from becoming overripe too quickly.",
+    "krispBenefit": "A Krisp helps a little here. Once ripe and chilled, slows it going from ripe to overripe. Expect about 2–3 extra days once it is ripe and in a closed crisper drawer.",
     "ripeTip": "Gently squeeze — a ripe avocado yields to firm pressure without being mushy. The skin darkens when ripe.",
     "avoidWith": [
       "Bananas",
@@ -72,7 +72,7 @@
       "Only refrigerate if very ripe and you need to buy a couple extra days — the peel will brown but the fruit stays good"
     ],
     "krispRecommended": false,
-    "krispBenefit": "Bananas are highly sensitive to ethylene gas. Placing a SimplyKrisp absorber near your bananas helps slow the ripening process, giving you more days to enjoy them.",
+    "krispBenefit": "",
     "ripeTip": "Yellow with small brown speckles means peak sweetness. Green tips mean it needs another day or two.",
     "avoidWith": [
       "Apples",
@@ -82,7 +82,6 @@
     ],
     "extraDays": 0,
     "imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f34c.png",
-    "extraDaysRange": null,
     "evidence": "related",
     "noBenefitReason": "Bananas belong on the counter, and a Krisp works inside the closed crisper drawer, so it can't reach them. Keep bananas away from your other produce instead. They give off ethylene too."
   },
@@ -101,14 +100,14 @@
       "Keep in the coldest part of the refrigerator",
       "Remove any moldy berries immediately"
     ],
-    "krispRecommended": true,
-    "krispBenefit": null,
+    "krispRecommended": false,
+    "krispBenefit": "",
     "ripeTip": "Look for firm, plump berries with a uniform deep blue color and a silvery frost coating.",
     "avoidWith": null,
-    "extraDays": 1,
+    "extraDays": 0,
     "imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1fad0.png",
-    "extraDaysRange": "1–2",
-    "evidence": "estimated"
+    "evidence": "estimated",
+    "noBenefitReason": "Berries barely react to ethylene. Mold is what ends them, so keep them dry and rinse just before eating."
   },
   {
     "name": "Cantaloupe",
@@ -125,18 +124,18 @@
       "Cut melon should be wrapped and stored in the fridge for up to 3 days",
       "Keep away from ethylene-sensitive produce"
     ],
-    "krispRecommended": true,
-    "krispBenefit": "Cantaloupe is a high ethylene producer. A SimplyKrisp absorber in your fridge helps prevent the gas from affecting other nearby produce.",
+    "krispRecommended": false,
+    "krispBenefit": "",
     "ripeTip": "Ripe cantaloupe has a sweet fragrance at the stem end and yields slightly to pressure. The skin should have a golden undertone.",
     "avoidWith": [
       "Leafy greens",
       "Broccoli",
       "Cucumbers"
     ],
-    "extraDays": 1,
+    "extraDays": 0,
     "imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f348.png",
-    "extraDaysRange": "1–2",
-    "evidence": "estimated"
+    "evidence": "estimated",
+    "noBenefitReason": "Whole melons ripen on the counter and are too big for the drawer. Once cut, wrap it and eat it within a few days."
   },
   {
     "name": "Cherry",
@@ -154,7 +153,7 @@
       "Bring to room temperature before eating for best flavor"
     ],
     "krispRecommended": false,
-    "krispBenefit": null,
+    "krispBenefit": "",
     "ripeTip": "Firm, glossy, and deeply colored with green stems still attached.",
     "avoidWith": null,
     "extraDays": 0,
@@ -178,7 +177,7 @@
       "Wash only before eating"
     ],
     "krispRecommended": false,
-    "krispBenefit": null,
+    "krispBenefit": "",
     "ripeTip": "Plump, firmly attached to the stem, with a powdery bloom on the skin.",
     "avoidWith": null,
     "extraDays": 0,
@@ -202,7 +201,7 @@
       "Place near apples or bananas to speed ripening"
     ],
     "krispRecommended": true,
-    "krispBenefit": "Kiwi is highly sensitive to ethylene gas. A SimplyKrisp absorber in your fridge helps keep ripe kiwi fresh longer by removing the ethylene that causes rapid softening.",
+    "krispBenefit": "A Krisp makes a real difference here. Ripe kiwi turns mushy fast around ethylene. This slows the softening. Expect about 2–4 extra days once it is ripe and in a closed crisper drawer.",
     "ripeTip": "A ripe kiwi yields to gentle pressure, similar to a ripe pear.",
     "avoidWith": [
       "Apples",
@@ -230,7 +229,7 @@
       "Store cut lemons face-down on a plate or in a sealed container"
     ],
     "krispRecommended": false,
-    "krispBenefit": null,
+    "krispBenefit": "",
     "ripeTip": "Choose bright yellow, firm lemons that feel heavy for their size.",
     "avoidWith": null,
     "extraDays": 0,
@@ -254,7 +253,7 @@
       "Store cut limes tightly wrapped"
     ],
     "krispRecommended": false,
-    "krispBenefit": null,
+    "krispBenefit": "",
     "ripeTip": "Firm with glossy, bright green skin. Heavier limes have more juice.",
     "avoidWith": null,
     "extraDays": 0,
@@ -277,17 +276,17 @@
       "To speed ripening, place in a paper bag",
       "Store cut mango in an airtight container in the fridge"
     ],
-    "krispRecommended": true,
-    "krispBenefit": "Mangoes are highly sensitive to ethylene. Using a SimplyKrisp absorber once they're in the fridge helps them stay at perfect ripeness longer instead of quickly going soft.",
+    "krispRecommended": false,
+    "krispBenefit": "",
     "ripeTip": "A ripe mango gives slightly when squeezed and has a fruity aroma at the stem end. Color is not a reliable indicator.",
     "avoidWith": [
       "Apples",
       "Bananas"
     ],
-    "extraDays": 2,
+    "extraDays": 0,
     "imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f96d.png",
-    "extraDaysRange": "2–3",
-    "evidence": "related"
+    "evidence": "related",
+    "noBenefitReason": "Mangoes ripen on the counter, and once ripe they have only a day or two. A Krisp adds little."
   },
   {
     "name": "Orange",
@@ -304,16 +303,16 @@
       "Do not store in sealed plastic bags — they need some air",
       "Keep away from high ethylene producers"
     ],
-    "krispRecommended": true,
-    "krispBenefit": null,
+    "krispRecommended": false,
+    "krispBenefit": "",
     "ripeTip": "Choose oranges that are firm, heavy for their size, and have smooth skin.",
     "avoidWith": [
       "Apples"
     ],
-    "extraDays": 1,
+    "extraDays": 0,
     "imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f34a.png",
-    "extraDaysRange": "1–2",
-    "evidence": "measured"
+    "evidence": "measured",
+    "noBenefitReason": "Citrus barely reacts to ethylene, so a Krisp won't change much. It keeps for weeks in the fridge anyway."
   },
   {
     "name": "Peach",
@@ -330,18 +329,18 @@
       "Store in a single layer to prevent bruising",
       "Do not store in a sealed bag until ripe"
     ],
-    "krispRecommended": true,
-    "krispBenefit": "Peaches produce high levels of ethylene and ripen quickly. A SimplyKrisp absorber helps slow this process once they're in the fridge, giving you more time to enjoy them.",
+    "krispRecommended": false,
+    "krispBenefit": "",
     "ripeTip": "A ripe peach has a sweet fragrance, yields to gentle pressure, and has creamy yellow or warm undertones (not green).",
     "avoidWith": [
       "Leafy greens",
       "Broccoli",
       "Cucumbers"
     ],
-    "extraDays": 1,
+    "extraDays": 0,
     "imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f351.png",
-    "extraDaysRange": "1–2",
-    "evidence": "estimated"
+    "evidence": "estimated",
+    "noBenefitReason": "Peaches ripen on the counter, and once ripe they have only a day or two. A Krisp adds little."
   },
   {
     "name": "Pear",
@@ -359,7 +358,7 @@
       "Keep away from strong-smelling foods"
     ],
     "krispRecommended": true,
-    "krispBenefit": "Pears are both high ethylene producers and highly sensitive to it. A SimplyKrisp absorber in the fridge helps manage their ripening and prevents them from going from perfect to overripe overnight.",
+    "krispBenefit": "A Krisp helps a little here. Once ripe and chilled, slows it going soft and mealy. Expect about 1–2 extra days once it is ripe and in a closed crisper drawer.",
     "ripeTip": "Press gently near the stem. If it yields, it's ripe. Pears ripen from the inside out, so don't wait until they feel soft all over.",
     "avoidWith": [
       "Apples",
@@ -386,7 +385,7 @@
       "Store upside down briefly to distribute sweetness before cutting"
     ],
     "krispRecommended": false,
-    "krispBenefit": null,
+    "krispBenefit": "",
     "ripeTip": "A ripe pineapple has a sweet fragrance at the base, golden skin, and leaves pull out easily.",
     "avoidWith": null,
     "extraDays": 0,
@@ -410,7 +409,7 @@
       "Do not wash until ready to eat"
     ],
     "krispRecommended": false,
-    "krispBenefit": "Plums are only moderately ethylene-sensitive, and a controlled trial found no measurable difference over three to eight weeks of cold storage. Keep them cold and let them ripen on the counter instead.",
+    "krispBenefit": "",
     "ripeTip": "Slightly soft to the touch with a sweet fragrance. The skin should have a powdery bloom.",
     "avoidWith": [
       "Apples",
@@ -436,14 +435,14 @@
       "Remove any moldy berries immediately",
       "Keep stems on until eating"
     ],
-    "krispRecommended": true,
-    "krispBenefit": null,
+    "krispRecommended": false,
+    "krispBenefit": "",
     "ripeTip": "Bright red all the way to the stem with a sweet aroma. Avoid berries with white or green tips.",
     "avoidWith": null,
-    "extraDays": 2,
+    "extraDays": 0,
     "imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f353.png",
-    "extraDaysRange": "2–3",
-    "evidence": "measured"
+    "evidence": "measured",
+    "noBenefitReason": "Berries barely react to ethylene. Mold is what ends them, so keep them dry and rinse just before eating."
   },
   {
     "name": "Tomato",
@@ -461,7 +460,7 @@
       "Keep away from direct sunlight"
     ],
     "krispRecommended": false,
-    "krispBenefit": "Tomatoes produce ethylene and are also sensitive to it. If you're storing ripe tomatoes in the fridge to extend their life, a SimplyKrisp absorber helps preserve their quality.",
+    "krispBenefit": "",
     "ripeTip": "Slightly soft, uniformly colored, and fragrant at the stem end.",
     "avoidWith": [
       "Cucumbers",
@@ -470,7 +469,6 @@
     ],
     "extraDays": 0,
     "imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f345.png",
-    "extraDaysRange": null,
     "evidence": "related",
     "noBenefitReason": "Tomatoes keep their flavor best on the counter, out of reach of a Krisp in the drawer. If you move ripe ones into the fridge to hold them a couple more days, a Krisp in that drawer helps a little."
   },
@@ -489,18 +487,18 @@
       "Keep away from ethylene-producing fruits",
       "Whole melons keep better at cool room temperature than in the fridge"
     ],
-    "krispRecommended": true,
-    "krispBenefit": "Watermelon is highly sensitive to ethylene gas. A SimplyKrisp absorber in the fridge helps cut watermelon stay firm and fresh longer.",
+    "krispRecommended": false,
+    "krispBenefit": "",
     "ripeTip": "A ripe watermelon sounds hollow when tapped, has a creamy yellow ground spot, and feels heavy for its size.",
     "avoidWith": [
       "Apples",
       "Bananas",
       "Peaches"
     ],
-    "extraDays": 1,
+    "extraDays": 0,
     "imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f349.png",
-    "extraDaysRange": "1–2",
-    "evidence": "estimated"
+    "evidence": "estimated",
+    "noBenefitReason": "Whole melons are too big for the drawer. Once cut, wrap it and eat it within a few days."
   },
   {
     "name": "Nectarine",
@@ -518,7 +516,7 @@
       "Keep away from other ethylene producers"
     ],
     "krispRecommended": false,
-    "krispBenefit": "Nectarines showed no measurable response to ethylene in cold storage, so an absorber is not what makes the difference here — ripening on the counter and then chilling is.",
+    "krispBenefit": "",
     "ripeTip": "Slightly soft along the seam with a fragrant aroma. Avoid green-tinged fruit.",
     "avoidWith": [
       "Apples",
@@ -545,17 +543,17 @@
       "Store cut papaya in an airtight container",
       "Place in a paper bag with a banana to speed ripening"
     ],
-    "krispRecommended": true,
-    "krispBenefit": "Papaya is both a high ethylene producer and highly sensitive. A SimplyKrisp absorber helps ripe papaya maintain quality in the fridge.",
+    "krispRecommended": false,
+    "krispBenefit": "",
     "ripeTip": "Mostly yellow to orange skin that gives slightly to pressure. A slight sweet aroma at the stem.",
     "avoidWith": [
       "Apples",
       "Bananas"
     ],
-    "extraDays": 1,
+    "extraDays": 0,
     "imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f96d.png",
-    "extraDaysRange": "1–2",
-    "evidence": "related"
+    "evidence": "related",
+    "noBenefitReason": "Papayas ripen on the counter, and once ripe they have only a day or two. A Krisp adds little."
   },
   {
     "name": "Pomegranate",
@@ -573,7 +571,7 @@
       "Freeze arils in a single layer for long-term storage"
     ],
     "krispRecommended": false,
-    "krispBenefit": null,
+    "krispBenefit": "",
     "ripeTip": "Heavy for its size with a deep color. The skin should be smooth and firm.",
     "avoidWith": null,
     "extraDays": 0,
@@ -597,7 +595,7 @@
       "Use as soon as possible for best flavor"
     ],
     "krispRecommended": true,
-    "krispBenefit": "Asparagus is moderately sensitive to ethylene. A SimplyKrisp absorber helps prevent premature toughening caused by ethylene exposure in the fridge.",
+    "krispBenefit": "A Krisp helps a little here. Slows the spears turning tough and woody. Expect about 1–2 extra days in a closed crisper drawer.",
     "ripeTip": "Choose firm, bright green stalks with tight, compact tips.",
     "avoidWith": [
       "Apples",
@@ -625,7 +623,7 @@
       "Green peppers last longer than red, yellow, or orange"
     ],
     "krispRecommended": false,
-    "krispBenefit": null,
+    "krispBenefit": "",
     "ripeTip": "Firm with glossy, wrinkle-free skin and a fresh green stem.",
     "avoidWith": null,
     "extraDays": 0,
@@ -649,7 +647,7 @@
       "Use within a few days for best nutrition and flavor"
     ],
     "krispRecommended": true,
-    "krispBenefit": "Broccoli is extremely sensitive to ethylene gas, which causes yellowing of the florets. A SimplyKrisp absorber in your crisper drawer keeps broccoli green and fresh significantly longer.",
+    "krispBenefit": "A Krisp makes a real difference here. Keeps the florets green instead of yellowing. Expect about 2–4 extra days in a closed crisper drawer.",
     "ripeTip": "Tight, dark green florets with firm stems. Avoid any yellowing.",
     "avoidWith": [
       "Apples",
@@ -678,7 +676,7 @@
       "Remove any yellowed outer leaves before storing"
     ],
     "krispRecommended": true,
-    "krispBenefit": "Brussels sprouts are highly sensitive to ethylene and will yellow quickly when exposed. A SimplyKrisp absorber protects them from ethylene in the fridge.",
+    "krispBenefit": "A Krisp makes a real difference here. Keeps the outer leaves from yellowing. Expect about 2–3 extra days in a closed crisper drawer.",
     "ripeTip": "Tight, compact heads that are bright green with no yellowing.",
     "avoidWith": [
       "Apples",
@@ -706,7 +704,7 @@
       "Outer leaves may wilt but protect the inner head"
     ],
     "krispRecommended": true,
-    "krispBenefit": "Cabbage is highly sensitive to ethylene which causes leaf yellowing and loss. A SimplyKrisp absorber helps keep your cabbage crisp and green for weeks.",
+    "krispBenefit": "A Krisp makes a real difference here. Slows outer leaves yellowing and loosening from the head. Expect about 2–4 extra days in a closed crisper drawer.",
     "ripeTip": "Choose heads that feel heavy and compact with crisp, tightly packed leaves.",
     "avoidWith": [
       "Apples",
@@ -734,7 +732,7 @@
       "Keep away from ethylene-producing fruits to prevent bitterness"
     ],
     "krispRecommended": true,
-    "krispBenefit": null,
+    "krispBenefit": "A Krisp makes a real difference here. Stops the bitter taste carrots pick up from ethylene. Expect about 2–3 extra days in a closed crisper drawer.",
     "ripeTip": "Firm, smooth, and bright orange. Avoid carrots that bend or have cracks.",
     "avoidWith": [
       "Apples"
@@ -760,7 +758,7 @@
       "Brown spots can be trimmed — the rest is still good"
     ],
     "krispRecommended": true,
-    "krispBenefit": "Cauliflower is highly sensitive to ethylene, which causes discoloration and accelerated yellowing. A SimplyKrisp absorber keeps it white and fresh.",
+    "krispBenefit": "A Krisp makes a real difference here. Slows browning on the head and yellowing leaves. Expect about 2–3 extra days in a closed crisper drawer.",
     "ripeTip": "Compact, creamy white heads with no dark spots. Leaves should be green and fresh.",
     "avoidWith": [
       "Apples",
@@ -788,7 +786,7 @@
       "Keep away from ethylene producers"
     ],
     "krispRecommended": true,
-    "krispBenefit": "Celery is moderately sensitive to ethylene which causes loss of green color. A SimplyKrisp absorber helps maintain the crisp, green quality of your celery.",
+    "krispBenefit": "A Krisp helps a little here. Helps the stalks keep their green color. Expect about 1–2 extra days in a closed crisper drawer.",
     "ripeTip": "Firm, crisp stalks that snap when bent. Look for bright green color and fresh leaves.",
     "avoidWith": [
       "Apples",
@@ -815,7 +813,7 @@
       "Store in the crisper drawer without removing silk"
     ],
     "krispRecommended": false,
-    "krispBenefit": null,
+    "krispBenefit": "",
     "ripeTip": "Look for bright green, tightly wrapped husks with moist silk. Kernels should be plump when peeked.",
     "avoidWith": null,
     "extraDays": 0,
@@ -839,7 +837,7 @@
       "Keep away from ethylene-producing fruits"
     ],
     "krispRecommended": true,
-    "krispBenefit": "Cucumbers are highly sensitive to ethylene which causes yellowing and accelerated decay. A SimplyKrisp absorber is especially useful if you store cucumbers near other produce.",
+    "krispBenefit": "A Krisp makes a real difference here. Slows yellowing and soft, watery spots. Expect about 2–3 extra days in a closed crisper drawer.",
     "ripeTip": "Firm, dark green, and medium-sized. Avoid soft spots or yellowing.",
     "avoidWith": [
       "Apples",
@@ -868,7 +866,7 @@
       "Do not cut until ready to cook to prevent browning"
     ],
     "krispRecommended": true,
-    "krispBenefit": null,
+    "krispBenefit": "A Krisp helps a little here. Slows browning at the cap and softening. Expect about 1–2 extra days in a closed crisper drawer.",
     "ripeTip": "Firm with smooth, glossy, deep purple skin. Should feel heavy for its size.",
     "avoidWith": null,
     "extraDays": 1,
@@ -892,7 +890,7 @@
       "Once broken from the bulb, use cloves within 10 days"
     ],
     "krispRecommended": false,
-    "krispBenefit": null,
+    "krispBenefit": "",
     "ripeTip": "Firm bulbs with tight, papery skin. Avoid soft, sprouting, or shriveled cloves.",
     "avoidWith": null,
     "extraDays": 0,
@@ -916,7 +914,7 @@
       "Blanch and freeze for long-term storage"
     ],
     "krispRecommended": true,
-    "krispBenefit": "Green beans are moderately sensitive to ethylene. A SimplyKrisp absorber helps prevent browning and loss of green color from ethylene exposure.",
+    "krispBenefit": "A Krisp helps a little here. Slows yellowing and browning. Expect about 2–3 extra days in a closed crisper drawer.",
     "ripeTip": "Firm, bright green, and snap cleanly when bent. Avoid limp or spotted beans.",
     "avoidWith": [
       "Apples",
@@ -943,7 +941,7 @@
       "Can be blanched and frozen for months"
     ],
     "krispRecommended": true,
-    "krispBenefit": "Kale is moderately ethylene-sensitive. A SimplyKrisp absorber helps slow yellowing and wilting in the crisper.",
+    "krispBenefit": "A Krisp makes a real difference here. Slows the leaves yellowing. Expect about 2–3 extra days in a closed crisper drawer.",
     "ripeTip": "Dark green, firm leaves with no yellowing or wilting. Smaller leaves are more tender.",
     "avoidWith": [
       "Apples",
@@ -970,7 +968,7 @@
       "Never store near apples, pears, or bananas"
     ],
     "krispRecommended": true,
-    "krispBenefit": "Lettuce is extremely sensitive to ethylene, which causes russet spotting and wilting. A SimplyKrisp absorber is one of the best ways to extend the life of your salad greens.",
+    "krispBenefit": "A Krisp makes a real difference here. Slows russet spotting, the brown specks on romaine and leaf lettuce. Expect about 2–4 extra days in a closed crisper drawer.",
     "ripeTip": "Crisp, vibrant leaves with no browning or slimy spots.",
     "avoidWith": [
       "Apples",
@@ -1000,7 +998,7 @@
       "Clean with a damp cloth or brush instead of rinsing"
     ],
     "krispRecommended": false,
-    "krispBenefit": null,
+    "krispBenefit": "",
     "ripeTip": "Firm, dry, and evenly colored. Avoid slimy or darkened mushrooms.",
     "avoidWith": null,
     "extraDays": 0,
@@ -1024,7 +1022,7 @@
       "Cut onions should be refrigerated in an airtight container"
     ],
     "krispRecommended": false,
-    "krispBenefit": null,
+    "krispBenefit": "",
     "ripeTip": "Firm with dry, papery outer skin and no soft spots or sprouting.",
     "avoidWith": [
       "Potatoes"
@@ -1050,7 +1048,7 @@
       "Blanch and freeze for long-term storage"
     ],
     "krispRecommended": true,
-    "krispBenefit": "Peas are moderately sensitive to ethylene which causes yellowing and decay. A SimplyKrisp absorber helps preserve their sweet, fresh flavor.",
+    "krispBenefit": "A Krisp helps a little here. Slows the pods yellowing. Expect about 1–2 extra days in a closed crisper drawer.",
     "ripeTip": "Bright green, plump pods that are firm to the touch.",
     "avoidWith": [
       "Apples",
@@ -1077,7 +1075,7 @@
       "Avoid exposure to light which causes greening"
     ],
     "krispRecommended": false,
-    "krispBenefit": null,
+    "krispBenefit": "",
     "ripeTip": "Firm with no green spots, sprouts, or soft areas.",
     "avoidWith": [
       "Onions",
@@ -1104,7 +1102,7 @@
       "Keep away from ethylene-producing fruits"
     ],
     "krispRecommended": true,
-    "krispBenefit": "Spinach is highly sensitive to ethylene gas which causes rapid yellowing and wilting. A SimplyKrisp absorber in your crisper significantly extends spinach freshness.",
+    "krispBenefit": "A Krisp makes a real difference here. Slows the leaves yellowing. Expect about 2–3 extra days in a closed crisper drawer.",
     "ripeTip": "Bright, deep green leaves that are crisp and dry with no slimy or yellow patches.",
     "avoidWith": [
       "Apples",
@@ -1133,7 +1131,7 @@
       "Use within a month for best quality"
     ],
     "krispRecommended": false,
-    "krispBenefit": null,
+    "krispBenefit": "",
     "ripeTip": "Firm with smooth, even-colored skin and no cracks or soft spots.",
     "avoidWith": null,
     "extraDays": 0,
@@ -1157,7 +1155,7 @@
       "Can be stored at cool room temperature for a few days"
     ],
     "krispRecommended": true,
-    "krispBenefit": null,
+    "krispBenefit": "A Krisp helps a little here. Slows yellowing and soft spots. Expect about 1–2 extra days in a closed crisper drawer.",
     "ripeTip": "Small to medium-sized with firm, glossy, dark green skin.",
     "avoidWith": [
       "Apples",
@@ -1184,18 +1182,18 @@
       "Wrap hardy herbs (rosemary, thyme) in a damp paper towel, then seal in a bag",
       "Do not wash until ready to use"
     ],
-    "krispRecommended": true,
-    "krispBenefit": "Fresh herbs are extremely sensitive to ethylene gas. A SimplyKrisp absorber in your fridge helps herbs stay vibrant and aromatic for days longer.",
+    "krispRecommended": false,
+    "krispBenefit": "",
     "ripeTip": "Bright, vibrant color with a strong aroma and no wilting or dark spots.",
     "avoidWith": [
       "Apples",
       "Bananas",
       "Tomatoes"
     ],
-    "extraDays": 2,
+    "extraDays": 0,
     "imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f33f.png",
-    "extraDaysRange": "2–3",
-    "evidence": "measured"
+    "evidence": "measured",
+    "noBenefitReason": "In a jar on the shelf, herbs are out of the Krisp's reach. Bagged in the high-humidity drawer instead, the Krisp helps keep them from yellowing."
   },
   {
     "name": "Radish",
@@ -1213,7 +1211,7 @@
       "Greens can be stored separately and used within a day or two"
     ],
     "krispRecommended": false,
-    "krispBenefit": null,
+    "krispBenefit": "",
     "ripeTip": "Firm with smooth, brightly colored skin and fresh-looking greens.",
     "avoidWith": null,
     "extraDays": 0,
@@ -1237,7 +1235,7 @@
       "Keep each squash from touching to prevent rot from spreading"
     ],
     "krispRecommended": false,
-    "krispBenefit": null,
+    "krispBenefit": "",
     "ripeTip": "Hard skin that can't be dented with a fingernail, heavy for its size, with a dry, corky stem.",
     "avoidWith": null,
     "extraDays": 0,
@@ -1261,7 +1259,7 @@
       "Bring to room temperature before eating for best flavor"
     ],
     "krispRecommended": false,
-    "krispBenefit": null,
+    "krispBenefit": "",
     "ripeTip": "Heavy for its size with thin, smooth skin. Color does not indicate ripeness.",
     "avoidWith": null,
     "extraDays": 0,
@@ -1285,7 +1283,7 @@
       "Handle gently — they bruise very easily"
     ],
     "krispRecommended": false,
-    "krispBenefit": "Stone fruit like apricots showed no measurable response to ethylene during cold storage, so we do not claim a benefit. Ripen on the counter, then refrigerate.",
+    "krispBenefit": "",
     "ripeTip": "Slightly soft to the touch with a deep golden-orange color and a sweet fragrance.",
     "avoidWith": [
       "Apples",
@@ -1311,18 +1309,18 @@
       "Wrap cut melon tightly in plastic",
       "Keep away from ethylene-producing fruits"
     ],
-    "krispRecommended": true,
-    "krispBenefit": "Honeydew is highly sensitive to ethylene which accelerates ripening and decay. A SimplyKrisp absorber helps maintain freshness once stored in the fridge.",
+    "krispRecommended": false,
+    "krispBenefit": "",
     "ripeTip": "Slightly waxy feel, creamy yellow skin (not white), and a faint sweet smell at the blossom end.",
     "avoidWith": [
       "Apples",
       "Bananas",
       "Peaches"
     ],
-    "extraDays": 1,
+    "extraDays": 0,
     "imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f348.png",
-    "extraDaysRange": "1–2",
-    "evidence": "estimated"
+    "evidence": "estimated",
+    "noBenefitReason": "Whole melons ripen on the counter and are too big for the drawer. Once cut, wrap it and eat it within a few days."
   },
   {
     "name": "Raspberry",
@@ -1340,7 +1338,7 @@
       "Keep in the coldest part of the refrigerator"
     ],
     "krispRecommended": false,
-    "krispBenefit": null,
+    "krispBenefit": "",
     "ripeTip": "Plump, deeply colored, and easily pulls from the stem. Avoid berries with visible mold or juice staining the container.",
     "avoidWith": null,
     "extraDays": 0,
@@ -1364,7 +1362,7 @@
       "Eat as soon as possible — blackberries are very perishable"
     ],
     "krispRecommended": false,
-    "krispBenefit": null,
+    "krispBenefit": "",
     "ripeTip": "Deep black color, plump, and slightly soft. Red or purple berries are underripe and will be tart.",
     "avoidWith": null,
     "extraDays": 0,
@@ -1388,7 +1386,7 @@
       "Freeze whole for long-term storage — texture changes but flavor is preserved"
     ],
     "krispRecommended": false,
-    "krispBenefit": null,
+    "krispBenefit": "",
     "ripeTip": "Firm with smooth, glossy skin. Red jalapeños are riper and slightly sweeter than green ones.",
     "avoidWith": null,
     "extraDays": 0,
@@ -1412,7 +1410,7 @@
       "Freeze for up to a year — they freeze exceptionally well"
     ],
     "krispRecommended": false,
-    "krispBenefit": null,
+    "krispBenefit": "",
     "ripeTip": "Firm, plump, and deep red. They should bounce when dropped — soft berries are past their prime.",
     "avoidWith": null,
     "extraDays": 0,
@@ -1436,7 +1434,7 @@
       "Do not stack or they will bruise and spoil quickly"
     ],
     "krispRecommended": false,
-    "krispBenefit": null,
+    "krispBenefit": "",
     "ripeTip": "Slightly soft to the touch with a sweet fragrance. The skin may have small cracks near the base when perfectly ripe.",
     "avoidWith": null,
     "extraDays": 0,
@@ -1460,7 +1458,7 @@
       "Trim and freeze for long-term storage"
     ],
     "krispRecommended": true,
-    "krispBenefit": null,
+    "krispBenefit": "A Krisp makes a real difference here. Slows the green tops yellowing. Expect about 2–3 extra days in a closed crisper drawer.",
     "ripeTip": "Firm white bulbs with crisp, bright green tops. Avoid any with slimy or yellowed greens.",
     "avoidWith": null,
     "extraDays": 2,
