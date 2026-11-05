@@ -34,6 +34,15 @@ test('storage guide lists each item with where/how, shortest-lived first', () =>
   assert.ok(Number(g.at_risk_usd) > 0);
   const lettuce = g.guide_items.find((i) => i.name === 'Lettuce');
   assert.match(lettuce.krisp, /Your Krisp adds/);
+  // Grouped like the Crisper Drawer Map.
+  assert.deepEqual(g.zones.map((z) => z.key), ['high', 'low', 'counter']);
+  assert.equal(g.zones[0].names, 'Lettuce');
+  assert.equal(g.zones[1].zone_items[0].name, 'Apple');
+  assert.match(g.zones[0].krisp_note, /Your Krisp/);
+  const z = storageGuide([{ name: 'Peach' }, { name: 'Strawberry' }, { name: 'Onion' }, { name: 'Watermelon' }]).zones;
+  assert.deepEqual(z.map((x) => x.key), ['shelf', 'counter', 'pantry']);
+  assert.match(z[1].zone_items.find((i) => i.name === 'Peach').then, /low-humidity drawer/);
+  assert.match(z[1].zone_items.find((i) => i.name === 'Watermelon').then, /Once cut/);
 });
 
 test('register-receipt abbreviations (what a receipt photo reads back)', () => {
@@ -74,7 +83,7 @@ test('photo receipt saves with the photo channel, items carry storage + waste, g
     assert.equal(it.source, 'photo');
     assert.ok(it.waste && it.waste.rate === 0.24 && it.waste.usd > 0);
     assert.ok(Array.isArray(it.avoidWith));
-    const ev = logs.find((l) => l.includes('[klaviyo disabled] /events') && l.includes('"guide_items":[{"name"'));
+    const ev = logs.find((l) => l.includes('[klaviyo disabled] /events') && l.includes('"zones":[{"key"'));
     assert.ok(ev, 'storage guide event sent');
   } finally {
     console.log = orig;
