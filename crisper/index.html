@@ -170,6 +170,10 @@ ol.steps li::marker{color:var(--muted-fg);font-weight:700}
 ol.ios{margin:8px 0 0 18px;font-size:14px;line-height:1.5}
 .photo{display:flex;flex-direction:column;gap:8px;align-items:flex-start}
 .photo .btn.dis{opacity:.55;pointer-events:none}
+.fbcard{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+.fbfoot{text-align:center;margin:22px 0 4px}
+#fbText{min-height:120px}
+#fbKind{align-self:flex-start}
 .tips{margin:0;padding-left:18px;font-size:13px;color:var(--muted-fg);line-height:1.5}
 .or{display:flex;align-items:center;gap:10px;color:var(--muted-fg);font-size:12.5px;text-transform:uppercase;letter-spacing:.06em}
 .or::before,.or::after{content:"";flex:1;border-top:1px solid var(--border)}
@@ -494,7 +498,7 @@ details.sd{display:block}
           <label class="check"><input type="checkbox" id="suConsent" /> <span>Send me tips and offers <span class="muted">(optional)</span></span></label>
           <div class="err hide" id="suErr" role="alert"></div>
           <button class="btn wide" type="submit" id="suBtn">Start my Krisper</button>
-          <p class="note c">No password. We keep produce names and dates, nothing else.</p>
+          <p class="note c">No password. We never sell your data. <a class="link" href="https://simplykrisp.com/policies/privacy-policy" target="_blank" rel="noopener">Privacy</a></p>
         </form>
         <div id="suExists" class="hide stack">
           <h3>You already have a Krisper</h3>
@@ -618,6 +622,7 @@ details.sd{display:block}
       <section id="stake" aria-label="Store it right"></section>
       <div id="conflict" class="hide" style="margin-top:12px"></div>
       <div id="groups"></div>
+      <p class="fbfoot small muted">Something not working, or an idea? <button class="link small" type="button" data-open="feedback" data-fbpage="fridge">Send feedback</button></p>
     </div>
 
     <div data-panel="impact" class="hide">
@@ -631,6 +636,10 @@ details.sd{display:block}
 
     <div data-panel="more" class="hide" id="vSettings">
       <h1>Settings</h1>
+      <div class="card fbcard" style="margin-top:14px">
+        <div><b>Help shape My Krisper</b><div class="note">Something broken, confusing or missing? Drew reads every note.</div></div>
+        <button class="btn sm" type="button" data-open="feedback" data-fbpage="settings">Send feedback</button>
+      </div>
       <div class="card" style="margin-top:14px">
         <div class="setrow">
           <div><b>Reminder emails</b><div class="note">Smart: only when something needs using soon.</div></div>
@@ -673,6 +682,10 @@ details.sd{display:block}
           <div class="note" style="margin:6px 0">Open this private link on your other device. Keep it to yourself.</div>
           <div class="addr"><code id="myLink" style="overflow-wrap:anywhere;font-size:12.5px"></code><button class="btn ghost sm" type="button" data-copy="myLink">Copy</button></div>
         </details>
+        <div class="setrow">
+          <div style="min-width:0;flex:1"><b>Privacy</b><div class="note">Receipt photos are read by an AI service and then discarded. Forwarded emails: we keep only the store, order number and produce lines. We never sell your data.</div></div>
+          <a class="btn ghost sm" href="https://simplykrisp.com/policies/privacy-policy" target="_blank" rel="noopener">Policy</a>
+        </div>
         <div class="setrow">
           <div><b>Sign out</b></div>
           <button class="btn ghost sm" type="button" id="signOut">Sign out</button>
@@ -731,6 +744,31 @@ details.sd{display:block}
   </div>
 </div>
 
+<!-- feedback sheet -->
+<div class="scrim hide" id="shFeedback" role="dialog" aria-modal="true" aria-labelledby="shFeedbackT">
+  <div class="sheet">
+    <div class="sh"><h2 id="shFeedbackT">Send feedback</h2><button class="x" type="button" data-close aria-label="Close">×</button></div>
+    <div id="fbForm" class="stack">
+      <div class="seg" id="fbKind" role="radiogroup" aria-label="Type of feedback">
+        <label><input type="radio" name="fbk" value="problem" checked><span>Something's wrong</span></label>
+        <label><input type="radio" name="fbk" value="idea"><span>Idea</span></label>
+        <label><input type="radio" name="fbk" value="other"><span>Other</span></label>
+      </div>
+      <label class="f" for="fbText">What happened, or what would make this better?</label>
+      <textarea class="inp" id="fbText" maxlength="2000" placeholder="e.g. My receipt photo missed the cilantro"></textarea>
+      <div class="err hide" id="fbErr" role="alert"></div>
+      <div class="row"><button class="btn" type="button" id="fbSend">Send</button></div>
+      <p class="note">Goes straight to Drew, Simply Krisp's founder, with your email so he can reply.</p>
+    </div>
+    <div id="fbDone" class="hide stack c ckdone">
+      <div class="ckbig" aria-hidden="true">&#10003;</div>
+      <h3>Thank you</h3>
+      <p class="muted">Drew reads every note. If you asked something, watch your email.</p>
+      <div class="row" style="justify-content:center"><button class="btn ghost" type="button" data-close>Close</button></div>
+    </div>
+  </div>
+</div>
+
 <!-- add produce sheet -->
 <div class="scrim hide" id="shFin" role="dialog" aria-modal="true" aria-labelledby="shFinT">
   <div class="sheet fin">
@@ -777,7 +815,7 @@ details.sd{display:block}
     </div>
     <div id="pasteStep2" class="hide stack">
       <p id="pasteFound"></p>
-      <p class="note hide" id="photoHint">Something off? Tap Back to fix the text.</p>
+      <p class="note hide" id="photoHint">Something off? Tap Back to fix the text, or <button class="link small" type="button" data-open="feedback" data-fbpage="receipt">tell us</button>.</p>
       <ul class="pl" id="pasteList"></ul>
       <details id="pasteSkipWrap" class="small muted"><summary id="pasteSkipSum"></summary><ul class="pl" id="pasteSkip" style="margin-top:6px"></ul></details>
       <div class="row"><button class="btn" type="button" id="pasteSave">Add these</button><button class="btn ghost" type="button" id="pasteBack">Back</button></div>
@@ -1264,7 +1302,8 @@ details.sd{display:block}
     if (CK.i >= n) {
       box.innerHTML = '<div class="ckdone"><div class="ckbig" aria-hidden="true">&#10003;</div><h3>All checked</h3><p class="muted">' +
         [CK.used ? CK.used + ' used' : '', CK.tossed ? CK.tossed + ' tossed' : '', CK.good ? CK.good + ' still good' : ''].filter(Boolean).join(' · ') + '</p>' +
-        '<button class="btn" type="button" id="ckFinish">Done</button></div>';
+        '<button class="btn" type="button" id="ckFinish">Done</button>' +
+        '<p class="small muted" style="margin-top:12px">Anything we should fix? <button class="link small" type="button" id="ckFb">Send feedback</button></p></div>';
       return;
     }
     var it = CK.list[CK.i], zone = (ZONES.filter(function (z) { return z.k === zoneOf(it); })[0] || {}).t || '';
@@ -1666,6 +1705,7 @@ details.sd{display:block}
     lastFocus = document.activeElement;
     closeSheets();
     if (which === 'check') { openCheck(); return; }
+    if (which === 'feedback') { openFeedback(); return; }
     if (which === 'repeat') {
       var lt = (S.st && S.st.lastTrip) || []; if (!lt.length) return;
       S.reviewMode = 'repeat'; S.pastePreview = null;
@@ -1696,7 +1736,7 @@ details.sd{display:block}
     document.body.style.overflow = 'hidden';
   }
   function closeSheets() {
-    show('shAdd', false); show('shPaste', false); show('shFin', false); show('shChoose', false); show('shCheck', false); document.body.style.overflow = '';
+    show('shAdd', false); show('shPaste', false); show('shFin', false); show('shChoose', false); show('shCheck', false); show('shFeedback', false); document.body.style.overflow = '';
     if (lastFocus && lastFocus.focus) try { lastFocus.focus(); } catch (e) {}
   }
   document.querySelectorAll('.scrim').forEach(function (s) { s.addEventListener('click', function (ev) { if (ev.target === s) closeSheets(); }); });
@@ -1930,6 +1970,30 @@ details.sd{display:block}
       .then(function () { show('photoStatus', false); el('photoBtn').classList.remove('dis'); });
   });
   el('pasteText').addEventListener('input', function () { if (!this.value.trim()) S.pasteChannel = 'paste'; });
+
+  // ---------- feedback ----------
+  var FB = { page: '' };
+  document.addEventListener('click', function (ev) { var t = ev.target.closest('[data-fbpage]'); if (t) FB.page = t.getAttribute('data-fbpage'); }, true);
+  function openFeedback() {
+    show('fbForm', true); show('fbDone', false); showErr('fbErr', ''); el('fbSend').disabled = false;
+    show('shFeedback', true); document.body.style.overflow = 'hidden';
+    setTimeout(function () { try { el('fbText').focus(); } catch (e) {} }, 50);
+  }
+  el('fbSend').addEventListener('click', function () {
+    var b = this, txt = el('fbText').value.trim(), k = (document.querySelector('input[name="fbk"]:checked') || {}).value || 'other';
+    if (txt.length < 3) return showErr('fbErr', 'Write a few words first.');
+    b.disabled = true; showErr('fbErr', '');
+    api('/api/crisper/me', { body: { feedback: { text: txt, kind: k, page: FB.page || 'app' } } }).then(function () {
+      el('fbText').value = ''; show('fbForm', false); show('fbDone', true);
+    }).catch(function (e) { showErr('fbErr', e.message); b.disabled = false; });
+  });
+  el('ckBody').addEventListener('click', function (ev) {
+    if (ev.target.closest('#ckFb')) {
+      ev.stopPropagation(); FB.page = 'fridge-check';
+      api('/api/crisper/items', { body: { check: true, reviewed: CK.list.length } }).then(function (st) { S.st = st; render(); }).catch(function () {});
+      closeSheets(); openFeedback();
+    }
+  }, true);
 
   boot();
 })();

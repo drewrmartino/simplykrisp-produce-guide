@@ -40,6 +40,8 @@ export default handle(['GET'], async (req) => {
     SELECT line, count(*)::int AS n FROM (
       SELECT jsonb_array_elements_text(unknown) AS line FROM crisper_receipts WHERE unknown IS NOT NULL
     ) t GROUP BY 1 ORDER BY 2 DESC LIMIT 30`);
+  const feedback = await q(`SELECT e.at, u.email, u.first_name, e.meta->>'kind' AS kind, e.meta->>'text' AS text, e.meta->>'page' AS page
+    FROM crisper_events e LEFT JOIN crisper_users u ON u.id = e.user_id WHERE e.type = 'feedback' ORDER BY e.at DESC LIMIT 100`);
   const topProduce = await q(`SELECT produce, count(*)::int AS n,
       count(*) FILTER (WHERE state = 'tossed')::int AS tossed,
       count(*) FILTER (WHERE state = 'used')::int AS used
@@ -55,5 +57,5 @@ export default handle(['GET'], async (req) => {
   catch (e) { orderLookup = `not working (Klaviyo ${e.status || e.message}). The private key needs profiles:read, events:read and metrics:read.`; }
   const reminderPreview = req.query.preview === '1' ? await runReminders({ dryRun: true }) : null;
 
-  return { generatedAt: new Date().toISOString(), orderLookup, funnel, retention, sources, outcomes, receipts, unknownLines, topProduce, users, reminderPreview };
+  return { generatedAt: new Date().toISOString(), orderLookup, funnel, retention, sources, outcomes, receipts, unknownLines, feedback, topProduce, users, reminderPreview };
 });

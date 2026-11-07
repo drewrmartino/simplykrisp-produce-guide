@@ -81,3 +81,18 @@ test('more register abbreviations', () => {
 });
 
 test.after(() => { server.close(); gw.close(); });
+
+test('feedback is saved and shown on the admin page', async () => {
+  const s = await api('/api/crisper/signup', { body: { email: 'fb.test@gmail.com', tz: 'America/Denver' } });
+  const k = s.data.key;
+  const empty = await api('/api/crisper/me', { key: k, body: { feedback: { text: ' ' } } });
+  assert.equal(empty.status, 400);
+  const r = await api('/api/crisper/me', { key: k, body: { feedback: { text: 'Photo missed the cilantro', kind: 'problem', page: 'receipt' } } });
+  assert.equal(r.status, 200, JSON.stringify(r.data));
+  const adminKey = process.env.CRISPER_ADMIN_KEY || 'dev-admin';
+  const a = await api('/api/crisper/admin?key=' + adminKey);
+  assert.equal(a.status, 200);
+  const f = a.data.feedback.find((x) => x.email === 'fb.test@gmail.com');
+  assert.equal(f.text, 'Photo missed the cilantro');
+  assert.equal(f.kind, 'problem');
+});
