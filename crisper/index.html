@@ -384,6 +384,15 @@ details.itd .dbody{display:flex;flex-direction:column;gap:6px;margin-top:6px}
 .bnav button[aria-current="page"]{color:var(--primary);font-weight:700}
 .bnav .bplus{font-size:24px;font-weight:400;line-height:18px;height:18px}
 body.has-bnav main{padding-bottom:96px}
+.rx{margin-top:14px;border:1px solid var(--card-border);background:var(--card);border-radius:14px;padding:12px 14px}
+.rxh{display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap}
+.rxh b{font-size:16px}
+.rxc{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.rxi{display:inline-flex;align-items:center;gap:6px;padding:5px 10px 5px 6px;border-radius:99px;border:1px solid var(--card-border);background:var(--card);font:inherit;font-size:14px;cursor:pointer}
+.rxi img{width:20px;height:20px}
+.rxi[aria-pressed="true"]{background:var(--primary);color:var(--primary-fg);border-color:var(--primary)}
+.rxl{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.rxn{margin-top:8px}
 .itx{flex:0 0 auto;width:30px;height:30px;border-radius:50%;border:0;background:none;color:var(--muted-fg);font-size:20px;line-height:1;cursor:pointer;margin-left:-2px}
 .itx:hover{background:var(--muted);color:var(--fg)}
 .qb .btn.on{background:var(--primary);color:var(--primary-fg);border-color:var(--primary)}
@@ -1182,6 +1191,7 @@ details.sd{display:block}
     var due = filtered.filter(function (i) { return i.status !== 'later'; })
       .sort(function (a, b) { return a.leftMax - b.leftMax; });
     if (due.length) html += '<p class="usefirst"><b>Use first:</b> ' + due.slice(0, 5).map(function (i) { return esc(i.name) + ' <span class="muted">(' + (i.status === 'check' ? 'check it' : i.status === 'today' ? 'today' : i.leftMax + 'd') + ')</span>'; }).join(', ') + (due.length > 5 ? ' +' + (due.length - 5) : '') + '</p>';
+    html += recipeCard(filtered);
     ZONES.forEach(function (z) {
       var list = filtered.filter(function (i) { return zoneOf(i) === z.k; }).sort(function (a, b) { return a.leftMax - b.leftMax; });
       if (!list.length) return;
@@ -1196,6 +1206,35 @@ details.sd{display:block}
 
   var DK_URL = 'https://simplykrisp.com/products/double-krisp?utm_source=produce-guide&utm_medium=referral&utm_campaign=krisper&utm_content=';
   function shortDate(iso) { return iso ? new Date(iso + 'T12:00:00').toLocaleDateString(undefined, { month: 'short', day: 'numeric' }) : ''; }
+
+  // ---------- recipe ideas: search the big recipe sites for what to use first ----------
+  function rxName(n) { var m = /^(.*?)\s*\((.*)\)$/.exec(n); return (m ? m[2] + ' ' + m[1] : n).toLowerCase(); }
+  var RX_SITES = [
+    ['Allrecipes', function (q) { return 'https://www.allrecipes.com/search?q=' + encodeURIComponent(q); }],
+    ['NYT Cooking', function (q) { return 'https://cooking.nytimes.com/search?q=' + encodeURIComponent(q); }],
+    ['Budget Bytes', function (q) { return 'https://www.budgetbytes.com/?s=' + encodeURIComponent(q); }]
+  ];
+  function recipeCard(items) {
+    var pool = items.slice().sort(function (a, b) { return a.leftMax - b.leftMax; }).filter(function (i, n, a) { return a.findIndex(function (x) { return x.name === i.name; }) === n; }).slice(0, 5);
+    if (!pool.length) return '';
+    var names = pool.map(function (i) { return i.name; });
+    if (!S.rx || S.rx.some(function (n) { return names.indexOf(n) < 0; })) {
+      var mate = pool.slice(1).filter(function (i) { return i.category === pool[0].category; })[0];
+      S.rx = [pool[0].name].concat(mate ? [mate.name] : []);
+    }
+    var q = S.rx.map(rxName).join(' ');
+    return '<section class="rx" aria-label="Recipe ideas"><div class="rxh"><b>Cook these first</b><span class="muted small">Tap to mix and match</span></div>' +
+      '<div class="rxc">' + pool.map(function (i) { var on = S.rx.indexOf(i.name) >= 0; return '<button type="button" class="rxi" data-rx-n="' + esc(i.name) + '" aria-pressed="' + on + '"><img src="' + esc(i.imageUrl) + '" alt="">' + esc(i.name) + '</button>'; }).join('') + '</div>' +
+      (S.rx.length ? '<div class="rxl">' + RX_SITES.map(function (r) { return '<a class="btn ghost sm" target="_blank" rel="noopener" href="' + esc(r[1](q)) + '">' + r[0] + ' <span aria-hidden="true">↗</span></a>'; }).join('') + '</div>' +
+        '<p class="muted small rxn">Recipes with ' + esc(S.rx.map(rxName).join(' + ')) + '. NYT Cooking needs a subscription for most recipes.</p>'
+        : '<p class="muted small rxn">Pick at least one item.</p>') + '</section>';
+  }
+  document.addEventListener('click', function (ev) {
+    var b = ev.target.closest('[data-rx-n]'); if (!b) return;
+    var n = b.getAttribute('data-rx-n'), k = S.rx.indexOf(n);
+    if (k >= 0) S.rx.splice(k, 1); else S.rx.push(n);
+    renderGroups(S.st.items, S.st.pending);
+  });
 
   function renderKrisp(st) {
     var k = st.krisp, shop = st.shop || {}, box = el('krispCard');
