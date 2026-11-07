@@ -6,6 +6,9 @@
 //                     items within 3 days.
 //   weekly:           one summary on Sunday (tester's time zone).
 //   off:              nothing.
+// Before you shop (weekly, on the tester's shop_day, default Friday): what is
+// still in the fridge so they skip re-buying it, what to use first, and a link
+// to the 1-minute fridge check. On that day it replaces the use-soon email.
 // Also flags the Krisp sachet when it's due (day 28) or overdue (day 30+).
 // Emails are sent by Klaviyo flows listening for the events emitted here.
 
@@ -52,9 +55,49 @@ export async function runReminders({ dryRun = false } = {}) {
     const hoursSince = lastAt ? (Date.now() - lastAt.getTime()) / 3600000 : Infinity;
     const dueKey = due.map((v) => v.id).sort().join(',');
 
+    // ---- before you shop ----
+    const shopDay = user.shop_day || 'Fri';
+    const lastShop = user.last_shop_email_at ? (Date.now() - new Date(user.last_shop_email_at).getTime()) / 864e5 : Infinity;
+    let shopSent = false;
+    if (shopDay !== 'off' && weekday(user.tz) === shopDay && lastShop > 5) {
+      const recentUsed = await q(
+        `SELECT produce, count(*)::int AS n FROM crisper_items WHERE user_id = $1 AND state = 'used' AND state_at > now() - interval '28 days' GROUP BY produce ORDER BY n DESC`,
+        [user.id],
+      );
+      const onHand = new Set(views.map((v) => v.name));
+      const restock = recentUsed.map((r) => r.produce).filter((n) => !onHand.has(n)).slice(0, 6);
+      if (views.length || restock.length) {
+        const img = (v) => (String(v.imageUrl || '').startsWith('http') ? v.imageUrl : '');
+        const skip = views.filter((v) => v.leftMax >= 3);
+        const useFirst = views.filter((v) => v.leftMax < 3).slice(0, 6);
+        const shopProps = {
+          first_name: user.first_name || '',
+          have_count: views.length,
+          skip_names: listNames(skip.map((v) => v.name)),
+          skip_items: skip.slice(0, 10).map((v) => ({ name: v.name, label: v.label, image: img(v) })),
+          use_first_names: listNames(useFirst.map((v) => v.name)),
+          use_first_items: useFirst.map((v) => ({ name: v.name, label: v.label, image: img(v) })),
+          restock_names: listNames(restock),
+          restock_count: restock.length,
+          check_url: dashboardUrl(user.id) + '#check',
+          dashboard_url: dashboardUrl(user.id),
+        };
+        if (!dryRun) {
+          await trackEvent({ email: user.email, firstName: user.first_name, metric: 'Krisper Before You Shop', properties: shopProps, uniqueId: `shop-${user.id}-${today}` });
+          await q('UPDATE crisper_users SET last_shop_email_at = now() WHERE id = $1', [user.id]);
+          await logEvent(user.id, 'shop_email_sent', { have: views.length, restock: restock.length });
+        }
+        shopSent = true;
+        summary.shop = (summary.shop || 0) + 1;
+        summary.details.push({ email: user.email, reason: 'before-you-shop', skip: shopProps.skip_names, use_first: shopProps.use_first_names, restock: shopProps.restock_names });
+      }
+    }
+
     let send = false;
     let reason = '';
-    if (user.reminder_pref === 'weekly') {
+    if (shopSent) {
+      send = false;
+    } else if (user.reminder_pref === 'weekly') {
       send = weekday(user.tz) === 'Sun' && views.length > 0 && hoursSince > 20;
       reason = 'weekly';
     } else if (due.length) {

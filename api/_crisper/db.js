@@ -82,6 +82,9 @@ const SCHEMA = [
   `ALTER TABLE crisper_items ADD COLUMN IF NOT EXISTS trim text`,
   `ALTER TABLE crisper_users ADD COLUMN IF NOT EXISTS shop_status jsonb`,
   `ALTER TABLE crisper_users ADD COLUMN IF NOT EXISTS shop_checked_at timestamptz`,
+  `ALTER TABLE crisper_users ADD COLUMN IF NOT EXISTS last_check_at timestamptz`,
+  `ALTER TABLE crisper_users ADD COLUMN IF NOT EXISTS shop_day text NOT NULL DEFAULT 'Fri'`,
+  `ALTER TABLE crisper_users ADD COLUMN IF NOT EXISTS last_shop_email_at timestamptz`,
   `CREATE INDEX IF NOT EXISTS crisper_items_user ON crisper_items(user_id, state)`,
   `CREATE TABLE IF NOT EXISTS crisper_events (
     id bigserial PRIMARY KEY,
