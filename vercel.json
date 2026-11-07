@@ -141,5 +141,10 @@
       "path": "/api/crisper/cron",
       "schedule": "0 14 * * *"
     }
-  ]
+  ],
+  "functions": {
+    "api/crisper/receipt.js": {
+      "maxDuration": 40
+    }
+  }
 }
