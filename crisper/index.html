@@ -384,6 +384,20 @@ details.itd .dbody{display:flex;flex-direction:column;gap:6px;margin-top:6px}
 .bnav button[aria-current="page"]{color:var(--primary);font-weight:700}
 .bnav .bplus{font-size:24px;font-weight:400;line-height:18px;height:18px}
 body.has-bnav main{padding-bottom:96px}
+.ckban{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:14px;padding:12px 14px;border-radius:14px;background:hsl(96 30% 94%);border:1px solid hsl(96 20% 84%)}
+.ckprog{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--muted-fg);margin-bottom:14px}
+.ckprog .bar{flex:1;margin:0}
+.ckit{display:flex;gap:14px;align-items:center;padding:14px;border:1px solid var(--card-border);border-radius:14px;background:var(--card)}
+.ckit img{width:56px;height:56px}
+.ckit .itn{font-size:19px}
+.ckq{margin:16px 0 10px;font-weight:600}
+.ckacts{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.ckacts .btn{padding-left:6px;padding-right:6px}
+.ckacts .btn.on{background:var(--primary);color:var(--primary-fg);border-color:var(--primary)}
+.ckfoot{text-align:center;margin-top:14px}
+.ckdone{text-align:center;padding:10px 0 6px}
+.ckdone .ckbig{width:56px;height:56px;border-radius:50%;margin:0 auto 10px;display:grid;place-items:center;background:hsl(96 30% 90%);color:var(--primary);font-size:28px}
+.ckdone .btn{margin-top:14px;min-width:160px}
 .rx{margin-top:14px;border:1px solid var(--card-border);background:var(--card);border-radius:14px;padding:12px 14px}
 .rxh{display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap}
 .rxh b{font-size:16px}
@@ -626,6 +640,14 @@ details.sd{display:block}
           </div>
         </div>
         <div class="setrow">
+          <div><b>Before-you-shop email</b><div class="note">What you still have, so you don't buy it twice.</div></div>
+          <select class="inp" id="setShopDay" style="width:auto" aria-label="Before-you-shop email day"><option value="Mon">Mon</option><option value="Tue">Tue</option><option value="Wed">Wed</option><option value="Thu">Thu</option><option value="Fri">Fri</option><option value="Sat">Sat</option><option value="Sun">Sun</option><option value="off">Off</option></select>
+        </div>
+        <div class="setrow">
+          <div><b>Weekly fridge check</b><div class="note" id="setCheckNote">One minute. Keeps your list right.</div></div>
+          <button class="btn ghost sm" type="button" data-open="check">Start</button>
+        </div>
+        <div class="setrow">
           <div><b>I have a Krisp</b><div class="note" id="setKrispNote"></div></div>
           <label class="check"><input type="checkbox" id="setKrisp"><span>Yes</span></label>
         </div>
@@ -692,11 +714,19 @@ details.sd{display:block}
   <div class="sheet">
     <div class="sh"><h2 id="shChooseT">Add groceries</h2><button class="x" type="button" data-close aria-label="Close">×</button></div>
     <div class="choose">
+      <button type="button" class="ch" data-open="repeat" id="chRepeat"><span class="ci" aria-hidden="true">&#8635;</span><span><b>Same as last trip</b><small id="chRepeatSub"></small></span></button>
       <button type="button" class="ch primary" data-open="photo"><span class="ci" aria-hidden="true">&#128247;</span><span><b>Snap a receipt</b><small>Paper receipt, read on your phone</small></span></button>
       <button type="button" class="ch" data-open="paste"><span class="ci" aria-hidden="true">&#128203;</span><span><b>Paste receipt text</b><small>From an order email or e-receipt</small></span></button>
       <button type="button" class="ch" data-open="add"><span class="ci" aria-hidden="true">&#129388;</span><span><b>Pick items</b><small>Tap what you bought</small></span></button>
       <button type="button" class="ch" data-go="setup" id="chFwd"><span class="ci" aria-hidden="true">&#9993;</span><span><b>Forward emails automatically</b><small>One-time setup for online orders</small></span></button>
     </div>
+  </div>
+</div>
+
+<div class="scrim hide" id="shCheck" role="dialog" aria-modal="true" aria-labelledby="shCheckT">
+  <div class="sheet">
+    <div class="sh"><h2 id="shCheckT">Fridge check</h2><button class="x" type="button" data-close aria-label="Close">×</button></div>
+    <div id="ckBody"></div>
   </div>
 </div>
 
@@ -880,7 +910,7 @@ details.sd{display:block}
     }
     api('/api/crisper/me').then(function (st) {
       S.st = st;
-      if (u.hash === '#setup') openSetup(); else { view('vDash'); render(); }
+      if (u.hash === '#setup') openSetup(); else { view('vDash'); render(); if (u.hash === '#check') { history.replaceState(null, '', u.pathname + u.search); openCheck(); } }
     }).catch(function (e) {
       if (e.status === 401) { ls(KEY_LS, null); S.key = null; view('vLanding'); showErr('suErr', e.message); }
       else { view('vLanding'); showErr('suErr', 'Could not reach your Krisper. Check your connection and refresh.'); }
@@ -1173,6 +1203,7 @@ details.sd{display:block}
     if (!items.length && !pend.length) {
       var hasAddr = !!S.st.inbox.address;
       box.innerHTML = '<div class="card" style="margin-top:18px"><h2 style="margin-bottom:4px">Add your first groceries</h2><p class="muted small" style="margin-bottom:12px">Pick one. You can always add more later.</p><div class="choose">' +
+        ((S.st.lastTrip || []).length ? '<button type="button" class="ch" data-open="repeat"><span class="ci" aria-hidden="true">&#8635;</span><span><b>Same as last trip</b><small>' + esc(S.st.lastTrip.slice(0, 3).map(function (i) { return i.name; }).join(', ') + (S.st.lastTrip.length > 3 ? ' +' + (S.st.lastTrip.length - 3) : '')) + '</small></span></button>' : '') +
         '<button type="button" class="ch primary" data-open="photo"><span class="ci" aria-hidden="true">&#128247;</span><span><b>Snap a receipt</b><small>Paper receipt, read on your phone</small></span></button>' +
         '<button type="button" class="ch" data-open="add"><span class="ci" aria-hidden="true">&#129388;</span><span><b>Pick items</b><small>Tap what you bought</small></span></button>' +
         '<button type="button" class="ch" data-open="paste"><span class="ci" aria-hidden="true">&#128203;</span><span><b>Paste receipt text</b><small>From an order email</small></span></button>' +
@@ -1191,6 +1222,7 @@ details.sd{display:block}
     var due = filtered.filter(function (i) { return i.status !== 'later'; })
       .sort(function (a, b) { return a.leftMax - b.leftMax; });
     if (due.length) html += '<p class="usefirst"><b>Use first:</b> ' + due.slice(0, 5).map(function (i) { return esc(i.name) + ' <span class="muted">(' + (i.status === 'check' ? 'check it' : i.status === 'today' ? 'today' : i.leftMax + 'd') + ')</span>'; }).join(', ') + (due.length > 5 ? ' +' + (due.length - 5) : '') + '</p>';
+    if (checkDue()) html += '<div class="ckban"><div><b>Weekly fridge check</b><div class="small muted">One minute. Tap through what\'s left so your list stays right.</div></div><button class="btn sm" type="button" data-open="check">Start</button></div>';
     html += recipeCard(filtered);
     ZONES.forEach(function (z) {
       var list = filtered.filter(function (i) { return zoneOf(i) === z.k; }).sort(function (a, b) { return a.leftMax - b.leftMax; });
@@ -1206,6 +1238,63 @@ details.sd{display:block}
 
   var DK_URL = 'https://simplykrisp.com/products/double-krisp?utm_source=produce-guide&utm_medium=referral&utm_campaign=krisper&utm_content=';
   function shortDate(iso) { return iso ? new Date(iso + 'T12:00:00').toLocaleDateString(undefined, { month: 'short', day: 'numeric' }) : ''; }
+
+  // ---------- weekly fridge check ----------
+  function daysSince(iso) { return iso ? (Date.now() - new Date(iso).getTime()) / 864e5 : Infinity; }
+  function checkDue() {
+    var st = S.st; if (!st || st.items.length < 2) return false;
+    return st.user.lastCheckAt ? daysSince(st.user.lastCheckAt) >= 6 : daysSince(st.user.createdAt) >= 3;
+  }
+  var CK = { list: [], i: 0, good: 0, used: 0, tossed: 0, partial: false, busy: false };
+  function openCheck() {
+    if (!S.st) return;
+    var list = S.st.items.slice().sort(function (a, b) { return a.leftMax - b.leftMax; });
+    if (!list.length) { toast('Nothing to check yet. Add groceries first.'); return; }
+    CK = { list: list, i: 0, good: 0, used: 0, tossed: 0, partial: false, busy: false };
+    show('toast', false); renderCheck(); show('shCheck', true); document.body.style.overflow = 'hidden';
+  }
+  function renderCheck() {
+    var n = CK.list.length, box = el('ckBody');
+    if (CK.i >= n) {
+      box.innerHTML = '<div class="ckdone"><div class="ckbig" aria-hidden="true">&#10003;</div><h3>All checked</h3><p class="muted">' +
+        [CK.used ? CK.used + ' used' : '', CK.tossed ? CK.tossed + ' tossed' : '', CK.good ? CK.good + ' still good' : ''].filter(Boolean).join(' · ') + '</p>' +
+        '<button class="btn" type="button" id="ckFinish">Done</button></div>';
+      return;
+    }
+    var it = CK.list[CK.i], zone = (ZONES.filter(function (z) { return z.k === zoneOf(it); })[0] || {}).t || '';
+    box.innerHTML = '<div class="ckprog"><span>' + (CK.i + 1) + ' of ' + n + '</span><div class="bar"><i style="width:' + Math.round(CK.i / n * 100) + '%"></i></div></div>' +
+      '<div class="ckit s-' + it.status + '"><img src="' + esc(it.imageUrl) + '" alt=""><div><div class="itn">' + esc(it.name) + (it.qty > 1 ? ' <span class="q">×' + it.qty + '</span>' : '') + '</div><div class="itl">' + esc(it.label) + '</div><div class="small muted">' + esc(zone) + '</div></div></div>' +
+      '<p class="ckq">Is it still in your kitchen?</p>' +
+      '<div class="ckacts"><button class="btn" type="button" data-ck="good">Still good</button><button class="btn ghost" type="button" data-ck="used">Used it</button><button class="btn ghost' + (CK.partial ? ' on' : '') + '" type="button" data-ck="toss">Tossed</button></div>' +
+      (CK.partial ? '<div class="pick"><span class="pq">How much got tossed?</span>' + [[1, 'All'], [0.75, '¾'], [0.5, '½'], [0.25, '¼']].map(function (f) { return '<button type="button" class="opt" data-ckt="' + f[0] + '">' + f[1] + '</button>'; }).join('') + '</div>' : '') +
+      '<div class="ckfoot"><button class="link small" type="button" data-ck="skip">Skip</button></div>';
+  }
+  window.addEventListener('hashchange', function () {
+    if (location.hash === '#check' && S.st) { history.replaceState(null, '', location.pathname + location.search); view('vDash'); tab('fridge'); openCheck(); }
+  });
+  function ckNext(kind) { if (kind) CK[kind]++; CK.i++; CK.partial = false; CK.busy = false; renderCheck(); }
+  function ckApi(body, kind) {
+    CK.busy = true;
+    api('/api/crisper/items', { body: body }).then(function (st) { S.st = st; render(); ckNext(kind); }).catch(function (e) { CK.busy = false; toast(e.message); });
+  }
+  el('ckBody').addEventListener('click', function (ev) {
+    var b = ev.target.closest('[data-ck],[data-ckt],#ckFinish'); if (!b || CK.busy) return;
+    if (b.id === 'ckFinish') {
+      api('/api/crisper/items', { body: { check: true, reviewed: CK.list.length } }).then(function (st) { S.st = st; closeSheets(); render(); toast('Fridge check done. See you next week.'); }).catch(function (e) { toast(e.message); });
+      return;
+    }
+    var it = CK.list[CK.i]; if (!it) return;
+    if (b.hasAttribute('data-ckt')) return ckApi({ id: it.id, op: 'finish', portion: +b.getAttribute('data-ckt') }, 'tossed');
+    var k = b.getAttribute('data-ck');
+    if (k === 'skip') return ckNext(null);
+    if (k === 'toss') { CK.partial = !CK.partial; return renderCheck(); }
+    if (k === 'used') return ckApi({ id: it.id, op: 'finish', portion: 0 }, 'used');
+    if (k === 'good') {
+      // Past or at the end of its window but still fine: give it 2 more days.
+      if (it.status === 'check' || it.status === 'today') return ckApi({ id: it.id, op: 'ripening', days: 2 }, 'good');
+      return ckNext('good');
+    }
+  });
 
   // ---------- recipe ideas: search the big recipe sites for what to use first ----------
   function rxName(n) { var m = /^(.*?)\s*\((.*)\)$/.exec(n); return (m ? m[2] + ' ' + m[1] : n).toLowerCase(); }
@@ -1482,6 +1571,8 @@ details.sd{display:block}
     if (document.activeElement !== el('setName')) el('setName').value = u.firstName || '';
     el('setAddr').textContent = st.inbox.address ? (st.inbox.firstEmailAt ? 'Connected' : 'Not set up yet') : 'Not on in this test build';
     el('delEmail').textContent = u.email;
+    el('setShopDay').value = u.shopDay || 'Fri';
+    el('setCheckNote').textContent = u.lastCheckAt ? 'Last done ' + fmtDate(String(u.lastCheckAt).slice(0, 10)) + '.' : 'One minute. Keeps your list right.';
   }
 
   function saveSettings(s, msg) {
@@ -1490,6 +1581,11 @@ details.sd{display:block}
   document.querySelectorAll('input[name="pref"]').forEach(function (r) {
     r.addEventListener('change', function () { saveSettings({ reminderPref: r.value }, r.value === 'off' ? 'Reminder emails off' : 'Reminders: ' + r.value); });
   });
+  el('setShopDay').addEventListener('change', function () {
+    var v = this.value;
+    api('/api/crisper/items', { body: { shopDay: v } }).then(function (st) { S.st = st; render(); toast(v === 'off' ? 'Before-you-shop email off' : 'Before-you-shop email on ' + this_day(v)); }).catch(function (e) { toast(e.message); });
+  });
+  function this_day(v) { return { Mon: 'Mondays', Tue: 'Tuesdays', Wed: 'Wednesdays', Thu: 'Thursdays', Fri: 'Fridays', Sat: 'Saturdays', Sun: 'Sundays' }[v] || v; }
   el('setKrisp').addEventListener('change', function () { saveSettings({ hasKrisp: this.checked }, this.checked ? 'Krisp on' : 'Krisp off'); });
   el('setKrispOn').addEventListener('change', function () { saveSettings({ krispChangedOn: this.value || null }, 'Sachet date saved'); });
   el('krispToday').addEventListener('click', function () { saveSettings({ krispChangedOn: S.st.today }, 'Sachet date updated'); });
@@ -1563,8 +1659,22 @@ details.sd{display:block}
   function openSheet(which) {
     lastFocus = document.activeElement;
     closeSheets();
+    if (which === 'check') { openCheck(); return; }
+    if (which === 'repeat') {
+      var lt = (S.st && S.st.lastTrip) || []; if (!lt.length) return;
+      S.reviewMode = 'repeat'; S.pastePreview = null;
+      S.review = lt.map(function (i) { return { name: i.name, count: i.count }; });
+      show('pasteStep1', false); show('pasteStep2', true); show('pasteSkipWrap', false); show('photoHint', false);
+      el('shPasteT').textContent = 'Same as last trip'; el('pasteBack').textContent = 'Cancel';
+      renderReview();
+      el('pasteFound').innerHTML = 'Your last trip. Tap <b>×</b> on anything you didn\'t buy this time.';
+      show('shPaste', true); document.body.style.overflow = 'hidden'; return;
+    }
     if (which === 'choose') {
       show('chFwd', !!(S.st && S.st.inbox.address));
+      var lt2 = (S.st && S.st.lastTrip) || [];
+      show('chRepeat', lt2.length > 0);
+      el('chRepeatSub').textContent = lt2.slice(0, 3).map(function (i) { return i.name; }).join(', ') + (lt2.length > 3 ? ' +' + (lt2.length - 3) : '');
       show('shChoose', true);
     } else if (which === 'add') {
       S.sel = {}; el('addSearch').value = ''; el('addDate').value = (S.st && S.st.today) || todayLocal(); el('addDate').max = el('addDate').value;
@@ -1572,7 +1682,7 @@ details.sd{display:block}
       show('shAdd', true); setTimeout(function () { el('addSearch').focus(); }, 30);
     } else if (which === 'paste' || which === 'photo') {
       if (!S.st) return;
-      S.pasteChannel = 'paste';
+      S.pasteChannel = 'paste'; S.reviewMode = 'paste'; el('shPasteT').textContent = 'Add a receipt'; el('pasteBack').textContent = 'Back';
       el('pasteText').value = ''; showErr('pasteErr', ''); show('pasteStep1', true); show('pasteStep2', false); show('photoStatus', false);
       show('shPaste', true);
       if (which === 'photo') el('photoIn').click(); else setTimeout(function () { el('pasteText').focus(); }, 30);
@@ -1580,7 +1690,7 @@ details.sd{display:block}
     document.body.style.overflow = 'hidden';
   }
   function closeSheets() {
-    show('shAdd', false); show('shPaste', false); show('shFin', false); show('shChoose', false); document.body.style.overflow = '';
+    show('shAdd', false); show('shPaste', false); show('shFin', false); show('shChoose', false); show('shCheck', false); document.body.style.overflow = '';
     if (lastFocus && lastFocus.focus) try { lastFocus.focus(); } catch (e) {}
   }
   document.querySelectorAll('.scrim').forEach(function (s) { s.addEventListener('click', function (ev) { if (ev.target === s) closeSheets(); }); });
@@ -1654,16 +1764,23 @@ details.sd{display:block}
     }).join('');
     el('pasteSave').disabled = !r.length;
     el('pasteSave').textContent = r.length ? 'Add ' + plural(r.length, 'item') : 'Nothing to add';
-    if (S.pastePreview && S.pastePreview.items.length) el('pasteFound').innerHTML = 'Found <b>' + plural(S.pastePreview.items.length, 'produce item') + '</b>' + (S.pastePreview.retailer && S.pastePreview.retailer !== 'Other' ? ' from ' + esc(S.pastePreview.retailer) : '') + '. Tap <b>×</b> to remove anything wrong.';
+    if (S.reviewMode !== 'repeat' && S.pastePreview && S.pastePreview.items.length) el('pasteFound').innerHTML = 'Found <b>' + plural(S.pastePreview.items.length, 'produce item') + '</b>' + (S.pastePreview.retailer && S.pastePreview.retailer !== 'Other' ? ' from ' + esc(S.pastePreview.retailer) : '') + '. Tap <b>×</b> to remove anything wrong.';
   }
   el('pasteList').addEventListener('click', function (ev) {
     var q = ev.target.closest('[data-rq]'), x = ev.target.closest('[data-rx]');
     if (q) { var it = S.review[+q.getAttribute('data-rq')]; it.count = Math.max(1, Math.min(99, it.count + +q.getAttribute('data-d'))); renderReview(); }
     else if (x) { S.review.splice(+x.getAttribute('data-rx'), 1); renderReview(); }
   });
-  el('pasteBack').addEventListener('click', function () { show('pasteStep1', true); show('pasteStep2', false); });
+  el('pasteBack').addEventListener('click', function () {
+    if (S.reviewMode === 'repeat') { closeSheets(); return; } show('pasteStep1', true); show('pasteStep2', false); });
   el('pasteSave').addEventListener('click', function () {
     var b = this; b.disabled = true;
+    if (S.reviewMode === 'repeat') {
+      api('/api/crisper/items', { body: { source: 'repeat', add: S.review.map(function (i) { return { produce: i.name, qty: i.count, date: S.st.today }; }) } }).then(function (st) {
+        S.st = st; closeSheets(); view('vDash'); tab('fridge'); render(); toast('Added ' + plural(S.review.length, 'item') + ' from your last trip');
+      }).catch(function (e) { toast(e.message); b.disabled = false; });
+      return;
+    }
     api('/api/crisper/receipt', { body: { text: el('pasteText').value, channel: S.pasteChannel || 'paste', keep: (S.review || []).map(function (i) { return { name: i.name, count: i.count }; }) } }).then(function (r) {
       S.st = r.state; closeSheets(); ls(SKIP_LS, '1'); view('vDash'); tab('fridge'); render(); toast('Added ' + plural(r.result.added, 'item'));
     }).catch(function (e) { toast(e.message); b.disabled = false; });

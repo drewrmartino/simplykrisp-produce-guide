@@ -200,6 +200,7 @@ export async function buildState(user, { touch = true } = {}) {
   );
   const krisp = krispStatus(user, today);
   const impact = buildImpact(finished, { today, tz: user.tz, krisp });
+  const lastTrip = await lastTripFor(user);
   const receipts = await q(
     `SELECT id, received_at, channel, retailer, kind, order_ref, subject, status, item_count, matched, skipped, unknown
        FROM crisper_receipts WHERE user_id = $1 ORDER BY received_at DESC LIMIT 10`,
@@ -215,7 +216,10 @@ export async function buildState(user, { touch = true } = {}) {
       reminderPref: user.reminder_pref,
       marketingConsent: user.marketing_consent,
       createdAt: user.created_at,
+      lastCheckAt: user.last_check_at || null,
+      shopDay: user.shop_day || 'Fri',
     },
+    lastTrip,
     inbox: {
       address: inboxAddress(user.inbox_slug),
       gmailVerification: user.gmail_verification || null,
@@ -244,6 +248,22 @@ export async function buildState(user, { touch = true } = {}) {
       unknown: r.unknown || [],
     })),
   };
+}
+
+// The most recent shopping trip: everything added on the latest day that
+// had additions (wrong items the user removed don't count). Merged by produce.
+export async function lastTripFor(user) {
+  const rows = await q(
+    `SELECT produce, qty FROM crisper_items
+      WHERE user_id = $1 AND state <> 'deleted'
+        AND (created_at AT TIME ZONE $2)::date = (
+          SELECT max((created_at AT TIME ZONE $2)::date) FROM crisper_items WHERE user_id = $1 AND state <> 'deleted')
+      ORDER BY created_at`,
+    [user.id, user.tz || 'America/Denver'],
+  );
+  const by = new Map();
+  for (const r of rows) if (BY_NAME[r.produce]) by.set(r.produce, (by.get(r.produce) || 0) + (r.qty || 1));
+  return [...by].map(([name, count]) => ({ name, count: Math.min(count, 48), imageUrl: BY_NAME[name].imageUrl }));
 }
 
 // ---------- items ----------
