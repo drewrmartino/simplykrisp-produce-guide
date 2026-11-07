@@ -384,6 +384,21 @@ details.itd .dbody{display:flex;flex-direction:column;gap:6px;margin-top:6px}
 .bnav button[aria-current="page"]{color:var(--primary);font-weight:700}
 .bnav .bplus{font-size:24px;font-weight:400;line-height:18px;height:18px}
 body.has-bnav main{padding-bottom:96px}
+.itx{flex:0 0 auto;width:30px;height:30px;border-radius:50%;border:0;background:none;color:var(--muted-fg);font-size:20px;line-height:1;cursor:pointer;margin-left:-2px}
+.itx:hover{background:var(--muted);color:var(--fg)}
+.qb .btn.on{background:var(--primary);color:var(--primary-fg);border-color:var(--primary)}
+.pick{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:10px 0 2px;padding:8px 10px;background:var(--muted);border-radius:10px}
+.pick .pq{font-size:13.5px;font-weight:600;margin-right:4px;flex-basis:100%}
+.pick .opt{min-width:52px;padding:8px 12px;border-radius:99px;border:1px solid var(--card-border);background:var(--card);font:inherit;font-size:15px;font-weight:600;cursor:pointer}
+.pick .opt:hover{border-color:var(--primary)}
+.pick .link{margin-left:auto}
+.pl li.rv{display:flex;align-items:center;gap:8px}
+.rvn{flex:1;min-width:0}
+.qty{display:inline-flex;align-items:center;gap:6px}
+.qty button{width:28px;height:28px;border-radius:50%;border:1px solid var(--card-border);background:var(--card);font:inherit;font-size:16px;line-height:1;cursor:pointer}
+.qty b{min-width:16px;text-align:center}
+.rvx{width:30px;height:30px;border-radius:50%;border:0;background:none;color:var(--muted-fg);font-size:20px;cursor:pointer}
+.rvx:hover{background:var(--muted);color:hsl(0 60% 45%)}
 .usefirst{margin-top:16px;font-size:14px;color:var(--fg);background:var(--muted);border-radius:10px;padding:8px 12px;line-height:1.45}
 .zgrp h3{text-transform:none;letter-spacing:0;font-size:17px}
 .zgrp h3 .zi{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:8px;background:hsl(200 60% 94%);color:hsl(205 55% 35%);font-size:14px}
@@ -1118,12 +1133,17 @@ details.sd{display:block}
         (i.ripeningDays ? '<button type="button" data-act="ripening" data-days="-2" data-id="' + i.id + '">Ripe now</button>' : '') +
         (i.scrap ? '<button type="button" data-fin="' + i.id + '" data-mode="ideas">Scrap ideas</button>' : '') +
         '<button type="button" data-act="delete" data-id="' + i.id + '">Remove</button>';
+    var xb = '<button class="itx" type="button" data-act="delete" data-id="' + i.id + '" aria-label="Remove ' + esc(i.name) + ' (wrong item)" title="Remove (wrong item)">×</button>';
+    var pk = S.pick && S.pick.id === i.id ? S.pick.kind : null;
+    var picker = !pk ? '' : '<div class="pick" role="group" aria-label="' + (pk === 'used' ? 'How much was eaten' : 'How much was tossed') + '"><span class="pq">' + (pk === 'used' ? 'How much did you eat?' : 'How much got tossed?') + '</span>' +
+      [[1, 'All'], [0.75, '¾'], [0.5, '½'], [0.25, '¼']].map(function (f) { return '<button type="button" class="opt" data-pf="' + f[0] + '" data-id="' + i.id + '">' + f[1] + '</button>'; }).join('') +
+      '<button type="button" class="link small" data-pcancel>Cancel</button></div>';
     var quick = pending
-      ? '<div class="qb"><button class="btn ghost" type="button" data-act="arrived" data-id="' + i.id + '">Arrived</button></div>'
-      : '<div class="qb"><button class="btn ghost" type="button" data-act="used" data-id="' + i.id + '" aria-label="' + esc(i.name) + ': used it">Used</button><button class="btn ghost" type="button" data-act="tossed" data-id="' + i.id + '" aria-label="' + esc(i.name) + ': tossed">Tossed</button></div>';
+      ? '<div class="qb"><button class="btn ghost" type="button" data-act="arrived" data-id="' + i.id + '">Arrived</button>' + xb + '</div>'
+      : '<div class="qb"><button class="btn ghost' + (pk === 'used' ? ' on' : '') + '" type="button" data-pk="used" data-id="' + i.id + '" aria-label="' + esc(i.name) + ': used it" aria-expanded="' + (pk === 'used') + '">Used</button><button class="btn ghost' + (pk === 'tossed' ? ' on' : '') + '" type="button" data-pk="tossed" data-id="' + i.id + '" aria-label="' + esc(i.name) + ': tossed" aria-expanded="' + (pk === 'tossed') + '">Tossed</button>' + xb + '</div>';
     return '<article class="it s-' + (pending ? 'pending' : i.status) + '">' +
       '<div class="ith"><img src="' + esc(i.imageUrl) + '" alt="" loading="lazy"><div style="flex:1;min-width:0"><div class="itn">' + esc(i.name) + q + '</div><div class="itl">' + esc(label) + '</div>' + kb.chip + '</div>' + quick + '</div>' +
-      (pending ? '' : '<div class="bar" role="progressbar" aria-label="Freshness used" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' + Math.round(i.progress * 100) + '"><i style="width:' + Math.max(4, Math.round(i.progress * 100)) + '%"></i></div>') +
+      picker + (pending ? '' : '<div class="bar" role="progressbar" aria-label="Freshness used" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' + Math.round(i.progress * 100) + '"><i style="width:' + Math.max(4, Math.round(i.progress * 100)) + '%"></i></div>') +
       store + kb.line +
       '<details class="itd"><summary>More</summary><div class="dbody">' + detail + (tags ? '<div class="tags">' + tags + '</div>' : '') + '<div class="mact">' + acts + '</div></div></details>' +
       '</article>';
@@ -1462,6 +1482,24 @@ details.sd{display:block}
     var id = lastUndo; lastUndo = null; show('toast', false);
     itemAct(id, 'undo');
   });
+  document.addEventListener('click', function (ev) {
+    var k = ev.target.closest('[data-pk]'), f = ev.target.closest('[data-pf]'), c = ev.target.closest('[data-pcancel]');
+    if (k) { var id = k.getAttribute('data-id'), kind = k.getAttribute('data-pk'); S.pick = S.pick && S.pick.id === id && S.pick.kind === kind ? null : { id: id, kind: kind }; renderGroups(S.st.items, S.st.pending); }
+    else if (c) { S.pick = null; renderGroups(S.st.items, S.st.pending); }
+    else if (f && S.pick) {
+      var amt = +f.getAttribute('data-pf'), portion = S.pick.kind === 'used' ? 1 - amt : amt, iid = f.getAttribute('data-id');
+      var it = findItem(iid); S.pick = null;
+      var had = {}; ((S.st.impact || {}).badges || []).forEach(function (b) { if (b.earned) had[b.id] = 1; });
+      api('/api/crisper/items', { body: { id: iid, op: 'finish', portion: portion } }).then(function (st) {
+        S.st = st; render();
+        var n = it ? it.name : 'Item', rescue = it && /^(check|today|soon)$/.test(it.status) && portion < 1;
+        var fresh = ((st.impact || {}).badges || []).filter(function (b) { return b.earned && !had[b.id]; });
+        var msg = n + (portion >= 1 ? ' marked tossed' : portion > 0 ? ': ' + FRAC[1 - portion] + ' eaten, ' + FRAC[portion] + ' tossed' : rescue ? ' rescued' : ' marked used') +
+          (portion < 1 ? ' · +' + (rescue ? 2 : 1) + ' pts' : '') + (fresh.length ? ' · Badge: ' + fresh.map(function (b) { return b.name; }).join(', ') : '');
+        toast(msg, iid, it && it.scrap && it.scrap.pct >= 5 ? iid : null);
+      }).catch(function (e) { toast(e.message); });
+    }
+  });
   function itemAct(id, op, days) {
     closeMenus();
     var it = S.st.items.concat(S.st.pending).filter(function (i) { return i.id === id; })[0];
@@ -1556,21 +1594,38 @@ details.sd{display:block}
     api('/api/crisper/receipt', { body: { text: txt, preview: true } }).then(function (r) {
       var p = r.preview; S.pastePreview = p;
       el('pasteFound').innerHTML = p.items.length ? 'Found <b>' + plural(p.items.length, 'produce item') + '</b>' + (p.retailer ? ' from ' + esc(p.retailer) : '') + ':' : '<b>No produce from the Storage Guide found in that text.</b> Try copying the whole email, or add items by hand.';
-      el('pasteList').innerHTML = p.items.map(function (i) { return '<li><img src="' + esc(img(i.name)) + '" alt="">' + esc(i.name) + (i.count > 1 ? ' ×' + i.count : '') + (i.weight ? ' <span class="muted">' + esc(i.weight) + '</span>' : '') + '</li>'; }).join('');
+      S.review = p.items.map(function (i) { return { name: i.name, count: i.count || 1, weight: i.weight }; });
+      renderReview();
       var skip = (p.skipped || []).map(function (s) { return typeof s === 'string' ? s : (s.line || s.name) + (s.reason ? ' (' + s.reason + ')' : ''); })
         .concat((p.unknown || []).map(function (s) { return (typeof s === 'string' ? s : s.line) + ' (not in the guide yet)'; }));
       el('pasteSkipSum').textContent = plural(skip.length, 'line') + ' skipped';
       el('pasteSkip').innerHTML = skip.map(function (s) { return '<li>' + esc(s) + '</li>'; }).join('');
       show('pasteSkipWrap', skip.length > 0);
-      el('pasteSave').disabled = !p.items.length;
+
       show('photoHint', S.pasteChannel === 'photo' && p.items.length > 0);
       show('pasteStep1', false); show('pasteStep2', true);
     }).catch(function (e) { showErr('pasteErr', e.message); }).then(function () { b.disabled = false; });
   });
+  function renderReview() {
+    var r = S.review || [];
+    el('pasteList').innerHTML = r.map(function (i, n) {
+      return '<li class="rv"><img src="' + esc(img(i.name)) + '" alt=""><span class="rvn">' + esc(i.name) + (i.weight ? ' <span class="muted">' + esc(i.weight) + '</span>' : '') + '</span>' +
+        '<span class="qty"><button type="button" data-rq="' + n + '" data-d="-1" aria-label="Fewer ' + esc(i.name) + '">−</button><b>' + i.count + '</b><button type="button" data-rq="' + n + '" data-d="1" aria-label="More ' + esc(i.name) + '">+</button></span>' +
+        '<button type="button" class="rvx" data-rx="' + n + '" aria-label="Remove ' + esc(i.name) + '">×</button></li>';
+    }).join('');
+    el('pasteSave').disabled = !r.length;
+    el('pasteSave').textContent = r.length ? 'Add ' + plural(r.length, 'item') : 'Nothing to add';
+    if (S.pastePreview && S.pastePreview.items.length) el('pasteFound').innerHTML = 'Found <b>' + plural(S.pastePreview.items.length, 'produce item') + '</b>' + (S.pastePreview.retailer && S.pastePreview.retailer !== 'Other' ? ' from ' + esc(S.pastePreview.retailer) : '') + '. Tap <b>×</b> to remove anything wrong.';
+  }
+  el('pasteList').addEventListener('click', function (ev) {
+    var q = ev.target.closest('[data-rq]'), x = ev.target.closest('[data-rx]');
+    if (q) { var it = S.review[+q.getAttribute('data-rq')]; it.count = Math.max(1, Math.min(99, it.count + +q.getAttribute('data-d'))); renderReview(); }
+    else if (x) { S.review.splice(+x.getAttribute('data-rx'), 1); renderReview(); }
+  });
   el('pasteBack').addEventListener('click', function () { show('pasteStep1', true); show('pasteStep2', false); });
   el('pasteSave').addEventListener('click', function () {
     var b = this; b.disabled = true;
-    api('/api/crisper/receipt', { body: { text: el('pasteText').value, channel: S.pasteChannel || 'paste' } }).then(function (r) {
+    api('/api/crisper/receipt', { body: { text: el('pasteText').value, channel: S.pasteChannel || 'paste', keep: (S.review || []).map(function (i) { return { name: i.name, count: i.count }; }) } }).then(function (r) {
       S.st = r.state; closeSheets(); ls(SKIP_LS, '1'); view('vDash'); tab('fridge'); render(); toast('Added ' + plural(r.result.added, 'item'));
     }).catch(function (e) { toast(e.message); b.disabled = false; });
   });
