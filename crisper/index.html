@@ -170,6 +170,7 @@ ol.steps li::marker{color:var(--muted-fg);font-weight:700}
 ol.ios{margin:8px 0 0 18px;font-size:14px;line-height:1.5}
 .photo{display:flex;flex-direction:column;gap:8px;align-items:flex-start}
 .photo .btn.dis{opacity:.55;pointer-events:none}
+.tips{margin:0;padding-left:18px;font-size:13px;color:var(--muted-fg);line-height:1.5}
 .or{display:flex;align-items:center;gap:10px;color:var(--muted-fg);font-size:12.5px;text-transform:uppercase;letter-spacing:.06em}
 .or::before,.or::after{content:"";flex:1;border-top:1px solid var(--border)}
 .sto{background:hsl(140 30% 96%);border:1px solid hsl(140 22% 88%);border-radius:.5rem;padding:8px 10px;display:flex;flex-direction:column;gap:4px}
@@ -715,7 +716,7 @@ details.sd{display:block}
     <div class="sh"><h2 id="shChooseT">Add groceries</h2><button class="x" type="button" data-close aria-label="Close">×</button></div>
     <div class="choose">
       <button type="button" class="ch" data-open="repeat" id="chRepeat"><span class="ci" aria-hidden="true">&#8635;</span><span><b>Same as last trip</b><small id="chRepeatSub"></small></span></button>
-      <button type="button" class="ch primary" data-open="photo"><span class="ci" aria-hidden="true">&#128247;</span><span><b>Snap a receipt</b><small>Paper receipt, read on your phone</small></span></button>
+      <button type="button" class="ch primary" data-open="photo"><span class="ci" aria-hidden="true">&#128247;</span><span><b>Snap a receipt</b><small>Paper receipt or order screenshot</small></span></button>
       <button type="button" class="ch" data-open="paste"><span class="ci" aria-hidden="true">&#128203;</span><span><b>Paste receipt text</b><small>From an order email or e-receipt</small></span></button>
       <button type="button" class="ch" data-open="add"><span class="ci" aria-hidden="true">&#129388;</span><span><b>Pick items</b><small>Tap what you bought</small></span></button>
       <button type="button" class="ch" data-go="setup" id="chFwd"><span class="ci" aria-hidden="true">&#9993;</span><span><b>Forward emails automatically</b><small>One-time setup for online orders</small></span></button>
@@ -758,9 +759,14 @@ details.sd{display:block}
     <div class="sh"><h2 id="shPasteT">Add a receipt</h2><button class="x" type="button" data-close aria-label="Close">×</button></div>
     <div id="pasteStep1" class="stack">
       <div class="photo">
+        <ul class="tips">
+          <li>Lay it flat on a dark table, in good light</li>
+          <li>Get the whole item list in the frame</li>
+          <li>Long receipt? Choose up to 3 photos</li>
+        </ul>
         <label class="btn" for="photoIn" id="photoBtn">Take or choose a receipt photo</label>
-        <input type="file" id="photoIn" accept="image/*" class="sr">
-        <p class="note">Flat, bright, fill the frame. The photo stays on your phone.</p>
+        <input type="file" id="photoIn" accept="image/*" multiple class="sr">
+        <p class="note">Photos are read by an AI service to find your produce, then discarded. We don't keep them.</p>
         <div class="status small hide" id="photoStatus"><span class="spin"></span><span id="photoMsg">Reading your receipt…</span></div>
       </div>
       <div class="or"><span>or paste the text</span></div>
@@ -1204,7 +1210,7 @@ details.sd{display:block}
       var hasAddr = !!S.st.inbox.address;
       box.innerHTML = '<div class="card" style="margin-top:18px"><h2 style="margin-bottom:4px">Add your first groceries</h2><p class="muted small" style="margin-bottom:12px">Pick one. You can always add more later.</p><div class="choose">' +
         ((S.st.lastTrip || []).length ? '<button type="button" class="ch" data-open="repeat"><span class="ci" aria-hidden="true">&#8635;</span><span><b>Same as last trip</b><small>' + esc(S.st.lastTrip.slice(0, 3).map(function (i) { return i.name; }).join(', ') + (S.st.lastTrip.length > 3 ? ' +' + (S.st.lastTrip.length - 3) : '')) + '</small></span></button>' : '') +
-        '<button type="button" class="ch primary" data-open="photo"><span class="ci" aria-hidden="true">&#128247;</span><span><b>Snap a receipt</b><small>Paper receipt, read on your phone</small></span></button>' +
+        '<button type="button" class="ch primary" data-open="photo"><span class="ci" aria-hidden="true">&#128247;</span><span><b>Snap a receipt</b><small>Paper receipt or order screenshot</small></span></button>' +
         '<button type="button" class="ch" data-open="add"><span class="ci" aria-hidden="true">&#129388;</span><span><b>Pick items</b><small>Tap what you bought</small></span></button>' +
         '<button type="button" class="ch" data-open="paste"><span class="ci" aria-hidden="true">&#128203;</span><span><b>Paste receipt text</b><small>From an order email</small></span></button>' +
         (hasAddr ? '<button type="button" class="ch" data-go="setup"><span class="ci" aria-hidden="true">&#9993;</span><span><b>Forward emails automatically</b><small>One-time setup for online orders</small></span></button>' : '') + '</div></div>';
@@ -1740,8 +1746,12 @@ details.sd{display:block}
     var b = this, txt = el('pasteText').value;
     if (txt.trim().length < 3) return showErr('pasteErr', 'Paste the text of a receipt or order email first.');
     b.disabled = true; showErr('pasteErr', '');
-    api('/api/crisper/receipt', { body: { text: txt, preview: true } }).then(function (r) {
-      var p = r.preview; S.pastePreview = p;
+    api('/api/crisper/receipt', { body: { text: txt, preview: true } }).then(function (r) { showPreview(r.preview); })
+      .catch(function (e) { showErr('pasteErr', e.message); }).then(function () { b.disabled = false; });
+  });
+  function showPreview(p) {
+    {
+      S.pastePreview = p;
       el('pasteFound').innerHTML = p.items.length ? 'Found <b>' + plural(p.items.length, 'produce item') + '</b>' + (p.retailer ? ' from ' + esc(p.retailer) : '') + ':' : '<b>No produce from the Storage Guide found in that text.</b> Try copying the whole email, or add items by hand.';
       S.review = p.items.map(function (i) { return { name: i.name, count: i.count || 1, weight: i.weight }; });
       renderReview();
@@ -1753,8 +1763,8 @@ details.sd{display:block}
 
       show('photoHint', S.pasteChannel === 'photo' && p.items.length > 0);
       show('pasteStep1', false); show('pasteStep2', true);
-    }).catch(function (e) { showErr('pasteErr', e.message); }).then(function () { b.disabled = false; });
-  });
+    }
+  }
   function renderReview() {
     var r = S.review || [];
     el('pasteList').innerHTML = r.map(function (i, n) {
@@ -1829,7 +1839,7 @@ details.sd{display:block}
     if (card && !deferredPrompt) card.scrollIntoView({ behavior: 'smooth', block: 'center' });
   });
 
-  // ---------- receipt photo -> text, all on-device (Tesseract.js) ----------
+  // ---------- receipt photo: AI reader first, on-device Tesseract.js as fallback ----------
   var TESS = 'https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js', tessP = null, worker = null;
   function loadTess() {
     if (tessP) return tessP;
@@ -1872,19 +1882,49 @@ details.sd{display:block}
       im.src = url;
     });
   }
-  el('photoIn').addEventListener('change', function () {
-    var f = this.files && this.files[0]; this.value = '';
-    if (!f) return;
-    showErr('pasteErr', ''); show('photoStatus', true); el('photoMsg').textContent = worker ? 'Reading your receipt…' : 'Getting the receipt reader ready (first time only)…';
-    el('photoBtn').classList.add('dis');
-    getWorker(function (m) {
+  // Photo -> small JPEG for the AI reader (1600px is plenty for receipt type).
+  function toJpeg(file) {
+    return new Promise(function (res, rej) {
+      var url = URL.createObjectURL(file), im = new Image();
+      im.onload = function () {
+        var k = Math.min(1, 1600 / Math.max(im.naturalWidth, im.naturalHeight));
+        var c = document.createElement('canvas'); c.width = Math.round(im.naturalWidth * k); c.height = Math.round(im.naturalHeight * k);
+        c.getContext('2d').drawImage(im, 0, 0, c.width, c.height); URL.revokeObjectURL(url);
+        res(c.toDataURL('image/jpeg', 0.82));
+      };
+      im.onerror = function () { URL.revokeObjectURL(url); rej(new Error('That file doesn\'t look like a photo.')); };
+      im.src = url;
+    });
+  }
+  // Fallback: on-device reading, one photo after another.
+  function readOnDevice(files) {
+    el('photoMsg').textContent = worker ? 'Reading your receipt…' : 'Getting the receipt reader ready (first time only)…';
+    return getWorker(function (m) {
       if (m.status === 'recognizing text') el('photoMsg').textContent = 'Reading your receipt… ' + Math.round((m.progress || 0) * 100) + '%';
-    }).then(function (w) { return prepImage(f).then(function (c) { el('photoMsg').textContent = 'Reading your receipt…'; return w.recognize(c); }); })
+    }).then(function (w) {
+      var out = [];
+      return files.reduce(function (p, f) {
+        return p.then(function () { return prepImage(f); }).then(function (c) { return w.recognize(c); }).then(function (r) { out.push((r && r.data && r.data.text || '').trim()); });
+      }, Promise.resolve()).then(function () { return out.join('\n'); });
+    }).then(function (txt) {
+      if (txt.length < 10) throw new Error('Couldn\'t read text in that photo. Try again closer, flatter and in brighter light.');
+      el('pasteText').value = txt; S.pasteChannel = 'photo';
+      el('pastePreview').click();
+    });
+  }
+  el('photoIn').addEventListener('change', function () {
+    var files = Array.prototype.slice.call(this.files || [], 0, 3); this.value = '';
+    if (!files.length) return;
+    showErr('pasteErr', ''); show('photoStatus', true); el('photoMsg').textContent = 'Reading your receipt…';
+    el('photoBtn').classList.add('dis');
+    Promise.all(files.map(toJpeg))
+      .then(function (images) { return api('/api/crisper/receipt', { body: { images: images, preview: true } }); })
       .then(function (r) {
-        var txt = (r && r.data && r.data.text || '').trim();
-        if (txt.length < 10) throw new Error('Couldn\'t read text in that photo. Try again closer, flatter and in brighter light.');
-        el('pasteText').value = txt; S.pasteChannel = 'photo';
-        el('pastePreview').click();
+        el('pasteText').value = r.text || ''; S.pasteChannel = 'photo';
+        showPreview(r.preview);
+      }, function (e) {
+        if (e.status === 400 && !/photo\.$/.test(e.message)) throw e; // read fine, just no receipt lines
+        return readOnDevice(files);
       })
       .catch(function (e) { showErr('pasteErr', e.message || 'Couldn\'t read that photo.'); })
       .then(function () { show('photoStatus', false); el('photoBtn').classList.remove('dis'); });

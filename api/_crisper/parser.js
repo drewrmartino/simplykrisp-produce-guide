@@ -77,14 +77,14 @@ for (const item of CATALOG) {
 // Abbreviations printed on paper register receipts (and what receipt-photo OCR
 // reads back). Matched as whole words, no plural forms generated.
 const RECEIPT_ABBREV = {
-  'Apple': ['appl', 'apl', 'hny crsp', 'honeycrsp', 'gala', 'fuji', 'grny smth'],
-  'Avocado': ['avoc', 'avo', 'avos', 'hass avo', 'avocad'],
-  'Banana': ['bnna', 'bnnas', 'banan', 'bana', 'bananas org'],
-  'Blueberry': ['blubry', 'bluebry', 'blueb', 'blu berry', 'blubrry'],
-  'Raspberry': ['raspb', 'rspbry', 'raspbry', 'rasp'],
+  'Apple': ['aple', 'hnycrsp', 'hny crisp', 'cosmc crsp', 'pnk lady', 'appl', 'apl', 'hny crsp', 'honeycrsp', 'gala', 'fuji', 'grny smth'],
+  'Avocado': ['avcdo', 'avcd', 'avoca', 'avoc', 'avo', 'avos', 'hass avo', 'avocad'],
+  'Banana': ['bnn', 'bnns', 'bananna', 'bnna', 'bnnas', 'banan', 'bana', 'bananas org'],
+  'Blueberry': ['blbry', 'blbrry', 'blubrys', 'bluebrs', 'blubry', 'bluebry', 'blueb', 'blu berry', 'blubrry'],
+  'Raspberry': ['rspb', 'rsbry', 'raspb', 'rspbry', 'raspbry', 'rasp'],
   'Blackberry': ['blkbry', 'blackb', 'blkberry'],
-  'Strawberry': ['strawb', 'strwb', 'strwbry', 'strbry', 'strawbry', 'strwberry'],
-  'Grape': ['grps', 'red grp', 'grn grp', 'grp red', 'grp grn', 'seedless grp'],
+  'Strawberry': ['strwbrry', 'strwbs', 'strawbs', 'strawb', 'strwb', 'strwbry', 'strbry', 'strawbry', 'strwberry'],
+  'Grape': ['grape rd', 'grape grn', 'grps', 'red grp', 'grn grp', 'grp red', 'grp grn', 'seedless grp'],
   'Orange': ['orng', 'navel', 'cara cara'],
   'Cantaloupe': ['cantal', 'canta', 'cantlp'],
   'Watermelon': ['wtrmln', 'wmelon', 'watermln', 'wtrmelon'],
@@ -93,32 +93,32 @@ const RECEIPT_ABBREV = {
   'Grapefruit': ['grpfrt', 'grapefrt', 'grpfruit'],
   'Pear': ['bartlett', 'danjou', 'd anjou', 'bosc'],
   'Mango': ['mngo'],
-  'Lemon': ['lemn', 'lmn'],
-  'Tomato': ['tomat', 'tomatoe', 'roma tom', 'tom roma', 'grape tom', 'cherry tom', 'tom vine', 'tov', 'hthse tom', 'toms'],
-  'Lettuce': ['rom hrts', 'romaine hrts', 'rom hearts', 'ltc', 'lttc', 'lett', 'grn leaf', 'red leaf', 'ice berg'],
-  'Broccoli': ['broc', 'brocc', 'broc crwn', 'broc crown', 'brocoli', 'brccli'],
-  'Cauliflower': ['caulif', 'cauli', 'cauliflwr', 'caulflwr'],
+  'Lemon': ['lemns', 'lemn', 'lmn'],
+  'Tomato': ['tmto', 'tmtos', 'roma', 'tomat', 'tomatoe', 'roma tom', 'tom roma', 'grape tom', 'cherry tom', 'tom vine', 'tov', 'hthse tom', 'toms'],
+  'Lettuce': ['lttce', 'lettce', 'rmn hrts', 'romn', 'bttr lett', 'spring mix', 'sprng mix', 'mxd grns', 'rom hrts', 'romaine hrts', 'rom hearts', 'ltc', 'lttc', 'lett', 'grn leaf', 'red leaf', 'ice berg'],
+  'Broccoli': ['brcli', 'brcl', 'brocli', 'brcoli', 'brcli crwn', 'broc flrt', 'broc florets', 'broc', 'brocc', 'broc crwn', 'broc crown', 'brocoli', 'brccli'],
+  'Cauliflower': ['clflwr', 'cauli flwr', 'caulif', 'cauli', 'cauliflwr', 'caulflwr'],
   'Brussels Sprouts': ['bruss spr', 'brussel', 'brsl spr', 'brussels spr'],
   'Cabbage': ['cabb', 'cbbg', 'cabbge'],
-  'Carrot': ['carr', 'crts', 'crrt', 'crrts', 'baby crt'],
-  'Celery': ['clry', 'celry', 'celery hrts'],
-  'Cucumber': ['cuke', 'cukes', 'cucumb', 'eng cuc', 'cucmbr'],
-  'Bell Pepper': ['bell pep', 'bell ppr', 'ppr bell', 'pep red', 'pep grn', 'red bell', 'grn bell', 'orng bell', 'yel bell', 'grn pepper', 'red pepper'],
+  'Carrot': ['carrt', 'carrts', 'carr', 'crts', 'crrt', 'crrts', 'baby crt'],
+  'Celery': ['clery', 'celey', 'cel hrts', 'clry', 'celry', 'celery hrts'],
+  'Cucumber': ['cucmb', 'mini cuc', 'cuke', 'cukes', 'cucumb', 'eng cuc', 'cucmbr'],
+  'Bell Pepper': ['bel pep', 'pepr bell', 'bll ppr', 'bell pep', 'bell ppr', 'ppr bell', 'pep red', 'pep grn', 'red bell', 'grn bell', 'orng bell', 'yel bell', 'grn pepper', 'red pepper'],
   'Jalapeno': ['jalap', 'jalpeno', 'jal pepper'],
-  'Potato': ['potat', 'russet pot', 'pot russet', 'yukon', 'ykn gld', 'red pot', 'gold pot', 'russets'],
+  'Potato': ['pots', 'ptato', 'russt', 'russet', 'potat', 'russet pot', 'pot russet', 'yukon', 'ykn gld', 'red pot', 'gold pot', 'russets'],
   'Sweet Potato': ['swt pot', 'swt potato', 'sweet pot', 'yam', 'yams'],
-  'Onion': ['onon', 'yel onion', 'onion yel', 'wht onion', 'onion wht', 'yel onon'],
-  'Green Onion': ['grn onion', 'grn onions', 'grn onon', 'scall'],
+  'Onion': ['onin', 'onins', 'swt onion', 'red onon', 'onon', 'yel onion', 'onion yel', 'wht onion', 'onion wht', 'yel onon'],
+  'Green Onion': ['grn onin', 'scallns', 'scllns', 'grn onion', 'grn onions', 'grn onon', 'scall'],
   'Garlic': ['grlc', 'garlc'],
-  'Mushroom': ['mush', 'mshrm', 'mshrms', 'mushrm', 'bella mush', 'wht mush', 'crimini'],
-  'Zucchini': ['zucc', 'zuke', 'zucch', 'zuchini', 'zucchin'],
-  'Spinach': ['spnch', 'baby spin', 'spinch'],
+  'Mushroom': ['mshrom', 'mush wht', 'bby bella', 'portabla', 'mush', 'mshrm', 'mshrms', 'mushrm', 'bella mush', 'wht mush', 'crimini'],
+  'Zucchini': ['zuc', 'zucchni', 'zucc', 'zuke', 'zucch', 'zuchini', 'zucchin'],
+  'Spinach': ['spnach', 'bby spnch', 'spnch', 'baby spin', 'spinch'],
   'Asparagus': ['aspar', 'asprgs', 'asparg'],
   'Green Beans': ['grn bean', 'grn beans', 'haricot'],
   'Corn': ['swt corn', 'corn ear', 'corn on cob'],
   'Eggplant': ['eggplt', 'egg plant'],
   'Radish': ['rdsh', 'radsh'],
-  'Herbs (Fresh)': ['cilant', 'cilantr', 'prsly', 'parsly'],
+  'Herbs (Fresh)': ['clntro', 'cilntro', 'cilantro bnch', 'basil', 'prsley', 'dill', 'cilant', 'cilantr', 'prsly', 'parsly'],
 };
 for (const [name, forms] of Object.entries(RECEIPT_ABBREV)) {
   const item = CATALOG.find((c) => normalize(c.name) === normalize(name));
@@ -140,7 +140,7 @@ const NOT_FRESH = [
   'pickled', 'pickle', 'diced tomatoes', 'crushed', 'sun-dried', 'sun dried', 'stewed',
   'powder', 'salt', 'seasoning', 'spice', 'extract', 'flavor', 'flavored', 'oil', 'vinegar', 'dressing',
   'soup', 'broth', 'stock', 'hummus', 'guacamole', 'dip', 'pesto', 'chutney', 'relish',
-  'baby food', 'pouch', 'vitamin', 'supplement',
+  'cream', 'whipping', 'half and half', 'eggs', 'baby food', 'pouch', 'vitamin', 'supplement',
   'scented', 'candle', 'soap', 'shampoo', 'conditioner', 'lotion', 'lip balm', 'detergent', 'cleaner', 'air freshener',
   'seed', 'seeds', 'plant', 'starter', 'cornmeal', 'cornstarch', 'corn starch', 'masa', 'grits',
   'split pea', 'chickpea', 'black-eyed', 'cauliflower rice bowl', 'tots', 'fries', 'hash brown',
@@ -280,7 +280,13 @@ const IGNORE_LINE_RE = /(apple pay|apple card|orange county|orangetheory|subject
 // Words that suggest a line is a grocery item even if we couldn't match it.
 const PRODUCE_HINT_RE = /\b(organic|fresh|bunch|per lb|\/lb|each|produce|bag|clamshell|ripe|bulk)\b/;
 
-const NEXT_QTY_RE = /^\s*(\d+(?:\.\d+)?)\s*(x|×|ct|count|lb|lbs|oz|each|ea|pk|@)(?![a-z])/;
+const NEXT_QTY_RE = /^\s*(\d+(?:\.\d+)?)\s*(x|×|ct|count|lb|lbs|oz|each|ea|pk|pkg|bunch|bunches|bag|bags|head|heads|@)(?![a-z])/;
+// A line that is only a quantity ("1 bunch", "2 each", "1.25 lb") or only a
+// price belongs to the item above it; never report it as an unknown item.
+const QTY_ONLY_RE = /^\s*(qty:?\s*)?\d+(\.\d+)?\s*(x|×|ct|count|each|ea|pk|pkg|pack|bunch|bunches|bag|bags|head|heads|lb|lbs|oz|kg|g)?\.?\s*(@\s*\$?\d+(\.\d+)?(\s*\/\s*\w+)?)?\s*$/;
+const PRICE_ONLY_RE = /^\s*-?\$?\d+\.\d{2}\s*[a-z]{0,2}\s*$/;
+// Receipt-photo OCR noise and store housekeeping lines.
+const JUNK_RE = /[|%{}\[\]<>~^]|bag (points|limit|fee|credit)|points|limit,?\s*\d|bottle deposit|crv\b/;
 
 export function extractItems(text) {
   const lines = String(text || '')
@@ -303,6 +309,7 @@ export function extractItems(text) {
 
     const match = MATCHERS.find((m) => m.re.test(line));
     if (!match) {
+      if (QTY_ONLY_RE.test(line) || PRICE_ONLY_RE.test(line) || JUNK_RE.test(line)) continue;
       if (PRODUCE_HINT_RE.test(line) && /[a-z]{3,}/.test(line) && !NOT_FRESH_RE.test(line) && !/total|subtotal|tax|fee|tip|discount|savings|delivery|service/.test(line)) {
         unknown.push(raw);
       }
@@ -321,11 +328,13 @@ export function extractItems(text) {
     let q = quantityOf(line);
     // Many receipts put quantity/price on the line below the item name:
     //   "Organic Bananas" / "6 ct  $2.09"
-    const next = normalize(lines[i + 1] || '');
+    // Instacart puts a price line between: "Bananas" / "$0.99" / "1 bunch".
+    let next = normalize(lines[i + 1] || ''), skip = 1;
+    if (PRICE_ONLY_RE.test(next) && NEXT_QTY_RE.test(normalize(lines[i + 2] || ''))) { next = normalize(lines[i + 2]); skip = 2; }
     if (q.count === 1 && NEXT_QTY_RE.test(next) && !MATCHERS.some((m) => m.re.test(next))) {
       const nq = quantityOf(next);
       q = { count: nq.count, weight: q.weight || nq.weight };
-      i++;
+      i += skip;
     }
     const cur = found.get(match.name);
     if (cur) {
