@@ -10,12 +10,12 @@
  */
 (function () {
   // Installable app (PWA): register the service worker on every guide page.
-  if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost') && window.self === window.top) {
+  if (!window.KRISPER_NATIVE && 'serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost') && window.self === window.top) {
     window.addEventListener('load', function () { navigator.serviceWorker.register('/sw.js').catch(function () {}); });
   }
   if (window.self !== window.top) return;
   // Inside the installed app, the logo goes home to My Krisper and the promo bar is hidden.
-  var APP = (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || window.navigator.standalone === true;
+  var APP = !!window.KRISPER_NATIVE || (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || window.navigator.standalone === true;
   var STORE = 'https://simplykrisp.com';
   var UTM = 'utm_source=produce-guide&utm_medium=referral&utm_campaign=site-header';
   var LOGO = 'https://simplykrisp.com/cdn/shop/files/v2_Simply_Krisp_Logo_-_Lime_and_Orange_Freshness_700_x_350_px_f00ce263-9da7-4e9d-9e09-55291aaf9e85.png?v=1774895710&width=380';
@@ -65,7 +65,7 @@
   var html = (APP ? '' : '<div class="skh-bar" role="region" aria-label="Announcement"><a href="' + STORE + '/products/double-krisp-subscription?' + UTM + '">Subscribe and save 25%</a></div>') +
     '<header class="skh"><div class="skh-in">' +
     '<span class="skh-right"><button class="skh-burger" type="button" aria-label="Menu" aria-expanded="false"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button></span>' +
-    '<a class="skh-logo" href="' + (APP ? '/krisper' : STORE + '/?' + UTM) + '"><img src="' + LOGO + '" alt="Simply Krisp" width="150" height="75"></a>' +
+    '<a class="skh-logo" href="' + (APP ? (window.KRISPER_NATIVE ? '/' : '/krisper') : STORE + '/?' + UTM) + '"><img src="' + LOGO + '" alt="Simply Krisp" width="150" height="75"></a>' +
     '<nav class="skh-nav" aria-label="Main">' + nav + '</nav>' +
     '<span class="skh-right" id="skhExtra"><a class="skh-cart" href="' + STORE + '/cart" aria-label="Cart"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M5 8h14l-1.2 12H6.2L5 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg></a></span>' +
     '</div></header>';

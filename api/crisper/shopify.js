@@ -5,6 +5,9 @@
 //   GET /api/crisper/shopify           -> 302 to Shopify's sign-in page
 //   GET /api/crisper/shopify?code=…    -> callback: verify, find/create the
 //                                         Krisper for that email, 302 /krisper?k=…
+//   GET /api/crisper/shopify?app=1     -> same, started from the iPhone app (in
+//                                         Safari); ends at simplykrisp://krisper?k=…
+//                                         so the app picks up the sign-in.
 //
 // Env: SHOPIFY_CA_CLIENT_ID (Headless channel > Customer Account API, public
 // client), optional SHOPIFY_STORE_DOMAIN (default simplykrisp.com).
@@ -13,6 +16,9 @@ import { createHmac, createHash, randomBytes, createPublicKey, createVerify, tim
 import { one, logEvent } from '../_crisper/db.js';
 import { secret, keyFor, createUser, cleanEmail, siteOrigin, dashboardUrl, inboxAddress } from '../_crisper/core.js';
 import { trackEvent } from '../_crisper/klaviyo.js';
+import { cors } from '../_crisper/http.js';
+
+export const APP_SCHEME = 'simplykrisp';
 
 const COOKIE = 'sk_oauth';
 const clientId = () => process.env.SHOPIFY_CA_CLIENT_ID || '';
@@ -47,7 +53,7 @@ function setCookie(res, value, maxAge) {
   res.setHeader('Set-Cookie', `${COOKIE}=${encodeURIComponent(value)}; Path=/api/crisper/shopify; Max-Age=${maxAge}; HttpOnly; Secure; SameSite=Lax`);
 }
 function redirect(res, url) { res.statusCode = 302; res.setHeader('Location', url); res.setHeader('Cache-Control', 'no-store'); res.end(); }
-function back(res, why) { redirect(res, `${siteOrigin()}/krisper?signin=${encodeURIComponent(why)}`); }
+function back(res, why, app = false) { redirect(res, `${app ? `${APP_SCHEME}://` : `${siteOrigin()}/`}krisper?signin=${encodeURIComponent(why)}`); }
 
 // Verify the RS256 ID token against the store's published keys.
 export async function verifyIdToken(idToken, { cfg, aud, nonce, now = Date.now() / 1000, jwks = null }) {
@@ -82,9 +88,12 @@ export async function krisperForEmail(email, { firstName = null } = {}) {
 
 export default async function handler(req, res) {
   const q = req.query || {};
+  cors(req, res);
+  if (req.method === 'OPTIONS') { res.statusCode = 204; return res.end(); }
   if (req.method !== 'GET') { res.statusCode = 405; return res.end(); }
   if (q.check) { res.setHeader('Cache-Control', 'no-store'); return res.status(200).json({ enabled: !!clientId() }); }
-  if (!clientId()) return back(res, 'unavailable');
+  let app = q.app === '1';
+  if (!clientId()) return back(res, 'unavailable', app);
 
   try {
     const cfg = await oidc();
@@ -94,7 +103,7 @@ export default async function handler(req, res) {
       const verifier = b64u(randomBytes(32));
       const state = b64u(randomBytes(16));
       const nonce = b64u(randomBytes(16));
-      setCookie(res, pack({ state, verifier, nonce, t: Date.now() }), 600);
+      setCookie(res, pack({ state, verifier, nonce, t: Date.now(), app }), 600);
       const u = new URL(cfg.authorization_endpoint);
       u.searchParams.set('client_id', clientId());
       u.searchParams.set('response_type', 'code');
@@ -110,8 +119,9 @@ export default async function handler(req, res) {
     // Step 2: callback.
     const saved = unpack(readCookie(req, COOKIE));
     setCookie(res, '', 0);
-    if (q.error) return back(res, 'cancelled');
-    if (!saved || saved.state !== q.state || Date.now() - saved.t > 600e3) return back(res, 'expired');
+    app = !!(saved && saved.app);
+    if (q.error) return back(res, 'cancelled', app);
+    if (!saved || saved.state !== q.state || Date.now() - saved.t > 600e3) return back(res, 'expired', app);
 
     const tr = await fetch(cfg.token_endpoint, {
       method: 'POST',
@@ -120,11 +130,11 @@ export default async function handler(req, res) {
       body: new URLSearchParams({ grant_type: 'authorization_code', client_id: clientId(), redirect_uri: callbackUrl(), code: String(q.code), code_verifier: saved.verifier }),
     });
     const tok = await tr.json().catch(() => ({}));
-    if (!tr.ok || !tok.id_token) { console.error('shopify token', tr.status, tok.error, tok.error_description); return back(res, 'failed'); }
+    if (!tr.ok || !tok.id_token) { console.error('shopify token', tr.status, tok.error, tok.error_description); return back(res, 'failed', app); }
 
     const claims = await verifyIdToken(tok.id_token, { cfg, aud: clientId(), nonce: saved.nonce });
     const email = cleanEmail(claims.email);
-    if (!email) return back(res, 'noemail');
+    if (!email) return back(res, 'noemail', app);
 
     // First name from the customer account, if we can get it (best effort).
     let firstName = null;
@@ -136,9 +146,9 @@ export default async function handler(req, res) {
 
     const { user, key, created } = await krisperForEmail(email, { firstName });
     await logEvent(user.id, 'shopify_login', { created });
-    return redirect(res, `${siteOrigin()}/krisper?k=${key}`);
+    return redirect(res, app ? `${APP_SCHEME}://krisper?k=${key}` : `${siteOrigin()}/krisper?k=${key}`);
   } catch (e) {
     console.error('shopify login', e);
-    return back(res, 'failed');
+    return back(res, 'failed', app);
   }
 }

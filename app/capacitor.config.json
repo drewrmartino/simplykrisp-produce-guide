@@ -1,0 +1,30 @@
+{
+  "appId": "com.simplykrisp.krisper",
+  "appName": "Simply Krisp",
+  "webDir": "www",
+  "ios": {
+    "scheme": "Simply Krisp",
+    "contentInset": "never",
+    "backgroundColor": "#fcfbf5",
+    "limitsNavigationsToAppBoundDomains": false
+  },
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 600,
+      "launchAutoHide": true,
+      "backgroundColor": "#fcfbf5",
+      "showSpinner": false
+    },
+    "StatusBar": {
+      "style": "DARK",
+      "backgroundColor": "#2e431f"
+    },
+    "PushNotifications": {
+      "presentationOptions": [
+        "badge",
+        "sound",
+        "alert"
+      ]
+    }
+  }
+}

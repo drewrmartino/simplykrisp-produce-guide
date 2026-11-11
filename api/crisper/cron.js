@@ -11,12 +11,42 @@
 // to the 1-minute fridge check. On that day it replaces the use-soon email.
 // Also flags the Krisp sachet when it's due (day 28) or overdue (day 30+).
 // Emails are sent by Klaviyo flows listening for the events emitted here.
+// People using the iPhone app also get the same reminder as a push
+// notification (api/_crisper/push.js; off until the APNS_* env vars are set).
 
 import { handle, bad } from '../_crisper/http.js';
 import { q, logEvent } from '../_crisper/db.js';
 import { itemView, sortViews, todayIn, krispStatus } from '../_crisper/shelf.js';
 import { dashboardUrl, listNames } from '../_crisper/core.js';
 import { trackEvent } from '../_crisper/klaviyo.js';
+import { pushToUser, pushEnabled } from '../_crisper/push.js';
+
+// A push problem must never stop the emails, so failures are logged and skipped.
+async function notify(summary, userId, message, opts) {
+  if (!pushEnabled()) return;
+  try {
+    const r = await pushToUser(userId, message, opts);
+    summary.push = (summary.push || 0) + r.sent;
+  } catch (e) {
+    console.error('push', e);
+  }
+}
+
+export function pushText(kind, p) {
+  if (kind === 'shop') {
+    const bits = [];
+    if (p.have_count) bits.push(`You still have ${p.have_count} item${p.have_count === 1 ? '' : 's'} in the fridge.`);
+    if (p.use_first_names) bits.push(`Use ${p.use_first_names} first.`);
+    return { title: 'Before you shop', body: bits.join(' ') || 'Check your fridge before you buy more.', path: '#check' };
+  }
+  if (kind === 'krisp') {
+    const d = p.due_in_days;
+    const when = d > 0 ? `in ${d} day${d === 1 ? '' : 's'}` : d === 0 ? 'today' : 'now';
+    return { title: 'Krisp sachet', body: `Time to swap in a fresh Krisp sachet ${when}.`, path: '' };
+  }
+  if (p.reminder_type === 'weekly') return { title: 'Your week in the fridge', body: `${p.count} item${p.count === 1 ? '' : 's'} to use: ${p.item_names}.`, path: '' };
+  return { title: 'Eat these first', body: `${p.item_names} ${p.count === 1 ? 'needs' : 'need'} to be used soon.`, path: '' };
+}
 
 function authorized(req) {
   const secret = process.env.CRON_SECRET;
@@ -86,6 +116,7 @@ export async function runReminders({ dryRun = false } = {}) {
           await trackEvent({ email: user.email, firstName: user.first_name, metric: 'Krisper Before You Shop', properties: shopProps, uniqueId: `shop-${user.id}-${today}` });
           await q('UPDATE crisper_users SET last_shop_email_at = now() WHERE id = $1', [user.id]);
           await logEvent(user.id, 'shop_email_sent', { have: views.length, restock: restock.length });
+          await notify(summary, user.id, pushText('shop', shopProps), { collapseId: `shop-${today}` });
         }
         shopSent = true;
         summary.shop = (summary.shop || 0) + 1;
@@ -125,6 +156,7 @@ export async function runReminders({ dryRun = false } = {}) {
         await trackEvent({ email: user.email, firstName: user.first_name, metric: 'Krisper Use Soon', properties: props, uniqueId: `use-soon-${user.id}-${today}` });
         await q('UPDATE crisper_users SET last_reminder_at = now(), last_reminder_items = $1 WHERE id = $2', [dueKey, user.id]);
         await logEvent(user.id, 'reminder_sent', { count: list.length, reason });
+        await notify(summary, user.id, pushText('use', props), { collapseId: `use-${today}` });
       }
       summary.sent++;
       summary.details.push({ email: user.email, reason, items: props.item_names });
@@ -142,6 +174,7 @@ export async function runReminders({ dryRun = false } = {}) {
           properties: { first_name: user.first_name || '', due_in_days: krisp.dueInDays, changed_on: krisp.changedOn, dashboard_url: dashboardUrl(user.id) },
         });
         await logEvent(user.id, 'krisp_reminder', { dueInDays: krisp.dueInDays });
+        await notify(summary, user.id, pushText('krisp', { due_in_days: krisp.dueInDays }), { collapseId: `krisp-${today}` });
       }
       summary.krisp++;
     }

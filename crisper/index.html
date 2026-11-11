@@ -829,6 +829,10 @@ details.sd{display:block}
 (function () {
   'use strict';
   var API = window.CRISPER_API || '';
+  // In the iPhone app (app/ folder, Capacitor) the page runs from the app bundle,
+  // so links people copy or share must point at the real site.
+  var NATIVE = !!window.KRISPER_NATIVE;
+  var SITE = window.CRISPER_SITE || location.origin;
   var SHOP = 'https://simplykrisp.com/?utm_source=produce-guide&utm_medium=referral&utm_campaign=krisper&utm_content=';
   // Store picker. [label, sender domains, ticked by default]. Gmail's from:
   // search matches subdomains too (orders@email.kroger.com). Amazon, Target
@@ -932,10 +936,11 @@ details.sd{display:block}
       history.replaceState(null, '', u.pathname + (u.search || '') + u.hash);
     }
     S.key = ls(KEY_LS);
-    fetch(API + '/crisper/catalog.json').then(function (r) { return r.json(); }).then(function (c) {
-      S.catalog = c; c.forEach(function (p) { S.byName[p.name] = p; });
-      if (S.st) render();
-    }).catch(function () {});
+    function useCatalog(c) { S.catalog = c; c.forEach(function (p) { S.byName[p.name] = p; }); if (S.st) render(); }
+    fetch(API + '/crisper/catalog.json').then(function (r) { return r.json(); }).then(useCatalog).catch(function () {
+      // The iPhone app ships a copy for when it can't reach the site.
+      if (NATIVE) fetch('crisper/catalog.json').then(function (r) { return r.json(); }).then(useCatalog).catch(function () {});
+    });
     var signin = u.searchParams.get('signin');
     if (signin) {
       u.searchParams.delete('signin');
@@ -1107,7 +1112,7 @@ details.sd{display:block}
 
   function render() {
     var st = S.st; if (!st) return;
-    if (S.key) el('myLink').textContent = location.origin + '/krisper?k=' + S.key;
+    if (S.key) el('myLink').textContent = SITE + '/krisper?k=' + S.key;
     var u = st.user, items = st.items, pend = st.pending;
     var h = new Date().getHours();
     el('greet').textContent = (h < 12 ? 'Good morning' : h < 17 ? 'Good afternoon' : 'Good evening') + (u.firstName ? ', ' + u.firstName : '');
@@ -1838,11 +1843,11 @@ details.sd{display:block}
 
   // ---------- installable app ----------
   var INST_LS = 'krisperInstallHidden', deferredPrompt = null;
-  function isStandalone() { return (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || window.navigator.standalone === true; }
+  function isStandalone() { return NATIVE || (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || window.navigator.standalone === true; }
   function isIOS() { return /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1); }
   function setManifest() {
     var l = document.querySelector('link[rel="manifest"]');
-    if (l) l.href = S.key ? '/api/crisper/manifest?k=' + encodeURIComponent(S.key) : '/manifest.webmanifest';
+    if (l && !NATIVE) l.href = S.key ? '/api/crisper/manifest?k=' + encodeURIComponent(S.key) : '/manifest.webmanifest';
   }
   window.addEventListener('beforeinstallprompt', function (e) { e.preventDefault(); deferredPrompt = e; renderInstall(); });
   window.addEventListener('appinstalled', function () { deferredPrompt = null; ls(INST_LS, '1'); renderInstall(); toast('Installed. Open Simply Krisp from your home screen.'); });

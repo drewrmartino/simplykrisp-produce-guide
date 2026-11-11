@@ -1,0 +1,27 @@
+{
+  "name": "my-krisper-ios",
+  "private": true,
+  "type": "module",
+  "description": "My Krisper iPhone app: a Capacitor shell around crisper/index.html.",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "build": "node scripts/build-www.mjs",
+    "build:dev": "KRISPER_PUSH_ENV=development node scripts/build-www.mjs",
+    "build:local": "CRISPER_API=http://localhost:3000 CRISPER_SITE=http://localhost:3000 KRISPER_PUSH_ENV=development node scripts/build-www.mjs",
+    "sync": "npm run build && npx cap sync ios",
+    "open": "npx cap open ios",
+    "test": "node --test test/"
+  },
+  "dependencies": {
+    "@capacitor/app": "^8.0.0",
+    "@capacitor/browser": "^8.0.0",
+    "@capacitor/core": "^8.6.0",
+    "@capacitor/ios": "^8.6.0",
+    "@capacitor/push-notifications": "^8.0.0",
+    "@capacitor/splash-screen": "^8.0.0",
+    "@capacitor/status-bar": "^8.0.0"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^8.6.0"
+  }
+}

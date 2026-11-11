@@ -2,3 +2,4 @@ dev/
 scripts/
 node_modules/
 *.test.mjs
+app/
