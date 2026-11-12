@@ -8,4 +8,5 @@
 - Krisp card: swap today; refills link shows when 5 or fewer days are left
 - Settings: reminder pref, Krisp toggle/date, name, sign out, delete (inline confirm)
 - Lost link: resend form (generic response)
+- Why it goes bad: /produce hub → item page (symptom chips jump to cards, sources numbered) → "What went wrong?" checker (pick item → symptom → answer; ?item=&symptom= deep link); /seasonal cards link to item pages
 - Existing pages /, /seasonal, /lab unchanged

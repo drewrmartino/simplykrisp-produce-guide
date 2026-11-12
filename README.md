@@ -21,7 +21,7 @@ its client-side routes. The rewrite **must** keep excluding `api/` and
 `seasonal`:
 
 ```json
-{ "source": "/((?!api/|seasonal|lab).*)", "destination": "/index.html" }
+{ "source": "/((?!api/|seasonal|lab|crisper|krisper|produce|sitemap\\.xml|robots\\.txt).*)", "destination": "/index.html" }
 ```
 
 Without that exclusion a request for `/seasonal` gets the storage guide instead,
@@ -31,6 +31,30 @@ Note that Vercel serves `/seasonal` without a trailing slash, so every
 same-project reference inside `seasonal/index.html` is root-absolute
 (`/seasonal/produce.json`, not `./produce.json`). Relative paths silently
 resolve one level too high and 404.
+
+## Why it goes bad (`/produce`)
+
+Static, crawlable pages for when storage didn't work: what each kind of
+spoilage looks like, what causes it, whether it's still OK to eat, and how to
+prevent it next time.
+
+- Content lives in `data/spoilage.json`: `sources` (every claim cites one),
+  `causes`, `verdicts` (eat | cook | trim | toss) and `items[]`, each with
+  `failures[]` ranked most common first.
+- Storage tips, shelf life, "keep away from" and Krisp wording are **not**
+  repeated there. The generator pulls them from `seasonal/produce.json`,
+  scrap ideas from `api/_crisper/scraps.js` and matching runs from
+  `lab/runs.json`.
+- `krispHelps: true` is only allowed on items in `scripts/krisp-tiers.mjs`
+  and only for ethylene or ripening failures. The test suite enforces it.
+- Run `npm run pages` after any edit and commit the output. It writes
+  `produce/<slug>/index.html`, `produce/index.html`,
+  `produce/what-went-wrong/index.html` (symptom checker, deep-linkable with
+  `?item=broccoli&symptom=yellow`), `produce/pages.json` (used by `/seasonal`
+  to link cards), `sitemap.xml` and `robots.txt`.
+  `dev/produce-pages.test.mjs` fails if the committed files are stale.
+- Every "Is it still OK?" line is a food-safety statement. Keep it
+  conservative and in line with USDA FSIS mold guidance.
 
 ## The lab notebook
 
