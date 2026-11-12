@@ -52,6 +52,8 @@ h1{font-size:clamp(30px,5.2vw,46px);line-height:1.08;max-width:19ch}
 .imgs figure{margin:0}
 .imgs img{width:100%;height:auto;border-radius:6px;border:1px solid var(--card-border);display:block}
 .imgs figcaption{font-size:12.5px;color:var(--muted-fg);margin-top:4px}
+.run h2 a{text-decoration:none}.run h2 a:hover{text-decoration:underline}
+.run .full{display:inline-block;margin-top:12px;font-size:14.5px;font-weight:600;color:var(--primary);text-decoration:none}
 .band{margin-top:40px;background:var(--card);border:1px solid var(--card-border);border-radius:var(--radius);padding:20px 22px;display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between}
 .band p{max-width:52ch;font-size:15px}
 .btn{font-family:var(--body);font-size:15.5px;font-weight:600;padding:13.5px 24px;border:1px solid transparent;border-radius:var(--radius);background:var(--primary);color:var(--primary-fg);cursor:pointer;text-decoration:none;display:inline-block}
@@ -91,7 +93,7 @@ footer p{max-width:76ch;margin-bottom:8px}
     <p class="lede" style="margin-top:14px;font-size:15px">Want the short version for your fridge? Print the <a href="/lab/crisper-map">Crisper Drawer Map</a>.</p>
   </section>
 
-  <section class="runs" id="runs" aria-live="polite"></section>
+  <section class="runs" id="runs" aria-live="polite"><article class="run" id="capacity-2026-11"><h2><a href="/lab/capacity-2026-11">How long does a sachet really last?</a></h2><div class="rmeta"><span class="badge live">in progress</span><span>Started November 2, 2026</span><span>Sachet media (potassium permanganate on mineral carrier)</span></div><div class="q"><span class="lbl">Question</span>The absorbent changes from purple to brown as it is used up. We are opening sachets from normal household drawers at day 30, 60 and 90 to see how much capacity is left. The result sets our swap schedule and refill plan.</div><div class="r"><span class="lbl">What we saw</span>Day 30 photos due around November 16, 2026.</div><a class="full" href="/lab/capacity-2026-11">Full run &rarr;</a></article><article class="run" id="broccoli-01"><h2><a href="/lab/broccoli-01">Run 1: Broccoli next to an apple, with and without</a></h2><div class="rmeta"><span class="badge live">in progress</span><span>Started November 2, 2026</span><span>Broccoli</span></div><div class="q"><span class="lbl">Question</span>UC Davis reports broccoli at 50°F loses half its shelf life at 2 ppm ethylene. A first two-week attempt with broccoli alone showed no visible difference on either side, which makes sense: with no ethylene producer in the container there was little for the absorber to remove. This run adds one ripe apple to each lidded container, same variety and ripeness, so both sides face the same ethylene load and the only difference is the Simply Krisp case in one of them.</div><div class="r"><span class="lbl">What we saw</span>Started November 2, 2026. Fresh broccoli crowns from the same bunch, one apple per container, photographed once a day under timed light with a thermometer in frame. First photos due the week of November 9.</div><a class="full" href="/lab/broccoli-01">Full run &rarr;</a></article><article class="run" id="romaine-01"><h2>Run 2: Romaine hearts</h2><div class="rmeta"><span class="badge planned">planned</span><span>Romaine</span></div><div class="q"><span class="lbl">Question</span>Romaine reacts to as little as 1 ppm ethylene (russet spotting, rib browning). Does a drawer with an absorber show less of it?</div><div class="r"><span class="lbl">What we saw</span>Not started.</div></article></section>
 
   <div class="band">
     <p>Want to be told when a new run is published? One email per test, nothing else.</p>
@@ -112,20 +114,22 @@ footer p{max-width:76ch;margin-bottom:8px}
   function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
   function badge(st){var cls=st==='in progress'?'live':st==='complete'?'done':'planned';return '<span class="badge '+cls+'">'+esc(st)+'</span>';}
   function fmt(d){if(!d)return '';var p=d.split('-');return new Date(p[0],p[1]-1,p[2]).toLocaleDateString(undefined,{year:'numeric',month:'short',day:'numeric'});}
-  fetch('/lab/runs.json',{cache:'no-cache'}).then(function(r){return r.json();}).then(function(data){
+  var pages=[];
+  fetch('/lab/pages.json',{cache:'no-cache'}).then(function(r){return r.ok?r.json():[];}).catch(function(){return [];}).then(function(p){pages=p||[];return fetch('/lab/runs.json',{cache:'no-cache'});}).then(function(r){return r.json();}).then(function(data){
     document.getElementById('method').textContent = data.meta.method + ' Last updated ' + fmt(data.meta.updated) + '.';
     var el=document.getElementById('runs');
     el.innerHTML = data.runs.map(function(run){
       var imgs = (run.images||[]).map(function(im){return '<figure><img loading="lazy" src="'+esc(im.src)+'" alt="'+esc(im.alt||'')+'" /><figcaption>'+esc(im.caption||'')+'</figcaption></figure>';}).join('');
       return '<article class="run" id="'+esc(run.id)+'">'
-        + '<h2>'+esc(run.title)+'</h2>'
+        + '<h2>'+(pages.indexOf(run.id)>-1?'<a href="/lab/'+esc(run.id)+'">'+esc(run.title)+'</a>':esc(run.title))+'</h2>'
         + '<div class="rmeta">'+badge(run.status)+(run.started?'<span>Started '+fmt(run.started)+'</span>':'')+'<span>'+esc(run.produce)+'</span></div>'
         + '<div class="q"><span class="lbl">Question</span>'+esc(run.question)+'</div>'
         + '<div class="r"><span class="lbl">What we saw</span>'+esc(run.result)+'</div>'
         + (imgs?'<div class="imgs">'+imgs+'</div>':'')
+        + (pages.indexOf(run.id)>-1?'<a class="full" href="/lab/'+esc(run.id)+'">Full run &rarr;</a>':'')
         + '</article>';
     }).join('');
-  }).catch(function(){document.getElementById('runs').innerHTML='<p class="lede">Could not load test runs. Try refreshing.</p>';});
+  }).catch(function(){var el=document.getElementById('runs');if(!el.children.length)el.innerHTML='<p class="lede">Could not load test runs. Try refreshing.</p>';});
 })();
 </script>
 </body>

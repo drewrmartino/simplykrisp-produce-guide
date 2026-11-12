@@ -54,7 +54,7 @@ test('every item in the storage guide gets its own page', () => {
   const pages = Object.keys(out).filter((k) => /^produce\/[^/]+\/index\.html$/.test(k) && !k.includes('what-went-wrong'));
   assert.equal(pages.length, produce.length);
   const urls = out['sitemap.xml'].match(/<loc>/g).length;
-  assert.equal(urls, produce.length + 6);
+  assert.equal(urls, produce.length + 6 + loadData().lab.runs.filter((r) => r.status !== 'planned').length);
   // Storage-only page: canonical, no spoilage FAQ, honest Krisp note.
   const apple = out['produce/apple/index.html'];
   assert.match(apple, /<link rel="canonical" href="https:\/\/guide\.simplykrisp\.com\/produce\/apple" \/>/);
@@ -73,4 +73,20 @@ test('catch-all rewrite leaves the static pages alone', () => {
   const re = new RegExp('^' + all.source + '$');
   for (const p of ['/produce', '/produce/broccoli', '/produce/what-went-wrong', '/sitemap.xml', '/robots.txt']) assert.ok(!re.test(p), p);
   assert.ok(re.test('/some-guide-route'));
+});
+
+test('started Lab Notebook runs get their own crawlable pages', () => {
+  const out = render();
+  const { lab } = loadData();
+  const started = lab.runs.filter((r) => r.status !== 'planned');
+  for (const r of started) {
+    const html = out[`lab/${r.id}/index.html`];
+    assert.ok(html, r.id);
+    assert.match(html, new RegExp(`<link rel="canonical" href="https://guide\\.simplykrisp\\.com/lab/${r.id}" />`));
+    assert.match(out['sitemap.xml'], new RegExp(`/lab/${r.id}</loc>`));
+    assert.match(out['lab/index.html'], new RegExp(`href="/lab/${r.id}"`));
+  }
+  for (const r of lab.runs.filter((x) => x.status === 'planned')) assert.equal(out[`lab/${r.id}/index.html`], undefined);
+  assert.deepEqual(JSON.parse(out['lab/pages.json']), started.map((r) => r.id));
+  assert.match(out['produce/broccoli/index.html'], /href="\/lab\/broccoli-01"/);
 });

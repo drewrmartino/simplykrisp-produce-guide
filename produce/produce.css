@@ -159,3 +159,11 @@ footer{margin-top:24px}
 .rel a:hover{border-color:hsl(96 14% 40%)}
 .facts a{color:inherit}
 @media(max-width:640px){.alist{grid-template-columns:1fr}.fail h3{font-size:18px}}
+/* Lab Notebook run pages */
+.runmeta{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin-top:14px;font-size:13.5px;color:var(--muted-fg)}
+.imgs{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-top:14px}
+.imgs figure{margin:0}
+.imgs img{width:100%;height:auto;border-radius:6px;border:1px solid var(--card-border);display:block}
+.imgs figcaption{font-size:12.5px;color:var(--muted-fg);margin-top:4px}
+.band{margin-top:36px;background:var(--card);border:1px solid var(--card-border);border-radius:var(--radius);padding:18px 20px;display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
+.band p{max-width:52ch;font-size:15px;margin:0}

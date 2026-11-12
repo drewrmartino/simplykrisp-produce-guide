@@ -42,6 +42,7 @@ export function loadData() {
     spoilage: readJson('data/spoilage.json'),
     produce: readJson('seasonal/produce.json'),
     runs: readJson('lab/runs.json').runs,
+    lab: readJson('lab/runs.json'),
   };
 }
 
@@ -336,7 +337,7 @@ ${cards}
   <ul class="tips">${scraps.ideas.map((t) => `<li>${esc(t)}</li>`).join('')}</ul></section>` : '';
 
   const labSec = lab.length ? `<section class="sec" id="lab"><h2>From the Lab Notebook</h2>
-  ${lab.map((r) => `<a class="labrun" href="/lab#${esc(r.id)}"><span class="badge b-${r.status === 'complete' ? 'done' : r.status === 'in progress' ? 'live' : 'planned'}">${esc(r.status)}</span><b>${esc(r.title)}</b><span>${esc(r.result)}</span></a>`).join('')}
+  ${lab.map((r) => `<a class="labrun" href="${hasPage(r) ? `/lab/${esc(r.id)}` : `/lab#${esc(r.id)}`}"><span class="badge b-${r.status === 'complete' ? 'done' : r.status === 'in progress' ? 'live' : 'planned'}">${esc(r.status)}</span><b>${esc(r.title)}</b><span>${esc(r.result)}</span></a>`).join('')}
   <p class="more">Home tests in one refrigerator, published as they happen, including the ones that show no difference.</p></section>` : '';
 
   // Same shelf, same kind of produce: the next thing a reader is likely to look up.
@@ -467,11 +468,64 @@ ${TOOLS}
 ` + foot(ctx.spoilage.meta.updated.slice(0, 4));
 }
 
+// ---------- Lab Notebook run pages ----------
+
+// A run gets its own page once it has started; planned runs have nothing to
+// show yet, so they stay as a card on /lab only.
+const hasPage = (r) => r.status !== 'planned';
+const runBadge = (st) => `<span class="badge b-${st === 'complete' ? 'done' : st === 'in progress' ? 'live' : 'planned'}">${esc(st)}</span>`;
+const fmtDate = (d) => (d ? new Date(d + 'T12:00:00Z').toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' }) : '');
+function clip(t, n = 155) {
+  const s = String(t).replace(/\s+/g, ' ').trim();
+  if (s.length <= n) return s;
+  const cut = s.slice(0, n - 1);
+  return cut.slice(0, cut.lastIndexOf(' ')).replace(/[,.;:]$/, '') + '…';
+}
+
+function labPage(run, ctx) {
+  const { meta, runs } = ctx.lab;
+  const trail = [['Lab Notebook', '/lab'], [run.title, `/lab/${run.id}`]];
+  const foods = ctx.all.filter((e) => labRunsFor({ name: e.name, display: e.display, labTerms: (ctx.items.find((i) => i.name === e.name) || {}).labTerms }, [run]).length);
+  const imgs = (run.images || []).map((im) => `<figure><img loading="lazy" src="${esc(im.src)}" alt="${esc(im.alt || '')}" /><figcaption>${esc(im.caption || '')}</figcaption></figure>`).join('');
+  const others = runs.filter((r) => r.id !== run.id);
+  const body = `${head({
+    title: `${run.title} | Simply Krisp Lab Notebook`,
+    desc: clip(`${run.status === 'complete' ? 'Results' : 'A home fridge test in progress'}: ${run.question}`),
+    pathname: `/lab/${run.id}`,
+    jsonld: [crumbLd(trail)],
+  })}
+<main class="wrap">
+  ${crumbs(trail)}
+  <section class="hero">
+    <div class="eyebrow"><span class="dot"></span> Lab Notebook</div>
+    <h1>${esc(run.title)}</h1>
+    <p class="runmeta">${runBadge(run.status)}${run.started ? `<span>Started ${fmtDate(run.started)}</span>` : ''}<span>${esc(run.produce)}</span></p>
+  </section>
+  <section class="sec"><h2>The question</h2><p>${esc(run.question)}</p></section>
+  <section class="sec"><h2>What we saw</h2><p>${esc(run.result)}</p>${imgs ? `<div class="imgs">${imgs}</div>` : ''}</section>
+  <section class="sec"><h2>How we test</h2><p>${esc(meta.method)}</p><p class="more">Last updated ${fmtDate(meta.updated)}.</p></section>
+  ${foods.length ? `<section class="sec"><h2>Storage guides for this produce</h2><div class="rel">${foods.map((e) => `<a href="/produce/${e.slug}">How to store ${esc(e.display)}</a>`).join('')}</div></section>` : ''}
+  ${others.length ? `<section class="sec"><h2>Other tests</h2>${others.map((r) => `<a class="labrun" href="${hasPage(r) ? `/lab/${esc(r.id)}` : `/lab#${esc(r.id)}`}">${runBadge(r.status)}<b>${esc(r.title)}</b><span>${esc(r.result)}</span></a>`).join('')}</section>` : ''}
+  <div class="band"><p>Want to be told when a new run is published? One email per test, nothing else.</p><a class="btn" href="https://simplykrisp.com/pages/lab-notebook-updates?${utm('lab-run')}" target="_blank" rel="noopener">Get test updates</a></div>
+</main>
+${TOOLS}
+${foot(new Date().getFullYear())}`;
+  return body;
+}
+
+// Prerender the run cards into /lab so crawlers see them; the page script
+// still refreshes them from runs.json in the browser.
+function labIndex(ctx) {
+  const html = readFileSync(path.join(root, 'lab/index.html'), 'utf8');
+  const cards = ctx.lab.runs.map((r) => `<article class="run" id="${esc(r.id)}"><h2>${hasPage(r) ? `<a href="/lab/${esc(r.id)}">${esc(r.title)}</a>` : esc(r.title)}</h2><div class="rmeta"><span class="badge ${r.status === 'in progress' ? 'live' : r.status === 'complete' ? 'done' : 'planned'}">${esc(r.status)}</span>${r.started ? `<span>Started ${fmtDate(r.started)}</span>` : ''}<span>${esc(r.produce)}</span></div><div class="q"><span class="lbl">Question</span>${esc(r.question)}</div><div class="r"><span class="lbl">What we saw</span>${esc(r.result)}</div>${hasPage(r) ? `<a class="full" href="/lab/${esc(r.id)}">Full run &rarr;</a>` : ''}</article>`).join('');
+  return html.replace(/<section class="runs" id="runs" aria-live="polite">[\s\S]*?<\/section>/, `<section class="runs" id="runs" aria-live="polite">${cards}</section>`);
+}
+
 // ---------- sitemap ----------
 
 function sitemap(ctx) {
   const today = ctx.spoilage.meta.updated;
-  const urls = ['/', '/seasonal', '/lab', '/lab/crisper-map', '/produce', '/produce/what-went-wrong', ...ctx.all.map((i) => `/produce/${i.slug}`)];
+  const urls = ['/', '/seasonal', '/lab', '/lab/crisper-map', '/produce', '/produce/what-went-wrong', ...ctx.all.map((i) => `/produce/${i.slug}`), ...ctx.lab.runs.filter(hasPage).map((r) => `/lab/${r.id}`)];
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${urls.map((u) => `  <url><loc>${ORIGIN}${u}</loc><lastmod>${today}</lastmod></url>`).join('\n')}
@@ -496,6 +550,7 @@ export function render(data = loadData()) {
   if (errs.length) throw new Error('data/spoilage.json is invalid:\n  ' + errs.join('\n  '));
   const byName = Object.fromEntries(data.produce.map((p) => [p.name, p]));
   const ctx = { ...data, byName, items: data.spoilage.items };
+  ctx.lab = data.lab || { meta: { method: '', updated: '' }, runs: data.runs || [] };
   ctx.all = allItems(ctx);
   ctx.bySlugName = Object.fromEntries(ctx.all.map((e) => [e.name, e]));
   const out = {
@@ -506,7 +561,10 @@ export function render(data = loadData()) {
     // Lets /seasonal link each card to its page without duplicating the list.
     'produce/pages.json': JSON.stringify(Object.fromEntries(ctx.all.map((i) => [i.name, i.slug])), null, 2) + '\n',
     'index.html': rootIndex(ctx),
+    'lab/index.html': labIndex(ctx),
+    'lab/pages.json': JSON.stringify(ctx.lab.runs.filter(hasPage).map((r) => r.id)) + '\n',
   };
+  for (const r of ctx.lab.runs.filter(hasPage)) out[`lab/${r.id}/index.html`] = labPage(r, ctx);
   for (const e of ctx.all) out[`produce/${e.slug}/index.html`] = itemPage(e, ctx);
   return out;
 }
@@ -517,6 +575,9 @@ function main() {
   const dir = path.join(root, 'produce');
   const keep = new Set(Object.keys(out).filter((k) => k.startsWith('produce/')).map((k) => k.split('/')[1]));
   if (existsSync(dir)) for (const d of readdirSync(dir, { withFileTypes: true })) if (d.isDirectory() && !keep.has(d.name)) rmSync(path.join(dir, d.name), { recursive: true });
+  const labDir = path.join(root, 'lab');
+  const labKeep = new Set(Object.keys(out).filter((k) => /^lab\/[^/]+\/index\.html$/.test(k)).map((k) => k.split('/')[1]));
+  for (const d of readdirSync(labDir, { withFileTypes: true })) if (d.isDirectory() && !labKeep.has(d.name)) rmSync(path.join(labDir, d.name), { recursive: true });
   for (const [rel, body] of Object.entries(out)) {
     const abs = path.join(root, rel);
     mkdirSync(path.dirname(abs), { recursive: true });
