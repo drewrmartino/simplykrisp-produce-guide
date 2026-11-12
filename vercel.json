@@ -21,7 +21,7 @@
       "destination": "/apple-touch-icon.png"
     },
     {
-      "source": "/((?!api/|seasonal|lab|crisper|krisper).*)",
+      "source": "/((?!api/|seasonal|lab|crisper|krisper|produce|sitemap\\.xml|robots\\.txt).*)",
       "destination": "/index.html"
     },
     {

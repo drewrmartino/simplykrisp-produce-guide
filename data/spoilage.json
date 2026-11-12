@@ -1,0 +1,1258 @@
+{
+  "meta": {
+    "updated": "2026-11-11",
+    "note": "Why produce goes bad: the ways each item usually fails, ranked most common first. Joined at build time with seasonal/produce.json (storage tips, shelf life, Krisp claims), api/_crisper/scraps.js (use-it-up ideas) and lab/runs.json. Every 'Is it still OK?' line is a food-safety statement: keep them conservative and sourced. Run `npm run pages` after editing."
+  },
+  "sources": {
+    "fsis-mold": {
+      "title": "Molds on Food: Are They Dangerous?",
+      "publisher": "USDA Food Safety and Inspection Service",
+      "url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/molds-food-are-they-dangerous"
+    },
+    "ucd-broccoli": {
+      "title": "Broccoli: Produce Facts",
+      "publisher": "UC Davis Postharvest Research and Extension Center",
+      "url": "https://postharvest.ucdavis.edu/produce-facts-sheets/broccoli"
+    },
+    "ucd-romaine": {
+      "title": "Lettuce (Romaine and Loose-Leaf): Produce Facts",
+      "publisher": "UC Davis Postharvest Research and Extension Center",
+      "url": "https://postharvest.ucdavis.edu/produce-facts-sheets/lettuce-romaine"
+    },
+    "ucd-spinach": {
+      "title": "Spinach: Produce Facts",
+      "publisher": "UC Davis Postharvest Research and Extension Center",
+      "url": "https://postharvest.ucdavis.edu/produce-facts-sheets/spinach"
+    },
+    "ucd-cucumber": {
+      "title": "Cucumber: Produce Facts",
+      "publisher": "UC Davis Postharvest Research and Extension Center",
+      "url": "https://postharvest.ucdavis.edu/produce-facts-sheets/cucumber"
+    },
+    "ucd-carrot": {
+      "title": "Carrot: Produce Facts",
+      "publisher": "UC Davis Postharvest Research and Extension Center",
+      "url": "https://postharvest.ucdavis.edu/produce-facts-sheets/carrot"
+    },
+    "ucd-celery": {
+      "title": "Celery: Produce Facts",
+      "publisher": "UC Davis Postharvest Research and Extension Center",
+      "url": "https://postharvest.ucdavis.edu/produce-facts-sheets/celery"
+    },
+    "ucd-mushroom": {
+      "title": "Mushroom: Produce Facts",
+      "publisher": "UC Davis Postharvest Research and Extension Center",
+      "url": "https://postharvest.ucdavis.edu/produce-facts-sheets/mushroom"
+    },
+    "ucd-pepper": {
+      "title": "Bell Pepper: Produce Facts",
+      "publisher": "UC Davis Postharvest Research and Extension Center",
+      "url": "https://postharvest.ucdavis.edu/produce-facts-sheets/bell-pepper"
+    },
+    "ucd-tomato": {
+      "title": "Tomato: Produce Facts",
+      "publisher": "UC Davis Postharvest Research and Extension Center",
+      "url": "https://postharvest.ucdavis.edu/produce-facts-sheets/tomato"
+    },
+    "ucd-avocado": {
+      "title": "Avocado: Produce Facts",
+      "publisher": "UC Davis Postharvest Research and Extension Center",
+      "url": "https://postharvest.ucdavis.edu/produce-facts-sheets/avocado"
+    },
+    "ucd-banana": {
+      "title": "Banana: Produce Facts",
+      "publisher": "UC Davis Postharvest Research and Extension Center",
+      "url": "https://postharvest.ucdavis.edu/produce-facts-sheets/banana"
+    },
+    "ucd-strawberry": {
+      "title": "Strawberry: Produce Facts",
+      "publisher": "UC Davis Postharvest Research and Extension Center",
+      "url": "https://postharvest.ucdavis.edu/produce-facts-sheets/strawberry"
+    },
+    "ucd-bushberry": {
+      "title": "Bushberries: Produce Facts",
+      "publisher": "UC Davis Postharvest Research and Extension Center",
+      "url": "https://postharvest.ucdavis.edu/produce-facts-sheets/bushberry"
+    },
+    "ucd-herbs": {
+      "title": "Herbs (Fresh Culinary): Produce Facts",
+      "publisher": "UC Davis Postharvest Research and Extension Center",
+      "url": "https://postharvest.ucdavis.edu/produce-facts-sheets/herbs-fresh-culinary"
+    },
+    "basil-review": {
+      "title": "Preharvest and postharvest techniques that optimize the shelf life of fresh basil",
+      "publisher": "Frontiers in Plant Science (2023)",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10514919/"
+    },
+    "osu-storage": {
+      "title": "Storage of Organic Fruits and Vegetables",
+      "publisher": "Ohio State University VegNet",
+      "url": "https://vegnet.osu.edu/sites/vegnet/files/imce/stored_fruit_veg.pdf"
+    },
+    "ucanr-ethylene": {
+      "title": "Postharvest Ethylene Effects",
+      "publisher": "UC Agriculture and Natural Resources",
+      "url": "https://www.ucanr.edu/sites/default/files/2018-05/283575.pdf"
+    },
+    "brassica-senescence": {
+      "title": "Varied Expression of Senescence-Associated and Ethylene-Related Genes during Postharvest Storage of Brassica Vegetables",
+      "publisher": "International Journal of Molecular Sciences (2021)",
+      "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7830694/"
+    },
+    "berries-review": {
+      "title": "Postharvest Handling of Berries",
+      "publisher": "IntechOpen",
+      "url": "https://cdn.intechopen.com/pdfs/55546.pdf"
+    }
+  },
+  "causes": {
+    "ethylene": {
+      "label": "Ethylene gas",
+      "blurb": "A ripening gas given off by apples, bananas, avocados, tomatoes and other fruit. Sensitive produce yellows, spots or turns bitter around it."
+    },
+    "ripening": {
+      "label": "Overripening",
+      "blurb": "The fruit keeps ripening after you buy it, driven by its own ethylene, until it goes past its best."
+    },
+    "moisture_loss": {
+      "label": "Drying out",
+      "blurb": "Produce keeps losing water after harvest. Dry fridge air speeds it up, and nothing replaces what is lost."
+    },
+    "excess_moisture": {
+      "label": "Trapped moisture",
+      "blurb": "Wet surfaces and sealed containers give bacteria and mold the damp conditions they need."
+    },
+    "mold": {
+      "label": "Mold",
+      "blurb": "Fungi such as gray mold. Some grow slowly even at refrigerator temperatures."
+    },
+    "bacterial_rot": {
+      "label": "Bacterial rot",
+      "blurb": "Soft-rot bacteria break tissue down into wet, slimy patches, usually starting where it was bruised, cut or frozen."
+    },
+    "chilling": {
+      "label": "Too cold",
+      "blurb": "Tropical and warm-season produce is damaged by temperatures that are normal for a fridge, even without freezing."
+    },
+    "bruising": {
+      "label": "Bruising",
+      "blurb": "Bumps and crushing break cells open. The damaged spot browns and is where rot gets in."
+    },
+    "age": {
+      "label": "Age",
+      "blurb": "Produce is still alive after harvest. It slowly uses up its stored sugar and water, even when stored well."
+    }
+  },
+  "verdicts": {
+    "eat": {
+      "label": "Still good",
+      "blurb": "Safe and fine to eat, maybe after a quick fix."
+    },
+    "cook": {
+      "label": "Cook it soon",
+      "blurb": "Safe, but past its best raw. Cook it or blend it in the next day or two."
+    },
+    "trim": {
+      "label": "Trim and use",
+      "blurb": "Cut away the damaged part and use the rest soon."
+    },
+    "toss": {
+      "label": "Toss it",
+      "blurb": "Not worth the risk. Compost it if you can."
+    }
+  },
+  "items": [
+    {
+      "name": "Lettuce",
+      "slug": "lettuce",
+      "display": "lettuce",
+      "intro": "Romaine and leaf lettuce usually fail in one of three ways: brown specks from ethylene, limp leaves from drying out, or slime from bacteria. Only the last one means it's done.",
+      "failures": [
+        {
+          "id": "brown-specks",
+          "title": "Brown or rusty specks on the ribs",
+          "cause": "ethylene",
+          "symptom": "Small tan-to-brown spots, mostly along the pale midribs of romaine and leaf lettuce.",
+          "why": "This is russet spotting. Romaine reacts to as little as 1 part per million of ethylene, the gas apples, pears, bananas and tomatoes give off. A shared crisper drawer can easily reach that.",
+          "prevent": [
+            "Give lettuce its own drawer, away from apples, pears, bananas and tomatoes",
+            "Store it unwashed in a bag lined with paper towels"
+          ],
+          "verdict": "eat",
+          "verdictNote": "Safe to eat. The spots can taste a little bitter, so trim the worst ribs if they bother you.",
+          "rescue": [
+            "Shred it into tacos, wraps or fried rice, where the spots won't show",
+            "Halve romaine hearts and char them in a hot pan or on the grill"
+          ],
+          "krispHelps": true,
+          "sources": [
+            "ucd-romaine"
+          ]
+        },
+        {
+          "id": "limp",
+          "title": "Limp, floppy leaves",
+          "cause": "moisture_loss",
+          "symptom": "Leaves bend instead of snapping, and the edges look thin or papery.",
+          "why": "Lettuce has a lot of leaf surface and loses water quickly. Dry fridge air, or a bag left open, pulls moisture out of it.",
+          "prevent": [
+            "Keep it in the crisper drawer on the humid setting",
+            "Wrap it loosely in a damp (not wet) paper towel inside a bag"
+          ],
+          "verdict": "eat",
+          "verdictNote": "Still good. Limp lettuce is only thirsty, and it usually firms back up.",
+          "rescue": [
+            "Soak the leaves in ice water for 15 to 30 minutes, then spin them dry",
+            "Wilt limp outer leaves into soup or a stir-fry"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-romaine"
+          ]
+        },
+        {
+          "id": "slimy",
+          "title": "Dark, wet, slimy leaves",
+          "cause": "bacterial_rot",
+          "symptom": "Translucent or dark green patches that feel slick, often with a sour smell.",
+          "why": "Soft-rot bacteria take hold in leaves that are damaged, wet or frozen. Lettuce pushed against the back wall of the fridge can freeze, and those leaves turn slimy fast once they thaw. Rot spreads faster when it's warm and humid.",
+          "prevent": [
+            "Dry leaves well before storing, and keep a paper towel in the bag to catch condensation",
+            "Keep lettuce away from the back wall of the fridge, where it can freeze",
+            "Pull off damaged outer leaves before they spread decay"
+          ],
+          "verdict": "toss",
+          "verdictNote": "Toss the slimy leaves and the ones touching them. If the bag smells off or most of it is slimy, toss the whole thing.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "ucd-romaine"
+          ]
+        }
+      ],
+      "labTerms": [
+        "romaine"
+      ]
+    },
+    {
+      "name": "Spinach",
+      "slug": "spinach",
+      "display": "spinach",
+      "intro": "Spinach goes yellow from ethylene, wilts as it dries out, and turns slimy when bacteria get into crushed or wet leaves. Yellow and wilted spinach is still good for cooking.",
+      "failures": [
+        {
+          "id": "yellow",
+          "title": "Leaves turning yellow",
+          "cause": "ethylene",
+          "symptom": "Leaves fade from dark green to pale or yellow, starting at the edges or with the oldest leaves.",
+          "why": "Spinach is highly sensitive to ethylene, and even low levels make the leaves yellow faster. Fruit in the same drawer is the usual source.",
+          "prevent": [
+            "Keep spinach away from apples, bananas, tomatoes and peaches",
+            "Store it in a container lined with paper towels"
+          ],
+          "verdict": "cook",
+          "verdictNote": "Safe to eat. Yellow leaves taste flatter, so they're better cooked than in a salad.",
+          "rescue": [
+            "Wilt it into eggs, pasta or soup",
+            "Blend it into a smoothie or pesto"
+          ],
+          "krispHelps": true,
+          "sources": [
+            "ucd-spinach"
+          ]
+        },
+        {
+          "id": "slimy",
+          "title": "Wet, dark, slimy leaves",
+          "cause": "bacterial_rot",
+          "symptom": "Leaves clump together, look dark and wet, and may smell sour.",
+          "why": "Bacterial soft rot usually starts on crushed stems and damaged leaves. A packed clamshell bruises leaves, and condensation gives bacteria the moisture they need. Spinach also freezes just below 32°F, and frozen leaves rot quickly after they thaw.",
+          "prevent": [
+            "Don't pack it down. Give leaves room in the container",
+            "Line the container with a paper towel and replace it if it gets wet",
+            "Keep spinach away from the back wall of the fridge"
+          ],
+          "verdict": "toss",
+          "verdictNote": "Pick out and toss slimy leaves, plus any stuck to them. If the container smells off, toss it all.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "ucd-spinach"
+          ]
+        },
+        {
+          "id": "wilted",
+          "title": "Wilted, droopy leaves",
+          "cause": "moisture_loss",
+          "symptom": "Leaves have gone soft and floppy but are still green and dry.",
+          "why": "Spinach leaves are thin and lose water fast. An open bag in dry fridge air speeds that up.",
+          "prevent": [
+            "Keep the container closed, with a paper towel inside",
+            "Store it in the high-humidity crisper drawer"
+          ],
+          "verdict": "cook",
+          "verdictNote": "Still good to cook, since spinach wilts in the pan anyway.",
+          "rescue": [
+            "Sauté it with garlic and olive oil",
+            "Freeze it in a bag to drop into smoothies or soups"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-spinach"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Kale",
+      "slug": "kale",
+      "display": "kale",
+      "intro": "Kale keeps longer than most greens when it's cold, but it yellows around ethylene and loses water quickly. Neither one makes it unsafe.",
+      "failures": [
+        {
+          "id": "yellow",
+          "title": "Leaves turning yellow",
+          "cause": "ethylene",
+          "symptom": "Leaves lose their deep green color and turn yellow, often from the tips inward.",
+          "why": "Kale produces very little ethylene but is sensitive to it, and exposure turns the leaves yellow. Warm storage makes it worse.",
+          "prevent": [
+            "Keep kale away from apples and bananas",
+            "Store it cold, in a bag with a little air"
+          ],
+          "verdict": "cook",
+          "verdictNote": "Safe to eat. Yellow leaves are more bitter, so cook them instead of eating them raw.",
+          "rescue": [
+            "Simmer it into soups and stews",
+            "Blanch and freeze it for later"
+          ],
+          "krispHelps": true,
+          "sources": [
+            "osu-storage",
+            "ucanr-ethylene"
+          ]
+        },
+        {
+          "id": "limp",
+          "title": "Limp or leathery leaves",
+          "cause": "moisture_loss",
+          "symptom": "Leaves droop and feel soft or leathery instead of crisp.",
+          "why": "Kale loses water fast. In one study, kale lost more than half its fresh weight in six days at room temperature, faster than broccoli or cabbage.",
+          "prevent": [
+            "Wrap it in a damp paper towel inside a bag",
+            "Get it into the fridge soon after you buy it"
+          ],
+          "verdict": "eat",
+          "verdictNote": "Still good. Soak it in cold water for 15 minutes to firm it back up for salads, or just cook it.",
+          "rescue": [
+            "Bake it into kale chips",
+            "Blend it into pesto or a smoothie"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "brassica-senescence"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Broccoli",
+      "slug": "broccoli",
+      "display": "broccoli",
+      "intro": "Broccoli is one of the most ethylene-sensitive vegetables you can buy. Yellow florets are the classic sign. It can also dry out or rot, especially at the cut stem.",
+      "failures": [
+        {
+          "id": "yellow",
+          "title": "Florets turning yellow",
+          "cause": "ethylene",
+          "symptom": "The tiny buds on the florets turn from dark green to yellow, starting at the edges of the head.",
+          "why": "Ethylene speeds up floret yellowing. UC Davis reports that 2 parts per million of ethylene at 50°F cuts broccoli's shelf life in half. Apples, bananas, peaches and tomatoes nearby are the usual source.",
+          "prevent": [
+            "Keep broccoli away from apples, bananas, peaches and tomatoes",
+            "Store it cold, unwashed, in a loose bag in the crisper"
+          ],
+          "verdict": "cook",
+          "verdictNote": "Safe to eat but more bitter. Roasting or soup hides it best.",
+          "rescue": [
+            "Roast it hot with lemon and parmesan",
+            "Blend it into broccoli soup"
+          ],
+          "krispHelps": true,
+          "sources": [
+            "ucd-broccoli"
+          ]
+        },
+        {
+          "id": "limp",
+          "title": "Rubbery, bendy stems",
+          "cause": "moisture_loss",
+          "symptom": "The stalk bends instead of snapping, and the florets feel soft.",
+          "why": "Broccoli keeps losing water after harvest. A tightly sealed bag isn't the answer, because it traps moisture and invites rot. A damp wrap on the stem works better.",
+          "prevent": [
+            "Wrap the stem end in a damp paper towel",
+            "Use a loose bag, not a sealed one"
+          ],
+          "verdict": "eat",
+          "verdictNote": "Still good. Trim the stem end and stand it in cold water for an hour to firm it up.",
+          "rescue": [
+            "Peel the stalk and slice it into stir-fry coins"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-broccoli"
+          ]
+        },
+        {
+          "id": "spots",
+          "title": "Dark, soft or fuzzy spots",
+          "cause": "bacterial_rot",
+          "symptom": "Brown or black soft spots, a slimy patch, or gray or black fuzz on the florets or cut stem.",
+          "why": "Bacterial soft rot, gray mold and black mold are the main causes of broccoli decay. They usually start where the head was damaged or got wet.",
+          "prevent": [
+            "Don't wash it until you're ready to cook",
+            "Use it within a few days of buying it"
+          ],
+          "verdict": "trim",
+          "verdictNote": "A small spot on the thick stalk can be cut out with an inch to spare around it. If the florets are moldy or slimy, toss the head.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "ucd-broccoli",
+            "fsis-mold"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Cucumber",
+      "slug": "cucumber",
+      "display": "cucumbers",
+      "intro": "Cucumbers are tricky: a regular fridge is colder than they like, and they're sensitive to ethylene too. Most problems come from those two things.",
+      "failures": [
+        {
+          "id": "watery-pits",
+          "title": "Watery spots and pits in the skin",
+          "cause": "chilling",
+          "symptom": "Sunken pits or dark, water-soaked patches on the skin, sometimes followed by soft, rotting spots.",
+          "why": "This is chilling injury. Cucumbers are damaged below 50°F if they stay there more than one to three days, and most fridges run around 37°F to 40°F. The damage adds up over time and makes rot more likely.",
+          "prevent": [
+            "Keep them in the warmest part of the fridge, in the door or at the front",
+            "Wrap each one in a paper towel, then loosely in a bag",
+            "Buy only what you'll use within a few days"
+          ],
+          "verdict": "trim",
+          "verdictNote": "If the cucumber is still firm, cut off the pitted spots and use it soon. If it's soft, slimy or moldy, toss it.",
+          "rescue": [
+            "Make quick refrigerator pickles",
+            "Grate it into tzatziki"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-cucumber"
+          ]
+        },
+        {
+          "id": "yellow",
+          "title": "Skin turning yellow",
+          "cause": "ethylene",
+          "symptom": "Green skin fades to yellow, and the cucumber may get seedy or bitter.",
+          "why": "Cucumbers are highly sensitive to ethylene. 1 to 5 parts per million speeds up yellowing and decay, which is why UC Davis says not to store them with bananas, melons or tomatoes.",
+          "prevent": [
+            "Keep them away from bananas, melons, tomatoes and apples"
+          ],
+          "verdict": "eat",
+          "verdictNote": "Safe to eat. Peel it if the skin tastes bitter.",
+          "rescue": [
+            "Peel and blend it into gazpacho or a smoothie",
+            "Make quick pickles"
+          ],
+          "krispHelps": true,
+          "sources": [
+            "ucd-cucumber"
+          ]
+        },
+        {
+          "id": "soft-slimy",
+          "title": "Soft, slimy or moldy",
+          "cause": "bacterial_rot",
+          "symptom": "The cucumber goes soft and mushy, leaks, feels slimy, or shows mold.",
+          "why": "Bacteria and fungi cause most cucumber losses, especially after chilling injury has weakened the skin.",
+          "prevent": [
+            "Avoid the coldest parts of the fridge",
+            "Keep them dry"
+          ],
+          "verdict": "toss",
+          "verdictNote": "Toss it. USDA lists cucumbers as soft produce, where mold can spread below the surface, so cutting it away isn't enough.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "ucd-cucumber",
+            "fsis-mold"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Carrot",
+      "slug": "carrot",
+      "display": "carrots",
+      "intro": "Carrots last for weeks, so when they fail, it's usually because they dried out or picked up a bitter taste from ethylene. Both are fixable.",
+      "failures": [
+        {
+          "id": "bitter",
+          "title": "Bitter taste",
+          "cause": "ethylene",
+          "symptom": "The carrots look fine but taste bitter or soapy.",
+          "why": "Ethylene makes carrots produce a bitter compound. As little as 0.5 parts per million can cause noticeable bitterness within two weeks. An apple in the same drawer is enough.",
+          "prevent": [
+            "Keep carrots away from apples, pears and other fruit",
+            "Store them in a bag in the crisper drawer"
+          ],
+          "verdict": "cook",
+          "verdictNote": "Safe to eat. Cooking them with something sweet balances the bitterness.",
+          "rescue": [
+            "Roast or glaze them with honey or maple",
+            "Blend them into carrot-ginger soup"
+          ],
+          "krispHelps": true,
+          "sources": [
+            "ucd-carrot"
+          ]
+        },
+        {
+          "id": "rubbery",
+          "title": "Bendy, rubbery carrots",
+          "cause": "moisture_loss",
+          "symptom": "Carrots bend without snapping and may look shriveled.",
+          "why": "Carrots go rubbery when they lose water. Green tops left on keep pulling moisture out of the root.",
+          "prevent": [
+            "Cut off green tops before storing",
+            "Keep them in a closed bag, or in a container of water in the fridge"
+          ],
+          "verdict": "eat",
+          "verdictNote": "Still good. Soak them in cold water for an hour to firm them back up.",
+          "rescue": [
+            "Grate them into slaw, muffins or fritters",
+            "Simmer them in soup or stock"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-carrot"
+          ]
+        },
+        {
+          "id": "white-blush",
+          "title": "White film on baby carrots",
+          "cause": "moisture_loss",
+          "symptom": "Peeled baby carrots look chalky or whitish.",
+          "why": "This is white blush: the cut, peeled surface drying out. It's cosmetic.",
+          "prevent": [
+            "Keep the bag sealed between uses"
+          ],
+          "verdict": "eat",
+          "verdictNote": "Still good. Rinse them or soak them in water for a few minutes and the color comes back.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "ucd-carrot"
+          ]
+        },
+        {
+          "id": "mold-rot",
+          "title": "Moldy or slimy spots",
+          "cause": "mold",
+          "symptom": "Fuzzy patches, or soft, wet, slimy areas, often at the tip or crown.",
+          "why": "Gray mold, watery rot and bacterial soft rot all attack carrots, and standing water in the bag helps them along.",
+          "prevent": [
+            "Keep the bag free of standing water",
+            "Check stored carrots every week or so"
+          ],
+          "verdict": "trim",
+          "verdictNote": "Carrots are firm, so USDA says a small mold spot can be cut off with at least an inch around and below it. If a carrot is slimy or soft all the way through, toss it.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "ucd-carrot",
+            "fsis-mold"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Celery",
+      "slug": "celery",
+      "display": "celery",
+      "intro": "Celery mostly fails by drying out. It's less sensitive to ethylene than most greens, and when it does rot, it starts at the cut ends.",
+      "failures": [
+        {
+          "id": "limp",
+          "title": "Limp, bendy stalks",
+          "cause": "moisture_loss",
+          "symptom": "Stalks bend instead of snapping.",
+          "why": "Celery keeps best at very high humidity, close to 100%. Fridge air is much drier, so uncovered celery wilts.",
+          "prevent": [
+            "Wrap it in aluminum foil, or keep cut stalks in a jar of water",
+            "Store it whole in the crisper drawer"
+          ],
+          "verdict": "eat",
+          "verdictNote": "Still good. Trim the base and stand the stalks in cold water for an hour.",
+          "rescue": [
+            "Add it to soup, stock or stir-fry"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-celery"
+          ]
+        },
+        {
+          "id": "pale",
+          "title": "Stalks losing their green color",
+          "cause": "ethylene",
+          "symptom": "Stalks fade from green to pale or yellowish.",
+          "why": "Celery isn't very sensitive to ethylene when it's cold. At higher levels and warmer temperatures, though, it loses its green color.",
+          "prevent": [
+            "Keep it away from apples and pears",
+            "Keep it cold"
+          ],
+          "verdict": "eat",
+          "verdictNote": "Still good. The color is cosmetic.",
+          "rescue": [],
+          "krispHelps": true,
+          "sources": [
+            "ucd-celery"
+          ]
+        },
+        {
+          "id": "pithy",
+          "title": "Hollow, spongy or white inside",
+          "cause": "age",
+          "symptom": "The inside of the stalk is white, dry and spongy instead of solid.",
+          "why": "This is pith breakdown, linked to age, cold stress and water stress, sometimes starting before harvest.",
+          "prevent": [
+            "Use older bunches first"
+          ],
+          "verdict": "cook",
+          "verdictNote": "Safe to eat. The texture is poor raw but fine in cooking.",
+          "rescue": [
+            "Chop it into soup, stock or a soffritto"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-celery"
+          ]
+        },
+        {
+          "id": "slimy-mold",
+          "title": "Slimy ends or moldy stalks",
+          "cause": "bacterial_rot",
+          "symptom": "Cut ends turn brown and slimy, or stalks show fuzzy gray or white mold.",
+          "why": "Cut stalks are especially prone to bacterial rot. Gray mold and watery rot can develop over a few weeks even in a cold fridge.",
+          "prevent": [
+            "Store celery whole, and cut it when you need it",
+            "Change the water every couple of days if you keep cut stalks in water"
+          ],
+          "verdict": "toss",
+          "verdictNote": "Toss slimy or moldy stalks. Other stalks from the bunch are fine if they're firm and smell normal.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "ucd-celery"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Herbs (Fresh)",
+      "slug": "fresh-herbs",
+      "display": "fresh herbs",
+      "intro": "Herbs aren't all the same. Basil hates the cold, parsley and mint yellow around ethylene, and cilantro rots fast if it's wet.",
+      "failures": [
+        {
+          "id": "basil-black",
+          "title": "Basil leaves turning black",
+          "cause": "chilling",
+          "symptom": "Basil leaves get dark brown or black patches, often within a day or two of going in the fridge.",
+          "why": "Basil and shiso are the only common herbs that are damaged by cold, and UC Davis says to keep them above 50°F. Research has found basil leaves blacken in as little as one day at 32°F, or three days at 41°F.",
+          "prevent": [
+            "Keep basil on the counter, stems in a glass of water, out of direct sun"
+          ],
+          "verdict": "trim",
+          "verdictNote": "Cold damage isn't a safety problem, but black leaves won't recover. Pick them off and use the rest today.",
+          "rescue": [
+            "Blend the good leaves into pesto and freeze it in an ice-cube tray"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-herbs",
+            "basil-review"
+          ]
+        },
+        {
+          "id": "yellow",
+          "title": "Parsley, mint or cilantro turning yellow",
+          "cause": "ethylene",
+          "symptom": "Leaves turn yellow, stems curl, and leaves drop.",
+          "why": "Ethylene causes yellowing, curling and leaf drop in herbs. UC Davis lists marjoram, mint, parsley and oregano as very sensitive. Sage, thyme, basil and rosemary barely react.",
+          "prevent": [
+            "Keep herb jars on a different shelf from apples, bananas and tomatoes",
+            "Trim stems and stand tender herbs in water, loosely covered with a bag"
+          ],
+          "verdict": "cook",
+          "verdictNote": "Safe to eat. The flavor fades as they yellow, so use them cooked, soon.",
+          "rescue": [
+            "Stir them into soups, sauces or a green chimichurri"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-herbs"
+          ]
+        },
+        {
+          "id": "slimy",
+          "title": "Slimy, dark leaves",
+          "cause": "excess_moisture",
+          "symptom": "Leaves, especially cilantro, turn dark green, wet and slimy inside the bag.",
+          "why": "Tender herbs rot quickly when wet leaves are trapped in a sealed bag, and mold is a common reason cilantro gets thrown out.",
+          "prevent": [
+            "Don't wash herbs until you use them",
+            "Keep leaves dry. Only the stems should touch water"
+          ],
+          "verdict": "toss",
+          "verdictNote": "Pick out and toss the slimy sprigs. If the whole bunch smells off, toss it.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "ucd-herbs"
+          ]
+        },
+        {
+          "id": "wilted",
+          "title": "Wilted, droopy herbs",
+          "cause": "moisture_loss",
+          "symptom": "Leaves and stems flop but are still green.",
+          "why": "Herbs lose water quickly, especially when they sit out or stay uncovered in the fridge.",
+          "prevent": [
+            "Store tender herbs like flowers, stems in water",
+            "Wrap hardy herbs (rosemary, thyme) in a damp paper towel inside a bag"
+          ],
+          "verdict": "eat",
+          "verdictNote": "Still good. Trim the stems and put them in cold water for 30 minutes.",
+          "rescue": [
+            "Freeze chopped herbs in olive oil in an ice-cube tray"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-herbs"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Mushroom",
+      "slug": "mushroom",
+      "display": "mushrooms",
+      "intro": "Mushrooms don't care about ethylene. They fail from moisture, bruising and age, so how you package them matters most.",
+      "failures": [
+        {
+          "id": "slimy",
+          "title": "Slimy, sticky surface",
+          "cause": "excess_moisture",
+          "symptom": "Caps feel slick or sticky, look darker, and may smell sour or fishy.",
+          "why": "Plastic traps moisture, and wet mushrooms are an easy home for spoilage bacteria. Warm temperatures and long storage make it worse.",
+          "prevent": [
+            "Store them in a paper bag, not plastic",
+            "Keep them dry, and clean them with a damp cloth just before cooking"
+          ],
+          "verdict": "toss",
+          "verdictNote": "Toss mushrooms that are slimy, sticky or smell sour.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "ucd-mushroom"
+          ]
+        },
+        {
+          "id": "brown",
+          "title": "Brown spots or darkening",
+          "cause": "bruising",
+          "symptom": "Caps get brown patches or darken overall, but they're still dry and firm.",
+          "why": "Mushrooms bruise easily, and handling makes them brown. UC Davis notes that most mushroom losses come from bruising, rough handling and age, not disease.",
+          "prevent": [
+            "Handle them gently and don't stack heavy things on top"
+          ],
+          "verdict": "eat",
+          "verdictNote": "Still good if they're dry and smell normal. Cook them.",
+          "rescue": [
+            "Chop them fine into duxelles for toast, eggs or pasta"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-mushroom"
+          ]
+        },
+        {
+          "id": "open-caps",
+          "title": "Caps opening, gills showing",
+          "cause": "age",
+          "symptom": "The edge of the cap pulls away from the stem and the dark gills show.",
+          "why": "Mushrooms keep growing after harvest, so the caps open and the veil breaks over time.",
+          "prevent": [
+            "Use them within about a week"
+          ],
+          "verdict": "cook",
+          "verdictNote": "Safe to eat, with a stronger flavor. Cook them soon.",
+          "rescue": [
+            "Use them in soup, gravy or a mushroom sauce"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-mushroom"
+          ]
+        },
+        {
+          "id": "shriveled",
+          "title": "Dry, wrinkled mushrooms",
+          "cause": "moisture_loss",
+          "symptom": "Mushrooms shrink, wrinkle and feel leathery.",
+          "why": "Mushrooms are mostly water. Left uncovered or in a paper bag for too long, they dry out.",
+          "prevent": [
+            "Fold the paper bag closed",
+            "Use them within about a week"
+          ],
+          "verdict": "cook",
+          "verdictNote": "Safe if there's no slime or mold. They work well cooked.",
+          "rescue": [
+            "Slice them into soups and sauces",
+            "Dry them the rest of the way in a low oven and grind them into mushroom powder"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-mushroom"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Bell Pepper",
+      "slug": "bell-pepper",
+      "display": "bell peppers",
+      "intro": "Peppers barely react to ethylene. They wrinkle as they lose water, get pitted if they're too cold for too long, and eventually mold.",
+      "failures": [
+        {
+          "id": "wrinkled",
+          "title": "Soft, wrinkled skin",
+          "cause": "moisture_loss",
+          "symptom": "The skin wrinkles and the walls feel soft instead of crisp.",
+          "why": "Peppers soften as they lose water, and red, yellow and orange peppers do it faster than green ones.",
+          "prevent": [
+            "Store them whole and unwashed in the crisper drawer",
+            "Use colored peppers before green ones"
+          ],
+          "verdict": "cook",
+          "verdictNote": "Safe if there's no mold. Wrinkled peppers are great cooked.",
+          "rescue": [
+            "Roast them and blend into a sauce or dip",
+            "Slice them into fajitas or a stir-fry"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-pepper"
+          ]
+        },
+        {
+          "id": "pitting",
+          "title": "Pitting or watery patches",
+          "cause": "chilling",
+          "symptom": "Small sunken pits or water-soaked areas on the skin, sometimes with rot at the stem.",
+          "why": "Peppers kept at 41°F can show cold damage after about two weeks. Green peppers are more sensitive than colored ones.",
+          "prevent": [
+            "Use peppers within one to two weeks",
+            "Keep them out of the coldest spot in the fridge"
+          ],
+          "verdict": "trim",
+          "verdictNote": "Cut away the pitted spots and use the rest soon. Toss it if it's soft and rotting.",
+          "rescue": [
+            "Dice it into salsa, eggs or chili"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-pepper"
+          ]
+        },
+        {
+          "id": "mold",
+          "title": "Mold spot on the skin or stem",
+          "cause": "mold",
+          "symptom": "Gray or black fuzz, usually near the stem or on a damaged spot.",
+          "why": "Gray mold grows well even at fridge temperatures, and it gets in through cuts and punctures.",
+          "prevent": [
+            "Store cut peppers in an airtight container and use them within a few days"
+          ],
+          "verdict": "trim",
+          "verdictNote": "Bell peppers are firm, so USDA says a small mold spot can be cut off with at least an inch around and below it. If there's mold inside the seed cavity or it covers more than a small spot, toss it.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "ucd-pepper",
+            "fsis-mold"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Tomato",
+      "slug": "tomato",
+      "display": "tomatoes",
+      "intro": "Tomatoes are damaged by cold, keep ripening on the counter, and mold quickly once the skin splits. They also give off ethylene that hurts nearby greens.",
+      "failures": [
+        {
+          "id": "mealy",
+          "title": "Mealy, bland tomatoes",
+          "cause": "chilling",
+          "symptom": "Flesh is soft and grainy, flavor is flat, and color may be blotchy.",
+          "why": "Tomatoes are damaged by cold. Below 50°F for more than two weeks, or at 41°F for more than six to eight days, they lose flavor, soften early, ripen unevenly and rot more easily.",
+          "prevent": [
+            "Ripen and keep tomatoes on the counter, stem-side down",
+            "Move only fully ripe ones to the fridge, and only for a few days"
+          ],
+          "verdict": "cook",
+          "verdictNote": "Safe to eat. The texture won't come back, so cook them.",
+          "rescue": [
+            "Simmer them into sauce or soup",
+            "Roast them with olive oil and garlic"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-tomato"
+          ]
+        },
+        {
+          "id": "overripe",
+          "title": "Very soft and wrinkly",
+          "cause": "ripening",
+          "symptom": "Tomatoes feel soft all over and the skin starts to wrinkle.",
+          "why": "Tomatoes keep ripening on the counter, driven by their own ethylene, until they go past their best.",
+          "prevent": [
+            "Buy a mix of ripe and less-ripe tomatoes",
+            "Move fully ripe tomatoes to the fridge for a couple of days if you need more time"
+          ],
+          "verdict": "cook",
+          "verdictNote": "Safe if there's no mold or leaking. Ideal for cooking.",
+          "rescue": [
+            "Blend them into sauce, salsa or gazpacho",
+            "Save cores and skins in a freezer stock bag"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-tomato"
+          ]
+        },
+        {
+          "id": "mold",
+          "title": "Moldy, split or leaking",
+          "cause": "mold",
+          "symptom": "Fuzzy mold, a cracked skin with wet flesh, or a sour smell.",
+          "why": "Several molds, including gray mold and black mold, attack tomatoes, often through cracks and damaged skin.",
+          "prevent": [
+            "Use split tomatoes the same day",
+            "Keep tomatoes in a single layer so they don't crush each other"
+          ],
+          "verdict": "toss",
+          "verdictNote": "Toss it. USDA lists tomatoes as soft produce, where mold can spread below the surface.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "ucd-tomato",
+            "fsis-mold"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Avocado",
+      "slug": "avocado",
+      "display": "avocados",
+      "intro": "Avocados have a short window. They go from ripe to overripe fast, brown inside if chilled too early, and turn rancid when rot sets in.",
+      "failures": [
+        {
+          "id": "overripe",
+          "title": "Mushy and overripe",
+          "cause": "ripening",
+          "symptom": "The fruit gives too easily when pressed, and the flesh is very soft.",
+          "why": "Avocados ripen after harvest, and their own ethylene speeds up sharply as they ripen. At room temperature they can go from ripe to overripe in a day or two.",
+          "prevent": [
+            "Move ripe avocados into the fridge to slow them down",
+            "Keep unripe ones on the counter, away from bananas if you don't want them to speed up"
+          ],
+          "verdict": "eat",
+          "verdictNote": "Still good if the flesh is green and smells fresh.",
+          "rescue": [
+            "Make guacamole or avocado toast",
+            "Blend it into a smoothie or salad dressing"
+          ],
+          "krispHelps": true,
+          "sources": [
+            "ucd-avocado"
+          ]
+        },
+        {
+          "id": "brown-streaks",
+          "title": "Brown streaks or gray flesh",
+          "cause": "chilling",
+          "symptom": "Brown threads or gray patches in the flesh, or a fruit that never ripens properly.",
+          "why": "Unripe avocados kept cold for too long get internal browning and may never ripen. Avocados should go in the fridge only once they're ripe.",
+          "prevent": [
+            "Ripen avocados on the counter first, then refrigerate"
+          ],
+          "verdict": "trim",
+          "verdictNote": "Cut away the brown parts. The rest is fine if it smells and tastes normal.",
+          "rescue": [
+            "Mash the good part with lime and salt"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-avocado"
+          ]
+        },
+        {
+          "id": "rotten",
+          "title": "Black, stringy, sour or moldy",
+          "cause": "mold",
+          "symptom": "Dark rot spreading from the stem or from black spots on the skin, with a sour or rancid smell.",
+          "why": "Fungal rots such as anthracnose and stem-end rot spread into the flesh, browning it and giving it a rancid flavor.",
+          "prevent": [
+            "Eat ripe avocados within a few days",
+            "Check the stem end when buying. Green underneath is good, brown isn't"
+          ],
+          "verdict": "toss",
+          "verdictNote": "Toss it if it smells sour or has visible mold. Avocados are soft fruit, so cutting around mold isn't safe.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "ucd-avocado",
+            "fsis-mold"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Banana",
+      "slug": "banana",
+      "display": "bananas",
+      "intro": "Most banana problems look worse than they are. A dark peel usually means cold or ripeness, not spoilage.",
+      "failures": [
+        {
+          "id": "brown-peel-fridge",
+          "title": "Peel turns brown or black in the fridge",
+          "cause": "chilling",
+          "symptom": "The peel goes dull, gray or dark brown after time in the fridge, while the fruit inside stays pale.",
+          "why": "Bananas are tropical and are damaged below about 56°F. The peel discolors and unripe bananas may stop ripening.",
+          "prevent": [
+            "Keep bananas on the counter",
+            "Refrigerate them only once they're fully ripe"
+          ],
+          "verdict": "eat",
+          "verdictNote": "Still good if the banana was ripe when it went in. The peel looks bad, but the fruit is fine.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "ucd-banana"
+          ]
+        },
+        {
+          "id": "overripe",
+          "title": "Covered in brown spots",
+          "cause": "ripening",
+          "symptom": "Lots of brown speckles, with soft, sweet flesh.",
+          "why": "Bananas keep ripening on the counter, driven by their own ethylene, and they ripen faster when it's warm.",
+          "prevent": [
+            "Separate bananas from the bunch",
+            "Keep them away from other fruit"
+          ],
+          "verdict": "eat",
+          "verdictNote": "Still good, and at their sweetest for baking.",
+          "rescue": [
+            "Peel and freeze them for smoothies or banana bread",
+            "Mash them into pancakes or oatmeal"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-banana"
+          ]
+        },
+        {
+          "id": "bruised",
+          "title": "Brown, mushy patches inside",
+          "cause": "bruising",
+          "symptom": "The peel looks fine, but the flesh has brown, soft spots.",
+          "why": "A drop or bump can brown the flesh without breaking the peel.",
+          "prevent": [
+            "Hang bananas or set them down gently"
+          ],
+          "verdict": "trim",
+          "verdictNote": "Cut out the bruised part and eat the rest.",
+          "rescue": [
+            "Use bruised bananas in baking or smoothies"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-banana"
+          ]
+        },
+        {
+          "id": "moldy-stem",
+          "title": "Mold on the stem or crown",
+          "cause": "mold",
+          "symptom": "White, gray or black fuzz where the bananas join together.",
+          "why": "Crown rot, a fungal infection of the cut stem where the bunch was separated, is one of the main ways bananas spoil.",
+          "prevent": [
+            "Check the crown when buying",
+            "Use bananas with a moldy crown first"
+          ],
+          "verdict": "trim",
+          "verdictNote": "If the mold is only on the stem and the fruit is firm and smells normal, cut off the stem end and eat it. If the fruit is leaking, smells fermented or has mold on it, toss it.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "ucd-banana"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Strawberry",
+      "slug": "strawberry",
+      "display": "strawberries",
+      "intro": "Mold is the number one reason strawberries get thrown out. Ethylene barely matters for them, but keeping them dry and cold does.",
+      "failures": [
+        {
+          "id": "gray-mold",
+          "title": "Gray, fuzzy mold",
+          "cause": "mold",
+          "symptom": "Gray fuzz, often starting on one berry and spreading to the ones touching it.",
+          "why": "Gray mold (Botrytis) causes the most strawberry losses after harvest. It grows even at 32°F, just very slowly, and moisture on the berries helps it spread.",
+          "prevent": [
+            "Don't wash berries until you eat them",
+            "Store them in a single layer on paper towels",
+            "Pull out moldy berries as soon as you see them"
+          ],
+          "verdict": "toss",
+          "verdictNote": "Toss moldy berries. Check the ones that were touching them, and toss any that are soft or wet. Strawberries are soft fruit, so you can't cut mold away.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "ucd-strawberry",
+            "fsis-mold"
+          ]
+        },
+        {
+          "id": "mushy",
+          "title": "Soft, mushy or leaking",
+          "cause": "bruising",
+          "symptom": "Berries collapse, leak juice and stain the container, with no visible mold.",
+          "why": "Crushed berries break down fast, and Rhizopus rot causes mushy, leaky berries. It doesn't grow below 41°F, so keeping them cold helps.",
+          "prevent": [
+            "Keep them in the coldest part of the fridge",
+            "Don't stack heavy things on the container"
+          ],
+          "verdict": "cook",
+          "verdictNote": "Safe if there's no mold. Cook or blend them today.",
+          "rescue": [
+            "Cook them into a quick compote or jam",
+            "Freeze them for smoothies"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-strawberry"
+          ]
+        },
+        {
+          "id": "dull",
+          "title": "Dull, shriveled berries",
+          "cause": "moisture_loss",
+          "symptom": "Berries lose their shine and start to shrivel.",
+          "why": "Strawberries lose water through their thin skin, especially when the stems are pulled off or they're left uncovered.",
+          "prevent": [
+            "Keep the green tops on until you eat them",
+            "Keep them covered in the fridge"
+          ],
+          "verdict": "cook",
+          "verdictNote": "Safe to eat. The texture is better in cooking or blended.",
+          "rescue": [
+            "Roast them with a little sugar",
+            "Blend them into a smoothie"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-strawberry"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Raspberry",
+      "slug": "raspberry",
+      "display": "raspberries",
+      "intro": "Raspberries are among the most perishable fruits you can buy, lasting only two to five days even at 32°F. Mold is almost always what ends them.",
+      "failures": [
+        {
+          "id": "gray-mold",
+          "title": "Gray, fuzzy mold",
+          "cause": "mold",
+          "symptom": "Gray fuzz on a few berries, spreading through the container.",
+          "why": "Diseases cause most raspberry losses, and gray mold (Botrytis) is the main one. It keeps growing slowly even at 32°F.",
+          "prevent": [
+            "Keep them dry and unwashed until you eat them",
+            "Store them in a single layer on a paper towel, in the coldest part of the fridge",
+            "Plan to eat them within two days"
+          ],
+          "verdict": "toss",
+          "verdictNote": "Toss moldy berries and any soft or wet ones touching them. You can't cut mold out of soft fruit.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "ucd-bushberry",
+            "fsis-mold"
+          ]
+        },
+        {
+          "id": "leaking",
+          "title": "Leaking, collapsing berries",
+          "cause": "bruising",
+          "symptom": "Berries lose their shape, leak juice and stick to each other, with no mold.",
+          "why": "Raspberries are hollow and fragile, and they soften quickly after harvest. Crushing speeds it up.",
+          "prevent": [
+            "Don't stack containers",
+            "Handle them as little as possible"
+          ],
+          "verdict": "cook",
+          "verdictNote": "Safe if there's no mold. Use them today.",
+          "rescue": [
+            "Cook them into a quick sauce",
+            "Freeze them for smoothies"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-bushberry"
+          ]
+        },
+        {
+          "id": "darkening",
+          "title": "Berries turning dark purple-red",
+          "cause": "ethylene",
+          "symptom": "Red raspberries darken toward purple.",
+          "why": "Ethylene can darken red raspberries to purple-red, and it can also speed up gray mold. Raspberries are too short-lived for a Krisp to make a real difference, so the fix is to keep them away from fruit and eat them fast.",
+          "prevent": [
+            "Keep raspberries away from apples, bananas and other ripening fruit"
+          ],
+          "verdict": "eat",
+          "verdictNote": "Still good if there's no mold. The color change is cosmetic.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "berries-review"
+          ]
+        }
+      ]
+    }
+  ]
+}
