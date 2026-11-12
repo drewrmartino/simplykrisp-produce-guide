@@ -23,7 +23,7 @@
     ['Shop', STORE + '/collections/all?' + UTM],
     ['Learn', null, null, [
       ['Storage Guide', '/', 'guide'],
-      ['Why It Goes Bad', '/produce', 'produce'],
+      ['Produce A–Z', '/produce', 'produce'],
       ['In Season', '/seasonal', 'seasonal'],
       ['Lab Notebook', '/lab', 'lab']
     ]],

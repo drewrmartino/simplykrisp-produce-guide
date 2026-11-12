@@ -141,3 +141,21 @@ details.fold summary{cursor:pointer;font-family:var(--sans);font-size:20px;color
 details.fold summary::marker{color:var(--muted-fg)}
 details.fold p{margin-top:10px;color:var(--muted-fg)}
 footer{margin-top:24px}
+
+/* All-produce A–Z list */
+.agroup{margin-top:34px}
+.agroup h2{font-size:22px;margin-bottom:10px}
+.alist{list-style:none;padding:0;display:grid;grid-template-columns:repeat(2,1fr);gap:8px 14px}
+.arow a{display:grid;grid-template-columns:28px 1fr auto;grid-template-rows:auto auto;column-gap:10px;align-items:center;background:#fff;border:1px solid var(--card-border);border-radius:var(--radius);padding:10px 14px;text-decoration:none;color:inherit}
+.arow a:hover{border-color:hsl(96 14% 40%)}
+.arow img{grid-row:1/3}
+.arow b{font-size:15.5px}
+.arow span{grid-column:2;font-size:13px;color:hsl(96 6% 38%)}
+.arow em{grid-row:1/3;grid-column:3;font-style:normal;font-size:11px;font-weight:600;padding:3px 8px;border-radius:99px;background:hsl(48 60% 90%);color:hsl(36 60% 28%);white-space:nowrap}
+.fails-h{font-size:24px;margin:40px 0 4px}
+.fail h3{font-size:21px;line-height:1.25}
+.rel{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.rel a{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border:1px solid var(--card-border);border-radius:99px;background:#fff;text-decoration:none;font-size:14px}
+.rel a:hover{border-color:hsl(96 14% 40%)}
+.facts a{color:inherit}
+@media(max-width:640px){.alist{grid-template-columns:1fr}.fail h3{font-size:18px}}
