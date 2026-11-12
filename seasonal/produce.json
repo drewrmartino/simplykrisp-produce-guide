@@ -1055,7 +1055,7 @@
       "Bananas"
     ],
     "extraDays": 1,
-    "imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1fadb.png",
+    "imageUrl": "https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/72x72/1fadb.png",
     "extraDaysRange": "1–2",
     "evidence": "estimated"
   },

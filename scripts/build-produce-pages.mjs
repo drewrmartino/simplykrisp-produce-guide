@@ -126,7 +126,7 @@ ${jsonld.map((j) => `<script type="application/ld+json">${JSON.stringify(j).repl
 <script src="/assets/sk-header.js"></script>
 <header><div class="wrap hdr">
   <a class="brand" href="/"><div><div class="name">SimplyKrisp</div><div class="sub">Produce Guide</div></div></a>
-  <nav><a href="/">Storage Guide</a><a href="/produce">Why It Goes Bad</a><a href="/seasonal">In Season</a><a href="/lab">Lab Notebook</a><a class="shop" href="https://simplykrisp.com/?${utm('header')}" target="_blank" rel="noopener">Shop</a></nav>
+  <nav><a href="/">Storage Guide</a><a href="/seasonal">In Season</a><a href="/produce">Why It Goes Bad</a><a href="/lab">Lab Notebook</a><a href="/krisper">My Krisper</a><a class="shop" href="https://simplykrisp.com/?${utm('header')}" target="_blank" rel="noopener">Shop</a></nav>
 </div></header>
 `;
 }
@@ -154,6 +154,9 @@ function crumbLd(trail) {
     itemListElement: trail.map(([name, href], i) => ({ '@type': 'ListItem', position: i + 1, name, item: ORIGIN + href })),
   };
 }
+
+// Same "More from SimplyKrisp" row as the other guide pages.
+const TOOLS = `<nav class="sk-tools" aria-label="SimplyKrisp tools"><style>.sk-tools{max-width:900px;margin:36px auto 0;padding:16px 20px;display:flex;flex-wrap:wrap;align-items:center;gap:8px 18px;font:14px/1.4 'DM Sans',system-ui,sans-serif;color:hsl(96 6% 38%);border-top:1px solid hsl(48 10% 87%)}.sk-tools a{color:hsl(96 14% 22%);text-decoration:none}.sk-tools a:hover{text-decoration:underline}.sk-tools a[aria-current]{font-weight:700}html.embedded .sk-tools{display:none}</style><span>More from SimplyKrisp:</span><a href="/">Storage Guide</a><a href="/seasonal">In Season</a><a href="/produce" aria-current="page">Why It Goes Bad</a><a href="/lab">Lab Notebook</a><a href="/krisper">My Krisper</a></nav>`;
 
 const verdictTag = (v, verdicts) => `<span class="verdict v-${v}">${esc(verdicts[v].label)}</span>`;
 const causeTag = (c, causes) => `<span class="cause">${esc(causes[c].label)}</span>`;
@@ -189,7 +192,7 @@ function itemPage(item, ctx) {
 
   const chips = item.failures.map((f) => `<a class="chip" href="#${f.id}">${esc(f.title)}</a>`).join('');
 
-  const cards = item.failures.map((f, i) => {
+  const cards = item.failures.map((f) => {
     const krisp = f.krispHelps && p.krispBenefit
       ? `<div class="krisp"><span class="lbl">Where a Krisp fits</span><p>${esc(p.krispBenefit)} <a href="${SHOP}?${utm(item.slug + '-' + f.id)}" target="_blank" rel="noopener">See the Double Krisp</a></p></div>`
       : '';
@@ -197,7 +200,7 @@ function itemPage(item, ctx) {
       ? `<div class="blk"><span class="lbl">Use it up</span><ul>${f.rescue.map((r) => `<li>${esc(r)}</li>`).join('')}</ul></div>`
       : '';
     return `<article class="fail" id="${f.id}">
-  <div class="fhead"><span class="num">${i + 1}</span><h2>${esc(f.title)}</h2></div>
+  <h2>${esc(f.title)}</h2>
   <div class="tags">${causeTag(f.cause, causes)}${verdictTag(f.verdict, verdicts)}</div>
   <p class="symptom"><span class="lbl">What you'll see</span>${esc(f.symptom)}</p>
   <div class="grid2">
@@ -240,8 +243,6 @@ function itemPage(item, ctx) {
     .map((s) => `<li id="src-${s}"><a href="${esc(sources[s].url)}" target="_blank" rel="noopener">${esc(sources[s].title)}</a>, ${esc(sources[s].publisher)}</li>`)
     .join('')}</ol></section>`;
 
-  const others = ctx.items.filter((o) => o.slug !== item.slug).map((o) => `<a href="/produce/${o.slug}"><img src="${esc(ctx.byName[o.name].imageUrl)}" alt="" width="24" height="24" loading="lazy" />${esc(o.name === 'Herbs (Fresh)' ? 'Fresh herbs' : o.name)}</a>`).join('');
-
   return head({ title, desc, pathname, jsonld: [crumbLd(trail), faq] }) + `
 <main class="wrap">
   ${crumbs(trail)}
@@ -266,8 +267,8 @@ ${cards}
   ${labSec}
   ${srcSec}
 
-  <section class="sec others"><h2>Other produce</h2><div class="olist">${others}</div></section>
 </main>
+${TOOLS}
 ` + foot(ctx.spoilage.meta.updated.slice(0, 4));
 }
 
@@ -305,17 +306,17 @@ function indexPage(ctx) {
   <section class="hero">
     <div class="eyebrow"><span class="dot"></span> Why it goes bad</div>
     <h1>Why produce goes bad, and what to do about it</h1>
-    <p class="lede">Storage tips tell you how to keep produce fresh. This is for when it didn't work. Find what you're looking at, learn what caused it, and see whether it's still good to eat. Most of the time it is.</p>
+    <p class="lede">For when storage didn't work. Find what you're seeing, why it happened, and whether it's still good to eat. Usually it is.</p>
     <div class="cta-row"><a class="btn" href="/produce/what-went-wrong">What went wrong? Pick a symptom</a><a class="btn ghost" href="/">Storage Guide</a></div>
   </section>
 
   <section class="igrid" aria-label="Produce">
 ${cards}
   </section>
-  <p class="more">${items.length} of the ${ctx.produce.length} items in the Storage Guide so far, starting with the produce people throw away most.</p>
 
-  <section class="sec"><h2>The usual causes</h2><p>Across these ${items.length} items, here's how often each cause shows up. Ethylene is only part of the picture, which is why storage habits matter as much as any product.</p><ul class="causes">${causes}</ul></section>
+  <details class="sec fold"><summary>What usually causes it</summary><p>Across these ${items.length} items, ethylene is only part of the picture, which is why storage habits matter as much as any product.</p><ul class="causes">${causes}</ul></details>
 </main>
+${TOOLS}
 ` + foot(ctx.spoilage.meta.updated.slice(0, 4));
 }
 
@@ -352,6 +353,7 @@ function lookupPage(ctx) {
 </main>
 <script id="wwdata" type="application/json">${JSON.stringify(data).replace(/</g, '\\u003c')}</script>
 <script src="/produce/lookup.js"></script>
+${TOOLS}
 ` + foot(ctx.spoilage.meta.updated.slice(0, 4));
 }
 

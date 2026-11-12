@@ -1,6 +1,6 @@
 // Simply Krisp service worker: makes the site installable and lets the app
 // shell open without a connection. Private data (/api/*) is never cached.
-const VERSION = 'sk-2026-11-05d';
+const VERSION = 'sk-2026-11-12a';
 const SHELL = [
   '/krisper',
   '/manifest.webmanifest',

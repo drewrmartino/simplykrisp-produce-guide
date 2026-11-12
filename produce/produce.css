@@ -45,8 +45,7 @@ h1{font-size:clamp(28px,5vw,42px);line-height:1.1;max-width:22ch}
 .fails{margin-top:30px;display:grid;gap:16px}
 .fail{background:#fff;border:1px solid var(--card-border);border-radius:var(--radius);padding:20px 22px;scroll-margin-top:16px}
 .fail:target{border-color:var(--primary);box-shadow:0 0 0 3px hsl(96 14% 28% / .12)}
-.fhead{display:flex;gap:10px;align-items:baseline}
-.fhead h2{font-size:22px;line-height:1.25}
+.fail h2{font-size:22px;line-height:1.25}
 .num{display:inline-grid;place-items:center;flex:none;width:24px;height:24px;border-radius:50%;background:var(--primary);color:#fff;font:700 12px/1 var(--body);position:relative;top:-2px}
 .tags{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 14px}
 .cause,.verdict{font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;padding:4px 8px;border-radius:4px;border:1px solid rgba(0,0,0,.06)}
@@ -90,9 +89,6 @@ h1{font-size:clamp(28px,5vw,42px);line-height:1.1;max-width:22ch}
 .badge.b-done{background:var(--primary);color:#fff}
 .srcs{font-size:14px;color:var(--muted-fg)}
 .srcs li:target{color:var(--fg);font-weight:600}
-.olist{display:flex;flex-wrap:wrap;gap:8px}
-.olist a{display:inline-flex;align-items:center;gap:6px;font-size:14px;text-decoration:none;padding:6px 10px;border-radius:var(--radius);background:#fff;border:1px solid var(--border)}
-.olist a:hover{border-color:var(--primary)}
 
 /* hub */
 .igrid{margin-top:30px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
@@ -136,8 +132,12 @@ footer .fine{font-size:12.5px}
   .facts{grid-template-columns:1fr}
   .igrid{grid-template-columns:1fr}
   .fail{padding:16px}
-  .fhead h2{font-size:19px}
+  .fail h2{font-size:19px}
   .ttl img{width:44px;height:44px}
   .lookup-band .btn{width:100%;text-align:center}
 }
-@media print{header,footer,.lookup-band,.jump,.others{display:none}.fail{break-inside:avoid}}
+@media print{header,footer,.lookup-band,.jump,.sk-tools{display:none}.fail{break-inside:avoid}}
+details.fold summary{cursor:pointer;font-family:var(--sans);font-size:20px;color:var(--fg)}
+details.fold summary::marker{color:var(--muted-fg)}
+details.fold p{margin-top:10px;color:var(--muted-fg)}
+footer{margin-top:24px}

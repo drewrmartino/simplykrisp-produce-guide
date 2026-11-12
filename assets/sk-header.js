@@ -21,11 +21,11 @@
   var LOGO = 'https://simplykrisp.com/cdn/shop/files/v2_Simply_Krisp_Logo_-_Lime_and_Orange_Freshness_700_x_350_px_f00ce263-9da7-4e9d-9e09-55291aaf9e85.png?v=1774895710&width=380';
   var MENU = [
     ['Home', STORE + '/?' + UTM],
-    ['About Us', STORE + '/pages/about-us?' + UTM],
-    ['Produce Storage Guide', '/', 'guide'],
-    ["What's In Season", '/seasonal', 'seasonal'],
+    ['About', STORE + '/pages/about-us?' + UTM],
+    ['Storage Guide', '/', 'guide'],
+    ['In Season', '/seasonal', 'seasonal'],
     ['Lab Notebook', '/lab', 'lab'],
-    ['My Krisper (Beta)', '/krisper', 'krisper'],
+    ['My Krisper', '/krisper', 'krisper'],
     ['Shop', STORE + '/collections/all?' + UTM],
     ['FAQ', STORE + '/pages/faq?' + UTM],
     ['Contact', STORE + '/pages/contact?' + UTM]
