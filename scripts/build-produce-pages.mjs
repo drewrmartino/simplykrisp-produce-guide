@@ -1,4 +1,5 @@
-// Builds the "Why it goes bad" pages from data/spoilage.json.
+// Builds one page per fruit and vegetable (seasonal/produce.json), adding the
+// "why it goes bad" sections from data/spoilage.json where they exist.
 //
 //   npm run pages        (node scripts/build-produce-pages.mjs)
 //
@@ -12,7 +13,8 @@
 // Writes static HTML that must be committed (search engines need real pages,
 // not a client-rendered app):
 //   produce/index.html                    all items
-//   produce/<slug>/index.html             one page per item
+//   produce/<slug>/index.html             one page per item (all 56)
+//   index.html                            static A-Z list inside the app's #root
 //   produce/what-went-wrong/index.html    symptom lookup
 //   sitemap.xml, robots.txt
 //
@@ -88,6 +90,46 @@ const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '
 const utm = (content) => `utm_source=produce-guide&utm_medium=referral&utm_campaign=why-it-goes-bad&utm_content=${encodeURIComponent(content)}`;
 const where = { refrigerator: 'Fridge', counter: 'Counter', counter_then_fridge: 'Counter, then fridge once ripe', pantry: 'Cool, dark pantry' };
 const list = (a) => (a.length < 2 ? a.join('') : a.slice(0, -1).join(', ') + ' and ' + a[a.length - 1]);
+const whereLong = { refrigerator: 'in the fridge', counter: 'on the counter', counter_then_fridge: 'on the counter until ripe, then in the fridge', pantry: 'in a cool, dark pantry' };
+const cap = (t) => t.charAt(0).toUpperCase() + t.slice(1);
+const toC = (f) => Math.round(((f - 32) * 5) / 9);
+// Names used in avoidWith that map to a page.
+const AVOID_ALIAS = { Apples: 'Apple', Avocados: 'Avocado', Bananas: 'Banana', Broccoli: 'Broccoli', Cantaloupe: 'Cantaloupe', Carrots: 'Carrot', Cucumbers: 'Cucumber', Lettuce: 'Lettuce', Onions: 'Onion', Peaches: 'Peach', Pears: 'Pear', Peppers: 'Bell Pepper', Potatoes: 'Potato', Tomatoes: 'Tomato' };
+// Page slug and how the item reads in a sentence, for items without spoilage data.
+const NAMES = {
+  Apple: ['apple', 'apples'], Blueberry: ['blueberry', 'blueberries'], Cantaloupe: ['cantaloupe', 'cantaloupe'], Cherry: ['cherry', 'cherries'],
+  Grape: ['grape', 'grapes'], Kiwi: ['kiwi', 'kiwis'], Lemon: ['lemon', 'lemons'], Lime: ['lime', 'limes'], Mango: ['mango', 'mangoes'],
+  Orange: ['orange', 'oranges'], Peach: ['peach', 'peaches'], Pear: ['pear', 'pears'], Pineapple: ['pineapple', 'pineapple'], Plum: ['plum', 'plums'],
+  Watermelon: ['watermelon', 'watermelon'], Nectarine: ['nectarine', 'nectarines'], Papaya: ['papaya', 'papaya'], Pomegranate: ['pomegranate', 'pomegranates'],
+  Asparagus: ['asparagus', 'asparagus'], 'Brussels Sprouts': ['brussels-sprouts', 'Brussels sprouts'], Cabbage: ['cabbage', 'cabbage'],
+  Cauliflower: ['cauliflower', 'cauliflower'], Corn: ['corn', 'corn'], Eggplant: ['eggplant', 'eggplant'], Garlic: ['garlic', 'garlic'],
+  'Green Beans': ['green-beans', 'green beans'], Onion: ['onion', 'onions'], Peas: ['peas', 'peas'], Potato: ['potato', 'potatoes'],
+  'Sweet Potato': ['sweet-potato', 'sweet potatoes'], Zucchini: ['zucchini', 'zucchini'], Radish: ['radish', 'radishes'],
+  'Squash (Winter)': ['winter-squash', 'winter squash'], Grapefruit: ['grapefruit', 'grapefruit'], Apricot: ['apricot', 'apricots'],
+  Honeydew: ['honeydew', 'honeydew'], Blackberry: ['blackberry', 'blackberries'], 'Jalapeño': ['jalapeno', 'jalapeños'],
+  Cranberry: ['cranberry', 'cranberries'], Fig: ['fig', 'figs'], 'Green Onion': ['green-onion', 'green onions'],
+};
+const SINGULAR = new Set(['asparagus']);
+const isPlural = (display) => display.endsWith('s') && !SINGULAR.has(display);
+const navName = (n) => (n === 'Herbs (Fresh)' ? 'Fresh herbs' : n === 'Squash (Winter)' ? 'Winter squash' : n);
+// Written for a plural subject; agree() adjusts for singular items.
+const PRODUCES = {
+  very_low: 'give off almost no ethylene, so {they} {are} safe to store next to most other produce.',
+  low: 'give off only a little ethylene, so {they} {are} fine next to most other produce.',
+  medium: 'give off a moderate amount of ethylene as {they} ripen, enough to speed up sensitive produce in a closed drawer.',
+  high: 'give off a lot of ethylene as {they} ripen. Keep {them} away from greens, broccoli and other sensitive produce.',
+  very_high: 'are one of the biggest ethylene sources in the kitchen. Keep {them} apart from almost everything else.',
+};
+const SENSES = {
+  high: 'are very sensitive to ethylene. Even a little in a closed drawer speeds up how fast {they} age.',
+  medium: 'are somewhat sensitive to ethylene, so storing {them} away from ripening fruit helps.',
+  low: 'are barely affected by ethylene.',
+};
+function agree(text, plural) {
+  let t = text.replace(/\{they\}/g, plural ? 'they' : 'it').replace(/\{them\}/g, plural ? 'them' : 'it').replace(/\{are\}/g, plural ? 'are' : 'is');
+  if (!plural) t = t.replace(/^give off/, 'gives off').replace(/^are /, 'is ').replace(/ it ripen\b/g, ' it ripens').replace(/ it age\b/g, ' it ages');
+  return t;
+}
 
 function labRunsFor(item, runs) {
   const terms = [item.name, item.display, ...(item.labTerms || [])].map((t) => t.toLowerCase());
@@ -104,7 +146,7 @@ function head({ title, desc, pathname, jsonld = [], extra = '' }) {
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(desc)}" />
 <link rel="canonical" href="${url}" />
-<meta property="og:site_name" content="SimplyKrisp Produce Guide" />
+<meta property="og:site_name" content="Simply Krisp Produce Guide" />
 <meta property="og:type" content="article" />
 <meta property="og:title" content="${esc(title)}" />
 <meta property="og:description" content="${esc(desc)}" />
@@ -125,8 +167,8 @@ ${jsonld.map((j) => `<script type="application/ld+json">${JSON.stringify(j).repl
 <body>
 <script src="/assets/sk-header.js"></script>
 <header><div class="wrap hdr">
-  <a class="brand" href="/"><div><div class="name">SimplyKrisp</div><div class="sub">Produce Guide</div></div></a>
-  <nav><a href="/">Storage Guide</a><a href="/seasonal">In Season</a><a href="/produce">Why It Goes Bad</a><a href="/lab">Lab Notebook</a><a href="/krisper">My Krisper</a><a class="shop" href="https://simplykrisp.com/?${utm('header')}" target="_blank" rel="noopener">Shop</a></nav>
+  <a class="brand" href="/"><div><div class="name">Simply Krisp</div><div class="sub">Produce Guide</div></div></a>
+  <nav><a href="/">Storage Guide</a><a href="/seasonal">In Season</a><a href="/produce">Produce A–Z</a><a href="/lab">Lab Notebook</a><a href="/krisper">My Krisper</a><a class="shop" href="https://simplykrisp.com/?${utm('header')}" target="_blank" rel="noopener">Shop</a></nav>
 </div></header>
 `;
 }
@@ -134,7 +176,7 @@ ${jsonld.map((j) => `<script type="application/ld+json">${JSON.stringify(j).repl
 function foot(year) {
   return `<footer><div class="wrap">
   <p><strong>Food safety:</strong> These pages describe quality and common spoilage. They are not a substitute for your own judgment. If something smells wrong, is slimy, or is moldy on soft produce, throw it out. Mold guidance follows <a href="https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/molds-food-are-they-dangerous" target="_blank" rel="noopener">USDA FSIS</a>, and spoilage causes come mainly from the <a href="https://postharvest.ucdavis.edu/produce-facts-sheets" target="_blank" rel="noopener">UC Davis Postharvest Center</a>.</p>
-  <p class="fine">&copy; ${year} SimplyKrisp. 1% for the Planet member.</p>
+  <p class="fine">&copy; ${year} Simply Krisp. 1% for the Planet member.</p>
 </div></footer>
 </body>
 </html>
@@ -155,52 +197,118 @@ function crumbLd(trail) {
   };
 }
 
-// Same "More from SimplyKrisp" row as the other guide pages.
-const TOOLS = `<nav class="sk-tools" aria-label="SimplyKrisp tools"><style>.sk-tools{max-width:900px;margin:36px auto 0;padding:16px 20px;display:flex;flex-wrap:wrap;align-items:center;gap:8px 18px;font:14px/1.4 'DM Sans',system-ui,sans-serif;color:hsl(96 6% 38%);border-top:1px solid hsl(48 10% 87%)}.sk-tools a{color:hsl(96 14% 22%);text-decoration:none}.sk-tools a:hover{text-decoration:underline}.sk-tools a[aria-current]{font-weight:700}html.embedded .sk-tools{display:none}</style><span>More from SimplyKrisp:</span><a href="/">Storage Guide</a><a href="/seasonal">In Season</a><a href="/produce" aria-current="page">Why It Goes Bad</a><a href="/lab">Lab Notebook</a><a href="/krisper">My Krisper</a></nav>`;
+// Same "More from Simply Krisp" row as the other guide pages.
+const TOOLS = `<nav class="sk-tools" aria-label="Simply Krisp tools"><style>.sk-tools{max-width:900px;margin:36px auto 0;padding:16px 20px;display:flex;flex-wrap:wrap;align-items:center;gap:8px 18px;font:14px/1.4 'DM Sans',system-ui,sans-serif;color:hsl(96 6% 38%);border-top:1px solid hsl(48 10% 87%)}.sk-tools a{color:hsl(96 14% 22%);text-decoration:none}.sk-tools a:hover{text-decoration:underline}.sk-tools a[aria-current]{font-weight:700}html.embedded .sk-tools{display:none}</style><span>More from Simply Krisp:</span><a href="/">Storage Guide</a><a href="/seasonal">In Season</a><a href="/produce" aria-current="page">Produce A–Z</a><a href="/lab">Lab Notebook</a><a href="/krisper">My Krisper</a></nav>`;
 
 const verdictTag = (v, verdicts) => `<span class="verdict v-${v}">${esc(verdicts[v].label)}</span>`;
 const causeTag = (c, causes) => `<span class="cause">${esc(causes[c].label)}</span>`;
 
 // ---------- item page ----------
 
-function itemPage(item, ctx) {
-  const { spoilage, byName, runs } = ctx;
+/** One entry per item in seasonal/produce.json, joined with spoilage data where it exists. */
+function allItems(ctx) {
+  const sp = Object.fromEntries(ctx.spoilage.items.map((i) => [i.name, i]));
+  return ctx.produce.map((p) => {
+    const it = sp[p.name];
+    const [slug, display] = it ? [it.slug, it.display] : NAMES[p.name] || [p.name.toLowerCase().replace(/[^a-z0-9]+/g, '-'), p.name.toLowerCase()];
+    return { name: p.name, slug, display, plural: isPlural(display), p, sp: it || null };
+  });
+}
+
+/** Items that should not share a drawer with this one, in either direction. */
+function keepApart(e, ctx) {
+  const out = new Map();
+  for (const a of e.p.avoidWith || []) out.set(AVOID_ALIAS[a] || a, AVOID_ALIAS[a] || a);
+  for (const o of ctx.all) {
+    if (o.name === e.name) continue;
+    if ((o.p.avoidWith || []).some((a) => (AVOID_ALIAS[a] || a) === e.name)) out.set(o.name, o.name);
+  }
+  return [...out.keys()];
+}
+
+function itemLink(name, ctx) {
+  const o = ctx.bySlugName[name];
+  return o ? `<a href="/produce/${o.slug}">${esc(o.display)}</a>` : esc(name.toLowerCase());
+}
+
+// Strong ethylene producers would otherwise list half the guide.
+function apartText(apart, ctx) {
+  if (apart.length <= 8) return list(apart.map((n) => itemLink(n, ctx)));
+  return `most other produce, especially ${list(apart.slice(0, 6).map((n) => itemLink(n, ctx)))}`;
+}
+
+function itemPage(e, ctx) {
+  const { spoilage, runs } = ctx;
   const { causes, verdicts, sources } = spoilage;
-  const p = byName[item.name];
-  const scraps = SCRAPS[item.name];
-  const lab = labRunsFor(item, runs);
-  const pathname = `/produce/${item.slug}`;
-  const Title = item.display.charAt(0).toUpperCase() + item.display.slice(1);
-  const title = `Why ${item.display} go${item.display.endsWith('s') ? '' : 'es'} bad, and what to do | SimplyKrisp`;
-  const desc = `${item.failures.map((f) => f.title.toLowerCase()).slice(0, 3).join(', ')}: what causes it, whether it's still OK to eat, and how to prevent it next time.`;
-  const trail = [['Produce Guide', '/'], ['Why It Goes Bad', '/produce'], [Title, pathname]];
+  const { p, sp: item, display, plural } = e;
+  const scraps = SCRAPS[e.name];
+  const lab = labRunsFor(item || { name: e.name, display }, runs);
+  const pathname = `/produce/${e.slug}`;
+  const Title = cap(display);
+  const they = plural ? 'they' : 'it';
+  const them = plural ? 'them' : 'it';
+  const title = item
+    ? `How to store ${display}, and why ${they} go${plural ? '' : 'es'} bad | Simply Krisp`
+    : `How to store ${display}, and how long ${they} last${plural ? '' : 's'} | Simply Krisp`;
+  const desc = item
+    ? `Where to keep ${display}, how long ${they} last${plural ? '' : 's'}, and what causes ${item.failures.map((f) => f.title.toLowerCase()).slice(0, 2).join(' or ')}, with whether it's still OK to eat.`
+    : `Keep ${display} ${whereLong[p.storageLocation]}. ${cap(they)} last${plural ? '' : 's'} ${p.shelfLife.replace(/ \(.*\)$/, '')}. Storage tips, what to keep ${them} away from, and how to pick good ${display}.`;
+  const trail = [['Produce Guide', '/'], ['All produce', '/produce'], [navName(e.name), pathname]];
 
-  // Number sources in order of first use on the page.
-  const order = [];
-  for (const f of item.failures) for (const s of f.sources) if (!order.includes(s)) order.push(s);
-  const ref = (s) => `<a class="ref" href="#src-${s}" aria-label="Source ${order.indexOf(s) + 1}">${order.indexOf(s) + 1}</a>`;
+  const apart = keepApart(e, ctx);
+  const facts = `<dl class="facts">
+  <div><dt>Where to keep ${them}</dt><dd>${esc(where[p.storageLocation] || p.storageLocation)}</dd></div>
+  <div><dt>How long ${they} last${plural ? '' : 's'}</dt><dd>${esc(p.shelfLife)}</dd></div>
+  <div><dt>Best temperature</dt><dd>About ${p.optimalTempF}&deg;F (${toC(p.optimalTempF)}&deg;C)</dd></div>
+  <div><dt>Don't store next to</dt><dd>${apart.length ? cap(apartText(apart, ctx)).replace(/^<a href="([^"]+)">(.)/, (m, h, c) => `<a href="${h}">${c.toUpperCase()}`) : 'Nothing in particular'}</dd></div>
+</dl>`;
 
-  const faq = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: item.failures.map((f) => ({
-      '@type': 'Question',
-      name: `${Title}: ${f.title.toLowerCase()}. Is it still OK to eat?`,
-      acceptedAnswer: { '@type': 'Answer', text: `${f.verdictNote} Why it happens: ${f.why}` },
-    })),
-  };
+  const lede = item
+    ? item.intro
+    : `${Title} keep${plural ? '' : 's'} best ${whereLong[p.storageLocation]}, at about ${p.optimalTempF}°F, and last${plural ? '' : 's'} ${p.shelfLife.replace(/ \(.*\)$/, '')}. Here is how to store ${them}, what to keep ${them} away from, and how to pick good ${display}.`;
 
-  const chips = item.failures.map((f) => `<a class="chip" href="#${f.id}">${esc(f.title)}</a>`).join('');
+  // Krisp: only where the data says it helps, otherwise the honest reason it doesn't.
+  const anyKrisp = item ? item.failures.some((f) => f.krispHelps) : p.krispRecommended;
+  const krispNote = p.krispRecommended && p.krispBenefit
+    ? `<p class="aside"><strong>Does a Krisp help?</strong> ${esc(p.krispBenefit)}${item ? '' : ` <a href="${SHOP}?${utm(e.slug + '-storage')}" target="_blank" rel="noopener">See the Double Krisp</a>`}</p>`
+    : p.noBenefitReason ? `<p class="aside"><strong>Does a Krisp help?</strong> ${esc(p.noBenefitReason)}</p>` : '';
+  const storage = `<section class="sec" id="storage"><h2>How to store ${esc(display)}</h2>
+  <ul class="tips">${p.storageTips.map((t) => `<li>${esc(t)}</li>`).join('')}</ul>
+  ${p.ripeTip ? `<p><strong>Picking good ${esc(display)}:</strong> ${esc(p.ripeTip)}</p>` : ''}
+  ${item && anyKrisp ? '' : krispNote}</section>`;
 
-  const cards = item.failures.map((f) => {
-    const krisp = f.krispHelps && p.krispBenefit
-      ? `<div class="krisp"><span class="lbl">Where a Krisp fits</span><p>${esc(p.krispBenefit)} <a href="${SHOP}?${utm(item.slug + '-' + f.id)}" target="_blank" rel="noopener">See the Double Krisp</a></p></div>`
-      : '';
-    const rescue = f.rescue.length
-      ? `<div class="blk"><span class="lbl">Use it up</span><ul>${f.rescue.map((r) => `<li>${esc(r)}</li>`).join('')}</ul></div>`
-      : '';
-    return `<article class="fail" id="${f.id}">
-  <h2>${esc(f.title)}</h2>
+  const eth = `<section class="sec" id="ethylene"><h2>${Title} and ethylene</h2>
+  <p>Ethylene is a gas that ripening produce gives off. In a closed crisper drawer it builds up and makes sensitive produce yellow, soften or sprout sooner.</p>
+  <ul class="tips"><li>${esc(Title)} ${esc(agree(PRODUCES[p.ethyleneProduction] || PRODUCES.low, plural))}</li><li>${esc(Title)} ${esc(agree(SENSES[p.ethyleneSensitivity] || SENSES.low, plural))}</li></ul>
+  ${apart.length ? `<p>Keep ${them} apart from ${apartText(apart, ctx)}.</p>` : ''}</section>`;
+
+  let fails = '';
+  let chips = '';
+  let srcSec = '';
+  let faq = null;
+  if (item) {
+    const order = [];
+    for (const f of item.failures) for (const s of f.sources) if (!order.includes(s)) order.push(s);
+    const ref = (s) => `<a class="ref" href="#src-${s}" aria-label="Source ${order.indexOf(s) + 1}">${order.indexOf(s) + 1}</a>`;
+    faq = {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: item.failures.map((f) => ({
+        '@type': 'Question',
+        name: `${Title}: ${f.title.toLowerCase()}. Is it still OK to eat?`,
+        acceptedAnswer: { '@type': 'Answer', text: `${f.verdictNote} Why it happens: ${f.why}` },
+      })),
+    };
+    chips = `<div class="jump"><span class="lbl">What are you seeing?</span><div class="chips">${item.failures.map((f) => `<a class="chip" href="#${f.id}">${esc(f.title)}</a>`).join('')}</div></div>`;
+    const cards = item.failures.map((f) => {
+      const krisp = f.krispHelps && p.krispBenefit
+        ? `<div class="krisp"><span class="lbl">Where a Krisp fits</span><p>${esc(p.krispBenefit)} <a href="${SHOP}?${utm(e.slug + '-' + f.id)}" target="_blank" rel="noopener">See the Double Krisp</a></p></div>`
+        : '';
+      const rescue = f.rescue.length
+        ? `<div class="blk"><span class="lbl">Use it up</span><ul>${f.rescue.map((r) => `<li>${esc(r)}</li>`).join('')}</ul></div>`
+        : '';
+      return `<article class="fail" id="${f.id}">
+  <h3>${esc(f.title)}</h3>
   <div class="tags">${causeTag(f.cause, causes)}${verdictTag(f.verdict, verdicts)}</div>
   <p class="symptom"><span class="lbl">What you'll see</span>${esc(f.symptom)}</p>
   <div class="grid2">
@@ -213,58 +321,52 @@ function itemPage(item, ctx) {
   </div>
   ${krisp}
 </article>`;
-  }).join('\n');
-
-  const avoid = (p.avoidWith || []).filter(Boolean);
-  const facts = `<dl class="facts">
-  <div><dt>Where to keep it</dt><dd>${esc(where[p.storageLocation] || p.storageLocation)}</dd></div>
-  <div><dt>How long it lasts</dt><dd>${esc(p.shelfLife)}</dd></div>
-  <div><dt>Keep it away from</dt><dd>${avoid.length ? esc(list(avoid)) : 'Nothing in particular'}</dd></div>
-</dl>`;
-
-  const anyKrisp = item.failures.some((f) => f.krispHelps);
-  const noKrisp = !anyKrisp && (p.noBenefitReason || p.krispBenefit)
-    ? `<p class="aside"><strong>Does a Krisp help?</strong> ${esc(p.noBenefitReason || p.krispBenefit)}</p>`
-    : '';
-
-  const storage = `<section class="sec" id="storage"><h2>How to store ${esc(item.display)}</h2>
-  <ul class="tips">${p.storageTips.map((t) => `<li>${esc(t)}</li>`).join('')}</ul>${noKrisp}
-  <p class="more">Full storage details are in the <a href="/">Produce Storage Guide</a>.</p></section>`;
+    }).join('\n');
+    fails = `<section class="fails" id="why" aria-labelledby="why-h"><h2 id="why-h" class="fails-h">Why ${esc(display)} go${plural ? '' : 'es'} bad</h2>
+${cards}
+  </section>
+  <div class="lookup-band"><p>Not sure what you're looking at? Pick the produce and the symptom.</p><a class="btn" href="/produce/what-went-wrong?item=${e.slug}">What went wrong?</a></div>`;
+    srcSec = `<section class="sec" id="sources"><h2>Sources</h2><ol class="srcs">${order
+      .map((s) => `<li id="src-${s}"><a href="${esc(sources[s].url)}" target="_blank" rel="noopener">${esc(sources[s].title)}</a>, ${esc(sources[s].publisher)}</li>`)
+      .join('')}</ol></section>`;
+  }
 
   const scrapSec = scraps ? `<section class="sec" id="scraps"><h2>The part people throw away</h2>
-  <p>About ${scraps.pct}% of ${esc(item.display)} by weight is usually trimmed off as ${esc(scraps.part)} (USDA FoodData Central). Some of it can still be used:</p>
+  <p>About ${scraps.pct}% of ${esc(display)} by weight is usually trimmed off as ${esc(scraps.part)} (USDA FoodData Central). Some of it can still be used:</p>
   <ul class="tips">${scraps.ideas.map((t) => `<li>${esc(t)}</li>`).join('')}</ul></section>` : '';
 
   const labSec = lab.length ? `<section class="sec" id="lab"><h2>From the Lab Notebook</h2>
   ${lab.map((r) => `<a class="labrun" href="/lab#${esc(r.id)}"><span class="badge b-${r.status === 'complete' ? 'done' : r.status === 'in progress' ? 'live' : 'planned'}">${esc(r.status)}</span><b>${esc(r.title)}</b><span>${esc(r.result)}</span></a>`).join('')}
   <p class="more">Home tests in one refrigerator, published as they happen, including the ones that show no difference.</p></section>` : '';
 
-  const srcSec = `<section class="sec" id="sources"><h2>Sources</h2><ol class="srcs">${order
-    .map((s) => `<li id="src-${s}"><a href="${esc(sources[s].url)}" target="_blank" rel="noopener">${esc(sources[s].title)}</a>, ${esc(sources[s].publisher)}</li>`)
-    .join('')}</ol></section>`;
+  // Same shelf, same kind of produce: the next thing a reader is likely to look up.
+  const related = ctx.all
+    .filter((o) => o.name !== e.name && o.p.category === p.category && o.p.storageLocation === p.storageLocation)
+    .slice(0, 8);
+  const relSec = related.length ? `<section class="sec" id="related"><h2>Also stored ${esc(whereLong[p.storageLocation])}</h2>
+  <ul class="rel">${related.map((o) => `<li><a href="/produce/${o.slug}"><img src="${esc(o.p.imageUrl)}" alt="" width="24" height="24" loading="lazy" />${esc(navName(o.name))}</a></li>`).join('')}</ul>
+  <p class="more"><a href="/produce">All 56 fruits and vegetables</a></p></section>` : '';
 
-  return head({ title, desc, pathname, jsonld: [crumbLd(trail), faq] }) + `
+  const h1 = item ? `How to store ${esc(display)}, and why ${they} go${plural ? '' : 'es'} bad` : `How to store ${esc(display)}`;
+  return head({ title, desc, pathname, jsonld: [crumbLd(trail), ...(faq ? [faq] : [])] }) + `
 <main class="wrap">
   ${crumbs(trail)}
   <section class="hero">
     <div class="ttl"><img src="${esc(p.imageUrl)}" alt="" width="56" height="56" /><div>
-      <div class="eyebrow"><span class="dot"></span> Why it goes bad</div>
-      <h1>${esc(Title)}: what went wrong, and what to do</h1>
+      <div class="eyebrow"><span class="dot"></span> Produce guide</div>
+      <h1>${h1}</h1>
     </div></div>
-    <p class="lede">${esc(item.intro)}</p>
+    <p class="lede">${esc(lede)}</p>
     ${facts}
-    <div class="jump"><span class="lbl">What are you seeing?</span><div class="chips">${chips}</div></div>
+    ${chips}
   </section>
-
-  <section class="fails" aria-label="Ways ${esc(item.display)} go bad">
-${cards}
-  </section>
-
-  <div class="lookup-band"><p>Not sure what you're looking at? Pick the produce and the symptom.</p><a class="btn" href="/produce/what-went-wrong?item=${item.slug}">What went wrong?</a></div>
 
   ${storage}
+  ${fails}
+  ${eth}
   ${scrapSec}
   ${labSec}
+  ${relSec}
   ${srcSec}
 
 </main>
@@ -274,58 +376,66 @@ ${TOOLS}
 
 // ---------- index ----------
 
+const GROUPS = [['fruit', 'Fruit'], ['vegetable', 'Vegetables and herbs']];
+
 function indexPage(ctx) {
-  const { items, byName, spoilage } = ctx;
-  const trail = [['Produce Guide', '/'], ['Why It Goes Bad', '/produce']];
-  const title = 'Why produce goes bad, and what to do about it | SimplyKrisp';
-  const desc = 'Yellow broccoli, slimy spinach, black basil, moldy berries: what causes each one, whether it is still safe to eat, and how to stop it happening again.';
+  const { all, items, spoilage } = ctx;
+  const trail = [['Produce Guide', '/'], ['All produce', '/produce']];
+  const title = 'How to store fruits and vegetables, and why they go bad | Simply Krisp';
+  const desc = 'Where to keep 56 fruits and vegetables, how long each one lasts, what not to store together, and what slimy, yellow or moldy produce means.';
   const totalFails = items.reduce((n, i) => n + i.failures.length, 0);
   const causeCounts = {};
   for (const it of items) for (const f of it.failures) causeCounts[f.cause] = (causeCounts[f.cause] || 0) + 1;
   const topCauses = Object.entries(causeCounts).sort((a, b) => b[1] - a[1]);
 
-  const cards = items.map((it) => {
-    const p = byName[it.name];
-    const nm = it.name === 'Herbs (Fresh)' ? 'Fresh herbs' : it.name;
-    return `<article class="icard">
-  <a class="ihead" href="/produce/${it.slug}"><img src="${esc(p.imageUrl)}" alt="" width="36" height="36" loading="lazy" /><h2>${esc(nm)}</h2></a>
-  <ul>${it.failures.map((f) => `<li><a href="/produce/${it.slug}#${f.id}">${esc(f.title)}</a>${verdictTag(f.verdict, spoilage.verdicts)}</li>`).join('')}</ul>
-</article>`;
-  }).join('\n');
+  const card = (e) => `<li class="arow"><a href="/produce/${e.slug}"><img src="${esc(e.p.imageUrl)}" alt="" width="28" height="28" loading="lazy" /><b>${esc(navName(e.name))}</b><span>${esc(where[e.p.storageLocation])} &middot; ${esc(e.p.shelfLife.replace(/ \(.*\)$/, ''))}</span>${e.sp ? '<em>Spoilage guide</em>' : ''}</a></li>`;
+  const sorted = [...all].sort((a, b) => navName(a.name).localeCompare(navName(b.name)));
+  const groups = GROUPS.map(([k, label]) => `<section class="agroup" aria-labelledby="g-${k}"><h2 id="g-${k}">${label}</h2><ul class="alist">${sorted.filter((e) => e.p.category === k).map(card).join('')}</ul></section>`).join('\n');
 
   const causes = topCauses.map(([c, n]) => `<li><b>${esc(spoilage.causes[c].label)}</b><span>${esc(spoilage.causes[c].blurb)}</span><em>${n} of ${totalFails}</em></li>`).join('');
 
   const itemList = {
     '@context': 'https://schema.org', '@type': 'ItemList',
-    itemListElement: items.map((it, i) => ({ '@type': 'ListItem', position: i + 1, url: `${ORIGIN}/produce/${it.slug}`, name: it.name })),
+    itemListElement: sorted.map((e, i) => ({ '@type': 'ListItem', position: i + 1, url: `${ORIGIN}/produce/${e.slug}`, name: navName(e.name) })),
   };
 
   return head({ title, desc, pathname: '/produce', jsonld: [crumbLd(trail), itemList] }) + `
 <main class="wrap">
   ${crumbs(trail)}
   <section class="hero">
-    <div class="eyebrow"><span class="dot"></span> Why it goes bad</div>
-    <h1>Why produce goes bad, and what to do about it</h1>
-    <p class="lede">For when storage didn't work. Find what you're seeing, why it happened, and whether it's still good to eat. Usually it is.</p>
-    <div class="cta-row"><a class="btn" href="/produce/what-went-wrong">What went wrong? Pick a symptom</a><a class="btn ghost" href="/">Storage Guide</a></div>
+    <div class="eyebrow"><span class="dot"></span> Produce guide</div>
+    <h1>How to store fruits and vegetables, and why they go bad</h1>
+    <p class="lede">Pick a fruit or vegetable to see where to keep it, how long it lasts and what not to store it with. Items marked "Spoilage guide" also explain what went wrong when it goes slimy, yellow or moldy.</p>
+    <div class="cta-row"><a class="btn" href="/produce/what-went-wrong">What went wrong? Pick a symptom</a><a class="btn ghost" href="/">Interactive storage guide</a></div>
   </section>
 
-  <section class="igrid" aria-label="Produce">
-${cards}
-  </section>
+${groups}
 
-  <details class="sec fold"><summary>What usually causes it</summary><p>Across these ${items.length} items, ethylene is only part of the picture, which is why storage habits matter as much as any product.</p><ul class="causes">${causes}</ul></details>
+  <details class="sec fold"><summary>What usually causes it</summary><p>Across the ${items.length} spoilage guides, ethylene is only part of the picture, which is why storage habits matter as much as any product.</p><ul class="causes">${causes}</ul></details>
 </main>
 ${TOOLS}
 ` + foot(ctx.spoilage.meta.updated.slice(0, 4));
+}
+
+// ---------- guide home (static fallback inside the app's #root) ----------
+
+// The Storage Guide home is a client-rendered app, so crawlers that don't run
+// JavaScript would see an empty page. This list sits inside #root and is
+// replaced as soon as the app mounts.
+function rootIndex(ctx) {
+  const html = readFileSync(path.join(root, 'index.html'), 'utf8');
+  const sorted = [...ctx.all].sort((a, b) => navName(a.name).localeCompare(navName(b.name)));
+  const lists = GROUPS.map(([k, label]) => `<h2>${label}</h2><ul>${sorted.filter((e) => e.p.category === k).map((e) => `<li><a href="/produce/${e.slug}">How to store ${esc(e.display)}</a></li>`).join('')}</ul>`).join('');
+  const block = `<div id="root"><!--static--><main style="max-width:900px;margin:0 auto;padding:32px 20px;font-family:system-ui,sans-serif"><h1>Produce Storage Guide</h1><p>Where to keep ${ctx.all.length} fruits and vegetables, how long each one lasts, and what not to store together. <a href="/produce">See all produce</a> or <a href="/produce/what-went-wrong">find out what went wrong</a>.</p>${lists}</main><!--/static--></div>`;
+  return html.replace(/<div id="root">(?:<!--static-->[\s\S]*?<!--\/static-->)?<\/div>/, block);
 }
 
 // ---------- symptom lookup ----------
 
 function lookupPage(ctx) {
   const { items, byName, spoilage } = ctx;
-  const trail = [['Produce Guide', '/'], ['Why It Goes Bad', '/produce'], ['What went wrong?', '/produce/what-went-wrong']];
-  const title = 'What went wrong with my produce? Symptom checker | SimplyKrisp';
+  const trail = [['Produce Guide', '/'], ['All produce', '/produce'], ['What went wrong?', '/produce/what-went-wrong']];
+  const title = 'What went wrong with my produce? Symptom checker | Simply Krisp';
   const desc = 'Pick the fruit or vegetable and what you see. Get the cause, whether it is still OK to eat, and how to prevent it next time.';
   const data = {
     causes: Object.fromEntries(Object.entries(spoilage.causes).map(([k, v]) => [k, v.label])),
@@ -361,10 +471,10 @@ ${TOOLS}
 
 function sitemap(ctx) {
   const today = ctx.spoilage.meta.updated;
-  const urls = ['/', '/seasonal', '/lab', '/lab/crisper-map', '/produce', '/produce/what-went-wrong', ...ctx.items.map((i) => `/produce/${i.slug}`)];
+  const urls = ['/', '/seasonal', '/lab', '/lab/crisper-map', '/produce', '/produce/what-went-wrong', ...ctx.all.map((i) => `/produce/${i.slug}`)];
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${urls.map((u) => `  <url><loc>${ORIGIN}${u}</loc>${u.startsWith('/produce') ? `<lastmod>${today}</lastmod>` : ''}</url>`).join('\n')}
+${urls.map((u) => `  <url><loc>${ORIGIN}${u}</loc><lastmod>${today}</lastmod></url>`).join('\n')}
 </urlset>
 `;
 }
@@ -386,15 +496,18 @@ export function render(data = loadData()) {
   if (errs.length) throw new Error('data/spoilage.json is invalid:\n  ' + errs.join('\n  '));
   const byName = Object.fromEntries(data.produce.map((p) => [p.name, p]));
   const ctx = { ...data, byName, items: data.spoilage.items };
+  ctx.all = allItems(ctx);
+  ctx.bySlugName = Object.fromEntries(ctx.all.map((e) => [e.name, e]));
   const out = {
     'produce/index.html': indexPage(ctx),
     'produce/what-went-wrong/index.html': lookupPage(ctx),
     'sitemap.xml': sitemap(ctx),
     'robots.txt': ROBOTS,
     // Lets /seasonal link each card to its page without duplicating the list.
-    'produce/pages.json': JSON.stringify(Object.fromEntries(ctx.items.map((i) => [i.name, i.slug])), null, 2) + '\n',
+    'produce/pages.json': JSON.stringify(Object.fromEntries(ctx.all.map((i) => [i.name, i.slug])), null, 2) + '\n',
+    'index.html': rootIndex(ctx),
   };
-  for (const it of ctx.items) out[`produce/${it.slug}/index.html`] = itemPage(it, ctx);
+  for (const e of ctx.all) out[`produce/${e.slug}/index.html`] = itemPage(e, ctx);
   return out;
 }
 
@@ -402,7 +515,7 @@ function main() {
   const out = render();
   // Remove item folders that no longer exist in the data.
   const dir = path.join(root, 'produce');
-  const keep = new Set(Object.keys(out).map((k) => k.split('/')[1]));
+  const keep = new Set(Object.keys(out).filter((k) => k.startsWith('produce/')).map((k) => k.split('/')[1]));
   if (existsSync(dir)) for (const d of readdirSync(dir, { withFileTypes: true })) if (d.isDirectory() && !keep.has(d.name)) rmSync(path.join(dir, d.name), { recursive: true });
   for (const [rel, body] of Object.entries(out)) {
     const abs = path.join(root, rel);

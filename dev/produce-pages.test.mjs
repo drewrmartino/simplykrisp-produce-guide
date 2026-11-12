@@ -48,6 +48,25 @@ test('pages carry canonical URL, FAQ data and the food-safety note', () => {
   assert.match(out['sitemap.xml'], /\/produce\/what-went-wrong/);
 });
 
+test('every item in the storage guide gets its own page', () => {
+  const out = render();
+  const { produce } = loadData();
+  const pages = Object.keys(out).filter((k) => /^produce\/[^/]+\/index\.html$/.test(k) && !k.includes('what-went-wrong'));
+  assert.equal(pages.length, produce.length);
+  const urls = out['sitemap.xml'].match(/<loc>/g).length;
+  assert.equal(urls, produce.length + 6);
+  // Storage-only page: canonical, no spoilage FAQ, honest Krisp note.
+  const apple = out['produce/apple/index.html'];
+  assert.match(apple, /<link rel="canonical" href="https:\/\/guide\.simplykrisp\.com\/produce\/apple" \/>/);
+  assert.match(apple, /<h1>How to store apples<\/h1>/);
+  assert.doesNotMatch(apple, /FAQPage/);
+  assert.doesNotMatch(apple, /See the Double Krisp/);
+  // No broken grammar from the singular/plural templates.
+  for (const [k, html] of Object.entries(out)) assert.doesNotMatch(html, /it're|it are |they is /, k);
+  // The app home carries a crawlable list that the app replaces on mount.
+  assert.match(out['index.html'], /<div id="root"><!--static-->[\s\S]*href="\/produce\/zucchini"[\s\S]*<!--\/static--><\/div>/);
+});
+
 test('catch-all rewrite leaves the static pages alone', () => {
   const v = JSON.parse(readFileSync(path.join(root, 'vercel.json'), 'utf8'));
   const all = v.rewrites.find((r) => r.destination === '/index.html');
