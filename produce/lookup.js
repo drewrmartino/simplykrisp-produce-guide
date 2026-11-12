@@ -57,7 +57,7 @@
     if (!f) return;
     press(symsEl, id);
     ans.innerHTML = '<article class="fail">' +
-      '<span class="lbl">' + esc(cur.name) + '</span><div class="fhead"><h2>' + esc(f.t) + '</h2></div>' +
+      '<span class="lbl">' + esc(cur.name) + '</span><h2>' + esc(f.t) + '</h2>' +
       '<div class="tags"><span class="cause">' + esc(D.causes[f.c]) + '</span><span class="verdict v-' + f.v + '">' + esc(D.verdicts[f.v]) + '</span></div>' +
       '<div class="grid2"><div class="blk"><span class="lbl">Why it happens</span><p>' + esc(f.w) + '</p></div>' +
       '<div class="blk ok v-' + f.v + '"><span class="lbl">Is it still OK?</span><p>' + esc(f.n) + '</p></div></div>' +
