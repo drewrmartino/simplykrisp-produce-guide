@@ -60,7 +60,7 @@ test('confirmation is pending, then the final receipt replaces it', async () => 
   me = await api('/api/crisper/me', { key });
   assert.equal(me.data.pending.length, 0, 'pending items replaced');
   const names = me.data.items.map((i) => i.name).sort();
-  assert.deepEqual(names, ['Apple', 'Banana', 'Broccoli', 'Green Onion', 'Herbs (Fresh)', 'Lettuce', 'Spinach', 'Strawberry']);
+  assert.deepEqual(names, ['Apple', 'Banana', 'Broccoli', 'Cilantro', 'Green Onion', 'Lettuce', 'Spinach', 'Strawberry']);
   assert.ok(!names.includes('Blueberry'), 'refunded item not added');
   assert.equal(me.data.receipts.find((x) => x.kind === 'confirmation').status, 'superseded');
   assert.ok(me.data.inbox.firstEmailAt);
@@ -83,12 +83,15 @@ test('items are sorted soonest first with Krisp credit on fridge items', async (
   assert.match(broccoli.krispPrevents, /yellow/);
   const banana = me.data.items.find((i) => i.name === 'Banana');
   assert.equal(banana.krispBoost, null, 'counter items get no Krisp credit');
-  const herbs = me.data.items.find((i) => i.name === 'Herbs (Fresh)');
+  const herbs = me.data.items.find((i) => i.name === 'Cilantro');
   assert.equal(herbs.krispBoost, null, 'shelf items are out of the Krisp\'s reach');
   assert.match(herbs.krispNoBenefit, /jar on the shelf/);
   const berry = me.data.items.find((i) => i.name === 'Strawberry');
   assert.equal(berry.krispBoost, null, 'berries barely react to ethylene');
   assert.equal(berry.krispCould, null);
+  const scallion = me.data.items.find((i) => i.name === 'Green Onion');
+  assert.equal(scallion.krispBoost, null, 'green onions do not react to outside ethylene');
+  assert.match(scallion.krispNoBenefit, /don't react to ethylene/);
 });
 
 test('item actions: used, tossed, undo, ripening, manual add', async () => {

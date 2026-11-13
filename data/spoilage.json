@@ -328,6 +328,56 @@
       "title": "How to Grow Onions in Your Garden",
       "publisher": "Utah State University Extension",
       "url": "https://extension.usu.edu/yardandgarden/research/onions-in-the-garden"
+    },
+    "hb66": {
+      "title": "The Commercial Storage of Fruits, Vegetables, and Florist and Nursery Stocks (Agriculture Handbook 66)",
+      "publisher": "USDA Agricultural Research Service",
+      "url": "https://www.ars.usda.gov/arsuserfiles/oc/np/commercialstorage/commercialstorage.pdf"
+    },
+    "foodkeeper": {
+      "title": "FoodKeeper App",
+      "publisher": "USDA Food Safety and Inspection Service",
+      "url": "https://www.foodsafety.gov/keep-food-safe/foodkeeper-app"
+    },
+    "ucd-mandarin": {
+      "title": "Mandarin/Tangerine: Produce Facts",
+      "publisher": "UC Davis Postharvest Research and Extension Center",
+      "url": "https://postharvest.ucdavis.edu/produce-facts-sheets/mandarin"
+    },
+    "ucd-persimmon": {
+      "title": "Persimmon: Produce Facts",
+      "publisher": "UC Davis Postharvest Research and Extension Center",
+      "url": "https://postharvest.ucdavis.edu/produce-facts-sheets/persimmon"
+    },
+    "ucd-plantain": {
+      "title": "Plantain: Produce Facts",
+      "publisher": "UC Davis Postharvest Research and Extension Center",
+      "url": "https://postharvest.ucdavis.edu/produce-facts-sheets/plantain"
+    },
+    "ucd-artichoke": {
+      "title": "Artichoke (Globe): Produce Facts",
+      "publisher": "UC Davis Postharvest Research and Extension Center",
+      "url": "https://postharvest.ucdavis.edu/produce-facts-sheets/artichoke-globe"
+    },
+    "ucd-bokchoy": {
+      "title": "Bok Choy: Produce Facts",
+      "publisher": "UC Davis Postharvest Research and Extension Center",
+      "url": "https://postharvest.ucdavis.edu/produce-facts-sheets/bok-choy"
+    },
+    "ucd-okra": {
+      "title": "Okra: Produce Facts",
+      "publisher": "UC Davis Postharvest Research and Extension Center",
+      "url": "https://postharvest.ucdavis.edu/produce-facts-sheets/okra"
+    },
+    "ucd-tomatillo": {
+      "title": "Tomatillo (Husk Tomato): Produce Facts",
+      "publisher": "UC Davis Postharvest Research and Extension Center",
+      "url": "https://postharvest.ucdavis.edu/produce-facts-sheets/tomatillo-husk-tomato"
+    },
+    "ucanr-persimmon": {
+      "title": "Persimmons: California's Autumn Jewel",
+      "publisher": "UC Agriculture and Natural Resources",
+      "url": "https://ucanr.edu/blog/stanislaus-sprout/article/persimmons-californias-autumn-jewel"
     }
   },
   "causes": {
@@ -845,7 +895,7 @@
           "verdict": "eat",
           "verdictNote": "Still good. The color is cosmetic.",
           "rescue": [],
-          "krispHelps": true,
+          "krispHelps": false,
           "sources": [
             "ucd-celery"
           ]
@@ -3887,7 +3937,7 @@
         },
         {
           "id": "soft-spot",
-          "title": "Soft or moldy spot on the rind",
+          "title": "Soft or moldy spots on the rind",
           "cause": "mold",
           "symptom": "A soft, sunken or discolored patch on the rind, sometimes with fuzz.",
           "why": "Several fungi cause storage rot in winter squash. Squash with a damaged rind or cold damage gets it first.",
@@ -4489,6 +4539,1568 @@
           "sources": [
             "ucd-green-onion",
             "fda-produce"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Mandarin",
+      "slug": "mandarin",
+      "display": "mandarins",
+      "intro": "Mandarins keep a week or two in the fridge. Mold is the usual ending, and one bad fruit in the bag spreads it to the rest.",
+      "failures": [
+        {
+          "id": "mold",
+          "title": "Green or blue mold",
+          "cause": "mold",
+          "symptom": "A soft, wet patch turns white, then powdery green or blue.",
+          "why": "Green mold and blue mold are the main decay of mandarins after harvest. The spores spread from fruit to fruit and get in through small breaks in the thin peel.",
+          "prevent": [
+            "Take mandarins out of the bag and check them when you get home",
+            "Refrigerate them. Cold slows mold down",
+            "Remove a moldy fruit right away"
+          ],
+          "verdict": "toss",
+          "verdictNote": "Toss a moldy mandarin. It is a soft fruit, so mold reaches past what you can see. Firm, clean neighbors are fine after a rinse.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "ucd-mandarin",
+            "fsis-mold"
+          ]
+        },
+        {
+          "id": "dry",
+          "title": "Dry, shriveled fruit",
+          "cause": "moisture_loss",
+          "symptom": "The peel turns leathery and loose, and the segments inside are dry.",
+          "why": "Mandarins have a thin peel and lose water quickly in dry air. Commercial storage holds them at 90 to 95 percent humidity, far above a fruit bowl or an open fridge shelf.",
+          "prevent": [
+            "Keep them in the crisper drawer, not a bowl, if they will sit more than a few days",
+            "Eat the oldest ones first"
+          ],
+          "verdict": "eat",
+          "verdictNote": "Safe to eat if it smells fine and has no mold. It will be less juicy.",
+          "rescue": [
+            "Juice them",
+            "Zest the peel before it dries out completely"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "hb66"
+          ]
+        },
+        {
+          "id": "pitting",
+          "title": "Pits or brown patches on the peel",
+          "cause": "chilling",
+          "symptom": "Small sunken pits or brown areas show up on the peel after long cold storage.",
+          "why": "UC Davis lists pitting and brown discoloration as chilling injury in mandarins held below 41°F, getting worse the longer and colder they are kept, and followed by more decay. A week or two in a home fridge rarely causes it.",
+          "prevent": [
+            "Eat refrigerated mandarins within about two weeks",
+            "Keep them out of the coldest spot at the back of the fridge"
+          ],
+          "verdict": "trim",
+          "verdictNote": "Peel it. If the fruit inside looks and smells normal, it is fine. Toss it if it is soft, moldy or smells off.",
+          "rescue": [
+            "Eat them soon, or juice them"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-mandarin"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Cilantro",
+      "slug": "cilantro",
+      "display": "cilantro",
+      "intro": "Cilantro lasts a week or so. Wet leaves turn to slime first, and the rest yellows and loses its flavor.",
+      "failures": [
+        {
+          "id": "slimy",
+          "title": "Slimy, dark leaves",
+          "cause": "excess_moisture",
+          "symptom": "Leaves turn dark green, wet and slimy inside the bag.",
+          "why": "Tender herbs rot quickly when wet leaves are trapped in a sealed bag. UC Davis describes bacterial soft rot as a slimy breakdown of the leaves.",
+          "prevent": [
+            "Do not wash cilantro until you use it",
+            "Keep the leaves dry. Only the stems should touch water"
+          ],
+          "verdict": "toss",
+          "verdictNote": "Pick out and toss the slimy sprigs. If the whole bunch smells off, toss it.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "ucd-herbs"
+          ]
+        },
+        {
+          "id": "yellow",
+          "title": "Yellow leaves and faded flavor",
+          "cause": "age",
+          "symptom": "Leaves turn yellow and the bunch stops smelling like cilantro.",
+          "why": "Cilantro yellows as it ages, faster when it is warm. UC Davis notes its aroma drops off after about 10 days, even when the bunch still looks good enough to sell.",
+          "prevent": [
+            "Keep it cold, in a jar of water with a loose bag over the top",
+            "Buy it close to when you plan to use it"
+          ],
+          "verdict": "trim",
+          "verdictNote": "Safe to eat. Pick off the yellow leaves, which have little flavor, and use the rest soon.",
+          "rescue": [
+            "Blend it into salsa verde or chimichurri",
+            "Freeze chopped cilantro in oil in an ice-cube tray"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-herbs"
+          ]
+        },
+        {
+          "id": "wilted",
+          "title": "Wilted, droopy sprigs",
+          "cause": "moisture_loss",
+          "symptom": "Stems and leaves flop but are still green.",
+          "why": "Herbs lose water quickly because they are sold in small, loose bunches. UC Davis calls water loss a serious cause of quality loss in fresh herbs.",
+          "prevent": [
+            "Stand the stems in water",
+            "Cover the bunch loosely so the leaves do not dry out"
+          ],
+          "verdict": "eat",
+          "verdictNote": "Still good. Trim the stems and stand them in cold water for 30 minutes.",
+          "rescue": [
+            "Stir it into soup or rice at the end of cooking"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-herbs"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Parsley",
+      "slug": "parsley",
+      "display": "parsley",
+      "intro": "Parsley is one of the longer-lasting herbs, a week or two. It yellows around ethylene and wilts when it dries out.",
+      "failures": [
+        {
+          "id": "yellow",
+          "title": "Leaves turning yellow",
+          "cause": "ethylene",
+          "symptom": "Leaves fade from deep green to yellow.",
+          "why": "Parsley gives off almost no ethylene but is very sensitive to it. USDA's storage handbook reports that as little as 0.4 parts per million speeds up yellowing once parsley is warmer than 32°F.",
+          "prevent": [
+            "Keep the jar on a different shelf from apples, pears and tomatoes",
+            "Keep it cold"
+          ],
+          "verdict": "trim",
+          "verdictNote": "Safe to eat. Pick off the yellow leaves and use the rest soon.",
+          "rescue": [
+            "Blend it into chimichurri or pesto",
+            "Add the stems to stock"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "hb66",
+            "ucd-herbs"
+          ]
+        },
+        {
+          "id": "wilted",
+          "title": "Wilted, limp sprigs",
+          "cause": "moisture_loss",
+          "symptom": "Stems and leaves droop but are still green.",
+          "why": "USDA's storage handbook marks the end of parsley's storage life as the point where it wilts, after losing about a fifth of its weight in water.",
+          "prevent": [
+            "Stand the stems in water and cover the bunch loosely",
+            "Or wrap it in a barely damp paper towel inside a bag"
+          ],
+          "verdict": "eat",
+          "verdictNote": "Still good. Trim the stems and stand them in cold water for 30 minutes.",
+          "rescue": [
+            "Chop and freeze it for cooking"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "hb66"
+          ]
+        },
+        {
+          "id": "slimy",
+          "title": "Slimy or moldy leaves",
+          "cause": "bacterial_rot",
+          "symptom": "Leaves turn dark and slimy, or grow gray fuzz.",
+          "why": "Soft-rot bacteria and gray mold both attack stored parsley. Wet leaves in a closed bag give them what they need.",
+          "prevent": [
+            "Do not wash parsley until you use it",
+            "Change the water in the jar every couple of days"
+          ],
+          "verdict": "toss",
+          "verdictNote": "Pick out and toss the slimy or moldy sprigs. If the whole bunch smells off, toss it.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "hb66",
+            "ucd-herbs"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Basil",
+      "slug": "basil",
+      "display": "basil",
+      "intro": "Basil is the one common herb that hates the fridge. Cold turns it black, and on the counter it wilts within a week.",
+      "failures": [
+        {
+          "id": "black",
+          "title": "Leaves turning black",
+          "cause": "chilling",
+          "symptom": "Leaves get dark brown or black patches, often within a day or two of going in the fridge.",
+          "why": "Basil is damaged by cold, and UC Davis says to keep it above 50°F. Research has found basil leaves blacken in as little as one day at 32°F, or three days at 41°F.",
+          "prevent": [
+            "Keep basil on the counter, stems in a glass of water, out of direct sun"
+          ],
+          "verdict": "trim",
+          "verdictNote": "Cold damage isn't a safety problem, but black leaves won't recover. Pick them off and use the rest today.",
+          "rescue": [
+            "Blend the good leaves into pesto and freeze it in an ice-cube tray"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-herbs",
+            "basil-review"
+          ]
+        },
+        {
+          "id": "wilted",
+          "title": "Wilted, droopy leaves",
+          "cause": "moisture_loss",
+          "symptom": "Leaves hang limp but are still green.",
+          "why": "Basil has large, thin leaves that lose water fast. UC Davis says how long it lasts depends mostly on water loss.",
+          "prevent": [
+            "Stand the stems in water like cut flowers",
+            "Keep it out of direct sun and away from the stove"
+          ],
+          "verdict": "eat",
+          "verdictNote": "Still good. Trim the stems and put them in fresh water. It often perks up within an hour.",
+          "rescue": [
+            "Make pesto",
+            "Tear it into tomato sauce at the end of cooking"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-herbs"
+          ]
+        },
+        {
+          "id": "mold",
+          "title": "Gray fuzz or slimy leaves",
+          "cause": "mold",
+          "symptom": "Leaves turn dark and slimy, or grow gray fuzzy mold.",
+          "why": "UC Davis notes that gray mold is common on basil, and damaged or wet leaves are where it starts.",
+          "prevent": [
+            "Keep the leaves dry. Only the stems should touch water",
+            "Change the water every day or two"
+          ],
+          "verdict": "toss",
+          "verdictNote": "Pick out and toss the moldy or slimy stems. If the whole bunch smells off, toss it.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "ucd-herbs",
+            "fsis-mold"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Bagged Salad",
+      "slug": "bagged-salad",
+      "display": "bagged salad",
+      "intro": "Bagged salad is already cut and washed, so it runs on its use-by date. Once the bag is open you have about two days.",
+      "failures": [
+        {
+          "id": "slimy",
+          "title": "Wet, slimy leaves",
+          "cause": "bacterial_rot",
+          "symptom": "Leaves turn dark, wet and slimy, and the bag smells sour.",
+          "why": "Cut leaves leak moisture and break down faster than a whole head. USDA's FoodKeeper gives bagged greens 3 to 5 days past the date on the bag unopened, and about 2 days once it is open.",
+          "prevent": [
+            "Keep the bag cold and sealed until you need it",
+            "Tuck a dry paper towel into an opened bag or tub",
+            "Buy the bag with the latest date"
+          ],
+          "verdict": "toss",
+          "verdictNote": "Toss the bag if the leaves are slimy or it smells sour. Picking out the bad pieces is not enough once slime has spread through the bag.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "foodkeeper",
+            "fda-produce"
+          ]
+        },
+        {
+          "id": "brown-edges",
+          "title": "Brown or pink cut edges",
+          "cause": "age",
+          "symptom": "The cut edges of the lettuce turn brown or pink.",
+          "why": "Lettuce browns where it was cut. Salad bags are packed with very little oxygen to slow this down, and it speeds up once the bag is opened.",
+          "prevent": [
+            "Use an opened bag within about 2 days",
+            "Press the air out and reseal the bag between uses"
+          ],
+          "verdict": "eat",
+          "verdictNote": "Browning on cut edges is a quality problem, not a safety one. Eat it soon if the leaves are still crisp and smell fresh.",
+          "rescue": [
+            "Sauté mixed greens into eggs or pasta"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "hb66"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Bok Choy",
+      "slug": "bok-choy",
+      "display": "bok choy",
+      "intro": "Bok choy keeps about a week. The leaves yellow and wilt first, and rot starts at the base of the stalks.",
+      "failures": [
+        {
+          "id": "yellow",
+          "title": "Leaves turning yellow",
+          "cause": "ethylene",
+          "symptom": "The dark green leaves fade to yellow.",
+          "why": "UC Davis calls leaf yellowing the main quality problem in stored bok choy. Warm temperatures speed it up, and exposure to 5 parts per million of ethylene accelerates it.",
+          "prevent": [
+            "Keep bok choy away from apples, pears and bananas",
+            "Keep it cold. It ages much faster when it is warm"
+          ],
+          "verdict": "trim",
+          "verdictNote": "Safe to eat. Trim off the yellow leaves and cook the rest soon.",
+          "rescue": [
+            "Stir-fry it",
+            "Add it to soup or noodles"
+          ],
+          "krispHelps": true,
+          "sources": [
+            "ucd-bokchoy"
+          ]
+        },
+        {
+          "id": "wilted",
+          "title": "Limp, wilted leaves",
+          "cause": "moisture_loss",
+          "symptom": "Leaves droop and feel soft instead of crisp.",
+          "why": "Bok choy leaves lose water quickly once they are out of the cold or left uncovered. Commercial storage keeps them at 95 percent humidity or higher, far above open fridge air.",
+          "prevent": [
+            "Keep it in a bag in the crisper drawer",
+            "Get it into the fridge soon after you buy it"
+          ],
+          "verdict": "eat",
+          "verdictNote": "Still good if there is no slime or bad smell. Stand the stalks in cold water for 15 minutes to firm them back up, or just cook it.",
+          "rescue": [
+            "Sauté it with garlic",
+            "Add it to soup"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-bokchoy"
+          ]
+        },
+        {
+          "id": "slimy",
+          "title": "Slimy, soft base",
+          "cause": "bacterial_rot",
+          "symptom": "The base of the stalks turns soft, wet and dark, and smells bad.",
+          "why": "UC Davis describes bacterial soft rot in bok choy as starting at the base of the leaves, with soft, water-soaked tissue and a foul smell. Cuts and bruises let it in.",
+          "prevent": [
+            "Store it dry. Do not wash it until you cook it",
+            "Do not crush it under heavier produce"
+          ],
+          "verdict": "toss",
+          "verdictNote": "Toss bok choy that is slimy or smells bad. If only one outer stalk is affected, pull it off and use the firm, clean stalks after a good rinse.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "ucd-bokchoy"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Collard Greens",
+      "slug": "collard-greens",
+      "display": "collard greens",
+      "intro": "Collards are tough leaves, but they still yellow around ethylene and wilt when they dry out. They keep about a week.",
+      "failures": [
+        {
+          "id": "yellow",
+          "title": "Leaves turning yellow",
+          "cause": "ethylene",
+          "symptom": "Leaves lose their dark green color and turn yellow.",
+          "why": "USDA's storage handbook says all leafy cooking greens are sensitive to ethylene. Yellowing is the sign, and warm storage speeds it up.",
+          "prevent": [
+            "Keep collards away from apples, pears and bananas",
+            "Keep them cold, in a bag"
+          ],
+          "verdict": "cook",
+          "verdictNote": "Safe to eat. Yellow leaves are more bitter, so trim the worst and cook the rest.",
+          "rescue": [
+            "Simmer them low and slow",
+            "Blanch and freeze them"
+          ],
+          "krispHelps": true,
+          "sources": [
+            "hb66"
+          ]
+        },
+        {
+          "id": "wilted",
+          "title": "Limp, wilted leaves",
+          "cause": "moisture_loss",
+          "symptom": "Leaves droop and feel soft instead of crisp.",
+          "why": "Collard greens lose water quickly once they are out of the cold or left uncovered. Commercial storage keeps them at 95 percent humidity or higher, far above open fridge air.",
+          "prevent": [
+            "Keep them in a bag in the crisper drawer",
+            "Get them into the fridge soon after you buy them"
+          ],
+          "verdict": "eat",
+          "verdictNote": "Still good if there is no slime or bad smell. Soak the leaves in cold water for 15 minutes to firm them back up, or just cook them.",
+          "rescue": [
+            "Sauté them with garlic",
+            "Add them to soup"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "hb66"
+          ]
+        },
+        {
+          "id": "slimy",
+          "title": "Slimy, dark leaves",
+          "cause": "bacterial_rot",
+          "symptom": "Leaves turn dark, wet and slimy, and smell bad.",
+          "why": "USDA's storage handbook names bacterial soft rot as the most common decay in leafy greens. It starts where leaves are bruised, wet or packed tight.",
+          "prevent": [
+            "Store them dry. Do not wash them until you use them",
+            "Pick out damaged leaves before they spoil the rest"
+          ],
+          "verdict": "toss",
+          "verdictNote": "Toss slimy or bad-smelling leaves. If only a few are affected, the crisp, clean ones are fine after a good rinse.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "hb66"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Swiss Chard",
+      "slug": "swiss-chard",
+      "display": "Swiss chard",
+      "intro": "Chard is more tender than kale or collards and keeps only a few days. It yellows around ethylene and wilts quickly.",
+      "failures": [
+        {
+          "id": "yellow",
+          "title": "Yellow or brown leaf edges",
+          "cause": "ethylene",
+          "symptom": "The edges of the leaves turn yellow, then brown.",
+          "why": "USDA's storage handbook lists yellowing and browning of the leaf edges from ethylene exposure as a main storage problem for Swiss chard.",
+          "prevent": [
+            "Keep chard away from apples, pears and bananas",
+            "Keep it cold, in a bag"
+          ],
+          "verdict": "trim",
+          "verdictNote": "Safe to eat. Trim off the yellow or brown edges and cook the rest soon.",
+          "rescue": [
+            "Sauté the leaves and stems with garlic",
+            "Add it to soup or beans"
+          ],
+          "krispHelps": true,
+          "sources": [
+            "hb66"
+          ]
+        },
+        {
+          "id": "wilted",
+          "title": "Limp, wilted leaves",
+          "cause": "moisture_loss",
+          "symptom": "Leaves droop and feel soft instead of crisp.",
+          "why": "Chard leaves lose water quickly once they are out of the cold or left uncovered. Commercial storage keeps them at 95 percent humidity or higher, far above open fridge air.",
+          "prevent": [
+            "Keep it in a bag in the crisper drawer",
+            "Get it into the fridge soon after you buy it"
+          ],
+          "verdict": "eat",
+          "verdictNote": "Still good if there is no slime or bad smell. Soak the leaves in cold water for 15 minutes to firm them back up, or just cook them.",
+          "rescue": [
+            "Sauté it with garlic",
+            "Add it to soup"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "hb66"
+          ]
+        },
+        {
+          "id": "slimy",
+          "title": "Slimy, dark leaves",
+          "cause": "bacterial_rot",
+          "symptom": "Leaves turn dark, wet and slimy, and smell bad.",
+          "why": "USDA's storage handbook names bacterial soft rot as the most common decay in leafy greens. It starts where leaves are bruised, wet or packed tight.",
+          "prevent": [
+            "Store it dry. Do not wash it until you use it",
+            "Pick out damaged leaves before they spoil the rest"
+          ],
+          "verdict": "toss",
+          "verdictNote": "Toss slimy or bad-smelling leaves. If only a few are affected, the crisp, clean ones are fine after a good rinse.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "hb66"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Arugula",
+      "slug": "arugula",
+      "display": "arugula",
+      "intro": "Arugula is one of the shortest-lived greens, a few days at home. It yellows, and damp leaves turn slimy.",
+      "failures": [
+        {
+          "id": "yellow",
+          "title": "Leaves turning yellow",
+          "cause": "ethylene",
+          "symptom": "Leaves fade from green to yellow.",
+          "why": "USDA's storage handbook says salad greens like arugula give off very little ethylene but are highly sensitive to it, and the result is yellow leaves. Even stored well, arugula lasts 7 to 10 days from harvest.",
+          "prevent": [
+            "Keep arugula away from apples, pears and bananas",
+            "Keep it cold and use it within a few days"
+          ],
+          "verdict": "trim",
+          "verdictNote": "Safe to eat. Pick out the yellow leaves and use the rest soon.",
+          "rescue": [
+            "Wilt it into pasta or onto pizza",
+            "Blend it into pesto"
+          ],
+          "krispHelps": true,
+          "sources": [
+            "hb66"
+          ]
+        },
+        {
+          "id": "slimy",
+          "title": "Slimy, dark leaves",
+          "cause": "excess_moisture",
+          "symptom": "Leaves turn dark, wet and slimy, usually at the bottom of the container.",
+          "why": "Small, tender leaves break down fast when moisture collects in a closed container. USDA's storage handbook names bacterial soft rot as the most common decay in leafy greens.",
+          "prevent": [
+            "Keep a dry paper towel in the container and change it when it gets damp",
+            "Do not wash arugula until you use it"
+          ],
+          "verdict": "toss",
+          "verdictNote": "Toss slimy or bad-smelling leaves. If only a few are affected, the dry, clean ones are fine after a good rinse.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "hb66"
+          ]
+        },
+        {
+          "id": "wilted",
+          "title": "Limp, wilted leaves",
+          "cause": "moisture_loss",
+          "symptom": "Leaves droop and feel soft instead of crisp.",
+          "why": "Arugula leaves lose water quickly once they are out of the cold or left uncovered. Commercial storage keeps them at 95 percent humidity or higher, far above open fridge air.",
+          "prevent": [
+            "Keep it in a bag in the crisper drawer",
+            "Get it into the fridge soon after you buy it"
+          ],
+          "verdict": "eat",
+          "verdictNote": "Still good if there is no slime or bad smell. Soak the leaves in cold water for 10 minutes to firm them back up.",
+          "rescue": [
+            "Sauté it with garlic",
+            "Add it to soup"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "hb66"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Mustard Greens",
+      "slug": "mustard-greens",
+      "display": "mustard greens",
+      "intro": "Mustard greens are thin and tender, so they keep only a few days. They yellow around ethylene and wilt fast.",
+      "failures": [
+        {
+          "id": "yellow",
+          "title": "Leaves turning yellow",
+          "cause": "ethylene",
+          "symptom": "Leaves lose their bright green color and turn yellow.",
+          "why": "USDA's storage handbook says all leafy cooking greens are sensitive to ethylene. Yellowing is the sign, and warm storage speeds it up.",
+          "prevent": [
+            "Keep mustard greens away from apples, pears and bananas",
+            "Keep them cold, in a bag"
+          ],
+          "verdict": "cook",
+          "verdictNote": "Safe to eat. Trim the worst leaves and cook the rest soon.",
+          "rescue": [
+            "Braise them with onion and a splash of vinegar",
+            "Blanch and freeze them"
+          ],
+          "krispHelps": true,
+          "sources": [
+            "hb66"
+          ]
+        },
+        {
+          "id": "wilted",
+          "title": "Limp, wilted leaves",
+          "cause": "moisture_loss",
+          "symptom": "Leaves droop and feel soft instead of crisp.",
+          "why": "Mustard greens lose water quickly once they are out of the cold or left uncovered. Commercial storage keeps them at 95 percent humidity or higher, far above open fridge air.",
+          "prevent": [
+            "Keep them in a bag in the crisper drawer",
+            "Get them into the fridge soon after you buy them"
+          ],
+          "verdict": "eat",
+          "verdictNote": "Still good if there is no slime or bad smell. Soak the leaves in cold water for 15 minutes to firm them back up, or just cook them.",
+          "rescue": [
+            "Sauté them with garlic",
+            "Add them to soup"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "hb66"
+          ]
+        },
+        {
+          "id": "slimy",
+          "title": "Slimy, dark leaves",
+          "cause": "bacterial_rot",
+          "symptom": "Leaves turn dark, wet and slimy, and smell bad.",
+          "why": "USDA's storage handbook names bacterial soft rot as the most common decay in leafy greens. It starts where leaves are bruised, wet or packed tight.",
+          "prevent": [
+            "Store them dry. Do not wash them until you use them",
+            "Pick out damaged leaves before they spoil the rest"
+          ],
+          "verdict": "toss",
+          "verdictNote": "Toss slimy or bad-smelling leaves. If only a few are affected, the crisp, clean ones are fine after a good rinse.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "hb66"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Beet",
+      "slug": "beet",
+      "display": "beets",
+      "intro": "Beet roots keep for weeks once the greens are off. They go soft as they dry out, and the greens fade within days.",
+      "failures": [
+        {
+          "id": "soft",
+          "title": "Soft, rubbery beets",
+          "cause": "moisture_loss",
+          "symptom": "The roots feel soft or wrinkled instead of hard.",
+          "why": "Beets go soft as they lose water, and greens left on keep pulling moisture out of the root. Commercial storage holds them at 98 percent humidity or higher.",
+          "prevent": [
+            "Cut the greens off an inch above the root",
+            "Keep the roots in a bag in the crisper drawer"
+          ],
+          "verdict": "eat",
+          "verdictNote": "Still good if there are no moldy or slimy spots and they smell fresh.",
+          "rescue": [
+            "Roast them",
+            "Grate them into slaw or borscht"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "hb66"
+          ]
+        },
+        {
+          "id": "wilted-greens",
+          "title": "Yellow, wilted greens",
+          "cause": "age",
+          "symptom": "The leafy tops turn limp and yellow while the roots are still firm.",
+          "why": "The tops age much faster than the roots. Storage tables give bunched beets with tops 10 to 14 days, against months for topped roots.",
+          "prevent": [
+            "Cut the greens off when you get home and store them separately",
+            "Use the greens within 2 to 3 days"
+          ],
+          "verdict": "trim",
+          "verdictNote": "Cut off and discard yellow or slimy tops. The roots are fine if they are firm.",
+          "rescue": [
+            "Sauté fresh greens like chard"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "hb66"
+          ]
+        },
+        {
+          "id": "mold",
+          "title": "Moldy or dark, soft spots",
+          "cause": "mold",
+          "symptom": "Gray fuzz, or dark, wet, sunken patches, often at the tip of the root.",
+          "why": "USDA's storage handbook names gray mold as the most common decay in stored beets, and black rot as a second one that mostly affects the root tip.",
+          "prevent": [
+            "Keep the roots dry in their bag",
+            "Check stored beets every week or so"
+          ],
+          "verdict": "trim",
+          "verdictNote": "Beets are firm, so USDA says a small mold spot can be cut off with at least an inch around and below it. Toss a beet that is soft or slimy all the way through.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "hb66",
+            "fsis-mold"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Ginger",
+      "slug": "ginger",
+      "display": "ginger",
+      "intro": "Ginger keeps for weeks in the fridge. It ends by shriveling as it dries out, or by molding where it was cut or stayed damp.",
+      "failures": [
+        {
+          "id": "shriveled",
+          "title": "Wrinkled, shriveled skin",
+          "cause": "moisture_loss",
+          "symptom": "The skin wrinkles and the piece feels light and a little soft.",
+          "why": "USDA's storage handbook calls drying out the most common problem with stored ginger. Shriveling shows once it has lost about a tenth of its weight.",
+          "prevent": [
+            "Keep it unpeeled in a bag with the air pressed out",
+            "Freeze what you will not use within a month"
+          ],
+          "verdict": "eat",
+          "verdictNote": "Still good if the flesh inside is firm, pale yellow and smells like ginger. It will be more fibrous.",
+          "rescue": [
+            "Grate it into stir-fries or tea",
+            "Slice and freeze it"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "hb66"
+          ]
+        },
+        {
+          "id": "mold",
+          "title": "Mold on the skin or cut end",
+          "cause": "mold",
+          "symptom": "Blue-green or white fuzz, usually on a cut end.",
+          "why": "Surface mold grows on ginger when moisture condenses on it, and cut ends are the easiest place for it to start.",
+          "prevent": [
+            "Blot cut ends dry before storing",
+            "Keep a paper towel in the bag if you see condensation"
+          ],
+          "verdict": "trim",
+          "verdictNote": "Ginger is firm, so USDA's rule for firm vegetables applies: cut off a small mold spot with at least an inch around and below it. Toss a small piece, or one where the mold is widespread.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "hb66",
+            "fsis-mold"
+          ]
+        },
+        {
+          "id": "soft",
+          "title": "Soft, wet or dark inside",
+          "cause": "mold",
+          "symptom": "The piece feels soft or watery, or the flesh is brown or gray when you cut it.",
+          "why": "USDA's storage handbook describes two storage rots in ginger: one turns the flesh brown and dry, the other turns it soft and watery.",
+          "prevent": [
+            "Buy firm pieces with taut skin",
+            "Keep it dry and cold"
+          ],
+          "verdict": "toss",
+          "verdictNote": "Toss ginger that is soft, watery or discolored inside.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "hb66"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Leek",
+      "slug": "leek",
+      "display": "leeks",
+      "intro": "Leeks keep a week or two. They soften around ethylene, the tops wilt as they dry out, and damaged layers turn slimy.",
+      "failures": [
+        {
+          "id": "soft",
+          "title": "Soft outer layers",
+          "cause": "ethylene",
+          "symptom": "The stalk loses its snap and the outer layers go soft.",
+          "why": "USDA's storage handbook rates leeks as moderately sensitive to ethylene and lists softening and more decay as the effects.",
+          "prevent": [
+            "Keep leeks away from apples and pears",
+            "Keep them cold, in a bag"
+          ],
+          "verdict": "trim",
+          "verdictNote": "Safe to eat. Peel off the soft outer layer and use the firm stalk underneath soon.",
+          "rescue": [
+            "Cook them into soup",
+            "Braise or roast them"
+          ],
+          "krispHelps": true,
+          "sources": [
+            "hb66"
+          ]
+        },
+        {
+          "id": "wilted",
+          "title": "Wilted, floppy tops",
+          "cause": "moisture_loss",
+          "symptom": "The green tops droop and dry out at the tips.",
+          "why": "USDA's storage handbook says high humidity is essential to keep leeks from wilting. Open fridge air is much drier than they need.",
+          "prevent": [
+            "Keep them in a bag in the crisper drawer",
+            "Leave the tops on until you cook them"
+          ],
+          "verdict": "eat",
+          "verdictNote": "Still good. Trim the dry tips. The white and pale green part is what most recipes use anyway.",
+          "rescue": [
+            "Save the dark tops for stock"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "hb66"
+          ]
+        },
+        {
+          "id": "slimy",
+          "title": "Slimy layers",
+          "cause": "bacterial_rot",
+          "symptom": "Outer layers turn dark, wet and slimy, and smell bad.",
+          "why": "Leeks get the same soft rots as onions. They start where the stalk was bruised or stayed wet.",
+          "prevent": [
+            "Store leeks unwashed",
+            "Do not crush them under heavier produce"
+          ],
+          "verdict": "toss",
+          "verdictNote": "Toss a leek that is slimy or smells bad. If only the outermost layer is affected, peel it away and rinse the firm stalk well.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "hb66",
+            "fda-produce"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Artichoke",
+      "slug": "artichoke",
+      "display": "artichokes",
+      "intro": "Artichokes are flower buds, and they fade within a week. The leaves bruise, dry out and open up.",
+      "failures": [
+        {
+          "id": "brown-tips",
+          "title": "Brown or black marks on the leaves",
+          "cause": "bruising",
+          "symptom": "Leaf tips and scuffed areas turn brown or black.",
+          "why": "UC Davis calls bruising and compression injury very common in artichokes. The damaged spots darken.",
+          "prevent": [
+            "Handle them gently and do not pack them under heavy produce",
+            "Store them in a bag so they do not rub against other items"
+          ],
+          "verdict": "eat",
+          "verdictNote": "Cosmetic. The heart and the base of the leaves are fine if the artichoke is still heavy and firm.",
+          "rescue": [
+            "Steam or braise them",
+            "Trim the tips with scissors before cooking"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-artichoke"
+          ]
+        },
+        {
+          "id": "dried-open",
+          "title": "Dry, spreading leaves",
+          "cause": "moisture_loss",
+          "symptom": "The artichoke feels light, and the leaves spread open and turn tough.",
+          "why": "Artichokes lose water and quality quickly. UC Davis notes that their look and eating quality decline rapidly, with under three weeks of storage even in ideal commercial conditions.",
+          "prevent": [
+            "Keep them in a plastic bag in the crisper drawer",
+            "Cook them within a week"
+          ],
+          "verdict": "cook",
+          "verdictNote": "Safe to eat if there is no mold or slime. The outer leaves will be tough, so trim more of them.",
+          "rescue": [
+            "Use the hearts in pasta or dip"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-artichoke"
+          ]
+        },
+        {
+          "id": "mold",
+          "title": "Gray mold or slimy spots",
+          "cause": "mold",
+          "symptom": "Gray fuzz between the leaves, or soft, wet, dark patches.",
+          "why": "Gray mold and bacterial soft rot are the main decay problems UC Davis lists for artichokes. Both take hold when they are stored too warm.",
+          "prevent": [
+            "Keep them cold",
+            "Store them unwashed"
+          ],
+          "verdict": "toss",
+          "verdictNote": "Toss an artichoke with mold or slime. The layered leaves make it impossible to see how far it goes.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "ucd-artichoke",
+            "fsis-mold"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Pumpkin",
+      "slug": "pumpkin",
+      "display": "pumpkins",
+      "intro": "A whole cooking pumpkin keeps a month or two in a cool, dry spot. Rot gets in through a damaged rind, and cold storage pits it.",
+      "failures": [
+        {
+          "id": "soft-spot",
+          "title": "Soft or moldy spots on the rind",
+          "cause": "mold",
+          "symptom": "A soft, sunken or discolored patch on the rind, sometimes with fuzz.",
+          "why": "USDA's storage handbook says decay is the main cause of loss in stored pumpkins, and many different fungi cause it. A nicked rind or a missing stem is where it gets in.",
+          "prevent": [
+            "Pick one with the stem attached and no cuts or soft spots",
+            "Keep pumpkins from touching each other",
+            "Check stored pumpkins every week or two"
+          ],
+          "verdict": "trim",
+          "verdictNote": "A whole pumpkin is hard and dense, so USDA's rule for firm vegetables applies: cut off a small mold spot with at least an inch around and below it. If the rot is soft and wet, has reached the seed cavity, or smells bad, toss the pumpkin.",
+          "rescue": [
+            "Cook the trimmed pumpkin the same day"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "hb66",
+            "fsis-mold"
+          ]
+        },
+        {
+          "id": "cold-damage",
+          "title": "Sunken pits in the rind",
+          "cause": "chilling",
+          "symptom": "Sunken pits on the rind, often followed by rot once the pumpkin warms up.",
+          "why": "Pumpkins get chilling injury below about 50°F. USDA's storage handbook says fridge temperatures cause sunken pits and loss of flavor, and rot follows when the pumpkin comes out of the cold.",
+          "prevent": [
+            "Keep whole pumpkins in a cool room, not the fridge",
+            "Bring them in from the porch before a hard frost"
+          ],
+          "verdict": "trim",
+          "verdictNote": "Cut it open. If the flesh under the pits is firm and smells fresh, trim the pitted areas and cook it soon. Toss it if the flesh is soft, wet or moldy.",
+          "rescue": [
+            "Roast it",
+            "Cook, mash and freeze it"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "hb66",
+            "ucd-wsquash"
+          ]
+        },
+        {
+          "id": "cut-slimy",
+          "title": "Cut pumpkin turning slimy",
+          "cause": "bacterial_rot",
+          "symptom": "The cut surface of a stored piece turns slimy, moldy or sour-smelling.",
+          "why": "Once the rind is cut, the wet flesh is exposed and spoils like any cut vegetable.",
+          "prevent": [
+            "Wrap cut pumpkin and refrigerate it",
+            "Use it within about 5 days, or cook and freeze it"
+          ],
+          "verdict": "toss",
+          "verdictNote": "Toss cut pumpkin that is slimy, moldy or smells off.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "fda-produce",
+            "fsis-mold"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Okra",
+      "slug": "okra",
+      "display": "okra",
+      "intro": "Okra is one of the most perishable vegetables, two or three days at home. It bruises, dries out, and is damaged by a cold fridge.",
+      "failures": [
+        {
+          "id": "dark-ridges",
+          "title": "Brown or black ridges",
+          "cause": "bruising",
+          "symptom": "The ridges and tips of the pods turn brown or black.",
+          "why": "UC Davis says tender okra pods are easily damaged, especially on the ridges, and the damage turns into brown and black discoloration.",
+          "prevent": [
+            "Handle the pods gently",
+            "Do not pack it tightly or under other produce"
+          ],
+          "verdict": "eat",
+          "verdictNote": "Cosmetic. The pods are fine if they are still firm and not slimy.",
+          "rescue": [
+            "Roast or fry it",
+            "Add it to gumbo or stew"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-okra"
+          ]
+        },
+        {
+          "id": "pitting",
+          "title": "Dark, pitted or water-soaked spots",
+          "cause": "chilling",
+          "symptom": "Pods get dark sunken pits or wet-looking patches, then rot.",
+          "why": "Okra keeps best at 45 to 50°F, warmer than most fridges. UC Davis lists discoloration, pitting, water-soaked spots and more decay as chilling injury.",
+          "prevent": [
+            "Store okra in the warmest part of the fridge, like the door",
+            "Use it within 2 to 3 days"
+          ],
+          "verdict": "trim",
+          "verdictNote": "Cut away pitted spots and cook the pods the same day. Toss any that are soft, slimy or moldy.",
+          "rescue": [
+            "Slice and sauté it"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-okra"
+          ]
+        },
+        {
+          "id": "tough",
+          "title": "Limp, tough pods",
+          "cause": "moisture_loss",
+          "symptom": "Pods lose their snap and turn dull, limp or woody.",
+          "why": "UC Davis notes that young okra pods lose water very fast, and that it takes very high humidity to slow drying, toughening and loss of freshness.",
+          "prevent": [
+            "Keep the pods in a loosely closed bag",
+            "Buy okra the day you plan to cook it, or the day before"
+          ],
+          "verdict": "cook",
+          "verdictNote": "Safe to eat if there is no slime or mold. Tough pods need longer, wetter cooking.",
+          "rescue": [
+            "Stew it with tomatoes"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-okra"
+          ]
+        },
+        {
+          "id": "slimy",
+          "title": "Slimy or moldy pods",
+          "cause": "excess_moisture",
+          "symptom": "The outside of the pods turns slimy or grows fuzz.",
+          "why": "Wet pods rot quickly. UC Davis says decay that follows chilling or injury is probably the most common cause of loss.",
+          "prevent": [
+            "Keep the pods dry and do not wash them until you cook them"
+          ],
+          "verdict": "toss",
+          "verdictNote": "Toss okra that is slimy on the outside or moldy.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "ucd-okra",
+            "fsis-mold"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Plantain",
+      "slug": "plantain",
+      "display": "plantains",
+      "intro": "Plantains are used at every stage from green to black, so most of what looks like spoiling is ripening. Cold is what really damages them.",
+      "failures": [
+        {
+          "id": "black-peel",
+          "title": "Peel turning yellow, then black",
+          "cause": "ripening",
+          "symptom": "A green plantain turns yellow, then spotted, then almost fully black.",
+          "why": "This is ripening. Starch turns to sugar as the peel darkens, and ethylene from other fruit speeds it up.",
+          "prevent": [
+            "Keep green plantains away from apples and bananas if you want them to stay green",
+            "Cook them at the stage your recipe calls for"
+          ],
+          "verdict": "eat",
+          "verdictNote": "A black plantain is ripe, not rotten, as long as it is not moldy, leaking or sour-smelling. It is the sweetest stage for frying.",
+          "rescue": [
+            "Fry ripe ones as maduros",
+            "Bake very ripe ones or mash them into batter"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-plantain"
+          ]
+        },
+        {
+          "id": "dull-gray",
+          "title": "Dull, gray-brown peel that will not ripen",
+          "cause": "chilling",
+          "symptom": "The peel turns dull, smoky or brown and the fruit stays hard.",
+          "why": "UC Davis lists a dull or smoky peel, browning and failure to ripen as chilling injury in plantains kept at 45°F or colder for about a week.",
+          "prevent": [
+            "Keep green plantains on the counter, never in the fridge",
+            "Only refrigerate plantains that are already fully ripe"
+          ],
+          "verdict": "cook",
+          "verdictNote": "Safe to eat if there is no mold. It will not sweeten, so cook it as a green plantain.",
+          "rescue": [
+            "Boil it or fry it as tostones"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-plantain"
+          ]
+        },
+        {
+          "id": "bruise",
+          "title": "Brown, bruised flesh",
+          "cause": "bruising",
+          "symptom": "Brown patches in the flesh, sometimes with no mark on the peel.",
+          "why": "UC Davis notes that dropping a plantain can brown the flesh with or without damage to the skin, and that the damaged spots can then mold.",
+          "prevent": [
+            "Handle them gently",
+            "Do not stack heavy items on them"
+          ],
+          "verdict": "trim",
+          "verdictNote": "Cut away the bruised part and use the rest. Toss it if the bruise is moldy or smells fermented.",
+          "rescue": [
+            "Fry or boil the rest"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-plantain",
+            "fda-produce"
+          ]
+        },
+        {
+          "id": "mold",
+          "title": "Mold at the stem or tip",
+          "cause": "mold",
+          "symptom": "Fuzzy mold at the stem end, or a dry, dark, rotted tip.",
+          "why": "UC Davis lists crown rot, stem-end rot and cigar-end rot as the main plantain diseases. They start at the cut stem or the tip and grow into the fruit.",
+          "prevent": [
+            "Keep them dry, with air around them",
+            "Use ripe plantains within a few days"
+          ],
+          "verdict": "toss",
+          "verdictNote": "Toss a plantain if mold or rot has reached the flesh. A little surface mold on the dry stem of an otherwise firm plantain peels away with the skin.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "ucd-plantain",
+            "fsis-mold"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Tomatillo",
+      "slug": "tomatillo",
+      "display": "tomatillos",
+      "intro": "Tomatillos keep a week or two in their husks. They turn yellow and sweet as they ripen, and damp husks mold.",
+      "failures": [
+        {
+          "id": "yellow",
+          "title": "Turning yellow and soft",
+          "cause": "ripening",
+          "symptom": "Bright green fruit turns pale, then yellow, and softens.",
+          "why": "Tomatillos are picked green. UC Davis notes that overripe ones turn light green or yellow and get sweeter, which most recipes do not want, and that ethylene causes the same color change.",
+          "prevent": [
+            "Keep them cold, in their husks",
+            "Keep them away from apples and bananas"
+          ],
+          "verdict": "cook",
+          "verdictNote": "Safe to eat if it is not moldy or mushy. It will be sweeter and less tart.",
+          "rescue": [
+            "Roast them for a milder salsa",
+            "Simmer them into chile verde"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-tomatillo"
+          ]
+        },
+        {
+          "id": "husk-mold",
+          "title": "Moldy or slimy husks",
+          "cause": "excess_moisture",
+          "symptom": "The papery husk turns damp, dark or fuzzy.",
+          "why": "UC Davis notes that surface molds grow on tomatillo husks in humid storage, and that moisture trapped inside the husk is hard to get rid of.",
+          "prevent": [
+            "Store them in a paper bag, not a sealed plastic one",
+            "Keep the husks dry"
+          ],
+          "verdict": "trim",
+          "verdictNote": "Peel off the husk. If the fruit underneath is firm and clean, wash it well and use it. Toss it if the fruit itself is moldy or soft.",
+          "rescue": [
+            "Use them the same day"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-tomatillo",
+            "fsis-mold"
+          ]
+        },
+        {
+          "id": "pitting",
+          "title": "Sunken pits or black mold on the fruit",
+          "cause": "chilling",
+          "symptom": "Small sunken pits on the skin, sometimes with black mold.",
+          "why": "UC Davis reports chilling injury in tomatillos after about three weeks at 41°F, sooner when colder: pitting, decay and black mold.",
+          "prevent": [
+            "Use refrigerated tomatillos within a week or two",
+            "Keep them out of the coldest part of the fridge"
+          ],
+          "verdict": "toss",
+          "verdictNote": "Toss tomatillos with mold or soft, sunken rot.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "ucd-tomatillo",
+            "fsis-mold"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Persimmon",
+      "slug": "persimmon",
+      "display": "persimmons",
+      "intro": "There are two kinds, and they fail differently. Squat Fuyu are eaten firm and go soft around ethylene. Acorn-shaped Hachiya are not ready until they are jelly-soft.",
+      "failures": [
+        {
+          "id": "soft",
+          "title": "Firm persimmons going soft",
+          "cause": "ethylene",
+          "symptom": "A crisp Fuyu turns soft within days.",
+          "why": "UC Davis rates persimmons as very sensitive to ethylene. At room temperature, 1 part per million softens them past the point stores can sell them in 6 days, and 10 parts per million does it in 2.",
+          "prevent": [
+            "Keep Fuyu persimmons away from apples, pears and bananas",
+            "Keep them in the coldest part of the fridge"
+          ],
+          "verdict": "eat",
+          "verdictNote": "A soft persimmon is safe and sweet. Toss it if it smells fermented or is moldy.",
+          "rescue": [
+            "Eat it with a spoon",
+            "Use the pulp in bread, muffins or smoothies"
+          ],
+          "krispHelps": true,
+          "sources": [
+            "ucd-persimmon"
+          ]
+        },
+        {
+          "id": "astringent",
+          "title": "Chalky, mouth-puckering taste",
+          "cause": "ripening",
+          "symptom": "The fruit looks ripe but dries out your mouth when you bite it.",
+          "why": "Hachiya-type persimmons are astringent until they are completely soft. This is an unripe fruit, not a spoiled one.",
+          "prevent": [
+            "Ripen Hachiya on the counter until they feel like a water balloon",
+            "Put them in a paper bag with an apple to speed it up"
+          ],
+          "verdict": "eat",
+          "verdictNote": "Not harmful, just unpleasant. Give it more time on the counter.",
+          "rescue": [
+            "Once soft, scoop out the pulp and freeze it for baking"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-persimmon",
+            "ucanr-persimmon"
+          ]
+        },
+        {
+          "id": "brown-flesh",
+          "title": "Brown, mushy flesh after cold storage",
+          "cause": "chilling",
+          "symptom": "A Fuyu looks fine outside but the flesh is brown and soft.",
+          "why": "UC Davis says Fuyu-type persimmons get chilling injury between 41 and 59°F, with flesh browning and softening, and that ethylene makes it worse. Colder than that, near freezing, is safe.",
+          "prevent": [
+            "Keep Fuyu in the coldest part of the fridge, not the door",
+            "Eat them within a few weeks"
+          ],
+          "verdict": "cook",
+          "verdictNote": "Safe to eat if it smells fine and has no mold. The texture suffers, so bake with it.",
+          "rescue": [
+            "Use it in bread or pudding"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-persimmon"
+          ]
+        },
+        {
+          "id": "mold",
+          "title": "Mold on the skin or under the cap",
+          "cause": "mold",
+          "symptom": "Black or fuzzy spots on the skin or around the green cap.",
+          "why": "Mold gets in through cracks and at the cap, and it spreads quickly in soft, ripe fruit.",
+          "prevent": [
+            "Keep them dry",
+            "Use ripe persimmons within a day or two"
+          ],
+          "verdict": "toss",
+          "verdictNote": "Toss a moldy persimmon. It is a soft fruit, so mold reaches past what you can see.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "ucd-persimmon",
+            "fsis-mold"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Parsnip",
+      "slug": "parsnip",
+      "display": "parsnips",
+      "intro": "Parsnips keep for weeks. When they fail it is usually a bitter taste from ethylene, or going limp as they dry out.",
+      "failures": [
+        {
+          "id": "bitter",
+          "title": "Bitter taste",
+          "cause": "ethylene",
+          "symptom": "The parsnips look fine but taste bitter.",
+          "why": "USDA's storage handbook says even low levels of ethylene in cold storage make parsnips bitter. An apple or pear in the same drawer is a source.",
+          "prevent": [
+            "Keep parsnips away from apples, pears and other fruit",
+            "Store them in a bag in the crisper drawer"
+          ],
+          "verdict": "cook",
+          "verdictNote": "Safe to eat. Cooking them with something sweet balances the bitterness.",
+          "rescue": [
+            "Roast them with honey or maple",
+            "Blend them into soup with apple or carrot"
+          ],
+          "krispHelps": true,
+          "sources": [
+            "hb66"
+          ]
+        },
+        {
+          "id": "limp",
+          "title": "Limp, rubbery parsnips",
+          "cause": "moisture_loss",
+          "symptom": "The roots bend instead of snapping and may look shriveled.",
+          "why": "Parsnips go rubbery when they lose water. Commercial storage keeps them at 98 percent humidity.",
+          "prevent": [
+            "Cut off any green tops",
+            "Keep them in a closed bag in the crisper drawer"
+          ],
+          "verdict": "eat",
+          "verdictNote": "Still good. Soak them in cold water for an hour to firm them back up.",
+          "rescue": [
+            "Roast them",
+            "Simmer them in soup or stew"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "hb66"
+          ]
+        },
+        {
+          "id": "brown",
+          "title": "Brown patches on the skin",
+          "cause": "bruising",
+          "symptom": "Tan or brown areas on the surface of the root.",
+          "why": "USDA's storage handbook ties surface browning in parsnips mostly to bruising and scuffing, and notes it increases the longer they are stored.",
+          "prevent": [
+            "Handle them gently",
+            "Use older parsnips first"
+          ],
+          "verdict": "eat",
+          "verdictNote": "Cosmetic. Peel them and they are fine, as long as the flesh is firm.",
+          "rescue": [
+            "Peel and roast them"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "hb66"
+          ]
+        },
+        {
+          "id": "rot",
+          "title": "Moldy or slimy spots",
+          "cause": "mold",
+          "symptom": "Gray fuzz, or soft, wet, sunken patches.",
+          "why": "Gray mold, bacterial soft rot and watery soft rot all attack stored parsnips. Damaged roots get them first.",
+          "prevent": [
+            "Keep the bag free of standing water",
+            "Check stored parsnips every week or so"
+          ],
+          "verdict": "trim",
+          "verdictNote": "Parsnips are firm, so USDA says a small mold spot can be cut off with at least an inch around and below it. Toss one that is slimy or soft all the way through.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "hb66",
+            "fsis-mold"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Turnip",
+      "slug": "turnip",
+      "display": "turnips",
+      "intro": "Turnips keep for weeks in the cold. They shrivel as they dry out, and warm storage brings on soft rot.",
+      "failures": [
+        {
+          "id": "soft",
+          "title": "Soft, shriveled turnips",
+          "cause": "moisture_loss",
+          "symptom": "The roots feel spongy or look wrinkled.",
+          "why": "Turnips shrivel as they lose water. USDA's storage handbook says to keep them cold and at high humidity to slow it, and that storage above 41°F speeds up weight loss.",
+          "prevent": [
+            "Cut off the greens",
+            "Keep the roots in a bag in the crisper drawer"
+          ],
+          "verdict": "eat",
+          "verdictNote": "Still good if there are no dark, soft spots and they smell fresh.",
+          "rescue": [
+            "Roast them",
+            "Mash them with potatoes"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "hb66"
+          ]
+        },
+        {
+          "id": "rot",
+          "title": "Soft, wet or moldy spots",
+          "cause": "bacterial_rot",
+          "symptom": "Soft, watery, sunken patches, sometimes with gray fuzz.",
+          "why": "USDA's storage handbook says storing turnips warmer than 41°F speeds up soft rot. Gray mold and watery soft rot are also listed.",
+          "prevent": [
+            "Keep them cold",
+            "Keep them dry in their bag"
+          ],
+          "verdict": "trim",
+          "verdictNote": "Turnips are firm, so USDA says a small mold spot can be cut off with at least an inch around and below it. Toss one that is slimy or soft all the way through.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "hb66",
+            "fsis-mold"
+          ]
+        },
+        {
+          "id": "wilted-greens",
+          "title": "Yellow, wilted greens",
+          "cause": "age",
+          "symptom": "The leafy tops turn limp and yellow while the roots are still firm.",
+          "why": "The tops age much faster than the roots. USDA's storage handbook calls turnip greens particularly perishable.",
+          "prevent": [
+            "Cut the greens off when you get home and store them separately",
+            "Use the greens within 2 to 3 days"
+          ],
+          "verdict": "trim",
+          "verdictNote": "Cut off and discard yellow or slimy tops. The roots are fine if they are firm.",
+          "rescue": [
+            "Cook fresh greens like mustard greens"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "hb66"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Fennel",
+      "slug": "fennel",
+      "display": "fennel",
+      "intro": "Fennel keeps about a week. Cut and bruised surfaces brown, and the bulb goes limp as it dries out.",
+      "failures": [
+        {
+          "id": "brown",
+          "title": "Brown cuts and bruises",
+          "cause": "bruising",
+          "symptom": "The cut base and any scuffed spots on the bulb turn brown.",
+          "why": "USDA's storage handbook says mechanical injury produces rapid browning in fennel, and that stores trim brown cut surfaces and injured outer layers.",
+          "prevent": [
+            "Handle the bulb gently",
+            "Slice it just before you use it"
+          ],
+          "verdict": "trim",
+          "verdictNote": "Cosmetic. Shave off the brown surface or peel away the outer layer. The rest is fine if it is firm.",
+          "rescue": [
+            "Shave it into salad",
+            "Roast or braise it"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "hb66"
+          ]
+        },
+        {
+          "id": "limp",
+          "title": "Limp, rubbery bulb",
+          "cause": "moisture_loss",
+          "symptom": "The bulb loses its crunch and the layers feel soft.",
+          "why": "Fennel is crisp because it is full of water. USDA's storage handbook recommends 90 to 95 percent humidity and gives it about two weeks even in ideal commercial storage.",
+          "prevent": [
+            "Keep the bulb in a bag in the crisper drawer",
+            "Cut off the stalks, which pull moisture from the bulb"
+          ],
+          "verdict": "cook",
+          "verdictNote": "Safe to eat if there is no slime or bad smell. It has lost its crunch, so cook it.",
+          "rescue": [
+            "Braise it",
+            "Add it to soup or roast it with other vegetables"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "hb66"
+          ]
+        },
+        {
+          "id": "slimy",
+          "title": "Slimy or moldy spots",
+          "cause": "bacterial_rot",
+          "symptom": "Soft, wet, dark patches, or fuzz between the layers.",
+          "why": "Like other fresh vegetables, fennel rots where it was bruised or stayed wet.",
+          "prevent": [
+            "Store it dry and unwashed",
+            "Use it within a week"
+          ],
+          "verdict": "toss",
+          "verdictNote": "Toss fennel that is slimy or smells bad. If only the outer layer is affected, peel it away and rinse the firm bulb underneath well.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "fda-produce",
+            "fsis-mold"
           ]
         }
       ]

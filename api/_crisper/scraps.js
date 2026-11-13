@@ -4,7 +4,10 @@
 // pct = USDA SR Legacy "refuse" percentage (FoodData Central / SR28 FOOD_DES),
 // the share of the item as purchased that is normally discarded.
 // https://fdc.nal.usda.gov/  (SR28 download: ars.usda.gov, sr28asc.zip)
-// Herbs use cilantro; peas use edible-podded; winter squash uses all varieties.
+// Herbs use cilantro; peas use edible-podded; winter squash uses all varieties;
+// mandarins use tangerines; bok choy is "cabbage, chinese (pak-choi)". Items with
+// no USDA refuse figure (tomatillo), or sold ready to eat (bagged salad, baby
+// arugula), are left out on purpose.
 
 export const SCRAPS = {
   'Apple': { part: 'cores and peels', pct: 10, ideas: ['Simmer cores and peels with a cinnamon stick for a quick syrup or tea', 'Make apple-scrap vinegar: cover with sugar water and let it ferment 2–4 weeks'] },
@@ -63,6 +66,25 @@ export const SCRAPS = {
   'Cranberry': { part: 'stems and soft berries', pct: 2, ideas: ['Cook soft berries into sauce', 'Compost the stems'] },
   'Fig': { part: 'stems', pct: 1, ideas: ['Roast soft figs with honey for toast or yogurt', 'Compost the stems'] },
   'Green Onion': { part: 'root ends', pct: 4, ideas: ['Stand the roots in a glass of water and regrow 2–3 harvests', 'Compost when they tire out'] },
+  'Mandarin': { part: 'peel and seeds', pct: 26, ideas: ['Dry the peels for tea or to scent a simmer pot', 'Zest before peeling and freeze the zest'] },
+  'Cilantro': { part: 'stems', pct: 15, ideas: ['The stems have as much flavor as the leaves: chop them into salsa, curry paste or rice', 'Blend stems into green sauce or chimichurri'] },
+  'Parsley': { part: 'tough stems', pct: 5, ideas: ['Add stems to stock or a pot of beans', 'Blend tender stems into chimichurri or pesto'] },
+  'Basil': { part: 'stems and flower heads', pct: 36, ideas: ['Steep stems in warm olive oil or simmer them in tomato sauce, then fish them out', 'Root a cut stem in a glass of water for a new plant'] },
+  'Bok Choy': { part: 'base and outer leaves', pct: 12, ideas: ['Stand the cut base in a dish of water to regrow a few leaves', 'Add trimmings to a freezer stock bag'] },
+  'Collard Greens': { part: 'stems', pct: 43, ideas: ['Slice the stems thin and sauté them a few minutes before the leaves', 'Pickle the stems like green beans'] },
+  'Swiss Chard': { part: 'stem ends', pct: 8, ideas: ['The stems are edible: chop and sauté them before the leaves', 'Pickle the colored stems'] },
+  'Mustard Greens': { part: 'bases', pct: 7, ideas: ['Chop tender stems into the pot with the leaves', 'Add the bases to a freezer stock bag'] },
+  'Beet': { part: 'greens and peel', pct: 33, ideas: ['Sauté the greens and stems like chard', 'Simmer the peels for a natural pink dye'] },
+  'Ginger': { part: 'peel', pct: 7, ideas: ['Steep the peels in hot water for ginger tea', 'Add peels to stock or broth'] },
+  'Leek': { part: 'dark green tops and roots', pct: 56, ideas: ['Simmer the dark tops in stock. They are too tough to eat but full of flavor', 'Slice the tops very thin and braise them until soft'] },
+  'Artichoke': { part: 'outer leaves, choke and stem', pct: 60, ideas: ['Peel the stem and cook it with the heart. It tastes the same', 'Simmer the tough outer leaves into a broth for risotto or soup'] },
+  'Pumpkin': { part: 'seeds, strings and rind', pct: 30, ideas: ['Rinse the seeds and roast them with oil and salt', 'Simmer the stringy pulp into stock'] },
+  'Okra': { part: 'caps', pct: 14, ideas: ['Compost the caps', 'Slice and freeze extra pods before they turn'] },
+  'Plantain': { part: 'peel', pct: 35, ideas: ['Compost the peels', 'Peel and freeze ripe plantains you will not cook this week'] },
+  'Persimmon': { part: 'cap, skin and seeds', pct: 16, ideas: ['Fuyu skin is edible: eat it like an apple', 'Dry thin, skin-on slices in a low oven for chips'] },
+  'Parsnip': { part: 'peels', pct: 15, ideas: ['Scrub instead of peeling when they are young', 'Toss the peels in oil and salt and roast them into crisps'] },
+  'Turnip': { part: 'peels and greens', pct: 19, ideas: ['Cook the greens like mustard greens', 'Small turnips only need a scrub, not peeling'] },
+  'Fennel': { part: 'stalks and fronds', pct: 28, ideas: ['Use the fronds like dill on fish, salad or eggs', 'Add the stalks to stock or roast fish on top of them'] },
 };
 
 export const STOCK_BAG_TIP = 'Keep a freezer "stock bag" for onion skins, carrot peels, celery ends, herb stems, mushroom stems and corn cobs. Skip broccoli and cabbage, they turn bitter. When it is full, cover with water and simmer an hour.';

@@ -95,7 +95,7 @@ const RECEIPT_ABBREV = {
   'Mango': ['mngo'],
   'Lemon': ['lemns', 'lemn', 'lmn'],
   'Tomato': ['tmto', 'tmtos', 'roma', 'tomat', 'tomatoe', 'roma tom', 'tom roma', 'grape tom', 'cherry tom', 'tom vine', 'tov', 'hthse tom', 'toms'],
-  'Lettuce': ['lttce', 'lettce', 'rmn hrts', 'romn', 'bttr lett', 'spring mix', 'sprng mix', 'mxd grns', 'rom hrts', 'romaine hrts', 'rom hearts', 'ltc', 'lttc', 'lett', 'grn leaf', 'red leaf', 'ice berg'],
+  'Lettuce': ['lttce', 'lettce', 'rmn hrts', 'romn', 'bttr lett', 'rom hrts', 'romaine hrts', 'rom hearts', 'ltc', 'lttc', 'lett', 'grn leaf', 'red leaf', 'ice berg'],
   'Broccoli': ['brcli', 'brcl', 'brocli', 'brcoli', 'brcli crwn', 'broc flrt', 'broc florets', 'broc', 'brocc', 'broc crwn', 'broc crown', 'brocoli', 'brccli'],
   'Cauliflower': ['clflwr', 'cauli flwr', 'caulif', 'cauli', 'cauliflwr', 'caulflwr'],
   'Brussels Sprouts': ['bruss spr', 'brussel', 'brsl spr', 'brussels spr'],
@@ -118,7 +118,11 @@ const RECEIPT_ABBREV = {
   'Corn': ['swt corn', 'corn ear', 'corn on cob'],
   'Eggplant': ['eggplt', 'egg plant'],
   'Radish': ['rdsh', 'radsh'],
-  'Herbs (Fresh)': ['clntro', 'cilntro', 'cilantro bnch', 'basil', 'prsley', 'dill', 'cilant', 'cilantr', 'prsly', 'parsly'],
+  'Herbs (Fresh)': ['dill'],
+  'Cilantro': ['clntro', 'cilntro', 'cilantro bnch', 'cilant', 'cilantr'],
+  'Parsley': ['prsley', 'prsly', 'parsly'],
+  'Bagged Salad': ['sprng mix', 'mxd grns', 'sld mix', 'salad kt'],
+  'Mandarin': ['mandrn', 'clemntn', 'clementn', 'tangrn'],
 };
 for (const [name, forms] of Object.entries(RECEIPT_ABBREV)) {
   const item = CATALOG.find((c) => normalize(c.name) === normalize(name));
@@ -144,8 +148,13 @@ const NOT_FRESH = [
   'scented', 'candle', 'soap', 'shampoo', 'conditioner', 'lotion', 'lip balm', 'detergent', 'cleaner', 'air freshener',
   'seed', 'seeds', 'plant', 'starter', 'cornmeal', 'cornstarch', 'corn starch', 'masa', 'grits',
   'split pea', 'chickpea', 'black-eyed', 'cauliflower rice bowl', 'tots', 'fries', 'hash brown',
+  // ginger ale, ground ginger, pumpkin pie filling, marinated artichoke hearts, fennel sausage...
+  'ale', 'ground', 'crystallized', 'candied', 'minced', 'snaps', 'shot', 'shots', 'marinated', 'quartered',
+  'libby', '100% pure', 'carving', 'decorative', 'gourd', 'sausage', 'flakes', 'mccormick', 'fruit cup', 'fruit cups',
 ];
 const NOT_FRESH_RE = new RegExp(`(^|[^a-z])(${NOT_FRESH.map(escapeRe).join('|')})(?![a-z])`);
+// Packaged forms that only show up next to the produce name itself, tested on the whole line.
+const PACKAGED_RE = /artichoke hearts?|artichoke bottoms?|ginger (paste|beer|chews?)|pumpkin (pie|spice|butter|bread|roll)/;
 
 // Line-level signals that an item did NOT arrive.
 const DID_NOT_ARRIVE_RE = /(refunded|refund issued|out of stock|unavailable|not available|couldn'?t find|could not find|was removed|removed from (your )?order|cancel+ed)/;
@@ -321,7 +330,7 @@ export function extractItems(text) {
     }
     // Test the rest of the line, minus the produce name itself, so "butter
     // lettuce" or "cotton candy grapes" aren't mistaken for butter or candy.
-    if (NOT_FRESH_RE.test(line.replace(match.form, ' '))) {
+    if (NOT_FRESH_RE.test(line.replace(match.form, ' ')) || PACKAGED_RE.test(line)) {
       skipped.push({ line: raw, name: match.name, reason: 'not fresh produce' });
       continue;
     }

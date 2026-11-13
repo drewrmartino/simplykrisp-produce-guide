@@ -9,7 +9,7 @@ import { scrapFor } from './scraps.js';
 export const BY_NAME = Object.fromEntries(CATALOG.map((c) => [c.name, c]));
 
 // Where it goes in the kitchen (same zones as the Crisper Drawer Map).
-const SHELF = new Set(['Blueberry', 'Strawberry', 'Raspberry', 'Blackberry', 'Cranberry', 'Herbs (Fresh)', 'Mushroom']);
+const SHELF = new Set(['Blueberry', 'Strawberry', 'Raspberry', 'Blackberry', 'Cranberry', 'Herbs (Fresh)', 'Cilantro', 'Parsley', 'Mushroom']);
 export function zoneFor(c) {
   if (c.storage === 'pantry') return 'pantry';
   if (c.storage === 'counter' || c.storage === 'counter_then_fridge') return 'counter';

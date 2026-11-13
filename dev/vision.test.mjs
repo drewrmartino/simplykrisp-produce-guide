@@ -76,8 +76,30 @@ test('quantity-only lines attach to the item above and are never unknown', () =>
 
 test('more register abbreviations', () => {
   const r = extractItems('BRCLI CRWN 2 @ 1.29\nHNYCRSP APL 3 LB\nAVCDO HASS\nRMN HRTS 3PK\nCLNTRO BNCH');
-  assert.deepEqual(r.items.map((i) => i.name), ['Broccoli', 'Apple', 'Avocado', 'Lettuce', 'Herbs (Fresh)']);
+  assert.deepEqual(r.items.map((i) => i.name), ['Broccoli', 'Apple', 'Avocado', 'Lettuce', 'Cilantro']);
   assert.equal(r.items[0].count, 2);
+});
+
+test('the 22 items added in Nov 2026 are recognised, and their packaged look-alikes are not', () => {
+  const fresh = {
+    'Cuties Clementines 3 lb bag': 'Mandarin', 'Satsuma Mandarins': 'Mandarin', 'Organic Cilantro Bunch': 'Cilantro',
+    'Italian Parsley': 'Parsley', 'Thai Basil 0.75 oz': 'Basil', 'Fresh Dill': 'Herbs (Fresh)',
+    'Organic Spring Mix 5 oz': 'Bagged Salad', 'Caesar Salad Kit': 'Bagged Salad', 'Baby Arugula 5 oz': 'Arugula',
+    'Baby Bok Choy': 'Bok Choy', 'Collard Greens Bunch': 'Collard Greens', 'Rainbow Chard': 'Swiss Chard',
+    'Mustard Greens': 'Mustard Greens', 'Red Beets Bunch': 'Beet', 'Ginger Root': 'Ginger', 'Leeks': 'Leek',
+    'Globe Artichoke': 'Artichoke', 'Pie Pumpkin': 'Pumpkin', 'Fresh Okra 1 lb': 'Okra', 'Plantains': 'Plantain',
+    'Tomatillos': 'Tomatillo', 'Fuyu Persimmons': 'Persimmon', 'Parsnips 1 lb': 'Parsnip', 'Turnips': 'Turnip',
+    'Fennel Bulb': 'Fennel', 'Navel Oranges': 'Orange', 'Romaine Hearts': 'Lettuce',
+  };
+  for (const [line, name] of Object.entries(fresh)) {
+    assert.deepEqual(extractItems(line).items.map((i) => i.name), [name], line);
+  }
+  const packaged = ['Canada Dry Ginger Ale 12 pk', 'McCormick Ground Ginger', 'Libby\'s 100% Pure Pumpkin 15 oz',
+    'Marinated Artichoke Hearts 12 oz', 'Italian Sausage with Fennel', 'Dried Parsley Flakes', 'Pumpkin Pie 8 in',
+    'Ginger Snaps', 'Mandarin Orange Fruit Cups', 'Pumpkin Spice Creamer', 'Basil Pesto 6 oz'];
+  for (const line of packaged) {
+    assert.deepEqual(extractItems(line).items.map((i) => i.name), [], line);
+  }
 });
 
 test.after(() => { server.close(); gw.close(); });
