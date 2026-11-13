@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updated": "2026-11-11",
+    "updated": "2026-11-13",
     "note": "Why produce goes bad: the ways each item usually fails, ranked most common first. Joined at build time with seasonal/produce.json (storage tips, shelf life, Krisp claims), api/_crisper/scraps.js (use-it-up ideas) and lab/runs.json. Every 'Is it still OK?' line is a food-safety statement: keep them conservative and sourced. Run `npm run pages` after editing."
   },
   "sources": {
@@ -103,6 +103,231 @@
       "title": "Postharvest Handling of Berries",
       "publisher": "IntechOpen",
       "url": "https://cdn.intechopen.com/pdfs/55546.pdf"
+    },
+    "ucd-apple": {
+      "title": "Apple (Honeycrisp): Produce Facts",
+      "publisher": "UC Davis Postharvest Research and Extension Center",
+      "url": "https://postharvest.ucdavis.edu/produce-facts-sheets/apple"
+    },
+    "ucd-apple-gala": {
+      "title": "Apple (Gala): Produce Facts",
+      "publisher": "UC Davis Postharvest Research and Extension Center",
+      "url": "https://postharvest.ucdavis.edu/produce-facts-sheets/apple-gala"
+    },
+    "ucd-cantaloupe": {
+      "title": "Cantaloupe: Produce Facts",
+      "publisher": "UC Davis Postharvest Research and Extension Center",
+      "url": "https://postharvest.ucdavis.edu/produce-facts-sheets/cantaloupe"
+    },
+    "ucd-cherry": {
+      "title": "Cherry: Produce Facts",
+      "publisher": "UC Davis Postharvest Research and Extension Center",
+      "url": "https://postharvest.ucdavis.edu/produce-facts-sheets/cherry"
+    },
+    "ucd-grape": {
+      "title": "Grape: Produce Facts",
+      "publisher": "UC Davis Postharvest Research and Extension Center",
+      "url": "https://postharvest.ucdavis.edu/produce-facts-sheets/grape"
+    },
+    "ucd-kiwifruit": {
+      "title": "Kiwifruit: Produce Facts",
+      "publisher": "UC Davis Postharvest Research and Extension Center",
+      "url": "https://postharvest.ucdavis.edu/produce-facts-sheets/kiwifruit"
+    },
+    "ucd-lemon": {
+      "title": "Lemon: Produce Facts",
+      "publisher": "UC Davis Postharvest Research and Extension Center",
+      "url": "https://postharvest.ucdavis.edu/produce-facts-sheets/lemon"
+    },
+    "ucd-lime": {
+      "title": "Lime: Produce Facts",
+      "publisher": "UC Davis Postharvest Research and Extension Center",
+      "url": "https://postharvest.ucdavis.edu/produce-facts-sheets/lime"
+    },
+    "ucd-mango": {
+      "title": "Mango: Produce Facts",
+      "publisher": "UC Davis Postharvest Research and Extension Center",
+      "url": "https://postharvest.ucdavis.edu/produce-facts-sheets/mango"
+    },
+    "ucd-orange": {
+      "title": "Orange: Produce Facts",
+      "publisher": "UC Davis Postharvest Research and Extension Center",
+      "url": "https://postharvest.ucdavis.edu/produce-facts-sheets/orange"
+    },
+    "ucd-peach": {
+      "title": "Nectarine and Peach: Produce Facts",
+      "publisher": "UC Davis Postharvest Research and Extension Center",
+      "url": "https://postharvest.ucdavis.edu/produce-facts-sheets/peach"
+    },
+    "ucd-pear-bartlett": {
+      "title": "Pear (Bartlett): Produce Facts",
+      "publisher": "UC Davis Postharvest Research and Extension Center",
+      "url": "https://postharvest.ucdavis.edu/produce-facts-sheets/pear-bartlett"
+    },
+    "ucd-pear-winter": {
+      "title": "Pear (Anjou, Bosc, Comice): Produce Facts",
+      "publisher": "UC Davis Postharvest Research and Extension Center",
+      "url": "https://postharvest.ucdavis.edu/produce-facts-sheets/pear-anjou-bosc-comice"
+    },
+    "ucd-pineapple": {
+      "title": "Pineapple: Produce Facts",
+      "publisher": "UC Davis Postharvest Research and Extension Center",
+      "url": "https://postharvest.ucdavis.edu/produce-facts-sheets/pineapple"
+    },
+    "ucd-plum": {
+      "title": "Plum: Produce Facts",
+      "publisher": "UC Davis Postharvest Research and Extension Center",
+      "url": "https://postharvest.ucdavis.edu/produce-facts-sheets/plum"
+    },
+    "ucd-watermelon": {
+      "title": "Watermelon: Produce Facts",
+      "publisher": "UC Davis Postharvest Research and Extension Center",
+      "url": "https://postharvest.ucdavis.edu/produce-facts-sheets/watermelon"
+    },
+    "ucd-papaya": {
+      "title": "Papaya: Produce Facts",
+      "publisher": "UC Davis Postharvest Research and Extension Center",
+      "url": "https://postharvest.ucdavis.edu/produce-facts-sheets/papaya"
+    },
+    "ucd-pomegranate": {
+      "title": "Pomegranate: Produce Facts",
+      "publisher": "UC Davis Postharvest Research and Extension Center",
+      "url": "https://postharvest.ucdavis.edu/produce-facts-sheets/pomegranate"
+    },
+    "ucd-grapefruit": {
+      "title": "Grapefruit: Produce Facts",
+      "publisher": "UC Davis Postharvest Research and Extension Center",
+      "url": "https://postharvest.ucdavis.edu/produce-facts-sheets/grapefruit"
+    },
+    "ucd-apricot": {
+      "title": "Apricot: Produce Facts",
+      "publisher": "UC Davis Postharvest Research and Extension Center",
+      "url": "https://postharvest.ucdavis.edu/produce-facts-sheets/apricot"
+    },
+    "ucd-honeydew": {
+      "title": "Honeydew: Produce Facts",
+      "publisher": "UC Davis Postharvest Research and Extension Center",
+      "url": "https://postharvest.ucdavis.edu/produce-facts-sheets/honeydew"
+    },
+    "ucd-fig": {
+      "title": "Fig: Produce Facts",
+      "publisher": "UC Davis Postharvest Research and Extension Center",
+      "url": "https://postharvest.ucdavis.edu/produce-facts-sheets/fig"
+    },
+    "ucd-asparagus": {
+      "title": "Asparagus (Green): Produce Facts",
+      "publisher": "UC Davis Postharvest Research and Extension Center",
+      "url": "https://postharvest.ucdavis.edu/produce-facts-sheets/asparagus-green"
+    },
+    "ucd-brussels": {
+      "title": "Brussels Sprouts: Produce Facts",
+      "publisher": "UC Davis Postharvest Research and Extension Center",
+      "url": "https://postharvest.ucdavis.edu/produce-facts-sheets/brussels-sprouts"
+    },
+    "ucd-cabbage": {
+      "title": "Cabbage: Produce Facts",
+      "publisher": "UC Davis Postharvest Research and Extension Center",
+      "url": "https://postharvest.ucdavis.edu/produce-facts-sheets/cabbage"
+    },
+    "ucd-cauliflower": {
+      "title": "Cauliflower: Produce Facts",
+      "publisher": "UC Davis Postharvest Research and Extension Center",
+      "url": "https://postharvest.ucdavis.edu/produce-facts-sheets/cauliflower"
+    },
+    "ucd-corn": {
+      "title": "Corn (Sweet): Produce Facts",
+      "publisher": "UC Davis Postharvest Research and Extension Center",
+      "url": "https://postharvest.ucdavis.edu/produce-facts-sheets/corn-sweet"
+    },
+    "ucd-eggplant": {
+      "title": "Eggplant: Produce Facts",
+      "publisher": "UC Davis Postharvest Research and Extension Center",
+      "url": "https://postharvest.ucdavis.edu/produce-facts-sheets/eggplant"
+    },
+    "ucd-garlic": {
+      "title": "Garlic: Produce Facts",
+      "publisher": "UC Davis Postharvest Research and Extension Center",
+      "url": "https://postharvest.ucdavis.edu/produce-facts-sheets/garlic"
+    },
+    "ucd-beans": {
+      "title": "Green Beans: Produce Facts",
+      "publisher": "UC Davis Postharvest Research and Extension Center",
+      "url": "https://postharvest.ucdavis.edu/produce-facts-sheets/bean-snap"
+    },
+    "ucd-onion": {
+      "title": "Onions (Dry): Produce Facts",
+      "publisher": "UC Davis Postharvest Research and Extension Center",
+      "url": "https://postharvest.ucdavis.edu/produce-facts-sheets/onions-dry"
+    },
+    "ucd-peas": {
+      "title": "Snow and Snap Pea Pods: Produce Facts",
+      "publisher": "UC Davis Postharvest Research and Extension Center",
+      "url": "https://postharvest.ucdavis.edu/produce-facts-sheets/peas-snow-and-snap-pod"
+    },
+    "ucd-potato": {
+      "title": "Potato (Early Crop): Produce Facts",
+      "publisher": "UC Davis Postharvest Research and Extension Center",
+      "url": "https://postharvest.ucdavis.edu/produce-facts-sheets/potato"
+    },
+    "ucd-sweetpotato": {
+      "title": "Sweet Potato: Produce Facts",
+      "publisher": "UC Davis Postharvest Research and Extension Center",
+      "url": "https://postharvest.ucdavis.edu/produce-facts-sheets/sweet-potato"
+    },
+    "ucd-squash": {
+      "title": "Summer Squash: Produce Facts",
+      "publisher": "UC Davis Postharvest Research and Extension Center",
+      "url": "https://postharvest.ucdavis.edu/produce-facts-sheets/squash-soft-rind"
+    },
+    "ucd-radish": {
+      "title": "Radish: Produce Facts",
+      "publisher": "UC Davis Postharvest Research and Extension Center",
+      "url": "https://postharvest.ucdavis.edu/produce-facts-sheets/radish"
+    },
+    "ucd-wsquash": {
+      "title": "Pumpkin and Winter Squash: Produce Facts",
+      "publisher": "UC Davis Postharvest Research and Extension Center",
+      "url": "https://postharvest.ucdavis.edu/produce-facts-sheets/pumpkin-winter-squash"
+    },
+    "ucd-chile": {
+      "title": "Chile Pepper: Produce Facts",
+      "publisher": "UC Davis Postharvest Research and Extension Center",
+      "url": "https://postharvest.ucdavis.edu/produce-facts-sheets/chile-pepper"
+    },
+    "ucd-green-onion": {
+      "title": "Onions (Green Bunch): Produce Facts",
+      "publisher": "UC Davis Postharvest Research and Extension Center",
+      "url": "https://postharvest.ucdavis.edu/produce-facts-sheets/onions-green-bunch"
+    },
+    "fda-produce": {
+      "title": "Selecting and Serving Produce Safely",
+      "publisher": "U.S. Food and Drug Administration",
+      "url": "https://www.fda.gov/food/buy-store-serve-safe-food/selecting-and-serving-produce-safely"
+    },
+    "ndsu-potato": {
+      "title": "From Garden to Table: My Potatoes Turned Green, Now What?",
+      "publisher": "NDSU Extension",
+      "url": "https://www.ndsu.edu/agriculture/extension/publications/garden-table-my-potatoes-turned-green-now-what"
+    },
+    "il-potato": {
+      "title": "Potato",
+      "publisher": "University of Illinois Extension",
+      "url": "https://extension.illinois.edu/gardening/potato"
+    },
+    "usu-garlic": {
+      "title": "Fruit and Vegetable Guide Series: Garlic",
+      "publisher": "Utah State University Extension",
+      "url": "https://extension.usu.edu/nutrition/research/garlic"
+    },
+    "msu-garlic": {
+      "title": "Stinking facts about garlic",
+      "publisher": "Michigan State University Extension",
+      "url": "https://www.canr.msu.edu/news/stinking_facts_about_garlic"
+    },
+    "usu-onion": {
+      "title": "How to Grow Onions in Your Garden",
+      "publisher": "Utah State University Extension",
+      "url": "https://extension.usu.edu/yardandgarden/research/onions-in-the-garden"
     }
   },
   "causes": {
@@ -141,6 +366,10 @@
     "age": {
       "label": "Age",
       "blurb": "Produce is still alive after harvest. It slowly uses up its stored sugar and water, even when stored well."
+    },
+    "light": {
+      "label": "Light",
+      "blurb": "Light turns potatoes green and builds up solanine, a bitter natural toxin. Dark storage prevents it."
     }
   },
   "verdicts": {
@@ -1250,6 +1479,3016 @@
           "krispHelps": false,
           "sources": [
             "berries-review"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Apple",
+      "slug": "apple",
+      "display": "apples",
+      "intro": "Apples keep for weeks in the fridge, so most of their problems are slow ones. They go soft and mealy, wrinkle as they dry out, or rot where they were bruised. They are also the biggest ethylene source in most kitchens.",
+      "failures": [
+        {
+          "id": "soft-mealy",
+          "title": "Soft, mealy flesh",
+          "cause": "ripening",
+          "symptom": "The flesh is soft and grainy instead of crisp and juicy.",
+          "why": "Apples keep ripening after harvest, driven by their own ethylene, and they lose firmness as they go. Warmth speeds it up. UC Davis recommends storing Gala apples at about 32°F.",
+          "prevent": [
+            "Keep apples in the fridge, not in a fruit bowl",
+            "Buy only what you'll eat in a few weeks"
+          ],
+          "verdict": "cook",
+          "verdictNote": "Safe to eat if there's no mold or rot. Mealy apples are better cooked.",
+          "rescue": [
+            "Cook them into applesauce or apple butter",
+            "Bake them into a crisp, muffins or oatmeal"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-apple-gala"
+          ]
+        },
+        {
+          "id": "wrinkled",
+          "title": "Wrinkled, leathery skin",
+          "cause": "moisture_loss",
+          "symptom": "The skin puckers and the apple feels lighter and slightly rubbery.",
+          "why": "Apples lose water slowly through the skin. They keep best at 90 to 95 percent humidity, and an open fridge shelf is much drier than that.",
+          "prevent": [
+            "Keep them in the crisper drawer, in a bag with a few holes in it"
+          ],
+          "verdict": "eat",
+          "verdictNote": "Still good. The flesh is a little less juicy, and that's all.",
+          "rescue": [
+            "Slice them thin and dry them into apple chips",
+            "Chop them into oatmeal or a salad"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-apple-gala"
+          ]
+        },
+        {
+          "id": "bruised",
+          "title": "Brown, soft bruises",
+          "cause": "bruising",
+          "symptom": "Flat brown spots under the skin that feel soft when pressed.",
+          "why": "A bump breaks cells under the skin, and the damaged flesh browns. Wounds are also where decay gets in during storage.",
+          "prevent": [
+            "Don't drop apples into the bag or the drawer",
+            "Eat bruised apples first"
+          ],
+          "verdict": "trim",
+          "verdictNote": "Cut the bruise out and eat the rest. FDA advises cutting away damaged or bruised areas before eating.",
+          "rescue": [
+            "Chop the good parts into a pie, a crisp or applesauce"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-apple",
+            "fda-produce"
+          ]
+        },
+        {
+          "id": "rot",
+          "title": "Soft brown rot or mold",
+          "cause": "mold",
+          "symptom": "A soft, watery brown patch that keeps growing, sometimes with blue-green or gray fuzz.",
+          "why": "Blue mold and gray mold both cause decay in stored apples. Wounds are a common way in.",
+          "prevent": [
+            "Check the bag every week or so and pull out damaged apples",
+            "Keep bruised or cut apples apart from sound ones"
+          ],
+          "verdict": "toss",
+          "verdictNote": "Toss an apple that is moldy or rotting. USDA notes that mold toxins are known to occur on apples, and that mold reaches deeper than the part you can see. Check the apples that were touching it.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "ucd-apple",
+            "fsis-mold"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Blueberry",
+      "slug": "blueberry",
+      "display": "blueberries",
+      "intro": "Blueberries last longer than most berries, a week or two in the fridge. Mold is what usually ends them, followed by shriveling.",
+      "failures": [
+        {
+          "id": "moldy",
+          "title": "Gray or white fuzzy mold",
+          "cause": "mold",
+          "symptom": "Fuzz on a few berries, often where they touch each other or at the stem scar.",
+          "why": "Gray mold and Rhizopus rot are the main diseases of blueberries after harvest. Moisture on the berries helps both along.",
+          "prevent": [
+            "Keep berries dry and unwashed until you eat them",
+            "Pick through the container when you get home and remove soft or damaged berries",
+            "Store them in the coldest part of the fridge"
+          ],
+          "verdict": "toss",
+          "verdictNote": "Toss moldy berries and any soft or wet ones touching them. You can't cut mold out of soft fruit.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "ucd-bushberry",
+            "fsis-mold"
+          ]
+        },
+        {
+          "id": "shriveled",
+          "title": "Wrinkled, shriveled berries",
+          "cause": "moisture_loss",
+          "symptom": "Berries lose their shine, wrinkle and feel soft.",
+          "why": "Water loss makes blueberries shrivel and lose their gloss. It happens faster in an open container or in dry fridge air.",
+          "prevent": [
+            "Keep them covered in the fridge",
+            "Eat them within a week or two"
+          ],
+          "verdict": "cook",
+          "verdictNote": "Safe to eat if there's no mold. The texture is better cooked or blended.",
+          "rescue": [
+            "Bake them into muffins or pancakes",
+            "Freeze them for smoothies"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-bushberry"
+          ]
+        },
+        {
+          "id": "leaking",
+          "title": "Soft, leaking berries",
+          "cause": "age",
+          "symptom": "Berries turn mushy and leak juice that stains the container, with no fuzz.",
+          "why": "UC Davis calls these leakers: berries that break down inside as they age and leak juice.",
+          "prevent": [
+            "Don't stack anything on the container",
+            "Line the container with a paper towel to catch juice"
+          ],
+          "verdict": "cook",
+          "verdictNote": "Soft berries with no mold and no sour smell are fine cooked or frozen today. Toss any that smell fermented or have fuzz.",
+          "rescue": [
+            "Simmer them into a quick compote for yogurt or oatmeal",
+            "Freeze them for smoothies"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-bushberry"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Cantaloupe",
+      "slug": "cantaloupe",
+      "display": "cantaloupe",
+      "intro": "A whole cantaloupe ripens on the counter and gives off a lot of ethylene as it does. Most losses come from letting it go too far, from rot on the rind, or from cut melon sitting too long.",
+      "failures": [
+        {
+          "id": "overripe",
+          "title": "Soft, mushy flesh",
+          "cause": "ripening",
+          "symptom": "The melon gives easily all over, and the flesh is very soft and wet.",
+          "why": "Cantaloupe keeps ripening after harvest and makes a lot of its own ethylene, so going overripe is the usual problem.",
+          "prevent": [
+            "Move it to the fridge as soon as the stem end smells sweet",
+            "Eat it within five to seven days of ripening"
+          ],
+          "verdict": "cook",
+          "verdictNote": "Safe if it smells sweet. Use it today. If it smells sour or boozy, or the flesh is slimy, toss it.",
+          "rescue": [
+            "Blend it into a smoothie or agua fresca",
+            "Freeze cubes for smoothies"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-cantaloupe"
+          ]
+        },
+        {
+          "id": "rind-rot",
+          "title": "Mold or sunken soft spots on the rind",
+          "cause": "mold",
+          "symptom": "Fuzzy white, green or black patches, or soft sunken spots, often at the stem end or where the melon sat.",
+          "why": "Several fungi cause decay and surface spots on cantaloupe rind.",
+          "prevent": [
+            "Choose melons without soft spots, cracks or mold at the stem end",
+            "Keep the melon dry on the counter"
+          ],
+          "verdict": "toss",
+          "verdictNote": "Toss a melon with mold or soft, sunken rot on the rind. FDA says to throw away produce that looks rotten, and a knife carries whatever is on the rind into the flesh.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "ucd-cantaloupe",
+            "fda-produce"
+          ]
+        },
+        {
+          "id": "cut-slimy",
+          "title": "Cut melon turned slimy or sour",
+          "cause": "bacterial_rot",
+          "symptom": "Cut pieces feel slick, look glassy or dull, and smell sour or fermented.",
+          "why": "Once a melon is cut, the wet flesh is exposed and bacteria can grow on it. FDA notes that a knife can carry dirt and bacteria from the rind onto the flesh.",
+          "prevent": [
+            "Scrub the rind under running water with a clean brush before you cut it",
+            "Refrigerate cut melon right away in a covered container",
+            "Eat cut melon within about three days"
+          ],
+          "verdict": "toss",
+          "verdictNote": "Toss it. Don't taste cut melon that is slimy or smells off.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "fda-produce",
+            "ucd-cantaloupe"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Cherry",
+      "slug": "cherry",
+      "display": "cherries",
+      "intro": "Cherries don't ripen after picking and barely react to ethylene. They fail from mold, from bruising and from drying out.",
+      "failures": [
+        {
+          "id": "rot",
+          "title": "Brown soft spots or fuzzy mold",
+          "cause": "mold",
+          "symptom": "A soft brown spot that spreads, or gray or white fuzz, often starting near the stem or at a split.",
+          "why": "Brown rot, gray mold and Rhizopus rot are the main cherry diseases after harvest. Gray mold keeps growing slowly even at 32°F, and Rhizopus shows up in fruit kept at 41°F or warmer.",
+          "prevent": [
+            "Keep cherries cold and dry, and don't wash them until you eat them",
+            "Pick out split or damaged cherries when you get home"
+          ],
+          "verdict": "toss",
+          "verdictNote": "Toss moldy or rotting cherries and any soft or wet ones touching them. You can't cut mold out of soft fruit.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "ucd-cherry",
+            "fsis-mold"
+          ]
+        },
+        {
+          "id": "dented",
+          "title": "Dents and soft bruises",
+          "cause": "bruising",
+          "symptom": "Small sunken dimples in the skin, or soft flat spots.",
+          "why": "Pitting is a dent left when cells under the skin collapse after an impact. Bruises come from pressure and drops.",
+          "prevent": [
+            "Don't pile cherries deep or put anything on top of them",
+            "Leave the stems on until you eat them"
+          ],
+          "verdict": "eat",
+          "verdictNote": "Still good if there's no mold or leaking. Eat the dented ones first.",
+          "rescue": [
+            "Pit and freeze them for smoothies",
+            "Simmer them into a quick sauce"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-cherry"
+          ]
+        },
+        {
+          "id": "shriveled",
+          "title": "Shriveled fruit and dry, brown stems",
+          "cause": "moisture_loss",
+          "symptom": "The skin wrinkles, the fruit softens, and the stems turn brown and brittle.",
+          "why": "Cherries lose water in dry air. UC Davis lists shriveling as a quality defect and recommends 90 to 95 percent humidity.",
+          "prevent": [
+            "Keep them in a bag or covered container in the fridge"
+          ],
+          "verdict": "eat",
+          "verdictNote": "Still good. They are a little less juicy.",
+          "rescue": [
+            "Pit and bake them into a clafoutis or a crisp"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-cherry"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Grape",
+      "slug": "grape",
+      "display": "grapes",
+      "intro": "Grapes don't ripen after harvest and barely react to ethylene. They last one to three weeks cold, and usually end by drying out, dropping off the stem or growing gray mold.",
+      "failures": [
+        {
+          "id": "gray-mold",
+          "title": "Brown, slipping skins and gray fuzz",
+          "cause": "mold",
+          "symptom": "Grapes turn brown, the skin slips off easily, and white threads or gray fuzz appear, usually in one part of the bunch.",
+          "why": "This is gray mold, the main disease of stored grapes. It moves through a bunch quickly once it starts.",
+          "prevent": [
+            "Keep grapes cold and dry in their vented bag",
+            "Don't wash them until you eat them",
+            "Snip off damaged or moldy clusters as soon as you see them"
+          ],
+          "verdict": "toss",
+          "verdictNote": "Toss moldy grapes and the ones touching them. You can't cut mold out of soft fruit.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "ucd-grape",
+            "fsis-mold"
+          ]
+        },
+        {
+          "id": "shatter",
+          "title": "Grapes falling off the stem",
+          "cause": "age",
+          "symptom": "Loose grapes collect at the bottom of the bag.",
+          "why": "This is called shatter. It increases as grapes mature and with rough handling.",
+          "prevent": [
+            "Handle the bag gently",
+            "Eat grapes within one to three weeks"
+          ],
+          "verdict": "eat",
+          "verdictNote": "Still good if the loose grapes are firm. Rinse them and eat them first.",
+          "rescue": [
+            "Freeze loose grapes as a snack",
+            "Roast them with a little oil and salt for toast or salads"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-grape"
+          ]
+        },
+        {
+          "id": "shriveled",
+          "title": "Wrinkled grapes and dry stems",
+          "cause": "moisture_loss",
+          "symptom": "The stems turn brown and brittle and the grapes start to wrinkle.",
+          "why": "Grapes dry out in fridge air. UC Davis lists shriveled and dried berries as defects and recommends 90 to 95 percent humidity.",
+          "prevent": [
+            "Keep them in their bag at the back of the fridge",
+            "Leave grapes on the stem until you eat them"
+          ],
+          "verdict": "eat",
+          "verdictNote": "Still good if there's no mold. They taste sweeter and chewier.",
+          "rescue": [
+            "Roast them or simmer them into a pan sauce"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-grape"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Kiwi",
+      "slug": "kiwi",
+      "display": "kiwis",
+      "intro": "Kiwi is extremely sensitive to ethylene. Ripe kiwi goes from soft to mushy quickly, especially near other ripening fruit.",
+      "failures": [
+        {
+          "id": "mushy",
+          "title": "Mushy, overly soft fruit",
+          "cause": "ethylene",
+          "symptom": "The fruit gives with almost no pressure, and the flesh is very soft and translucent.",
+          "why": "Kiwi softens in response to tiny amounts of ethylene. UC Davis reports that as little as 5 to 10 parts per billion is enough. Ripe kiwi also gives off plenty of its own.",
+          "prevent": [
+            "Once ripe, keep kiwi in the fridge, away from apples, bananas and pears",
+            "Ripen only as many as you'll eat in a few days"
+          ],
+          "verdict": "cook",
+          "verdictNote": "Safe if it smells fresh and there's no mold. Toss it if it smells fermented.",
+          "rescue": [
+            "Blend it into a smoothie",
+            "Mash it over yogurt or oatmeal"
+          ],
+          "krispHelps": true,
+          "sources": [
+            "ucd-kiwifruit"
+          ]
+        },
+        {
+          "id": "bruised",
+          "title": "Dark, soft bruises",
+          "cause": "bruising",
+          "symptom": "A dark, wet-looking patch in the flesh under a soft spot on the skin.",
+          "why": "Ripe kiwi bruises easily. Wounds are also where gray mold gets in.",
+          "prevent": [
+            "Store ripe kiwi in a single layer",
+            "Don't put heavier fruit on top of it"
+          ],
+          "verdict": "trim",
+          "verdictNote": "Cut away the bruised part and eat the rest today.",
+          "rescue": [
+            "Scoop the good flesh into a smoothie"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-kiwifruit",
+            "fda-produce"
+          ]
+        },
+        {
+          "id": "moldy",
+          "title": "Mold or a sour, fermented smell",
+          "cause": "mold",
+          "symptom": "Gray fuzz, usually at the stem end or a wound, or a fruit that smells sour or boozy.",
+          "why": "Gray mold is the main kiwi disease after harvest. It can invade the fruit directly or through wounds.",
+          "prevent": [
+            "Eat ripe kiwi within a few days",
+            "Remove any damaged fruit from the bag"
+          ],
+          "verdict": "toss",
+          "verdictNote": "Toss it. Kiwi is soft fruit, so mold can't be cut away.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "ucd-kiwifruit",
+            "fsis-mold"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Lemon",
+      "slug": "lemon",
+      "display": "lemons",
+      "intro": "Lemons keep for weeks. When they fail, it's usually one of three things: they dry out, the peel pits in the cold, or one goes moldy and the fruit around it follows.",
+      "failures": [
+        {
+          "id": "dried-out",
+          "title": "Hard, shrunken lemons",
+          "cause": "moisture_loss",
+          "symptom": "The peel turns hard, thin and dull, and the lemon feels light.",
+          "why": "Lemons lose water through the peel. They keep best at 90 to 95 percent humidity, and both a fruit bowl and an open fridge shelf are drier than that.",
+          "prevent": [
+            "Keep lemons in a sealed bag in the fridge"
+          ],
+          "verdict": "eat",
+          "verdictNote": "Still good if there's no mold. There is just less juice.",
+          "rescue": [
+            "Microwave it for 10 seconds, roll it, then juice it",
+            "Zest it and freeze the zest"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-lemon"
+          ]
+        },
+        {
+          "id": "moldy",
+          "title": "Soft spot, then green or blue powder",
+          "cause": "mold",
+          "symptom": "A soft, watery patch on the peel that grows white fuzz, then a dusty green or blue coating.",
+          "why": "These are green mold and blue mold, the main diseases of citrus after harvest. They start as a water-soaked spot, then the spores appear.",
+          "prevent": [
+            "Check the bag or bowl often and remove any soft lemon",
+            "Handle lemons gently. Cuts and scratches are where decay starts"
+          ],
+          "verdict": "toss",
+          "verdictNote": "Toss a moldy lemon. Citrus is soft, juicy fruit, so mold can spread below the surface. Check the fruit that was touching it.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "ucd-lemon",
+            "fsis-mold"
+          ]
+        },
+        {
+          "id": "pitted-peel",
+          "title": "Pitted or stained peel",
+          "cause": "chilling",
+          "symptom": "Small sunken pits or reddish-brown stains on the peel after a long stay in the fridge.",
+          "why": "Lemons keep best at 54 to 57°F, warmer than a fridge. After a long time in the cold the peel can pit and stain, and badly damaged fruit decays more easily.",
+          "prevent": [
+            "Buy what you'll use in three to four weeks",
+            "Use the oldest lemons first"
+          ],
+          "verdict": "eat",
+          "verdictNote": "Still good if the lemon is firm and has no mold. The damage is in the peel, so juice it.",
+          "rescue": [
+            "Juice it and freeze the juice in an ice cube tray"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-lemon"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Lime",
+      "slug": "lime",
+      "display": "limes",
+      "intro": "Limes are sensitive to cold and to ethylene. They yellow near ripening fruit, get brown leathery patches in the fridge, and dry out on the counter.",
+      "failures": [
+        {
+          "id": "dried-out",
+          "title": "Hard, dry limes",
+          "cause": "moisture_loss",
+          "symptom": "The peel turns hard and dull and the lime gives very little juice.",
+          "why": "Limes lose water through the peel and keep best at 90 to 95 percent humidity. A fruit bowl is far drier than that.",
+          "prevent": [
+            "Keep limes in a sealed bag in the fridge"
+          ],
+          "verdict": "eat",
+          "verdictNote": "Still good if there's no mold. There is just less juice.",
+          "rescue": [
+            "Microwave it for 10 seconds, roll it, then juice it",
+            "Zest it and mix the zest with salt"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-lime"
+          ]
+        },
+        {
+          "id": "yellowing",
+          "title": "Turning yellow",
+          "cause": "ethylene",
+          "symptom": "The green peel fades to yellow-green, then yellow.",
+          "why": "Ethylene breaks down the green pigment in lime peel and lets the yellow underneath show. Apples, bananas and other ripening fruit nearby are the usual source.",
+          "prevent": [
+            "Keep limes away from apples, bananas and tomatoes",
+            "Store them in a sealed bag in the fridge"
+          ],
+          "verdict": "eat",
+          "verdictNote": "Still good if it's firm and has no mold. The change is in the peel color.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "ucd-lime"
+          ]
+        },
+        {
+          "id": "brown-patches",
+          "title": "Brown, sunken patches on the peel",
+          "cause": "chilling",
+          "symptom": "Small pits in the peel that merge into brown, leathery, sunken areas.",
+          "why": "Limes get chilling injury below 50°F, and it gets worse the colder and longer they are stored. Pits form in the peel and can merge into brown, leathery patches.",
+          "prevent": [
+            "Buy limes in small amounts and use them within two to three weeks",
+            "For up to a week, the counter is fine"
+          ],
+          "verdict": "eat",
+          "verdictNote": "Still good if the inside looks and smells normal. Juice it soon. Toss it if the patches are soft or moldy.",
+          "rescue": [
+            "Juice it and freeze the juice in an ice cube tray"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-lime"
+          ]
+        },
+        {
+          "id": "moldy",
+          "title": "Soft spot with green or blue mold",
+          "cause": "mold",
+          "symptom": "A soft, watery patch that grows white fuzz and then green or blue powder.",
+          "why": "Green mold and blue mold are the main lime diseases after harvest, along with rots that start at the stem end. Cuts and bruises in the peel let them in.",
+          "prevent": [
+            "Remove any soft lime from the bag as soon as you see it",
+            "Handle limes gently"
+          ],
+          "verdict": "toss",
+          "verdictNote": "Toss a moldy lime. Citrus is soft, juicy fruit, so mold can spread below the surface. Check the fruit that was touching it.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "ucd-lime",
+            "fsis-mold"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Mango",
+      "slug": "mango",
+      "display": "mangoes",
+      "intro": "Mangoes are tropical. Chilling them before they're ripe ruins them, and once ripe they have only a few days.",
+      "failures": [
+        {
+          "id": "cold-damage",
+          "title": "Gray, dull skin and uneven ripening",
+          "cause": "chilling",
+          "symptom": "Grayish, scald-like patches or pits on the skin, and fruit that ripens unevenly with poor color and flavor.",
+          "why": "Unripe mangoes are damaged by cold. UC Davis recommends 55°F for mature-green mangoes and 50°F for ripe ones, both well above fridge temperature. Chilled mangoes ripen unevenly, taste flat and decay more easily, and the flesh sometimes browns.",
+          "prevent": [
+            "Ripen mangoes on the counter",
+            "Refrigerate only ripe mangoes, and eat them within five to seven days"
+          ],
+          "verdict": "cook",
+          "verdictNote": "Safe to eat if the flesh smells fresh and has no mold. The flavor will be flat.",
+          "rescue": [
+            "Blend it into a smoothie or lassi with lime",
+            "Cook it into chutney"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-mango"
+          ]
+        },
+        {
+          "id": "black-spots",
+          "title": "Black spots on the skin",
+          "cause": "mold",
+          "symptom": "Dark spots that grow as the mango ripens, or a black ring around the stem.",
+          "why": "Anthracnose is a fungal disease that shows up as dark spots on the skin and can darken the flesh underneath. Stem-end rot starts as a round black patch around the stem.",
+          "prevent": [
+            "Choose mangoes without dark sunken spots or a black stem end",
+            "Eat ripe mangoes promptly, because the spots grow as the fruit softens"
+          ],
+          "verdict": "trim",
+          "verdictNote": "Spots that stay in the skin come off when you peel it. If the flesh underneath is dark, soft or smells off, or you see fuzzy mold, toss the mango.",
+          "rescue": [
+            "Peel it, check the flesh, and cube the good fruit for the freezer"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-mango",
+            "fda-produce",
+            "fsis-mold"
+          ]
+        },
+        {
+          "id": "overripe",
+          "title": "Very soft, wrinkled or stringy",
+          "cause": "ripening",
+          "symptom": "The mango gives easily all over, the skin wrinkles, and the flesh is very soft.",
+          "why": "Mangoes keep ripening after harvest, and they give off more ethylene the warmer they are. A ripe mango on the counter goes past its best quickly.",
+          "prevent": [
+            "Move ripe mangoes to the fridge",
+            "Cube and freeze ripe mango you will not eat in time"
+          ],
+          "verdict": "cook",
+          "verdictNote": "Safe if it smells sweet and fruity. Toss it if it smells sour or like alcohol, or the flesh has turned gray or brown.",
+          "rescue": [
+            "Blend it into a smoothie",
+            "Cook it down into a sauce for yogurt or ice cream"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-mango"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Orange",
+      "slug": "orange",
+      "display": "oranges",
+      "intro": "Oranges are hardy and keep for weeks in the fridge. Mold is the main way they fail. Otherwise they slowly dry out.",
+      "failures": [
+        {
+          "id": "moldy",
+          "title": "Soft spot with green or blue mold",
+          "cause": "mold",
+          "symptom": "A soft, watery patch that grows white fuzz and then green or blue powder, or a sour-smelling soft rot.",
+          "why": "Green mold, blue mold and sour rot are among the main diseases of oranges after harvest.",
+          "prevent": [
+            "Check the bag often and remove any soft orange",
+            "Don't seal oranges in an airtight bag"
+          ],
+          "verdict": "toss",
+          "verdictNote": "Toss a moldy orange. Citrus is soft, juicy fruit, so mold can spread below the surface. Check the fruit that was touching it.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "ucd-orange",
+            "fsis-mold"
+          ]
+        },
+        {
+          "id": "stem-end",
+          "title": "Shriveled peel around the stem",
+          "cause": "age",
+          "symptom": "The peel around the stem end dries, sinks and turns brown, and the orange feels lighter.",
+          "why": "As an orange ages, the peel around the stem dries out and breaks down. UC Davis calls it stem-end rind breakdown.",
+          "prevent": [
+            "Use oranges within three to four weeks",
+            "Keep them in the fridge rather than on the counter"
+          ],
+          "verdict": "eat",
+          "verdictNote": "Still good if the fruit inside is juicy and smells fresh, with no mold.",
+          "rescue": [
+            "Juice it"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-orange"
+          ]
+        },
+        {
+          "id": "pitted-peel",
+          "title": "Pitted or brown-stained peel",
+          "cause": "chilling",
+          "symptom": "Small sunken pits or brown stains on the peel after cold storage.",
+          "why": "Some oranges get chilling injury in the cold: pits and brown stains on the peel, and more decay afterward. How cold is too cold depends on the variety and where it was grown.",
+          "prevent": [
+            "Keep oranges in the crisper drawer rather than against the cold back wall",
+            "Use them within three to four weeks"
+          ],
+          "verdict": "eat",
+          "verdictNote": "Still good if the orange is firm and has no mold. Peel it and eat it soon.",
+          "rescue": [
+            "Juice it or segment it into a salad"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-orange"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Peach",
+      "slug": "peach",
+      "display": "peaches",
+      "intro": "Peaches have a narrow window. They turn mealy if they're refrigerated before they're ripe, bruise easily once soft, and mold fast.",
+      "failures": [
+        {
+          "id": "mealy",
+          "title": "Mealy, dry or brown inside",
+          "cause": "chilling",
+          "symptom": "The flesh is dry and grainy instead of juicy, sometimes brown or streaked red, with little flavor.",
+          "why": "This is internal breakdown, a kind of chilling injury. Peaches held at 36 to 46°F are the most prone to it, and that range includes most fridges. It shows up later, when the fruit ripens, and it can start in cold storage before the fruit reaches you.",
+          "prevent": [
+            "Ripen peaches on the counter first",
+            "Refrigerate only ripe peaches, and eat them within three to five days"
+          ],
+          "verdict": "cook",
+          "verdictNote": "Safe to eat if there's no mold. The texture won't come back, so cook them.",
+          "rescue": [
+            "Bake them into a crisp or cobbler",
+            "Simmer them into jam or a sauce"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-peach"
+          ]
+        },
+        {
+          "id": "bruised",
+          "title": "Brown, soft bruises",
+          "cause": "bruising",
+          "symptom": "Flat, soft, brown areas under the skin where the fruit was pressed or bumped.",
+          "why": "Ripe peaches bruise under very little pressure, and some varieties bruise more easily than others.",
+          "prevent": [
+            "Store them in a single layer, stem side down",
+            "Don't stack ripe peaches or bag them with heavier fruit"
+          ],
+          "verdict": "trim",
+          "verdictNote": "Cut the bruise out and eat the rest today. Toss the peach if the bruise has gone moldy or smells sour.",
+          "rescue": [
+            "Slice the good parts over yogurt or into a smoothie"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-peach",
+            "fda-produce"
+          ]
+        },
+        {
+          "id": "brown-rot",
+          "title": "Brown soft rot or fuzzy mold",
+          "cause": "mold",
+          "symptom": "A soft brown spot that spreads fast, often with tan, gray or white fuzz.",
+          "why": "Brown rot, gray mold and Rhizopus rot are the main peach diseases after harvest.",
+          "prevent": [
+            "Eat ripe peaches within a few days",
+            "Remove any rotting peach right away and check the ones next to it"
+          ],
+          "verdict": "toss",
+          "verdictNote": "Toss it. USDA lists peaches as soft fruit, where mold can spread below the surface.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "ucd-peach",
+            "fsis-mold"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Pear",
+      "slug": "pear",
+      "display": "pears",
+      "intro": "Pears ripen from the inside out, so by the time one feels soft all over, the core is already past it. Bruising and mold are the other ways they go.",
+      "failures": [
+        {
+          "id": "overripe",
+          "title": "Mushy and brown at the core",
+          "cause": "ripening",
+          "symptom": "The neck is very soft, and the flesh around the core is brown, wet and mushy.",
+          "why": "Pears ripen after harvest and make a lot of their own ethylene as they do, which keeps pushing them along. Past ripe, the flesh softens too far and breaks down.",
+          "prevent": [
+            "Check the neck every day. When it gives to gentle pressure, the pear is ripe",
+            "Move ripe pears to the fridge, away from apples and bananas"
+          ],
+          "verdict": "cook",
+          "verdictNote": "Safe if it smells sweet and there's no mold. Cut out the brown core and use the rest today.",
+          "rescue": [
+            "Simmer it into pear sauce or pear butter",
+            "Bake it into muffins or a crisp"
+          ],
+          "krispHelps": true,
+          "sources": [
+            "ucd-pear-bartlett"
+          ]
+        },
+        {
+          "id": "bruised",
+          "title": "Brown scuffs and bruises",
+          "cause": "bruising",
+          "symptom": "Brown marks or bands on the skin, or soft brown flesh underneath.",
+          "why": "Pears mark easily. Rubbing and vibration leave brown spots or bands on the skin, and an impact browns the flesh underneath.",
+          "prevent": [
+            "Carry and store pears in a single layer",
+            "Handle ripe pears as little as possible"
+          ],
+          "verdict": "trim",
+          "verdictNote": "Skin scuffs are cosmetic. Cut out any bruised flesh and eat the rest.",
+          "rescue": [
+            "Slice the good parts into a salad or onto toast"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-pear-bartlett",
+            "fda-produce"
+          ]
+        },
+        {
+          "id": "moldy",
+          "title": "Soft rot or fuzzy mold",
+          "cause": "mold",
+          "symptom": "A soft, watery brown patch, sometimes with blue-green or gray fuzz.",
+          "why": "Blue mold and gray mold are the main pear diseases after harvest.",
+          "prevent": [
+            "Remove damaged pears from the bowl or bag",
+            "Eat ripe pears within three to five days"
+          ],
+          "verdict": "toss",
+          "verdictNote": "Toss a pear that is moldy or rotting. Ripe pears are soft, juicy fruit, so mold can spread below the surface.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "ucd-pear-bartlett",
+            "ucd-pear-winter",
+            "fsis-mold"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Pineapple",
+      "slug": "pineapple",
+      "display": "pineapple",
+      "intro": "Pineapple doesn't get sweeter after it's picked, so there is nothing to wait for. Left too long it ferments, and too long in a cold fridge browns the core.",
+      "failures": [
+        {
+          "id": "fermented",
+          "title": "Soft, fizzy flesh that smells like alcohol",
+          "cause": "age",
+          "symptom": "Bright yellow, very soft flesh with gas pockets, and a smell of alcohol or vinegar.",
+          "why": "Yeasts ferment the sugar in overripe pineapple. UC Davis describes soft, bright-yellow flesh broken up by large gas cavities. The yeast gets in through wounds.",
+          "prevent": [
+            "Eat pineapple within a few days of buying it",
+            "Choose one without soft spots, leaks or a fermented smell at the base"
+          ],
+          "verdict": "toss",
+          "verdictNote": "Toss it if it smells like alcohol or vinegar, fizzes, or has soft, leaking patches.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "ucd-pineapple",
+            "fda-produce"
+          ]
+        },
+        {
+          "id": "brown-core",
+          "title": "Brown, watery spots near the core",
+          "cause": "chilling",
+          "symptom": "Water-soaked brown spots in and around the core, sometimes spreading until the center is brown.",
+          "why": "Pineapple is damaged below 45°F, and a week or more is enough. Brown, water-soaked spots form in the core. Ripe fruit handles cold better than unripe fruit.",
+          "prevent": [
+            "Keep a whole pineapple in the fridge for no more than about five days",
+            "Or keep it on the counter and eat it within a few days"
+          ],
+          "verdict": "trim",
+          "verdictNote": "Cut away the brown, watery flesh. The rest is fine if it looks normal and smells sweet. Toss it if it smells fermented.",
+          "rescue": [
+            "Grill or roast the good pieces",
+            "Freeze chunks for smoothies"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-pineapple",
+            "fda-produce"
+          ]
+        },
+        {
+          "id": "soft-patches",
+          "title": "Dark, soft patches on the shell",
+          "cause": "mold",
+          "symptom": "A slightly darker patch of shell that gives way under light pressure, with soft, watery flesh underneath.",
+          "why": "This is black rot, a fungal disease. The flesh under the patch softens, and the skin over it breaks easily.",
+          "prevent": [
+            "Check the base and sides for soft spots before buying",
+            "Don't let a whole pineapple sit for more than a few days"
+          ],
+          "verdict": "toss",
+          "verdictNote": "Toss it. FDA says to throw away produce that looks rotten.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "ucd-pineapple",
+            "fda-produce"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Plum",
+      "slug": "plum",
+      "display": "plums",
+      "intro": "Plums ripen on the counter and bruise less easily than peaches. The usual problems are flesh that browns after a cold stay, fruit left too long, and mold.",
+      "failures": [
+        {
+          "id": "brown-inside",
+          "title": "Brown, glassy or mealy flesh",
+          "cause": "chilling",
+          "symptom": "The flesh looks translucent or brown, tastes flat and feels mealy, even though the skin looks fine.",
+          "why": "This is internal breakdown, a kind of chilling injury. Plums held at 36 to 46°F are the most prone to it, and that range includes most fridges. It shows up later, as the fruit ripens.",
+          "prevent": [
+            "Ripen plums on the counter until slightly soft",
+            "Refrigerate only ripe plums, and eat them within three to five days"
+          ],
+          "verdict": "cook",
+          "verdictNote": "Safe to eat if there's no mold. The flavor and texture are poor, so cook them.",
+          "rescue": [
+            "Roast them with a little sugar",
+            "Simmer them into jam or a sauce"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-plum"
+          ]
+        },
+        {
+          "id": "overripe",
+          "title": "Very soft and wrinkled",
+          "cause": "ripening",
+          "symptom": "The plum gives easily all over, and the skin wrinkles or splits.",
+          "why": "Plums keep ripening after harvest and make far more ethylene once ripe and warm than they do cold.",
+          "prevent": [
+            "Move ripe plums to the crisper drawer",
+            "Store them in a single layer"
+          ],
+          "verdict": "cook",
+          "verdictNote": "Safe if it smells sweet and there's no mold or leaking. Use it today.",
+          "rescue": [
+            "Simmer them into a quick compote",
+            "Bake them into a cake or crumble"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-plum"
+          ]
+        },
+        {
+          "id": "moldy",
+          "title": "Brown soft rot or fuzzy mold",
+          "cause": "mold",
+          "symptom": "A soft brown spot that spreads, often with tan, gray or white fuzz.",
+          "why": "Brown rot, gray mold and Rhizopus rot are the main plum diseases after harvest.",
+          "prevent": [
+            "Don't wash plums until you eat them",
+            "Remove any rotting plum right away"
+          ],
+          "verdict": "toss",
+          "verdictNote": "Toss it. Plums are soft, juicy fruit, so mold can spread below the surface.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "ucd-plum",
+            "fsis-mold"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Watermelon",
+      "slug": "watermelon",
+      "display": "watermelon",
+      "intro": "Whole watermelon keeps best at cool room temperature, not in the fridge. It turns mealy around ripening fruit, loses color and flavor in the cold, and spoils quickly once cut.",
+      "failures": [
+        {
+          "id": "mealy",
+          "title": "Mealy, mushy flesh",
+          "cause": "ethylene",
+          "symptom": "The flesh is grainy and soft instead of crisp.",
+          "why": "Watermelon makes very little ethylene but reacts badly to it. UC Davis reports that 5 parts per million for a week at 64°F causes an unacceptable loss of firmness and eating quality. Hard knocks do something similar: internal bruising makes the flesh break down early and turn mealy.",
+          "prevent": [
+            "Keep whole watermelon away from apples, bananas, peaches and other ripening fruit",
+            "Carry it and set it down gently"
+          ],
+          "verdict": "cook",
+          "verdictNote": "Safe if it smells fresh and sweet. The texture is better blended. Toss it if it smells sour or fizzes.",
+          "rescue": [
+            "Blend it into juice, agua fresca or a slushie",
+            "Freeze cubes for smoothies"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-watermelon"
+          ]
+        },
+        {
+          "id": "cold-damage",
+          "title": "Pale, bland flesh after the fridge",
+          "cause": "chilling",
+          "symptom": "Small pits in the rind, with flesh that has lost some of its color and flavor.",
+          "why": "Whole watermelon is damaged by several days below about 45°F. The rind pits, the flesh loses color and flavor, and it decays faster once it comes back to room temperature.",
+          "prevent": [
+            "Keep whole watermelon on the counter or in a cool room",
+            "Chill it for a day before serving rather than for a week"
+          ],
+          "verdict": "eat",
+          "verdictNote": "Still good if it smells fresh. It just won't taste as sweet.",
+          "rescue": [
+            "Toss it with lime, salt and chili",
+            "Blend it into a drink"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-watermelon"
+          ]
+        },
+        {
+          "id": "cut-slimy",
+          "title": "Cut watermelon turned slimy or sour",
+          "cause": "bacterial_rot",
+          "symptom": "Cut pieces feel slick, look dull and smell sour, or the juice fizzes.",
+          "why": "Cut watermelon is wet and exposed, so bacteria and yeasts can grow on it. FDA notes that a knife can carry dirt and bacteria from the rind onto the flesh.",
+          "prevent": [
+            "Scrub the rind under running water before you cut it",
+            "Wrap cut watermelon tightly and refrigerate it right away",
+            "Eat cut watermelon within three to five days"
+          ],
+          "verdict": "toss",
+          "verdictNote": "Toss it. Don't taste cut melon that is slimy, fizzy or smells off.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "fda-produce",
+            "ucd-watermelon"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Nectarine",
+      "slug": "nectarine",
+      "display": "nectarines",
+      "intro": "Nectarines behave like peaches. A fridge turns unripe ones mealy, ripe ones go soft within days, and rot moves fast.",
+      "failures": [
+        {
+          "id": "mealy",
+          "title": "Mealy, flavorless flesh",
+          "cause": "chilling",
+          "symptom": "The flesh is dry and grainy, sometimes brown or streaked red, and the fruit never gets juicy.",
+          "why": "Nectarines held at 36 to 46°F are prone to internal breakdown, a kind of chilling injury, and most fridges sit in that range. The damage shows when the fruit ripens: mealy or brown flesh, red bleeding and little flavor.",
+          "prevent": [
+            "Ripen nectarines on the counter, stem side down",
+            "Refrigerate them only once ripe, and eat them within three to five days"
+          ],
+          "verdict": "cook",
+          "verdictNote": "Safe to eat if there's no mold. Cooking is the best use.",
+          "rescue": [
+            "Grill or roast them",
+            "Cook them into a crisp or a jam"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-peach"
+          ]
+        },
+        {
+          "id": "overripe",
+          "title": "Wrinkled and very soft",
+          "cause": "ripening",
+          "symptom": "The skin wrinkles and the fruit feels squishy all over.",
+          "why": "Nectarines keep ripening on the counter. Ripe fruit at room temperature gives off many times more ethylene than unripe fruit does.",
+          "prevent": [
+            "Move ripe nectarines to the fridge",
+            "Keep them in a single layer"
+          ],
+          "verdict": "cook",
+          "verdictNote": "Safe if it smells sweet and there's no mold or leaking. Use it today.",
+          "rescue": [
+            "Blend them into a smoothie",
+            "Simmer them into a sauce for yogurt or pancakes"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-peach"
+          ]
+        },
+        {
+          "id": "moldy",
+          "title": "Brown soft rot or fuzzy mold",
+          "cause": "mold",
+          "symptom": "A soft brown spot that spreads quickly, often with tan, gray or white fuzz.",
+          "why": "Brown rot, gray mold and Rhizopus rot are the main diseases of nectarines after harvest.",
+          "prevent": [
+            "Remove any rotting fruit right away and check the ones next to it",
+            "Don't wash nectarines until you eat them"
+          ],
+          "verdict": "toss",
+          "verdictNote": "Toss it. USDA lists peaches as soft fruit, where mold can spread below the surface, and nectarines are the same.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "ucd-peach",
+            "fsis-mold"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Papaya",
+      "slug": "papaya",
+      "display": "papaya",
+      "intro": "Papaya is damaged below about 54°F unless it's already ripe. Chilled too early, it pits, blotches and never ripens properly. Ripe, it has only a few days.",
+      "failures": [
+        {
+          "id": "cold-damage",
+          "title": "Blotchy skin that never ripens",
+          "cause": "chilling",
+          "symptom": "Pitted or blotchy skin, hard patches in the flesh, and fruit that stays partly green and bland.",
+          "why": "Papaya gets chilling injury below about 54°F, and green fruit is hit hardest. The skin pits and blotches, the fruit ripens unevenly, and the flesh can stay hard or turn watery. It also decays more easily.",
+          "prevent": [
+            "Ripen papaya on the counter until the skin is mostly yellow",
+            "Refrigerate only ripe papaya"
+          ],
+          "verdict": "cook",
+          "verdictNote": "Safe to eat if the flesh smells fresh and has no mold. It will be bland.",
+          "rescue": [
+            "Blend it into a smoothie with lime",
+            "Cook green, firm papaya in a curry or stir-fry"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-papaya"
+          ]
+        },
+        {
+          "id": "sunken-spots",
+          "title": "Brown, sunken spots on the skin",
+          "cause": "mold",
+          "symptom": "Small brown, water-soaked spots that grow as the fruit ripens, or a dark stem end.",
+          "why": "Anthracnose is the main papaya disease after harvest. It starts as small, brown, shallow spots that can enlarge. Other fungi rot the stem end, turning it dark brown to black.",
+          "prevent": [
+            "Choose papayas without sunken spots or a dark, soft stem end",
+            "Eat ripe papaya promptly"
+          ],
+          "verdict": "trim",
+          "verdictNote": "Shallow spots that stay in the skin come off when you peel it. If the flesh underneath is soft, dark or smells off, or you see fuzzy mold, toss the papaya.",
+          "rescue": [
+            "Peel it, check the flesh, and cube the good fruit for the freezer"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-papaya",
+            "fda-produce",
+            "fsis-mold"
+          ]
+        },
+        {
+          "id": "overripe",
+          "title": "Mushy, very soft flesh",
+          "cause": "ripening",
+          "symptom": "The fruit gives easily all over and the flesh is very soft.",
+          "why": "Papaya keeps ripening after harvest, softening and yellowing as it goes, and it does so faster when warm.",
+          "prevent": [
+            "Move ripe papaya to the fridge",
+            "Store cut papaya in a covered container and eat it within a few days"
+          ],
+          "verdict": "cook",
+          "verdictNote": "Safe if it smells sweet. Toss it if it smells sour or fermented, or the flesh is slimy.",
+          "rescue": [
+            "Blend it into a smoothie",
+            "Freeze cubes for later"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-papaya"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Pomegranate",
+      "slug": "pomegranate",
+      "display": "pomegranates",
+      "intro": "Pomegranates keep for a month or more in the fridge and don't ripen after harvest. They mostly dry out. The thing to watch for is rot inside, which the skin can hide.",
+      "failures": [
+        {
+          "id": "leathery",
+          "title": "Hard, shrunken, leathery skin",
+          "cause": "moisture_loss",
+          "symptom": "The skin dries, hardens and pulls in around the arils.",
+          "why": "Pomegranates are very prone to water loss, which shrivels the skin.",
+          "prevent": [
+            "Keep whole pomegranates in the fridge, in a bag"
+          ],
+          "verdict": "eat",
+          "verdictNote": "Usually still good. Open it: if the arils are plump and smell fresh, eat them.",
+          "rescue": [
+            "Freeze the arils in a single layer",
+            "Juice them"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-pomegranate"
+          ]
+        },
+        {
+          "id": "black-arils",
+          "title": "Brown or black arils inside",
+          "cause": "mold",
+          "symptom": "Arils that are brown, black or mushy, sometimes with an off-color patch of skin outside.",
+          "why": "Heart rot is a fungal infection that blackens the arils while the outside looks close to normal. Gray mold works from the outside in: the rind turns light brown and leathery, then gray fuzz appears.",
+          "prevent": [
+            "Choose fruit that feels heavy, with no soft or discolored patches",
+            "Refrigerate pomegranates rather than leaving them out for weeks"
+          ],
+          "verdict": "toss",
+          "verdictNote": "Toss it if the arils are black, mushy or moldy, or smell fermented.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "ucd-pomegranate",
+            "fsis-mold"
+          ]
+        },
+        {
+          "id": "brown-skin",
+          "title": "Brown patches on the skin",
+          "cause": "chilling",
+          "symptom": "Brown discoloration on the skin after a long time in cold storage.",
+          "why": "After two months or more in the cold, pomegranate skin can turn brown. UC Davis describes husk scald, which stays in the skin, and chilling injury, which can also leave the arils pale and the white membranes brown.",
+          "prevent": [
+            "Use pomegranates within a month or two",
+            "Eat the oldest ones first"
+          ],
+          "verdict": "eat",
+          "verdictNote": "Still good if the arils inside are firm, juicy and smell fresh, with no mold.",
+          "rescue": [
+            "Scatter the arils over salads or yogurt"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-pomegranate"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Asparagus",
+      "slug": "asparagus",
+      "display": "asparagus",
+      "intro": "Asparagus keeps growing after it's cut, which is why it goes downhill so fast. The spears turn woody, go limp, or get slimy at the tips, usually within a week.",
+      "failures": [
+        {
+          "id": "woody",
+          "title": "Tough, woody spears",
+          "cause": "ethylene",
+          "symptom": "Spears are tough and stringy, especially toward the cut end.",
+          "why": "Asparagus builds woody fiber after harvest. UC Davis notes that ethylene speeds this toughening up, and that includes the ethylene bruised spears make themselves.",
+          "prevent": [
+            "Keep asparagus away from apples, avocados and peaches",
+            "Handle the bunch gently",
+            "Cook it within three to five days"
+          ],
+          "verdict": "cook",
+          "verdictNote": "Safe to eat. Snap or cut off the tough ends and peel the lower stalks.",
+          "rescue": [
+            "Peel the lower stalks and roast or grill them",
+            "Simmer the tough ends into soup and blend it"
+          ],
+          "krispHelps": true,
+          "sources": [
+            "ucd-asparagus"
+          ]
+        },
+        {
+          "id": "limp",
+          "title": "Limp, bendy spears",
+          "cause": "moisture_loss",
+          "symptom": "Spears bend instead of snapping, and the cut ends look dry and shrunken.",
+          "why": "Asparagus dries out fast. UC Davis recommends 95 to 100 percent humidity and counts dried-out ends as a quality defect.",
+          "prevent": [
+            "Stand the bunch upright in a jar with an inch of water and cover it loosely with a bag",
+            "Or wrap the cut ends in a damp paper towel"
+          ],
+          "verdict": "eat",
+          "verdictNote": "Still good if the tips aren't slimy and it smells fresh.",
+          "rescue": [
+            "Trim the ends and stand the spears in cold water for an hour",
+            "Roast or sauté them"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-asparagus"
+          ]
+        },
+        {
+          "id": "slimy-tips",
+          "title": "Dark, slimy tips",
+          "cause": "bacterial_rot",
+          "symptom": "The tips turn dark, mushy and slimy, and smell bad.",
+          "why": "This is bacterial soft rot. UC Davis notes that it can start at the tips or at the cut end.",
+          "prevent": [
+            "Keep the tips dry. Only the cut ends should sit in water",
+            "Change the water every day or two",
+            "Use asparagus within a few days"
+          ],
+          "verdict": "toss",
+          "verdictNote": "Toss slimy or bad-smelling spears. FDA says to throw away produce that looks rotten. Check the rest of the bunch, and cook any firm, fresh-smelling spears today.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "ucd-asparagus",
+            "fda-produce"
+          ]
+        },
+        {
+          "id": "feathering",
+          "title": "Tips opening up",
+          "cause": "age",
+          "symptom": "The tight tips loosen and spread open, and the spears bend upward.",
+          "why": "Asparagus keeps growing after it's cut. The tips open up, which growers call feathering, and the spears bend away from gravity. It happens quickly above 50°F.",
+          "prevent": [
+            "Refrigerate asparagus as soon as you get home",
+            "Store it upright"
+          ],
+          "verdict": "eat",
+          "verdictNote": "Still good. It's a sign of age, so cook it soon.",
+          "rescue": [
+            "Roast, grill or sauté it"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-asparagus"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Brussels Sprouts",
+      "slug": "brussels-sprouts",
+      "display": "Brussels sprouts",
+      "intro": "Brussels sprouts are very sensitive to ethylene. The outer leaves yellow and fall off first, then the sprouts go limp, and old or bruised ones turn dark and slimy.",
+      "failures": [
+        {
+          "id": "yellow-leaves",
+          "title": "Yellow, loose outer leaves",
+          "cause": "ethylene",
+          "symptom": "The outer leaves turn yellow and come away from the sprout.",
+          "why": "Ethylene makes Brussels sprouts yellow and shed their outer leaves. They make little of it themselves, so the source is usually ripening fruit nearby.",
+          "prevent": [
+            "Keep them away from apples, pears and tomatoes",
+            "Store them in a breathable bag in the crisper drawer"
+          ],
+          "verdict": "trim",
+          "verdictNote": "Peel off the yellow leaves. The sprout underneath is fine if it's firm and green.",
+          "rescue": [
+            "Roast them",
+            "Shred them for a slaw or a quick sauté"
+          ],
+          "krispHelps": true,
+          "sources": [
+            "ucd-brussels"
+          ]
+        },
+        {
+          "id": "limp",
+          "title": "Soft, limp sprouts",
+          "cause": "moisture_loss",
+          "symptom": "Sprouts feel soft and loose instead of tight and firm.",
+          "why": "Without high humidity, sprouts lose water and go limp. UC Davis recommends above 95 percent humidity.",
+          "prevent": [
+            "Keep them in a bag in the crisper drawer",
+            "Buy them on the stalk when you can"
+          ],
+          "verdict": "cook",
+          "verdictNote": "Safe to eat if there's no slime or bad smell.",
+          "rescue": [
+            "Roast them at high heat",
+            "Shred and sauté them"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-brussels"
+          ]
+        },
+        {
+          "id": "dark-slimy",
+          "title": "Dark, slimy leaves",
+          "cause": "bacterial_rot",
+          "symptom": "Dark, wet, slimy leaves and a strong bad smell.",
+          "why": "This is bacterial soft rot. It usually follows bruising or other damage.",
+          "prevent": [
+            "Don't wash them until you cook them",
+            "Use them within three to five days"
+          ],
+          "verdict": "toss",
+          "verdictNote": "Toss sprouts that are slimy or smell bad. FDA says to throw away produce that looks rotten. Sort the rest and cook the firm ones soon.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "ucd-brussels",
+            "fda-produce"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Cabbage",
+      "slug": "cabbage",
+      "display": "cabbage",
+      "intro": "Cabbage is one of the longest-keeping vegetables, a month or two in the fridge. The outer leaves take the damage: they yellow around ethylene, speckle with age, and brown where the head was cut.",
+      "failures": [
+        {
+          "id": "yellow-leaves",
+          "title": "Yellow, loose outer leaves",
+          "cause": "ethylene",
+          "symptom": "The outer leaves turn yellow and separate from the head.",
+          "why": "Ethylene makes cabbage leaves yellow and detach. Cabbage makes very little of it, so the source is usually fruit stored nearby.",
+          "prevent": [
+            "Keep cabbage away from apples, avocados and peaches",
+            "Store it whole in the crisper drawer"
+          ],
+          "verdict": "trim",
+          "verdictNote": "Peel off the yellow leaves. The head underneath is fine if it's firm and crisp.",
+          "rescue": [
+            "Shred it for slaw",
+            "Sauté or braise it"
+          ],
+          "krispHelps": true,
+          "sources": [
+            "ucd-cabbage"
+          ]
+        },
+        {
+          "id": "black-specks",
+          "title": "Small black specks on the leaves",
+          "cause": "age",
+          "symptom": "Tiny dark specks on the ribs and veins of the leaves, like ground pepper.",
+          "why": "This is pepper spot, also called black leaf speck. It's a storage disorder, not mold. It's tied to cold weather in the field and late harvest, and it develops further when cabbage goes from cold storage to warmer temperatures.",
+          "prevent": [
+            "Choose heads without specks on the outer leaves",
+            "Keep cabbage in the fridge rather than letting it sit out"
+          ],
+          "verdict": "eat",
+          "verdictNote": "Still good. The specks are cosmetic. Peel off the outer leaves if they bother you.",
+          "rescue": [
+            "Use it cooked, where the specks disappear"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-cabbage"
+          ]
+        },
+        {
+          "id": "cut-edge",
+          "title": "Gray or brown cut edge",
+          "cause": "bruising",
+          "symptom": "The cut face of a half head turns gray-brown or black.",
+          "why": "Cut and broken cabbage tissue browns. UC Davis notes that broken ribs brown and decay more easily too.",
+          "prevent": [
+            "Don't cut the head until you need it",
+            "Wrap the cut face tightly",
+            "Peel off whole leaves when you only need a little"
+          ],
+          "verdict": "trim",
+          "verdictNote": "Shave off the discolored layer. The cabbage underneath is fine if it's crisp and smells fresh.",
+          "rescue": [
+            "Shred the rest for slaw or a stir-fry"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-cabbage",
+            "fda-produce"
+          ]
+        },
+        {
+          "id": "slimy-moldy",
+          "title": "Slimy or moldy outer leaves",
+          "cause": "bacterial_rot",
+          "symptom": "Dark, slimy, bad-smelling leaves, or gray fuzz on the outside of the head.",
+          "why": "Bacterial soft rot breaks leaves down into slime. Gray mold and other fungi also attack stored cabbage.",
+          "prevent": [
+            "Keep the head dry and unwashed until you use it",
+            "Check stored cabbage every week or two and peel off any leaves that are going"
+          ],
+          "verdict": "trim",
+          "verdictNote": "Cabbage is firm, so USDA says a small mold spot can be cut off with at least an inch around and below it. Peel away the affected outer leaves as well. If the slime or smell reaches into the head, toss it.",
+          "rescue": [
+            "Cook what is left the same day"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-cabbage",
+            "fsis-mold"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Cauliflower",
+      "slug": "cauliflower",
+      "display": "cauliflower",
+      "intro": "Cauliflower shows every problem on its white head. It discolors around ethylene, browns where it was bumped, and grows dark spots as it ages.",
+      "failures": [
+        {
+          "id": "discolored",
+          "title": "Discolored head and yellow leaves",
+          "cause": "ethylene",
+          "symptom": "The white head turns dull or yellowish-brown, and the green leaves yellow and drop off.",
+          "why": "UC Davis notes that even low levels of ethylene discolor the head and make the outer leaves yellow and detach.",
+          "prevent": [
+            "Keep it away from apples, pears and tomatoes",
+            "Store it in a loose bag in the crisper drawer"
+          ],
+          "verdict": "trim",
+          "verdictNote": "Trim any discolored surface and pull off the yellow leaves. The rest is fine if it's firm and smells fresh.",
+          "rescue": [
+            "Roast it",
+            "Rice it or blend it into soup"
+          ],
+          "krispHelps": true,
+          "sources": [
+            "ucd-cauliflower"
+          ]
+        },
+        {
+          "id": "bruised",
+          "title": "Brown, bruised patches",
+          "cause": "bruising",
+          "symptom": "Brown patches where the head was pressed or bumped.",
+          "why": "Bruised cauliflower browns quickly and decays sooner.",
+          "prevent": [
+            "Store it stem side up, so the head isn't resting on the shelf",
+            "Don't stack anything on it"
+          ],
+          "verdict": "trim",
+          "verdictNote": "Shave or cut off the brown patches. The rest is still good.",
+          "rescue": [
+            "Roast or steam the rest"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-cauliflower",
+            "fda-produce"
+          ]
+        },
+        {
+          "id": "dark-spots",
+          "title": "Dark spots, fuzz or slime",
+          "cause": "mold",
+          "symptom": "Small dark spots on the head that spread, sometimes gray fuzz, or soft, slimy, bad-smelling patches.",
+          "why": "Black spot and gray mold are fungal. Bacterial soft rot turns the head soft and slimy. All of them get more likely after three to four weeks of storage, or sooner if the cauliflower is kept too warm.",
+          "prevent": [
+            "Don't wash it until you cook it",
+            "Use it within one to two weeks"
+          ],
+          "verdict": "trim",
+          "verdictNote": "Cauliflower is firm, so USDA's rule for firm vegetables applies: cut off small mold spots with at least an inch around and below them. If the spots are widespread, or the head is soft, slimy or smells bad, toss it.",
+          "rescue": [
+            "Cook the trimmed head the same day"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-cauliflower",
+            "fsis-mold"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Corn",
+      "slug": "corn",
+      "display": "corn",
+      "intro": "Sweet corn is at its best the day it's picked. After that the sugar turns to starch, the husks dry out, and old ears mold. Eat it within a day or three.",
+      "failures": [
+        {
+          "id": "starchy",
+          "title": "Starchy, bland kernels",
+          "cause": "age",
+          "symptom": "The kernels are tough and doughy, and the corn isn't sweet.",
+          "why": "Corn turns its sugar into starch after harvest. UC Davis says standard sweet corn isn't stored for more than a few days because quality drops quickly, even at ideal temperatures. Warmth makes it faster.",
+          "prevent": [
+            "Refrigerate corn as soon as you get home",
+            "Eat it within one to three days",
+            "Keep it in the husk until you cook it"
+          ],
+          "verdict": "cook",
+          "verdictNote": "Safe to eat if there's no mold, slime or sour smell. It just isn't sweet.",
+          "rescue": [
+            "Cut the kernels off for chowder, cornbread or fritters",
+            "Sauté the kernels with butter and salt"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-corn"
+          ]
+        },
+        {
+          "id": "dry-husks",
+          "title": "Dry, papery husks",
+          "cause": "moisture_loss",
+          "symptom": "The husks turn pale, dry and papery, and the silk dries out.",
+          "why": "Corn loses moisture after picking. UC Davis notes that the stalk ends are trimmed short to limit it.",
+          "prevent": [
+            "Keep the husks on",
+            "Store the ears in a bag in the crisper drawer"
+          ],
+          "verdict": "cook",
+          "verdictNote": "Safe to eat if the kernels look normal and there's no mold or sour smell. The ear is past its best.",
+          "rescue": [
+            "Cut the kernels off and add them to soup or a stir-fry"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-corn"
+          ]
+        },
+        {
+          "id": "moldy",
+          "title": "Mold, slime or a sour smell",
+          "cause": "mold",
+          "symptom": "Fuzzy mold on the silk or the tip of the ear, or kernels that are slimy or smell sour.",
+          "why": "UC Davis notes that the dry silk often grows surface mold once corn has been stored for more than about 10 days. Corn that old is well past its best.",
+          "prevent": [
+            "Buy corn close to when you plan to eat it",
+            "Keep it cold and dry"
+          ],
+          "verdict": "toss",
+          "verdictNote": "Toss an ear with mold, slime or a sour smell. Corn kernels are soft and moist, so mold can spread below the surface.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "ucd-corn",
+            "fsis-mold"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Eggplant",
+      "slug": "eggplant",
+      "display": "eggplant",
+      "intro": "Eggplant is a warm-weather crop that doesn't like the fridge. It pits and browns in the cold, wrinkles as it dries out, and browns at the cap around ethylene. Use it within a few days.",
+      "failures": [
+        {
+          "id": "cold-damage",
+          "title": "Pitted skin and brown seeds",
+          "cause": "chilling",
+          "symptom": "Pits and bronze patches on the skin, with brown seeds and flesh inside.",
+          "why": "Eggplant is damaged below 50°F. At 41°F the injury shows in six to eight days, and it adds up over time. Most fridges run around 37°F to 40°F.",
+          "prevent": [
+            "Use eggplant within a few days of buying it",
+            "Keep it in the warmest part of the fridge"
+          ],
+          "verdict": "cook",
+          "verdictNote": "Safe to eat if it's firm and smells fresh, with no mold. Cut away any badly browned flesh and cook it soon.",
+          "rescue": [
+            "Roast it and blend it into a dip",
+            "Cook it into a curry or stew"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-eggplant"
+          ]
+        },
+        {
+          "id": "wrinkled",
+          "title": "Wrinkled skin and spongy flesh",
+          "cause": "moisture_loss",
+          "symptom": "The skin loses its shine and wrinkles, and the flesh feels spongy.",
+          "why": "These are the signs of water loss. UC Davis notes that long, thin Japanese eggplants lose water three times faster than the large globe type.",
+          "prevent": [
+            "Use it within five to seven days",
+            "Keep it in the crisper drawer"
+          ],
+          "verdict": "cook",
+          "verdictNote": "Safe to eat if there's no mold or soft rot. The texture is better cooked down.",
+          "rescue": [
+            "Roast it and mash it into a dip",
+            "Dice it into a pasta sauce"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-eggplant"
+          ]
+        },
+        {
+          "id": "brown-cap",
+          "title": "Brown cap and early browning",
+          "cause": "ethylene",
+          "symptom": "The green cap turns brown and may come loose, and the eggplant browns sooner than it should.",
+          "why": "Above about 1 part per million, ethylene can make the cap drop off and speeds up deterioration, browning in particular.",
+          "prevent": [
+            "Keep it away from apples, bananas and tomatoes",
+            "Use it within a few days"
+          ],
+          "verdict": "eat",
+          "verdictNote": "Still good if the eggplant is firm and the flesh looks normal. Cut off the cap and cook it soon.",
+          "rescue": [
+            "Slice and roast or grill it"
+          ],
+          "krispHelps": true,
+          "sources": [
+            "ucd-eggplant"
+          ]
+        },
+        {
+          "id": "moldy",
+          "title": "Soft, sunken spots or mold",
+          "cause": "mold",
+          "symptom": "Soft, sunken, dark patches, or gray, black or white fuzz.",
+          "why": "Several molds rot eggplant, including gray mold, black mold and Rhizopus. Eggplant also bruises easily when it's stacked or handled roughly.",
+          "prevent": [
+            "Don't stack anything on it",
+            "Don't wash it until you cook it"
+          ],
+          "verdict": "toss",
+          "verdictNote": "Toss it. Eggplant flesh is soft and spongy, so mold can spread below the surface.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "ucd-eggplant",
+            "fsis-mold"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Garlic",
+      "slug": "garlic",
+      "display": "garlic",
+      "intro": "Garlic keeps for months in a dry pantry. When it goes, it sprouts, dries out into shrunken cloves, or turns soft and moldy.",
+      "failures": [
+        {
+          "id": "sprouting",
+          "title": "Green shoots",
+          "cause": "age",
+          "symptom": "A green shoot grows from the top of the clove, or shows in the center when you cut it.",
+          "why": "Sprouting means the garlic has come out of dormancy. It happens fastest between about 40 and 65°F, cooler than a kitchen and close to fridge temperature.",
+          "prevent": [
+            "Keep whole bulbs in a dry, airy spot at room temperature, not in the fridge",
+            "Buy garlic in amounts you'll use within a few months"
+          ],
+          "verdict": "eat",
+          "verdictNote": "Still okay to eat, according to Utah State University Extension. The shoot means the garlic is older and can taste bitter, so pull it out if you like.",
+          "rescue": [
+            "Roast the cloves, which mellows the flavor"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "usu-garlic",
+            "ucd-garlic"
+          ]
+        },
+        {
+          "id": "shrunken",
+          "title": "Shrunken, soft cloves",
+          "cause": "moisture_loss",
+          "symptom": "Cloves feel light, soft or hollow under the papery skin.",
+          "why": "Garlic slowly loses water. UC Davis notes that the bulbs end up soft, spongy and shriveled.",
+          "prevent": [
+            "Keep bulbs whole until you need them",
+            "Once a bulb is broken open, use the cloves within about 10 days"
+          ],
+          "verdict": "trim",
+          "verdictNote": "Use the cloves that are still firm. Toss any that are soft, brown or sticky.",
+          "rescue": [
+            "Peel the firm cloves and freeze them"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-garlic",
+            "msu-garlic"
+          ]
+        },
+        {
+          "id": "moldy",
+          "title": "Soft, moldy cloves",
+          "cause": "mold",
+          "symptom": "Blue-green or gray powder on the cloves, or cloves that are soft, spongy and crumbling.",
+          "why": "This is Penicillium rot. A bulb can look normal outside while the cloves turn soft and spongy, then break down into a green or gray powdery mass.",
+          "prevent": [
+            "Store garlic dry, with air moving around it",
+            "Don't keep it in a sealed bag or container"
+          ],
+          "verdict": "toss",
+          "verdictNote": "Toss the bulb. Michigan State University Extension says to throw out garlic when it's soft or moldy.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "ucd-garlic",
+            "msu-garlic"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Green Beans",
+      "slug": "green-beans",
+      "display": "green beans",
+      "intro": "Green beans are fussy: too cold and they spot, too dry and they go limp, and ethylene yellows them. They are best within five to seven days.",
+      "failures": [
+        {
+          "id": "yellow-brown",
+          "title": "Yellowing and browning",
+          "cause": "ethylene",
+          "symptom": "The pods lose their bright green and turn yellowish or brown.",
+          "why": "Ethylene makes green beans lose their green color and brown faster. UC Davis reports that more than 0.1 part per million cuts their shelf life at 41°F by 30 to 50 percent.",
+          "prevent": [
+            "Keep them away from apples, bananas and other ripening fruit",
+            "Store them unwashed in a breathable bag in the crisper drawer"
+          ],
+          "verdict": "cook",
+          "verdictNote": "Safe to eat if they aren't slimy or moldy. They are past their best raw.",
+          "rescue": [
+            "Braise them with tomatoes and garlic",
+            "Add them to soup or a stir-fry"
+          ],
+          "krispHelps": true,
+          "sources": [
+            "ucd-beans"
+          ]
+        },
+        {
+          "id": "rusty-spots",
+          "title": "Rusty brown spots",
+          "cause": "chilling",
+          "symptom": "Small rusty-brown spots on the pods, sometimes with a dull, cloudy look.",
+          "why": "Green beans keep best at 41 to 45°F, a little warmer than most fridges. Rusty-brown spots are the most common sign of cold damage. Below 41°F for more than five or six days, the pods can also turn dull and pit.",
+          "prevent": [
+            "Use green beans within five to seven days",
+            "Keep them in the crisper drawer, not against the cold back wall"
+          ],
+          "verdict": "cook",
+          "verdictNote": "Safe to eat if the beans are firm and not slimy. Cook them soon, because cold-damaged beans decay faster.",
+          "rescue": [
+            "Blanch and freeze them",
+            "Roast or sauté them"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-beans"
+          ]
+        },
+        {
+          "id": "limp",
+          "title": "Limp, shriveled beans",
+          "cause": "moisture_loss",
+          "symptom": "The beans bend instead of snapping, and the skin wrinkles.",
+          "why": "Green beans lose water quickly. UC Davis notes that about 5 percent weight loss is enough to make them shrivel and go limp.",
+          "prevent": [
+            "Keep them in a bag in the crisper drawer",
+            "Don't snap or trim them until you cook them"
+          ],
+          "verdict": "cook",
+          "verdictNote": "Safe to eat if there's no slime or mold.",
+          "rescue": [
+            "Soak them in ice water for 30 minutes before cooking",
+            "Simmer them in soup or a stew"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-beans"
+          ]
+        },
+        {
+          "id": "slimy",
+          "title": "Slimy or moldy clumps",
+          "cause": "mold",
+          "symptom": "Wet, slimy patches, or white cottony fuzz holding several beans together.",
+          "why": "Decay starts on broken or damaged beans and spreads to the ones touching them, forming what UC Davis calls nests. Moisture on the surface makes it worse.",
+          "prevent": [
+            "Keep beans dry and unwashed until you cook them",
+            "Pick out broken or damaged beans when you get home"
+          ],
+          "verdict": "toss",
+          "verdictNote": "Toss slimy or moldy beans and the ones stuck to them. Beans are soft and moist, so mold can't be cut away. If the rest are dry, firm and smell fresh, wash and cook them today.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "ucd-beans",
+            "fsis-mold"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Onion",
+      "slug": "onion",
+      "display": "onions",
+      "intro": "Whole onions keep for a month or more in a cool, dry, dark spot. Over time they sprout, pick up black mold under the skin, or rot from the neck down.",
+      "failures": [
+        {
+          "id": "sprouting",
+          "title": "Green sprouts",
+          "cause": "age",
+          "symptom": "A green shoot grows from the top, and the onion feels softer than it did.",
+          "why": "Onions sprout once their dormancy ends. Commercial storage holds them at 32°F, and UC Davis notes that anything from 41 to 77°F favors sprouting. That covers every spot in a house, so at home it comes down to time.",
+          "prevent": [
+            "Buy onions in amounts you'll use within a month or two",
+            "Keep them cool, dry and in the dark, with air around them"
+          ],
+          "verdict": "trim",
+          "verdictNote": "Utah State University Extension says to use sprouting onions first. If the onion is firm, with no mold, slime or bad smell, cut out the shoot and any soft layers and use the rest soon. Toss it if it's mushy or smells off.",
+          "rescue": [
+            "Cook it the same week. Sprouted onions keep getting softer"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-onion",
+            "usu-onion"
+          ]
+        },
+        {
+          "id": "black-mold",
+          "title": "Black powder under the skin",
+          "cause": "mold",
+          "symptom": "Black, sooty powder on or under the papery skin, usually near the neck.",
+          "why": "This is black mold. It shows up as black discoloration at the neck and on the outer layers.",
+          "prevent": [
+            "Store onions dry, with air around them, not in a plastic bag",
+            "Use onions with damaged or loose skins first"
+          ],
+          "verdict": "trim",
+          "verdictNote": "Onions are firm, so USDA says small mold spots can be cut off with at least an inch around and below them. Peel off every layer that has black powder on it and rinse what is left. If the mold runs between the inner layers, or the onion is soft or smells off, toss it.",
+          "rescue": [
+            "Cook the cleaned onion the same day"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-onion",
+            "fsis-mold"
+          ]
+        },
+        {
+          "id": "soft-rot",
+          "title": "Soft, smelly layers",
+          "cause": "bacterial_rot",
+          "symptom": "Soft, watery or slimy layers with a sour or foul smell, sometimes only on the inside or at the neck.",
+          "why": "Several rots do this. Bacterial soft rot is watery and foul-smelling, sour skin turns inner layers slimy and yellow-brown, and neck rot starts at the neck and moves down through the bulb.",
+          "prevent": [
+            "Choose onions with tight, dry necks and no soft spots",
+            "Keep them dry"
+          ],
+          "verdict": "toss",
+          "verdictNote": "Toss it. FDA says to throw away produce that looks rotten. Check the onions stored next to it.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "ucd-onion",
+            "fda-produce"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Peas",
+      "slug": "peas",
+      "display": "peas",
+      "intro": "Fresh peas lose their sweetness and tenderness within days. The pods also yellow around ethylene, and old or damp ones spot and rot.",
+      "failures": [
+        {
+          "id": "yellow-pods",
+          "title": "Yellowing pods",
+          "cause": "ethylene",
+          "symptom": "The pods fade from bright green to yellow, and the stem end turns brown.",
+          "why": "UC Davis notes that long exposure to even low levels of ethylene speeds up yellowing and decay in pea pods. The small leafy cap at the stem end is more sensitive than the pod.",
+          "prevent": [
+            "Keep peas away from apples, bananas and other ripening fruit",
+            "Store them in a perforated bag in the crisper drawer"
+          ],
+          "verdict": "cook",
+          "verdictNote": "Safe to eat if there's no slime or mold. They are past their best raw.",
+          "rescue": [
+            "Stir-fry them",
+            "Simmer them in soup"
+          ],
+          "krispHelps": true,
+          "sources": [
+            "ucd-peas"
+          ]
+        },
+        {
+          "id": "starchy",
+          "title": "Starchy, tough peas",
+          "cause": "age",
+          "symptom": "The peas taste starchy instead of sweet, and the pods are tough.",
+          "why": "Peas age quickly after picking. UC Davis lists yellowing, lost tenderness and starchiness as what goes wrong with time, and all of it happens faster at 41 to 50°F than at 32°F.",
+          "prevent": [
+            "Refrigerate peas right away",
+            "Eat them within three to five days",
+            "Don't shell them until you cook them"
+          ],
+          "verdict": "cook",
+          "verdictNote": "Safe to eat if there's no slime or mold. They are better cooked.",
+          "rescue": [
+            "Simmer them into pea soup",
+            "Mash them with mint and lemon"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-peas"
+          ]
+        },
+        {
+          "id": "spotted-slimy",
+          "title": "Spotted or slimy pods",
+          "cause": "mold",
+          "symptom": "Brown spots on the pods, gray or white fuzz, or soft, wet, slimy patches.",
+          "why": "Several fungi spot and rot pea pods, including gray mold. Bacterial soft rot is common after rough handling.",
+          "prevent": [
+            "Keep peas dry and unwashed until you use them",
+            "Handle them gently"
+          ],
+          "verdict": "toss",
+          "verdictNote": "Toss pods that are slimy or moldy. Pea pods are soft and moist, so mold can't be cut away. If the rest are dry, firm and smell fresh, wash and cook them today.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "ucd-peas",
+            "fsis-mold"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Potato",
+      "slug": "potato",
+      "display": "potatoes",
+      "intro": "Potatoes keep for weeks in a cool, dark pantry. Light turns them green, time makes them sprout, and one rotting potato can spoil the bag.",
+      "failures": [
+        {
+          "id": "sprouting",
+          "title": "Sprouts",
+          "cause": "age",
+          "symptom": "White, pink or purple sprouts growing from the eyes.",
+          "why": "Potatoes sprout once their dormancy ends, and a warm room brings it on sooner.",
+          "prevent": [
+            "Keep potatoes cool, dark and ventilated",
+            "Buy what you'll use within a few weeks"
+          ],
+          "verdict": "trim",
+          "verdictNote": "If the potato is still firm, cut out the sprouts and eyes and use it. University of Illinois Extension says a firm sprouted potato is fine once the sprouts are removed. If it's also shriveled or wrinkled, don't eat it.",
+          "rescue": [
+            "Cut out the sprouts, peel it and cook it this week"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "il-potato",
+            "ndsu-potato",
+            "ucd-potato"
+          ]
+        },
+        {
+          "id": "green-skin",
+          "title": "Green skin",
+          "cause": "light",
+          "symptom": "Green patches on or just under the skin.",
+          "why": "Light makes potatoes produce chlorophyll, which is the green you see. Bitter, toxic compounds called glycoalkaloids form along with it. Solanine is the best known.",
+          "prevent": [
+            "Store potatoes in the dark, in a paper bag, a basket or a closed cupboard",
+            "Don't leave them out on the counter"
+          ],
+          "verdict": "trim",
+          "verdictNote": "Cut out small green areas. NDSU Extension says that removes most of the toxin. Peel away any green skin too. If the greening is extensive, the flesh under the skin is green, or the potato tastes bitter, throw it away.",
+          "rescue": [
+            "Peel and trim it, then cook it as usual"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-potato",
+            "ndsu-potato",
+            "il-potato"
+          ]
+        },
+        {
+          "id": "soft-rot",
+          "title": "Soft, wet, smelly potato",
+          "cause": "bacterial_rot",
+          "symptom": "A soft, wet or leaking potato with a strong bad smell.",
+          "why": "Bacterial soft rot and several fungal rots break potatoes down. Bruised, cut or skinned potatoes are the most likely to decay.",
+          "prevent": [
+            "Check the bag every week or so and remove any soft potato",
+            "Keep potatoes dry and unwashed until you use them"
+          ],
+          "verdict": "toss",
+          "verdictNote": "Toss it. FDA says to throw away produce that looks rotten. Check the potatoes that were touching it and wipe out the bin.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "ucd-potato",
+            "fda-produce"
+          ]
+        },
+        {
+          "id": "black-spots",
+          "title": "Dark spots under the skin",
+          "cause": "bruising",
+          "symptom": "Gray, blue-black or brown patches in the flesh when you peel or cut the potato.",
+          "why": "This is bruising. Bruised potato tissue turns reddish, then blue-black, over one to three days.",
+          "prevent": [
+            "Don't drop the bag or toss potatoes into a bin",
+            "Store them where they will not get knocked around"
+          ],
+          "verdict": "trim",
+          "verdictNote": "Cut the dark spots out. The rest of the potato is fine if it's firm.",
+          "rescue": [
+            "Trim it and cook it as usual"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-potato",
+            "fda-produce"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Sweet Potato",
+      "slug": "sweet-potato",
+      "display": "sweet potatoes",
+      "intro": "Sweet potatoes are a pantry item. The fridge damages them, a warm kitchen dries them out, and broken skin lets rot in.",
+      "failures": [
+        {
+          "id": "hard-center",
+          "title": "Hard center after cooking",
+          "cause": "chilling",
+          "symptom": "Parts of the sweet potato stay hard however long it's cooked, and the flesh looks darker than usual.",
+          "why": "Sweet potatoes get chilling injury at 55°F or below, so a fridge damages them. UC Davis calls the result hardcore: cooked roots with a hard center and darker color. Chilled roots can also brown inside, shrivel and rot.",
+          "prevent": [
+            "Keep sweet potatoes in a cool, dark pantry, not the fridge",
+            "Use them within about a month"
+          ],
+          "verdict": "cook",
+          "verdictNote": "Safe to eat if there's no mold, rot or off smell. Some parts may never soften.",
+          "rescue": [
+            "Cut it into small cubes and simmer it in soup or stew",
+            "Mash the parts that soften"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-sweetpotato"
+          ]
+        },
+        {
+          "id": "wrinkled",
+          "title": "Wrinkled, shriveled ends",
+          "cause": "moisture_loss",
+          "symptom": "The ends shrivel and the skin wrinkles.",
+          "why": "Sweet potatoes lose water in storage. They lose it faster where the skin is scraped or broken, and faster above about 59°F.",
+          "prevent": [
+            "Handle them gently. The skin is thin",
+            "Keep them away from the stove and other warm spots"
+          ],
+          "verdict": "cook",
+          "verdictNote": "Safe to eat if it's still firm, with no mold or soft, wet spots. Cut off the dried ends.",
+          "rescue": [
+            "Roast it",
+            "Peel, cube and simmer it in soup"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-sweetpotato"
+          ]
+        },
+        {
+          "id": "rot",
+          "title": "Soft, moldy or black patches",
+          "cause": "mold",
+          "symptom": "Soft, wet patches, white or gray fuzz, or dark sunken spots.",
+          "why": "Rhizopus soft rot, black rot and Fusarium rot all attack stored sweet potatoes. Broken skin and cold damage both make decay more likely.",
+          "prevent": [
+            "Use sweet potatoes with scraped or broken skin first",
+            "Don't wash them until you cook them"
+          ],
+          "verdict": "toss",
+          "verdictNote": "Toss a sweet potato with soft, wet or moldy patches or an off smell. FDA says to throw away produce that looks rotten.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "ucd-sweetpotato",
+            "fda-produce"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Zucchini",
+      "slug": "zucchini",
+      "display": "zucchini",
+      "intro": "Zucchini is damaged by temperatures below 41°F, and most fridges run a little colder than that. It pits and goes watery in the cold, yellows around ethylene, and turns rubbery as it dries out.",
+      "failures": [
+        {
+          "id": "cold-damage",
+          "title": "Pitted, watery spots",
+          "cause": "chilling",
+          "symptom": "Small sunken, watery pits in the skin, followed by discoloration and soft spots.",
+          "why": "Zucchini gets chilling injury after more than a day or two below 41°F. The damage adds up over time and leads to faster decay.",
+          "prevent": [
+            "Use zucchini within five to seven days",
+            "Keep it in the warmest part of the fridge"
+          ],
+          "verdict": "trim",
+          "verdictNote": "If the zucchini is still firm, cut away the pitted spots and use it soon. If it's soft, slimy or moldy, toss it.",
+          "rescue": [
+            "Grate it into fritters, muffins or zucchini bread",
+            "Sauté or roast it"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-squash"
+          ]
+        },
+        {
+          "id": "yellowing",
+          "title": "Turning yellow",
+          "cause": "ethylene",
+          "symptom": "Dark green skin fades toward yellow.",
+          "why": "UC Davis notes that low levels of ethylene speed up yellowing in green summer squash.",
+          "prevent": [
+            "Keep it away from apples, bananas and tomatoes",
+            "Store it in a bag in the crisper drawer"
+          ],
+          "verdict": "eat",
+          "verdictNote": "Still good if it's firm, with no soft or slimy spots.",
+          "rescue": [
+            "Sauté or roast it",
+            "Grate it into a frittata"
+          ],
+          "krispHelps": true,
+          "sources": [
+            "ucd-squash"
+          ]
+        },
+        {
+          "id": "rubbery",
+          "title": "Rubbery, shriveled zucchini",
+          "cause": "moisture_loss",
+          "symptom": "The zucchini bends, feels soft, and the skin wrinkles, usually from the ends.",
+          "why": "Summer squash loses water quickly after harvest, which makes it lose firmness and shrivel.",
+          "prevent": [
+            "Keep it in a plastic bag in the crisper drawer",
+            "Don't wash it until you cook it"
+          ],
+          "verdict": "cook",
+          "verdictNote": "Safe to eat if there's no slime or mold. The texture is better cooked.",
+          "rescue": [
+            "Grate it into soup, pasta sauce or baking",
+            "Roast it"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-squash"
+          ]
+        },
+        {
+          "id": "slimy",
+          "title": "Slimy or moldy spots",
+          "cause": "mold",
+          "symptom": "Soft, wet, slimy patches, or white or gray fuzz.",
+          "why": "Several rots attack summer squash, including bacterial rots and Rhizopus soft rot. Storage beyond about two weeks makes decay more likely.",
+          "prevent": [
+            "Keep it dry",
+            "Handle it gently. Scuffs and bruises come from rough handling"
+          ],
+          "verdict": "toss",
+          "verdictNote": "Toss it. Zucchini is soft and moist, like cucumber, which USDA lists as soft produce where mold can spread below the surface.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "ucd-squash",
+            "fsis-mold"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Radish",
+      "slug": "radish",
+      "display": "radishes",
+      "intro": "Radishes keep a week or two. They go rubbery as they dry out, the tops yellow well before the roots give up, and warm storage brings on dark spots.",
+      "failures": [
+        {
+          "id": "rubbery",
+          "title": "Soft, rubbery radishes",
+          "cause": "moisture_loss",
+          "symptom": "The radishes feel soft and bendy instead of crisp.",
+          "why": "Radishes go soft as they lose water. UC Davis recommends 95 to 100 percent humidity and notes that ice on top helps them keep a crisp texture.",
+          "prevent": [
+            "Cut off the greens before storing",
+            "Keep the roots in a bag in the crisper drawer"
+          ],
+          "verdict": "eat",
+          "verdictNote": "Still good if there are no dark, soft spots and they smell fresh.",
+          "rescue": [
+            "Soak them in ice water for 30 minutes to an hour to firm them up",
+            "Slice and roast or sauté them"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-radish"
+          ]
+        },
+        {
+          "id": "yellow-tops",
+          "title": "Yellow, wilted tops",
+          "cause": "age",
+          "symptom": "The leafy tops turn yellow, wilt, and may go slimy.",
+          "why": "The tops age faster than the roots. UC Davis notes that they yellow with longer storage and with exposure to ethylene.",
+          "prevent": [
+            "Cut the tops off when you get home and store them separately",
+            "Use the greens within a day or two"
+          ],
+          "verdict": "trim",
+          "verdictNote": "Cut off and discard yellow or slimy tops. The roots are fine if they're firm.",
+          "rescue": [
+            "Slice the roots into a salad"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-radish"
+          ]
+        },
+        {
+          "id": "dark-spots",
+          "title": "Dark spots or soft rot",
+          "cause": "bacterial_rot",
+          "symptom": "Black or dark spots on the root, gray fuzz, or soft, watery, sunken patches.",
+          "why": "Bacterial black spot and other lesions develop when radishes are stored warmer than they should be. Soft rot and gray mold turn the root watery or fuzzy.",
+          "prevent": [
+            "Keep radishes cold",
+            "Keep them in a bag, and dry them off if they are wet"
+          ],
+          "verdict": "toss",
+          "verdictNote": "Toss radishes with dark soft spots, slime or mold. USDA allows cutting a small mold spot off firm vegetables with at least an inch around it, and a radish is too small for that. The firm, clean radishes in the bunch are fine.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "ucd-radish",
+            "fsis-mold"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Squash (Winter)",
+      "slug": "winter-squash",
+      "display": "winter squash",
+      "intro": "Whole winter squash keeps for a month or more in a cool, dry pantry. Cold damages the rind, damaged rind lets rot in, and very old squash turns dry and stringy.",
+      "failures": [
+        {
+          "id": "cold-damage",
+          "title": "Sunken pits in the rind",
+          "cause": "chilling",
+          "symptom": "Sunken pits on the rind, often followed by rot once the squash warms up.",
+          "why": "Winter squash gets chilling injury below about 50 to 55°F. A month at 41°F is enough. The rind pits, and the squash decays quickly after it comes out of the cold.",
+          "prevent": [
+            "Keep whole squash in a cool pantry, not the fridge",
+            "Don't store it in an unheated garage or porch in cold weather"
+          ],
+          "verdict": "trim",
+          "verdictNote": "Cut it open. If the flesh under the pits is firm and smells fresh, trim the pitted areas and cook it soon. Toss it if the flesh is soft, wet or moldy.",
+          "rescue": [
+            "Roast it",
+            "Cube and freeze it"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-wsquash"
+          ]
+        },
+        {
+          "id": "soft-spot",
+          "title": "Soft or moldy spot on the rind",
+          "cause": "mold",
+          "symptom": "A soft, sunken or discolored patch on the rind, sometimes with fuzz.",
+          "why": "Several fungi cause storage rot in winter squash. Squash with a damaged rind or cold damage gets it first.",
+          "prevent": [
+            "Keep squash from touching each other",
+            "Check stored squash every week or two, and use any with a damaged rind first"
+          ],
+          "verdict": "trim",
+          "verdictNote": "Whole winter squash is hard and dense, so USDA's rule for firm vegetables applies: cut off a small mold spot with at least an inch around and below it. If the rot is soft and wet, has reached the seed cavity, or smells bad, toss the squash.",
+          "rescue": [
+            "Cook the trimmed squash the same day"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-wsquash",
+            "fsis-mold"
+          ]
+        },
+        {
+          "id": "dry-stringy",
+          "title": "Dry, stringy flesh",
+          "cause": "age",
+          "symptom": "The squash feels light, and the flesh is dry, stringy or pale.",
+          "why": "Squash slowly loses weight and texture in storage, and warm rooms speed it up.",
+          "prevent": [
+            "Store squash somewhere cool and dry, with air around it",
+            "Use the oldest squash first"
+          ],
+          "verdict": "cook",
+          "verdictNote": "Safe to eat if there's no mold, soft rot or off smell.",
+          "rescue": [
+            "Roast it and blend it into soup",
+            "Steam and mash it"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-wsquash"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Grapefruit",
+      "slug": "grapefruit",
+      "display": "grapefruit",
+      "intro": "Grapefruit keeps best at 54 to 57°F, warmer than a fridge. Over a long cold stay the peel pits and browns. Mold and drying out are the other ways it goes.",
+      "failures": [
+        {
+          "id": "pitted-peel",
+          "title": "Pitted, reddish-brown peel",
+          "cause": "chilling",
+          "symptom": "Sunken pits and reddish-brown patches on the peel after weeks in the fridge.",
+          "why": "Grapefruit gets chilling injury in cold storage: pitting, reddish-brown discoloration, off-flavors and more decay. How easily depends on the variety and the season.",
+          "prevent": [
+            "Use refrigerated grapefruit within two to three weeks",
+            "For up to a week, the counter is fine"
+          ],
+          "verdict": "eat",
+          "verdictNote": "Still good if the fruit is firm, smells fresh and has no mold. Toss it if the flesh is watery or tastes off.",
+          "rescue": [
+            "Juice it",
+            "Broil the halves with a little sugar"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-grapefruit"
+          ]
+        },
+        {
+          "id": "moldy",
+          "title": "Soft spot with green or blue mold",
+          "cause": "mold",
+          "symptom": "A soft, watery patch that grows white fuzz and then green or blue powder, or a sour-smelling soft rot.",
+          "why": "Green mold, blue mold and sour rot are among the main diseases of grapefruit after harvest.",
+          "prevent": [
+            "Remove any soft grapefruit as soon as you see it",
+            "Keep the fruit dry"
+          ],
+          "verdict": "toss",
+          "verdictNote": "Toss a moldy grapefruit. Citrus is soft, juicy fruit, so mold can spread below the surface. Check the fruit that was touching it.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "ucd-grapefruit",
+            "fsis-mold"
+          ]
+        },
+        {
+          "id": "dried-out",
+          "title": "Soft, shriveled peel",
+          "cause": "moisture_loss",
+          "symptom": "The peel wrinkles and softens, and the fruit feels light for its size.",
+          "why": "Grapefruit loses water through the peel and keeps best at 90 to 95 percent humidity.",
+          "prevent": [
+            "Keep grapefruit in the crisper drawer"
+          ],
+          "verdict": "eat",
+          "verdictNote": "Still good if there's no mold and it smells fresh. There is less juice.",
+          "rescue": [
+            "Juice it"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-grapefruit"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Apricot",
+      "slug": "apricot",
+      "display": "apricots",
+      "intro": "Apricots are fragile. They bruise at a touch once soft, turn brown and spongy after a cold stay, and rot quickly.",
+      "failures": [
+        {
+          "id": "gel-breakdown",
+          "title": "Brown, spongy or gel-like flesh",
+          "cause": "chilling",
+          "symptom": "Watery patches in the flesh that turn brown, with a spongy or jelly-like texture and little flavor.",
+          "why": "UC Davis calls this gel breakdown or chilling injury. Apricots stored at 36 to 46°F, the range most fridges run in, have a short life and lose flavor.",
+          "prevent": [
+            "Ripen apricots on the counter until slightly soft",
+            "Refrigerate only ripe apricots, and eat them within three to five days"
+          ],
+          "verdict": "cook",
+          "verdictNote": "Safe to eat if there's no mold and it smells fresh. Cook them.",
+          "rescue": [
+            "Simmer them into jam or a compote",
+            "Roast them with honey"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-apricot"
+          ]
+        },
+        {
+          "id": "bruised",
+          "title": "Soft, brown bruises",
+          "cause": "bruising",
+          "symptom": "Flat, soft, dark areas where the fruit was pressed.",
+          "why": "Soft apricots bruise very easily.",
+          "prevent": [
+            "Store them in a single layer",
+            "Handle ripe apricots as little as possible"
+          ],
+          "verdict": "trim",
+          "verdictNote": "Cut the bruise out and eat the rest today. Toss the apricot if the bruise is moldy or smells sour.",
+          "rescue": [
+            "Chop the good parts into oatmeal or yogurt"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-apricot",
+            "fda-produce"
+          ]
+        },
+        {
+          "id": "moldy",
+          "title": "Brown soft rot or fuzzy mold",
+          "cause": "mold",
+          "symptom": "A soft brown spot that spreads, often with tan, gray or white fuzz.",
+          "why": "Brown rot and Rhizopus rot are the main apricot diseases after harvest.",
+          "prevent": [
+            "Remove any rotting apricot right away",
+            "Don't wash apricots until you eat them"
+          ],
+          "verdict": "toss",
+          "verdictNote": "Toss it. Apricots are soft, juicy fruit, so mold can spread below the surface.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "ucd-apricot",
+            "fsis-mold"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Honeydew",
+      "slug": "honeydew",
+      "display": "honeydew",
+      "intro": "Honeydew is damaged by fridge temperatures unless it's already ripe. An unripe one that goes in cold may never ripen, and cut melon needs to be eaten within a few days.",
+      "failures": [
+        {
+          "id": "cold-damage",
+          "title": "Tan or reddish patches on the rind",
+          "cause": "chilling",
+          "symptom": "Reddish-tan blotches or small pits on the rind after time in the fridge. The melon may stay hard and bland.",
+          "why": "Honeydew is damaged by several days below 45°F, and most fridges run around 37°F to 40°F. The rind pits and discolors, the melon may fail to ripen, and it picks up off-flavors and decays more easily.",
+          "prevent": [
+            "Ripen whole honeydew on the counter",
+            "Refrigerate it only once it's ripe, and eat it within a few days"
+          ],
+          "verdict": "eat",
+          "verdictNote": "Cut it open. If the flesh looks and smells normal, it's fine to eat, though it may be bland. Toss it if the rind is soft or moldy or the flesh smells off.",
+          "rescue": [
+            "Blend bland melon with lime juice and a little honey",
+            "Freeze cubes for smoothies"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-honeydew"
+          ]
+        },
+        {
+          "id": "rind-mold",
+          "title": "Mold on the rind",
+          "cause": "excess_moisture",
+          "symptom": "Gray, black or pink fuzzy patches on the rind, usually underneath or at the stem end.",
+          "why": "Surface molds grow on honeydew when the rind stays damp. UC Davis notes that long periods of high humidity or condensation encourage them.",
+          "prevent": [
+            "Keep the melon dry, and wipe off condensation when it comes out of the fridge",
+            "Don't leave it sitting in a wet spot or a sealed bag"
+          ],
+          "verdict": "toss",
+          "verdictNote": "Toss a melon with mold or soft rot on the rind. FDA says to throw away produce that looks rotten, and a knife carries what's on the rind into the flesh.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "ucd-honeydew",
+            "fda-produce"
+          ]
+        },
+        {
+          "id": "cut-slimy",
+          "title": "Cut melon turned slimy or sour",
+          "cause": "bacterial_rot",
+          "symptom": "Cut pieces feel slick and smell sour or fermented.",
+          "why": "Cut melon is wet and exposed, so bacteria can grow on it. FDA notes that a knife can carry dirt and bacteria from the rind onto the flesh.",
+          "prevent": [
+            "Scrub the rind under running water with a clean brush before cutting",
+            "Wrap cut melon tightly and refrigerate it right away",
+            "Eat cut melon within a few days"
+          ],
+          "verdict": "toss",
+          "verdictNote": "Toss it. Don't taste cut melon that is slimy or smells off.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "fda-produce",
+            "ucd-honeydew"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Blackberry",
+      "slug": "blackberry",
+      "display": "blackberries",
+      "intro": "Blackberries are very perishable, good for only two to five days even at 32°F. Mold and crushing end most of them.",
+      "failures": [
+        {
+          "id": "moldy",
+          "title": "Gray, fuzzy mold",
+          "cause": "mold",
+          "symptom": "Gray or white fuzz that starts on one berry and spreads through the container.",
+          "why": "Gray mold and Rhizopus rot are the main diseases of blackberries after harvest. Moisture on the berries helps both along.",
+          "prevent": [
+            "Keep them dry and unwashed until you eat them",
+            "Spread them in a single layer on a paper towel, in the coldest part of the fridge",
+            "Plan to eat them within two or three days"
+          ],
+          "verdict": "toss",
+          "verdictNote": "Toss moldy berries and any soft or wet ones touching them. You can't cut mold out of soft fruit.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "ucd-bushberry",
+            "fsis-mold"
+          ]
+        },
+        {
+          "id": "crushed",
+          "title": "Crushed, leaking berries",
+          "cause": "bruising",
+          "symptom": "Berries at the bottom lose their shape and leak dark juice, with no mold.",
+          "why": "Ripe blackberries are very soft. Stacked deep, the bottom layer gets crushed and leaks.",
+          "prevent": [
+            "Don't stack containers or put anything on top",
+            "Handle them as little as possible"
+          ],
+          "verdict": "cook",
+          "verdictNote": "Safe if there's no mold and no sour smell. Use them today.",
+          "rescue": [
+            "Cook them into a quick sauce or jam",
+            "Freeze them for smoothies"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-bushberry",
+            "berries-review"
+          ]
+        },
+        {
+          "id": "shriveled",
+          "title": "Dull, shriveled berries",
+          "cause": "moisture_loss",
+          "symptom": "Berries lose their shine and start to wrinkle.",
+          "why": "Water loss makes berries shrivel and lose their gloss.",
+          "prevent": [
+            "Keep them covered in the fridge"
+          ],
+          "verdict": "cook",
+          "verdictNote": "Safe to eat if there's no mold. The texture is better cooked or blended.",
+          "rescue": [
+            "Bake them into a cobbler or muffins",
+            "Blend them into a smoothie"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-bushberry"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Jalapeño",
+      "slug": "jalapeno",
+      "display": "jalapeños",
+      "intro": "Jalapeños keep a week or two in the fridge. They wrinkle as they dry out, and very long cold storage pits the skin and darkens the seeds. Turning red is just ripening.",
+      "failures": [
+        {
+          "id": "wrinkled",
+          "title": "Wrinkled, soft skin",
+          "cause": "moisture_loss",
+          "symptom": "The skin wrinkles and the pepper feels soft instead of firm.",
+          "why": "Chiles lose firmness as they lose water. It happens faster above 45°F.",
+          "prevent": [
+            "Keep them in a paper bag or loosely wrapped in the crisper drawer",
+            "Don't wash them until you use them"
+          ],
+          "verdict": "cook",
+          "verdictNote": "Safe to eat if there's no mold or slimy spots. Wrinkled jalapeños are fine cooked.",
+          "rescue": [
+            "Roast or blister them",
+            "Pickle them, or dice and freeze them"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-chile"
+          ]
+        },
+        {
+          "id": "pitted",
+          "title": "Pitted skin and dark seeds",
+          "cause": "chilling",
+          "symptom": "Small sunken pits in the skin, with seeds or the inside of the pepper turning brown.",
+          "why": "Chiles keep best at about 45°F. At 41°F they hold for at least two weeks without visible damage. After two to three weeks the seeds start to darken, and the skin can pit, soften and decay.",
+          "prevent": [
+            "Use jalapeños within one to two weeks",
+            "Freeze them whole if you have more than you can use"
+          ],
+          "verdict": "eat",
+          "verdictNote": "Still good if the pepper is firm, with no mold or slimy spots. Scrape out the dark seeds.",
+          "rescue": [
+            "Dice and freeze them",
+            "Cook them into salsa or chili"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-chile"
+          ]
+        },
+        {
+          "id": "turning-red",
+          "title": "Turning red",
+          "cause": "ripening",
+          "symptom": "Green jalapeños slowly turn red, often starting in streaks.",
+          "why": "That's ripening, not spoilage. UC Davis notes that jalapeños don't respond to ethylene, so the fruit bowl isn't to blame. The color changes faster above 45°F.",
+          "prevent": [
+            "Keep them in the fridge if you want them to stay green"
+          ],
+          "verdict": "eat",
+          "verdictNote": "Still good. Red jalapeños are riper and a little sweeter.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "ucd-chile"
+          ]
+        },
+        {
+          "id": "moldy",
+          "title": "Soft spots or mold",
+          "cause": "mold",
+          "symptom": "Soft, wet, sunken spots, or gray or black fuzz, often at the stem or a nick in the skin.",
+          "why": "Gray mold, Alternaria and bacterial soft rot attack damaged tissue. Punctures, scrapes and crushing make decay more likely.",
+          "prevent": [
+            "Handle them gently",
+            "Keep them dry"
+          ],
+          "verdict": "toss",
+          "verdictNote": "USDA lists bell peppers as firm produce, where a small mold spot can be cut off with an inch around it. A jalapeño is too small for that, so toss it.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "ucd-chile",
+            "fsis-mold"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Cranberry",
+      "slug": "cranberry",
+      "display": "cranberries",
+      "intro": "Fresh cranberries are tough for a berry and keep for weeks. Sort them before you cook: soft or brown ones go, firm ones stay.",
+      "failures": [
+        {
+          "id": "soft-brown",
+          "title": "Soft, brown or leaking berries",
+          "cause": "age",
+          "symptom": "Some berries in the bag are soft, brown or wet, while the rest are firm.",
+          "why": "Cranberries can be held for two to four months in cold storage, so a bag may not be new when you buy it. Berries that break down go soft and leak, and decay follows.",
+          "prevent": [
+            "Sort the bag when you get home and remove soft berries",
+            "Keep them dry and unwashed until you use them",
+            "Freeze them if you won't use them within a few weeks"
+          ],
+          "verdict": "trim",
+          "verdictNote": "Sort them. Toss berries that are soft, brown, leaking or moldy. The firm, glossy ones are fine to use.",
+          "rescue": [
+            "Cook the firm ones into sauce or bake them into bread",
+            "Freeze the firm ones in their bag"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-bushberry",
+            "fda-produce"
+          ]
+        },
+        {
+          "id": "rubbery",
+          "title": "Dull, rubbery berries",
+          "cause": "chilling",
+          "symptom": "Berries lose their shine and feel rubbery instead of firm.",
+          "why": "Cranberries are the one common berry that can get too cold. Below 37°F they can develop chilling injury: a dull look, a rubbery texture and more decay.",
+          "prevent": [
+            "Keep them in the main part of the fridge, not against the back wall"
+          ],
+          "verdict": "cook",
+          "verdictNote": "Safe to eat if they aren't soft, leaking or moldy. Cook them.",
+          "rescue": [
+            "Simmer them into cranberry sauce"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-bushberry"
+          ]
+        },
+        {
+          "id": "shriveled",
+          "title": "Shriveled berries",
+          "cause": "moisture_loss",
+          "symptom": "Berries wrinkle and lose their gloss.",
+          "why": "Water loss makes cranberries shrivel and lose their shine.",
+          "prevent": [
+            "Keep them in their original bag in the fridge"
+          ],
+          "verdict": "cook",
+          "verdictNote": "Safe if there's no mold or leaking. They are fine cooked.",
+          "rescue": [
+            "Cook them into sauce, chutney or baked goods"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-bushberry"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Fig",
+      "slug": "fig",
+      "display": "figs",
+      "intro": "Fresh figs last two or three days. They sour, mold and collapse quickly, so buy them close to when you'll eat them.",
+      "failures": [
+        {
+          "id": "sour",
+          "title": "Sour or boozy smell, oozing",
+          "cause": "bacterial_rot",
+          "symptom": "The fig smells like alcohol or vinegar and may ooze liquid from the bottom.",
+          "why": "This is souring. Yeasts and bacteria ferment the fruit, and it smells of alcohol or vinegar. It usually starts before harvest, carried in by insects such as vinegar flies.",
+          "prevent": [
+            "Smell figs before buying and skip any that smell sour",
+            "Refrigerate them right away"
+          ],
+          "verdict": "toss",
+          "verdictNote": "Toss figs that smell sour or boozy, or that are oozing.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "ucd-fig"
+          ]
+        },
+        {
+          "id": "moldy",
+          "title": "Dark spots or fuzzy mold",
+          "cause": "mold",
+          "symptom": "Small round brown or black spots, or white, pink or black fuzz, often at a split in the skin.",
+          "why": "Alternaria rot shows up as small, round, brown-to-black spots, and black mold as dark flesh followed by white fuzz and black spores. Cracks in the skin let them in.",
+          "prevent": [
+            "Store figs in a single layer on a paper towel",
+            "Eat them within two or three days"
+          ],
+          "verdict": "toss",
+          "verdictNote": "Toss it. Figs are soft fruit, so mold can't be cut away.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "ucd-fig",
+            "fsis-mold"
+          ]
+        },
+        {
+          "id": "collapsing",
+          "title": "Very soft, split or collapsing",
+          "cause": "age",
+          "symptom": "The fig slumps, the skin splits and the flesh is very soft, with no sour smell.",
+          "why": "Figs keep softening after harvest. Ethylene speeds up softening and decay, especially at 41°F and above.",
+          "prevent": [
+            "Don't stack figs",
+            "Keep them in the coldest part of the fridge"
+          ],
+          "verdict": "cook",
+          "verdictNote": "Safe if it smells sweet, with no sour smell, ooze or mold. Eat or cook it today.",
+          "rescue": [
+            "Roast them with honey",
+            "Simmer them into a quick jam"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-fig"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Green Onion",
+      "slug": "green-onion",
+      "display": "green onions",
+      "intro": "Green onions last a week or two. The tops yellow and go limp first, and bruised or wet ones turn slimy.",
+      "failures": [
+        {
+          "id": "yellow-tops",
+          "title": "Yellow tops",
+          "cause": "age",
+          "symptom": "The green tops turn yellow, starting at the tips.",
+          "why": "The tops yellow as they age. UC Davis notes that higher temperatures greatly speed it up.",
+          "prevent": [
+            "Refrigerate green onions as soon as you get home",
+            "Use them within one to two weeks"
+          ],
+          "verdict": "trim",
+          "verdictNote": "Cut off the yellow parts. The rest is fine if it's firm and not slimy.",
+          "rescue": [
+            "Slice the good parts and freeze them",
+            "Cook them into fried rice, eggs or soup"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-green-onion"
+          ]
+        },
+        {
+          "id": "limp",
+          "title": "Limp, wilted tops",
+          "cause": "moisture_loss",
+          "symptom": "The tops droop and feel soft.",
+          "why": "Green onions lose water quickly. UC Davis calls preventing water loss critical and recommends above 98 percent humidity.",
+          "prevent": [
+            "Stand them upright in a jar with an inch of water and cover them loosely with a bag",
+            "Or wrap them in a damp paper towel inside a bag"
+          ],
+          "verdict": "eat",
+          "verdictNote": "Still good if there's no slime or bad smell.",
+          "rescue": [
+            "Trim the ends and stand them in cold water for an hour",
+            "Cook them"
+          ],
+          "krispHelps": false,
+          "sources": [
+            "ucd-green-onion"
+          ]
+        },
+        {
+          "id": "slimy",
+          "title": "Slimy leaves",
+          "cause": "bacterial_rot",
+          "symptom": "The leaves or outer layers turn dark, wet and slimy, and smell bad.",
+          "why": "This is bacterial soft rot, sometimes with gray mold. Bruising is common in green onions and leads to rapid decay.",
+          "prevent": [
+            "Change the water every few days if you keep them in a jar",
+            "Don't crush the bunch under other produce"
+          ],
+          "verdict": "toss",
+          "verdictNote": "Toss slimy or bad-smelling green onions. FDA says to throw away produce that looks rotten. Check the rest of the bunch, and use the firm, fresh-smelling ones today.",
+          "rescue": [],
+          "krispHelps": false,
+          "sources": [
+            "ucd-green-onion",
+            "fda-produce"
           ]
         }
       ]

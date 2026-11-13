@@ -55,12 +55,24 @@ test('every item in the storage guide gets its own page', () => {
   assert.equal(pages.length, produce.length);
   const urls = out['sitemap.xml'].match(/<loc>/g).length;
   assert.equal(urls, produce.length + 6 + loadData().lab.runs.filter((r) => r.status !== 'planned').length);
-  // Storage-only page: canonical, no spoilage FAQ, honest Krisp note.
+  // Every item has a spoilage section now, so the index drops the per-item badge.
   const apple = out['produce/apple/index.html'];
   assert.match(apple, /<link rel="canonical" href="https:\/\/guide\.simplykrisp\.com\/produce\/apple" \/>/);
-  assert.match(apple, /<h1>How to store apples<\/h1>/);
-  assert.doesNotMatch(apple, /FAQPage/);
+  assert.match(apple, /<h1>How to store apples, and why they go bad<\/h1>/);
+  assert.match(apple, /FAQPage/);
   assert.doesNotMatch(apple, /See the Double Krisp/);
+  assert.doesNotMatch(out['produce/index.html'], /Spoilage guide/);
+  // Storage-only page (an item added to produce.json before its spoilage entry is written):
+  // canonical, no spoilage FAQ, honest Krisp note, and the index badge comes back.
+  const data = loadData();
+  const partial = render({ ...data, spoilage: { ...data.spoilage, items: data.spoilage.items.filter((i) => i.name !== 'Apple') } });
+  const bare = partial['produce/apple/index.html'];
+  assert.match(bare, /<link rel="canonical" href="https:\/\/guide\.simplykrisp\.com\/produce\/apple" \/>/);
+  assert.match(bare, /<h1>How to store apples<\/h1>/);
+  assert.doesNotMatch(bare, /FAQPage/);
+  assert.doesNotMatch(bare, /See the Double Krisp/);
+  assert.match(partial['produce/index.html'], /<em>Spoilage guide<\/em>/);
+  assert.match(partial['produce/index.html'], /Items marked &quot;Spoilage guide&quot;|Items marked "Spoilage guide"/);
   // No broken grammar from the singular/plural templates.
   for (const [k, html] of Object.entries(out)) assert.doesNotMatch(html, /it're|it are |they is /, k);
   // The app home carries a crawlable list that the app replaces on mount.
