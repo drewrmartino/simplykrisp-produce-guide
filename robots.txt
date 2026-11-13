@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /krisper
+Disallow: /crisper
+
+Sitemap: https://guide.simplykrisp.com/sitemap.xml

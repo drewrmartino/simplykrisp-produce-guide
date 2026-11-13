@@ -3,10 +3,11 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>What's In Season Near You | SimplyKrisp</title>
+<title>What's In Season Near You | Simply Krisp</title>
+<link rel="canonical" href="https://guide.simplykrisp.com/seasonal" />
 <meta name="description" content="Enter your ZIP code to see which fruits and vegetables are local and in season right now — plus how to store each one so it lasts." />
-<meta property="og:site_name" content="SimplyKrisp Produce Guide" />
-<meta property="og:title" content="What's In Season Near You | SimplyKrisp" />
+<meta property="og:site_name" content="Simply Krisp Produce Guide" />
+<meta property="og:title" content="What's In Season Near You | Simply Krisp" />
 <meta property="og:description" content="Enter your ZIP code to see what produce is local and in season right now, and how to store it." />
 <link rel="icon" type="image/png" href="/favicon.png?v=2" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -134,6 +135,7 @@ select{font-family:var(--body);font-size:15px;padding:13px 12px;border:1px solid
 .tip .lbl{display:block;font-size:10.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--muted-fg);margin-bottom:4px}
 details{margin-top:auto;padding-top:10px;border-top:1px solid var(--card-border)}
 .tip{margin-bottom:12px}
+.why{display:inline-block;margin-top:10px;font-size:13.8px;font-weight:600;color:var(--primary)}
 
 /* Sourcing disclosure. Written as details.method so it outranks the generic
    in-card `details` rule above, which is scoped to produce cards. */
@@ -173,9 +175,6 @@ details[open] summary::after{transform:rotate(-135deg);margin-top:2px}
 .band h3{font-size:23px;line-height:1.2;max-width:30ch}
 .band p{font-size:14.5px;opacity:.86;margin-top:8px;max-width:70ch}
 .band .btn{background:var(--accent);color:hsl(96 14% 14%);font-weight:700}
-.band .sensrow{margin-top:14px;display:flex;flex-wrap:wrap;gap:7px}
-.band .sensrow span{font-size:12.5px;padding:4px 10px;border-radius:999px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.16)}
-.band .sensrow b{font-weight:700;color:var(--accent)}
 
 /* markets rail */
 /* align-self:stretch gives the sticky child a full-height track to travel in;
@@ -245,6 +244,7 @@ details[open] summary::after{transform:rotate(-135deg);margin-top:2px}
 .tgroup button.tmore{font:inherit;font-size:12.4px;font-weight:600;color:var(--primary);background:none;border:0;padding:3px 4px;cursor:pointer;text-decoration:underline}
 
 /* crisper conflict checker */
+.ckwrap .ck{margin:0;border:0;background:none;padding:0 20px 18px}
 .ck{margin-top:24px;background:var(--card);border:1px solid var(--card-border);border-radius:var(--radius);padding:20px 22px}
 .ck h2{font-size:21px;line-height:1.25}
 .ck>.sub{font-size:13.6px;color:var(--muted-fg);margin-top:6px;max-width:76ch}
@@ -372,7 +372,7 @@ footer p{max-width:76ch;margin-bottom:8px}
         </svg>
       </span>
       <span>
-        <span class="name">SimplyKrisp</span><br>
+        <span class="name">Simply Krisp</span><br>
         <span class="sub">Produce Guide</span>
       </span>
     </a>
@@ -391,7 +391,7 @@ footer p{max-width:76ch;margin-bottom:8px}
   <section class="hero">
     <div class="eyebrow"><span class="dot"></span> Seasonal &amp; local</div>
     <h1>What's in season near you right now?</h1>
-    <p class="lede">Enter your ZIP code to see which fruits and vegetables are being harvested locally this month — and exactly how to store each one so it doesn't end up in the compost pail.</p>
+    <p class="lede">Enter your ZIP to see what's being harvested near you this month, and how to store each one.</p>
 
     <form class="zipform" id="zipform" novalidate>
       <div class="zipfield">
@@ -424,9 +424,8 @@ footer p{max-width:76ch;margin-bottom:8px}
       <div>
         <h3 id="bandh">These are the ones ethylene ruins first</h3>
         <p id="bandp"></p>
-        <div class="sensrow" id="sensrow"></div>
       </div>
-      <a class="btn" href="https://simplykrisp.com/?utm_source=produce-guide&amp;utm_medium=referral&amp;utm_campaign=seasonal-page&amp;utm_content=hero-band" target="_blank" rel="noopener">Shop SimplyKrisp</a>
+      <a class="btn" href="https://simplykrisp.com/?utm_source=produce-guide&amp;utm_medium=referral&amp;utm_campaign=seasonal-page&amp;utm_content=hero-band" target="_blank" rel="noopener">Shop Simply Krisp</a>
     </div>
 
     <!-- Sourcing for the day estimates, on the page rather than buried, because
@@ -477,9 +476,10 @@ footer p{max-width:76ch;margin-bottom:8px}
 
     <!-- Crisper conflict checker. Pairs what the visitor actually has against
          the ethylene production/sensitivity ratings to name specific culprits. -->
-    <section class="ck" id="ck" aria-labelledby="ckh">
-      <h2 id="ckh">What's fighting in your crisper?</h2>
-      <p class="sub">Ethylene is a gas, so storage is not a one-item problem — a single apple can pull the plug on everything around it. Tap what you have in the house and see which pairs are working against each other.</p>
+    <details class="method ckwrap">
+    <summary>What's fighting in your crisper? Check what you have</summary>
+    <section class="ck" id="ck" aria-label="Crisper checker">
+      <p class="sub">One apple can speed up everything around it. Tap what you have to see which items to keep apart.</p>
       <div class="ckpick" id="ckpick"></div>
       <div class="ckbar">
         <span class="lg"><span class="pd" aria-hidden="true" style="width:7px;height:7px;border-radius:50%;background:var(--accent);display:inline-block"></span> gives off ethylene</span>
@@ -488,6 +488,7 @@ footer p{max-width:76ch;margin-bottom:8px}
       </div>
       <div class="ckout" id="ckout"></div>
     </section>
+    </details>
 
     <div class="cols">
       <div class="col-main">
@@ -528,7 +529,7 @@ footer p{max-width:76ch;margin-bottom:8px}
     <!-- Buy path. Price, availability and variant id are refreshed from the
          storefront's public product JSON so this can't go stale. -->
     <section class="buy" id="buy" aria-labelledby="buyh">
-      <img class="bimg" id="buyimg" src="https://cdn.shopify.com/s/files/1/0944/5353/0943/files/simplykrisp_sq_hero.jpg?v=1775524052" alt="SimplyKrisp Double Krisp ethylene absorber" loading="lazy" />
+      <img class="bimg" id="buyimg" src="https://cdn.shopify.com/s/files/1/0944/5353/0943/files/simplykrisp_sq_hero.jpg?v=1775524052" alt="Simply Krisp Double Krisp ethylene absorber" loading="lazy" />
       <div>
         <h2 id="buyh">Double Krisp</h2>
         <p class="bp">Two ethylene-absorbing casings — one for each crisper drawer. Peel, stick inside the drawer, and the gas that ripens your produce early gets absorbed instead of building up. Each sachet works for about 30 days.</p>
@@ -545,12 +546,7 @@ footer p{max-width:76ch;margin-bottom:8px}
 
 </main>
 
-<section class="sk-story" aria-label="How SimplyKrisp helps you eat what you buy">
-<style>.sk-story{max-width:1080px;margin:28px auto 8px;padding:0 20px;font-family:'DM Sans',system-ui,sans-serif;color:hsl(96 14% 18%)}.sk-story h2{font-family:Questrial,'DM Sans',sans-serif;font-size:21px;line-height:1.25;margin:0 0 4px;letter-spacing:-.01em}.sk-story p{margin:0 0 14px;font-size:14px;color:hsl(96 6% 38%);max-width:680px}.sk-g{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}.sk-c{display:flex;flex-direction:column;gap:4px;padding:14px;border:1px solid hsl(48 18% 86%);border-radius:12px;background:#fff;text-decoration:none;color:inherit;font-size:13px;line-height:1.4;transition:border-color .15s}.sk-c:hover{border-color:hsl(96 14% 40%)}.sk-c b{font-size:14.5px}.sk-c span:last-child{color:hsl(96 6% 38%)}.sk-n{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:hsl(96 14% 28%);color:#fff;font-size:12px;font-weight:700}.sk-cur{border-color:hsl(96 14% 28%);background:hsl(96 20% 96%)}@media(max-width:900px){.sk-g{grid-template-columns:1fr 1fr}}@media(max-width:480px){.sk-g{grid-template-columns:1fr}}</style>
-<h2>Keep the produce you buy fresh long enough to eat it.</h2>
-<p>Produce usually gets tossed for three reasons: it spoils faster than expected, it gets buried in the fridge, or there’s more than you can use. Each SimplyKrisp tool handles one part of that.</p>
-<div class="sk-g"><a class="sk-c" href="/"><span class="sk-n">1</span><b>Store it right</b><span>The Storage Guide and Crisper Map show where each item lasts longest.</span></a><a class="sk-c sk-cur" href="/seasonal"><span class="sk-n">2</span><b>Buy what’s in season</b><span>Fresher at the store means more days at home.</span></a><a class="sk-c" href="https://simplykrisp.com/products/double-krisp?utm_source=produce-guide&amp;utm_medium=referral&amp;utm_campaign=story-strip&amp;utm_content=seasonal" target="_blank" rel="noopener"><span class="sk-n">3</span><b>Slow the spoiling</b><span>A Krisp in each crisper drawer pulls out the ethylene that ages greens and broccoli.</span></a><a class="sk-c" href="/krisper"><span class="sk-n">4</span><b>Eat it in time</b><span>My Krisper (beta) reads your grocery receipts and tells you what to use first.</span></a><a class="sk-c" href="/lab"><span class="sk-n">5</span><b>See the proof</b><span>Every home test, published in the Lab Notebook, including the ones that show no difference.</span></a></div>
-</section>
+<nav class="sk-tools" aria-label="Simply Krisp tools"><style>.sk-tools{max-width:900px;margin:36px auto 0;padding:16px 20px;display:flex;flex-wrap:wrap;align-items:center;gap:8px 18px;font:14px/1.4 'DM Sans',system-ui,sans-serif;color:hsl(96 6% 38%);border-top:1px solid hsl(48 10% 87%)}.sk-tools a{color:hsl(96 14% 22%);text-decoration:none}.sk-tools a:hover{text-decoration:underline}.sk-tools a[aria-current]{font-weight:700}html.embedded .sk-tools{display:none}</style><span>More from Simply Krisp:</span><a href="/">Storage Guide</a><a href="/seasonal" aria-current="page">In Season</a><a href="/produce">Produce A–Z</a><a href="/lab">Lab Notebook</a><a href="/krisper">My Krisper</a></nav>
 <footer>
   <div class="wrap">
     <p><strong>Seasonality data</strong> is compiled by region from the
@@ -562,8 +558,8 @@ footer p{max-width:76ch;margin-bottom:8px}
       including the coordinates plotted on the map. Map tiles are served by
       <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors.
       <strong>Storage guidance and ethylene ratings</strong> are the same data behind the
-      <a href="/">SimplyKrisp Produce Storage Guide</a>.</p>
-    <p style="margin-top:14px">&copy; <span id="yr"></span> SimplyKrisp. 1% for the Planet member.</p>
+      <a href="/">Simply Krisp Produce Storage Guide</a>.</p>
+    <p style="margin-top:14px">&copy; <span id="yr"></span> Simply Krisp. 1% for the Planet member.</p>
   </div>
 </footer>
 
@@ -621,11 +617,14 @@ footer p{max-width:76ch;margin-bottom:8px}
     if (state.produce && state.seasons) return Promise.resolve();
     return Promise.all([
       fetch('/seasonal/produce.json').then(function (r) { return r.json(); }),
-      fetch('/seasonal/seasonality.json').then(function (r) { return r.json(); })
+      fetch('/seasonal/seasonality.json').then(function (r) { return r.json(); }),
+      // Items with a "Why it goes bad" page (generated by npm run pages). Optional.
+      fetch('/produce/pages.json').then(function (r) { return r.ok ? r.json() : {}; }).catch(function () { return {}; })
     ]).then(function (res) {
       state.produce = {};
       res[0].forEach(function (p) { state.produce[p.name] = p; });
       state.seasons = res[1];
+      state.why = res[2] || {};
     });
   }
 
@@ -697,12 +696,8 @@ footer p{max-width:76ch;margin-bottom:8px}
     if (sens === 'high') b.push('<span class="badge sens">Ethylene-sensitive</span>');
     else if (sens === 'medium') b.push('<span class="badge sens">Somewhat sensitive</span>');
     if (prod === 'very_high' || prod === 'high') b.push('<span class="badge prod">Ethylene producer</span>');
-    if (p.extraDays) {
-      // Ranges rather than a single figure — the published effect is a
-      // percentage of baseline life and it varies with the fridge.
-      b.push('<span class="badge krisp">Krisp adds <b>' +
-             (p.extraDaysRange || p.extraDays) + ' days</b></span>');
-    } else if (p.noBenefitReason) {
+    // Items a Krisp helps show the day range in the gain row below.
+    if (!p.extraDays && p.noBenefitReason) {
       b.push('<span class="badge nokrisp">Krisp won\u2019t help here</span>');
     }
 
@@ -712,7 +707,7 @@ footer p{max-width:76ch;margin-bottom:8px}
     // Only pitch the absorber where there's a day count behind it. On the
     // zero-day items the honest reason below replaces the sales copy.
     var kb = (p.krispBenefit && p.extraDays)
-      ? '<div class="sec">With SimplyKrisp</div><p class="kb">' + esc(p.krispBenefit) + '</p>' : '';
+      ? '<div class="sec">With Simply Krisp</div><p class="kb">' + esc(p.krispBenefit) + '</p>' : '';
     // Where the day estimate came from, item by item.
     var ev = '';
     if (p.extraDays && p.evidence) {
@@ -759,6 +754,8 @@ footer p{max-width:76ch;margin-bottom:8px}
       '<details><summary>All storage tips</summary><div class="dbody">' +
         '<div class="sec">Full guidance</div><ul>' + tips + '</ul>' + ripe + avoid + kb + ev +
       '</div></details>' +
+      (state.why && state.why[p.name]
+        ? '<a class="why" href="/produce/' + esc(state.why[p.name]) + '">Full guide \u2192</a>' : '') +
     '</article>';
   }
 
@@ -807,16 +804,8 @@ footer p{max-width:76ch;margin-bottom:8px}
           ' of the ' + all.length + ' in season right now';
       // No universal claim. The absorber only moves the needle on produce that
       // is ethylene-sensitive and doesn't out-gas the sachet, so say so here.
-      el('bandp').textContent = 'Ethylene is the ripening hormone your apples and tomatoes give off, ' +
-        'and it\u2019s what turns a good market haul into compost by Thursday. A Krisp absorber in the ' +
-        'drawer removes it, which helps most on leafy and cruciferous produce \u2014 ' +
-        best.name.toLowerCase() + ' gains the most here, roughly ' +
-        (best.extraDaysRange || best.extraDays) + ' days in a closed drawer. The other ' +
-        (all.length - krispItems.length) + ' items in season right now barely respond to ' +
-        'ethylene, and we mark those as \u201cKrisp won\u2019t help here\u201d rather than pad the number.';
-      el('sensrow').innerHTML = krispItems.slice(0, 12).map(function (p) {
-        return '<span>' + esc(p.name) + ' <b>+' + (p.extraDaysRange || p.extraDays) + 'd</b></span>';
-      }).join('');
+      el('bandp').textContent = 'A Krisp in the drawer removes ethylene, the ripening gas that yellows greens and broccoli. ' +
+        'The other ' + (all.length - krispItems.length) + ' barely respond to it, and we say so on each card.';
       band.classList.remove('hide');
     } else {
       band.classList.add('hide');

@@ -3,10 +3,11 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Lab Notebook | SimplyKrisp</title>
+<title>Lab Notebook | Simply Krisp</title>
+<link rel="canonical" href="https://guide.simplykrisp.com/lab" />
 <meta name="description" content="Side-by-side home refrigerator tests of Simply Krisp, published as they happen, including the ones that show little difference." />
-<meta property="og:site_name" content="SimplyKrisp Produce Guide" />
-<meta property="og:title" content="Lab Notebook | SimplyKrisp" />
+<meta property="og:site_name" content="Simply Krisp Produce Guide" />
+<meta property="og:title" content="Lab Notebook | Simply Krisp" />
 <link rel="icon" type="image/png" href="/favicon.png?v=2" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -34,8 +35,8 @@ nav a.shop{color:var(--fg);font-weight:600}
 .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--accent)}
 h1{font-size:clamp(30px,5.2vw,46px);line-height:1.08;max-width:19ch}
 .lede{margin-top:14px;font-size:17px;color:var(--muted-fg);max-width:60ch}
-.method{margin-top:28px;background:var(--card);border:1px solid var(--card-border);border-radius:var(--radius);padding:18px 20px;font-size:14.5px;color:var(--fg)}
-.method .lbl{display:block;font-size:10.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--muted-fg);margin-bottom:6px}
+.method{margin-top:28px;background:var(--card);border:1px solid var(--card-border);border-radius:var(--radius);padding:14px 20px;font-size:14.5px;color:var(--fg)}
+.method summary{cursor:pointer;font-weight:600;color:var(--primary)}.method p{margin-top:10px;color:var(--muted-fg)}
 .runs{margin-top:36px;display:grid;gap:16px}
 .run{background:#fff;border:1px solid var(--card-border);border-radius:var(--radius);padding:20px 22px}
 .run h2{font-size:21px;line-height:1.25}
@@ -51,6 +52,8 @@ h1{font-size:clamp(30px,5.2vw,46px);line-height:1.08;max-width:19ch}
 .imgs figure{margin:0}
 .imgs img{width:100%;height:auto;border-radius:6px;border:1px solid var(--card-border);display:block}
 .imgs figcaption{font-size:12.5px;color:var(--muted-fg);margin-top:4px}
+.run h2 a{text-decoration:none}.run h2 a:hover{text-decoration:underline}
+.run .full{display:inline-block;margin-top:12px;font-size:14.5px;font-weight:600;color:var(--primary);text-decoration:none}
 .band{margin-top:40px;background:var(--card);border:1px solid var(--card-border);border-radius:var(--radius);padding:20px 22px;display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between}
 .band p{max-width:52ch;font-size:15px}
 .btn{font-family:var(--body);font-size:15.5px;font-weight:600;padding:13.5px 24px;border:1px solid transparent;border-radius:var(--radius);background:var(--primary);color:var(--primary-fg);cursor:pointer;text-decoration:none;display:inline-block}
@@ -77,7 +80,7 @@ footer p{max-width:76ch;margin-bottom:8px}
 <body>
 <script src="/assets/sk-header.js"></script>
 <header><div class="wrap hdr">
-  <a class="brand" href="/"><div><div class="name">SimplyKrisp</div><div class="sub">Produce Guide</div></div></a>
+  <a class="brand" href="/"><div><div class="name">Simply Krisp</div><div class="sub">Produce Guide</div></div></a>
   <nav><a href="/">Storage Guide</a><a href="/seasonal">In Season</a><a href="/lab/crisper-map">Crisper Map</a><a href="/krisper">My Krisper</a><a class="shop" href="https://simplykrisp.com/?utm_source=produce-guide&utm_medium=referral&utm_campaign=lab-notebook" target="_blank" rel="noopener">Shop</a></nav>
 </div></header>
 
@@ -85,12 +88,12 @@ footer p{max-width:76ch;margin-bottom:8px}
   <section class="hero">
     <div class="eyebrow"><span class="dot"></span> Lab Notebook</div>
     <h1>What actually happens in the drawer</h1>
-    <p class="lede">Side-by-side tests in a normal home refrigerator, with a camera and a thermometer in the frame. Every run is published here, including the ones that show little or no difference, because a result you can check is worth more than a claim you can't.</p>
-    <div class="method"><span class="lbl">Method</span><span id="method"></span></div>
+    <p class="lede">Side-by-side tests in a normal home fridge. We publish every run, including the ones that show no difference.</p>
+    <details class="method"><summary>How we test</summary><p id="method"></p></details>
     <p class="lede" style="margin-top:14px;font-size:15px">Want the short version for your fridge? Print the <a href="/lab/crisper-map">Crisper Drawer Map</a>.</p>
   </section>
 
-  <section class="runs" id="runs" aria-live="polite"></section>
+  <section class="runs" id="runs" aria-live="polite"><article class="run" id="capacity-2026-11"><h2><a href="/lab/capacity-2026-11">How long does a sachet really last?</a></h2><div class="rmeta"><span class="badge live">in progress</span><span>Started November 2, 2026</span><span>Sachet media (potassium permanganate on mineral carrier)</span></div><div class="q"><span class="lbl">Question</span>The absorbent changes from purple to brown as it is used up. We are opening sachets from normal household drawers at day 30, 60 and 90 to see how much capacity is left. The result sets our swap schedule and refill plan.</div><div class="r"><span class="lbl">What we saw</span>Day 30 photos due around November 16, 2026.</div><a class="full" href="/lab/capacity-2026-11">Full run &rarr;</a></article><article class="run" id="broccoli-01"><h2><a href="/lab/broccoli-01">Run 1: Broccoli next to an apple, with and without</a></h2><div class="rmeta"><span class="badge live">in progress</span><span>Started November 2, 2026</span><span>Broccoli</span></div><div class="q"><span class="lbl">Question</span>UC Davis reports broccoli at 50°F loses half its shelf life at 2 ppm ethylene. A first two-week attempt with broccoli alone showed no visible difference on either side, which makes sense: with no ethylene producer in the container there was little for the absorber to remove. This run adds one ripe apple to each lidded container, same variety and ripeness, so both sides face the same ethylene load and the only difference is the Simply Krisp case in one of them.</div><div class="r"><span class="lbl">What we saw</span>Started November 2, 2026. Fresh broccoli crowns from the same bunch, one apple per container, photographed once a day under timed light with a thermometer in frame. First photos due the week of November 9.</div><a class="full" href="/lab/broccoli-01">Full run &rarr;</a></article><article class="run" id="romaine-01"><h2>Run 2: Romaine hearts</h2><div class="rmeta"><span class="badge planned">planned</span><span>Romaine</span></div><div class="q"><span class="lbl">Question</span>Romaine reacts to as little as 1 ppm ethylene (russet spotting, rib browning). Does a drawer with an absorber show less of it?</div><div class="r"><span class="lbl">What we saw</span>Not started.</div></article></section>
 
   <div class="band">
     <p>Want to be told when a new run is published? One email per test, nothing else.</p>
@@ -98,15 +101,10 @@ footer p{max-width:76ch;margin-bottom:8px}
   </div>
 </main>
 
-<section class="sk-story" aria-label="How SimplyKrisp helps you eat what you buy">
-<style>.sk-story{max-width:1080px;margin:28px auto 8px;padding:0 20px;font-family:'DM Sans',system-ui,sans-serif;color:hsl(96 14% 18%)}.sk-story h2{font-family:Questrial,'DM Sans',sans-serif;font-size:21px;line-height:1.25;margin:0 0 4px;letter-spacing:-.01em}.sk-story p{margin:0 0 14px;font-size:14px;color:hsl(96 6% 38%);max-width:680px}.sk-g{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}.sk-c{display:flex;flex-direction:column;gap:4px;padding:14px;border:1px solid hsl(48 18% 86%);border-radius:12px;background:#fff;text-decoration:none;color:inherit;font-size:13px;line-height:1.4;transition:border-color .15s}.sk-c:hover{border-color:hsl(96 14% 40%)}.sk-c b{font-size:14.5px}.sk-c span:last-child{color:hsl(96 6% 38%)}.sk-n{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:hsl(96 14% 28%);color:#fff;font-size:12px;font-weight:700}.sk-cur{border-color:hsl(96 14% 28%);background:hsl(96 20% 96%)}@media(max-width:900px){.sk-g{grid-template-columns:1fr 1fr}}@media(max-width:480px){.sk-g{grid-template-columns:1fr}}</style>
-<h2>Keep the produce you buy fresh long enough to eat it.</h2>
-<p>Produce usually gets tossed for three reasons: it spoils faster than expected, it gets buried in the fridge, or there’s more than you can use. Each SimplyKrisp tool handles one part of that.</p>
-<div class="sk-g"><a class="sk-c" href="/"><span class="sk-n">1</span><b>Store it right</b><span>The Storage Guide and Crisper Map show where each item lasts longest.</span></a><a class="sk-c" href="/seasonal"><span class="sk-n">2</span><b>Buy what’s in season</b><span>Fresher at the store means more days at home.</span></a><a class="sk-c" href="https://simplykrisp.com/products/double-krisp?utm_source=produce-guide&amp;utm_medium=referral&amp;utm_campaign=story-strip&amp;utm_content=lab" target="_blank" rel="noopener"><span class="sk-n">3</span><b>Slow the spoiling</b><span>A Krisp in each crisper drawer pulls out the ethylene that ages greens and broccoli.</span></a><a class="sk-c" href="/krisper"><span class="sk-n">4</span><b>Eat it in time</b><span>My Krisper (beta) reads your grocery receipts and tells you what to use first.</span></a><a class="sk-c sk-cur" href="/lab"><span class="sk-n">5</span><b>See the proof</b><span>Every home test, published in the Lab Notebook, including the ones that show no difference.</span></a></div>
-</section>
+<nav class="sk-tools" aria-label="Simply Krisp tools"><style>.sk-tools{max-width:900px;margin:36px auto 0;padding:16px 20px;display:flex;flex-wrap:wrap;align-items:center;gap:8px 18px;font:14px/1.4 'DM Sans',system-ui,sans-serif;color:hsl(96 6% 38%);border-top:1px solid hsl(48 10% 87%)}.sk-tools a{color:hsl(96 14% 22%);text-decoration:none}.sk-tools a:hover{text-decoration:underline}.sk-tools a[aria-current]{font-weight:700}html.embedded .sk-tools{display:none}</style><span>More from Simply Krisp:</span><a href="/">Storage Guide</a><a href="/seasonal">In Season</a><a href="/produce">Produce A–Z</a><a href="/lab" aria-current="page">Lab Notebook</a><a href="/krisper">My Krisper</a></nav>
 <footer><div class="wrap">
   <p><strong>Ethylene thresholds</strong> cited in test questions come from the UC Davis Postharvest Technology Center produce facts sheets for <a href="https://postharvest.ucdavis.edu/produce-facts-sheets/broccoli" target="_blank" rel="noopener">broccoli</a> and <a href="https://postharvest.ucdavis.edu/produce-facts-sheets/lettuce-romaine" target="_blank" rel="noopener">romaine</a>. Home tests show what happened in one refrigerator under the conditions noted; they are not controlled laboratory studies and do not establish universal shelf-life gains.</p>
-  <p style="margin-top:14px">&copy; <span id="yr"></span> SimplyKrisp. 1% for the Planet member.</p>
+  <p style="margin-top:14px">&copy; <span id="yr"></span> Simply Krisp. 1% for the Planet member.</p>
 </div></footer>
 
 <script>
@@ -116,20 +114,22 @@ footer p{max-width:76ch;margin-bottom:8px}
   function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
   function badge(st){var cls=st==='in progress'?'live':st==='complete'?'done':'planned';return '<span class="badge '+cls+'">'+esc(st)+'</span>';}
   function fmt(d){if(!d)return '';var p=d.split('-');return new Date(p[0],p[1]-1,p[2]).toLocaleDateString(undefined,{year:'numeric',month:'short',day:'numeric'});}
-  fetch('/lab/runs.json',{cache:'no-cache'}).then(function(r){return r.json();}).then(function(data){
+  var pages=[];
+  fetch('/lab/pages.json',{cache:'no-cache'}).then(function(r){return r.ok?r.json():[];}).catch(function(){return [];}).then(function(p){pages=p||[];return fetch('/lab/runs.json',{cache:'no-cache'});}).then(function(r){return r.json();}).then(function(data){
     document.getElementById('method').textContent = data.meta.method + ' Last updated ' + fmt(data.meta.updated) + '.';
     var el=document.getElementById('runs');
     el.innerHTML = data.runs.map(function(run){
       var imgs = (run.images||[]).map(function(im){return '<figure><img loading="lazy" src="'+esc(im.src)+'" alt="'+esc(im.alt||'')+'" /><figcaption>'+esc(im.caption||'')+'</figcaption></figure>';}).join('');
       return '<article class="run" id="'+esc(run.id)+'">'
-        + '<h2>'+esc(run.title)+'</h2>'
+        + '<h2>'+(pages.indexOf(run.id)>-1?'<a href="/lab/'+esc(run.id)+'">'+esc(run.title)+'</a>':esc(run.title))+'</h2>'
         + '<div class="rmeta">'+badge(run.status)+(run.started?'<span>Started '+fmt(run.started)+'</span>':'')+'<span>'+esc(run.produce)+'</span></div>'
         + '<div class="q"><span class="lbl">Question</span>'+esc(run.question)+'</div>'
         + '<div class="r"><span class="lbl">What we saw</span>'+esc(run.result)+'</div>'
         + (imgs?'<div class="imgs">'+imgs+'</div>':'')
+        + (pages.indexOf(run.id)>-1?'<a class="full" href="/lab/'+esc(run.id)+'">Full run &rarr;</a>':'')
         + '</article>';
     }).join('');
-  }).catch(function(){document.getElementById('runs').innerHTML='<p class="lede">Could not load test runs. Try refreshing.</p>';});
+  }).catch(function(){var el=document.getElementById('runs');if(!el.children.length)el.innerHTML='<p class="lede">Could not load test runs. Try refreshing.</p>';});
 })();
 </script>
 </body>

@@ -20,18 +20,22 @@
   var UTM = 'utm_source=produce-guide&utm_medium=referral&utm_campaign=site-header';
   var LOGO = 'https://simplykrisp.com/cdn/shop/files/v2_Simply_Krisp_Logo_-_Lime_and_Orange_Freshness_700_x_350_px_f00ce263-9da7-4e9d-9e09-55291aaf9e85.png?v=1774895710&width=380';
   var MENU = [
-    ['Home', STORE + '/?' + UTM],
-    ['About Us', STORE + '/pages/about-us?' + UTM],
-    ['Produce Storage Guide', '/', 'guide'],
-    ["What's In Season", '/seasonal', 'seasonal'],
-    ['Lab Notebook', '/lab', 'lab'],
-    ['My Krisper (Beta)', '/krisper', 'krisper'],
     ['Shop', STORE + '/collections/all?' + UTM],
-    ['FAQ', STORE + '/pages/faq?' + UTM],
-    ['Contact', STORE + '/pages/contact?' + UTM]
+    ['Learn', null, null, [
+      ['Storage Guide', '/', 'guide'],
+      ['Produce A–Z', '/produce', 'produce'],
+      ['In Season', '/seasonal', 'seasonal'],
+      ['Lab Notebook', '/lab', 'lab']
+    ]],
+    ['My Krisper', '/krisper', 'krisper'],
+    ['About', null, null, [
+      ['Our Story', STORE + '/pages/about-us?' + UTM],
+      ['FAQ', STORE + '/pages/faq?' + UTM],
+      ['Contact', STORE + '/pages/contact?' + UTM]
+    ]]
   ];
   var p = location.pathname;
-  var cur = /^\/(krisper|crisper)/.test(p) ? 'krisper' : /^\/lab/.test(p) ? 'lab' : /^\/seasonal/.test(p) ? 'seasonal' : 'guide';
+  var cur = /^\/(krisper|crisper)/.test(p) ? 'krisper' : /^\/lab/.test(p) ? 'lab' : /^\/produce/.test(p) ? 'produce' : /^\/seasonal/.test(p) ? 'seasonal' : 'guide';
 
   var css = '' +
     'html.skh-on header:not(.skh){display:none!important}' +
@@ -43,12 +47,22 @@
     '.skh-nav{display:flex;flex-wrap:wrap;gap:6px 22px;flex:1}' +
     '.skh-nav a{color:#fb8c00;text-decoration:none;font-size:15px;line-height:1.6;padding:2px 0;border-bottom:1px solid transparent}' +
     '.skh-nav a:hover,.skh-nav a[aria-current=page]{border-bottom-color:#fb8c00}' +
+    '.skh-grp{position:relative}' +
+    '.skh-grp>button{background:none;border:0;color:#fb8c00;font:inherit;font-size:15px;line-height:1.6;padding:2px 0;cursor:pointer;display:inline-flex;align-items:center;gap:5px;border-bottom:1px solid transparent}' +
+    '.skh-grp>button::after{content:"";width:6px;height:6px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg) translateY(-2px)}' +
+    '.skh-grp.cur>button{border-bottom-color:#fb8c00}' +
+    '.skh-menu{display:none;position:absolute;left:-16px;top:100%;margin-top:8px;background:#fcfbf5;min-width:190px;padding:10px 0;box-shadow:0 8px 24px rgba(0,0,0,.15);z-index:60}' +
+    '.skh-grp:hover .skh-menu,.skh-grp:focus-within .skh-menu,.skh-grp.open .skh-menu{display:block}' +
+    '.skh-menu::before{content:"";position:absolute;left:0;right:0;top:-10px;height:10px}' +
+    '.skh-nav .skh-menu a{display:block;color:#2e431f;padding:7px 20px;border:0;font-size:15px}' +
+    '.skh-nav .skh-menu a:hover,.skh-nav .skh-menu a[aria-current=page]{text-decoration:underline;text-underline-offset:3px}' +
     '.skh-right{display:flex;align-items:center;gap:14px}' +
     '.skh-right button,.skh-right a.skh-cart{background:none;border:0;color:#fb8c00;font:inherit;font-size:15px;cursor:pointer;padding:4px;display:inline-flex;align-items:center}' +
     '.skh-right .hide{display:none!important}' +
     '.skh-burger{display:none!important}' +
     '@media(max-width:989px){.skh-in{padding:12px 18px;gap:12px;flex-wrap:wrap}.skh-burger{display:inline-flex!important;order:-1}.skh-logo{flex:1;display:flex;justify-content:center}.skh-logo img{width:120px}' +
-    '.skh-nav{display:none;order:5;flex-basis:100%;flex-direction:column;gap:0;padding:6px 0 4px;border-top:1px solid rgba(251,140,0,.25)}.skh.open .skh-nav{display:flex}.skh-nav a{padding:10px 2px;font-size:16px;border-bottom:0}}' +
+    '.skh-nav{display:none;order:5;flex-basis:100%;flex-direction:column;gap:0;padding:6px 0 4px;border-top:1px solid rgba(251,140,0,.25)}.skh.open .skh-nav{display:flex}.skh-nav a{padding:10px 2px;font-size:16px;border-bottom:0}' +
+    '.skh-grp>button{display:none}.skh-menu{display:block;position:static;margin:0;background:none;box-shadow:none;padding:0;min-width:0}.skh-menu::before{display:none}.skh-nav .skh-menu a{color:#fb8c00;padding:10px 2px;font-size:16px}}' +
     '@media print{.skh,.skh-bar{display:none}}';
   var st = document.createElement('style'); st.textContent = css; document.head.appendChild(st);
   if (!document.querySelector('link[href*="family=Trirong"]')) {
@@ -59,8 +73,13 @@
   document.documentElement.className += ' skh-on';
 
   function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;'); }
+  function link(m) {
+    return '<a href="' + esc(m[1]) + '"' + (m[2] && m[2] === cur ? ' aria-current="page"' : '') + '>' + esc(m[0]) + '</a>';
+  }
   var nav = MENU.map(function (m) {
-    return '<a href="' + esc(m[1]) + '"' + (m[2] === cur ? ' aria-current="page"' : '') + '>' + esc(m[0]) + '</a>';
+    if (!m[3]) return link(m);
+    var on = m[3].some(function (c) { return c[2] && c[2] === cur; });
+    return '<span class="skh-grp' + (on ? ' cur' : '') + '"><button type="button" aria-expanded="false">' + esc(m[0]) + '</button><span class="skh-menu">' + m[3].map(link).join('') + '</span></span>';
   }).join('');
   var html = (APP ? '' : '<div class="skh-bar" role="region" aria-label="Announcement"><a href="' + STORE + '/products/double-krisp-subscription?' + UTM + '">Subscribe and save 25%</a></div>') +
     '<header class="skh"><div class="skh-in">' +
@@ -75,6 +94,10 @@
     var h = document.querySelector('header.skh');
     var b = h.querySelector('.skh-burger');
     b.addEventListener('click', function () { var o = h.classList.toggle('open'); b.setAttribute('aria-expanded', o ? 'true' : 'false'); });
+    Array.prototype.slice.call(h.querySelectorAll('.skh-grp>button')).forEach(function (g) {
+      g.addEventListener('click', function () { var o = g.parentNode.classList.toggle('open'); g.setAttribute('aria-expanded', o ? 'true' : 'false'); });
+    });
+    document.addEventListener('click', function (e) { if (!e.target.closest || !e.target.closest('.skh-grp')) Array.prototype.slice.call(h.querySelectorAll('.skh-grp.open')).forEach(function (n) { n.classList.remove('open'); n.firstChild.setAttribute('aria-expanded', 'false'); }); });
     function extras() {
       var extra = document.getElementById('skhExtra');
       Array.prototype.slice.call(document.querySelectorAll('header:not(.skh) [data-sk-header-extra]')).forEach(function (n) { extra.insertBefore(n, extra.firstChild); });
