@@ -22,7 +22,8 @@ export const ZONES = [
   { key: 'counter', title: 'Counter', detail: 'Room temperature, out of direct sun.' },
   { key: 'pantry', title: 'Cool, dark cupboard', detail: 'Not the fridge. Keep onions away from potatoes.' },
 ];
-const SHELF_HOW = { 'Herbs (Fresh)': 'Top shelf, stems in a jar of water with a loose bag over the top.', Mushroom: 'Paper bag on a shelf.' };
+const JAR = 'Top shelf, stems in a jar of water with a loose bag over the top.';
+const SHELF_HOW = { 'Herbs (Fresh)': JAR, Cilantro: JAR, Parsley: JAR, Mushroom: 'Paper bag on a shelf.' };
 
 const MELON = /melon|cantaloupe|honeydew/i;
 function thenNote(c) {

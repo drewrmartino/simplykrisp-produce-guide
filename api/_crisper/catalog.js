@@ -391,12 +391,7 @@ export const CATALOG = [
    "navel orange",
    "cara cara",
    "blood orange",
-   "mandarin",
-   "clementine",
-   "cutie",
-   "halo mandarin",
-   "tangerine",
-   "satsuma"
+   "valencia orange"
   ]
  },
  {
@@ -908,7 +903,7 @@ export const CATALOG = [
    3
   ],
   "krispTier": "strong",
-  "krispPrevents": "Stops the bitter taste carrots pick up from ethylene.",
+  "krispPrevents": "Helps keep carrots from picking up a bitter taste from ethylene.",
   "krispEvidence": "Based on published data for closely related produce.",
   "krispNoBenefit": "",
   "ethyleneProduction": "very_low",
@@ -967,22 +962,22 @@ export const CATALOG = [
   "minDays": 14,
   "maxDays": 28,
   "ripensFirst": false,
-  "krispRecommended": true,
+  "krispRecommended": false,
   "krispExtra": [
-   1,
-   2
+   0,
+   0
   ],
-  "krispTier": "some",
-  "krispPrevents": "Helps the stalks keep their green color.",
-  "krispEvidence": "Our estimate from how strongly it reacts to ethylene.",
-  "krispNoBenefit": "",
+  "krispTier": null,
+  "krispPrevents": "",
+  "krispEvidence": "",
+  "krispNoBenefit": "Celery only loses its green at high ethylene levels and warm temperatures, well beyond a cold crisper drawer. It mostly fails by drying out, so wrapping it does more than a Krisp.",
   "ethyleneProduction": "very_low",
   "ethyleneSensitivity": "medium",
   "avoidWith": [
    "Apples",
    "Pears"
   ],
-  "tip": "Wrap in aluminum foil — this allows ethylene to escape while retaining moisture",
+  "tip": "Wrap in aluminum foil to hold in moisture",
   "ripeTip": "Firm, crisp stalks that snap when bent. Look for bright green color and fresh leaves.",
   "aliases": [
    "celery",
@@ -1221,11 +1216,6 @@ export const CATALOG = [
    "butterhead",
    "green leaf",
    "red leaf",
-   "spring mix",
-   "salad mix",
-   "mixed greens",
-   "arugula",
-   "baby greens",
    "little gem"
   ]
  },
@@ -1303,7 +1293,7 @@ export const CATALOG = [
   "name": "Peas",
   "category": "vegetable",
   "emoji": "🫛",
-  "imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1fadb.png",
+  "imageUrl": "https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/72x72/1fadb.png",
   "storage": "refrigerator",
   "shelfLifeText": "3-5 days (refrigerated)",
   "minDays": 3,
@@ -1501,10 +1491,6 @@ export const CATALOG = [
   "ripeTip": "Bright, vibrant color with a strong aroma and no wilting or dark spots.",
   "aliases": [
    "fresh herb",
-   "cilantro",
-   "parsley",
-   "italian parsley",
-   "basil",
    "mint",
    "dill",
    "thyme",
@@ -1823,17 +1809,17 @@ export const CATALOG = [
   "minDays": 7,
   "maxDays": 14,
   "ripensFirst": false,
-  "krispRecommended": true,
+  "krispRecommended": false,
   "krispExtra": [
-   2,
-   3
+   0,
+   0
   ],
-  "krispTier": "strong",
-  "krispPrevents": "Slows the green tops yellowing.",
-  "krispEvidence": "Based on published data for closely related produce.",
-  "krispNoBenefit": "",
+  "krispTier": null,
+  "krispPrevents": "",
+  "krispEvidence": "",
+  "krispNoBenefit": "Green onions don't react to ethylene from other produce. Warmth and age are what yellow the tops, so keeping them cold and damp does more than a Krisp.",
   "ethyleneProduction": "low",
-  "ethyleneSensitivity": "high",
+  "ethyleneSensitivity": "low",
   "avoidWith": [],
   "tip": "Stand upright in a jar with an inch of water and cover loosely with a bag",
   "ripeTip": "Firm white bulbs with crisp, bright green tops. Avoid any with slimy or yellowed greens.",
@@ -1841,6 +1827,711 @@ export const CATALOG = [
    "green onion",
    "scallion",
    "spring onion"
+  ]
+ },
+ {
+  "name": "Mandarin",
+  "category": "fruit",
+  "emoji": "🍊",
+  "imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f34a.png",
+  "storage": "refrigerator",
+  "shelfLifeText": "1-2 weeks (refrigerated)",
+  "minDays": 7,
+  "maxDays": 14,
+  "ripensFirst": false,
+  "krispRecommended": false,
+  "krispExtra": [
+   0,
+   0
+  ],
+  "krispTier": null,
+  "krispPrevents": "",
+  "krispEvidence": "",
+  "krispNoBenefit": "Citrus reacts only mildly to ethylene, and mold is what usually ends mandarins. A Krisp won't change much.",
+  "ethyleneProduction": "very_low",
+  "ethyleneSensitivity": "medium",
+  "avoidWith": [
+   "Apples"
+  ],
+  "tip": "Refrigerate loose in the crisper drawer if you will not eat them within a few days",
+  "ripeTip": "Heavy for their size with glossy, deep orange skin. A slightly loose peel is normal. Soft spots or a musty smell are not.",
+  "aliases": [
+   "mandarin",
+   "clementine",
+   "cutie",
+   "halo mandarin",
+   "tangerine",
+   "satsuma",
+   "tangelo"
+  ]
+ },
+ {
+  "name": "Cilantro",
+  "category": "vegetable",
+  "emoji": "🌿",
+  "imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3MiA3MiI+PHBhdGggZD0iTTM2IDY4IEwzNiAzNiBNMzYgNTQgUTI4IDQ2IDIwIDM4IE0zNiA1NCBRNDQgNDYgNTIgMzgiIHN0cm9rZT0iIzdCQUI1NiIgc3Ryb2tlLXdpZHRoPSIyLjYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgZmlsbD0ibm9uZSIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDM2IDI0KSI+PGVsbGlwc2UgY3g9Ii04IiBjeT0iMiIgcng9IjciIHJ5PSI4IiBmaWxsPSIjNUI4QzRBIiB0cmFuc2Zvcm09InJvdGF0ZSgtMzUgLTggMikiLz48ZWxsaXBzZSBjeD0iOCIgY3k9IjIiIHJ4PSI3IiByeT0iOCIgZmlsbD0iIzVCOEM0QSIgdHJhbnNmb3JtPSJyb3RhdGUoMzUgOCAyKSIvPjxlbGxpcHNlIGN4PSIwIiBjeT0iLTUiIHJ4PSI3LjUiIHJ5PSI5IiBmaWxsPSIjNUI4QzRBIi8+PHBhdGggZD0iTTAgMTIgTDAgLTggTTAgOCBMLTggMCBNMCA4IEw4IDAiIHN0cm9rZT0iI0NGRTZBRSIgc3Ryb2tlLXdpZHRoPSIxLjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgZmlsbD0ibm9uZSIvPjwvZz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxOCAzMCkiPjxlbGxpcHNlIGN4PSItOCIgY3k9IjIiIHJ4PSI3IiByeT0iOCIgZmlsbD0iIzdCQUI1NiIgdHJhbnNmb3JtPSJyb3RhdGUoLTM1IC04IDIpIi8+PGVsbGlwc2UgY3g9IjgiIGN5PSIyIiByeD0iNyIgcnk9IjgiIGZpbGw9IiM3QkFCNTYiIHRyYW5zZm9ybT0icm90YXRlKDM1IDggMikiLz48ZWxsaXBzZSBjeD0iMCIgY3k9Ii01IiByeD0iNy41IiByeT0iOSIgZmlsbD0iIzdCQUI1NiIvPjxwYXRoIGQ9Ik0wIDEyIEwwIC04IE0wIDggTC04IDAgTTAgOCBMOCAwIiBzdHJva2U9IiNDRkU2QUUiIHN0cm9rZS13aWR0aD0iMS4yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIGZpbGw9Im5vbmUiLz48L2c+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNTQgMzApIj48ZWxsaXBzZSBjeD0iLTgiIGN5PSIyIiByeD0iNyIgcnk9IjgiIGZpbGw9IiM3QkFCNTYiIHRyYW5zZm9ybT0icm90YXRlKC0zNSAtOCAyKSIvPjxlbGxpcHNlIGN4PSI4IiBjeT0iMiIgcng9IjciIHJ5PSI4IiBmaWxsPSIjN0JBQjU2IiB0cmFuc2Zvcm09InJvdGF0ZSgzNSA4IDIpIi8+PGVsbGlwc2UgY3g9IjAiIGN5PSItNSIgcng9IjcuNSIgcnk9IjkiIGZpbGw9IiM3QkFCNTYiLz48cGF0aCBkPSJNMCAxMiBMMCAtOCBNMCA4IEwtOCAwIE0wIDggTDggMCIgc3Ryb2tlPSIjQ0ZFNkFFIiBzdHJva2Utd2lkdGg9IjEuMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBmaWxsPSJub25lIi8+PC9nPjwvc3ZnPg==",
+  "storage": "refrigerator",
+  "shelfLifeText": "7-10 days (refrigerated)",
+  "minDays": 7,
+  "maxDays": 10,
+  "ripensFirst": false,
+  "krispRecommended": false,
+  "krispExtra": [
+   0,
+   0
+  ],
+  "krispTier": null,
+  "krispPrevents": "",
+  "krispEvidence": "",
+  "krispNoBenefit": "In a jar on the shelf, cilantro is out of the Krisp's reach. Bagged in the high-humidity drawer instead, the Krisp helps keep it from yellowing.",
+  "ethyleneProduction": "very_low",
+  "ethyleneSensitivity": "high",
+  "avoidWith": [
+   "Apples",
+   "Bananas",
+   "Tomatoes"
+  ],
+  "tip": "Trim the stems and stand the bunch in a jar with an inch of water",
+  "ripeTip": "Bright green, perky leaves with a strong smell. Skip bunches with yellow, dark or slimy leaves.",
+  "aliases": [
+   "cilantro"
+  ]
+ },
+ {
+  "name": "Parsley",
+  "category": "vegetable",
+  "emoji": "🌿",
+  "imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3MiA3MiI+PHBhdGggZD0iTTM2IDY4IEwzNiAzNCBNMzYgNTYgUTI3IDQ4IDIwIDQwIE0zNiA1NiBRNDUgNDggNTIgNDAiIHN0cm9rZT0iIzVCOEM0QSIgc3Ryb2tlLXdpZHRoPSIyLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgZmlsbD0ibm9uZSIvPjxjaXJjbGUgY3g9IjQzLjkiIGN5PSIyMiIgcj0iNC45NSIgZmlsbD0iIzNBNkIzNCIvPjxjaXJjbGUgY3g9IjQxLjYiIGN5PSIyNy42IiByPSI0Ljk1IiBmaWxsPSIjM0E2QjM0Ii8+PGNpcmNsZSBjeD0iMzYiIGN5PSIyOS45IiByPSI0Ljk1IiBmaWxsPSIjM0E2QjM0Ii8+PGNpcmNsZSBjeD0iMzAuNCIgY3k9IjI3LjYiIHI9IjQuOTUiIGZpbGw9IiMzQTZCMzQiLz48Y2lyY2xlIGN4PSIyOC4xIiBjeT0iMjIiIHI9IjQuOTUiIGZpbGw9IiMzQTZCMzQiLz48Y2lyY2xlIGN4PSIzMC40IiBjeT0iMTYuNCIgcj0iNC45NSIgZmlsbD0iIzNBNkIzNCIvPjxjaXJjbGUgY3g9IjM2IiBjeT0iMTQuMSIgcj0iNC45NSIgZmlsbD0iIzNBNkIzNCIvPjxjaXJjbGUgY3g9IjQxLjYiIGN5PSIxNi40IiByPSI0Ljk1IiBmaWxsPSIjM0E2QjM0Ii8+PGNpcmNsZSBjeD0iMzYiIGN5PSIyMiIgcj0iNy43IiBmaWxsPSIjM0E2QjM0Ii8+PGNpcmNsZSBjeD0iMzkuMyIgY3k9IjIyIiByPSIxLjMiIGZpbGw9IiM2RkEzNUEiLz48Y2lyY2xlIGN4PSIzNiIgY3k9IjI1LjMiIHI9IjEuMyIgZmlsbD0iIzZGQTM1QSIvPjxjaXJjbGUgY3g9IjMyLjciIGN5PSIyMiIgcj0iMS4zIiBmaWxsPSIjNkZBMzVBIi8+PGNpcmNsZSBjeD0iMzYiIGN5PSIxOC43IiByPSIxLjMiIGZpbGw9IiM2RkEzNUEiLz48Y2lyY2xlIGN4PSIyNS44IiBjeT0iMzEiIHI9IjQuMjc1IiBmaWxsPSIjNEE3QzNGIi8+PGNpcmNsZSBjeD0iMjMuOCIgY3k9IjM1LjgiIHI9IjQuMjc1IiBmaWxsPSIjNEE3QzNGIi8+PGNpcmNsZSBjeD0iMTkiIGN5PSIzNy44IiByPSI0LjI3NSIgZmlsbD0iIzRBN0MzRiIvPjxjaXJjbGUgY3g9IjE0LjIiIGN5PSIzNS44IiByPSI0LjI3NSIgZmlsbD0iIzRBN0MzRiIvPjxjaXJjbGUgY3g9IjEyLjIiIGN5PSIzMSIgcj0iNC4yNzUiIGZpbGw9IiM0QTdDM0YiLz48Y2lyY2xlIGN4PSIxNC4yIiBjeT0iMjYuMiIgcj0iNC4yNzUiIGZpbGw9IiM0QTdDM0YiLz48Y2lyY2xlIGN4PSIxOSIgY3k9IjI0LjIiIHI9IjQuMjc1IiBmaWxsPSIjNEE3QzNGIi8+PGNpcmNsZSBjeD0iMjMuOCIgY3k9IjI2LjIiIHI9IjQuMjc1IiBmaWxsPSIjNEE3QzNGIi8+PGNpcmNsZSBjeD0iMTkiIGN5PSIzMSIgcj0iNi43IiBmaWxsPSIjNEE3QzNGIi8+PGNpcmNsZSBjeD0iMjEuOSIgY3k9IjMxIiByPSIxLjMiIGZpbGw9IiM2RkEzNUEiLz48Y2lyY2xlIGN4PSIxOSIgY3k9IjMzLjkiIHI9IjEuMyIgZmlsbD0iIzZGQTM1QSIvPjxjaXJjbGUgY3g9IjE2LjIiIGN5PSIzMSIgcj0iMS4zIiBmaWxsPSIjNkZBMzVBIi8+PGNpcmNsZSBjeD0iMTkiIGN5PSIyOC4yIiByPSIxLjMiIGZpbGw9IiM2RkEzNUEiLz48Y2lyY2xlIGN4PSI1OS44IiBjeT0iMzEiIHI9IjQuMjc1IiBmaWxsPSIjNEE3QzNGIi8+PGNpcmNsZSBjeD0iNTcuOCIgY3k9IjM1LjgiIHI9IjQuMjc1IiBmaWxsPSIjNEE3QzNGIi8+PGNpcmNsZSBjeD0iNTMiIGN5PSIzNy44IiByPSI0LjI3NSIgZmlsbD0iIzRBN0MzRiIvPjxjaXJjbGUgY3g9IjQ4LjIiIGN5PSIzNS44IiByPSI0LjI3NSIgZmlsbD0iIzRBN0MzRiIvPjxjaXJjbGUgY3g9IjQ2LjIiIGN5PSIzMSIgcj0iNC4yNzUiIGZpbGw9IiM0QTdDM0YiLz48Y2lyY2xlIGN4PSI0OC4yIiBjeT0iMjYuMiIgcj0iNC4yNzUiIGZpbGw9IiM0QTdDM0YiLz48Y2lyY2xlIGN4PSI1MyIgY3k9IjI0LjIiIHI9IjQuMjc1IiBmaWxsPSIjNEE3QzNGIi8+PGNpcmNsZSBjeD0iNTcuOCIgY3k9IjI2LjIiIHI9IjQuMjc1IiBmaWxsPSIjNEE3QzNGIi8+PGNpcmNsZSBjeD0iNTMiIGN5PSIzMSIgcj0iNi43IiBmaWxsPSIjNEE3QzNGIi8+PGNpcmNsZSBjeD0iNTUuOSIgY3k9IjMxIiByPSIxLjMiIGZpbGw9IiM2RkEzNUEiLz48Y2lyY2xlIGN4PSI1MyIgY3k9IjMzLjkiIHI9IjEuMyIgZmlsbD0iIzZGQTM1QSIvPjxjaXJjbGUgY3g9IjUwLjIiIGN5PSIzMSIgcj0iMS4zIiBmaWxsPSIjNkZBMzVBIi8+PGNpcmNsZSBjeD0iNTMiIGN5PSIyOC4yIiByPSIxLjMiIGZpbGw9IiM2RkEzNUEiLz48L3N2Zz4=",
+  "storage": "refrigerator",
+  "shelfLifeText": "1-2 weeks (refrigerated)",
+  "minDays": 7,
+  "maxDays": 14,
+  "ripensFirst": false,
+  "krispRecommended": false,
+  "krispExtra": [
+   0,
+   0
+  ],
+  "krispTier": null,
+  "krispPrevents": "",
+  "krispEvidence": "",
+  "krispNoBenefit": "In a jar on the shelf, parsley is out of the Krisp's reach. Bagged in the high-humidity drawer instead, the Krisp helps keep it from yellowing.",
+  "ethyleneProduction": "very_low",
+  "ethyleneSensitivity": "high",
+  "avoidWith": [
+   "Apples",
+   "Bananas",
+   "Tomatoes"
+  ],
+  "tip": "Trim the stems and stand the bunch in a jar with an inch of water",
+  "ripeTip": "Deep green, springy leaves with firm stems. Skip bunches with yellow or wilted leaves.",
+  "aliases": [
+   "parsley",
+   "italian parsley",
+   "curly parsley"
+  ]
+ },
+ {
+  "name": "Basil",
+  "category": "vegetable",
+  "emoji": "🌿",
+  "imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3MiA3MiI+PHBhdGggZD0iTTM2IDY4IEwzNiAyNiIgc3Ryb2tlPSIjN0JBQjU2IiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgZmlsbD0ibm9uZSIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDM2IDUwKSByb3RhdGUoLTE1OCkiPjxwYXRoIGQ9Ik0wIDAgQzYuOCAtOS41IDIwLjMgLTkuNSAyNyAwIEMyMC4zIDkuNSA2LjggOS41IDAgMFoiIGZpbGw9IiM0QTdDM0YiLz48cGF0aCBkPSJNMSAwIEwyNCAwIiBzdHJva2U9IiM4RkJGNkEiIHN0cm9rZS13aWR0aD0iMS4zIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48L2c+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzYgNTApIHJvdGF0ZSgtMjIpIj48cGF0aCBkPSJNMCAwIEM2LjggLTkuNSAyMC4zIC05LjUgMjcgMCBDMjAuMyA5LjUgNi44IDkuNSAwIDBaIiBmaWxsPSIjNUI4QzRBIi8+PHBhdGggZD0iTTEgMCBMMjQgMCIgc3Ryb2tlPSIjQThEMjgzIiBzdHJva2Utd2lkdGg9IjEuMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PC9nPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDM2IDMyKSByb3RhdGUoLTE0MCkiPjxwYXRoIGQ9Ik0wIDAgQzUuOCAtOCAxNy4zIC04IDIzIDAgQzE3LjMgOCA1LjggOCAwIDBaIiBmaWxsPSIjNUI4QzRBIi8+PHBhdGggZD0iTTEgMCBMMjAgMCIgc3Ryb2tlPSIjQThEMjgzIiBzdHJva2Utd2lkdGg9IjEuMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PC9nPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDM2IDMyKSByb3RhdGUoLTQwKSI+PHBhdGggZD0iTTAgMCBDNS44IC04IDE3LjMgLTggMjMgMCBDMTcuMyA4IDUuOCA4IDAgMFoiIGZpbGw9IiM0QTdDM0YiLz48cGF0aCBkPSJNMSAwIEwyMCAwIiBzdHJva2U9IiM4RkJGNkEiIHN0cm9rZS13aWR0aD0iMS4zIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48L2c+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzYgMjYpIHJvdGF0ZSgtOTApIj48cGF0aCBkPSJNMCAwIEM0LjggLTYuNSAxNC4zIC02LjUgMTkgMCBDMTQuMyA2LjUgNC44IDYuNSAwIDBaIiBmaWxsPSIjNkZBMzUyIi8+PHBhdGggZD0iTTEgMCBMMTYgMCIgc3Ryb2tlPSIjQjVEQjkzIiBzdHJva2Utd2lkdGg9IjEuMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PC9nPjwvc3ZnPg==",
+  "storage": "counter",
+  "shelfLifeText": "5-7 days (counter)",
+  "minDays": 5,
+  "maxDays": 7,
+  "ripensFirst": false,
+  "krispRecommended": false,
+  "krispExtra": [
+   0,
+   0
+  ],
+  "krispTier": null,
+  "krispPrevents": "",
+  "krispEvidence": "",
+  "krispNoBenefit": "Basil lives on the counter because the fridge blackens it, so it never shares a drawer with a Krisp. It barely reacts to ethylene anyway.",
+  "ethyleneProduction": "very_low",
+  "ethyleneSensitivity": "low",
+  "avoidWith": [],
+  "tip": "Trim the stems and stand the bunch in a glass of water on the counter, out of direct sun",
+  "ripeTip": "Glossy, bright green leaves with no black spots, and a strong smell when you brush them.",
+  "aliases": [
+   "basil",
+   "thai basil"
+  ]
+ },
+ {
+  "name": "Bagged Salad",
+  "category": "vegetable",
+  "emoji": "🥗",
+  "imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f957.png",
+  "storage": "refrigerator",
+  "shelfLifeText": "3-5 days (refrigerated)",
+  "minDays": 3,
+  "maxDays": 5,
+  "ripensFirst": false,
+  "krispRecommended": false,
+  "krispExtra": [
+   0,
+   0
+  ],
+  "krispTier": null,
+  "krispPrevents": "",
+  "krispEvidence": "",
+  "krispNoBenefit": "Bagged salad is cut, washed and sealed, so it runs on its use-by date. Once the bag is open, moisture and bruised edges end it in about two days, and a Krisp won't change that.",
+  "ethyleneProduction": "very_low",
+  "ethyleneSensitivity": "medium",
+  "avoidWith": [
+   "Apples",
+   "Pears"
+  ],
+  "tip": "Keep the bag or tub sealed and cold until you need it, and go by the use-by date",
+  "ripeTip": "Pick the bag with the latest date, dry leaves and no dark, wet or slimy pieces.",
+  "aliases": [
+   "spring mix",
+   "salad mix",
+   "mixed greens",
+   "baby greens",
+   "salad kit",
+   "salad blend",
+   "bagged salad",
+   "power greens",
+   "baby lettuce",
+   "garden salad",
+   "salad greens"
+  ]
+ },
+ {
+  "name": "Bok Choy",
+  "category": "vegetable",
+  "emoji": "🥬",
+  "imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3MiA3MiI+PGVsbGlwc2UgY3g9IjIwIiBjeT0iMjIiIHJ4PSIxMSIgcnk9IjE2IiBmaWxsPSIjNEE3QzNGIiB0cmFuc2Zvcm09InJvdGF0ZSgtMjIgMjAgMjIpIi8+PGVsbGlwc2UgY3g9IjUyIiBjeT0iMjIiIHJ4PSIxMSIgcnk9IjE2IiBmaWxsPSIjNEE3QzNGIiB0cmFuc2Zvcm09InJvdGF0ZSgyMiA1MiAyMikiLz48ZWxsaXBzZSBjeD0iMzYiIGN5PSIxNyIgcng9IjExIiByeT0iMTUiIGZpbGw9IiM1QjhDNEEiLz48cGF0aCBkPSJNMjkgNTggUTIyIDQ0IDIxIDI4IiBzdHJva2U9IiNFREVCREQiIHN0cm9rZS13aWR0aD0iOCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTQzIDU4IFE1MCA0NCA1MSAyOCIgc3Ryb2tlPSIjRURFQkREIiBzdHJva2Utd2lkdGg9IjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgZmlsbD0ibm9uZSIvPjxwYXRoIGQ9Ik0zNiA2MCBMMzYgMjIiIHN0cm9rZT0iI0ZBRjhFRSIgc3Ryb2tlLXdpZHRoPSI5IiBzdHJva2UtbGluZWNhcD0icm91bmQiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNMjIgNTQgQzIyIDQ2IDI4IDQ0IDM2IDQ0IEM0NCA0NCA1MCA0NiA1MCA1NCBDNTAgNjIgNDQgNjcgMzYgNjcgQzI4IDY3IDIyIDYyIDIyIDU0WiIgZmlsbD0iI0Y0RjJFNiIvPjxwYXRoIGQ9Ik0zMSA0OCBRMjkgNTYgMzIgNjQgTTQxIDQ4IFE0MyA1NiA0MCA2NCIgc3Ryb2tlPSIjRDhENUMyIiBzdHJva2Utd2lkdGg9IjEuNCIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PC9zdmc+",
+  "storage": "refrigerator",
+  "shelfLifeText": "5-7 days (refrigerated)",
+  "minDays": 5,
+  "maxDays": 7,
+  "ripensFirst": false,
+  "krispRecommended": true,
+  "krispExtra": [
+   1,
+   2
+  ],
+  "krispTier": "some",
+  "krispPrevents": "Slows the leaves yellowing.",
+  "krispEvidence": "Our estimate from how strongly it reacts to ethylene.",
+  "krispNoBenefit": "",
+  "ethyleneProduction": "very_low",
+  "ethyleneSensitivity": "medium",
+  "avoidWith": [
+   "Apples",
+   "Bananas",
+   "Pears"
+  ],
+  "tip": "Store unwashed in a loose plastic bag in the crisper drawer",
+  "ripeTip": "Firm, white or pale green stalks and dark leaves with no yellowing, holes or brown spots.",
+  "aliases": [
+   "bok choy",
+   "baby bok choy",
+   "bok choi",
+   "pak choi",
+   "pak choy"
+  ]
+ },
+ {
+  "name": "Collard Greens",
+  "category": "vegetable",
+  "emoji": "🥬",
+  "imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3MiA3MiI+PHBhdGggZD0iTTM2IDUgQzU1IDggNjIgMjggNTYgNDQgQzUyIDU1IDQzIDU5IDM2IDU5IEMyOSA1OSAyMCA1NSAxNiA0NCBDMTAgMjggMTcgOCAzNiA1WiIgZmlsbD0iIzNBNkIzNCIvPjxwYXRoIGQ9Ik0zNiAyMiBMMjUgMTUgTTM2IDIyIEw0NyAxNSBNMzYgMzMgTDIxIDI2IE0zNiAzMyBMNTEgMjYgTTM2IDQ0IEwyMiAzOSBNMzYgNDQgTDUwIDM5IE0zNiA1MyBMMjggNTEgTTM2IDUzIEw0NCA1MSIgc3Ryb2tlPSIjQkZEOUEwIiBzdHJva2Utd2lkdGg9IjEuNiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTM2IDEwIEwzNiA2OCIgc3Ryb2tlPSIjQ0ZFM0I0IiBzdHJva2Utd2lkdGg9IjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgZmlsbD0ibm9uZSIvPjwvc3ZnPg==",
+  "storage": "refrigerator",
+  "shelfLifeText": "5-7 days (refrigerated)",
+  "minDays": 5,
+  "maxDays": 7,
+  "ripensFirst": false,
+  "krispRecommended": true,
+  "krispExtra": [
+   1,
+   2
+  ],
+  "krispTier": "some",
+  "krispPrevents": "Slows the leaves yellowing.",
+  "krispEvidence": "Our estimate from how strongly it reacts to ethylene.",
+  "krispNoBenefit": "",
+  "ethyleneProduction": "very_low",
+  "ethyleneSensitivity": "high",
+  "avoidWith": [
+   "Apples",
+   "Bananas",
+   "Pears"
+  ],
+  "tip": "Store unwashed in a loose plastic bag in the crisper drawer",
+  "ripeTip": "Dark green, firm leaves with no yellow edges or slimy spots. Smaller leaves are more tender.",
+  "aliases": [
+   "collard",
+   "collard green"
+  ]
+ },
+ {
+  "name": "Swiss Chard",
+  "category": "vegetable",
+  "emoji": "🥬",
+  "imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3MiA3MiI+PHBhdGggZD0iTTM2IDQgQzQzIDUgNDYgMTAgNTEgMTIgQzU2IDE2IDU0IDIyIDU4IDI3IEM2MCAzMyA1NiAzOCA1NSA0NCBDNTIgNTAgNDYgNTIgNDIgNTYgTDM2IDU4IEwzMCA1NiBDMjYgNTIgMjAgNTAgMTcgNDQgQzE2IDM4IDEyIDMzIDE0IDI3IEMxOCAyMiAxNiAxNiAyMSAxMiBDMjYgMTAgMjkgNSAzNiA0WiIgZmlsbD0iIzRBN0MzRiIvPjxwYXRoIGQ9Ik0zNiAyMiBMMjYgMTQgTTM2IDIyIEw0NiAxNCBNMzYgMzMgTDIxIDI1IE0zNiAzMyBMNTEgMjUgTTM2IDQ0IEwyMyAzOCBNMzYgNDQgTDQ5IDM4IiBzdHJva2U9IiNFMDUyNkIiIHN0cm9rZS13aWR0aD0iMS43IiBzdHJva2UtbGluZWNhcD0icm91bmQiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNMzYgMTEgTDM2IDY4IiBzdHJva2U9IiNENjJGNEUiIHN0cm9rZS13aWR0aD0iNS41IiBzdHJva2UtbGluZWNhcD0icm91bmQiIGZpbGw9Im5vbmUiLz48L3N2Zz4=",
+  "storage": "refrigerator",
+  "shelfLifeText": "3-5 days (refrigerated)",
+  "minDays": 3,
+  "maxDays": 5,
+  "ripensFirst": false,
+  "krispRecommended": true,
+  "krispExtra": [
+   1,
+   2
+  ],
+  "krispTier": "some",
+  "krispPrevents": "Slows the leaves yellowing and browning at the edges.",
+  "krispEvidence": "Our estimate from how strongly it reacts to ethylene.",
+  "krispNoBenefit": "",
+  "ethyleneProduction": "very_low",
+  "ethyleneSensitivity": "high",
+  "avoidWith": [
+   "Apples",
+   "Bananas",
+   "Pears"
+  ],
+  "tip": "Store unwashed in a loose plastic bag in the crisper drawer",
+  "ripeTip": "Glossy, crisp leaves and firm, brightly colored stems. Skip bunches with yellow or brown edges.",
+  "aliases": [
+   "chard",
+   "swiss chard",
+   "rainbow chard",
+   "beet green"
+  ]
+ },
+ {
+  "name": "Arugula",
+  "category": "vegetable",
+  "emoji": "🥬",
+  "imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3MiA3MiI+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjQgNjIpIHJvdGF0ZSgtMjQpIj48ZWxsaXBzZSBjeD0iMCIgY3k9Ii0zMSIgcng9IjciIHJ5PSI5IiBmaWxsPSIjNUI4QzRBIi8+PGVsbGlwc2UgY3g9Ii03IiBjeT0iLTIwIiByeD0iNi41IiByeT0iNC4yIiBmaWxsPSIjNUI4QzRBIiB0cmFuc2Zvcm09InJvdGF0ZSgtMjUgLTcgLTIwKSIvPjxlbGxpcHNlIGN4PSI3IiBjeT0iLTIwIiByeD0iNi41IiByeT0iNC4yIiBmaWxsPSIjNUI4QzRBIiB0cmFuc2Zvcm09InJvdGF0ZSgyNSA3IC0yMCkiLz48ZWxsaXBzZSBjeD0iLTYiIGN5PSItMTEiIHJ4PSI1LjUiIHJ5PSIzLjYiIGZpbGw9IiM1QjhDNEEiIHRyYW5zZm9ybT0icm90YXRlKC0yNSAtNiAtMTEpIi8+PGVsbGlwc2UgY3g9IjYiIGN5PSItMTEiIHJ4PSI1LjUiIHJ5PSIzLjYiIGZpbGw9IiM1QjhDNEEiIHRyYW5zZm9ybT0icm90YXRlKDI1IDYgLTExKSIvPjxyZWN0IHg9Ii0zIiB5PSItMzAiIHdpZHRoPSI2IiBoZWlnaHQ9IjI2IiByeD0iMyIgZmlsbD0iIzVCOEM0QSIvPjxwYXRoIGQ9Ik0wIDQgTDAgLTM0IiBzdHJva2U9IiNEREVCQzQiIHN0cm9rZS13aWR0aD0iMS44IiBzdHJva2UtbGluZWNhcD0icm91bmQiIGZpbGw9Im5vbmUiLz48L2c+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDggNjIpIHJvdGF0ZSgyNCkiPjxlbGxpcHNlIGN4PSIwIiBjeT0iLTMxIiByeD0iNyIgcnk9IjkiIGZpbGw9IiM1QjhDNEEiLz48ZWxsaXBzZSBjeD0iLTciIGN5PSItMjAiIHJ4PSI2LjUiIHJ5PSI0LjIiIGZpbGw9IiM1QjhDNEEiIHRyYW5zZm9ybT0icm90YXRlKC0yNSAtNyAtMjApIi8+PGVsbGlwc2UgY3g9IjciIGN5PSItMjAiIHJ4PSI2LjUiIHJ5PSI0LjIiIGZpbGw9IiM1QjhDNEEiIHRyYW5zZm9ybT0icm90YXRlKDI1IDcgLTIwKSIvPjxlbGxpcHNlIGN4PSItNiIgY3k9Ii0xMSIgcng9IjUuNSIgcnk9IjMuNiIgZmlsbD0iIzVCOEM0QSIgdHJhbnNmb3JtPSJyb3RhdGUoLTI1IC02IC0xMSkiLz48ZWxsaXBzZSBjeD0iNiIgY3k9Ii0xMSIgcng9IjUuNSIgcnk9IjMuNiIgZmlsbD0iIzVCOEM0QSIgdHJhbnNmb3JtPSJyb3RhdGUoMjUgNiAtMTEpIi8+PHJlY3QgeD0iLTMiIHk9Ii0zMCIgd2lkdGg9IjYiIGhlaWdodD0iMjYiIHJ4PSIzIiBmaWxsPSIjNUI4QzRBIi8+PHBhdGggZD0iTTAgNCBMMCAtMzQiIHN0cm9rZT0iI0RERUJDNCIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgZmlsbD0ibm9uZSIvPjwvZz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzNiA2Nikgc2NhbGUoMS4yNSkiPjxlbGxpcHNlIGN4PSIwIiBjeT0iLTMxIiByeD0iNyIgcnk9IjkiIGZpbGw9IiM3QkFCNTYiLz48ZWxsaXBzZSBjeD0iLTciIGN5PSItMjAiIHJ4PSI2LjUiIHJ5PSI0LjIiIGZpbGw9IiM3QkFCNTYiIHRyYW5zZm9ybT0icm90YXRlKC0yNSAtNyAtMjApIi8+PGVsbGlwc2UgY3g9IjciIGN5PSItMjAiIHJ4PSI2LjUiIHJ5PSI0LjIiIGZpbGw9IiM3QkFCNTYiIHRyYW5zZm9ybT0icm90YXRlKDI1IDcgLTIwKSIvPjxlbGxpcHNlIGN4PSItNiIgY3k9Ii0xMSIgcng9IjUuNSIgcnk9IjMuNiIgZmlsbD0iIzdCQUI1NiIgdHJhbnNmb3JtPSJyb3RhdGUoLTI1IC02IC0xMSkiLz48ZWxsaXBzZSBjeD0iNiIgY3k9Ii0xMSIgcng9IjUuNSIgcnk9IjMuNiIgZmlsbD0iIzdCQUI1NiIgdHJhbnNmb3JtPSJyb3RhdGUoMjUgNiAtMTEpIi8+PHJlY3QgeD0iLTMiIHk9Ii0zMCIgd2lkdGg9IjYiIGhlaWdodD0iMjYiIHJ4PSIzIiBmaWxsPSIjN0JBQjU2Ii8+PHBhdGggZD0iTTAgNCBMMCAtMzQiIHN0cm9rZT0iI0RERUJDNCIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgZmlsbD0ibm9uZSIvPjwvZz48L3N2Zz4=",
+  "storage": "refrigerator",
+  "shelfLifeText": "3-5 days (refrigerated)",
+  "minDays": 3,
+  "maxDays": 5,
+  "ripensFirst": false,
+  "krispRecommended": true,
+  "krispExtra": [
+   1,
+   2
+  ],
+  "krispTier": "some",
+  "krispPrevents": "Slows the leaves yellowing.",
+  "krispEvidence": "Our estimate from how strongly it reacts to ethylene.",
+  "krispNoBenefit": "",
+  "ethyleneProduction": "very_low",
+  "ethyleneSensitivity": "high",
+  "avoidWith": [
+   "Apples",
+   "Bananas",
+   "Pears"
+  ],
+  "tip": "Keep it in its container or a bag with a dry paper towel to soak up moisture",
+  "ripeTip": "Dry, bright green leaves with no yellow, dark or slimy pieces.",
+  "aliases": [
+   "arugula",
+   "baby arugula"
+  ]
+ },
+ {
+  "name": "Mustard Greens",
+  "category": "vegetable",
+  "emoji": "🥬",
+  "imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3MiA3MiI+PHBhdGggZD0iTTM2IDQwIEwzNiA2OCIgc3Ryb2tlPSIjQjdEOThDIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgZmlsbD0ibm9uZSIvPjxjaXJjbGUgY3g9IjU0IiBjeT0iMjkiIHI9IjUuNSIgZmlsbD0iIzdCQUI1NiIvPjxjaXJjbGUgY3g9IjUyLjYiIGN5PSIzNy40IiByPSI1LjUiIGZpbGw9IiM3QkFCNTYiLz48Y2lyY2xlIGN4PSI0OC43IiBjeT0iNDQuNiIgcj0iNS41IiBmaWxsPSIjN0JBQjU2Ii8+PGNpcmNsZSBjeD0iNDIuOSIgY3k9IjQ5LjMiIHI9IjUuNSIgZmlsbD0iIzdCQUI1NiIvPjxjaXJjbGUgY3g9IjM2IiBjeT0iNTEiIHI9IjUuNSIgZmlsbD0iIzdCQUI1NiIvPjxjaXJjbGUgY3g9IjI5LjEiIGN5PSI0OS4zIiByPSI1LjUiIGZpbGw9IiM3QkFCNTYiLz48Y2lyY2xlIGN4PSIyMy4zIiBjeT0iNDQuNiIgcj0iNS41IiBmaWxsPSIjN0JBQjU2Ii8+PGNpcmNsZSBjeD0iMTkuNCIgY3k9IjM3LjQiIHI9IjUuNSIgZmlsbD0iIzdCQUI1NiIvPjxjaXJjbGUgY3g9IjE4IiBjeT0iMjkiIHI9IjUuNSIgZmlsbD0iIzdCQUI1NiIvPjxjaXJjbGUgY3g9IjE5LjQiIGN5PSIyMC42IiByPSI1LjUiIGZpbGw9IiM3QkFCNTYiLz48Y2lyY2xlIGN4PSIyMy4zIiBjeT0iMTMuNCIgcj0iNS41IiBmaWxsPSIjN0JBQjU2Ii8+PGNpcmNsZSBjeD0iMjkuMSIgY3k9IjguNyIgcj0iNS41IiBmaWxsPSIjN0JBQjU2Ii8+PGNpcmNsZSBjeD0iMzYiIGN5PSI3IiByPSI1LjUiIGZpbGw9IiM3QkFCNTYiLz48Y2lyY2xlIGN4PSI0Mi45IiBjeT0iOC43IiByPSI1LjUiIGZpbGw9IiM3QkFCNTYiLz48Y2lyY2xlIGN4PSI0OC43IiBjeT0iMTMuNCIgcj0iNS41IiBmaWxsPSIjN0JBQjU2Ii8+PGNpcmNsZSBjeD0iNTIuNiIgY3k9IjIwLjYiIHI9IjUuNSIgZmlsbD0iIzdCQUI1NiIvPjxlbGxpcHNlIGN4PSIzNiIgY3k9IjI5IiByeD0iMTgiIHJ5PSIyMiIgZmlsbD0iIzdCQUI1NiIvPjxwYXRoIGQ9Ik0zNiAyMiBMMjcgMTUgTTM2IDIyIEw0NSAxNSBNMzYgMzIgTDIzIDI2IE0zNiAzMiBMNDkgMjYgTTM2IDQyIEwyNiAzOCBNMzYgNDIgTDQ2IDM4IiBzdHJva2U9IiNENUVEQjQiIHN0cm9rZS13aWR0aD0iMS42IiBzdHJva2UtbGluZWNhcD0icm91bmQiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNMzYgMTAgTDM2IDUyIiBzdHJva2U9IiNENUVEQjQiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBmaWxsPSJub25lIi8+PC9zdmc+",
+  "storage": "refrigerator",
+  "shelfLifeText": "3-5 days (refrigerated)",
+  "minDays": 3,
+  "maxDays": 5,
+  "ripensFirst": false,
+  "krispRecommended": true,
+  "krispExtra": [
+   1,
+   2
+  ],
+  "krispTier": "some",
+  "krispPrevents": "Slows the leaves yellowing.",
+  "krispEvidence": "Our estimate from how strongly it reacts to ethylene.",
+  "krispNoBenefit": "",
+  "ethyleneProduction": "very_low",
+  "ethyleneSensitivity": "high",
+  "avoidWith": [
+   "Apples",
+   "Bananas",
+   "Pears"
+  ],
+  "tip": "Store unwashed in a loose plastic bag in the crisper drawer",
+  "ripeTip": "Crisp, bright green leaves with no yellowing or brown spots. Smaller leaves are milder.",
+  "aliases": [
+   "mustard green",
+   "turnip green"
+  ]
+ },
+ {
+  "name": "Beet",
+  "category": "vegetable",
+  "emoji": "🥕",
+  "imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3MiA3MiI+PHBhdGggZD0iTTMwIDMwIFEyNiAxOCAxOCAxMiBNMzYgMjggTDM2IDggTTQyIDMwIFE0NiAxOCA1NCAxMiIgc3Ryb2tlPSIjQzQzMjVEIiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgZmlsbD0ibm9uZSIvPjxlbGxpcHNlIGN4PSIxNyIgY3k9IjExIiByeD0iNiIgcnk9IjkiIGZpbGw9IiM1QjhDNEEiIHRyYW5zZm9ybT0icm90YXRlKC0zNSAxNyAxMSkiLz48ZWxsaXBzZSBjeD0iMzYiIGN5PSI4IiByeD0iNiIgcnk9IjgiIGZpbGw9IiM0QTdDM0YiLz48ZWxsaXBzZSBjeD0iNTUiIGN5PSIxMSIgcng9IjYiIHJ5PSI5IiBmaWxsPSIjNUI4QzRBIiB0cmFuc2Zvcm09InJvdGF0ZSgzNSA1NSAxMSkiLz48cGF0aCBkPSJNMzYgMjYgQzUwIDI2IDU2IDM2IDU2IDQ0IEM1NiA1NCA0NiA2MCAzOSA2MiBRMzcgNjYgMzYgNzAgUTM1IDY2IDMzIDYyIEMyNiA2MCAxNiA1NCAxNiA0NCBDMTYgMzYgMjIgMjYgMzYgMjZaIiBmaWxsPSIjOEMxRDU1Ii8+PHBhdGggZD0iTTIzIDQwIFEyNiAzMiAzMyAzMSIgc3Ryb2tlPSIjQjQ0QzgwIiBzdHJva2Utd2lkdGg9IjIuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBmaWxsPSJub25lIi8+PC9zdmc+",
+  "storage": "refrigerator",
+  "shelfLifeText": "2-3 weeks (refrigerated)",
+  "minDays": 14,
+  "maxDays": 21,
+  "ripensFirst": false,
+  "krispRecommended": false,
+  "krispExtra": [
+   0,
+   0
+  ],
+  "krispTier": null,
+  "krispPrevents": "",
+  "krispEvidence": "",
+  "krispNoBenefit": "Beets barely react to ethylene. Drying out is what turns them soft, so a bag in the drawer does more than a Krisp.",
+  "ethyleneProduction": "very_low",
+  "ethyleneSensitivity": "low",
+  "avoidWith": [],
+  "tip": "Cut the greens off an inch above the root so they stop pulling moisture out of it",
+  "ripeTip": "Firm, smooth roots with no soft spots. If the greens are attached, they should look fresh, not wilted.",
+  "aliases": [
+   "beet"
+  ]
+ },
+ {
+  "name": "Ginger",
+  "category": "vegetable",
+  "emoji": "🫚",
+  "imageUrl": "https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/72x72/1fada.png",
+  "storage": "refrigerator",
+  "shelfLifeText": "3-4 weeks (refrigerated)",
+  "minDays": 21,
+  "maxDays": 28,
+  "ripensFirst": false,
+  "krispRecommended": false,
+  "krispExtra": [
+   0,
+   0
+  ],
+  "krispTier": null,
+  "krispPrevents": "",
+  "krispEvidence": "",
+  "krispNoBenefit": "Ginger barely reacts to ethylene. It ends by shriveling or molding, so keeping it dry and bagged matters more than a Krisp.",
+  "ethyleneProduction": "very_low",
+  "ethyleneSensitivity": "low",
+  "avoidWith": [],
+  "tip": "Store it unpeeled in a zip bag in the crisper drawer with the air pressed out",
+  "ripeTip": "Firm and heavy with smooth, taut skin. Skip pieces that are wrinkled, soft or moldy at the cut ends.",
+  "aliases": [
+   "ginger",
+   "ginger root"
+  ]
+ },
+ {
+  "name": "Leek",
+  "category": "vegetable",
+  "emoji": "🧅",
+  "imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3MiA3MiI+PHBhdGggZD0iTTMwIDQwIEwxMiAxMCBMMjIgNSBMMzcgMzRaIiBmaWxsPSIjNEE3QzNGIi8+PHBhdGggZD0iTTQyIDQwIEw2MCAxMCBMNTAgNSBMMzUgMzRaIiBmaWxsPSIjM0E2QjM0Ii8+PHBhdGggZD0iTTMwLjUgMzggTDMxLjUgMyBMNDAuNSAzIEw0MS41IDM4WiIgZmlsbD0iIzVCOEM0QSIvPjxyZWN0IHg9IjI5IiB5PSIzMCIgd2lkdGg9IjE0IiBoZWlnaHQ9IjE2IiBmaWxsPSIjQTlDQzdFIi8+PHJlY3QgeD0iMjkiIHk9IjM4IiB3aWR0aD0iMTQiIGhlaWdodD0iMTAiIGZpbGw9IiNEM0U1QjMiLz48cmVjdCB4PSIyOSIgeT0iNDQiIHdpZHRoPSIxNCIgaGVpZ2h0PSIyMCIgcng9IjUiIGZpbGw9IiNGNEYyRTYiLz48cGF0aCBkPSJNMzEgNjQgTDI5IDY5IE0zNC41IDY1IEwzNCA3MCBNMzcuNSA2NSBMMzggNzAgTTQxIDY0IEw0MyA2OSIgc3Ryb2tlPSIjQkZBOTdGIiBzdHJva2Utd2lkdGg9IjEuMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBmaWxsPSJub25lIi8+PC9zdmc+",
+  "storage": "refrigerator",
+  "shelfLifeText": "1-2 weeks (refrigerated)",
+  "minDays": 7,
+  "maxDays": 14,
+  "ripensFirst": false,
+  "krispRecommended": true,
+  "krispExtra": [
+   1,
+   2
+  ],
+  "krispTier": "some",
+  "krispPrevents": "Slows the softening ethylene causes.",
+  "krispEvidence": "Our estimate from how strongly it reacts to ethylene.",
+  "krispNoBenefit": "",
+  "ethyleneProduction": "very_low",
+  "ethyleneSensitivity": "medium",
+  "avoidWith": [
+   "Apples",
+   "Pears"
+  ],
+  "tip": "Store unwashed and untrimmed in a loose plastic bag in the crisper drawer",
+  "ripeTip": "Firm, straight white stalks with crisp, dark green tops. Skip any with yellow or slimy leaves.",
+  "aliases": [
+   "leek"
+  ]
+ },
+ {
+  "name": "Artichoke",
+  "category": "vegetable",
+  "emoji": "🥬",
+  "imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3MiA3MiI+PHJlY3QgeD0iMzIiIHk9IjU0IiB3aWR0aD0iOCIgaGVpZ2h0PSIxNSIgcng9IjIiIGZpbGw9IiM2QzlDNEMiLz48cGF0aCBkPSJNMzYgNCBDNTIgMTIgNjIgMjggNjAgNDIgQzU4IDU0IDQ4IDYxIDM2IDYxIEMyNCA2MSAxNCA1NCAxMiA0MiBDMTAgMjggMjAgMTIgMzYgNFoiIGZpbGw9IiM2QzlDNEMiLz48Y2xpcFBhdGggaWQ9ImEiPjxwYXRoIGQ9Ik0zNiA0IEM1MiAxMiA2MiAyOCA2MCA0MiBDNTggNTQgNDggNjEgMzYgNjEgQzI0IDYxIDE0IDU0IDEyIDQyIEMxMCAyOCAyMCAxMiAzNiA0WiIvPjwvY2xpcFBhdGg+PGcgY2xpcC1wYXRoPSJ1cmwoI2EpIj48cGF0aCBkPSJNMjguNSAyMy41IEMyNy41IDEyLjEgMzMgNi40IDM2IDQuNSBDMzkgNi40IDQ0LjUgMTIuMSA0My41IDIzLjVaIiBmaWxsPSIjODJCMzVEIiBzdHJva2U9IiM0QTdDM0YiIHN0cm9rZS13aWR0aD0iMS4xIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTIxLjUgMzMuNSBDMjAuNSAyMi4xIDI2IDE2LjQgMjkgMTQuNSBDMzIgMTYuNCAzNy41IDIyLjEgMzYuNSAzMy41WiIgZmlsbD0iIzZDOUM0QyIgc3Ryb2tlPSIjNEE3QzNGIiBzdHJva2Utd2lkdGg9IjEuMSIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik0zNS41IDMzLjUgQzM0LjUgMjIuMSA0MCAxNi40IDQzIDE0LjUgQzQ2IDE2LjQgNTEuNSAyMi4xIDUwLjUgMzMuNVoiIGZpbGw9IiM4MkIzNUQiIHN0cm9rZT0iIzRBN0MzRiIgc3Ryb2tlLXdpZHRoPSIxLjEiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNMTQuNSA0My41IEMxMy41IDMyLjEgMTkgMjYuNCAyMiAyNC41IEMyNSAyNi40IDMwLjUgMzIuMSAyOS41IDQzLjVaIiBmaWxsPSIjODJCMzVEIiBzdHJva2U9IiM0QTdDM0YiIHN0cm9rZS13aWR0aD0iMS4xIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTI4LjUgNDMuNSBDMjcuNSAzMi4xIDMzIDI2LjQgMzYgMjQuNSBDMzkgMjYuNCA0NC41IDMyLjEgNDMuNSA0My41WiIgZmlsbD0iIzZDOUM0QyIgc3Ryb2tlPSIjNEE3QzNGIiBzdHJva2Utd2lkdGg9IjEuMSIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik00Mi41IDQzLjUgQzQxLjUgMzIuMSA0NyAyNi40IDUwIDI0LjUgQzUzIDI2LjQgNTguNSAzMi4xIDU3LjUgNDMuNVoiIGZpbGw9IiM4MkIzNUQiIHN0cm9rZT0iIzRBN0MzRiIgc3Ryb2tlLXdpZHRoPSIxLjEiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNOS41IDUzLjUgQzguNSA0Mi4xIDE0IDM2LjQgMTcgMzQuNSBDMjAgMzYuNCAyNS41IDQyLjEgMjQuNSA1My41WiIgZmlsbD0iIzZDOUM0QyIgc3Ryb2tlPSIjNEE3QzNGIiBzdHJva2Utd2lkdGg9IjEuMSIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik0yMiA1My41IEMyMSA0Mi4xIDI2LjUgMzYuNCAyOS41IDM0LjUgQzMyLjUgMzYuNCAzOCA0Mi4xIDM3IDUzLjVaIiBmaWxsPSIjODJCMzVEIiBzdHJva2U9IiM0QTdDM0YiIHN0cm9rZS13aWR0aD0iMS4xIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTM1IDUzLjUgQzM0IDQyLjEgMzkuNSAzNi40IDQyLjUgMzQuNSBDNDUuNSAzNi40IDUxIDQyLjEgNTAgNTMuNVoiIGZpbGw9IiM2QzlDNEMiIHN0cm9rZT0iIzRBN0MzRiIgc3Ryb2tlLXdpZHRoPSIxLjEiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNNDcuNSA1My41IEM0Ni41IDQyLjEgNTIgMzYuNCA1NSAzNC41IEM1OCAzNi40IDYzLjUgNDIuMSA2Mi41IDUzLjVaIiBmaWxsPSIjODJCMzVEIiBzdHJva2U9IiM0QTdDM0YiIHN0cm9rZS13aWR0aD0iMS4xIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PHBhdGggZD0iTTE0LjUgNjIuNSBDMTMuNSA1MS4xIDE5IDQ1LjQgMjIgNDMuNSBDMjUgNDUuNCAzMC41IDUxLjEgMjkuNSA2Mi41WiIgZmlsbD0iIzgyQjM1RCIgc3Ryb2tlPSIjNEE3QzNGIiBzdHJva2Utd2lkdGg9IjEuMSIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik0yOC41IDYyLjUgQzI3LjUgNTEuMSAzMyA0NS40IDM2IDQzLjUgQzM5IDQ1LjQgNDQuNSA1MS4xIDQzLjUgNjIuNVoiIGZpbGw9IiM2QzlDNEMiIHN0cm9rZT0iIzRBN0MzRiIgc3Ryb2tlLXdpZHRoPSIxLjEiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNNDIuNSA2Mi41IEM0MS41IDUxLjEgNDcgNDUuNCA1MCA0My41IEM1MyA0NS40IDU4LjUgNTEuMSA1Ny41IDYyLjVaIiBmaWxsPSIjODJCMzVEIiBzdHJva2U9IiM0QTdDM0YiIHN0cm9rZS13aWR0aD0iMS4xIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PC9nPjwvc3ZnPg==",
+  "storage": "refrigerator",
+  "shelfLifeText": "5-7 days (refrigerated)",
+  "minDays": 5,
+  "maxDays": 7,
+  "ripensFirst": false,
+  "krispRecommended": false,
+  "krispExtra": [
+   0,
+   0
+  ],
+  "krispTier": null,
+  "krispPrevents": "",
+  "krispEvidence": "",
+  "krispNoBenefit": "Artichokes barely react to ethylene. They dry out and bruise, so a bag in the drawer does more than a Krisp.",
+  "ethyleneProduction": "very_low",
+  "ethyleneSensitivity": "low",
+  "avoidWith": [],
+  "tip": "Store unwashed in a plastic bag in the crisper drawer",
+  "ripeTip": "Heavy for its size with tight, squeaky leaves. A little brown on the tips is fine. Spreading, dry leaves mean it is old.",
+  "aliases": [
+   "artichoke"
+  ]
+ },
+ {
+  "name": "Pumpkin",
+  "category": "vegetable",
+  "emoji": "🎃",
+  "imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3MiA3MiI+PHBhdGggZD0iTTMzIDIyIEMzMiAxNCAzNCAxMCAzOSA3IEw0MyAxMSBDMzkgMTMgMzkgMTcgMzkgMjJaIiBmaWxsPSIjNkU3RjNCIi8+PGVsbGlwc2UgY3g9IjE4IiBjeT0iNDMiIHJ4PSIxMiIgcnk9IjE4IiBmaWxsPSIjREU2RjE3Ii8+PGVsbGlwc2UgY3g9IjU0IiBjeT0iNDMiIHJ4PSIxMiIgcnk9IjE4IiBmaWxsPSIjREU2RjE3Ii8+PGVsbGlwc2UgY3g9IjI3IiBjeT0iNDMiIHJ4PSIxMiIgcnk9IjIwLjUiIGZpbGw9IiNFRTg0MjQiLz48ZWxsaXBzZSBjeD0iNDUiIGN5PSI0MyIgcng9IjEyIiByeT0iMjAuNSIgZmlsbD0iI0VFODQyNCIvPjxlbGxpcHNlIGN4PSIzNiIgY3k9IjQzIiByeD0iMTAuNSIgcnk9IjIxLjUiIGZpbGw9IiNGNzlBM0EiLz48L3N2Zz4=",
+  "storage": "pantry",
+  "shelfLifeText": "1-2 months (pantry)",
+  "minDays": 30,
+  "maxDays": 60,
+  "ripensFirst": false,
+  "krispRecommended": false,
+  "krispExtra": [
+   0,
+   0
+  ],
+  "krispTier": null,
+  "krispPrevents": "",
+  "krispEvidence": "",
+  "krispNoBenefit": "Whole pumpkins keep in a cool, dry spot, well away from the fridge and the Krisp.",
+  "ethyleneProduction": "low",
+  "ethyleneSensitivity": "medium",
+  "avoidWith": [
+   "Apples"
+  ],
+  "tip": "Store whole pumpkins in a cool, dry place with air moving around them",
+  "ripeTip": "Hard skin a fingernail cannot dent, a firm stem still attached, and no soft spots. Pie or sugar pumpkins are the ones for cooking.",
+  "aliases": [
+   "pumpkin",
+   "pie pumpkin",
+   "sugar pumpkin"
+  ]
+ },
+ {
+  "name": "Okra",
+  "category": "vegetable",
+  "emoji": "🌱",
+  "imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3MiA3MiI+PGcgdHJhbnNmb3JtPSJyb3RhdGUoMzggMzYgMzYpIj48cmVjdCB4PSIzMyIgeT0iMSIgd2lkdGg9IjYiIGhlaWdodD0iMTIiIHJ4PSIyLjUiIGZpbGw9IiM0QTdDM0YiLz48cGF0aCBkPSJNMjYgMTcgQzI0IDM0IDMwIDU1IDM2IDcwIEM0MiA1NSA0OCAzNCA0NiAxN1oiIGZpbGw9IiM3QkFCNTYiLz48cGF0aCBkPSJNMzEgMTggQzMwIDM2IDMzIDU0IDM2IDY4IE00MSAxOCBDNDIgMzYgMzkgNTQgMzYgNjgiIHN0cm9rZT0iIzVCOEM0QSIgc3Ryb2tlLXdpZHRoPSIxLjYiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxwYXRoIGQ9Ik0zNiAxOCBMMzYgNjYiIHN0cm9rZT0iI0E1Q0Y3RCIgc3Ryb2tlLXdpZHRoPSIxLjYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxwYXRoIGQ9Ik0yNCAxOSBDMjQgMTIgMzAgOSAzNiA5IEM0MiA5IDQ4IDEyIDQ4IDE5IEw0NSAyMSBMNDEgMTggTDM2IDIxIEwzMSAxOCBMMjcgMjFaIiBmaWxsPSIjNEE3QzNGIi8+PC9nPjwvc3ZnPg==",
+  "storage": "refrigerator",
+  "shelfLifeText": "2-3 days (refrigerated)",
+  "minDays": 2,
+  "maxDays": 3,
+  "ripensFirst": false,
+  "krispRecommended": false,
+  "krispExtra": [
+   0,
+   0
+  ],
+  "krispTier": null,
+  "krispPrevents": "",
+  "krispEvidence": "",
+  "krispNoBenefit": "Okra lasts only two or three days at home. Drying out, bruising and cold damage end it long before ethylene matters, so a Krisp won't help.",
+  "ethyleneProduction": "low",
+  "ethyleneSensitivity": "medium",
+  "avoidWith": [],
+  "tip": "Keep the pods dry in a paper bag or a loosely closed bag",
+  "ripeTip": "Small, bright green pods, 2 to 4 inches long, that snap at the tip. Big, dull pods are tough and stringy.",
+  "aliases": [
+   "okra"
+  ]
+ },
+ {
+  "name": "Plantain",
+  "category": "fruit",
+  "emoji": "🍌",
+  "imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3MiA3MiI+PHBhdGggZD0iTTEwIDE2IEwxNyAxMyBDMjAgMzIgMzIgNDggNTggNDkgTDYzIDU1IEw1OSA2MCBDMzAgNjMgMTIgNDQgMTAgMTZaIiBmaWxsPSIjN0JBQjU2Ii8+PHBhdGggZD0iTTE0IDE4IEMxNyAzOCAzMSA1NCA1OCA1NSIgc3Ryb2tlPSIjNUI4QzRBIiBzdHJva2Utd2lkdGg9IjIiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxwYXRoIGQ9Ik05IDEwIEwxNSA4IEwxNyAxMyBMMTAgMTZaIiBmaWxsPSIjNUE0QTMyIi8+PHBhdGggZD0iTTU4IDQ5IEw2MyA1NSBMNTkgNjAgTDU2IDU1WiIgZmlsbD0iIzVBNEEzMiIvPjwvc3ZnPg==",
+  "storage": "counter",
+  "shelfLifeText": "1-2 weeks (counter)",
+  "minDays": 7,
+  "maxDays": 14,
+  "ripensFirst": false,
+  "krispRecommended": false,
+  "krispExtra": [
+   0,
+   0
+  ],
+  "krispTier": null,
+  "krispPrevents": "",
+  "krispEvidence": "",
+  "krispNoBenefit": "Plantains belong on the counter, and a Krisp works inside the closed crisper drawer, so it can't reach them. Keep them away from apples and bananas if you want them to stay green.",
+  "ethyleneProduction": "low",
+  "ethyleneSensitivity": "high",
+  "avoidWith": [
+   "Apples",
+   "Bananas",
+   "Avocados",
+   "Tomatoes"
+  ],
+  "tip": "Keep them on the counter, out of direct sun. Never refrigerate green plantains",
+  "ripeTip": "Firm and heavy with no mold at the stem. Choose green for savory dishes and yellow to black for sweet ones.",
+  "aliases": [
+   "plantain",
+   "platano"
+  ]
+ },
+ {
+  "name": "Tomatillo",
+  "category": "vegetable",
+  "emoji": "🍅",
+  "imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3MiA3MiI+PHBhdGggZD0iTTM2IDEyIEwzNiA0IiBzdHJva2U9IiM3QzhDNEEiIHN0cm9rZS13aWR0aD0iNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PHBhdGggZD0iTTM2IDEwIEM1NCAxMiA2NCAyOCA2MCA0NCBDNTcgNTYgNDYgNjQgMzYgNjggQzI2IDY0IDE1IDU2IDEyIDQ0IEM4IDI4IDE4IDEyIDM2IDEwWiIgZmlsbD0iI0NGQ0I4RiIvPjxjaXJjbGUgY3g9IjM2IiBjeT0iNDIiIHI9IjE2LjUiIGZpbGw9IiM4NkI4NUEiLz48cGF0aCBkPSJNMjcgMzggUTI5IDMxIDM2IDMwIiBzdHJva2U9IiNCNERCOEMiIHN0cm9rZS13aWR0aD0iMi41IiBzdHJva2UtbGluZWNhcD0icm91bmQiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNMzYgMTAgQzIwIDE0IDEwIDI4IDEyIDQ0IEMxNCA1NiAyNiA2NCAzNiA2OCBDMjMgNTggMTUgNDQgMjAgMjggQzIzIDIwIDMwIDEzIDM2IDEwWiIgZmlsbD0iI0RERDlBNSIvPjxwYXRoIGQ9Ik0zNiAxMCBDNTIgMTQgNjIgMjggNjAgNDQgQzU4IDU2IDQ2IDY0IDM2IDY4IEM0OSA1OCA1NyA0NCA1MiAyOCBDNDkgMjAgNDIgMTMgMzYgMTBaIiBmaWxsPSIjREREOUE1Ii8+PHBhdGggZD0iTTMzIDEzIEMyMiAyMCAxMyAzMiAxNSA0NiBNMzkgMTMgQzUwIDIwIDU5IDMyIDU3IDQ2IiBzdHJva2U9IiNCM0FENzIiIHN0cm9rZS13aWR0aD0iMS4yIiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48L3N2Zz4=",
+  "storage": "refrigerator",
+  "shelfLifeText": "1-2 weeks (refrigerated)",
+  "minDays": 7,
+  "maxDays": 14,
+  "ripensFirst": false,
+  "krispRecommended": false,
+  "krispExtra": [
+   0,
+   0
+  ],
+  "krispTier": null,
+  "krispPrevents": "",
+  "krispEvidence": "",
+  "krispNoBenefit": "Ethylene can turn tomatillos yellow, but they react only mildly and there is no data to put a number on it. Dry husks and steady cold matter more.",
+  "ethyleneProduction": "very_low",
+  "ethyleneSensitivity": "medium",
+  "avoidWith": [
+   "Apples",
+   "Bananas"
+  ],
+  "tip": "Leave the husks on and store them in a paper bag in the crisper drawer",
+  "ripeTip": "Firm, bright green fruit that fills its husk. The husk should be dry and papery, not slimy or moldy.",
+  "aliases": [
+   "tomatillo"
+  ]
+ },
+ {
+  "name": "Persimmon",
+  "category": "fruit",
+  "emoji": "🍊",
+  "imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3MiA3MiI+PHBhdGggZD0iTTM2IDIzIEM1NCAyMSA2NCAzMSA2NCA0MyBDNjQgNTYgNTIgNjUgMzYgNjUgQzIwIDY1IDggNTYgOCA0MyBDOCAzMSAxOCAyMSAzNiAyM1oiIGZpbGw9IiNFRTdBMUYiLz48cGF0aCBkPSJNMTYgNDAgUTE5IDMxIDI4IDI5IiBzdHJva2U9IiNGOEE2NUEiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTM2IDI1IEMzNyAxNiA0NyAxMiA1NSAxNyBDNTQgMjcgNDUgMzIgMzYgMjVaIiBmaWxsPSIjNjg3QTNBIiB0cmFuc2Zvcm09InJvdGF0ZSgxMCAzNiAyNSkiLz48cGF0aCBkPSJNMzYgMjUgQzM3IDE2IDQ3IDEyIDU1IDE3IEM1NCAyNyA0NSAzMiAzNiAyNVoiIGZpbGw9IiM3QzhCNDUiIHRyYW5zZm9ybT0icm90YXRlKDEwMCAzNiAyNSkiLz48cGF0aCBkPSJNMzYgMjUgQzM3IDE2IDQ3IDEyIDU1IDE3IEM1NCAyNyA0NSAzMiAzNiAyNVoiIGZpbGw9IiM2ODdBM0EiIHRyYW5zZm9ybT0icm90YXRlKDE5MCAzNiAyNSkiLz48cGF0aCBkPSJNMzYgMjUgQzM3IDE2IDQ3IDEyIDU1IDE3IEM1NCAyNyA0NSAzMiAzNiAyNVoiIGZpbGw9IiM3QzhCNDUiIHRyYW5zZm9ybT0icm90YXRlKDI4MCAzNiAyNSkiLz48Y2lyY2xlIGN4PSIzNiIgY3k9IjI1IiByPSIzIiBmaWxsPSIjN0E1QjM0Ii8+PC9zdmc+",
+  "storage": "refrigerator",
+  "shelfLifeText": "1-3 weeks (refrigerated)",
+  "minDays": 7,
+  "maxDays": 21,
+  "ripensFirst": false,
+  "krispRecommended": true,
+  "krispExtra": [
+   1,
+   2
+  ],
+  "krispTier": "some",
+  "krispPrevents": "Slows firm persimmons going soft around ethylene.",
+  "krispEvidence": "Our estimate from how strongly it reacts to ethylene.",
+  "krispNoBenefit": "",
+  "ethyleneProduction": "low",
+  "ethyleneSensitivity": "high",
+  "avoidWith": [
+   "Apples",
+   "Bananas",
+   "Pears",
+   "Avocados"
+  ],
+  "tip": "Keep firm, squat Fuyu persimmons in the coldest part of the fridge and eat them while they are still crisp",
+  "ripeTip": "Deep orange, glossy skin with the green cap still attached. Fuyu should be firm. Hachiya should be very soft before you eat it.",
+  "aliases": [
+   "persimmon",
+   "fuyu",
+   "hachiya"
+  ]
+ },
+ {
+  "name": "Parsnip",
+  "category": "vegetable",
+  "emoji": "🥕",
+  "imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3MiA3MiI+PHBhdGggZD0iTTMyIDE0IFEzMCA4IDI2IDUgTTM2IDEzIEwzNiAzIE00MCAxNCBRNDIgOCA0NiA1IiBzdHJva2U9IiM1QjhDNEEiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTIyIDIyIEMyMiAxMiA1MCAxMiA1MCAyMiBDNTAgMzggNDIgNTYgMzYgNzAgQzMwIDU2IDIyIDM4IDIyIDIyWiIgZmlsbD0iI0YwRTJCNiIvPjxwYXRoIGQ9Ik0yNiAyNiBMMzQgMjcgTTM4IDM0IEw0NiAzMyBNMjggNDAgTDM1IDQxIE0zNiA0OSBMNDIgNDggTTMyIDU2IEwzNyA1NyIgc3Ryb2tlPSIjQ0RCNjdFIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBmaWxsPSJub25lIi8+PC9zdmc+",
+  "storage": "refrigerator",
+  "shelfLifeText": "2-3 weeks (refrigerated)",
+  "minDays": 14,
+  "maxDays": 21,
+  "ripensFirst": false,
+  "krispRecommended": true,
+  "krispExtra": [
+   1,
+   2
+  ],
+  "krispTier": "some",
+  "krispPrevents": "Helps keep parsnips from picking up a bitter taste from ethylene.",
+  "krispEvidence": "Our estimate from how strongly it reacts to ethylene.",
+  "krispNoBenefit": "",
+  "ethyleneProduction": "very_low",
+  "ethyleneSensitivity": "high",
+  "avoidWith": [
+   "Apples",
+   "Pears"
+  ],
+  "tip": "Cut off any green tops. They pull moisture out of the root",
+  "ripeTip": "Firm, cream-colored roots, small to medium in size. Very large ones can have a woody core.",
+  "aliases": [
+   "parsnip"
+  ]
+ },
+ {
+  "name": "Turnip",
+  "category": "vegetable",
+  "emoji": "🥕",
+  "imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3MiA3MiI+PHBhdGggZD0iTTMwIDI2IFEyNyAxNCAyMCA5IE0zNiAyNCBMMzYgNiBNNDIgMjYgUTQ1IDE0IDUyIDkiIHN0cm9rZT0iIzVCOEM0QSIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWNhcD0icm91bmQiIGZpbGw9Im5vbmUiLz48ZWxsaXBzZSBjeD0iMTkiIGN5PSI5IiByeD0iNS41IiByeT0iOCIgZmlsbD0iIzVCOEM0QSIgdHJhbnNmb3JtPSJyb3RhdGUoLTM1IDE5IDkpIi8+PGVsbGlwc2UgY3g9IjM2IiBjeT0iNiIgcng9IjUuNSIgcnk9IjciIGZpbGw9IiM0QTdDM0YiLz48ZWxsaXBzZSBjeD0iNTMiIGN5PSI5IiByeD0iNS41IiByeT0iOCIgZmlsbD0iIzVCOEM0QSIgdHJhbnNmb3JtPSJyb3RhdGUoMzUgNTMgOSkiLz48Y2xpcFBhdGggaWQ9InQiPjxwYXRoIGQ9Ik0zNiAyMiBDNTIgMjIgNTggMzMgNTggNDEgQzU4IDUzIDQ3IDU5IDM5IDYxIFEzNyA2NSAzNiA3MCBRMzUgNjUgMzMgNjEgQzI1IDU5IDE0IDUzIDE0IDQxIEMxNCAzMyAyMCAyMiAzNiAyMloiLz48L2NsaXBQYXRoPjxnIGNsaXAtcGF0aD0idXJsKCN0KSI+PHJlY3QgeD0iMTAiIHk9IjIwIiB3aWR0aD0iNTIiIGhlaWdodD0iNTIiIGZpbGw9IiNGNkYxRTYiLz48cGF0aCBkPSJNMTAgMjAgTDYyIDIwIEw2MiA0MCBRNTQgNDYgNDYgNDEgUTQwIDM3IDM2IDQyIFEzMCA0NyAyNCA0MSBRMTcgMzcgMTAgNDJaIiBmaWxsPSIjOUE0Qzk2Ii8+PC9nPjwvc3ZnPg==",
+  "storage": "refrigerator",
+  "shelfLifeText": "2-3 weeks (refrigerated)",
+  "minDays": 14,
+  "maxDays": 21,
+  "ripensFirst": false,
+  "krispRecommended": false,
+  "krispExtra": [
+   0,
+   0
+  ],
+  "krispTier": null,
+  "krispPrevents": "",
+  "krispEvidence": "",
+  "krispNoBenefit": "Turnips barely react to ethylene. They go soft from drying out, so a bag in the drawer does more than a Krisp.",
+  "ethyleneProduction": "very_low",
+  "ethyleneSensitivity": "low",
+  "avoidWith": [],
+  "tip": "Cut off the greens so they stop pulling moisture out of the root",
+  "ripeTip": "Small, heavy and firm with smooth skin. Large turnips can be woody and sharp-tasting.",
+  "aliases": [
+   "turnip"
+  ]
+ },
+ {
+  "name": "Fennel",
+  "category": "vegetable",
+  "emoji": "🥬",
+  "imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3MiA3MiI+PHBhdGggZD0iTTI5IDQ2IFEyNCAzMCAyMCAxOCBNMzYgNDQgTDM2IDE0IE00MyA0NiBRNDggMzAgNTIgMTgiIHN0cm9rZT0iI0E5Q0M3RSIgc3Ryb2tlLXdpZHRoPSI1IiBzdHJva2UtbGluZWNhcD0icm91bmQiIGZpbGw9Im5vbmUiLz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyMCAxOCkgcm90YXRlKC0xOCkiPjxwYXRoIGQ9Ik0wIDIgTDAgLTEyIE0wIC0yIEwtNiAtOCBNMCAtMiBMNiAtOCBNMCAtNiBMLTUgLTEyIE0wIC02IEw1IC0xMiBNMCAyIEwtNyAtMyBNMCAyIEw3IC0zIiBzdHJva2U9IiM1QjhDNEEiIHN0cm9rZS13aWR0aD0iMS43IiBzdHJva2UtbGluZWNhcD0icm91bmQiIGZpbGw9Im5vbmUiLz48L2c+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzYgMTQpIHJvdGF0ZSgwKSI+PHBhdGggZD0iTTAgMiBMMCAtMTIgTTAgLTIgTC02IC04IE0wIC0yIEw2IC04IE0wIC02IEwtNSAtMTIgTTAgLTYgTDUgLTEyIE0wIDIgTC03IC0zIE0wIDIgTDcgLTMiIHN0cm9rZT0iIzVCOEM0QSIgc3Ryb2tlLXdpZHRoPSIxLjciIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgZmlsbD0ibm9uZSIvPjwvZz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSg1MiAxOCkgcm90YXRlKDE4KSI+PHBhdGggZD0iTTAgMiBMMCAtMTIgTTAgLTIgTC02IC04IE0wIC0yIEw2IC04IE0wIC02IEwtNSAtMTIgTTAgLTYgTDUgLTEyIE0wIDIgTC03IC0zIE0wIDIgTDcgLTMiIHN0cm9rZT0iIzVCOEM0QSIgc3Ryb2tlLXdpZHRoPSIxLjciIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgZmlsbD0ibm9uZSIvPjwvZz48cGF0aCBkPSJNMzYgMzggQzQ4IDM4IDU1IDQ2IDU1IDU0IEM1NSA2MiA0NyA2OCAzNiA2OCBDMjUgNjggMTcgNjIgMTcgNTQgQzE3IDQ2IDI0IDM4IDM2IDM4WiIgZmlsbD0iI0VFRjFEQiIvPjxwYXRoIGQ9Ik0yOSA0MiBDMjQgNDggMjQgNTggMzAgNjYgTTQzIDQyIEM0OCA0OCA0OCA1OCA0MiA2NiBNMzYgNDAgTDM2IDY3IiBzdHJva2U9IiNDOUQzQTYiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtbGluZWNhcD0icm91bmQiIGZpbGw9Im5vbmUiLz48L3N2Zz4=",
+  "storage": "refrigerator",
+  "shelfLifeText": "5-7 days (refrigerated)",
+  "minDays": 5,
+  "maxDays": 7,
+  "ripensFirst": false,
+  "krispRecommended": false,
+  "krispExtra": [
+   0,
+   0
+  ],
+  "krispTier": null,
+  "krispPrevents": "",
+  "krispEvidence": "",
+  "krispNoBenefit": "There is no published data on how fennel reacts to ethylene, so we make no Krisp claim for it. Keeping it cold and bagged is what works.",
+  "ethyleneProduction": "low",
+  "ethyleneSensitivity": "low",
+  "avoidWith": [],
+  "tip": "Cut the stalks off the bulb and store the two separately",
+  "ripeTip": "A firm, white to pale green bulb with no brown spots or splits, and fresh green fronds.",
+  "aliases": [
+   "fennel"
   ]
  }
 ];

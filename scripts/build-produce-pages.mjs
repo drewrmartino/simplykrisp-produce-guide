@@ -13,7 +13,7 @@
 // Writes static HTML that must be committed (search engines need real pages,
 // not a client-rendered app):
 //   produce/index.html                    all items
-//   produce/<slug>/index.html             one page per item (all 56)
+//   produce/<slug>/index.html             one page per item
 //   index.html                            static A-Z list inside the app's #root
 //   produce/what-went-wrong/index.html    symptom lookup
 //   sitemap.xml, robots.txt
@@ -280,7 +280,9 @@ function itemPage(e, ctx) {
 
   const eth = `<section class="sec" id="ethylene"><h2>${Title} and ethylene</h2>
   <p>Ethylene is a gas that ripening produce gives off. In a closed crisper drawer it builds up and makes sensitive produce yellow, soften or sprout sooner.</p>
-  <ul class="tips"><li>${esc(Title)} ${esc(agree(PRODUCES[p.ethyleneProduction] || PRODUCES.low, plural))}</li><li>${esc(Title)} ${esc(agree(SENSES[p.ethyleneSensitivity] || SENSES.low, plural))}</li></ul>
+  ${p.ethyleneNote
+    ? `<p>${esc(p.ethyleneNote)}</p>` // where the published data is missing, say so instead of guessing
+    : `<ul class="tips"><li>${esc(Title)} ${esc(agree(PRODUCES[p.ethyleneProduction] || PRODUCES.low, plural))}</li><li>${esc(Title)} ${esc(agree(SENSES[p.ethyleneSensitivity] || SENSES.low, plural))}</li></ul>`}
   ${apart.length ? `<p>Keep ${them} apart from ${apartText(apart, ctx)}.</p>` : ''}</section>`;
 
   let fails = '';
@@ -346,7 +348,7 @@ ${cards}
     .slice(0, 8);
   const relSec = related.length ? `<section class="sec" id="related"><h2>Also stored ${esc(whereLong[p.storageLocation])}</h2>
   <ul class="rel">${related.map((o) => `<li><a href="/produce/${o.slug}"><img src="${esc(o.p.imageUrl)}" alt="" width="24" height="24" loading="lazy" />${esc(navName(o.name))}</a></li>`).join('')}</ul>
-  <p class="more"><a href="/produce">All 56 fruits and vegetables</a></p></section>` : '';
+  <p class="more"><a href="/produce">All ${ctx.all.length} fruits and vegetables</a></p></section>` : '';
 
   const h1 = item ? `How to store ${esc(display)}, and why ${they} go${plural ? '' : 'es'} bad` : `How to store ${esc(display)}`;
   return head({ title, desc, pathname, jsonld: [crumbLd(trail), ...(faq ? [faq] : [])] }) + `
@@ -383,7 +385,7 @@ function indexPage(ctx) {
   const { all, items, spoilage } = ctx;
   const trail = [['Produce Guide', '/'], ['All produce', '/produce']];
   const title = 'How to store fruits and vegetables, and why they go bad | Simply Krisp';
-  const desc = 'Where to keep 56 fruits and vegetables, how long each one lasts, what not to store together, and what slimy, yellow or moldy produce means.';
+  const desc = `Where to keep ${all.length} fruits and vegetables, how long each one lasts, what not to store together, and what slimy, yellow or moldy produce means.`;
   const totalFails = items.reduce((n, i) => n + i.failures.length, 0);
   const causeCounts = {};
   for (const it of items) for (const f of it.failures) causeCounts[f.cause] = (causeCounts[f.cause] || 0) + 1;
@@ -430,7 +432,11 @@ function rootIndex(ctx) {
   const sorted = [...ctx.all].sort((a, b) => navName(a.name).localeCompare(navName(b.name)));
   const lists = GROUPS.map(([k, label]) => `<h2>${label}</h2><ul>${sorted.filter((e) => e.p.category === k).map((e) => `<li><a href="/produce/${e.slug}">How to store ${esc(e.display)}</a></li>`).join('')}</ul>`).join('');
   const block = `<div id="root"><!--static--><main style="max-width:900px;margin:0 auto;padding:32px 20px;font-family:system-ui,sans-serif"><h1>Produce Storage Guide</h1><p>Where to keep ${ctx.all.length} fruits and vegetables, how long each one lasts, and what not to store together. <a href="/produce">See all produce</a> or <a href="/produce/what-went-wrong">find out what went wrong</a>.</p>${lists}</main><!--/static--></div>`;
-  return html.replace(/<div id="root">(?:<!--static-->[\s\S]*?<!--\/static-->)?<\/div>/, block);
+  const n = ctx.all.length;
+  return html
+    .replace(/How to Store \d+ Fruits and Vegetables/, `How to Store ${n} Fruits and Vegetables`)
+    .replace(/(<meta name="description" content="Where to keep )\d+( fruits and vegetables)/, `$1${n}$2`)
+    .replace(/<div id="root">(?:<!--static-->[\s\S]*?<!--\/static-->)?<\/div>/, block);
 }
 
 // ---------- symptom lookup ----------

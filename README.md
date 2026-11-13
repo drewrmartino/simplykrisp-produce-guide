@@ -71,7 +71,7 @@ Self-contained: one HTML file with inline CSS and JS, plus four data files.
 |---|---|
 | `seasonal/index.html` | The whole page |
 | `seasonal/zip-to-state.js` | Offline ZIP → state lookup, no API key |
-| `seasonal/produce.json` | 56 items, extracted from the Storage Guide build so the tips match exactly |
+| `seasonal/produce.json` | 78 items. The source of truth for storage facts; `npm run sync` rebuilds the Storage Guide's data from it |
 | `seasonal/seasonality.json` | 9 growing regions × month × crop |
 | `seasonal/vendor/` | Leaflet 1.9.4, vendored rather than CDN-loaded |
 
@@ -140,7 +140,7 @@ than from the store.
 ## My Krisper (pilot)
 
 `/krisper` (also `/crisper`) is the "My Krisper" tester-facing pilot: people forward grocery order emails and see
-what to use first. Shelf-life ranges come from the Storage Guide (56 items,
+what to use first. Shelf-life ranges come from the Storage Guide (78 items,
 built into `api/_crisper/catalog.js` by `npm run catalog`).
 
 How it works:

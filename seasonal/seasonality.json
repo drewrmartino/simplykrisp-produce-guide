@@ -14,8 +14,8 @@
       "https://californiagrown.org/wp-content/uploads/2020/05/CAGrown_EatTheSeason_Calendar.pdf",
       "https://ucanr.edu/site/online-agricultural-resources/harvest-calendar"
     ],
-    "notes": "Nine custom regions (not individual states) were built by combining the ACL/Farmers' Almanac regional seasonal produce chart (acl.gov) with state-level cross-checks from seasonalfoodguide.org (NRDC + state ag departments + university extension) and direct university extension harvest calendars for Wisconsin (UW-Madison Extension), Utah (USU Extension, Wasatch Front availability chart, Central Utah harvest schedule), Georgia (UGA Extension / Georgia Grows / Georgia Farm Bureau), and California (CDFA seasonal chart, CA Grown, UC ANR harvest calendar). Because our region list groups states differently than ACL's regions (e.g. our 'southwest' adds NM while our 'south' merges ACL's South Central and Southeast regions minus FL), month ranges were re-derived per produce item by blending the relevant ACL sub-regions and validating against the representative-state extension data above. Non-native items (banana, mango, pineapple, papaya, kiwi, lemon, lime, avocado, orange, grapefruit, fig, pomegranate) are included only in regions where they are commercially/locally grown (citrus and avocado in Florida and the Southwest/California; some citrus and pomegranate in the South for Texas; tropical fruit in Hawaii and Florida; kiwi and fig in California). Where cold storage realistically extends farmers-market/grocery availability of a locally grown crop (apples, potatoes, onions, winter squash, cabbage, carrots, garlic), storage months are included in addition to fresh harvest months, consistent with the ACL chart's own winter/storage footnotes for regions like Alaska. Because our regions are broad, tropical/imported items unavailable from local storage anywhere (e.g. banana, papaya, pineapple outside Hawaii/Florida) are simply omitted from that region's season list rather than fabricated. Ranges reflect typical/average conditions; exact timing varies by microclimate, elevation, and year.",
-    "updated": "2026-08-06"
+    "notes": "Nine custom regions (not individual states) were built by combining the ACL/Farmers' Almanac regional seasonal produce chart (acl.gov) with state-level cross-checks from seasonalfoodguide.org (NRDC + state ag departments + university extension) and direct university extension harvest calendars for Wisconsin (UW-Madison Extension), Utah (USU Extension, Wasatch Front availability chart, Central Utah harvest schedule), Georgia (UGA Extension / Georgia Grows / Georgia Farm Bureau), and California (CDFA seasonal chart, CA Grown, UC ANR harvest calendar). Because our region list groups states differently than ACL's regions (e.g. our 'southwest' adds NM while our 'south' merges ACL's South Central and Southeast regions minus FL), month ranges were re-derived per produce item by blending the relevant ACL sub-regions and validating against the representative-state extension data above. Non-native items (banana, mango, pineapple, papaya, kiwi, lemon, lime, avocado, orange, grapefruit, fig, pomegranate) are included only in regions where they are commercially/locally grown (citrus and avocado in Florida and the Southwest/California; some citrus and pomegranate in the South for Texas; tropical fruit in Hawaii and Florida; kiwi and fig in California). Where cold storage realistically extends farmers-market/grocery availability of a locally grown crop (apples, potatoes, onions, winter squash, cabbage, carrots, garlic), storage months are included in addition to fresh harvest months, consistent with the ACL chart's own winter/storage footnotes for regions like Alaska. Because our regions are broad, tropical/imported items unavailable from local storage anywhere (e.g. banana, papaya, pineapple outside Hawaii/Florida) are simply omitted from that region's season list rather than fabricated. Ranges reflect typical/average conditions; exact timing varies by microclimate, elevation, and year. November 2026 additions: beet, leek, parsnip, turnip, okra, pumpkin, artichoke, persimmon, mandarin and ginger follow the ACL chart rows (artichoke and okra adjusted for spring artichokes in California and for frost in the North Central and Florida summers). Crops the chart does not list borrow the months of the closest crop already here: collard greens, Swiss chard, mustard greens and bok choy use kale; arugula uses spinach; cilantro, parsley and basil use fresh herbs; tomatillo uses tomato. Fennel is an estimate from its cool-season habit. Bagged salad is packaged year-round and has no season.",
+    "updated": "2026-11-13"
   },
   "stateToRegion": {
     "WA": "northwest",
@@ -361,6 +361,102 @@
         7,
         8,
         9
+      ],
+      "Beet": [
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "Leek": [
+        1,
+        2,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Pumpkin": [
+        9,
+        10,
+        11
+      ],
+      "Collard Greens": [
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "Swiss Chard": [
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "Mustard Greens": [
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "Bok Choy": [
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "Arugula": [
+        4,
+        5,
+        6,
+        9,
+        10
+      ],
+      "Cilantro": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "Parsley": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "Basil": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "Tomatillo": [
+        7,
+        8,
+        9,
+        10
+      ],
+      "Fennel": [
+        7,
+        8,
+        9,
+        10
       ]
     },
     "southwest": {
@@ -834,6 +930,191 @@
         10,
         11,
         12
+      ],
+      "Beet": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Leek": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        12
+      ],
+      "Parsnip": [
+        1,
+        2,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Turnip": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "Okra": [
+        6,
+        7,
+        8
+      ],
+      "Pumpkin": [
+        9,
+        10,
+        11
+      ],
+      "Artichoke": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "Persimmon": [
+        9,
+        10,
+        11
+      ],
+      "Mandarin": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Collard Greens": [
+        1,
+        2,
+        3,
+        4,
+        10,
+        11,
+        12
+      ],
+      "Swiss Chard": [
+        1,
+        2,
+        3,
+        4,
+        10,
+        11,
+        12
+      ],
+      "Mustard Greens": [
+        1,
+        2,
+        3,
+        4,
+        10,
+        11,
+        12
+      ],
+      "Bok Choy": [
+        1,
+        2,
+        3,
+        4,
+        10,
+        11,
+        12
+      ],
+      "Arugula": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        10,
+        11,
+        12
+      ],
+      "Cilantro": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Parsley": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Basil": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Tomatillo": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "Fennel": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        10,
+        11,
+        12
       ]
     },
     "north_central": {
@@ -1062,6 +1343,96 @@
       ],
       "Green Onion": [
         6,
+        7,
+        8,
+        9
+      ],
+      "Beet": [
+        3,
+        4,
+        5,
+        9,
+        10,
+        11
+      ],
+      "Parsnip": [
+        3,
+        4,
+        5
+      ],
+      "Turnip": [
+        9,
+        10,
+        11
+      ],
+      "Okra": [
+        8,
+        9,
+        10
+      ],
+      "Pumpkin": [
+        9,
+        10,
+        11
+      ],
+      "Collard Greens": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "Swiss Chard": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "Mustard Greens": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "Bok Choy": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "Arugula": [
+        5,
+        6,
+        9,
+        10
+      ],
+      "Cilantro": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "Parsley": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "Basil": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "Tomatillo": [
+        7,
+        8,
+        9
+      ],
+      "Fennel": [
         7,
         8,
         9
@@ -1311,6 +1682,108 @@
         7,
         8,
         9
+      ],
+      "Beet": [
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "Leek": [
+        9,
+        10,
+        11
+      ],
+      "Parsnip": [
+        3,
+        4,
+        5,
+        9,
+        10,
+        11
+      ],
+      "Turnip": [
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "Okra": [
+        6,
+        7,
+        8
+      ],
+      "Pumpkin": [
+        9,
+        10,
+        11
+      ],
+      "Collard Greens": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "Swiss Chard": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "Mustard Greens": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "Bok Choy": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "Arugula": [
+        5,
+        6,
+        9,
+        10
+      ],
+      "Cilantro": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "Parsley": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "Basil": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "Tomatillo": [
+        7,
+        8,
+        9
+      ],
+      "Fennel": [
+        7,
+        8,
+        9,
+        10
       ]
     },
     "northeast": {
@@ -1579,6 +2052,115 @@
         7,
         8,
         9
+      ],
+      "Beet": [
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "Leek": [
+        9,
+        10,
+        11
+      ],
+      "Parsnip": [
+        1,
+        2,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Turnip": [
+        9,
+        10,
+        11
+      ],
+      "Pumpkin": [
+        9,
+        10,
+        11
+      ],
+      "Collard Greens": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "Swiss Chard": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "Mustard Greens": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "Bok Choy": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "Arugula": [
+        4,
+        5,
+        6,
+        9,
+        10
+      ],
+      "Cilantro": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "Parsley": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "Basil": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "Tomatillo": [
+        7,
+        8,
+        9
+      ],
+      "Fennel": [
+        7,
+        8,
+        9,
+        10
       ]
     },
     "south": {
@@ -1924,6 +2506,153 @@
         8,
         9,
         10
+      ],
+      "Beet": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        12
+      ],
+      "Leek": [
+        1,
+        2,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Turnip": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Okra": [
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "Pumpkin": [
+        9,
+        10,
+        11
+      ],
+      "Persimmon": [
+        9,
+        10,
+        11
+      ],
+      "Mandarin": [
+        1,
+        2,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Collard Greens": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        10,
+        11,
+        12
+      ],
+      "Swiss Chard": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        10,
+        11,
+        12
+      ],
+      "Mustard Greens": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        10,
+        11,
+        12
+      ],
+      "Bok Choy": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        10,
+        11,
+        12
+      ],
+      "Arugula": [
+        3,
+        4,
+        5,
+        10,
+        11
+      ],
+      "Cilantro": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "Parsley": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "Basil": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "Tomatillo": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "Fennel": [
+        1,
+        2,
+        3,
+        4,
+        10,
+        11,
+        12
       ]
     },
     "florida": {
@@ -2249,6 +2978,142 @@
         3,
         11,
         12
+      ],
+      "Beet": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        11,
+        12
+      ],
+      "Okra": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "Mandarin": [
+        1,
+        2,
+        3,
+        4,
+        10,
+        11,
+        12
+      ],
+      "Collard Greens": [
+        1,
+        2,
+        3,
+        4,
+        11,
+        12
+      ],
+      "Swiss Chard": [
+        1,
+        2,
+        3,
+        4,
+        11,
+        12
+      ],
+      "Mustard Greens": [
+        1,
+        2,
+        3,
+        4,
+        11,
+        12
+      ],
+      "Bok Choy": [
+        1,
+        2,
+        3,
+        4,
+        11,
+        12
+      ],
+      "Arugula": [
+        1,
+        2,
+        3,
+        11,
+        12
+      ],
+      "Cilantro": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Parsley": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Basil": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Tomatillo": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        11,
+        12
+      ],
+      "Fennel": [
+        1,
+        2,
+        3,
+        12
+      ],
+      "Plantain": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
       ]
     },
     "alaska": {
@@ -2387,6 +3252,79 @@
         9
       ],
       "Green Onion": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "Beet": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Turnip": [
+        1,
+        2,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Collard Greens": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "Swiss Chard": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "Mustard Greens": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "Bok Choy": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "Arugula": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "Cilantro": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "Parsley": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "Basil": [
         6,
         7,
         8,
@@ -2676,6 +3614,88 @@
         12
       ],
       "Herbs (Fresh)": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Pumpkin": [
+        1,
+        2,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Persimmon": [
+        9,
+        10,
+        11
+      ],
+      "Mandarin": [
+        1,
+        2,
+        12
+      ],
+      "Ginger": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "Cilantro": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Parsley": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Basil": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "Plantain": [
         1,
         2,
         3,
