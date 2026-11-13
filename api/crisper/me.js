@@ -1,6 +1,8 @@
 // GET  /api/crisper/me            (header X-Crisper-Key) -> dashboard state
 // POST /api/crisper/me {settings}  -> update settings, returns state
 // POST /api/crisper/me {deleteAccount: true} -> removes the account and all data
+// POST /api/crisper/me {pushToken, pushEnv?} -> registers this iPhone for push
+// POST /api/crisper/me {pushToken, pushOff: true} -> unregisters it
 // POST /api/crisper/me {feedback: {text, kind, page}} -> saved for the admin page and
 //   emailed to the owner through the "Krisper Feedback" Klaviyo metric
 
@@ -26,6 +28,20 @@ export default handle(['GET', 'POST'], async (req) => {
     await q('DELETE FROM crisper_users WHERE id = $1', [user.id]);
     await logEvent(null, 'account_deleted');
     return { deleted: true };
+  }
+
+  if (b.pushToken) {
+    const token = String(b.pushToken).trim();
+    if (!/^[0-9a-fA-F]{32,200}$/.test(token)) throw bad('Bad push token.');
+    if (b.pushOff === true) {
+      await q('DELETE FROM crisper_devices WHERE token = $1 AND user_id = $2', [token, user.id]);
+      return { ok: true, push: false };
+    }
+    const env = b.pushEnv === 'development' ? 'development' : 'production';
+    await q(`INSERT INTO crisper_devices (token, user_id, env) VALUES ($1, $2, $3)
+             ON CONFLICT (token) DO UPDATE SET user_id = EXCLUDED.user_id, env = EXCLUDED.env, last_seen_at = now()`, [token, user.id, env]);
+    await logEvent(user.id, 'push_registered', { env });
+    return { ok: true, push: true };
   }
 
   if (b.feedback) {

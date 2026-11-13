@@ -1,6 +1,10 @@
 {
   "rewrites": [
     {
+      "source": "/.well-known/apple-app-site-association",
+      "destination": "/api/crisper/manifest?aasa=1"
+    },
+    {
       "source": "/krisper",
       "destination": "/crisper/index.html"
     },
@@ -132,6 +136,15 @@
         {
           "key": "Cache-Control",
           "value": "public, max-age=3600"
+        }
+      ]
+    },
+    {
+      "source": "/crisper/catalog.json",
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
         }
       ]
     }

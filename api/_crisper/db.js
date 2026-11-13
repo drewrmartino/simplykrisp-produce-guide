@@ -94,6 +94,16 @@ const SCHEMA = [
     at timestamptz NOT NULL DEFAULT now()
   )`,
   `CREATE INDEX IF NOT EXISTS crisper_events_type ON crisper_events(type, at)`,
+  // iPhone app push tokens (APNs). One row per device; removed with the account.
+  `CREATE TABLE IF NOT EXISTS crisper_devices (
+    token text PRIMARY KEY,
+    user_id uuid NOT NULL REFERENCES crisper_users(id) ON DELETE CASCADE,
+    platform text NOT NULL DEFAULT 'ios',
+    env text NOT NULL DEFAULT 'production',
+    created_at timestamptz NOT NULL DEFAULT now(),
+    last_seen_at timestamptz NOT NULL DEFAULT now()
+  )`,
+  `CREATE INDEX IF NOT EXISTS crisper_devices_user ON crisper_devices(user_id)`,
 ];
 
 async function migrate(fn) {

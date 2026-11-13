@@ -79,7 +79,35 @@ export const BASE = {
   ]
 };
 
+// GET /.well-known/apple-app-site-association (rewritten here in vercel.json).
+// Lets magic links like https://guide.simplykrisp.com/krisper?k=… open the iPhone
+// app when it's installed. Uses the same Team ID env var as push notifications.
+export function appSiteAssociation(env = process.env) {
+  const team = env.APNS_TEAM_ID || env.APPLE_TEAM_ID || 'TEAMID';
+  const appID = `${team}.${env.APNS_BUNDLE_ID || 'com.simplykrisp.krisper'}`;
+  return {
+    applinks: {
+      details: [{
+        appIDs: [appID],
+        components: [
+          { '/': '/krisper/admin*', exclude: true },
+          { '/': '/krisper' },
+          { '/': '/krisper/' },
+          { '/': '/crisper' },
+        ],
+      }],
+    },
+    webcredentials: { apps: [appID] },
+  };
+}
+
 export default function handler(req, res) {
+  if ((req.query && req.query.aasa) || new URL(req.url, 'http://x').searchParams.get('aasa')) {
+    res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Cache-Control', 'public, max-age=3600');
+    res.statusCode = 200;
+    return res.end(JSON.stringify(appSiteAssociation()));
+  }
   const k = String((req.query && req.query.k) || new URL(req.url, 'http://x').searchParams.get('k') || '');
   const m = { ...BASE };
   if (/^[A-Za-z0-9_-]{20,64}$/.test(k)) m.start_url = `/krisper?source=app&k=${k}`;

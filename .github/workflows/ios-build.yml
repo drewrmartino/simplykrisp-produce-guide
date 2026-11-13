@@ -1,0 +1,38 @@
+# Compiles the My Krisper iPhone app (app/) on a Mac so problems show up on the
+# pull request, before anyone opens Xcode. Unsigned simulator build: no Apple
+# account or secrets needed.
+name: iOS app build
+
+on:
+  pull_request:
+    paths:
+      - 'app/**'
+      - 'crisper/index.html'
+      - 'assets/sk-header.js'
+      - '.github/workflows/ios-build.yml'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-15
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: app
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci
+      - run: npm run build
+      - run: npx cap sync ios
+      - name: Xcode version
+        run: xcodebuild -version
+      - name: Build for the iOS Simulator
+        run: |
+          xcodebuild -project ios/App/App.xcodeproj -scheme App \
+            -configuration Debug -sdk iphonesimulator \
+            -destination 'generic/platform=iOS Simulator' \
+            CODE_SIGNING_ALLOWED=NO build | tail -n 60
+          exit ${PIPESTATUS[0]}
