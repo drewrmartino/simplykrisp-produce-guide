@@ -389,7 +389,9 @@ function indexPage(ctx) {
   for (const it of items) for (const f of it.failures) causeCounts[f.cause] = (causeCounts[f.cause] || 0) + 1;
   const topCauses = Object.entries(causeCounts).sort((a, b) => b[1] - a[1]);
 
-  const card = (e) => `<li class="arow"><a href="/produce/${e.slug}"><img src="${esc(e.p.imageUrl)}" alt="" width="28" height="28" loading="lazy" /><b>${esc(navName(e.name))}</b><span>${esc(where[e.p.storageLocation])} &middot; ${esc(e.p.shelfLife.replace(/ \(.*\)$/, ''))}</span>${e.sp ? '<em>Spoilage guide</em>' : ''}</a></li>`;
+  // The badge only means something while some items are still storage-only.
+  const allCovered = all.every((e) => e.sp);
+  const card = (e) => `<li class="arow"><a href="/produce/${e.slug}"><img src="${esc(e.p.imageUrl)}" alt="" width="28" height="28" loading="lazy" /><b>${esc(navName(e.name))}</b><span>${esc(where[e.p.storageLocation])} &middot; ${esc(e.p.shelfLife.replace(/ \(.*\)$/, ''))}</span>${!allCovered && e.sp ? '<em>Spoilage guide</em>' : ''}</a></li>`;
   const sorted = [...all].sort((a, b) => navName(a.name).localeCompare(navName(b.name)));
   const groups = GROUPS.map(([k, label]) => `<section class="agroup" aria-labelledby="g-${k}"><h2 id="g-${k}">${label}</h2><ul class="alist">${sorted.filter((e) => e.p.category === k).map(card).join('')}</ul></section>`).join('\n');
 
@@ -406,7 +408,7 @@ function indexPage(ctx) {
   <section class="hero">
     <div class="eyebrow"><span class="dot"></span> Produce guide</div>
     <h1>How to store fruits and vegetables, and why they go bad</h1>
-    <p class="lede">Pick a fruit or vegetable to see where to keep it, how long it lasts and what not to store it with. Items marked "Spoilage guide" also explain what went wrong when it goes slimy, yellow or moldy.</p>
+    <p class="lede">Pick a fruit or vegetable to see where to keep it, how long it lasts and what not to store it with. ${allCovered ? 'Each page also explains what went wrong when it goes slimy, yellow or moldy, and whether it is still OK to eat.' : 'Items marked "Spoilage guide" also explain what went wrong when it goes slimy, yellow or moldy.'}</p>
     <div class="cta-row"><a class="btn" href="/produce/what-went-wrong">What went wrong? Pick a symptom</a><a class="btn ghost" href="/">Interactive storage guide</a></div>
   </section>
 
