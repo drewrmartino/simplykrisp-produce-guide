@@ -426,6 +426,44 @@ body.has-bnav main{padding-bottom:96px}
 .qty b{min-width:16px;text-align:center}
 .rvx{width:30px;height:30px;border-radius:50%;border:0;background:none;color:var(--muted-fg);font-size:20px;cursor:pointer}
 .rvx:hover{background:var(--muted);color:hsl(0 60% 45%)}
+/* Kitchen map: where everything is, at a glance. Same look as /partners. */
+.km{display:grid;grid-template-columns:1.55fr 1fr;gap:12px;margin-top:16px}
+@media (max-width:640px){.km{grid-template-columns:1fr}}
+.km-zl{font-family:var(--sans);font-size:14px;line-height:1.2;margin-bottom:8px;padding-right:44px}
+.km-zl small{display:block;font-family:var(--body);font-size:11.5px;color:var(--muted-fg);margin-top:2px}
+.km-fridge{background:linear-gradient(180deg,hsl(200 25% 97%),hsl(200 18% 92%));border:2.5px solid hsl(96 14% 22%);border-radius:16px;padding:10px 10px 12px}
+.km-fh{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted-fg);padding:0 4px 8px}
+.km-shelf{background:hsl(0 0% 100% / .75);border-radius:8px;padding:10px;min-height:76px;border-bottom:5px solid hsl(195 22% 80%);margin-bottom:10px}
+.km-drawers{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media (max-width:400px){.km-drawers{grid-template-columns:1fr}}
+.km-drawer{position:relative;border-radius:6px 6px 12px 12px;padding:16px 10px 34px;min-height:140px;border:2px solid}
+.km-drawer.hi{background:hsl(195 45% 93%);border-color:hsl(195 30% 70%)}
+.km-drawer.lo{background:hsl(40 72% 92%);border-color:hsl(36 40% 70%)}
+.km-pull{position:absolute;top:5px;left:50%;transform:translateX(-50%);width:44px;height:5px;border-radius:3px;background:hsl(0 0% 0% / .2)}
+.km-sachet{position:absolute;right:8px;bottom:8px;display:inline-flex;align-items:center;gap:5px;font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#fff;background:var(--ok);border-radius:5px;padding:3px 7px 3px 4px}
+.km-sachet span{width:15px;height:15px;border-radius:50%;background:#fff;color:var(--ok);display:grid;place-items:center;font-size:9.5px;letter-spacing:0}
+.km-sachet.off{background:#fff;color:var(--muted-fg);border:1px dashed var(--input)}
+.km-sachet.off span{background:var(--muted);color:var(--muted-fg)}
+.km-side{display:flex;flex-direction:column;gap:12px}
+.km-counter{position:relative;padding:10px 10px 24px;border-radius:10px 10px 4px 4px;background:hsl(30 30% 96%);border:1px solid hsl(30 20% 88%);flex:1}
+.km-slab{position:absolute;left:-1px;right:-1px;bottom:-1px;height:12px;border-radius:0 0 4px 4px;background:linear-gradient(hsl(30 35% 64%),hsl(28 35% 52%))}
+.km-pantry{position:relative;padding:10px 10px 14px;border-radius:8px;border:2.5px solid hsl(28 30% 42%);background:hsl(34 42% 91%);flex:1}
+.km-knobs{position:absolute;top:12px;right:10px;display:flex;gap:5px}
+.km-knobs i{width:7px;height:7px;border-radius:50%;background:hsl(28 30% 42%)}
+.km-chips{display:flex;flex-wrap:wrap;gap:6px}
+.km-chip{display:inline-flex;align-items:center;gap:5px;background:#fff;border:1px solid var(--border);border-radius:999px;padding:3px 9px 3px 4px;font-size:13px;text-decoration:none;color:var(--fg);line-height:1.3;cursor:pointer}
+.km-chip:hover{border-color:var(--primary)}
+.km-chip img{width:20px;height:20px;border-radius:50%;object-fit:cover}
+.km-chip .d{width:7px;height:7px;border-radius:50%;flex:none;background:var(--ok)}
+.km-chip.s-today .d,.km-chip.s-check .d{background:var(--warn)}
+.km-chip.s-soon .d{background:var(--soon)}
+.km-chip .kd{font-size:10.5px;font-weight:700;color:#fff;background:var(--ok);border-radius:999px;padding:1px 6px;white-space:nowrap}
+.km-chip .kd.could{background:#fff;color:var(--ok);border:1px dashed var(--ok)}
+.km-none{font-size:12.5px;color:var(--muted-fg)}
+.km-legend{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;font-size:12px;color:var(--muted-fg);margin-top:8px}
+.km-legend i{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:4px;vertical-align:1px}
+.it.flash{box-shadow:0 0 0 3px var(--accent)}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 .usefirst{margin-top:16px;font-size:14px;color:var(--fg);background:var(--muted);border-radius:10px;padding:8px 12px;line-height:1.45}
 .zgrp h3{text-transform:none;letter-spacing:0;font-size:17px}
 .zgrp h3 .zi{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:8px;background:hsl(200 60% 94%);color:hsl(205 55% 35%);font-size:14px}
@@ -1085,6 +1123,12 @@ details.sd{display:block}
     document.querySelectorAll('[data-tab2]').forEach(function (b) { if (b.getAttribute('data-tab2') === name) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current'); });
     window.scrollTo(0, 0);
   }
+  document.addEventListener('click', function (ev) {
+    var b = ev.target.closest('[data-km]'); if (!b) return;
+    var card = el('it-' + b.getAttribute('data-km')); if (!card) return;
+    card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    card.classList.add('flash'); setTimeout(function () { card.classList.remove('flash'); }, 1400);
+  });
   document.addEventListener('click', function (ev) { var b = ev.target.closest('[data-tab2]'); if (b) tab(b.getAttribute('data-tab2')); });
   el('navSettings').addEventListener('click', function () { tab('more'); });
 
@@ -1198,6 +1242,41 @@ details.sd{display:block}
     return { chip: '<div>' + chip + '</div>', line: line };
   }
 
+  // Kitchen map: fridge (shelf + two drawers), counter and pantry. Chips jump to the item card.
+  function kmChip(i) {
+    var inDrawer = i.zone === 'high' || i.zone === 'low' || zoneOf(i) === 'high' || zoneOf(i) === 'low';
+    var r = inDrawer ? (i.krispBoost || i.krispCould) : null;
+    var when = i.status === 'check' ? 'check it' : i.status === 'today' ? 'use today' : i.leftMax + ' days left';
+    return '<button type="button" class="km-chip s-' + i.status + '" data-km="' + i.id + '" title="' + esc(i.name + ' · ' + when) + '">' +
+      '<span class="d" aria-hidden="true"></span><img src="' + esc(i.imageUrl) + '" alt="" loading="lazy">' + esc(i.name) +
+      (r ? '<span class="kd' + (i.krispBoost ? '' : ' could') + '">+' + r[0] + '–' + r[1] + ' days</span>' : '') +
+      '<span class="sr-only">, ' + esc(when) + '</span></button>';
+  }
+  function kmZone(list, k, empty) {
+    var l = list.filter(function (i) { return zoneOf(i) === k; }).sort(function (a, b) { return a.leftMax - b.leftMax; });
+    return l.length ? '<div class="km-chips">' + l.map(kmChip).join('') + '</div>' : '<div class="km-none">' + empty + '</div>';
+  }
+  function kitchenMap(list) {
+    var k = S.st && S.st.krisp || {};
+    var on = !!(k.active || k.owned);
+    var sachet = '<span class="km-sachet' + (on ? '' : ' off') + '" title="' + (on ? 'Your Krisp sachet goes in this drawer' : 'A Krisp sachet would go in this drawer') + '"><span>K</span>' + (on ? 'Krisp' : 'No Krisp') + '</span>';
+    var anyK = list.some(function (i) { return (zoneOf(i) === 'high' || zoneOf(i) === 'low') && (i.krispBoost || i.krispCould); });
+    var anyCould = list.some(function (i) { return (zoneOf(i) === 'high' || zoneOf(i) === 'low') && !i.krispBoost && i.krispCould; });
+    return '<div class="km" role="group" aria-label="Where everything is">' +
+      '<div class="km-fridge"><div class="km-fh">Fridge</div>' +
+        '<div class="km-shelf"><div class="km-zl">Fridge shelf<small>Main fridge, not a drawer</small></div>' + kmZone(list, 'shelf', 'Nothing on the shelf') + '</div>' +
+        '<div class="km-drawers">' +
+          '<div class="km-drawer hi"><div class="km-pull"></div><div class="km-zl">High-humidity drawer<small>Vent closed · things that wilt</small></div>' + kmZone(list, 'high', 'Empty') + sachet + '</div>' +
+          '<div class="km-drawer lo"><div class="km-pull"></div><div class="km-zl">Low-humidity drawer<small>Vent open · fruit, away from greens</small></div>' + kmZone(list, 'low', 'Empty') + sachet + '</div>' +
+        '</div></div>' +
+      '<div class="km-side">' +
+        '<div class="km-counter"><div class="km-zl">Counter<small>Room temp, out of the sun</small></div>' + kmZone(list, 'counter', 'Nothing on the counter') + '<div class="km-slab"></div></div>' +
+        '<div class="km-pantry"><div class="km-knobs"><i></i><i></i></div><div class="km-zl">Pantry<small>Cool, dark cupboard</small></div>' + kmZone(list, 'pantry', 'Nothing in the pantry') + '</div>' +
+      '</div></div>' +
+      '<div class="km-legend"><span><i style="background:var(--warn)"></i>Use today</span><span><i style="background:var(--soon)"></i>Next 2 days</span><span><i style="background:var(--ok)"></i>Later</span>' +
+      (anyK ? '<span>+ days: ' + (on ? 'extra days from your Krisp' : 'extra days a Krisp would add') + (on && anyCould ? ' (dashed: with a fresh sachet)' : '') + '</span>' : '') + '</div>';
+  }
+
   function itemCard(i, pending) {
     var q = i.qty > 1 ? ' <span class="q">×' + i.qty + '</span>' : (i.weight ? ' <span class="q">' + esc(i.weight) + '</span>' : '');
     var label = pending ? 'Counting starts ' + fmtDate(i.startDate) + ' · lasts ' + i.minDays + '–' + i.maxDays + ' days' : i.label;
@@ -1228,7 +1307,7 @@ details.sd{display:block}
     var quick = pending
       ? '<div class="qb"><button class="btn ghost" type="button" data-act="arrived" data-id="' + i.id + '">Arrived</button>' + xb + '</div>'
       : '<div class="qb"><button class="btn ghost' + (pk === 'used' ? ' on' : '') + '" type="button" data-pk="used" data-id="' + i.id + '" aria-label="' + esc(i.name) + ': used it" aria-expanded="' + (pk === 'used') + '">Used</button><button class="btn ghost' + (pk === 'tossed' ? ' on' : '') + '" type="button" data-pk="tossed" data-id="' + i.id + '" aria-label="' + esc(i.name) + ': tossed" aria-expanded="' + (pk === 'tossed') + '">Tossed</button>' + xb + '</div>';
-    return '<article class="it s-' + (pending ? 'pending' : i.status) + '">' +
+    return '<article class="it s-' + (pending ? 'pending' : i.status) + '" id="it-' + i.id + '">' +
       '<div class="ith"><img src="' + esc(i.imageUrl) + '" alt="" loading="lazy"><div style="flex:1;min-width:0"><div class="itn">' + esc(i.name) + q + '</div><div class="itl">' + esc(label) + '</div>' + kb.chip + '</div>' + quick + '</div>' +
       picker + (pending ? '' : '<div class="bar" role="progressbar" aria-label="Freshness used" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' + Math.round(i.progress * 100) + '"><i style="width:' + Math.max(4, Math.round(i.progress * 100)) + '%"></i></div>') +
       store + kb.line +
@@ -1265,7 +1344,7 @@ details.sd{display:block}
       var base = new Date(S.st.today + 'T12:00:00'), dd = new Date(base.getTime() + S.filterDay * 864e5);
       note = '<div class="status" style="margin-top:18px;justify-content:space-between"><span>Showing items whose window ends ' + (S.filterDay === 0 ? 'today' : 'on ' + dd.toLocaleDateString(undefined, { weekday: 'long' })) + ' (' + filtered.length + ')</span><button class="link small" type="button" data-day="' + S.filterDay + '">Show all</button></div>';
     }
-    var html = note;
+    var html = note + (filtered.length ? kitchenMap(filtered) : '');
     // Use-first note: secondary to where things go.
     var due = filtered.filter(function (i) { return i.status !== 'later'; })
       .sort(function (a, b) { return a.leftMax - b.leftMax; });
