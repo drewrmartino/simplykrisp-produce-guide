@@ -167,3 +167,31 @@ footer{margin-top:24px}
 .imgs figcaption{font-size:12.5px;color:var(--muted-fg);margin-top:4px}
 .band{margin-top:36px;background:var(--card);border:1px solid var(--card-border);border-radius:var(--radius);padding:18px 20px;display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
 .band p{max-width:52ch;font-size:15px;margin:0}
+/* how-to guides */
+.answer{margin-top:18px;max-width:68ch;padding:16px 18px;background:#fff;border:1px solid var(--card-border);border-left:4px solid var(--accent);border-radius:var(--radius)}
+.answer p{font-size:17px}
+.steps{margin-top:10px;padding-left:0;list-style:none;counter-reset:st;max-width:68ch}
+.steps li{position:relative;padding-left:38px;margin-top:12px;counter-increment:st}
+.steps li::before{content:counter(st);position:absolute;left:0;top:0;width:26px;height:26px;border-radius:50%;background:var(--primary);color:var(--primary-fg);font-size:13px;font-weight:700;display:grid;place-items:center}
+.tbl{margin-top:12px;overflow-x:auto;border:1px solid var(--card-border);border-radius:var(--radius);background:#fff}
+.tbl table{width:100%;border-collapse:collapse;font-size:14.5px}
+.tbl th,.tbl td{text-align:left;vertical-align:top;padding:10px 12px;border-top:1px solid var(--card-border)}
+.tbl thead th{border-top:0;background:var(--card);font-size:10.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--muted-fg)}
+.tbl tbody th{font-weight:600;min-width:120px}
+.wgroup{margin-top:18px}
+.wgroup h3,.drawer h3,.sec h3{font-size:18px;margin-bottom:8px}
+.wgroup .n{font-size:13px;color:var(--muted-fg)}
+.drawers{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+.drawer{background:var(--card);border:1px solid var(--card-border);border-radius:var(--radius);padding:14px 16px}
+.drawer .more{margin:0 0 10px}
+.qa{margin-top:16px}
+.qa h3{font-size:17px;margin-bottom:4px}
+.glist{margin-top:8px}
+.glist li{margin-top:6px}
+#related h3{margin-top:18px}
+.hlist{list-style:none;padding:0;display:grid;grid-template-columns:repeat(2,1fr);gap:10px 14px}
+.hlist a{display:block;height:100%;background:#fff;border:1px solid var(--card-border);border-radius:var(--radius);padding:14px 16px;text-decoration:none;color:inherit}
+.hlist a:hover{border-color:hsl(96 14% 40%)}
+.hlist b{display:block;font-size:16px;font-weight:600}
+.hlist span{display:block;margin-top:4px;font-size:13.5px;color:hsl(96 6% 38%)}
+@media (max-width:640px){.drawers,.hlist{grid-template-columns:1fr}.tbl table{font-size:13.5px}.tbl tbody th{min-width:96px}}

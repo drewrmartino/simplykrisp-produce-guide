@@ -86,10 +86,10 @@ test('pages carry canonical URL, FAQ data and the food-safety note', () => {
 test('every item in the storage guide gets its own page', () => {
   const out = render();
   const { produce } = loadData();
-  const pages = Object.keys(out).filter((k) => /^produce\/[^/]+\/index\.html$/.test(k) && !k.includes('what-went-wrong'));
+  const pages = Object.keys(out).filter((k) => /^produce\/[^/]+\/index\.html$/.test(k) && !k.includes('what-went-wrong') && !k.includes('how-to'));
   assert.equal(pages.length, produce.length);
   const urls = out['sitemap.xml'].match(/<loc>/g).length;
-  assert.equal(urls, produce.length + 6 + loadData().lab.runs.filter((r) => r.status !== 'planned').length);
+  assert.equal(urls, produce.length + 6 + loadData().lab.runs.filter((r) => r.status !== 'planned').length + loadData().guides.guides.length + 1);
   // Every item has a spoilage section now, so the index drops the per-item badge.
   const apple = out['produce/apple/index.html'];
   assert.match(apple, /<link rel="canonical" href="https:\/\/guide\.simplykrisp\.com\/produce\/apple" \/>/);
@@ -118,7 +118,7 @@ test('catch-all rewrite leaves the static pages alone', () => {
   const v = JSON.parse(readFileSync(path.join(root, 'vercel.json'), 'utf8'));
   const all = v.rewrites.find((r) => r.destination === '/index.html');
   const re = new RegExp('^' + all.source + '$');
-  for (const p of ['/produce', '/produce/broccoli', '/produce/what-went-wrong', '/sitemap.xml', '/robots.txt']) assert.ok(!re.test(p), p);
+  for (const p of ['/produce', '/produce/broccoli', '/produce/what-went-wrong', '/produce/how-to', '/produce/how-to/ripen-avocados', '/sitemap.xml', '/robots.txt']) assert.ok(!re.test(p), p);
   assert.ok(re.test('/some-guide-route'));
 });
 
@@ -136,4 +136,43 @@ test('started Lab Notebook runs get their own crawlable pages', () => {
   for (const r of lab.runs.filter((x) => x.status === 'planned')) assert.equal(out[`lab/${r.id}/index.html`], undefined);
   assert.deepEqual(JSON.parse(out['lab/pages.json']), started.map((r) => r.id));
   assert.match(out['produce/broccoli/index.html'], /href="\/lab\/broccoli-01"/);
+});
+
+test('how-to guides get crawlable pages with answers, FAQ data and numbered sources', () => {
+  const out = render();
+  const { guides } = loadData();
+  assert.ok(out['produce/how-to/index.html']);
+  assert.match(out['sitemap.xml'], /\/produce\/how-to<\/loc>/);
+  for (const g of guides.guides) {
+    const html = out[`produce/how-to/${g.slug}/index.html`];
+    assert.ok(html, g.slug);
+    assert.match(html, new RegExp(`<link rel="canonical" href="https://guide\\.simplykrisp\\.com/produce/how-to/${g.slug}" />`));
+    assert.match(html, /"@type":"FAQPage"/);
+    assert.match(html, /class="answer"/);
+    assert.match(out['sitemap.xml'], new RegExp(`/produce/how-to/${g.slug}</loc>`));
+    assert.match(out['produce/how-to/index.html'], new RegExp(`href="/produce/how-to/${g.slug}"`));
+    // No raw tokens left, and every ref points at a listed source.
+    assert.doesNotMatch(html, /\[\[|\[\^/, g.slug);
+    for (const [, k] of html.matchAll(/href="#src-([\w-]+)"/g)) assert.match(html, new RegExp(`<li id="src-${k}">`), `${g.slug} ${k}`);
+    // FAQ structured data is plain text.
+    const ld = [...html.matchAll(/<script type="application\/ld\+json">(.*?)<\/script>/g)].map((m) => JSON.parse(m[1]));
+    const faq = ld.find((j) => j['@type'] === 'FAQPage');
+    assert.equal(faq.mainEntity.length, g.faq.length);
+    for (const q of faq.mainEntity) assert.doesNotMatch(q.acceptedAnswer.text, /\[|</);
+  }
+  // Krisp shows up only on ripening guides, and only links to the shop where produce.json makes a claim.
+  assert.match(out['produce/how-to/ripen-kiwi/index.html'], /See the Double Krisp/);
+  assert.doesNotMatch(out['produce/how-to/ripen-bananas/index.html'], /See the Double Krisp/);
+  assert.doesNotMatch(out['produce/how-to/wash-strawberries/index.html'], /Krisp help/);
+  // Item pages link back to their guides.
+  assert.match(out['produce/avocado/index.html'], /href="\/produce\/how-to\/ripen-avocados"/);
+});
+
+test('guide validation catches bad sources, links and Krisp copy', () => {
+  const data = loadData();
+  const copy = structuredClone(data.guides);
+  copy.guides[0].answer += ' [^nope] [[Dragonfruit]] A Krisp fixes it.';
+  copy.guides[0].faq = copy.guides[0].faq.slice(0, 1);
+  const errs = validate({ ...data, guides: copy });
+  for (const e of ['unknown source "nope"', 'unknown produce link "Dragonfruit"', 'mentions Krisp', 'at least 2 FAQs']) assert.ok(errs.some((x) => x.includes(e)), e);
 });

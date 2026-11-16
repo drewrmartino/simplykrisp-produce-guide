@@ -16,6 +16,8 @@
 //   produce/<slug>/index.html             one page per item
 //   index.html                            static A-Z list inside the app's #root
 //   produce/what-went-wrong/index.html    symptom lookup
+//   produce/how-to/index.html             how-to guide hub (data/guides.json)
+//   produce/how-to/<slug>/index.html      one page per how-to guide
 //   sitemap.xml, robots.txt
 //
 // dev/produce-pages.test.mjs fails if the data is invalid or the committed
@@ -43,11 +45,12 @@ export function loadData() {
     produce: readJson('seasonal/produce.json'),
     runs: readJson('lab/runs.json').runs,
     lab: readJson('lab/runs.json'),
+    guides: readJson('data/guides.json'),
   };
 }
 
 /** Returns a list of problems; empty means valid. */
-export function validate({ spoilage, produce }) {
+export function validate({ spoilage, produce, guides }) {
   const errs = [];
   const names = new Set(produce.map((p) => p.name));
   const slugs = new Set();
@@ -82,6 +85,69 @@ export function validate({ spoilage, produce }) {
     }
   }
   for (const [k, s] of Object.entries(sources)) if (!/^https:\/\//.test(s.url || '')) errs.push(`source ${k}: needs an https url`);
+  return errs.concat(validateGuides({ spoilage, produce, guides }));
+}
+
+// ---------- how-to guide data ----------
+
+// [[Produce Name]] or [[Produce Name|text]] links an item page,
+// [[how-to:slug|text]] links another guide, [^key] cites a source.
+const GUIDE_TOKEN = /\[\[([^\]|]+)(?:\|([^\]]+))?\]\]|\[\^([\w-]+)\]/g;
+const GUIDE_AUTO = ['where-table', 'drawer-map'];
+const NO_GUIDES = { meta: {}, groups: {}, sources: {}, guides: [] };
+
+/** Every text field of a guide, in reading order (which is also citation order). */
+function guideStrings(g) {
+  const out = [g.answer];
+  for (const s of g.sections) {
+    if (s.auto === 'drawer-map') out.push(DRAWER_NOTE);
+    for (const k of ['p', 'steps', 'list']) out.push(...(s[k] || []));
+    if (s.table) for (const r of s.table.rows) out.push(...r);
+  }
+  for (const f of g.faq) out.push(f.q, f.a);
+  return out;
+}
+
+export function validateGuides({ spoilage, produce, guides = NO_GUIDES }) {
+  const errs = [];
+  const names = new Set(produce.map((p) => p.name));
+  const sources = { ...spoilage.sources, ...guides.sources };
+  const slugs = new Set();
+  const all = new Set(guides.guides.map((g) => g.slug));
+  for (const g of guides.guides) {
+    const at = `guide ${g.slug}`;
+    if (!/^[a-z0-9]+(-[a-z0-9]+)*$/.test(g.slug || '')) errs.push(`${at}: bad slug`);
+    if (slugs.has(g.slug)) errs.push(`${at}: duplicate slug`);
+    slugs.add(g.slug);
+    for (const k of ['title', 'seoTitle', 'desc', 'answer']) if (!g[k] || typeof g[k] !== 'string') errs.push(`${at}: missing ${k}`);
+    if ((g.desc || '').length > 165) errs.push(`${at}: desc is over 165 characters`);
+    if (!guides.groups[g.group]) errs.push(`${at}: unknown group "${g.group}"`);
+    for (const n of [g.item, ...(g.items || [])].filter(Boolean)) if (!names.has(n)) errs.push(`${at}: ${n} is not in seasonal/produce.json`);
+    if (!Array.isArray(g.sections) || !g.sections.length) errs.push(`${at}: needs sections`);
+    for (const s of g.sections || []) {
+      if (!s.h2) errs.push(`${at}: section without h2`);
+      if (s.auto && !GUIDE_AUTO.includes(s.auto)) errs.push(`${at}: unknown auto section "${s.auto}"`);
+      if (s.table && s.table.rows.some((r) => r.length !== s.table.cols.length)) errs.push(`${at}: table row length does not match columns`);
+    }
+    if (!Array.isArray(g.faq) || g.faq.length < 2) errs.push(`${at}: needs at least 2 FAQs`);
+    for (const f of g.faq || []) if (!/\[\^[\w-]+\]/.test(f.a || '')) errs.push(`${at}: FAQ "${f.q}" needs a source`);
+    for (const r of g.related || []) if (!all.has(r) || r === g.slug) errs.push(`${at}: bad related guide "${r}"`);
+    let cites = 0;
+    for (const t of guideStrings(g)) {
+      // Krisp wording comes only from seasonal/produce.json, never from guide copy.
+      if (/krisp/i.test(t)) errs.push(`${at}: mentions Krisp in guide text`);
+      for (const m of String(t).matchAll(GUIDE_TOKEN)) {
+        if (m[3]) { cites++; if (!sources[m[3]]) errs.push(`${at}: unknown source "${m[3]}"`); }
+        else if (m[1].startsWith('how-to:')) { if (!all.has(m[1].slice(7))) errs.push(`${at}: unknown guide link "${m[1]}"`); }
+        else if (!names.has(m[1])) errs.push(`${at}: unknown produce link "${m[1]}"`);
+      }
+    }
+    if (!cites) errs.push(`${at}: cites no sources`);
+  }
+  for (const [k, s] of Object.entries(guides.sources)) {
+    if (!/^https:\/\//.test(s.url || '')) errs.push(`guide source ${k}: needs an https url`);
+    if (spoilage.sources[k]) errs.push(`guide source ${k}: already defined in data/spoilage.json`);
+  }
   return errs;
 }
 
@@ -350,6 +416,10 @@ ${cards}
   <ul class="rel">${related.map((o) => `<li><a href="/produce/${o.slug}"><img src="${esc(o.p.imageUrl)}" alt="" width="24" height="24" loading="lazy" />${esc(navName(o.name))}</a></li>`).join('')}</ul>
   <p class="more"><a href="/produce">All ${ctx.all.length} fruits and vegetables</a></p></section>` : '';
 
+  const guides = guidesFor(e.name, ctx);
+  const guideSec = guides.length ? `<section class="sec" id="guides"><h2>How-to guides</h2>
+  <ul class="glist">${guides.map((g) => `<li><a href="/produce/how-to/${g.slug}">${esc(g.title)}</a></li>`).join('')}</ul></section>` : '';
+
   const h1 = item ? `How to store ${esc(display)}, and why ${they} go${plural ? '' : 'es'} bad` : `How to store ${esc(display)}`;
   return head({ title, desc, pathname, jsonld: [crumbLd(trail), ...(faq ? [faq] : [])] }) + `
 <main class="wrap">
@@ -369,6 +439,7 @@ ${cards}
   ${eth}
   ${scrapSec}
   ${labSec}
+  ${guideSec}
   ${relSec}
   ${srcSec}
 
@@ -411,7 +482,7 @@ function indexPage(ctx) {
     <div class="eyebrow"><span class="dot"></span> Produce guide</div>
     <h1>How to store fruits and vegetables, and why they go bad</h1>
     <p class="lede">Pick a fruit or vegetable to see where to keep it, how long it lasts and what not to store it with. ${allCovered ? 'Each page also explains what went wrong when it goes slimy, yellow or moldy, and whether it is still OK to eat.' : 'Items marked "Spoilage guide" also explain what went wrong when it goes slimy, yellow or moldy.'}</p>
-    <div class="cta-row"><a class="btn" href="/produce/what-went-wrong">What went wrong? Pick a symptom</a><a class="btn ghost" href="/">Interactive storage guide</a></div>
+    <div class="cta-row"><a class="btn" href="/produce/what-went-wrong">What went wrong? Pick a symptom</a><a class="btn ghost" href="/produce/how-to">How-to guides</a><a class="btn ghost" href="/">Interactive storage guide</a></div>
   </section>
 
 ${groups}
@@ -431,7 +502,7 @@ function rootIndex(ctx) {
   const html = readFileSync(path.join(root, 'index.html'), 'utf8');
   const sorted = [...ctx.all].sort((a, b) => navName(a.name).localeCompare(navName(b.name)));
   const lists = GROUPS.map(([k, label]) => `<h2>${label}</h2><ul>${sorted.filter((e) => e.p.category === k).map((e) => `<li><a href="/produce/${e.slug}">How to store ${esc(e.display)}</a></li>`).join('')}</ul>`).join('');
-  const block = `<div id="root"><!--static--><main style="max-width:900px;margin:0 auto;padding:32px 20px;font-family:system-ui,sans-serif"><h1>Produce Storage Guide</h1><p>Where to keep ${ctx.all.length} fruits and vegetables, how long each one lasts, and what not to store together. <a href="/produce">See all produce</a> or <a href="/produce/what-went-wrong">find out what went wrong</a>.</p>${lists}</main><!--/static--></div>`;
+  const block = `<div id="root"><!--static--><main style="max-width:900px;margin:0 auto;padding:32px 20px;font-family:system-ui,sans-serif"><h1>Produce Storage Guide</h1><p>Where to keep ${ctx.all.length} fruits and vegetables, how long each one lasts, and what not to store together. <a href="/produce">See all produce</a> or <a href="/produce/what-went-wrong">find out what went wrong</a>.</p>${lists}${ctx.guides.guides.length ? `<h2>How-to guides</h2><ul>${ctx.guides.guides.map((g) => `<li><a href="/produce/how-to/${g.slug}">${esc(g.title)}</a></li>`).join('')}</ul>` : ''}</main><!--/static--></div>`;
   const n = ctx.all.length;
   return html
     .replace(/How to Store \d+ Fruits and Vegetables/, `How to Store ${n} Fruits and Vegetables`)
@@ -529,11 +600,174 @@ function labIndex(ctx) {
   return html.replace(/<section class="runs" id="runs" aria-live="polite">[\s\S]*?<\/section>/, `<section class="runs" id="runs" aria-live="polite">${cards}</section>`);
 }
 
+// ---------- how-to guides ----------
+
+const DRAWER_NOTE = 'Vegetables generally keep best in higher humidity and fruit in lower humidity. Some crisper drawers have a slider that controls this.[^fsis-fridge]';
+const DRAWERS = [
+  ['High humidity: vent closed', 'For things that wilt.', ['Lettuce', 'Spinach', 'Kale', 'Broccoli', 'Cauliflower', 'Cabbage', 'Cucumber', 'Carrot', 'Celery', 'Green Beans', 'Asparagus', 'Bell Pepper', 'Herbs (Fresh)']],
+  ['Low humidity: vent open', 'For things that rot.', ['Apple', 'Pear', 'Grape', 'Peach', 'Plum', 'Nectarine', 'Kiwi', 'Avocado']],
+];
+const WHERE_ORDER = ['refrigerator', 'counter_then_fridge', 'counter', 'pantry'];
+
+function guidesFor(name, ctx) {
+  return ctx.guides.guides.filter((g) => g.item === name || (g.items || []).includes(name));
+}
+
+const chip = (o) => `<li><a href="/produce/${o.slug}"><img src="${esc(o.p.imageUrl)}" alt="" width="24" height="24" loading="lazy" />${esc(navName(o.name))}</a></li>`;
+
+/** Renders guide text: escapes it, then turns tokens into links and numbered refs. */
+function guideText(t, ctx, refs) {
+  return esc(t).replace(GUIDE_TOKEN, (m, name, label, src) => {
+    if (src) {
+      if (!refs.includes(src)) refs.push(src);
+      const n = refs.indexOf(src) + 1;
+      return `<a class="ref" href="#src-${src}" aria-label="Source ${n}">${n}</a>`;
+    }
+    if (name.startsWith('how-to:')) {
+      const g = ctx.guideBySlug[name.slice(7)];
+      return `<a href="/produce/how-to/${g.slug}">${label || esc(g.title)}</a>`;
+    }
+    const o = ctx.bySlugName[name];
+    return `<a href="/produce/${o.slug}">${label || esc(o.display)}</a>`;
+  });
+}
+
+/** Same text as plain words, for structured data. */
+function guidePlain(t, ctx) {
+  return String(t).replace(GUIDE_TOKEN, (m, name, label, src) => (src ? '' : label || (name.startsWith('how-to:') ? ctx.guideBySlug[name.slice(7)].title : ctx.bySlugName[name].display)));
+}
+
+const sectionId = (h) => h.toLowerCase().replace(/&[a-z]+;/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').split('-').slice(0, 6).join('-');
+
+function whereTable(ctx) {
+  const sorted = [...ctx.all].sort((a, b) => navName(a.name).localeCompare(navName(b.name)));
+  return WHERE_ORDER.map((loc) => {
+    const its = sorted.filter((o) => o.p.storageLocation === loc);
+    return `<div class="wgroup"><h3>${esc(where[loc])} <span class="n">${its.length}</span></h3><ul class="rel">${its.map(chip).join('')}</ul></div>`;
+  }).join('') + `<p class="more">Each item links to its own page with how long it lasts, what to keep it away from, and the sources.</p>`;
+}
+
+function drawerMap(ctx, T) {
+  return `<p>${T(DRAWER_NOTE)}</p><div class="drawers">${DRAWERS.map(([h, sub, names]) => `<div class="drawer"><h3>${esc(h)}</h3><p class="more">${esc(sub)}</p><ul class="rel">${names.map((n) => chip(ctx.bySlugName[n])).join('')}</ul></div>`).join('')}</div>
+  <p class="more">Stone fruit, kiwi and avocados go in the fridge only once they are ripe. Want it on paper? <a href="/lab/crisper-map">Print the crisper map</a>.</p>`;
+}
+
+function guidePage(g, ctx) {
+  const refs = [];
+  const T = (t) => guideText(t, ctx, refs);
+  const pathname = `/produce/how-to/${g.slug}`;
+  const trail = [['Produce Guide', '/'], ['All produce', '/produce'], ['How-to guides', '/produce/how-to'], [g.title, pathname]];
+  const main = ctx.bySlugName[g.item];
+
+  const answer = `<div class="answer"><span class="lbl">Short answer</span><p>${T(g.answer)}</p></div>`;
+  const toc = `<div class="jump"><span class="lbl">On this page</span><div class="chips">${g.sections.map((s) => `<a class="chip" href="#${sectionId(s.h2)}">${esc(s.h2)}</a>`).join('')}<a class="chip" href="#faq">Common questions</a></div></div>`;
+
+  const sections = g.sections.map((s) => {
+    let body = '';
+    if (s.auto === 'where-table') body += whereTable(ctx);
+    if (s.auto === 'drawer-map') body += drawerMap(ctx, T);
+    body += (s.p || []).map((t) => `<p>${T(t)}</p>`).join('');
+    if (s.steps) body += `<ol class="steps">${s.steps.map((t) => `<li>${T(t)}</li>`).join('')}</ol>`;
+    if (s.list) body += `<ul class="tips">${s.list.map((t) => `<li>${T(t)}</li>`).join('')}</ul>`;
+    if (s.table) body += `<div class="tbl"><table><thead><tr>${s.table.cols.map((c) => `<th scope="col">${esc(c)}</th>`).join('')}</tr></thead><tbody>${s.table.rows.map((r) => `<tr>${r.map((c, i) => (i ? `<td>${T(c)}</td>` : `<th scope="row">${T(c)}</th>`)).join('')}</tr>`).join('')}</tbody></table></div>`;
+    return `<section class="sec" id="${sectionId(s.h2)}"><h2>${esc(s.h2)}</h2>${body}</section>`;
+  }).join('\n  ');
+
+  // Krisp: ripening guides only, in the same words as the item's own page.
+  const p = main && main.p;
+  const krisp = g.group === 'ripen' && p
+    ? p.krispRecommended && p.krispBenefit
+      ? `<p class="aside"><strong>Does a Krisp help?</strong> ${esc(p.krispBenefit)} <a href="${SHOP}?${utm('howto-' + g.slug)}" target="_blank" rel="noopener">See the Double Krisp</a></p>`
+      : p.noBenefitReason ? `<p class="aside"><strong>Does a Krisp help?</strong> ${esc(p.noBenefitReason)}</p>` : ''
+    : '';
+
+  const faqSec = `<section class="sec" id="faq"><h2>Common questions</h2>${g.faq.map((f) => `<div class="qa"><h3>${esc(f.q)}</h3><p>${T(f.a)}</p></div>`).join('')}</section>`;
+
+  const items = [...new Set([g.item, ...(g.items || [])].filter(Boolean))].map((n) => ctx.bySlugName[n]);
+  const rel = (g.related || []).map((s) => ctx.guideBySlug[s]);
+  const relSec = `<section class="sec" id="related"><h2>Keep reading</h2>
+  ${rel.length ? `<ul class="glist">${rel.map((r) => `<li><a href="/produce/how-to/${r.slug}">${esc(r.title)}</a></li>`).join('')}</ul>` : ''}
+  <h3>Storage pages for this guide</h3><ul class="rel">${items.map(chip).join('')}</ul>
+  <p class="more"><a href="/produce/how-to">All how-to guides</a> &middot; <a href="/produce">All ${ctx.all.length} fruits and vegetables</a></p></section>`;
+
+  // Rendered last so the numbering matches the order refs appear on the page.
+  const srcSec = `<section class="sec" id="sources"><h2>Sources</h2><ol class="srcs">${refs
+    .map((s) => `<li id="src-${s}"><a href="${esc(ctx.allSources[s].url)}" target="_blank" rel="noopener">${esc(ctx.allSources[s].title)}</a>, ${esc(ctx.allSources[s].publisher)}</li>`)
+    .join('')}</ol></section>`;
+
+  const faqLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: g.faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: guidePlain(f.a, ctx) } })),
+  };
+  const articleLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: g.title,
+    description: g.desc,
+    dateModified: ctx.guides.meta.updated,
+    mainEntityOfPage: ORIGIN + pathname,
+    author: { '@type': 'Organization', name: 'Simply Krisp', url: 'https://simplykrisp.com' },
+    publisher: { '@type': 'Organization', name: 'Simply Krisp', url: 'https://simplykrisp.com' },
+  };
+
+  return head({ title: g.seoTitle, desc: g.desc, pathname, jsonld: [crumbLd(trail), articleLd, faqLd] }) + `
+<main class="wrap">
+  ${crumbs(trail)}
+  <section class="hero">
+    <div class="ttl">${main ? `<img src="${esc(main.p.imageUrl)}" alt="" width="56" height="56" />` : ''}<div>
+      <div class="eyebrow"><span class="dot"></span> How-to guide &middot; ${esc(ctx.guides.groups[g.group])}</div>
+      <h1>${esc(g.title)}</h1>
+    </div></div>
+    ${answer}
+    ${toc}
+  </section>
+
+  ${sections}
+  ${krisp ? `<section class="sec" id="krisp">${krisp}</section>` : ''}
+  ${faqSec}
+  ${relSec}
+  ${srcSec}
+
+</main>
+${TOOLS}
+` + foot(ctx.guides.meta.updated.slice(0, 4));
+}
+
+function guideHub(ctx) {
+  const { guides } = ctx;
+  const trail = [['Produce Guide', '/'], ['All produce', '/produce'], ['How-to guides', '/produce/how-to']];
+  const title = 'Produce how-to guides: ripening, washing, freezing and storing | Simply Krisp';
+  const desc = 'How to ripen avocados, mangoes and pears, wash berries and greens, store cut produce, and decide fridge, counter or freezer. Every answer cites its source.';
+  const groups = Object.entries(guides.groups).map(([k, label]) => {
+    const gs = guides.guides.filter((g) => g.group === k);
+    return gs.length ? `<section class="agroup" aria-labelledby="g-${k}"><h2 id="g-${k}">${esc(label)}</h2><ul class="hlist">${gs.map((g) => `<li><a href="/produce/how-to/${g.slug}"><b>${esc(g.title)}</b><span>${esc(g.desc)}</span></a></li>`).join('')}</ul></section>` : '';
+  }).join('\n');
+  const itemList = {
+    '@context': 'https://schema.org', '@type': 'ItemList',
+    itemListElement: guides.guides.map((g, i) => ({ '@type': 'ListItem', position: i + 1, url: `${ORIGIN}/produce/how-to/${g.slug}`, name: g.title })),
+  };
+  return head({ title, desc, pathname: '/produce/how-to', jsonld: [crumbLd(trail), itemList] }) + `
+<main class="wrap">
+  ${crumbs(trail)}
+  <section class="hero">
+    <div class="eyebrow"><span class="dot"></span> How-to guides</div>
+    <h1>Produce how-to guides</h1>
+    <p class="lede">Short, sourced answers to the questions people actually search for: how to ripen it, how to wash it, how to store what's left, and whether it goes in the fridge, on the counter or in the freezer.</p>
+    <div class="cta-row"><a class="btn" href="/produce">All produce A–Z</a><a class="btn ghost" href="/produce/what-went-wrong">What went wrong?</a></div>
+  </section>
+
+${groups}
+</main>
+${TOOLS}
+` + foot(guides.meta.updated.slice(0, 4));
+}
+
 // ---------- sitemap ----------
 
 function sitemap(ctx) {
   const today = ctx.spoilage.meta.updated;
-  const urls = ['/', '/seasonal', '/lab', '/lab/crisper-map', '/produce', '/produce/what-went-wrong', ...ctx.all.map((i) => `/produce/${i.slug}`), ...ctx.lab.runs.filter(hasPage).map((r) => `/lab/${r.id}`)];
+  const urls = ['/', '/seasonal', '/lab', '/lab/crisper-map', '/produce', '/produce/what-went-wrong', '/produce/how-to', ...ctx.guides.guides.map((g) => `/produce/how-to/${g.slug}`), ...ctx.all.map((i) => `/produce/${i.slug}`), ...ctx.lab.runs.filter(hasPage).map((r) => `/lab/${r.id}`)];
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${urls.map((u) => `  <url><loc>${ORIGIN}${u}</loc><lastmod>${today}</lastmod></url>`).join('\n')}
@@ -555,9 +789,12 @@ Sitemap: ${ORIGIN}/sitemap.xml
 /** Returns { relativePath: contents } for every generated file. */
 export function render(data = loadData()) {
   const errs = validate(data);
-  if (errs.length) throw new Error('data/spoilage.json is invalid:\n  ' + errs.join('\n  '));
+  if (errs.length) throw new Error('data/spoilage.json or data/guides.json is invalid:\n  ' + errs.join('\n  '));
   const byName = Object.fromEntries(data.produce.map((p) => [p.name, p]));
   const ctx = { ...data, byName, items: data.spoilage.items };
+  ctx.guides = data.guides || NO_GUIDES;
+  ctx.guideBySlug = Object.fromEntries(ctx.guides.guides.map((g) => [g.slug, g]));
+  ctx.allSources = { ...data.spoilage.sources, ...ctx.guides.sources };
   ctx.lab = data.lab || { meta: { method: '', updated: '' }, runs: data.runs || [] };
   ctx.all = allItems(ctx);
   ctx.bySlugName = Object.fromEntries(ctx.all.map((e) => [e.name, e]));
@@ -574,6 +811,8 @@ export function render(data = loadData()) {
   };
   for (const r of ctx.lab.runs.filter(hasPage)) out[`lab/${r.id}/index.html`] = labPage(r, ctx);
   for (const e of ctx.all) out[`produce/${e.slug}/index.html`] = itemPage(e, ctx);
+  out['produce/how-to/index.html'] = guideHub(ctx);
+  for (const g of ctx.guides.guides) out[`produce/how-to/${g.slug}/index.html`] = guidePage(g, ctx);
   return out;
 }
 
@@ -583,6 +822,9 @@ function main() {
   const dir = path.join(root, 'produce');
   const keep = new Set(Object.keys(out).filter((k) => k.startsWith('produce/')).map((k) => k.split('/')[1]));
   if (existsSync(dir)) for (const d of readdirSync(dir, { withFileTypes: true })) if (d.isDirectory() && !keep.has(d.name)) rmSync(path.join(dir, d.name), { recursive: true });
+  const howDir = path.join(dir, 'how-to');
+  const howKeep = new Set(Object.keys(out).filter((k) => /^produce\/how-to\/[^/]+\/index\.html$/.test(k)).map((k) => k.split('/')[2]));
+  if (existsSync(howDir)) for (const d of readdirSync(howDir, { withFileTypes: true })) if (d.isDirectory() && !howKeep.has(d.name)) rmSync(path.join(howDir, d.name), { recursive: true });
   const labDir = path.join(root, 'lab');
   const labKeep = new Set(Object.keys(out).filter((k) => /^lab\/[^/]+\/index\.html$/.test(k)).map((k) => k.split('/')[1]));
   for (const d of readdirSync(labDir, { withFileTypes: true })) if (d.isDirectory() && !labKeep.has(d.name)) rmSync(path.join(labDir, d.name), { recursive: true });
