@@ -1,5 +1,7 @@
 # After each production deploy on Vercel, tells IndexNow (Bing, Yandex and
 # others) which guide pages changed so they're recrawled quickly.
+# Vercel names the environment "Production – <project>"; previews and the
+# separate "guide" project don't match, so they're skipped.
 name: IndexNow
 
 on:
@@ -7,7 +9,7 @@ on:
 
 jobs:
   ping:
-    if: github.event.deployment_status.state == 'success' && github.event.deployment.environment == 'Production'
+    if: github.event.deployment_status.state == 'success' && github.event.deployment.environment == 'Production – simplykrisp-produce-guide'
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
