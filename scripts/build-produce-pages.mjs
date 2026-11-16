@@ -48,7 +48,7 @@ export const ORG = {
   name: 'Simply Krisp',
   url: 'https://simplykrisp.com',
   logo: 'https://simplykrisp.com/cdn/shop/files/v2_Simply_Krisp_Logo_-_Lime_and_Orange_Freshness_700_x_350_px_f00ce263-9da7-4e9d-9e09-55291aaf9e85.png',
-  description: 'Simply Krisp is a produce-freshness company working to cut food waste. It publishes free storage guides for fruits and vegetables and sells ethylene absorbers for the crisper drawer.',
+  description: 'Simply Krisp is a company that helps people keep produce fresh long enough to eat it instead of throwing it away. We cut food waste with free produce storage guides and tools, and sell products that extend freshness.',
   sameAs: ['https://www.instagram.com/simply_krisp', 'https://guide.simplykrisp.com/'],
   memberOf: { '@type': 'Organization', name: '1% for the Planet', url: 'https://www.onepercentfortheplanet.org' },
 };
@@ -820,7 +820,7 @@ function llms(ctx) {
   const labRuns = ctx.lab.runs.filter(hasPage);
   return `# Simply Krisp Produce Guide
 
-> Free, sourced guidance on storing fruits and vegetables so less of them go to waste: where each item belongs (fridge, counter or freezer), how long it lasts, what not to store together, why it spoils, and how to ripen, wash and freeze it. Published by Simply Krisp (https://simplykrisp.com), a produce-freshness company and 1% for the Planet member.
+> Free, sourced guidance on storing fruits and vegetables so less of them go to waste: where each item belongs (fridge, counter or freezer), how long it lasts, what not to store together, why it spoils, and how to ripen, wash and freeze it. Published by Simply Krisp (https://simplykrisp.com), a company that helps people keep produce fresh long enough to eat it instead of throwing it away, and a 1% for the Planet member.
 
 Storage and spoilage facts come mainly from the UC Davis Postharvest Technology Center and USDA sources, and each how-to guide cites its sources inline. Food-safety advice is deliberately conservative. Pages describe quality and common spoilage and are not a substitute for judgment: anything slimy, off-smelling, or moldy on soft produce should be thrown out.
 
