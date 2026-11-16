@@ -1,0 +1,1429 @@
+{
+  "meta": {
+    "updated": "2026-11-16",
+    "note": "How-to guides: ripening, washing, cut produce, freezing and where things go. Rendered by scripts/build-produce-pages.mjs to /produce/how-to/<slug>. Every claim cites a source with [^key]; keys come from this file's sources or data/spoilage.json's. [[Name]] links a produce page by its seasonal/produce.json name, [[Name|text]] sets the link text, and [[how-to:slug|text]] links another guide. Krisp wording is never written here: the generator pulls it from seasonal/produce.json for the guide's item, so it can't drift from the rest of the site. Food-safety lines stay conservative. Run `npm run pages` after editing."
+  },
+  "groups": {
+    "ripen": "Ripening",
+    "wash": "Washing",
+    "store": "Storing leftovers",
+    "where": "Fridge, counter and freezer"
+  },
+  "sources": {
+    "cac-store": {
+      "title": "How to Store Avocados",
+      "publisher": "California Avocado Commission",
+      "url": "https://www.californiaavocado.com/blog/how-to-store-avocados"
+    },
+    "cac-hub": {
+      "title": "California Avocado How-to Hub",
+      "publisher": "California Avocado Commission",
+      "url": "https://californiaavocado.com/how-to/california-avocado-how-to-hub/"
+    },
+    "fda-avocado": {
+      "title": "Microbiological Sampling Assignment Summary Report: Whole Fresh Avocados",
+      "publisher": "U.S. Food and Drug Administration",
+      "url": "https://www.fda.gov/media/119969/download"
+    },
+    "fda-avocado-water": {
+      "title": "Internalization of Listeria monocytogenes in Whole Avocado (Journal of Food Protection)",
+      "publisher": "FDA researchers, via PubMed",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/27497134/"
+    },
+    "nmb-choose": {
+      "title": "How to Choose a Mango",
+      "publisher": "National Mango Board",
+      "url": "https://www.mango.org/choose-a-mango/"
+    },
+    "zespri": {
+      "title": "How to Eat, Choose, Store and Ripen Kiwifruit",
+      "publisher": "Zespri",
+      "url": "https://www.zespri.com/en-MY/blogdetail/how-to-eat-choose-store-ripen"
+    },
+    "usapears": {
+      "title": "Fun Facts and FAQs About Pears",
+      "publisher": "USA Pears (Pear Bureau Northwest)",
+      "url": "https://www.usapears.org/pear-faq"
+    },
+    "fda-7tips": {
+      "title": "7 Tips for Cleaning Fruits, Vegetables",
+      "publisher": "U.S. Food and Drug Administration",
+      "url": "https://www.fda.gov/consumers/consumer-updates/7-tips-cleaning-fruits-vegetables"
+    },
+    "umaine-wash": {
+      "title": "A Guide for Best Produce Washing Practices",
+      "publisher": "University of Maine Cooperative Extension",
+      "url": "https://extension.umaine.edu/food-health/2023/06/26/a-guide-for-best-produce-washing-practices/"
+    },
+    "umn-wash": {
+      "title": "Washing fresh fruits and vegetables safely",
+      "publisher": "University of Minnesota Extension",
+      "url": "https://extension.umn.edu/food/preparing/cooking-at-home/washing-fresh-fruits-and-vegetables"
+    },
+    "csu-produce": {
+      "title": "Guide to Handling Fresh Produce",
+      "publisher": "Colorado State University Extension",
+      "url": "https://extension.colostate.edu/resource/guide-to-handling-fresh-produce/"
+    },
+    "gfc-grapes": {
+      "title": "All About Grapes from California",
+      "publisher": "California Table Grape Commission",
+      "url": "https://www.grapesfromcalifornia.com/wp-content/uploads/2017/03/all_about_grapes_from_california.pdf"
+    },
+    "noa-myths": {
+      "title": "Common Myths: Leftover Onion and Cut Onion",
+      "publisher": "National Onion Association",
+      "url": "https://www.onions-usa.org/tips-onion-myths-faqs/common-myths/"
+    },
+    "fsis-freezing": {
+      "title": "Freezing and Food Safety",
+      "publisher": "USDA Food Safety and Inspection Service",
+      "url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/freezing-and-food-safety"
+    },
+    "fsis-fridge": {
+      "title": "Refrigeration and Food Safety",
+      "publisher": "USDA Food Safety and Inspection Service",
+      "url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/refrigeration"
+    },
+    "nchfp-blanch": {
+      "title": "Blanching Vegetables",
+      "publisher": "National Center for Home Food Preservation",
+      "url": "https://nchfp.uga.edu/how/freeze/freeze-general-information/blanching-vegetables/"
+    },
+    "nchfp-notwell": {
+      "title": "Foods That Do Not Freeze Well",
+      "publisher": "National Center for Home Food Preservation",
+      "url": "https://nchfp.uga.edu/how/freeze/freeze-general-information/foods-that-do-not-freeze-well/"
+    },
+    "nchfp-howlong": {
+      "title": "How Long Can I Store Frozen Foods",
+      "publisher": "National Center for Home Food Preservation",
+      "url": "https://nchfp.uga.edu/how/freeze/freeze-general-information/how-long-can-i-store-frozen-foods/"
+    },
+    "nchfp-tray": {
+      "title": "Dry or Tray Packing for Fruits",
+      "publisher": "National Center for Home Food Preservation",
+      "url": "https://nchfp.uga.edu/how/freeze/freeze-general-information/dry-or-tray-packing-for-fruits/"
+    },
+    "nchfp-mushrooms": {
+      "title": "Freezing Mushrooms",
+      "publisher": "National Center for Home Food Preservation",
+      "url": "https://nchfp.uga.edu/how/freeze/vegetable/freezing-mushrooms/"
+    },
+    "nchfp-cabbage": {
+      "title": "Freezing Cabbage or Chinese Cabbage",
+      "publisher": "National Center for Home Food Preservation",
+      "url": "https://nchfp.uga.edu/how/freeze/vegetable/freezing-cabbage-or-chinese-cabbage/"
+    },
+    "nchfp-celery": {
+      "title": "Freezing Celery",
+      "publisher": "National Center for Home Food Preservation",
+      "url": "https://nchfp.uga.edu/how/freeze/vegetable/freezing-celery/"
+    },
+    "nchfp-potatoes": {
+      "title": "Freezing New Irish Potatoes",
+      "publisher": "National Center for Home Food Preservation",
+      "url": "https://nchfp.uga.edu/how/freeze/vegetable/freezing-new-irish-potatoes/"
+    },
+    "nchfp-bananas": {
+      "title": "Freezing Bananas",
+      "publisher": "National Center for Home Food Preservation",
+      "url": "https://nchfp.uga.edu/how/freeze/fruits/freezing-bananas/"
+    },
+    "nchfp-tomatoes": {
+      "title": "Freezing Tomatoes",
+      "publisher": "National Center for Home Food Preservation",
+      "url": "https://nchfp.uga.edu/how/freeze/vegetable/freezing-tomatoes/"
+    },
+    "nchfp-squash": {
+      "title": "Freezing Summer Squash",
+      "publisher": "National Center for Home Food Preservation",
+      "url": "https://nchfp.uga.edu/how/freeze/vegetable/freezing-summer-squash/"
+    },
+    "nchfp-onions": {
+      "title": "Freezing Onions",
+      "publisher": "National Center for Home Food Preservation",
+      "url": "https://nchfp.uga.edu/how/freeze/vegetable/freezing-onions/"
+    },
+    "nchfp-carrots": {
+      "title": "Freezing Carrots",
+      "publisher": "National Center for Home Food Preservation",
+      "url": "https://nchfp.uga.edu/how/freeze/vegetable/freezing-carrots/"
+    },
+    "nchfp-herbs": {
+      "title": "Freezing Fresh Herbs",
+      "publisher": "National Center for Home Food Preservation",
+      "url": "https://nchfp.uga.edu/how/freeze/vegetable/freezing-fresh-herbs/"
+    },
+    "nchfp-greens": {
+      "title": "Freezing Greens (Including Spinach)",
+      "publisher": "National Center for Home Food Preservation",
+      "url": "https://nchfp.uga.edu/how/freeze/vegetable/freezing-greens-including-spinach/"
+    },
+    "nchfp-broccoli": {
+      "title": "Freezing Broccoli",
+      "publisher": "National Center for Home Food Preservation",
+      "url": "https://nchfp.uga.edu/how/freeze/vegetable/freezing-broccoli/"
+    },
+    "nchfp-strawberries": {
+      "title": "Freezing Strawberries",
+      "publisher": "National Center for Home Food Preservation",
+      "url": "https://nchfp.uga.edu/how/freeze/fruits/freezing-strawberries/"
+    },
+    "nchfp-blueberries": {
+      "title": "Freezing Blueberries or Huckleberries",
+      "publisher": "National Center for Home Food Preservation",
+      "url": "https://nchfp.uga.edu/how/freeze/fruits/freezing-blueberries-or-huckleberries/"
+    },
+    "nchfp-grapes": {
+      "title": "Freezing Grapes",
+      "publisher": "National Center for Home Food Preservation",
+      "url": "https://nchfp.uga.edu/how/freeze/fruits/freezing-grapes/"
+    },
+    "nchfp-avocados": {
+      "title": "Freezing Avocados",
+      "publisher": "National Center for Home Food Preservation",
+      "url": "https://nchfp.uga.edu/how/freeze/fruits/freezing-avocados/"
+    },
+    "nchfp-peppers": {
+      "title": "Freezing Bell or Sweet Peppers",
+      "publisher": "National Center for Home Food Preservation",
+      "url": "https://nchfp.uga.edu/how/freeze/vegetable/freezing-bell-or-sweet-peppers/"
+    },
+    "nchfp-corn": {
+      "title": "Freezing Corn",
+      "publisher": "National Center for Home Food Preservation",
+      "url": "https://nchfp.uga.edu/how/freeze/vegetable/freezing-corn/"
+    },
+    "nchfp-mangos": {
+      "title": "Freezing Mangos",
+      "publisher": "National Center for Home Food Preservation",
+      "url": "https://nchfp.uga.edu/how/freeze/fruits/freezing-mangos/"
+    },
+    "nchfp-pomegranates": {
+      "title": "Freezing Pomegranates",
+      "publisher": "National Center for Home Food Preservation",
+      "url": "https://nchfp.uga.edu/how/freeze/fruits/freezing-pomegranates/"
+    },
+    "nchfp-garlic-oil": {
+      "title": "Freezing Garlic-In-Oil",
+      "publisher": "National Center for Home Food Preservation",
+      "url": "https://nchfp.uga.edu/how/freeze/vegetable/freezing-garlic-in-oil/"
+    },
+    "il-pomegranate": {
+      "title": "Practice mindfulness while opening pomegranates",
+      "publisher": "University of Illinois Extension",
+      "url": "https://extension.illinois.edu/blogs/live-well-eat-well/2025-01-15-practice-mindfulness-while-opening-pomegranates"
+    },
+    "uaex-pomegranate": {
+      "title": "Ruby Red Pomegranates: Unique and Nutritious",
+      "publisher": "University of Arkansas Cooperative Extension",
+      "url": "https://www.uaex.uada.edu/counties/miller/news/fcs/fruits-veggies/Ruby%20Red%20Pomegranates%20-%20Unique%20and%20Nutritious.aspx"
+    },
+    "isu-garlic": {
+      "title": "Garlic",
+      "publisher": "Iowa State University Extension, Spend Smart. Eat Smart.",
+      "url": "https://spendsmart.extension.iastate.edu/produce-item/garlic/"
+    },
+    "osu-garlic": {
+      "title": "Preserving garlic",
+      "publisher": "Oregon State University Extension",
+      "url": "https://extension.oregonstate.edu/food/preservation/preserving-garlic"
+    }
+  },
+  "guides": [
+    {
+      "slug": "ripen-avocados",
+      "group": "ripen",
+      "item": "Avocado",
+      "items": [
+        "Avocado",
+        "Banana",
+        "Apple",
+        "Kiwi"
+      ],
+      "title": "How to ripen avocados fast, and how to slow them down",
+      "seoTitle": "How to ripen avocados fast (and slow them down) | Simply Krisp",
+      "desc": "Put a hard avocado in a closed bag with an apple or banana to ripen it faster. How to tell when it's ripe, when to refrigerate, and the water hack to skip.",
+      "answer": "Put the avocado in a closed paper bag with an apple or banana and leave it on the counter. Those fruits give off ethylene, the ripening gas, and the bag holds it around the avocado. Check it once a day with a gentle squeeze, and move it to the fridge as soon as it's ripe.",
+      "sections": [
+        {
+          "h2": "The fastest way to ripen an avocado",
+          "steps": [
+            "Put the avocado in a paper bag with an apple, banana or kiwi. All three give off ethylene, which speeds ripening.[^cac-store]",
+            "Fold the bag closed and leave it on the counter at room temperature, out of direct sun. Avocados don't ripen on the tree. They only start making their own ethylene after they're picked, and room temperature is where that happens.[^ucd-avocado]",
+            "Check once a day. A nearly ripe avocado usually turns soft-firm within about three days at room temperature, and sometimes by the second day.[^cac-store]",
+            "Once it's ripe, eat it or move it to the fridge to slow it down.[^cac-store][^ucd-avocado]"
+          ]
+        },
+        {
+          "h2": "How to tell when an avocado is ripe",
+          "p": [
+            "Hold it in your palm and squeeze gently. Don't press with your fingertips, which bruises the flesh.[^cac-store]"
+          ],
+          "list": [
+            "Ripe: it gives easily to gentle pressure, springs back a little, and the skin is a shade darker than an unripe one.[^cac-store]",
+            "Firm-ripe: it gives a little but is still firmer than ripe. It's good for slicing, and it'll be fully ripe the next day on the counter.[^cac-store]",
+            "Not ready: it's hard and doesn't give at all. Bag it as above.",
+            "Too far: it's mushy or the skin feels loose. See [[Avocado|what went wrong with your avocado]] to check whether it's still good."
+          ]
+        },
+        {
+          "h2": "Don't put a hard avocado in the fridge",
+          "p": [
+            "Cold stops an unripe avocado from ripening properly. UC Davis reports that unripe avocados held at 37 to 41°F for more than two weeks can turn gray or brown inside and may never ripen.[^ucd-avocado] Ripen it on the counter first, and refrigerate it only once it's ripe."
+          ]
+        },
+        {
+          "h2": "How to slow down a ripe avocado",
+          "list": [
+            "Keep it away from apples, bananas and kiwis, which speed it up.[^cac-store]",
+            "Put ripe avocados in the fridge. UC Davis stores ripe fruit at 36 to 40°F, which is normal fridge temperature.[^ucd-avocado]",
+            "Plan on eating a ripe, refrigerated avocado within a few days."
+          ]
+        },
+        {
+          "h2": "Skip the water hack",
+          "p": [
+            "Storing whole or cut avocados under water in the fridge is a popular social media tip, but it isn't safe. In FDA sampling, about 18% of avocado skins carried Listeria.[^fda-avocado] In an FDA lab study, Listeria got into the flesh of whole avocados held in contaminated water.[^fda-avocado-water] Store avocados dry, and for a cut one, see [[how-to:store-cut-avocado|how to store a cut avocado]]."
+          ]
+        }
+      ],
+      "faq": [
+        {
+          "q": "Does a paper bag really ripen avocados faster?",
+          "a": "Yes, especially with an apple, banana or kiwi in the bag. Those fruits give off ethylene, and a closed bag keeps it around the avocado.[^cac-store]"
+        },
+        {
+          "q": "Should avocados be refrigerated?",
+          "a": "Only once they're ripe. Cold keeps an unripe avocado from ripening properly and can brown it inside, but it slows down a ripe one.[^ucd-avocado]"
+        },
+        {
+          "q": "How long does it take an avocado to ripen?",
+          "a": "A nearly ripe avocado usually turns soft-firm within about three days on the counter. A rock-hard one takes longer, and a bag with an apple or banana speeds it up.[^cac-store]"
+        },
+        {
+          "q": "Is it safe to store avocados in water?",
+          "a": "No. FDA sampling found Listeria on about 18% of avocado skins, and FDA researchers found that it can get into the flesh of avocados held in water.[^fda-avocado][^fda-avocado-water]"
+        }
+      ],
+      "related": [
+        "store-cut-avocado",
+        "ripen-bananas",
+        "fridge-or-counter"
+      ]
+    },
+    {
+      "slug": "is-mango-ripe",
+      "group": "ripen",
+      "item": "Mango",
+      "items": [
+        "Mango",
+        "Peach",
+        "Avocado"
+      ],
+      "title": "How to tell if a mango is ripe, and how to ripen one",
+      "seoTitle": "How to tell if a mango is ripe (and how to ripen it) | Simply Krisp",
+      "desc": "Squeeze, don't look: color is not a reliable sign of a ripe mango. How to check ripeness, ripen a hard mango on the counter, and when to refrigerate it.",
+      "answer": "Squeeze it gently. A ripe mango gives slightly, like a ripe peach or avocado, and often smells fruity at the stem. Don't go by color, because red skin doesn't mean ripe. A firm mango will ripen on the counter in a few days.",
+      "sections": [
+        {
+          "h2": "Squeeze it, don't judge by color",
+          "p": [
+            "Mangoes come in many colors, and the red blush on some varieties isn't a sign of ripeness.[^nmb-choose][^ucd-mango] Go by feel instead:"
+          ],
+          "list": [
+            "Ripe: it gives slightly when you squeeze gently.[^nmb-choose]",
+            "Medium-ripe: it's somewhat firm.[^nmb-choose]",
+            "Unripe: it's very firm to the touch.[^nmb-choose]",
+            "Smell the stem end. Ripe mangoes often have a fruity aroma there.[^nmb-choose]"
+          ]
+        },
+        {
+          "h2": "How to ripen a hard mango",
+          "steps": [
+            "Leave it on the counter at room temperature. UC Davis ripens mangoes at 68 to 72°F, which is about room temperature.[^ucd-mango]",
+            "To speed it up, put it in a paper bag. Ethylene speeds up mango ripening, and a bag holds in the gas the fruit gives off.[^ucd-mango]",
+            "Check it daily with a gentle squeeze. Depending on how mature it was when picked, a mango can take anywhere from a few days to more than a week.[^ucd-mango]"
+          ]
+        },
+        {
+          "h2": "Once it's ripe",
+          "p": [
+            "Move a ripe mango to the fridge to hold it a few more days. Don't refrigerate firm, unripe mangoes. They're tropical fruit, and UC Davis stores even ripe mangoes at about 50°F, warmer than a home fridge, to avoid chilling damage.[^ucd-mango] For cut mango, use an airtight container in the fridge."
+          ]
+        }
+      ],
+      "faq": [
+        {
+          "q": "Is a red mango ripe?",
+          "a": "Not necessarily. The red on some varieties isn't a ripeness indicator. Squeeze gently instead, because a ripe mango gives slightly.[^nmb-choose][^ucd-mango]"
+        },
+        {
+          "q": "Can you eat an unripe mango?",
+          "a": "Yes. Mangoes can be eaten at any stage. Unripe ones taste sour and tart, and ripe ones taste sweet.[^nmb-choose]"
+        },
+        {
+          "q": "How long does it take a mango to ripen?",
+          "a": "Usually several days to a week on the counter, depending on how mature it was when picked. A paper bag speeds it up.[^ucd-mango]"
+        },
+        {
+          "q": "Should mangoes be refrigerated?",
+          "a": "Only once they're ripe. Firm mangoes are tropical fruit and ripen best at room temperature.[^ucd-mango]"
+        }
+      ],
+      "related": [
+        "ripen-avocados",
+        "ripen-kiwi",
+        "fridge-or-counter"
+      ]
+    },
+    {
+      "slug": "ripen-bananas",
+      "group": "ripen",
+      "item": "Banana",
+      "items": [
+        "Banana",
+        "Apple",
+        "Avocado",
+        "Kiwi"
+      ],
+      "title": "How to ripen bananas faster, or keep them from ripening",
+      "seoTitle": "How to ripen bananas faster, or slow them down | Simply Krisp",
+      "desc": "Bag green bananas with an apple to ripen them faster. To slow ripe bananas, refrigerate them: the peel darkens but the fruit stays good for a few more days.",
+      "answer": "To ripen bananas faster, put them in a paper bag with an apple or another ripe banana and keep them somewhere warm. To slow them down once they're ripe, put them in the fridge. The peel turns dark, but the fruit inside stays good for a few more days.",
+      "sections": [
+        {
+          "h2": "How to ripen green bananas faster",
+          "steps": [
+            "Put them in a paper bag with an apple or an already ripe banana. Ripening fruit gives off ethylene, the gas that triggers banana ripening, and the bag holds it in.[^ucd-banana]",
+            "Keep the bag somewhere warm. UC Davis ripens bananas at 59 to 68°F, and warmer rooms ripen them faster.[^ucd-banana]",
+            "Check them every day. Once yellow, they keep ripening on their own."
+          ]
+        },
+        {
+          "h2": "Never refrigerate green bananas",
+          "p": [
+            "Bananas are tropical and are damaged below about 56°F. In the cold, the peel discolors, and unripe bananas may never ripen properly.[^ucd-banana] Let them ripen on the counter first."
+          ]
+        },
+        {
+          "h2": "How to slow down ripe bananas",
+          "list": [
+            "Put ripe bananas in the fridge. Cold damages the peel and turns it brown or black,[^ucd-banana] but the fruit inside stays good for a couple of extra days. This is the one time the fridge makes sense.",
+            "Keep them away from your other produce. Bananas give off ethylene as they ripen and can speed up fruit stored next to them.",
+            "Wrapping the stems or separating the bunch is a popular tip. We haven't found good evidence that it makes much difference, so try it if you like, but don't count on it.",
+            "If you can't eat them in time, freeze them. See [[how-to:can-you-freeze-it|the freezing chart]]."
+          ]
+        },
+        {
+          "h2": "What the brown spots mean",
+          "p": [
+            "Brown freckles on the peel mean the banana is ripening. It's driven by its own ethylene, and it happens faster in a warm room.[^ucd-banana] A spotty banana is sweeter and softer. It's ideal for baking or smoothies, not a reason to throw it out. A banana that's leaking, moldy or smells fermented is done."
+          ]
+        }
+      ],
+      "faq": [
+        {
+          "q": "Should bananas be refrigerated?",
+          "a": "Not while they're green or still ripening, because cold damages them and can stop ripening. Once ripe, the fridge buys a few extra days. The peel darkens, but the fruit is fine.[^ucd-banana]"
+        },
+        {
+          "q": "Why do bananas turn brown?",
+          "a": "On the counter, brown spots mean they're ripening, driven by their own ethylene. In the fridge, a brown or black peel is cold damage to the skin.[^ucd-banana]"
+        },
+        {
+          "q": "Do bananas make other fruit ripen faster?",
+          "a": "Yes. Ripening bananas give off ethylene, which speeds up other fruit in a closed bag or bowl. That's why a banana in the bag helps ripen an avocado.[^ucd-banana][^cac-store]"
+        },
+        {
+          "q": "Can you freeze bananas?",
+          "a": "Yes. The National Center for Home Food Preservation recommends peeling and mashing them with a little ascorbic acid (vitamin C powder) to limit browning.[^nchfp-bananas]"
+        }
+      ],
+      "related": [
+        "ripen-avocados",
+        "fridge-or-counter",
+        "can-you-freeze-it"
+      ]
+    },
+    {
+      "slug": "fridge-or-counter",
+      "group": "where",
+      "items": [
+        "Apple",
+        "Tomato",
+        "Avocado",
+        "Banana",
+        "Potato",
+        "Onion",
+        "Orange",
+        "Garlic"
+      ],
+      "title": "Fridge or counter? Where every fruit and vegetable goes",
+      "seoTitle": "Fridge or counter? Where to store every fruit and vegetable | Simply Krisp",
+      "desc": "Which fruits and vegetables go in the fridge, which stay on the counter, which ripen first, and which belong in the pantry. A full list for 78 kinds of produce.",
+      "answer": "Most vegetables, berries, apples, grapes and citrus go in the fridge. Avocados, pears, kiwi, mangoes, stone fruit and melons ripen on the counter, then go in the fridge once ripe. Bananas, tomatoes and basil stay on the counter. Potatoes, onions, garlic, sweet potatoes and winter squash go in a cool, dark pantry.",
+      "sections": [
+        {
+          "auto": "where-table",
+          "h2": "The full list"
+        },
+        {
+          "h2": "Why some produce stays out of the fridge",
+          "list": [
+            "Tropical and warm-season produce is damaged by cold. Bananas are hurt below about 56°F,[^ucd-banana] and tomatoes lose flavor and ripen unevenly after long spells below 50°F.[^ucd-tomato]",
+            "Some fruit needs to ripen first. Avocados and pears ripen at room temperature, and cold before ripening can stop them from ripening properly.[^ucd-avocado][^usapears]",
+            "Potatoes, onions and garlic are dry-storage crops. They do best in a cool, dark, airy spot. Garlic sprouts fastest at about 40 to 65°F, which is close to fridge temperature.[^usu-garlic][^ucd-onion]"
+          ]
+        }
+      ],
+      "faq": [
+        {
+          "q": "Should apples be refrigerated?",
+          "a": "Yes. Apples keep for weeks in the fridge and soften much faster on the counter. UC Davis stores them close to 32°F. Keep them away from greens, because apples give off a lot of ethylene.[^ucd-apple]"
+        },
+        {
+          "q": "Should tomatoes be refrigerated?",
+          "a": "Keep them on the counter until ripe. Long spells below 50°F cost flavor and texture. If a ripe tomato won't be eaten in a day or two, a few days in the fridge is OK.[^ucd-tomato]"
+        },
+        {
+          "q": "Should avocados be refrigerated?",
+          "a": "Only once ripe. Cold stops unripe avocados from ripening properly, but it slows down ripe ones.[^ucd-avocado]"
+        },
+        {
+          "q": "Should bananas be refrigerated?",
+          "a": "Not until they're ripe. Below about 56°F the peel discolors and green bananas may stop ripening. Once ripe, the fridge buys a few days.[^ucd-banana]"
+        },
+        {
+          "q": "Should potatoes be refrigerated?",
+          "a": "No. Keep them in a cool, dark, ventilated spot. Light turns them green, and warmth makes them sprout sooner.[^ucd-potato][^ndsu-potato]"
+        },
+        {
+          "q": "Should onions be refrigerated?",
+          "a": "Whole onions go in a cool, dry, dark spot. Once cut, they go in the fridge in a sealed container.[^ucd-onion][^noa-myths]"
+        },
+        {
+          "q": "Do oranges need to be refrigerated?",
+          "a": "They keep longest in the fridge, often for weeks.[^ucd-orange]"
+        },
+        {
+          "q": "Does garlic need to be refrigerated?",
+          "a": "Not whole bulbs. They keep for months in a cool, dry pantry. Peeled cloves go in the fridge.[^ucd-garlic][^isu-garlic]"
+        }
+      ],
+      "related": [
+        "organize-fridge",
+        "can-you-freeze-it",
+        "ripen-avocados"
+      ]
+    },
+    {
+      "slug": "wash-strawberries",
+      "group": "wash",
+      "item": "Strawberry",
+      "items": [
+        "Strawberry",
+        "Blueberry",
+        "Raspberry",
+        "Blackberry"
+      ],
+      "title": "How to wash strawberries and other berries, and whether vinegar helps",
+      "seoTitle": "How to wash strawberries and berries (and does vinegar help?) | Simply Krisp",
+      "desc": "Wash strawberries right before eating, under cool running water, then pat them dry. What the FDA says about soap and produce washes, and what a vinegar soak does.",
+      "answer": "Wash strawberries right before you eat them, not before storing. Rinse them in a colander under cool running water, then pat them dry. You don't need soap or a produce wash, and the FDA recommends against both. A vinegar soak is optional, not required.",
+      "sections": [
+        {
+          "h2": "How to wash strawberries",
+          "steps": [
+            "Wait until you're about to eat them. Moisture helps mold grow, so berries keep longer if they stay dry until then.[^umaine-wash]",
+            "Put them in a colander and rinse with cool running water, turning them as you go. A sink sprayer works well for soft fruit.[^umn-wash][^umaine-wash]",
+            "Use cool water, not hot. Hot water can make produce draw water, and any bacteria with it, into the fruit.[^umn-wash]",
+            "Pat them dry with a clean towel or paper towel. Drying also removes more bacteria.[^fda-7tips]",
+            "Hull them and eat or use them. Put any washed leftovers back in the fridge, dry, and eat them soon."
+          ]
+        },
+        {
+          "h2": "Do you need a vinegar wash?",
+          "p": [
+            "No. The FDA says plain running water is enough and recommends against soap, detergent and commercial produce washes. Produce is porous, and residue can be absorbed.[^fda-produce][^fda-7tips]",
+            "A vinegar soak is optional. University of Maine Extension describes ½ cup distilled vinegar to 2 cups water for five minutes, followed by a rinse in clean water. They write about leafy greens: it reduces bacteria but can leave a vinegar taste and change the texture.[^umaine-wash] Vinegar soaks are popular for berries too, but the evidence that they add days is mostly informal. If you try it, rinse afterward and dry the berries very well, because leftover moisture works against you."
+          ]
+        },
+        {
+          "h2": "Raspberries, blackberries and blueberries",
+          "list": [
+            "Treat them the same way: rinse them in a colander right before eating, and don't soak them. Raspberries and blackberries are especially fragile.[^umaine-wash]",
+            "If you're freezing blueberries, don't wash them first. Washing makes the skins tougher. Rinse them when you use them.[^nchfp-blueberries]"
+          ]
+        },
+        {
+          "h2": "Why berries mold so fast",
+          "p": [
+            "Gray mold (Botrytis) is the main reason strawberries get thrown out, and it keeps growing slowly even at 32°F.[^ucd-strawberry] Washing doesn't stop it, and wet berries in a closed box help it spread. Store them dry, cold and in a single layer if you can. See [[Strawberry|why strawberries go bad]]."
+          ]
+        }
+      ],
+      "faq": [
+        {
+          "q": "Should you wash strawberries before putting them in the fridge?",
+          "a": "No. Wash them right before eating. Moisture helps mold grow, so berries last longer when they stay dry.[^umaine-wash]"
+        },
+        {
+          "q": "Does soaking strawberries in vinegar make them last longer?",
+          "a": "It's optional. A diluted vinegar soak can reduce bacteria on produce, but it can affect taste and texture, and the FDA says plain water is enough. If you try it, rinse and dry the berries thoroughly.[^umaine-wash][^fda-produce]"
+        },
+        {
+          "q": "Can I wash strawberries with soap or produce wash?",
+          "a": "No. The FDA recommends against soap, detergent and commercial produce washes. Produce is porous and can absorb them.[^fda-produce]"
+        },
+        {
+          "q": "Why do my strawberries mold so fast?",
+          "a": "Gray mold grows even at fridge temperature, and moisture helps it spread. Keep berries dry until you eat them, and remove any moldy ones right away.[^ucd-strawberry]"
+        }
+      ],
+      "related": [
+        "wash-grapes",
+        "wash-vegetables",
+        "can-you-freeze-it"
+      ]
+    },
+    {
+      "slug": "wash-grapes",
+      "group": "wash",
+      "item": "Grape",
+      "items": [
+        "Grape",
+        "Strawberry",
+        "Blueberry"
+      ],
+      "title": "How to wash grapes",
+      "seoTitle": "How to wash grapes, and what the white film is | Simply Krisp",
+      "desc": "Rinse grapes under cool running water right before eating and pat them dry. The white powdery film is bloom, a natural coating, not pesticide. No soap needed.",
+      "answer": "Rinse grapes under cool running water right before you eat them, gently rubbing them as you go, then pat them dry. The white, powdery film is bloom, a natural coating the grape makes. Keep grapes unwashed in the fridge until then.",
+      "sections": [
+        {
+          "h2": "How to wash grapes",
+          "steps": [
+            "Leave them unwashed in the fridge until you're ready to eat them.[^gfc-grapes]",
+            "Put them in a colander and rinse with cool running water, gently rubbing them with your hands.[^fda-7tips][^umn-wash]",
+            "Pat them dry with a clean towel. Drying removes more bacteria and keeps any leftovers from getting soggy.[^fda-7tips]",
+            "Pull off and toss any soft, split or moldy grapes before serving."
+          ]
+        },
+        {
+          "h2": "What is the white film on grapes?",
+          "p": [
+            "It's called bloom. It's a natural coating that helps protect grapes from losing moisture and from decay, and it's a good sign.[^gfc-grapes] A rinse removes most of it. It isn't pesticide, and you don't need to scrub it off."
+          ]
+        },
+        {
+          "h2": "Skip the soap, baking soda and produce wash",
+          "p": [
+            "The FDA says gently rubbing produce under plain running water is enough. It recommends against soap, detergent and commercial produce washes.[^fda-7tips][^fda-produce] Soaks are popular online, but you don't need them to clean grapes."
+          ]
+        },
+        {
+          "h2": "Why you shouldn't wash grapes before storing them",
+          "p": [
+            "Gray mold is the main disease of stored grapes, and it moves through a bunch quickly once it starts.[^ucd-grape] Grapes washed and put away damp give it a head start. Store them dry in a ventilated bag in the coldest part of the fridge, where they keep for one to three weeks. See [[Grape|how to store grapes]]."
+          ]
+        }
+      ],
+      "faq": [
+        {
+          "q": "Is the white stuff on grapes pesticide?",
+          "a": "No. It's bloom, a natural coating that helps protect grapes from moisture loss and decay. Rinsing removes most of it.[^gfc-grapes]"
+        },
+        {
+          "q": "Do you need to soak grapes in vinegar or baking soda?",
+          "a": "No. The FDA says rubbing produce under plain running water is enough, and it recommends against produce washes.[^fda-7tips]"
+        },
+        {
+          "q": "Should you wash grapes before refrigerating them?",
+          "a": "No. Keep them unwashed in the fridge and rinse them just before eating. Moisture helps gray mold spread.[^gfc-grapes][^ucd-grape]"
+        },
+        {
+          "q": "Can you freeze grapes?",
+          "a": "Yes. Stem, wash and dry seedless grapes, then freeze them whole. They're good as a frozen snack or in smoothies.[^nchfp-grapes][^nchfp-tray]"
+        }
+      ],
+      "related": [
+        "wash-strawberries",
+        "wash-vegetables",
+        "can-you-freeze-it"
+      ]
+    },
+    {
+      "slug": "wash-vegetables",
+      "group": "wash",
+      "items": [
+        "Lettuce",
+        "Spinach",
+        "Kale",
+        "Broccoli",
+        "Cauliflower",
+        "Carrot",
+        "Potato",
+        "Cucumber",
+        "Mushroom",
+        "Bagged Salad"
+      ],
+      "title": "How to wash vegetables and lettuce",
+      "seoTitle": "How to wash vegetables and lettuce the right way | Simply Krisp",
+      "desc": "Rinse vegetables under cool running water, scrub firm ones with a brush, and soak leafy greens. When to skip washing, and why soap and produce washes aren't needed.",
+      "answer": "Rinse vegetables under cool running water and rub them with your hands. Scrub firm ones like potatoes, carrots and cucumbers with a clean brush. Separate leafy greens and soak them in cool water, then lift them out and dry them. Bagged greens labeled \"pre-washed\" don't need washing again.",
+      "sections": [
+        {
+          "h2": "The basics for any vegetable",
+          "steps": [
+            "Wash your hands for 20 seconds with soap and warm water.[^fda-7tips]",
+            "Cut away bruised or damaged spots.[^fda-7tips]",
+            "Rinse before you peel or cut, so the knife doesn't carry dirt into the part you eat.[^fda-7tips][^fda-produce]",
+            "Rub the vegetable under cool running water. Don't use soap or a produce wash.[^fda-7tips]",
+            "Dry it with a clean cloth or paper towel.[^fda-7tips]"
+          ]
+        },
+        {
+          "h2": "By type of vegetable",
+          "table": {
+            "cols": [
+              "Vegetable",
+              "How to wash it"
+            ],
+            "rows": [
+              [
+                "Lettuce, spinach, kale and other greens",
+                "Pull off the outer leaves of a head.[^fda-7tips] Separate the leaves and soak them in cool water for a few minutes, then lift them out, drain and repeat. Dry them in a salad spinner or on paper towels.[^umaine-wash]"
+              ],
+              [
+                "Broccoli and cauliflower",
+                "Soak for 1 to 2 minutes in cool water, then drain and dry.[^umaine-wash]"
+              ],
+              [
+                "Potatoes, carrots, cucumbers and other firm vegetables",
+                "Scrub with a clean vegetable brush under running water.[^fda-7tips][^umaine-wash]"
+              ],
+              [
+                "Mushrooms",
+                "Wait until right before cooking. Moisture makes them spoil faster.[^umaine-wash]"
+              ],
+              [
+                "Fresh herbs",
+                "Rinse them in a colander under a sink sprayer, turning them as you go.[^umn-wash]"
+              ],
+              [
+                "Bagged salad labeled pre-washed or ready-to-eat",
+                "No washing needed. If you rinse it anyway, keep it away from unwashed surfaces.[^fda-produce]"
+              ]
+            ]
+          }
+        },
+        {
+          "h2": "What not to use",
+          "list": [
+            "Soap, detergent or bleach. Produce is porous and can absorb them, even after rinsing.[^fda-produce]",
+            "Commercial produce washes. The FDA says their residues haven't been shown to be safe and their effectiveness hasn't been tested.[^fda-produce]",
+            "Very cold water on warm produce. Colorado State suggests rinse water no more than 10°F colder than the produce, so the produce doesn't draw water in through the stem end.[^csu-produce]"
+          ]
+        },
+        {
+          "h2": "Wash now or later?",
+          "p": [
+            "For anything that molds or turns slimy, like berries, mushrooms and tender greens, wait to wash until you're ready to use it.[^umaine-wash] If you wash greens ahead for the week, dry them very well before they go back in the fridge, since trapped moisture is what makes greens slimy. See [[Lettuce|why lettuce goes bad]]."
+          ]
+        }
+      ],
+      "faq": [
+        {
+          "q": "Do I need to wash organic or farmers market produce?",
+          "a": "Yes. The FDA recommends washing all produce under running water, including homegrown, farmers market and grocery store produce.[^fda-produce]"
+        },
+        {
+          "q": "Should I wash vegetables I'm going to peel?",
+          "a": "Yes. Wash before peeling so dirt and bacteria on the skin aren't carried onto the part you eat.[^fda-produce]"
+        },
+        {
+          "q": "Does a vinegar soak clean vegetables better?",
+          "a": "It can reduce bacteria on leafy greens, but it can leave a vinegar taste and change the texture. University of Maine Extension suggests ½ cup vinegar to 2 cups water for five minutes, followed by a rinse. Plain water is what the FDA recommends.[^umaine-wash][^fda-7tips]"
+        },
+        {
+          "q": "Do I need to wash bagged salad?",
+          "a": "Not if the bag says pre-washed or ready-to-eat.[^fda-produce]"
+        }
+      ],
+      "related": [
+        "wash-strawberries",
+        "wash-grapes",
+        "organize-fridge"
+      ]
+    },
+    {
+      "slug": "store-cut-onion",
+      "group": "store",
+      "item": "Onion",
+      "items": [
+        "Onion",
+        "Green Onion",
+        "Garlic"
+      ],
+      "title": "How to store a cut onion",
+      "seoTitle": "How to store a cut onion (and half an onion) | Simply Krisp",
+      "desc": "Store a cut or half onion in a sealed container in the fridge and use it within about 7 days. Cut onions aren't poisonous. How to freeze chopped onion.",
+      "answer": "Put the cut onion in a sealed container or wrap it tightly and refrigerate it. Use it within about 7 days. Cut onions aren't poisonous. That's an old internet myth. If you won't use it in time, dice it and freeze it for cooking.",
+      "sections": [
+        {
+          "h2": "How to store a cut or half onion",
+          "steps": [
+            "Refrigerate it within two hours of cutting. The FDA advises refrigerating all cut produce within that window.[^fda-produce]",
+            "Put it in a sealed container or wrap it tightly. This keeps the smell in and stops the cut face from drying out.[^noa-myths]",
+            "Use it within about 7 days.[^noa-myths]",
+            "Before using it, check for sliminess, mold or a sour smell, and toss it if you find any.[^fsis-mold]"
+          ]
+        },
+        {
+          "h2": "Are cut onions poisonous?",
+          "p": [
+            "No. A widely shared claim says leftover onions attract bacteria and become poisonous. According to the National Onion Association, it goes back to a 2008 blog post. Onion juice is actually antimicrobial, and a cut onion stored properly in the fridge is fine for up to a week.[^noa-myths]"
+          ]
+        },
+        {
+          "h2": "How to freeze onions",
+          "p": [
+            "Dice the onion into about ¼-inch pieces. It doesn't need blanching. Pack it into freezer bags or containers with the air pressed out, or freeze the pieces on a tray first so they don't clump. It's best used within a few months, in cooked dishes. Frozen onion isn't crisp.[^nchfp-onions]"
+          ]
+        },
+        {
+          "h2": "Whole onions don't belong in the fridge",
+          "p": [
+            "Uncut onions keep for a month or more in a cool, dry, dark spot.[^ucd-onion] Only cut ones go in the fridge. See [[Onion|how to store onions]]."
+          ]
+        }
+      ],
+      "faq": [
+        {
+          "q": "How long does a cut onion last in the fridge?",
+          "a": "Up to about 7 days in a sealed container.[^noa-myths]"
+        },
+        {
+          "q": "Can I leave a cut onion on the counter?",
+          "a": "Not for long. The FDA advises refrigerating cut produce within two hours.[^fda-produce]"
+        },
+        {
+          "q": "Are leftover cut onions poisonous?",
+          "a": "No. It's a myth from a 2008 blog post. Stored sealed in the fridge, a cut onion is fine for up to a week.[^noa-myths]"
+        },
+        {
+          "q": "Can you freeze chopped onions?",
+          "a": "Yes, without blanching. Use them within a few months in cooked dishes.[^nchfp-onions]"
+        }
+      ],
+      "related": [
+        "store-peeled-garlic",
+        "fridge-or-counter",
+        "can-you-freeze-it"
+      ]
+    },
+    {
+      "slug": "can-you-freeze-it",
+      "group": "where",
+      "items": [
+        "Mushroom",
+        "Cabbage",
+        "Celery",
+        "Potato",
+        "Banana",
+        "Tomato",
+        "Zucchini",
+        "Onion",
+        "Carrot",
+        "Broccoli",
+        "Bell Pepper",
+        "Corn",
+        "Spinach",
+        "Lettuce",
+        "Cucumber",
+        "Strawberry",
+        "Grape",
+        "Avocado"
+      ],
+      "title": "Can you freeze it? A freezing chart for fruits and vegetables",
+      "seoTitle": "Can you freeze it? Fruit and vegetable freezing chart | Simply Krisp",
+      "desc": "Which fruits and vegetables freeze well, which need blanching first, and which don't freeze well at all, like lettuce and cucumbers. Blanching times included.",
+      "answer": "Most vegetables freeze well if you blanch them first, and most fruit freezes well raw. A few don't freeze well for eating raw: lettuce, cucumbers, radishes, and raw celery and cabbage. Frozen produce kept at 0°F stays safe indefinitely and keeps its best quality for about 8 to 12 months.",
+      "sections": [
+        {
+          "h2": "The freezing chart",
+          "table": {
+            "cols": [
+              "Produce",
+              "Freeze it?",
+              "How"
+            ],
+            "rows": [
+              [
+                "[[Mushroom|Mushrooms]]",
+                "Yes, cooked first",
+                "Dip in lemon water, then steam (whole 5 minutes, quarters 3½, slices 3), or sauté until almost done.[^nchfp-mushrooms]"
+              ],
+              [
+                "[[Cabbage|Cabbage]]",
+                "For cooking",
+                "Blanch shredded cabbage 1½ minutes. Raw cabbage goes limp and waterlogged, except as freezer slaw.[^nchfp-cabbage][^nchfp-notwell]"
+              ],
+              [
+                "[[Celery|Celery]]",
+                "For cooking",
+                "Blanch 3 minutes. It loses its crunch, so use it in soups and cooked dishes.[^nchfp-celery][^nchfp-notwell]"
+              ],
+              [
+                "[[Potato|Potatoes]]",
+                "Small new potatoes only",
+                "Blanch 3 to 5 minutes. Baked or boiled potatoes turn mealy when frozen.[^nchfp-potatoes][^nchfp-notwell]"
+              ],
+              [
+                "[[Banana|Bananas]]",
+                "Yes",
+                "Peel and mash with ½ teaspoon ascorbic acid (vitamin C powder) per cup to limit browning.[^nchfp-bananas]"
+              ],
+              [
+                "[[Tomato|Tomatoes]]",
+                "For cooking",
+                "Dip in boiling water for 30 seconds, peel, and freeze whole or cut. Thawed tomatoes are soft.[^nchfp-tomatoes]"
+              ],
+              [
+                "[[Zucchini|Zucchini]] and summer squash",
+                "Yes",
+                "Slice ½ inch thick and blanch 3 minutes. For baking, grate it and steam 1 to 2 minutes.[^nchfp-squash]"
+              ],
+              [
+                "[[Onion|Onions]]",
+                "Yes, no blanching",
+                "Dice and freeze, best within a few months. Use in cooked dishes.[^nchfp-onions]"
+              ],
+              [
+                "[[Carrot|Carrots]]",
+                "Yes",
+                "Blanch small whole carrots 5 minutes, or diced and sliced carrots 2 minutes.[^nchfp-carrots]"
+              ],
+              [
+                "[[Broccoli|Broccoli]]",
+                "Yes",
+                "Cut into pieces and blanch 3 minutes in water or 5 minutes in steam.[^nchfp-blanch][^nchfp-broccoli]"
+              ],
+              [
+                "[[Bell Pepper|Bell peppers]]",
+                "Yes",
+                "Freeze raw strips or pieces without blanching, or blanch 2 to 3 minutes for cooked dishes.[^nchfp-peppers]"
+              ],
+              [
+                "[[Corn|Corn]]",
+                "Yes",
+                "Blanch ears 4 minutes before cutting off kernels, or 7 to 11 minutes to freeze on the cob.[^nchfp-corn]"
+              ],
+              [
+                "[[Spinach|Spinach]], [[Kale|kale]] and other greens",
+                "For cooking",
+                "Blanch 2 minutes (collards 3).[^nchfp-greens]"
+              ],
+              [
+                "[[Herbs (Fresh)|Fresh herbs]]",
+                "For cooking",
+                "Wrap a few sprigs and freeze. They go limp when thawed but keep their flavor in cooking.[^nchfp-herbs]"
+              ],
+              [
+                "[[Strawberry|Strawberries]]",
+                "Yes",
+                "Hull, then tray-freeze whole or sliced.[^nchfp-strawberries][^nchfp-tray]"
+              ],
+              [
+                "[[Blueberry|Blueberries]]",
+                "Yes",
+                "Freeze unwashed, which keeps the skins tender. Rinse before using.[^nchfp-blueberries]"
+              ],
+              [
+                "[[Grape|Grapes]]",
+                "Yes",
+                "Freeze seedless grapes whole.[^nchfp-grapes]"
+              ],
+              [
+                "[[Mango|Mangoes]]",
+                "Yes",
+                "Peel, slice and tray-freeze.[^nchfp-mangos][^nchfp-tray]"
+              ],
+              [
+                "[[Avocado|Avocados]]",
+                "Purée only",
+                "Purée with 1 tablespoon lemon juice per 2 avocados. Whole or sliced avocados don't freeze well.[^nchfp-avocados]"
+              ],
+              [
+                "[[Lettuce|Lettuce]]",
+                "No",
+                "It turns limp and waterlogged.[^nchfp-notwell][^fsis-freezing]"
+              ],
+              [
+                "[[Cucumber|Cucumbers]]",
+                "No",
+                "Same problem as lettuce, except as freezer pickles.[^nchfp-notwell]"
+              ],
+              [
+                "[[Radish|Radishes]]",
+                "No",
+                "They turn limp and waterlogged.[^nchfp-notwell]"
+              ]
+            ]
+          }
+        },
+        {
+          "h2": "How to freeze vegetables: blanch first",
+          "p": [
+            "Blanching means a short dip in boiling water or steam. It slows the enzymes that otherwise keep breaking down flavor, color and texture in the freezer.[^nchfp-blanch]"
+          ],
+          "steps": [
+            "Bring a large pot of water to a boil, and set a bowl of ice water next to it.",
+            "Blanch the vegetable for the time in the chart.[^nchfp-blanch]",
+            "Move it straight into the ice water to stop the cooking, then drain it well.",
+            "Pack it into freezer bags or containers, press out the air, and label it with the date.",
+            "Freeze it in a single layer so it freezes fast, then stack it once it's solid.[^fsis-freezing]"
+          ]
+        },
+        {
+          "h2": "How to freeze fruit: the tray method",
+          "p": [
+            "Spread prepared fruit in one layer on a tray, freeze it, then pack it into containers right away. The pieces stay loose, so you can pour out just what you need.[^nchfp-tray]"
+          ]
+        },
+        {
+          "h2": "How long frozen produce lasts",
+          "p": [
+            "Food kept at 0°F stays safe indefinitely. Time affects quality, not safety.[^fsis-freezing] For best quality, use frozen fruits and vegetables within about 8 to 12 months.[^nchfp-howlong] Freezer burn makes dry, grayish patches. It isn't unsafe, but it tastes worse, so cut it off.[^fsis-freezing]"
+          ]
+        }
+      ],
+      "faq": [
+        {
+          "q": "Can you freeze lettuce?",
+          "a": "Not well. It turns limp and waterlogged when it thaws.[^fsis-freezing][^nchfp-notwell]"
+        },
+        {
+          "q": "Can you freeze mushrooms?",
+          "a": "Yes, after steaming or sautéing them first. Steamed mushrooms keep longer than sautéed ones.[^nchfp-mushrooms]"
+        },
+        {
+          "q": "Do you have to blanch vegetables before freezing?",
+          "a": "It's recommended for most vegetables. Blanching stops the enzymes that cause flavor, color and texture loss in the freezer. Diced onions and raw pepper strips are exceptions.[^nchfp-blanch][^nchfp-onions][^nchfp-peppers]"
+        },
+        {
+          "q": "Can you refreeze thawed vegetables?",
+          "a": "If they thawed in the fridge, yes, though the quality drops. Don't refreeze food left out of the fridge for more than 2 hours.[^fsis-freezing]"
+        }
+      ],
+      "related": [
+        "fridge-or-counter",
+        "ripen-bananas",
+        "store-cut-onion"
+      ]
+    },
+    {
+      "slug": "store-pomegranate-seeds",
+      "group": "store",
+      "item": "Pomegranate",
+      "items": [
+        "Pomegranate",
+        "Cranberry",
+        "Persimmon"
+      ],
+      "title": "How to store pomegranate seeds",
+      "seoTitle": "How to store pomegranate seeds (arils) | Simply Krisp",
+      "desc": "Store pomegranate seeds in an airtight container in the fridge and eat them within a few days to a week, or freeze them on a tray. How to get the seeds out cleanly.",
+      "answer": "Refrigerate pomegranate seeds in an airtight container and eat them within a few days, no more than about a week. To keep them longer, freeze them in a single layer on a tray, then bag them. A whole pomegranate keeps for a month or more in the fridge, so leave the seeds in the fruit until you need them.",
+      "sections": [
+        {
+          "h2": "How to store the seeds",
+          "steps": [
+            "Pat the seeds (arils) dry and pick out any bits of white membrane.",
+            "Put them in an airtight container and refrigerate.[^il-pomegranate]",
+            "Eat them within a few days. Guidance runs from a few days to about a week, so sooner is better.[^uaex-pomegranate][^il-pomegranate]",
+            "Store-bought cups of seeds come chilled. Keep them in the fridge and go by the date on the package.[^il-pomegranate]"
+          ]
+        },
+        {
+          "h2": "How to freeze pomegranate seeds",
+          "p": [
+            "Spread the seeds in one layer on a tray and freeze them, then move them to an airtight container or freezer bag. Take out only what you need. The University of Arkansas Extension says they keep for up to 6 months frozen.[^uaex-pomegranate][^nchfp-tray] Thawed seeds are softer, so they're better in smoothies, sauces or baking than as a garnish."
+          ]
+        },
+        {
+          "h2": "How to get the seeds out",
+          "p": [
+            "Cut the pomegranate in half across the middle. Hold one half cut side down over a bowl and rap the shell firmly with the back of a wooden spoon so the seeds fall out.[^nchfp-pomegranates] Pull out any white pith that falls in with them."
+          ]
+        },
+        {
+          "h2": "Leave them in the fruit if you can",
+          "p": [
+            "Whole pomegranates keep for one to three months in the fridge, much longer than loose seeds. They mostly fail by drying out, but rot inside can hide behind normal-looking skin.[^ucd-pomegranate] Toss seeds that are brown, mushy, smell fermented or show mold. See [[Pomegranate|why pomegranates go bad]]."
+          ]
+        }
+      ],
+      "faq": [
+        {
+          "q": "How long do pomegranate seeds last in the fridge?",
+          "a": "A few days to about a week in an airtight container. Eat them sooner rather than later.[^uaex-pomegranate][^il-pomegranate]"
+        },
+        {
+          "q": "Can you freeze pomegranate seeds?",
+          "a": "Yes. Freeze them on a tray in a single layer, then pack them airtight. The University of Arkansas Extension says they keep for up to 6 months.[^uaex-pomegranate]"
+        },
+        {
+          "q": "How long does a whole pomegranate last?",
+          "a": "One to three months in the fridge. It mostly fails by drying out.[^ucd-pomegranate][^il-pomegranate]"
+        },
+        {
+          "q": "How do you know if pomegranate seeds have gone bad?",
+          "a": "Brown or black seeds, a mushy texture, a fermented smell or any mold means toss them.[^ucd-pomegranate][^fsis-mold]"
+        }
+      ],
+      "related": [
+        "can-you-freeze-it",
+        "store-cut-avocado",
+        "fridge-or-counter"
+      ]
+    },
+    {
+      "slug": "ripen-kiwi",
+      "group": "ripen",
+      "item": "Kiwi",
+      "items": [
+        "Kiwi",
+        "Apple",
+        "Banana"
+      ],
+      "title": "How to ripen kiwi, and keep ripe kiwi from going mushy",
+      "seoTitle": "How to ripen kiwi fast (and keep it from going mushy) | Simply Krisp",
+      "desc": "Ripen firm kiwi on the counter in 2 to 3 days, or faster in a bag with an apple or banana. Then refrigerate it, away from apples, so it doesn't go mushy.",
+      "answer": "Leave firm kiwi on the counter for 2 to 3 days, or put it in a bag with an apple or banana to speed it up. It's ripe when it gives to gentle pressure. Then move it to the fridge, where it keeps about 7 to 10 more days, but not next to apples, or it'll turn mushy.",
+      "sections": [
+        {
+          "h2": "How to ripen kiwi",
+          "steps": [
+            "Leave firm kiwi on the counter at room temperature, out of direct sun. It usually ripens in 2 to 3 days.[^zespri]",
+            "To speed it up, put it in a paper or plastic bag with a ripe apple or banana. Their ethylene speeds up kiwi ripening.[^zespri]",
+            "Check it daily. A ripe kiwi yields gently to light pressure.[^zespri]",
+            "Once ripe, eat it or refrigerate it."
+          ]
+        },
+        {
+          "h2": "Why kiwi goes mushy in the fridge",
+          "p": [
+            "Kiwi is extremely sensitive to ethylene. UC Davis reports that as little as 5 to 10 parts per billion makes it soften.[^ucd-kiwifruit] That's why one apple ripens a bag of kiwi so well. It's also why ripe kiwi stored in a drawer with apples or pears turns soft and mushy within days."
+          ]
+        },
+        {
+          "h2": "How to keep ripe kiwi longer",
+          "list": [
+            "Refrigerate it once it's ripe. It keeps about 7 to 10 more days.[^zespri]",
+            "Keep it away from apples, pears and other ethylene producers.[^zespri][^ucd-kiwifruit]",
+            "Firm kiwi in the fridge still ripens, just slowly, over about 5 to 7 days. That's handy if you want to stagger a big bag.[^zespri]"
+          ]
+        }
+      ],
+      "faq": [
+        {
+          "q": "How do you know when a kiwi is ripe?",
+          "a": "It yields gently to light pressure, like a ripe peach.[^zespri]"
+        },
+        {
+          "q": "Does putting kiwi with apples make it ripen faster?",
+          "a": "Yes. Kiwi is extremely sensitive to ethylene, and apples give off a lot of it. It's great for ripening, but keep ripe kiwi away from apples.[^ucd-kiwifruit][^zespri]"
+        },
+        {
+          "q": "Can you eat unripe kiwi?",
+          "a": "You can, but firm green kiwi is sour. Gold kiwi is usually ready to eat when you buy it.[^zespri]"
+        },
+        {
+          "q": "How long does ripe kiwi last in the fridge?",
+          "a": "About 7 to 10 days, as long as it's kept away from ethylene-producing fruit.[^zespri]"
+        }
+      ],
+      "related": [
+        "ripen-pears",
+        "ripen-avocados",
+        "organize-fridge"
+      ]
+    },
+    {
+      "slug": "ripen-pears",
+      "group": "ripen",
+      "item": "Pear",
+      "items": [
+        "Pear",
+        "Apple",
+        "Banana"
+      ],
+      "title": "How to ripen pears, and how to tell when they're ready",
+      "seoTitle": "How to ripen pears and check if they're ripe | Simply Krisp",
+      "desc": "Pears ripen on the counter, not the tree. Speed them up in a paper bag with an apple or banana, check the neck daily, then refrigerate ripe pears.",
+      "answer": "Leave pears on the counter at room temperature, or put them in a paper bag with an apple or banana to speed things up. Check the neck daily: when it gives to gentle thumb pressure near the stem, the pear is ripe. Then refrigerate it.",
+      "sections": [
+        {
+          "h2": "How to ripen pears",
+          "steps": [
+            "Leave them at room temperature on the counter. Pears are picked mature but unripe, and they ripen after harvest.[^usapears]",
+            "To speed them up, put them in a paper bag with an apple or banana. Those fruits give off ethylene, which speeds ripening.[^usapears]",
+            "Check them every day so they don't go past ripe.[^usapears]",
+            "Once ripe, move them to the fridge to slow further ripening.[^usapears]"
+          ]
+        },
+        {
+          "h2": "Check the neck",
+          "p": [
+            "Pears ripen from the inside out, so the middle is a poor guide. Press gently near the stem with your thumb. If it gives, the pear is ripe. If you wait until the middle is soft, it's overripe.[^usapears]",
+            "Bartlett pears turn from green to yellow as they ripen. Anjou, Bosc, Comice, Seckel and most others barely change color, so go by the neck.[^usapears]"
+          ]
+        },
+        {
+          "h2": "If a pear won't ripen",
+          "p": [
+            "Winter pears like Anjou, Bosc and Comice ripen best after a chill. Commercially, weeks of cold storage or an ethylene treatment conditions them so they ripen evenly.[^ucd-pear-winter] Most store pears have already had this. If a pear sits on the counter for a week without softening, bag it with a banana and keep it at a warm room temperature. UC Davis notes that warmer temperatures ripen pears faster.[^ucd-pear-winter]"
+          ]
+        }
+      ],
+      "faq": [
+        {
+          "q": "How do you know when a pear is ripe?",
+          "a": "Press gently near the stem with your thumb. When it gives, it's ripe. The middle softens last.[^usapears]"
+        },
+        {
+          "q": "Does a paper bag ripen pears faster?",
+          "a": "Yes, especially with an apple or banana inside to add ethylene.[^usapears]"
+        },
+        {
+          "q": "Should pears be refrigerated?",
+          "a": "Once ripe, yes, to slow them down. Unripe pears ripen on the counter.[^usapears]"
+        },
+        {
+          "q": "Why are my pears mealy or brown inside?",
+          "a": "It usually means they were left too long. Pears ripen from the inside out, so the middle can turn while the outside still feels firm. Check the neck and refrigerate them once they give.[^usapears]"
+        }
+      ],
+      "related": [
+        "ripen-kiwi",
+        "ripen-avocados",
+        "fridge-or-counter"
+      ]
+    },
+    {
+      "slug": "store-cut-avocado",
+      "group": "store",
+      "item": "Avocado",
+      "items": [
+        "Avocado",
+        "Lemon",
+        "Lime"
+      ],
+      "title": "How to store a cut avocado",
+      "seoTitle": "How to store a cut avocado so it doesn't turn brown | Simply Krisp",
+      "desc": "Squeeze lemon or lime juice on cut avocado, wrap it tightly with no air, and refrigerate. Why it browns, how to store guacamole, and why not to store it in water.",
+      "answer": "Squeeze lemon or lime juice over the cut flesh, then wrap it tightly with no air trapped against it, or put it cut side down in an airtight container. Refrigerate it and eat it soon. If the top browns a little, scrape it off. The flesh underneath is fine.",
+      "sections": [
+        {
+          "h2": "How to store half an avocado",
+          "steps": [
+            "Squeeze lemon or lime juice over the cut flesh.[^cac-store][^cac-hub]",
+            "Wrap it tightly in plastic or reusable wrap so no air is trapped against the flesh, or put it cut side down in an airtight container.[^cac-store][^cac-hub]",
+            "Refrigerate it.[^cac-store]",
+            "Eat it soon. A day or two is about as long as the cut surface stays looking good."
+          ]
+        },
+        {
+          "h2": "Why cut avocado turns brown",
+          "p": [
+            "Browning is oxidation: the cut flesh reacts with air.[^cac-store] Juice and a tight wrap slow it down. A thin brown layer on top isn't spoilage. Scrape it off and the green underneath is fine. Toss it if it smells sour or rancid or shows mold. Avocados are soft fruit, so you can't cut mold away.[^fsis-mold]"
+          ]
+        },
+        {
+          "h2": "If it isn't ripe yet",
+          "p": [
+            "If you cut an avocado and it's still hard, put the two halves back together, seal them in wrap, and refrigerate.[^cac-store]"
+          ]
+        },
+        {
+          "h2": "Guacamole and mashed avocado",
+          "p": [
+            "Put it in an airtight container and press plastic or reusable wrap right onto the surface before you close the lid.[^cac-hub]"
+          ]
+        },
+        {
+          "h2": "Don't store it in water",
+          "p": [
+            "Submerging cut avocado in water is a popular hack, but the FDA found Listeria on about 18% of avocado skins it sampled, and FDA researchers showed it can move into the flesh in water.[^fda-avocado][^fda-avocado-water]"
+          ]
+        },
+        {
+          "h2": "To keep it longer, freeze it as purée",
+          "p": [
+            "Avocados don't freeze well whole or sliced. Purée them with about 1 tablespoon of lemon juice per 2 avocados, pack the purée into a container, and freeze. It's good in dips, dressings and smoothies.[^nchfp-avocados]"
+          ]
+        }
+      ],
+      "faq": [
+        {
+          "q": "Does leaving the pit in keep avocado from browning?",
+          "a": "Juice and a tight wrap are what slow browning. The California Avocado Commission's leftover-avocado method removes the pit, adds lemon juice and stores the half face down in an airtight container.[^cac-hub]"
+        },
+        {
+          "q": "Is brown cut avocado safe to eat?",
+          "a": "A brown surface is oxidation, not spoilage. Scrape it off. If it smells sour or rancid or is moldy, toss it.[^cac-store][^fsis-mold]"
+        },
+        {
+          "q": "Can you store cut avocado in water?",
+          "a": "It's not recommended. FDA research found Listeria can move from the skin into the flesh in water.[^fda-avocado-water]"
+        },
+        {
+          "q": "Can you freeze avocado?",
+          "a": "Yes, as purée with lemon juice. Whole or sliced avocado doesn't freeze well.[^nchfp-avocados]"
+        }
+      ],
+      "related": [
+        "ripen-avocados",
+        "store-cut-onion",
+        "can-you-freeze-it"
+      ]
+    },
+    {
+      "slug": "store-peeled-garlic",
+      "group": "store",
+      "item": "Garlic",
+      "items": [
+        "Garlic",
+        "Onion",
+        "Ginger"
+      ],
+      "title": "How to store peeled garlic",
+      "seoTitle": "How to store peeled garlic cloves safely | Simply Krisp",
+      "desc": "Refrigerate peeled garlic cloves in a covered container and use them within about a week, or freeze them. Why homemade garlic in oil needs special care.",
+      "answer": "Put peeled garlic cloves in a covered container in the fridge and use them within about a week. To keep them longer, freeze them. If you cover garlic with oil, refrigerate it and use it within 4 days, or freeze it, because garlic in oil at room temperature can cause botulism.",
+      "sections": [
+        {
+          "h2": "How to store peeled garlic cloves",
+          "steps": [
+            "Put the cloves in a covered container.[^isu-garlic]",
+            "Refrigerate them.[^isu-garlic]",
+            "Use them within about a week.[^isu-garlic]",
+            "Toss any that turn soft, slimy or moldy.[^ucd-garlic]"
+          ]
+        },
+        {
+          "h2": "Garlic in oil: refrigerate it and use it within 4 days",
+          "p": [
+            "Homemade garlic in oil is a botulism risk. Garlic can carry Clostridium botulinum spores, and covering it in oil cuts off oxygen. Unrefrigerated, that lets the bacteria make a toxin you can't taste or smell.[^msu-garlic]",
+            "Make garlic in oil fresh, keep it at 40°F or below, and use it within 4 days, or freeze it for longer storage.[^nchfp-garlic-oil][^osu-garlic] Throw it out if it's been at room temperature for more than two hours.[^msu-garlic]"
+          ]
+        },
+        {
+          "h2": "How to freeze garlic",
+          "p": [
+            "Whole bulbs and unpeeled cloves can go in a freezer bag with the air pressed out.[^isu-garlic] Garlic in oil can also be frozen, packed in freezer jars or containers, for up to several months.[^nchfp-garlic-oil]"
+          ]
+        },
+        {
+          "h2": "Whole bulbs belong in the pantry",
+          "p": [
+            "A whole bulb keeps for months in a cool, dry, airy spot. The fridge is close to the temperature where garlic sprouts fastest.[^usu-garlic] Once you break a bulb apart, the cloves keep only a few days to about 10 days.[^msu-garlic][^isu-garlic] See [[Garlic|how to store garlic]]."
+          ]
+        }
+      ],
+      "faq": [
+        {
+          "q": "How long does peeled garlic last in the fridge?",
+          "a": "About a week in a covered container.[^isu-garlic]"
+        },
+        {
+          "q": "Is it safe to store garlic in olive oil?",
+          "a": "Only in the fridge for up to 4 days, or in the freezer. Garlic in oil at room temperature is a botulism risk.[^nchfp-garlic-oil][^msu-garlic]"
+        },
+        {
+          "q": "Can you freeze peeled garlic?",
+          "a": "Yes. Freeze whole or unpeeled cloves in a sealed freezer bag, or freeze garlic in oil in freezer containers.[^isu-garlic][^nchfp-garlic-oil]"
+        },
+        {
+          "q": "Should whole garlic be refrigerated?",
+          "a": "No. Keep whole bulbs in a cool, dry pantry. Fridge temperatures encourage sprouting.[^usu-garlic]"
+        }
+      ],
+      "related": [
+        "store-cut-onion",
+        "fridge-or-counter",
+        "can-you-freeze-it"
+      ]
+    },
+    {
+      "slug": "organize-fridge",
+      "group": "where",
+      "items": [
+        "Lettuce",
+        "Broccoli",
+        "Spinach",
+        "Apple",
+        "Pear",
+        "Grape",
+        "Cucumber",
+        "Carrot"
+      ],
+      "title": "How to organize your fridge so produce lasts longer",
+      "seoTitle": "How to organize your fridge so produce lasts longer | Simply Krisp",
+      "desc": "Keep the fridge at 40°F or below, put things that wilt in the high-humidity drawer and things that rot in the low-humidity drawer, and keep apples away from greens.",
+      "answer": "Keep the fridge at 40°F or below. Put vegetables that wilt in the high-humidity crisper drawer (vent closed) and fruit that rots in the low-humidity drawer (vent open). Keep apples and pears away from greens and broccoli, give your eat-first produce a spot at eye level, and leave out what belongs on the counter or in the pantry.",
+      "sections": [
+        {
+          "h2": "Start with the temperature",
+          "p": [
+            "Set the fridge to 40°F or below, and check it with an appliance thermometer if it doesn't have one built in.[^fsis-fridge] Colder slows spoilage, but don't go below freezing, because frozen spots ruin lettuce and other tender produce."
+          ]
+        },
+        {
+          "auto": "drawer-map",
+          "h2": "What goes in each crisper drawer"
+        },
+        {
+          "h2": "Keep ethylene producers away from greens",
+          "p": [
+            "Apples, pears and other ripening fruit give off ethylene. In a closed drawer it builds up and yellows broccoli, spots lettuce and softens cucumbers sooner.[^ucanr-ethylene] Keep the producers in their own drawer, and see [[how-to:fridge-or-counter|fridge or counter]] for what shouldn't be in the fridge at all."
+          ]
+        },
+        {
+          "h2": "Three habits that matter more than any gadget",
+          "list": [
+            "Make an eat-first spot: one place at eye level for whatever is closest to turning.",
+            "Check the drawers before you shop. Thirty seconds and a phone photo stop you from buying a second bag of spinach.",
+            "Don't overpack the drawers. Crushed produce bruises, and bruised spots spoil first."
+          ]
+        }
+      ],
+      "faq": [
+        {
+          "q": "What goes in the high-humidity crisper drawer?",
+          "a": "Vegetables that wilt: leafy greens, broccoli, cucumbers, carrots and herbs. Vegetables do best in higher humidity.[^fsis-fridge]"
+        },
+        {
+          "q": "What goes in the low-humidity drawer?",
+          "a": "Fruit, which does best in lower humidity: apples, pears, grapes and ripe stone fruit.[^fsis-fridge]"
+        },
+        {
+          "q": "What temperature should my fridge be?",
+          "a": "40°F or below.[^fsis-fridge]"
+        },
+        {
+          "q": "Why do my vegetables go bad so fast in the crisper?",
+          "a": "Often it's ethylene from fruit sharing the drawer, trapped moisture or the drawer being too warm. Separate fruit from greens, dry produce before storing, and check the temperature.[^ucanr-ethylene][^fsis-fridge]"
+        }
+      ],
+      "related": [
+        "fridge-or-counter",
+        "wash-vegetables",
+        "ripen-kiwi"
+      ]
+    }
+  ]
+}
