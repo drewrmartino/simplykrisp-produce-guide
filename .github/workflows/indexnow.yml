@@ -1,0 +1,21 @@
+# After each production deploy on Vercel, tells IndexNow (Bing, Yandex and
+# others) which guide pages changed so they're recrawled quickly.
+name: IndexNow
+
+on:
+  deployment_status:
+
+jobs:
+  ping:
+    if: github.event.deployment_status.state == 'success' && github.event.deployment.environment == 'Production'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.deployment.sha }}
+          fetch-depth: 2
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/indexnow.mjs --changed HEAD~1 HEAD
