@@ -39,6 +39,11 @@ test('storage guide lists each item with where/how, shortest-lived first', () =>
   assert.equal(g.zones[0].names, 'Lettuce');
   assert.equal(g.zones[1].zone_items[0].name, 'Apple');
   assert.match(g.zones[0].krisp_note, /Your Krisp/);
+  // Kitchen map: all five spots, drawer items carry the Krisp badge.
+  assert.deepEqual(Object.keys(g.kitchen), ['high', 'low', 'shelf', 'counter', 'pantry']);
+  assert.deepEqual(g.kitchen.shelf, []);
+  assert.match(g.kitchen.high[0].krisp_days, /^\+\d+–\d+ days$/);
+  assert.equal(g.kitchen.counter[0].krisp_days, '');
   const z = storageGuide([{ name: 'Peach' }, { name: 'Strawberry' }, { name: 'Onion' }, { name: 'Watermelon' }]).zones;
   assert.deepEqual(z.map((x) => x.key), ['shelf', 'counter', 'pantry']);
   assert.match(z[1].zone_items.find((i) => i.name === 'Peach').then, /low-humidity drawer/);

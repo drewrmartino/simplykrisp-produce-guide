@@ -65,6 +65,8 @@ export function storageGuide(items, { hasKrisp = false, limit = 15 } = {}) {
       krisp: krispReach(c) && extra[1] > 0
         ? `${hasKrisp ? 'Your Krisp adds' : 'A Krisp adds'} about ${extra[0]}–${extra[1]} days${c.storage === 'counter_then_fridge' ? ' once it is ripe and in the drawer' : ''}. ${c.krispPrevents}`.trim()
         : '',
+      // Short badge for the kitchen map: drawer items only, same rule as krisp.
+      krisp_days: krispReach(c) && extra[1] > 0 && (zone === 'high' || zone === 'low') ? `+${extra[0]}–${extra[1]} days` : '',
       typically_wasted_pct: Math.round(w.rate * 100),
       typically_wasted_usd: w.usd.toFixed(2),
     });
@@ -81,5 +83,8 @@ export function storageGuide(items, { hasKrisp = false, limit = 15 } = {}) {
     zone_items: list.filter((i) => i.zone === z.key),
   })).filter((z) => z.zone_items.length);
   for (const z of zones) z.names = z.zone_items.map((i) => i.name).join(', ');
-  return { guide_items: list, zones, item_count: out.length, at_risk_usd: r2(usd).toFixed(2), at_risk_lb: r2(lb).toFixed(1) };
+  // Kitchen map for the email: every spot present (empty arrays included) so the
+  // template can draw the fridge, two drawers, counter and pantry in fixed places.
+  const kitchen = Object.fromEntries(ZONES.map((z) => [z.key, list.filter((i) => i.zone === z.key).map((i) => ({ name: i.name, image_url: i.image_url, krisp_days: i.krisp_days }))]));
+  return { guide_items: list, zones, kitchen, item_count: out.length, at_risk_usd: r2(usd).toFixed(2), at_risk_lb: r2(lb).toFixed(1) };
 }
