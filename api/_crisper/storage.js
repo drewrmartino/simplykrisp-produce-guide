@@ -35,7 +35,7 @@ const r2 = (n) => Math.round(n * 100) / 100;
 const stem = (s) => String(s).toLowerCase().replace(/(oes|ies|es|s)$/, (m) => (m === 'ies' ? 'y' : m === 'oes' ? 'o' : ''));
 
 // items: [{ name, count, weight }] as returned by the parser.
-export function storageGuide(items, { hasKrisp = false } = {}) {
+export function storageGuide(items, { hasKrisp = false, limit = 15 } = {}) {
   const seen = new Set();
   const names = new Set(items.map((i) => stem(i.name)));
   const out = [];
@@ -71,7 +71,7 @@ export function storageGuide(items, { hasKrisp = false } = {}) {
   }
   // Shortest-lived first: that's what to put away carefully and eat first.
   out.sort((a, b) => (BY_NAME[a.name].maxDays - BY_NAME[b.name].maxDays) || a.name.localeCompare(b.name));
-  const list = out.slice(0, 15);
+  const list = out.slice(0, limit);
   // Grouped like the fridge map, shortest-lived first within each spot.
   // zone_items (not items) so Klaviyo never collides with dict.items.
   const zones = ZONES.map((z) => ({
