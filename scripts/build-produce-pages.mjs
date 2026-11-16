@@ -18,7 +18,7 @@
 //   produce/what-went-wrong/index.html    symptom lookup
 //   produce/how-to/index.html             how-to guide hub (data/guides.json)
 //   produce/how-to/<slug>/index.html      one page per how-to guide
-//   sitemap.xml, robots.txt
+//   sitemap.xml, robots.txt, llms.txt
 //
 // dev/produce-pages.test.mjs fails if the data is invalid or the committed
 // HTML is out of date, so re-run this after any data change.
@@ -36,6 +36,31 @@ const readJson = (p) => JSON.parse(readFileSync(path.join(root, p), 'utf8'));
 const VERDICTS = ['eat', 'cook', 'trim', 'toss'];
 const KRISP_CAUSES = ['ethylene', 'ripening'];
 const SHOP = 'https://simplykrisp.com/products/double-krisp';
+
+// Who publishes the site. One definition, referenced by @id everywhere else, so
+// search engines and AI assistants see the same business facts on every page.
+// Keep in step with simplykrisp.com (logo, description, social profiles).
+export const ORG_ID = 'https://simplykrisp.com/#organization';
+export const ORG = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  '@id': ORG_ID,
+  name: 'Simply Krisp',
+  url: 'https://simplykrisp.com',
+  logo: 'https://simplykrisp.com/cdn/shop/files/v2_Simply_Krisp_Logo_-_Lime_and_Orange_Freshness_700_x_350_px_f00ce263-9da7-4e9d-9e09-55291aaf9e85.png',
+  description: 'Simply Krisp is a company that helps people keep produce fresh long enough to eat it instead of throwing it away. We cut food waste with free produce storage guides and tools, and sell products that extend freshness.',
+  sameAs: ['https://www.instagram.com/simply_krisp', 'https://guide.simplykrisp.com/'],
+  memberOf: { '@type': 'Organization', name: '1% for the Planet', url: 'https://www.onepercentfortheplanet.org' },
+};
+export const SITE_LD = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': 'https://guide.simplykrisp.com/#website',
+  name: 'Simply Krisp Produce Guide',
+  url: 'https://guide.simplykrisp.com/',
+  publisher: { '@id': ORG_ID },
+};
+const ORG_REF = { '@id': ORG_ID };
 
 // ---------- load + validate ----------
 
@@ -229,7 +254,7 @@ function head({ title, desc, pathname, jsonld = [], extra = '' }) {
 <link href="https://fonts.googleapis.com/css2?family=Questrial&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="/produce/produce.css" />
 <script>if(window.self!==window.top){document.documentElement.className+=' embedded';}</script>
-${jsonld.map((j) => `<script type="application/ld+json">${JSON.stringify(j).replace(/</g, '\\u003c')}</script>`).join('\n')}${extra}
+${[ORG, ...jsonld].map((j) => `<script type="application/ld+json">${JSON.stringify(j).replace(/</g, '\\u003c')}</script>`).join('\n')}${extra}
 </head>
 <body>
 <script src="/assets/sk-header.js"></script>
@@ -493,6 +518,13 @@ ${TOOLS}
 ` + foot(ctx.spoilage.meta.updated.slice(0, 4));
 }
 
+// Adds (or refreshes) JSON-LD in a hand-written page's <head>, between markers
+// so re-running the build replaces it instead of stacking copies.
+function withLd(html, items) {
+  const ld = `<!--ld-->${items.map((j) => `<script type="application/ld+json">${JSON.stringify(j).replace(/</g, '\\u003c')}</script>`).join('')}<!--/ld-->`;
+  return html.replace(/(?:<!--ld-->[\s\S]*?<!--\/ld-->)?\n?<\/head>/, `${ld}\n</head>`);
+}
+
 // ---------- guide home (static fallback inside the app's #root) ----------
 
 // The Storage Guide home is a client-rendered app, so crawlers that don't run
@@ -504,7 +536,7 @@ function rootIndex(ctx) {
   const lists = GROUPS.map(([k, label]) => `<h2>${label}</h2><ul>${sorted.filter((e) => e.p.category === k).map((e) => `<li><a href="/produce/${e.slug}">How to store ${esc(e.display)}</a></li>`).join('')}</ul>`).join('');
   const block = `<div id="root"><!--static--><main style="max-width:900px;margin:0 auto;padding:32px 20px;font-family:system-ui,sans-serif"><h1>Produce Storage Guide</h1><p>Where to keep ${ctx.all.length} fruits and vegetables, how long each one lasts, and what not to store together. <a href="/produce">See all produce</a> or <a href="/produce/what-went-wrong">find out what went wrong</a>.</p>${lists}${ctx.guides.guides.length ? `<h2>How-to guides</h2><ul>${ctx.guides.guides.map((g) => `<li><a href="/produce/how-to/${g.slug}">${esc(g.title)}</a></li>`).join('')}</ul>` : ''}</main><!--/static--></div>`;
   const n = ctx.all.length;
-  return html
+  return withLd(html, [ORG, SITE_LD])
     .replace(/How to Store \d+ Fruits and Vegetables/, `How to Store ${n} Fruits and Vegetables`)
     .replace(/(<meta name="description" content="Where to keep )\d+( fruits and vegetables)/, `$1${n}$2`)
     .replace(/<div id="root">(?:<!--static-->[\s\S]*?<!--\/static-->)?<\/div>/, block);
@@ -597,7 +629,7 @@ ${foot(new Date().getFullYear())}`;
 function labIndex(ctx) {
   const html = readFileSync(path.join(root, 'lab/index.html'), 'utf8');
   const cards = ctx.lab.runs.map((r) => `<article class="run" id="${esc(r.id)}"><h2>${hasPage(r) ? `<a href="/lab/${esc(r.id)}">${esc(r.title)}</a>` : esc(r.title)}</h2><div class="rmeta"><span class="badge ${r.status === 'in progress' ? 'live' : r.status === 'complete' ? 'done' : 'planned'}">${esc(r.status)}</span>${r.started ? `<span>Started ${fmtDate(r.started)}</span>` : ''}<span>${esc(r.produce)}</span></div><div class="q"><span class="lbl">Question</span>${esc(r.question)}</div><div class="r"><span class="lbl">What we saw</span>${esc(r.result)}</div>${hasPage(r) ? `<a class="full" href="/lab/${esc(r.id)}">Full run &rarr;</a>` : ''}</article>`).join('');
-  return html.replace(/<section class="runs" id="runs" aria-live="polite">[\s\S]*?<\/section>/, `<section class="runs" id="runs" aria-live="polite">${cards}</section>`);
+  return withLd(html, [ORG]).replace(/<section class="runs" id="runs" aria-live="polite">[\s\S]*?<\/section>/, `<section class="runs" id="runs" aria-live="polite">${cards}</section>`);
 }
 
 // ---------- how-to guides ----------
@@ -707,8 +739,8 @@ function guidePage(g, ctx) {
     description: g.desc,
     dateModified: ctx.guides.meta.updated,
     mainEntityOfPage: ORIGIN + pathname,
-    author: { '@type': 'Organization', name: 'Simply Krisp', url: 'https://simplykrisp.com' },
-    publisher: { '@type': 'Organization', name: 'Simply Krisp', url: 'https://simplykrisp.com' },
+    author: ORG_REF,
+    publisher: ORG_REF,
   };
 
   return head({ title: g.seoTitle, desc: g.desc, pathname, jsonld: [crumbLd(trail), articleLd, faqLd] }) + `
@@ -775,6 +807,52 @@ ${urls.map((u) => `  <url><loc>${ORIGIN}${u}</loc><lastmod>${today}</lastmod></u
 `;
 }
 
+// ---------- llms.txt ----------
+
+// Plain-language map of the site for AI assistants (llmstxt.org format):
+// what the site is, who runs it, and links to every page worth citing.
+function llms(ctx) {
+  const sorted = [...ctx.all].sort((a, b) => navName(a.name).localeCompare(navName(b.name)));
+  const guideLines = Object.entries(ctx.guides.groups).flatMap(([k, label]) => {
+    const gs = ctx.guides.guides.filter((g) => g.group === k);
+    return gs.length ? [`### ${label}`, '', ...gs.map((g) => `- [${g.title}](${ORIGIN}/produce/how-to/${g.slug}): ${g.desc}`), ''] : [];
+  });
+  const labRuns = ctx.lab.runs.filter(hasPage);
+  return `# Simply Krisp Produce Guide
+
+> Free, sourced guidance on storing fruits and vegetables so less of them go to waste: where each item belongs (fridge, counter or freezer), how long it lasts, what not to store together, why it spoils, and how to ripen, wash and freeze it. Published by Simply Krisp (https://simplykrisp.com), a company that helps people keep produce fresh long enough to eat it instead of throwing it away, and a 1% for the Planet member.
+
+Storage and spoilage facts come mainly from the UC Davis Postharvest Technology Center and USDA sources, and each how-to guide cites its sources inline. Food-safety advice is deliberately conservative. Pages describe quality and common spoilage and are not a substitute for judgment: anything slimy, off-smelling, or moldy on soft produce should be thrown out.
+
+Simply Krisp also sells ethylene absorbers for the crisper drawer. The guides say plainly which produce they help (ethylene-sensitive items) and which they don't.
+
+## Start here
+
+- [Produce Storage Guide](${ORIGIN}/): searchable storage guide for ${ctx.all.length} fruits and vegetables
+- [All produce A to Z](${ORIGIN}/produce): every item with storage location and shelf life
+- [What went wrong?](${ORIGIN}/produce/what-went-wrong): look up a spoilage symptom (mold, sprouting, wilting, browning) and whether to eat, cook, trim or toss
+- [How-to guides](${ORIGIN}/produce/how-to): ripening, washing, storing leftovers, and fridge vs. counter vs. freezer
+- [In season near you](${ORIGIN}/seasonal): enter a ZIP code to see which fruits and vegetables are local and in season
+
+## How-to guides
+
+${guideLines.join('\n')}
+## Produce storage pages
+
+${sorted.map((e) => `- [How to store ${e.display}](${ORIGIN}/produce/${e.slug})`).join('\n')}
+
+## Lab Notebook
+
+- [Lab Notebook](${ORIGIN}/lab): side-by-side home refrigerator tests of Simply Krisp, published as they happen, including ones that show little difference
+${labRuns.map((r) => `- [${r.title || r.id}](${ORIGIN}/lab/${r.id})`).join('\n')}${labRuns.length ? '\n' : ''}
+## Optional
+
+- [Simply Krisp store](https://simplykrisp.com): ethylene absorbers and refills (agent shopping instructions at https://simplykrisp.com/llms.txt)
+- [Instagram](https://www.instagram.com/simply_krisp)
+- [Sitemap](${ORIGIN}/sitemap.xml)
+`;
+}
+
 const ROBOTS = `User-agent: *
 Allow: /
 Disallow: /api/
@@ -803,6 +881,7 @@ export function render(data = loadData()) {
     'produce/what-went-wrong/index.html': lookupPage(ctx),
     'sitemap.xml': sitemap(ctx),
     'robots.txt': ROBOTS,
+    'llms.txt': llms(ctx),
     // Lets /seasonal link each card to its page without duplicating the list.
     'produce/pages.json': JSON.stringify(Object.fromEntries(ctx.all.map((i) => [i.name, i.slug])), null, 2) + '\n',
     'index.html': rootIndex(ctx),
