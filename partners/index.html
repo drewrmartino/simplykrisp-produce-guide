@@ -71,7 +71,7 @@ button,input,textarea{font:inherit;color:inherit}
 .note-for-partner{font-size:13px;color:var(--muted-fg);margin-top:10px}
 
 /* The guide itself (also what prints). Email copy uses inline styles built in JS. */
-.guide{background:var(--card);max-width:640px;margin:0 auto;border-radius:8px;padding:28px 28px 22px;box-shadow:0 2px 10px hsl(40 20% 20% / .08)}
+.guide{background:var(--card);max-width:760px;margin:0 auto;border-radius:8px;padding:28px 28px 22px;box-shadow:0 2px 10px hsl(40 20% 20% / .08)}
 @media (max-width:560px){.guide{padding:20px 16px}}
 .g-top{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;border-bottom:2px solid var(--fg);padding-bottom:10px;margin-bottom:16px}
 .g-top h2{font-size:24px;line-height:1.15}
@@ -102,9 +102,44 @@ button,input,textarea{font:inherit;color:inherit}
 .g-foot{margin-top:14px;font-size:11.5px;color:var(--muted-fg);border-top:1px solid var(--border);padding-top:10px}
 .g-empty{text-align:center;color:var(--muted-fg);padding:40px 10px}
 
+/* Kitchen map */
+.kitchen{display:grid;grid-template-columns:1.55fr 1fr;gap:14px;margin:2px 0 10px}
+@media (max-width:620px){.kitchen{grid-template-columns:1fr}}
+.zl{font-family:var(--sans);font-size:14.5px;line-height:1.2;margin-bottom:8px;padding-right:4px}
+.zl small{display:block;font-family:var(--body);font-size:11.5px;color:var(--muted-fg);margin-top:2px}
+.fridge{position:relative;background:linear-gradient(180deg,hsl(200 25% 97%),hsl(200 18% 92%));border:2.5px solid hsl(96 14% 22%);border-radius:16px;padding:10px 10px 12px}
+.f-head{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted-fg);padding:0 4px 8px}
+.f-shelf{background:hsl(0 0% 100% / .75);border-radius:8px;padding:10px;min-height:88px;border-bottom:5px solid hsl(195 22% 80%);margin-bottom:10px}
+.f-drawers{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media (max-width:380px){.f-drawers{grid-template-columns:1fr}}
+.drawer{position:relative;border-radius:6px 6px 12px 12px;padding:16px 10px 36px;min-height:160px;border:2px solid}
+.drawer.hi{background:hsl(195 45% 93%);border-color:hsl(195 30% 70%)}
+.drawer.lo{background:hsl(40 72% 92%);border-color:hsl(36 40% 70%)}
+.d-pull{position:absolute;top:5px;left:50%;transform:translateX(-50%);width:44px;height:5px;border-radius:3px;background:hsl(0 0% 0% / .2)}
+.sachet{position:absolute;right:8px;bottom:8px;display:inline-flex;align-items:center;gap:5px;font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#fff;background:var(--krisp);border-radius:5px;padding:3px 7px 3px 4px}
+.sachet span{width:15px;height:15px;border-radius:50%;background:#fff;color:var(--krisp);display:grid;place-items:center;font-size:9.5px;letter-spacing:0}
+.side{display:flex;flex-direction:column;gap:14px}
+.counter{position:relative;padding:10px 10px 24px;border-radius:10px 10px 4px 4px;background:hsl(30 30% 96%);border:1px solid hsl(30 20% 88%);flex:1}
+.counter .slab{position:absolute;left:-1px;right:-1px;bottom:-1px;height:12px;border-radius:0 0 4px 4px;background:linear-gradient(hsl(30 35% 64%),hsl(28 35% 52%))}
+.pantry{position:relative;padding:10px 10px 14px;border-radius:8px;border:2.5px solid hsl(28 30% 42%);background:hsl(34 42% 91%);flex:1}
+.pantry .knobs{position:absolute;top:12px;right:10px;display:flex;gap:5px}
+.pantry .knobs i{width:7px;height:7px;border-radius:50%;background:hsl(28 30% 42%)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{display:inline-flex;align-items:center;gap:5px;background:#fff;border:1px solid var(--border);border-radius:999px;padding:3px 9px 3px 6px;font-size:13px;text-decoration:none;color:var(--fg);line-height:1.3}
+a.chip:hover{border-color:var(--primary)}
+.chip .em{font-size:15px;line-height:1}
+.chip.k{border-color:var(--krisp-line);background:hsl(80 60% 97%)}
+.chip .kd{font-size:10.5px;font-weight:700;color:#fff;background:var(--krisp);border-radius:999px;padding:1px 6px;white-space:nowrap}
+.none{font-size:12.5px;color:var(--muted-fg)}
+.legend{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--muted-fg);margin-bottom:6px}
+.g-sec{font-size:18px;margin:16px 0 6px;padding-top:12px;border-top:2px solid var(--fg)}
+.g-item{scroll-margin-top:20px}
+.g-item:target{background:hsl(80 60% 96%);box-shadow:0 0 0 6px hsl(80 60% 96%)}
+
 @media (max-width:560px){.g-top{flex-direction:column;align-items:flex-start;gap:6px}.g-top .by{text-align:left}.g-top .by b{display:inline;margin-right:6px}.g-cta .btn{width:100%}}
 @media print{
-  body{background:#fff}
+  body{background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .kitchen{break-inside:avoid}
   #sk-header,.intro,.panel,.out-head,.note-for-partner,.toast,[data-sk-header]{display:none!important}
   .wrap{padding:0;max-width:none}.layout{display:block}
   .stage{background:none;border:0;padding:0}
@@ -247,6 +282,33 @@ function krispLine(i) {
   return `<b>Simply Krisp helps:</b> about ${m[1]}–${m[2]} extra days${esc(m[3])}. ${esc(m[4])}`;
 }
 
+const zoneItems = (m, k) => (m.g.zones.find((z) => z.key === k) || { zone_items: [] }).zone_items;
+const kdays = (i) => (i.krisp ? i.krisp.match(/about (\d+)–(\d+) days/) : null);
+function chip(i) {
+  // Days badge only where the sachet is: the drawers.
+  const d = i.zone === 'high' || i.zone === 'low' ? kdays(i) : null;
+  return `<a class="chip${d ? ' k' : ''}" href="#it-${slug(i.name)}"><span class="em" aria-hidden="true">${emo(i.name)}</span>${esc(dn(i.name))}${d ? `<span class="kd" title="About ${d[1]}–${d[2]} extra days with a Simply Krisp">+${d[1]}–${d[2]} days</span>` : ''}</a>`;
+}
+const chips = (items, empty) => (items.length ? `<div class="chips">${items.map(chip).join('')}</div>` : `<div class="none">${empty}</div>`);
+function renderKitchen(m) {
+  const sachet = '<span class="sachet" title="A Simply Krisp sachet goes in this drawer"><span>K</span>Krisp</span>';
+  return `<div class="kitchen" role="group" aria-label="Where everything goes">
+    <div class="fridge">
+      <div class="f-head">Fridge</div>
+      <div class="f-shelf"><div class="zl">Fridge shelf<small>On a shelf, not in a drawer</small></div>${chips(zoneItems(m, 'shelf'), 'Nothing for the shelf this week')}</div>
+      <div class="f-drawers">
+        <div class="drawer hi"><div class="d-pull"></div><div class="zl">High-humidity drawer<small>Vent closed · things that wilt</small></div>${chips(zoneItems(m, 'high'), 'Empty this week')}${sachet}</div>
+        <div class="drawer lo"><div class="d-pull"></div><div class="zl">Low-humidity drawer<small>Vent open · fruit, away from greens</small></div>${chips(zoneItems(m, 'low'), 'Empty this week')}${sachet}</div>
+      </div>
+    </div>
+    <div class="side">
+      <div class="counter"><div class="zl">Counter<small>Room temp, out of the sun</small></div>${chips(zoneItems(m, 'counter'), 'Nothing for the counter')}<div class="slab"></div></div>
+      <div class="pantry"><div class="knobs"><i></i><i></i></div><div class="zl">Pantry<small>Cool, dark cupboard</small></div>${chips(zoneItems(m, 'pantry'), 'Nothing for the pantry')}</div>
+    </div>
+  </div>
+  ${m.krispItems.length ? '<div class="legend"><span class="chip k"><span class="kd">+ days</span></span>Extra days with a Simply Krisp sachet in the drawer</div>' : ''}`;
+}
+
 function renderGuide(m) {
   if (!m.g.guide_items.length) return `<div class="guide"><div class="g-empty">Add the produce in this week's box to see the guide.</div></div>`;
   const zones = m.g.zones.map((z) => `
@@ -254,7 +316,7 @@ function renderGuide(m) {
       <h3>${esc(z.title)}${z.krisp_note && z.zone_items.some((i) => i.krisp) ? '<span class="ztag">Krisp goes here</span>' : ''}</h3>
       <div class="zdetail">${esc(z.detail)}</div>
       ${z.zone_items.map((i) => `
-        <div class="g-item">
+        <div class="g-item" id="it-${slug(i.name)}">
           <div><span class="nm">${esc(dn(i.name))}</span> <span class="how">\u2014 ${esc(sent(i.shelf_how || i.how))}</span></div>
           ${i.then ? `<div class="then">${esc(i.then)}</div>` : ''}
           ${i.boxAway ? `<div class="away">${esc(i.boxAway)}</div>` : ''}
@@ -267,10 +329,35 @@ function renderGuide(m) {
       <div class="by"><b>Simply Krisp</b>Produce storage guide</div></div>
     ${m.krispItems.length ? `<div class="g-krisp-sum"><span class="ic" aria-hidden="true">K</span><div>${krispSummary(m)}</div></div>` : ''}
     ${watchText(m) ? `<div class="g-watch">${watchText(m)}</div>` : ''}
+    ${renderKitchen(m)}
+    <h3 class="g-sec">How to store each item</h3>
     ${zones}
     ${m.krispItems.length ? `<div class="g-cta"><p>${m.partner ? `${esc(m.partner)} members` : 'Members'}${els.code.value.trim() ? ` save with code <b>${esc(els.code.value.trim())}</b>` : ' can try one in each crisper drawer'} \u2014 one sachet per drawer, changed monthly.</p><a class="btn" href="${esc(storeUrl())}" target="_blank" rel="noopener">See Simply Krisp</a></div>` : ''}
     <div class="g-foot">${m.partner ? `Shared by ${esc(m.partner)}. ` : ''}Storage guidance from the Simply Krisp Produce Storage Guide, built on UC Davis Postharvest Technology Center data. Every item, plus what to do when something starts to turn: guide.simplykrisp.com</div>
   </article>`;
+}
+
+// Catalog reuses some emoji (beet shows a carrot); override those.
+const EMOJI_FIX = { Beet: '\u{1F331}' };
+const emo = (n) => EMOJI_FIX[n] || BY_NAME[n].emoji || '';
+// Email version of the kitchen map: nested tables, emoji as text, no CSS classes.
+function emailKitchen(m, F, ink, mute, green) {
+  const chip = (i) => { const d = i.zone === 'high' || i.zone === 'low' ? kdays(i) : null; return `<span style="${F}display:inline-block;margin:0 4px 5px 0;padding:3px 8px;border-radius:12px;background:#ffffff;border:1px solid ${d ? '#b9d38f' : '#ddd8cc'};font-size:13px;color:${ink};white-space:nowrap;">${emo(i.name)} ${esc(dn(i.name))}${d ? ` <b style="font-size:11px;color:#fff;background:${green};border-radius:8px;padding:0 5px;">+${d[1]}–${d[2]} days</b>` : ''}</span>`; };
+  const list = (k, empty) => { const it = zoneItems(m, k); return it.length ? it.map(chip).join('') : `<span style="${F}font-size:12px;color:${mute};">${empty}</span>`; };
+  const lbl = (t, sub) => `<div style="${F}font-size:14px;color:${ink};font-weight:bold;">${t}</div><div style="${F}font-size:11px;color:${mute};padding-bottom:6px;">${sub}</div>`;
+  const sachet = `<div style="${F}margin-top:6px;text-align:right;"><span style="font-size:10px;font-weight:bold;color:#fff;background:${green};border-radius:4px;padding:2px 6px;letter-spacing:.5px;">KRISP SACHET</span></div>`;
+  return `<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="width:100%;border-collapse:separate;border:2px solid ${ink};border-radius:14px;background:#eef3f5;">
+    <tr><td colspan="2" style="${F}padding:8px 10px 4px;font-size:11px;font-weight:bold;letter-spacing:1.5px;color:${mute};">FRIDGE</td></tr>
+    <tr><td colspan="2" style="padding:0 8px 8px;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#ffffff;border-bottom:4px solid #c3d3d9;border-radius:6px;"><tr><td style="padding:8px 10px;">${lbl('Fridge shelf', 'On a shelf, not in a drawer')}${list('shelf', 'Nothing for the shelf this week')}</td></tr></table></td></tr>
+    <tr>
+      <td width="50%" valign="top" style="padding:0 4px 8px 8px;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#e3f1f6;border:2px solid #a9cbd7;border-radius:6px 6px 10px 10px;"><tr><td style="padding:10px;">${lbl('High-humidity drawer', 'Vent closed · things that wilt')}${list('high', 'Empty this week')}${sachet}</td></tr></table></td>
+      <td width="50%" valign="top" style="padding:0 8px 8px 4px;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#fbf0dc;border:2px solid #d9c39a;border-radius:6px 6px 10px 10px;"><tr><td style="padding:10px;">${lbl('Low-humidity drawer', 'Vent open · fruit, away from greens')}${list('low', 'Empty this week')}${sachet}</td></tr></table></td>
+    </tr>
+  </table>
+  <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="width:100%;margin-top:10px;"><tr>
+    <td width="50%" valign="top" style="padding-right:5px;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f7f2ec;border-bottom:8px solid #a8835e;border-radius:8px 8px 3px 3px;"><tr><td style="padding:10px;">${lbl('Counter', 'Room temp, out of the sun')}${list('counter', 'Nothing for the counter')}</td></tr></table></td>
+    <td width="50%" valign="top" style="padding-left:5px;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f3e9d9;border:2px solid #8a6a47;border-radius:6px;"><tr><td style="padding:10px;">${lbl('Pantry', 'Cool, dark cupboard')}${list('pantry', 'Nothing for the pantry')}</td></tr></table></td>
+  </tr></table>`;
 }
 
 // Email clients strip <style>, so the copied version is inline-styled tables.
@@ -295,7 +382,11 @@ function renderEmail(m) {
     <tr><td style="${F}font-size:22px;color:${ink};padding-bottom:4px;">${title(m)}</td></tr>
     <tr><td style="${F}font-size:13px;color:${mute};padding-bottom:12px;border-bottom:2px solid ${ink};">${m.partner ? `From ${esc(m.partner)} \u00b7 ` : ''}Put it away tonight and it lasts days longer.</td></tr>
     <tr><td style="height:14px;"></td></tr>
-    ${sum}${watch}${zones}${cta}
+    ${sum}${watch}
+    <tr><td style="height:12px;"></td></tr>
+    <tr><td>${emailKitchen(m, F, ink, mute, green)}</td></tr>
+    <tr><td style="${F}font-size:18px;color:${ink};padding:16px 0 0;border-top:2px solid ${ink};">How to store each item</td></tr>
+    ${zones}${cta}
     <tr><td style="${F}font-size:11px;color:${mute};padding-top:14px;border-top:1px solid ${line};">Storage guide by <a href="${SITE}/?${utm('footer')}" style="color:${mute};">Simply Krisp</a>, built on UC Davis Postharvest Technology Center data.</td></tr>
   </table>`;
 }
