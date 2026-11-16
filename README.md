@@ -9,6 +9,7 @@ Two customer-facing tools, one Vercel project.
 | `/api/markets` | Serverless proxy for the USDA Local Food Directory |
 | `/lab` | Lab Notebook — side-by-side fridge tests, rendered from `lab/runs.json` |
 | `/lab/crisper-map` | Printable one-page Crisper Drawer Map; `?partner=Name` adds a partner credit line |
+| `/partners` | Box Storage Guide for CSAs: paste a box list, copy a storage guide for the newsletter or print it |
 
 Both are embedded into Shopify pages as iframes. `vercel.json` sets
 `X-Frame-Options: ALLOWALL` and `frame-ancestors *` specifically to allow that —
@@ -55,6 +56,26 @@ prevent it next time.
   `dev/produce-pages.test.mjs` fails if the committed files are stale.
 - Every "Is it still OK?" line is a food-safety statement. Keep it
   conservative and in line with USDA FSIS mold guidance.
+
+## CSA box guide (`/partners`)
+
+CSAs and farm boxes paste this week's list and get a guide grouped by storage
+spot (same zones as the Crisper Drawer Map), with copy-for-email (inline-styled
+HTML), plain text and a print layout. It runs entirely in the browser; nothing
+is sent or stored except saved boxes in the partner's own localStorage.
+
+- `partners/engine.js` is a bundle of `api/_crisper/parser.js` and
+  `storage.js`, so a CSA guide never disagrees with My Krisper. Run
+  `npm run partner-engine` after changing the catalog or parser and commit it.
+- Krisp notes come only from `krispReach` items, so the claims match
+  `scripts/krisp-tiers.mjs`. Only drawer zones get the "Krisp goes here" tag.
+- Each guide shows where and how to store. How long it lasts and what to do
+  when it turns stay on the `/produce/<slug>` pages it links to.
+- Links carry `utm_source=partner-guide&utm_medium=csa&utm_campaign=<partner>`.
+  With a discount code the store link is `/discount/<code>?redirect=/products/double-krisp`.
+- `?partner=Name&code=CODE` pre-fills the form for a link sent to one partner.
+- Items the parser would misfile (garlic scapes, beet greens) are listed as
+  "not in our guide yet" instead of guessed.
 
 ## The lab notebook
 

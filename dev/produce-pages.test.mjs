@@ -118,7 +118,7 @@ test('catch-all rewrite leaves the static pages alone', () => {
   const v = JSON.parse(readFileSync(path.join(root, 'vercel.json'), 'utf8'));
   const all = v.rewrites.find((r) => r.destination === '/index.html');
   const re = new RegExp('^' + all.source + '$');
-  for (const p of ['/produce', '/produce/broccoli', '/produce/what-went-wrong', '/produce/how-to', '/produce/how-to/ripen-avocados', '/sitemap.xml', '/robots.txt']) assert.ok(!re.test(p), p);
+  for (const p of ['/produce', '/produce/broccoli', '/produce/what-went-wrong', '/produce/how-to', '/produce/how-to/ripen-avocados', '/partners', '/sitemap.xml', '/robots.txt']) assert.ok(!re.test(p), p);
   assert.ok(re.test('/some-guide-route'));
 });
 

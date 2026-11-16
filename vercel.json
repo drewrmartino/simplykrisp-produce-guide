@@ -21,11 +21,15 @@
       "destination": "/crisper/admin.html"
     },
     {
+      "source": "/partners",
+      "destination": "/partners/index.html"
+    },
+    {
       "source": "/(apple-touch-icon.*\\.png)",
       "destination": "/apple-touch-icon.png"
     },
     {
-      "source": "/((?!api/|seasonal|lab|crisper|krisper|produce|sitemap\\.xml|robots\\.txt|llms\\.txt|[0-9a-f]{32}\\.txt$).*)",
+      "source": "/((?!api/|seasonal|lab|partners|crisper|krisper|produce|sitemap\\.xml|robots\\.txt|llms\\.txt|[0-9a-f]{32}\\.txt$).*)",
       "destination": "/index.html"
     },
     {

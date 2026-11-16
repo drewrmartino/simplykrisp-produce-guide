@@ -10,3 +10,4 @@
 - Lost link: resend form (generic response)
 - Why it goes bad: /produce hub → item page (symptom chips jump to cards, sources numbered) → "What went wrong?" checker (pick item → symptom → answer; ?item=&symptom= deep link); /seasonal cards link to item pages
 - Existing pages /, /seasonal, /lab unchanged
+- CSA box guide /partners: paste list (lines or commas) → zones + Krisp notes; unmatched warning; Preview/Plain tabs; Copy for email (text/html), Copy plain text, Print; Save box / load / delete; ?partner=&code= prefill

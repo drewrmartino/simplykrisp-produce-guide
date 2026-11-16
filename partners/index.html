@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Box Storage Guide for CSAs and Farms | Simply Krisp</title>
+<meta name="description" content="Type in this week's CSA box and get a ready-to-send guide to where each item goes in the kitchen, grouped by fridge drawer, counter and cupboard." />
+<link rel="canonical" href="https://guide.simplykrisp.com/partners" />
+<link rel="icon" type="image/png" href="/favicon.png?v=2" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Questrial&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<meta property="og:image" content="https://guide.simplykrisp.com/icons/share-1200x630.png" />
+<style>
+:root{
+  --bg:hsl(48 36% 97%);--fg:hsl(96 14% 14%);--muted-fg:hsl(96 5% 40%);--card:hsl(0 0% 100%);--panel:hsl(48 28% 94%);
+  --border:hsl(48 10% 85%);--primary:hsl(96 14% 28%);--primary-hover:hsl(96 16% 22%);--primary-fg:hsl(48 36% 97%);
+  --krisp:hsl(96 38% 30%);--krisp-bg:hsl(80 52% 90%);--krisp-line:hsl(84 40% 70%);
+  --warn:hsl(16 62% 38%);--warn-bg:hsl(28 85% 94%);
+  --radius:10px;--sans:"Questrial","DM Sans",system-ui,sans-serif;--body:"DM Sans",system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--sans);font-weight:400;letter-spacing:-.01em}
+a{color:inherit}
+button,input,textarea{font:inherit;color:inherit}
+.wrap{max-width:1160px;margin:0 auto;padding:28px 20px 64px}
+.intro{max-width:720px;margin-bottom:24px}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--krisp)}
+.intro h1{font-size:clamp(26px,3.4vw,36px);line-height:1.12;margin:6px 0 8px}
+.intro p{color:var(--muted-fg);max-width:62ch}
+.layout{display:grid;grid-template-columns:minmax(300px,380px) 1fr;gap:24px;align-items:start}
+@media (max-width:860px){.layout{grid-template-columns:1fr}}
+
+/* Input panel */
+.panel{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:18px;position:sticky;top:16px}
+@media (max-width:860px){.panel{position:static}}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:13px;font-weight:600;margin-bottom:5px}
+.field .hint{font-size:12px;color:var(--muted-fg);margin-top:4px}
+.field input,.field textarea{width:100%;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:9px 11px;font-size:15px}
+.field textarea{min-height:200px;resize:vertical;line-height:1.45}
+.field input:focus,.field textarea:focus{outline:2px solid hsl(96 30% 45% / .45);outline-offset:1px;border-color:var(--primary)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:1px solid var(--primary);background:var(--primary);color:var(--primary-fg);border-radius:8px;padding:9px 14px;font-size:14px;font-weight:600;cursor:pointer;text-decoration:none;transition:background .15s}
+.btn:hover{background:var(--primary-hover)}
+.btn.ghost{background:transparent;color:var(--primary)}
+.btn.ghost:hover{background:hsl(96 14% 28% / .08)}
+.btn.sm{padding:6px 10px;font-size:13px}
+.btn:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
+.saved{border-top:1px solid var(--border);margin-top:16px;padding-top:14px}
+.saved h3{font-size:14px;margin-bottom:8px;font-family:var(--body);font-weight:600}
+.saved ul{list-style:none;display:flex;flex-direction:column;gap:6px}
+.saved li{display:flex;align-items:center;justify-content:space-between;gap:8px;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:6px 6px 6px 10px;font-size:13.5px}
+.saved li button.load{background:none;border:0;text-align:left;cursor:pointer;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.saved li button.del{background:none;border:0;cursor:pointer;color:var(--muted-fg);padding:2px 6px;font-size:16px;line-height:1}
+.saved .empty{font-size:13px;color:var(--muted-fg)}
+.unmatched{margin-top:10px;font-size:13px;background:var(--warn-bg);color:var(--warn);border-radius:8px;padding:8px 10px}
+
+/* Output */
+.out-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
+.tabs{display:inline-flex;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:3px}
+.tabs button{border:0;background:none;padding:6px 12px;border-radius:6px;font-size:13.5px;font-weight:600;cursor:pointer;color:var(--muted-fg)}
+.tabs button[aria-selected="true"]{background:var(--card);color:var(--fg);box-shadow:0 1px 2px hsl(40 20% 20% / .1)}
+.actions{display:flex;flex-wrap:wrap;gap:8px}
+.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(20px);opacity:0;background:var(--fg);color:var(--bg);padding:10px 16px;border-radius:8px;font-size:14px;transition:all .2s;pointer-events:none;z-index:50}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.stage{background:hsl(48 14% 90%);border:1px solid var(--border);border-radius:var(--radius);padding:22px}
+@media (max-width:560px){.stage{padding:10px}}
+.plain{white-space:pre-wrap;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px;background:var(--card);border-radius:8px;padding:18px;line-height:1.55;overflow-x:auto}
+.note-for-partner{font-size:13px;color:var(--muted-fg);margin-top:10px}
+
+/* The guide itself (also what prints). Email copy uses inline styles built in JS. */
+.guide{background:var(--card);max-width:640px;margin:0 auto;border-radius:8px;padding:28px 28px 22px;box-shadow:0 2px 10px hsl(40 20% 20% / .08)}
+@media (max-width:560px){.guide{padding:20px 16px}}
+.g-top{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;border-bottom:2px solid var(--fg);padding-bottom:10px;margin-bottom:16px}
+.g-top h2{font-size:24px;line-height:1.15}
+.g-top .sub{font-size:13px;color:var(--muted-fg);margin-top:3px}
+.g-top .by{font-size:11px;color:var(--muted-fg);text-align:right;white-space:nowrap}
+.g-top .by b{display:block;font-family:var(--sans);font-size:14px;color:var(--fg);font-weight:400}
+.g-krisp-sum{display:flex;gap:12px;align-items:flex-start;background:var(--krisp-bg);border:1px solid var(--krisp-line);border-radius:8px;padding:12px 14px;margin-bottom:18px;font-size:14px}
+.g-krisp-sum .ic{flex:none;width:28px;height:28px;border-radius:50%;background:var(--krisp);color:#fff;display:grid;place-items:center;font-weight:700;font-size:13px}
+.g-krisp-sum b{color:var(--krisp)}
+.g-watch{background:var(--warn-bg);border-radius:8px;padding:10px 14px;margin-bottom:18px;font-size:14px}
+.g-watch b{color:var(--warn)}
+.g-zone{margin-bottom:18px}
+.g-zone h3{font-size:17px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.g-zone .zdetail{font-size:13px;color:var(--muted-fg);margin:1px 0 8px}
+.ztag{font-family:var(--body);font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:4px;background:var(--krisp);color:#fff}
+.g-item{padding:9px 0;border-top:1px solid var(--border)}
+.g-item:first-of-type{border-top:0}
+.g-item .nm{font-weight:600}
+.g-item .how{font-size:14px}
+.g-item .then,.g-item .away{font-size:13px;color:var(--muted-fg)}
+.g-item .kb{margin-top:6px;font-size:13px;border-left:3px solid var(--krisp);background:var(--krisp-bg);padding:5px 9px;border-radius:0 6px 6px 0}
+.g-item .kb b{color:var(--krisp)}
+.g-item .more{font-size:13px;font-weight:600;color:var(--krisp);text-decoration:none;display:inline-block;margin-top:3px}
+.g-item .more:hover{text-decoration:underline}
+.g-cta{margin-top:18px;border:1px solid var(--border);border-radius:8px;padding:14px;display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.g-cta p{font-size:14px;max-width:40ch}
+.g-cta .btn{background:var(--krisp);border-color:var(--krisp)}
+.g-foot{margin-top:14px;font-size:11.5px;color:var(--muted-fg);border-top:1px solid var(--border);padding-top:10px}
+.g-empty{text-align:center;color:var(--muted-fg);padding:40px 10px}
+
+@media (max-width:560px){.g-top{flex-direction:column;align-items:flex-start;gap:6px}.g-top .by{text-align:left}.g-top .by b{display:inline;margin-right:6px}.g-cta .btn{width:100%}}
+@media print{
+  body{background:#fff}
+  #sk-header,.intro,.panel,.out-head,.note-for-partner,.toast,[data-sk-header]{display:none!important}
+  .wrap{padding:0;max-width:none}.layout{display:block}
+  .stage{background:none;border:0;padding:0}
+  .guide{box-shadow:none;max-width:none;padding:0}
+  .g-item .more{color:var(--fg)}
+  @page{size:letter;margin:.45in}
+}
+</style>
+</head>
+<body>
+<script src="/assets/sk-header.js"></script>
+<main class="wrap">
+  <div class="intro">
+    <div class="eyebrow">For CSAs, farms and produce boxes</div>
+    <h1>Turn this week's box into a storage guide</h1>
+    <p>Paste what's going out to members. You get a guide grouped by where each item goes, ready to paste into your newsletter or print as a box insert. Nothing you type is saved anywhere except this browser.</p>
+  </div>
+
+  <div class="layout">
+    <form class="panel" id="form" autocomplete="off" onsubmit="return false">
+      <div class="row2">
+        <div class="field"><label for="partner">Your farm or CSA</label><input id="partner" placeholder="Tagge's Famous Fruit" /></div>
+        <div class="field"><label for="week">Box label</label><input id="week" placeholder="Week 22" /></div>
+      </div>
+      <div class="field">
+        <label for="code">Member discount code <span style="font-weight:400;color:var(--muted-fg)">(optional)</span></label>
+        <input id="code" placeholder="TAGGES15" />
+        <div class="hint">Added to the Simply Krisp link so your members' orders are credited to you.</div>
+      </div>
+      <div class="field">
+        <label for="items">What's in the box</label>
+        <textarea id="items" spellcheck="false" placeholder="One per line, or separated by commas"></textarea>
+        <div class="hint">Varieties and quantities are fine: "2 lb Yukon Gold potatoes", "1 bunch Lacinato kale".</div>
+        <div id="unmatched" class="unmatched" hidden></div>
+      </div>
+      <div class="actions">
+        <button class="btn" type="button" id="save">Save this box</button>
+        <button class="btn ghost" type="button" id="sample">Load a sample box</button>
+      </div>
+      <div class="saved"><h3>Saved boxes</h3><ul id="savedList"></ul></div>
+    </form>
+
+    <section aria-label="Guide output">
+      <div class="out-head">
+        <div class="tabs" role="tablist">
+          <button role="tab" aria-selected="true" data-view="guide">Preview</button>
+          <button role="tab" aria-selected="false" data-view="plain">Plain text</button>
+        </div>
+        <div class="actions">
+          <button class="btn" type="button" id="copyHtml">Copy for email</button>
+          <button class="btn ghost" type="button" id="copyText">Copy plain text</button>
+          <button class="btn ghost" type="button" id="print">Print insert</button>
+        </div>
+      </div>
+      <div class="stage">
+        <div id="viewGuide"></div>
+        <pre id="viewPlain" class="plain" hidden></pre>
+      </div>
+      <p class="note-for-partner">"Copy for email" keeps the layout and links when pasted into Mailchimp, Constant Contact, Gmail or Squarespace. Use plain text for text messages or Facebook posts.</p>
+    </section>
+  </div>
+</main>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script type="module">
+// Vercel serves this at /partners (no trailing slash), so a relative import would miss.
+const enginePath = /\/partners\/?$/.test(location.pathname) ? '/partners/engine.js' : './engine.js';
+const { extractItems, storageGuide, BY_NAME, PAGES } = await import(enginePath);
+
+const SITE = 'https://guide.simplykrisp.com';
+const STORE = 'https://simplykrisp.com';
+const PRODUCT = '/products/double-krisp';
+const $ = (id) => document.getElementById(id);
+const els = { partner: $('partner'), week: $('week'), code: $('code'), items: $('items') };
+const PRODUCERS = new Set(['very_high', 'high', 'medium']);
+const SAMPLE = 'Lacinato kale\nRainbow carrots\nButternut squash\nHoneycrisp apples\nBroccoli\nRed leaf lettuce\nYellow onions\nGarlic\nBartlett pears\nSpinach\nBeets\nKohlrabi';
+
+const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const slug = (s) => String(s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'partner';
+const list = (a) => a.length < 3 ? a.join(' and ') : `${a.slice(0, -1).join(', ')} and ${a[a.length - 1]}`;
+const DISPLAY = { 'Squash (Winter)': 'Winter squash', 'Herbs (Fresh)': 'Fresh herbs' };
+const sent = (t) => (t && !/[.!?]$/.test(t.trim()) ? t.trim() + '.' : t);
+const dn = (n) => DISPLAY[n] || n;
+const lc = (n) => n.replace(/\s*\((.+)\)/, (_, x) => ` ${x}`).toLowerCase().replace(/^squash winter$/, 'winter squash');
+
+function utm(content) {
+  const p = new URLSearchParams({ utm_source: 'partner-guide', utm_medium: 'csa', utm_campaign: slug(els.partner.value), utm_content: content });
+  return p.toString();
+}
+function itemUrl(name) {
+  const s = PAGES[name];
+  return s ? `${SITE}/produce/${s}?${utm('item-' + s)}` : `${SITE}/?${utm('item')}`;
+}
+function storeUrl() {
+  const code = els.code.value.trim();
+  const q = utm('krisp-cta');
+  return code ? `${STORE}/discount/${encodeURIComponent(code)}?redirect=${encodeURIComponent(PRODUCT + '?' + q)}` : `${STORE}${PRODUCT}?${q}`;
+}
+
+// CSA lists come comma-separated as often as one per line; the parser reads lines.
+function toLines(raw) {
+  return raw.split(/\r?\n|,|;|•|·/).map((l) => l.replace(/^\s*[-*]\s*/, '').trim()).filter(Boolean);
+}
+// Lines the parser would map to the wrong storage spot. Better to admit we don't cover them.
+const MISMATCH = [/\bscapes?\b/i, /\bgreens?\b.*\b(beet|turnip|radish)\b|\b(beet|turnip|radish)\b.*\bgreens?\b/i, /\bgreen garlic\b/i];
+
+function build() {
+  const lines = toLines(els.items.value);
+  const parsed = [], unmatched = [];
+  for (const line of lines) {
+    if (MISMATCH.some((re) => re.test(line))) { unmatched.push(line); continue; }
+    const r = extractItems(line);
+    if (r.items.length) parsed.push(...r.items); else unmatched.push(line);
+  }
+  const g = storageGuide(parsed, { limit: 40 });
+  const names = new Set(g.guide_items.map((i) => i.name));
+  const krispItems = g.guide_items.filter((i) => i.krisp);
+  const producers = [...names].filter((n) => PRODUCERS.has(BY_NAME[n].ethyleneProduction) && BY_NAME[n].storage !== 'pantry');
+  const sensitive = krispItems.map((i) => i.name).filter((n) => !producers.includes(n));
+  // Box-specific "keep away from": only mention conflicts actually in this box.
+  for (const i of g.guide_items) {
+    const away = (BY_NAME[i.name].avoidWith || []).filter((a) => [...names].some((n) => lc(n).startsWith(lc(a).replace(/s$/, '')) || lc(a).startsWith(lc(n).replace(/s$/, ''))));
+    i.boxAway = away.length ? `Keep away from the ${list(away.map(lc))} in this box.` : '';
+  }
+  return { g, unmatched, krispItems, producers, sensitive, partner: els.partner.value.trim(), week: els.week.value.trim() };
+}
+
+function title(m) { return m.week ? `Where to store your ${esc(m.week)} box` : 'Where to store this week\u2019s box'; }
+function krispSummary(m) {
+  const n = m.krispItems.length;
+  return `<b>A Simply Krisp in your crisper drawer helps ${n} of these ${n === 1 ? 'item' : 'items'} last longer:</b> ${esc(list(m.krispItems.map((i) => dn(i.name).toLowerCase())))}. It soaks up ethylene, the gas that yellows greens and softens produce. Look for the green notes below.`;
+}
+function watchText(m) {
+  if (!m.producers.length || !m.sensitive.length) return '';
+  return `<b>Ethylene watch:</b> the ${esc(list(m.producers.map(lc)))} in this box give off ethylene, which speeds up yellowing in the ${esc(list(m.sensitive.slice(0, 4).map(lc)))}. Keep them in separate drawers.`;
+}
+function krispLine(i) {
+  const m = i.krisp.match(/about (\d+)–(\d+) days(.*?)\.\s*(.*)$/);
+  if (!m) return esc(i.krisp);
+  return `<b>Simply Krisp helps:</b> about ${m[1]}–${m[2]} extra days${esc(m[3])}. ${esc(m[4])}`;
+}
+
+function renderGuide(m) {
+  if (!m.g.guide_items.length) return `<div class="guide"><div class="g-empty">Add the produce in this week's box to see the guide.</div></div>`;
+  const zones = m.g.zones.map((z) => `
+    <div class="g-zone">
+      <h3>${esc(z.title)}${z.krisp_note && z.zone_items.some((i) => i.krisp) ? '<span class="ztag">Krisp goes here</span>' : ''}</h3>
+      <div class="zdetail">${esc(z.detail)}</div>
+      ${z.zone_items.map((i) => `
+        <div class="g-item">
+          <div><span class="nm">${esc(dn(i.name))}</span> <span class="how">\u2014 ${esc(sent(i.shelf_how || i.how))}</span></div>
+          ${i.then ? `<div class="then">${esc(i.then)}</div>` : ''}
+          ${i.boxAway ? `<div class="away">${esc(i.boxAway)}</div>` : ''}
+          ${i.krisp ? `<div class="kb">${krispLine(i)}</div>` : ''}
+          <a class="more" href="${esc(itemUrl(i.name))}" target="_blank" rel="noopener">How long it lasts and signs it's turning \u2192</a>
+        </div>`).join('')}
+    </div>`).join('');
+  return `<article class="guide">
+    <div class="g-top"><div><h2>${title(m)}</h2><div class="sub">${m.partner ? `From ${esc(m.partner)} \u00b7 ` : ''}Put it away tonight and it lasts days longer.</div></div>
+      <div class="by"><b>Simply Krisp</b>Produce storage guide</div></div>
+    ${m.krispItems.length ? `<div class="g-krisp-sum"><span class="ic" aria-hidden="true">K</span><div>${krispSummary(m)}</div></div>` : ''}
+    ${watchText(m) ? `<div class="g-watch">${watchText(m)}</div>` : ''}
+    ${zones}
+    ${m.krispItems.length ? `<div class="g-cta"><p>${m.partner ? `${esc(m.partner)} members` : 'Members'}${els.code.value.trim() ? ` save with code <b>${esc(els.code.value.trim())}</b>` : ' can try one in each crisper drawer'} \u2014 one sachet per drawer, changed monthly.</p><a class="btn" href="${esc(storeUrl())}" target="_blank" rel="noopener">See Simply Krisp</a></div>` : ''}
+    <div class="g-foot">${m.partner ? `Shared by ${esc(m.partner)}. ` : ''}Storage guidance from the Simply Krisp Produce Storage Guide, built on UC Davis Postharvest Technology Center data. Every item, plus what to do when something starts to turn: guide.simplykrisp.com</div>
+  </article>`;
+}
+
+// Email clients strip <style>, so the copied version is inline-styled tables.
+function renderEmail(m) {
+  if (!m.g.guide_items.length) return '';
+  const F = "font-family:Arial,Helvetica,sans-serif;";
+  const green = '#3a6427', greenBg = '#ebf3d9', ink = '#1f2a1b', mute = '#5f675b', line = '#e1ddd2';
+  const zones = m.g.zones.map((z) => `
+    <tr><td style="${F}padding:16px 0 2px;font-size:17px;color:${ink};font-weight:bold;">${esc(z.title)}${z.krisp_note && z.zone_items.some((i) => i.krisp) ? ` <span style="${F}font-size:11px;font-weight:bold;color:#fff;background:${green};padding:2px 6px;border-radius:3px;letter-spacing:.5px;">KRISP GOES HERE</span>` : ''}</td></tr>
+    <tr><td style="${F}font-size:13px;color:${mute};padding-bottom:6px;">${esc(z.detail)}</td></tr>
+    ${z.zone_items.map((i) => `<tr><td style="${F}border-top:1px solid ${line};padding:8px 0;font-size:14px;color:${ink};line-height:1.45;">
+      <b>${esc(dn(i.name))}</b> \u2014 ${esc(sent(i.shelf_how || i.how))}
+      ${i.then ? `<br><span style="font-size:13px;color:${mute};">${esc(i.then)}</span>` : ''}
+      ${i.boxAway ? `<br><span style="font-size:13px;color:${mute};">${esc(i.boxAway)}</span>` : ''}
+      ${i.krisp ? `<div style="margin-top:5px;font-size:13px;background:${greenBg};border-left:3px solid ${green};padding:5px 8px;">${krispLine(i).replace('<b>', `<b style="color:${green};">`)}</div>` : ''}
+      <br><a href="${esc(itemUrl(i.name))}" style="font-size:13px;color:${green};font-weight:bold;text-decoration:none;">How long it lasts and signs it's turning \u2192</a>
+    </td></tr>`).join('')}`).join('');
+  const sum = m.krispItems.length ? `<tr><td style="${F}background:${greenBg};border:1px solid #c5d9a4;padding:12px 14px;font-size:14px;color:${ink};line-height:1.45;">${krispSummary(m).replace('<b>', `<b style="color:${green};">`)}</td></tr><tr><td style="height:10px;"></td></tr>` : '';
+  const watch = watchText(m) ? `<tr><td style="${F}background:#fdf1e6;padding:10px 14px;font-size:14px;color:${ink};line-height:1.45;">${watchText(m).replace('<b>', '<b style="color:#9c4a26;">')}</td></tr>` : '';
+  const cta = m.krispItems.length ? `<tr><td style="${F}padding:18px 0 4px;font-size:14px;color:${ink};">${m.partner ? `${esc(m.partner)} members` : 'Members'}${els.code.value.trim() ? ` save with code <b>${esc(els.code.value.trim())}</b>` : ' can try one in each crisper drawer'} \u2014 one sachet per drawer, changed monthly.<br><a href="${esc(storeUrl())}" style="display:inline-block;margin-top:8px;background:${green};color:#fff;padding:9px 16px;border-radius:6px;text-decoration:none;font-weight:bold;">See Simply Krisp</a></td></tr>` : '';
+  return `<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="width:100%;max-width:600px;border-collapse:collapse;">
+    <tr><td style="${F}font-size:22px;color:${ink};padding-bottom:4px;">${title(m)}</td></tr>
+    <tr><td style="${F}font-size:13px;color:${mute};padding-bottom:12px;border-bottom:2px solid ${ink};">${m.partner ? `From ${esc(m.partner)} \u00b7 ` : ''}Put it away tonight and it lasts days longer.</td></tr>
+    <tr><td style="height:14px;"></td></tr>
+    ${sum}${watch}${zones}${cta}
+    <tr><td style="${F}font-size:11px;color:${mute};padding-top:14px;border-top:1px solid ${line};">Storage guide by <a href="${SITE}/?${utm('footer')}" style="color:${mute};">Simply Krisp</a>, built on UC Davis Postharvest Technology Center data.</td></tr>
+  </table>`;
+}
+
+function renderPlain(m) {
+  if (!m.g.guide_items.length) return 'Add the produce in this week\u2019s box to see the guide.';
+  const strip = (h) => h.replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').replace(/&#39;/g, "'").replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+  const out = [strip(title(m)).toUpperCase(), m.partner ? `From ${m.partner}` : '', ''];
+  if (m.krispItems.length) out.push(strip(krispSummary(m)).replace(' Look for the green notes below.', ' Items marked [+Krisp] are the ones it helps.'), '');
+  if (watchText(m)) out.push(strip(watchText(m)), '');
+  for (const z of m.g.zones) {
+    out.push(`${z.title.toUpperCase()}${z.krisp_note && z.zone_items.some((i) => i.krisp) ? ' (a Krisp goes here)' : ''}`);
+    for (const i of z.zone_items) {
+      out.push(`- ${dn(i.name)}${i.krisp ? ' [+Krisp]' : ''}: ${sent(i.shelf_how || i.how)}${i.then ? ' ' + i.then : ''}${i.boxAway ? ' ' + i.boxAway : ''}`);
+      if (i.krisp) out.push(`  ${strip(krispLine(i))}`);
+    }
+    out.push('');
+  }
+  out.push(`How long each item lasts and what to do when it starts to turn: ${SITE}/produce?${utm('plain-text')}`);
+  if (m.krispItems.length) out.push(`Simply Krisp${els.code.value.trim() ? ` (code ${els.code.value.trim()})` : ''}: ${storeUrl()}`);
+  return out.join('\n');
+}
+
+let view = 'guide', model;
+function update() {
+  model = build();
+  $('viewGuide').innerHTML = renderGuide(model);
+  $('viewPlain').textContent = renderPlain(model);
+  const u = $('unmatched');
+  u.hidden = !model.unmatched.length;
+  u.textContent = model.unmatched.length ? `Not in our guide yet, left out: ${model.unmatched.join(', ')}. Add a line about these yourself.` : '';
+  persistDraft();
+}
+for (const el of Object.values(els)) el.addEventListener('input', update);
+
+document.querySelectorAll('.tabs button').forEach((b) => b.addEventListener('click', () => {
+  view = b.dataset.view;
+  document.querySelectorAll('.tabs button').forEach((x) => x.setAttribute('aria-selected', String(x === b)));
+  $('viewGuide').hidden = view !== 'guide';
+  $('viewPlain').hidden = view !== 'plain';
+}));
+
+let tt;
+function toast(msg) { const t = $('toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(tt); tt = setTimeout(() => t.classList.remove('show'), 2200); }
+async function copy(html, text, label) {
+  if (!model.g.guide_items.length) return toast('Add some produce first');
+  try {
+    if (html && window.ClipboardItem) {
+      await navigator.clipboard.write([new ClipboardItem({ 'text/html': new Blob([html], { type: 'text/html' }), 'text/plain': new Blob([text], { type: 'text/plain' }) })]);
+    } else {
+      await navigator.clipboard.writeText(text);
+    }
+    toast(label);
+  } catch {
+    // Clipboard API blocked (some embeds): fall back to a selection copy.
+    const box = document.createElement(html ? 'div' : 'textarea');
+    if (html) { box.innerHTML = html; box.contentEditable = 'true'; } else box.value = text;
+    Object.assign(box.style, { position: 'fixed', left: '-9999px', top: '0' });
+    document.body.appendChild(box);
+    const r = document.createRange();
+    if (html) { r.selectNodeContents(box); const s = getSelection(); s.removeAllRanges(); s.addRange(r); } else box.select();
+    const ok = document.execCommand('copy');
+    box.remove();
+    toast(ok ? label : 'Copy blocked here. Select the preview and copy it instead.');
+  }
+}
+$('copyHtml').addEventListener('click', () => copy(renderEmail(model), renderPlain(model), 'Copied. Paste it into your newsletter.'));
+$('copyText').addEventListener('click', () => copy('', renderPlain(model), 'Plain text copied'));
+$('print').addEventListener('click', () => { if (!model.g.guide_items.length) return toast('Add some produce first'); window.print(); });
+$('sample').addEventListener('click', () => { els.items.value = SAMPLE; if (!els.week.value) els.week.value = 'Week 22'; update(); });
+
+// Saved boxes live in localStorage so a CSA can reuse last week's list.
+const KEY = 'sk-partner-boxes', DRAFT = 'sk-partner-draft';
+const loadSaved = () => { try { return JSON.parse(localStorage.getItem(KEY)) || []; } catch { return []; } };
+function renderSaved() {
+  const s = loadSaved(), ul = $('savedList');
+  ul.innerHTML = s.length ? s.map((b, i) => `<li><button class="load" type="button" data-i="${i}" title="Load ${esc(b.week || 'box')}">${esc(b.week || 'Untitled box')} <span style="color:var(--muted-fg)">\u00b7 ${b.count} items</span></button><button class="del" type="button" data-del="${i}" aria-label="Delete ${esc(b.week || 'box')}">\u00d7</button></li>`).join('') : '<li class="empty" style="border:0;background:none;padding:0">Save a box to reuse it next week.</li>';
+}
+$('savedList').addEventListener('click', (e) => {
+  const s = loadSaved();
+  const l = e.target.closest('[data-i]'), d = e.target.closest('[data-del]');
+  if (l) { const b = s[+l.dataset.i]; els.week.value = b.week; els.items.value = b.items; update(); toast(`Loaded ${b.week || 'box'}`); }
+  if (d) { s.splice(+d.dataset.del, 1); localStorage.setItem(KEY, JSON.stringify(s)); renderSaved(); }
+});
+$('save').addEventListener('click', () => {
+  if (!model.g.guide_items.length) return toast('Add some produce first');
+  const s = loadSaved().filter((b) => b.week !== els.week.value.trim());
+  s.unshift({ week: els.week.value.trim(), items: els.items.value, count: model.g.guide_items.length });
+  localStorage.setItem(KEY, JSON.stringify(s.slice(0, 12)));
+  renderSaved(); toast('Box saved');
+});
+function persistDraft() { try { localStorage.setItem(DRAFT, JSON.stringify({ partner: els.partner.value, code: els.code.value, week: els.week.value, items: els.items.value })); } catch {} }
+
+// ?partner=Tagge%27s&code=TAGGES15 pre-fills a link we send to a specific partner.
+const q = new URLSearchParams(location.search);
+let d = {}; try { d = JSON.parse(localStorage.getItem(DRAFT)) || {}; } catch {}
+els.partner.value = q.get('partner') ?? d.partner ?? '';
+els.code.value = q.get('code') ?? d.code ?? '';
+els.week.value = d.week ?? '';
+els.items.value = d.items || SAMPLE;
+if (!d.items && !els.week.value) els.week.value = 'Week 22';
+renderSaved();
+update();
+</script>
+</body>
+</html>

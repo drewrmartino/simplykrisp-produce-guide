@@ -10,12 +10,14 @@
     "catalog": "node scripts/build-crisper-catalog.mjs",
     "pages": "node scripts/build-produce-pages.mjs",
     "test": "node --test dev/",
-    "indexnow": "node scripts/indexnow.mjs"
+    "indexnow": "node scripts/indexnow.mjs",
+    "partner-engine": "node scripts/build-partner-engine.mjs"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.2.0"
   },
   "devDependencies": {
-    "@electric-sql/pglite": "^0.5.15"
+    "@electric-sql/pglite": "^0.5.15",
+    "esbuild": "^0.24.2"
   }
 }
