@@ -16,11 +16,15 @@ app/
 - **Sign-in links open the app.** Magic-link emails (`https://guide.simplykrisp.com/krisper?k=…`) open the app when it's installed. This uses universal links, served from `/.well-known/apple-app-site-association`.
 - **Sign in with Simply Krisp** runs in a Safari sheet and returns to the app through `simplykrisp://krisper?k=…`.
 - **Store, recipe and help links** open in a Safari sheet over the app, so people stay in the app.
-- **Receipt photos** use the iPhone camera or photo library. The permission text is in `Info.plist`.
+- **Receipt photos** use the iPhone camera or photo library. The permission text is in `Info.plist`. Before the first photo, people choose the AI reader (Google Gemini) or reading on the phone. Apple requires that permission before personal data goes to a third-party AI (guideline 5.1.2(i)).
+- **Offline notice.** Without a connection the app says so, then reloads the fridge when the phone is back online.
+- **Privacy manifest.** `ios/App/App/PrivacyInfo.xcprivacy` lists the data the app collects. Keep it matching the App Privacy answers in App Store Connect.
 - **App look.** There is no website menu, footer or "Add to Home Screen" prompt, the status bar is green, and the layout is iPhone-only and portrait-only.
 - **Account deletion** is under Settings. Apple requires it, and it already existed.
 
-## Build (needs a Mac with Xcode 16+, or a cloud Mac)
+## Build (needs a Mac with Xcode 26 or later)
+
+Apple only accepts uploads built with Xcode 26+ and the iOS 26 SDK. Step-by-step instructions for the first App Store submission are in [APP_STORE.md](APP_STORE.md).
 
 ```bash
 cd app
@@ -52,7 +56,7 @@ Every pull request that touches `app/` is compiled on a GitHub Mac runner (`.git
    - Support URL
    - Category: Food & Drink
    - Age rating
-   - App Privacy answers: you collect an email address, purchase history (receipts) and a device ID (push token). None of it is used for tracking.
+   - App Privacy answers: see the table in [APP_STORE.md](APP_STORE.md). None of it is used for tracking.
 5. **Review notes.** Give Apple a test account. Create one, then paste its sign-in link (`https://guide.simplykrisp.com/krisper?k=…`) into the review notes. Explain that the app reads grocery receipts and reminds people to eat produce before it spoils.
 
 ## Check that it's working
