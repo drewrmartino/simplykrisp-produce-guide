@@ -57,6 +57,19 @@ button,input,textarea{font:inherit;color:inherit}
 .saved .empty{font-size:13px;color:var(--muted-fg)}
 .unmatched{margin-top:10px;font-size:13px;background:var(--warn-bg);color:var(--warn);border-radius:8px;padding:8px 10px}
 
+/* Produce suggestions under the box list */
+.ac-wrap{position:relative}
+.ac{position:absolute;left:0;right:0;top:100%;background:var(--card);border:1px solid var(--border);border-radius:8px;box-shadow:0 8px 24px hsl(96 14% 14% / .12);list-style:none;padding:4px;z-index:20;max-height:280px;overflow:auto}
+.ac li{display:flex;align-items:center;gap:8px;padding:7px 9px;border-radius:6px;cursor:pointer;font-size:14.5px}
+.ac li[aria-selected="true"]{background:var(--krisp-bg)}
+.ac li img{width:18px;height:18px;flex:none}
+.ac li .ac-sub{margin-left:auto;font-size:12px;color:var(--muted-fg);white-space:nowrap}
+.ac li .ac-in{margin-left:auto;font-size:12px;color:var(--krisp);font-weight:600}
+.ac .ac-t{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ac mark{background:none;color:inherit;font-weight:700}
+.ac-help{font-size:12px;color:var(--muted-fg);padding:5px 9px 3px;border-top:1px solid var(--border);margin-top:3px}
+@media (hover:none){.ac-help{display:none}}
+
 /* Output */
 .out-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
 .tabs{display:inline-flex;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:3px}
@@ -171,8 +184,11 @@ a.chip:hover{border-color:var(--primary)}
       </div>
       <div class="field">
         <label for="items">What's in the box</label>
-        <textarea id="items" spellcheck="false" placeholder="One per line, or separated by commas"></textarea>
-        <div class="hint">Varieties and quantities are fine: "2 lb Yukon Gold potatoes", "1 bunch Lacinato kale".</div>
+        <div class="ac-wrap">
+          <textarea id="items" spellcheck="false" placeholder="Start typing: kale, honeycrisp, carrots..." role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="acList"></textarea>
+          <ul id="acList" class="ac" role="listbox" aria-label="Produce suggestions" hidden></ul>
+        </div>
+        <div class="hint">Pick from the suggestions as you type, or paste your list. Varieties and quantities are fine: "2 lb Yukon Gold potatoes", "1 bunch Lacinato kale".</div>
         <div id="unmatched" class="unmatched" hidden></div>
       </div>
       <div class="actions">
@@ -416,11 +432,113 @@ function update() {
   $('viewGuide').innerHTML = renderGuide(model);
   $('viewPlain').textContent = renderPlain(model);
   const u = $('unmatched');
-  u.hidden = !model.unmatched.length;
-  u.textContent = model.unmatched.length ? `Not in our guide yet, left out: ${model.unmatched.join(', ')}. Add a line about these yourself.` : '';
+  // Don't flag the word still being typed as missing.
+  const seg = document.activeElement === els.items ? currentSegment() : null;
+  const miss = seg && seg.q ? model.unmatched.filter((l) => !l.toLowerCase().endsWith(seg.q)) : model.unmatched;
+  u.hidden = !miss.length;
+  u.textContent = miss.length ? `Not in our guide yet, left out: ${miss.join(', ')}. Add a line about these yourself.` : '';
   persistDraft();
 }
 for (const el of Object.values(els)) el.addEventListener('input', update);
+
+// ---- Produce suggestions: same names and variety aliases the parser matches ----
+const AC = (() => {
+  const out = [], seen = new Set();
+  const cap = (t) => t.replace(/\b\w/g, (c) => c.toUpperCase());
+  for (const c of Object.values(BY_NAME)) {
+    const label = dn(c.name);
+    const add = (text, sub) => { const k = text.toLowerCase(); if (seen.has(k)) return; seen.add(k); out.push({ text, sub, name: c.name, img: c.imageUrl, key: k }); };
+    add(label, '');
+    for (const a of c.aliases || []) if (a.toLowerCase() !== label.toLowerCase()) add(cap(a), label);
+  }
+  return out;
+})();
+const QTY = /^((?:\d+(?:[./]\d+)?\s*)?(?:(?:lbs?|pounds?|oz|ounces?|bunch(?:es)?|heads?|pints?|quarts?|bags?|ea|each|pcs?|pieces?|x)\b\.?\s*)?(?:of\s+)?)/i;
+const acList = $('acList');
+let acItems = [], acIdx = 0, acSeg = null;
+
+function currentSegment() {
+  const ta = els.items, v = ta.value, pos = ta.selectionStart;
+  if (pos !== ta.selectionEnd) return null;
+  let start = pos; while (start > 0 && !/[\n,;•·]/.test(v[start - 1])) start--;
+  let end = pos; while (end < v.length && !/[\n,;•·]/.test(v[end])) end++;
+  const raw = v.slice(start, end);
+  const lead = raw.match(/^\s*(?:[-*]\s*)?/)[0];
+  const body = raw.slice(lead.length);
+  const qty = body.match(QTY)[0];
+  const q = body.slice(qty.length).trim().toLowerCase();
+  return { start, end, lead, qty, q };
+}
+function rank(e, q) {
+  if (e.key === q) return 0;
+  if (e.key.startsWith(q)) return e.sub ? 2 : 1;
+  if (e.key.split(/[\s-]+/).some((w) => w.startsWith(q))) return e.sub ? 4 : 3;
+  if (q.length >= 3 && e.key.includes(q)) return 5;
+  return -1;
+}
+function hl(text, q) {
+  const i = text.toLowerCase().indexOf(q);
+  return i < 0 ? esc(text) : esc(text.slice(0, i)) + '<mark>' + esc(text.slice(i, i + q.length)) + '</mark>' + esc(text.slice(i + q.length));
+}
+// Open the list just under the line being typed, not at the bottom of a tall box.
+function caretTop() {
+  const ta = els.items, cs = getComputedStyle(ta), m = document.createElement('div');
+  for (const k of ['fontFamily', 'fontSize', 'lineHeight', 'letterSpacing', 'paddingTop', 'paddingLeft', 'paddingRight', 'borderTopWidth', 'borderLeftWidth', 'borderRightWidth', 'boxSizing']) m.style[k] = cs[k];
+  Object.assign(m.style, { position: 'absolute', visibility: 'hidden', whiteSpace: 'pre-wrap', wordWrap: 'break-word', width: ta.offsetWidth + 'px', top: '0', left: '0' });
+  m.textContent = ta.value.slice(0, ta.selectionStart);
+  const mk = document.createElement('span'); mk.textContent = '\u200b'; m.appendChild(mk);
+  ta.parentNode.appendChild(m);
+  const lh = parseFloat(cs.lineHeight) || 22;
+  const y = mk.offsetTop + lh - ta.scrollTop + 6;
+  m.remove();
+  return Math.max(lh, Math.min(y, ta.offsetHeight + 4));
+}
+function acClose() { acList.hidden = true; els.items.setAttribute('aria-expanded', 'false'); els.items.removeAttribute('aria-activedescendant'); acItems = []; }
+function acRender() {
+  // What's already in the box, not counting the line being typed.
+  const v = els.items.value, rest = v.slice(0, acSeg.start) + v.slice(acSeg.end);
+  const inBox = new Set(toLines(rest).flatMap((l) => extractItems(l).items.map((i) => i.name)));
+  acList.innerHTML = acItems.map((e, i) => `<li role="option" id="ac-${i}" data-i="${i}" aria-selected="${i === acIdx}"><img src="${esc(e.img)}" alt="" loading="lazy"><span class="ac-t">${hl(e.text, acSeg.q)}</span>${inBox.has(e.name) && e.key !== acSeg.q ? '<span class="ac-in">in box</span>' : e.sub ? `<span class="ac-sub">${esc(e.sub)}</span>` : ''}</li>`).join('')
+    + '<li class="ac-help" aria-hidden="true">↑↓ to choose · Enter adds · Esc closes</li>';
+  acList.style.top = caretTop() + 'px';
+  acList.hidden = false;
+  els.items.setAttribute('aria-expanded', 'true');
+  els.items.setAttribute('aria-activedescendant', 'ac-' + acIdx);
+  acList.querySelector(`[data-i="${acIdx}"]`)?.scrollIntoView({ block: 'nearest' });
+}
+function acUpdate() {
+  acSeg = currentSegment();
+  if (!acSeg || !acSeg.q) return acClose();
+  const q = acSeg.q;
+  const hits = AC.map((e) => [e, rank(e, q)]).filter(([, r]) => r >= 0).sort((a, b) => a[1] - b[1] || a[0].key.length - b[0].key.length);
+  const per = new Map();
+  acItems = hits.map(([e]) => e).filter((e) => { const n = (per.get(e.name) || 0) + 1; per.set(e.name, n); return n <= 2; }).slice(0, 8);
+  // Already typed an exact match and nothing longer to offer: stay out of the way.
+  if (!acItems.length || (acItems.length === 1 && acItems[0].key === q)) return acClose();
+  acIdx = 0; acRender();
+}
+function acPick(i) {
+  const e = acItems[i]; if (!e || !acSeg) return;
+  const ta = els.items, v = ta.value;
+  const after = v.slice(acSeg.end);
+  const glue = after.length && /^[\n,;]/.test(after) ? '' : '\n';
+  const insert = acSeg.lead + acSeg.qty + e.text + glue;
+  ta.value = v.slice(0, acSeg.start) + insert + after;
+  const caret = acSeg.start + insert.length + (glue ? 0 : 1);
+  ta.setSelectionRange(Math.min(caret, ta.value.length), Math.min(caret, ta.value.length));
+  acClose(); ta.focus(); update();
+}
+els.items.addEventListener('input', acUpdate);
+els.items.addEventListener('click', acUpdate);
+els.items.addEventListener('blur', () => setTimeout(() => { acClose(); update(); }, 120));
+els.items.addEventListener('keydown', (ev) => {
+  if (acList.hidden) return;
+  if (ev.key === 'ArrowDown') { ev.preventDefault(); acIdx = (acIdx + 1) % acItems.length; acRender(); }
+  else if (ev.key === 'ArrowUp') { ev.preventDefault(); acIdx = (acIdx - 1 + acItems.length) % acItems.length; acRender(); }
+  else if (ev.key === 'Enter' || ev.key === 'Tab') { ev.preventDefault(); acPick(acIdx); }
+  else if (ev.key === 'Escape') { ev.preventDefault(); acClose(); }
+});
+acList.addEventListener('mousedown', (ev) => { const li = ev.target.closest('li[data-i]'); if (li) { ev.preventDefault(); acPick(+li.dataset.i); } });
 
 document.querySelectorAll('.tabs button').forEach((b) => b.addEventListener('click', () => {
   view = b.dataset.view;
