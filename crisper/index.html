@@ -169,6 +169,7 @@ ol.steps li::marker{color:var(--muted-fg);font-weight:700}
 ol.ios{margin:8px 0 0 18px;font-size:14px;line-height:1.5}
 .photo{display:flex;flex-direction:column;gap:8px;align-items:flex-start}
 .photo .btn.dis{opacity:.55;pointer-events:none}
+.aiask{border:1px solid #d9dccb;border-radius:12px;padding:12px;background:#fff;display:flex;flex-direction:column;gap:8px;width:100%;box-sizing:border-box}.aiask p{margin:0}
 .fbcard{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
 .fbfoot{text-align:center;margin:22px 0 4px}
 #fbText{min-height:120px}
@@ -727,7 +728,7 @@ details.sd{display:block}
           <div class="addr"><code id="myLink" style="overflow-wrap:anywhere;font-size:12.5px"></code><button class="btn ghost sm" type="button" data-copy="myLink">Copy</button></div>
         </details>
         <div class="setrow">
-          <div style="min-width:0;flex:1"><b>Privacy</b><div class="note">Receipt photos are read by an AI service and then discarded. Forwarded emails: we keep only the store, order number and produce lines. We never sell your data.</div></div>
+          <div style="min-width:0;flex:1"><b>Privacy</b><div class="note">Receipt photos are read by Google Gemini, or on your phone if you chose that, and then discarded. Forwarded emails: we keep only the store, order number and produce lines. We never sell your data.</div></div>
           <a class="btn ghost sm" href="https://simplykrisp.com/policies/privacy-policy" target="_blank" rel="noopener">Policy</a>
         </div>
         <div class="setrow">
@@ -848,7 +849,12 @@ details.sd{display:block}
         </ul>
         <label class="btn" for="photoIn" id="photoBtn">Take or choose a receipt photo</label>
         <input type="file" id="photoIn" accept="image/*" multiple class="sr">
-        <p class="note">Photos are read by an AI service to find your produce, then discarded. We don't keep them.</p>
+        <p class="note" id="photoNote">Photos are read by an AI service to find your produce, then discarded. We don't keep them.</p>
+        <div class="aiask hide" id="aiAsk" role="group" aria-labelledby="aiAskT">
+          <b id="aiAskT">How should we read your receipt?</b>
+          <p class="small">The AI reader sends your photo to Google Gemini, which finds the produce lines. We don't store the photo. Reading on this phone keeps the photo on your phone, but it's slower and misses more.</p>
+          <div class="row"><button class="btn" type="button" id="aiYes">Use the AI reader</button><button class="btn ghost" type="button" id="aiNo">Read on this phone</button></div>
+        </div>
         <div class="status small hide" id="photoStatus"><span class="spin"></span><span id="photoMsg">Reading your receipt…</span></div>
       </div>
       <div class="or"><span>or paste the text</span></div>
@@ -1860,7 +1866,7 @@ details.sd{display:block}
     } else if (which === 'paste' || which === 'photo') {
       if (!S.st) return;
       S.pasteChannel = 'paste'; S.reviewMode = 'paste'; el('shPasteT').textContent = 'Add a receipt'; el('pasteBack').textContent = 'Back';
-      el('pasteText').value = ''; showErr('pasteErr', ''); show('pasteStep1', true); show('pasteStep2', false); show('photoStatus', false);
+      el('pasteText').value = ''; showErr('pasteErr', ''); show('pasteStep1', true); show('pasteStep2', false); show('photoStatus', false); show('aiAsk', false); pendingPhotos = null;
       show('shPaste', true);
       if (which === 'photo') el('photoIn').click(); else setTimeout(function () { el('pasteText').focus(); }, 30);
     }
@@ -2083,11 +2089,45 @@ details.sd{display:block}
       el('pastePreview').click();
     });
   }
+  // Ask once before the first photo goes to the AI reader (Apple 5.1.2(i):
+  // explicit permission before sharing personal data with third-party AI).
+  // 'ai' = Gemini reader, 'device' = on-device reader only.
+  var AI_LS = 'krisperPhotoReader', pendingPhotos = null;
+  function photoNote() {
+    var c = ls(AI_LS);
+    el('photoNote').innerHTML = c === 'device'
+      ? 'Photos are read on this phone and never leave it. <button class="link small" type="button" id="aiChange">Use the AI reader instead</button>'
+      : c === 'ai'
+        ? 'Photos are read by Google Gemini to find your produce, then discarded. We don\'t keep them. <button class="link small" type="button" id="aiChange">Read on this phone instead</button>'
+        : 'Photos are read by an AI service to find your produce, then discarded. We don\'t keep them.';
+  }
+  photoNote();
+  el('photoNote').addEventListener('click', function (ev) {
+    if (!ev.target.closest('#aiChange')) return;
+    ls(AI_LS, ls(AI_LS) === 'device' ? 'ai' : 'device'); photoNote();
+  });
+  function aiChoice(c) {
+    ls(AI_LS, c); show('aiAsk', false); photoNote();
+    var f = pendingPhotos; pendingPhotos = null;
+    if (f) readPhotos(f);
+  }
+  el('aiYes').addEventListener('click', function () { aiChoice('ai'); });
+  el('aiNo').addEventListener('click', function () { aiChoice('device'); });
   el('photoIn').addEventListener('change', function () {
     var files = Array.prototype.slice.call(this.files || [], 0, 3); this.value = '';
     if (!files.length) return;
-    showErr('pasteErr', ''); show('photoStatus', true); el('photoMsg').textContent = 'Reading your receipt…';
+    showErr('pasteErr', '');
+    if (!ls(AI_LS)) { pendingPhotos = files; show('aiAsk', true); el('aiYes').focus(); return; }
+    readPhotos(files);
+  });
+  function readPhotos(files) {
+    show('photoStatus', true); el('photoMsg').textContent = 'Reading your receipt…';
     el('photoBtn').classList.add('dis');
+    if (ls(AI_LS) === 'device') {
+      return readOnDevice(files)
+        .catch(function (e) { showErr('pasteErr', e.message || 'Couldn\'t read that photo.'); })
+        .then(function () { show('photoStatus', false); el('photoBtn').classList.remove('dis'); });
+    }
     Promise.all(files.map(toJpeg))
       .then(function (images) { return api('/api/crisper/receipt', { body: { images: images, preview: true } }); })
       .then(function (r) {
@@ -2099,7 +2139,7 @@ details.sd{display:block}
       })
       .catch(function (e) { showErr('pasteErr', e.message || 'Couldn\'t read that photo.'); })
       .then(function () { show('photoStatus', false); el('photoBtn').classList.remove('dis'); });
-  });
+  }
   el('pasteText').addEventListener('input', function () { if (!this.value.trim()) S.pasteChannel = 'paste'; });
 
   // ---------- feedback ----------

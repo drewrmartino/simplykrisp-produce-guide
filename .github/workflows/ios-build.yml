@@ -14,7 +14,9 @@ on:
 
 jobs:
   build:
-    runs-on: macos-15
+    # App Store uploads must be built with Xcode 26+ and the iOS 26 SDK
+    # (Apple, since April 28, 2026), so build with the same here.
+    runs-on: macos-26
     timeout-minutes: 30
     defaults:
       run:
@@ -27,8 +29,11 @@ jobs:
       - run: npm ci
       - run: npm run build
       - run: npx cap sync ios
-      - name: Xcode version
-        run: xcodebuild -version
+      - name: Xcode version (must be 26 or later)
+        run: |
+          xcodebuild -version
+          v=$(xcodebuild -version | awk 'NR==1{split($2,a,"."); print a[1]}')
+          [ "$v" -ge 26 ] || { echo "::error::Xcode $v is too old for App Store uploads (need 26+)"; exit 1; }
       - name: Build for the iOS Simulator
         run: |
           xcodebuild -project ios/App/App.xcodeproj -scheme App \

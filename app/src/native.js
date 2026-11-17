@@ -126,6 +126,26 @@
     if (t && k) post({ pushToken: t, pushOff: true }, k).catch(function () {});
   }, true);
 
+  // ---------- offline ----------
+  // The app itself is on the phone, but the fridge lives on the server. Say so
+  // plainly instead of showing a sign-in error, and reload when it's back.
+  var offBar = null;
+  function offline(on) {
+    if (on && !offBar) {
+      offBar = document.createElement('div');
+      offBar.id = 'offlineBar'; offBar.setAttribute('role', 'status');
+      offBar.textContent = 'You\u2019re offline. Your fridge will update when you\u2019re back online.';
+      offBar.style.cssText = 'position:fixed;left:12px;right:12px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:2000;background:#2e431f;color:#fff;padding:10px 14px;border-radius:12px;font:600 14px/1.35 system-ui,-apple-system,sans-serif;text-align:center;box-shadow:0 4px 14px rgba(0,0,0,.18)';
+      (document.body || document.documentElement).appendChild(offBar);
+    } else if (!on && offBar) {
+      offBar.remove(); offBar = null;
+      if (key()) location.reload();
+    }
+  }
+  window.addEventListener('offline', function () { offline(true); });
+  window.addEventListener('online', function () { offline(false); });
+  if (navigator.onLine === false) window.addEventListener('DOMContentLoaded', function () { offline(true); });
+
   // ---------- look ----------
   // White status-bar text over the dark green Simply Krisp header.
   if (P.StatusBar) P.StatusBar.setStyle({ style: 'DARK' }).catch(function () {});

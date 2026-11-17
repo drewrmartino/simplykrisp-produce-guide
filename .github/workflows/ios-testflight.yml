@@ -1,0 +1,115 @@
+# Builds My Krisper on a GitHub Mac (Xcode 26+), signs it with Apple's
+# cloud-managed signing and uploads it to App Store Connect / TestFlight.
+# Run it by hand: Actions → "iOS TestFlight upload" → Run workflow.
+#
+# Repository secrets (Settings → Secrets and variables → Actions):
+#   ASC_KEY_ID      App Store Connect API key ID (10 characters)
+#   ASC_ISSUER_ID   Issuer ID shown above the key list
+#   ASC_KEY_P8      full text of the AuthKey_XXXXXXXXXX.p8 file
+#   APPLE_TEAM_ID   Team ID (developer.apple.com → Membership details)
+# The key must have the Admin role: lower roles fail the export with
+# "Cloud signing permission error".
+#
+# Build numbers are 1000 + the run number, so they never collide with builds
+# uploaded by hand from Xcode (1, 2, 3…).
+name: iOS TestFlight upload
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version people see (e.g. 1.0)'
+        required: true
+        default: '1.0'
+
+concurrency:
+  group: ios-testflight
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  upload:
+    runs-on: macos-26
+    timeout-minutes: 45
+    defaults:
+      run:
+        working-directory: app
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Check secrets
+        env:
+          A: ${{ secrets.ASC_KEY_ID }}
+          B: ${{ secrets.ASC_ISSUER_ID }}
+          C: ${{ secrets.ASC_KEY_P8 }}
+          D: ${{ secrets.APPLE_TEAM_ID }}
+        run: |
+          for n in A:ASC_KEY_ID B:ASC_ISSUER_ID C:ASC_KEY_P8 D:APPLE_TEAM_ID; do
+            v="${n%%:*}"; [ -n "${!v}" ] || { echo "::error::Missing repository secret ${n#*:}"; exit 1; }
+          done
+      - run: npm ci
+      - run: npm run build
+      - run: npx cap sync ios
+      - name: Xcode version
+        run: xcodebuild -version
+      - name: Write API key
+        env:
+          P8: ${{ secrets.ASC_KEY_P8 }}
+        run: |
+          printf '%s\n' "$P8" > "$RUNNER_TEMP/AuthKey.p8"
+          chmod 600 "$RUNNER_TEMP/AuthKey.p8"
+      - name: Archive
+        env:
+          KEY_ID: ${{ secrets.ASC_KEY_ID }}
+          ISSUER: ${{ secrets.ASC_ISSUER_ID }}
+          TEAM: ${{ secrets.APPLE_TEAM_ID }}
+          VERSION: ${{ inputs.version }}
+          BUILD: ${{ github.run_number }}
+        run: |
+          xcodebuild -project ios/App/App.xcodeproj -scheme App \
+            -configuration Release -destination 'generic/platform=iOS' \
+            -archivePath "$RUNNER_TEMP/App.xcarchive" archive \
+            DEVELOPMENT_TEAM="$TEAM" CODE_SIGN_STYLE=Automatic \
+            MARKETING_VERSION="$VERSION" CURRENT_PROJECT_VERSION=$((1000 + BUILD)) \
+            -allowProvisioningUpdates \
+            -authenticationKeyPath "$RUNNER_TEMP/AuthKey.p8" \
+            -authenticationKeyID "$KEY_ID" -authenticationKeyIssuerID "$ISSUER" | tail -n 40
+          exit ${PIPESTATUS[0]}
+      - name: Sign and upload to App Store Connect
+        env:
+          KEY_ID: ${{ secrets.ASC_KEY_ID }}
+          ISSUER: ${{ secrets.ASC_ISSUER_ID }}
+          TEAM: ${{ secrets.APPLE_TEAM_ID }}
+        run: |
+          cat > "$RUNNER_TEMP/ExportOptions.plist" <<PLIST
+          <?xml version="1.0" encoding="UTF-8"?>
+          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+          <plist version="1.0"><dict>
+            <key>method</key><string>app-store-connect</string>
+            <key>destination</key><string>upload</string>
+            <key>teamID</key><string>$TEAM</string>
+            <key>signingStyle</key><string>automatic</string>
+            <key>manageAppVersionAndBuildNumber</key><false/>
+          </dict></plist>
+          PLIST
+          xcodebuild -exportArchive -archivePath "$RUNNER_TEMP/App.xcarchive" \
+            -exportOptionsPlist "$RUNNER_TEMP/ExportOptions.plist" \
+            -exportPath "$RUNNER_TEMP/export" -allowProvisioningUpdates \
+            -authenticationKeyPath "$RUNNER_TEMP/AuthKey.p8" \
+            -authenticationKeyID "$KEY_ID" -authenticationKeyIssuerID "$ISSUER"
+      - name: Summary
+        env:
+          VERSION: ${{ inputs.version }}
+          BUILD: ${{ github.run_number }}
+        run: |
+          echo "## Uploaded My Krisper $VERSION ($((1000 + BUILD)))" >> "$GITHUB_STEP_SUMMARY"
+          echo "It shows up in App Store Connect → TestFlight after Apple finishes processing (10–30 min)." >> "$GITHUB_STEP_SUMMARY"
+      - name: Remove API key
+        if: always()
+        run: rm -f "$RUNNER_TEMP/AuthKey.p8"
