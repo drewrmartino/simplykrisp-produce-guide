@@ -13,8 +13,12 @@ What's already in the repo, so you don't need to build it:
 
 ## Part 1. Set up the Mac (once, about an hour, mostly downloads)
 
-1. **Update macOS.** Apple menu → System Settings → General → Software Update. Current Xcode (27.x) needs macOS Tahoe 26.6 or later. On macOS Sequoia 15.6 you can only use Xcode 26.3. That still works for uploads until April 2027, when Apple starts requiring the iOS 27 SDK.
-2. **Install Xcode** from the Mac App Store (search "Xcode", about 3 GB plus components). Open it once, accept the license, and when it asks which platforms to install, tick **iOS**.
+1. **Update macOS if your Mac can.** Apple menu → About This Mac shows the model. Any Apple silicon Mac (M1 or later), plus a few 2019–2020 Intel models, can run macOS Tahoe ([Apple's list](https://support.apple.com/en-us/122867)). System Settings → General → Software Update → **Upgrade Now** under macOS Tahoe. Then update to the latest Tahoe (26.6 or later), because current Xcode (27.x) needs it.
+2. **Install Xcode.**
+   - **On Tahoe 26.6+:** install Xcode from the Mac App Store.
+   - **Staying on Sequoia (15.6 or later):** the App Store shows Xcode as unavailable because it only offers the newest version. Instead, go to [developer.apple.com/download/all](https://developer.apple.com/download/all/?q=Xcode%2026.3), sign in, search **Xcode 26.3**, expand it and download `Xcode_26.3.xip` (about 3 GB). Double-click the `.xip` to unpack it and drag `Xcode.app` into Applications. Xcode 26.3 includes the iOS 26.2 SDK, which Apple accepts for uploads until April 2027. After that you'll need Tahoe and Xcode 27.
+     If your iPhone runs iOS 27, Xcode 26.3 may not be able to run the app directly on it (Part 5). Install it through TestFlight instead (Part 7).
+   - Open Xcode once, accept the license, and when it asks which platforms to install, tick **iOS**.
 3. **Sign in to Xcode.** Xcode → Settings → Accounts → **+** → Apple Account. Use the Apple ID you enrolled with. You should see the Simply Krisp team listed (organization) once enrollment is approved.
 4. **Install the command-line tools** Terminal needs. Open Terminal (Spotlight → "Terminal") and run:
 
