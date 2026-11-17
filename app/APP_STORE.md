@@ -159,6 +159,21 @@ Go to [appstoreconnect.apple.com](https://appstoreconnect.apple.com).
 5. Select the new archive → **Distribute App** → **App Store Connect** → **Distribute**. Leave the default options, including automatic signing. Xcode switches push to production for you.
 6. Wait for the email "has completed processing" (10–30 minutes). If Apple emails an "ITMS-" warning or error instead, forward it or paste it into a new Perplexity task.
 
+## Part 6b. Upload from GitHub instead of your Mac
+
+GitHub can build, sign and upload with a current Xcode on its own Macs. Use this when your Mac's Xcode is too old for Apple, from April 2027 on Sequoia.
+
+One-time setup:
+
+1. App Store Connect → **Users and Access** → **Integrations** → **App Store Connect API** → **Team Keys** → **+**. Name it `GitHub upload` and set the role to **Admin**. Apple's cloud signing refuses keys with lower roles ("Cloud signing permission error"). Download the `.p8` file (Apple only allows this once). Note the **Key ID** in the row and the **Issuer ID** above the list.
+2. GitHub → the repo → **Settings** → **Secrets and variables** → **Actions** → **New repository secret**. Add four:
+   - `ASC_KEY_ID`: the Key ID
+   - `ASC_ISSUER_ID`: the Issuer ID
+   - `ASC_KEY_P8`: open the `.p8` in TextEdit and paste all of it, including the BEGIN and END lines
+   - `APPLE_TEAM_ID`: your Team ID
+
+Each upload: GitHub → **Actions** → **iOS TestFlight upload** → **Run workflow**. Enter the version (such as `1.0`) and click **Run workflow**. It takes about 10 minutes. The build then appears in TestFlight after Apple finishes processing. GitHub builds are numbered from 1001, so they never clash with builds uploaded from Xcode.
+
 ## Part 7. TestFlight (optional, recommended for the first release)
 
 App Store Connect → your app → **TestFlight**:
