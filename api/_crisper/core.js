@@ -178,7 +178,13 @@ export async function buildState(user, { touch = true } = {}) {
   await activateDuePending(user, today);
   if (touch) await q('UPDATE crisper_users SET last_seen_at = now() WHERE id = $1', [user.id]);
 
-  const rows = await q(`SELECT * FROM crisper_items WHERE user_id = $1 AND state IN ('active','pending') ORDER BY created_at`, [user.id]);
+  const rows = await q(
+    `SELECT i.*,
+       COALESCE((SELECT sum(c.qty) FROM crisper_items c WHERE c.parent_id = i.id AND c.state = 'used'), 0)::int AS used_n,
+       COALESCE((SELECT sum(c.qty) FROM crisper_items c WHERE c.parent_id = i.id AND c.state = 'tossed'), 0)::int AS tossed_n
+     FROM crisper_items i WHERE i.user_id = $1 AND i.state IN ('active','pending') ORDER BY i.created_at`,
+    [user.id],
+  );
   const active = sortViews(rows.filter((r) => r.state === 'active').map((r) => itemView(r, user, today)).filter(Boolean));
   const pending = rows.filter((r) => r.state === 'pending').map((r) => itemView(r, user, today)).filter(Boolean);
 
@@ -190,7 +196,7 @@ export async function buildState(user, { touch = true } = {}) {
     `SELECT
        count(*) FILTER (WHERE state = 'used'   AND state_at > now() - interval '30 days')::int AS used30,
        count(*) FILTER (WHERE state = 'tossed' AND state_at > now() - interval '30 days')::int AS tossed30,
-       count(*) FILTER (WHERE created_at > now() - interval '30 days' AND state <> 'deleted')::int AS added30
+       count(*) FILTER (WHERE created_at > now() - interval '30 days' AND state <> 'deleted' AND parent_id IS NULL)::int AS added30
      FROM crisper_items WHERE user_id = $1`,
     [user.id],
   );
@@ -254,10 +260,10 @@ export async function buildState(user, { touch = true } = {}) {
 // had additions (wrong items the user removed don't count). Merged by produce.
 export async function lastTripFor(user) {
   const rows = await q(
-    `SELECT produce, qty FROM crisper_items
-      WHERE user_id = $1 AND state <> 'deleted'
+    `SELECT produce, COALESCE(bought_qty, qty) AS qty FROM crisper_items
+      WHERE user_id = $1 AND state <> 'deleted' AND parent_id IS NULL
         AND (created_at AT TIME ZONE $2)::date = (
-          SELECT max((created_at AT TIME ZONE $2)::date) FROM crisper_items WHERE user_id = $1 AND state <> 'deleted')
+          SELECT max((created_at AT TIME ZONE $2)::date) FROM crisper_items WHERE user_id = $1 AND state <> 'deleted' AND parent_id IS NULL)
       ORDER BY created_at`,
     [user.id, user.tz || 'America/Denver'],
   );
@@ -275,13 +281,14 @@ export async function addItem(user, { produce, qty = 1, weight = null, date, sou
   if (!/^\d{4}-\d{2}-\d{2}$/.test(start) || daysBetween(start, today) < -7 || daysBetween(start, today) > 120) start = today;
   const n = Math.max(1, Math.min(48, parseInt(qty, 10) || 1));
   return one(
-    `INSERT INTO crisper_items (user_id, receipt_id, produce, qty, weight, source, start_date, state, state_at)
-     VALUES ($1,$2,$3,$4,$5,$6,$7,$8, now()) RETURNING *`,
+    `INSERT INTO crisper_items (user_id, receipt_id, produce, qty, bought_qty, weight, source, start_date, state, state_at)
+     VALUES ($1,$2,$3,$4,$4,$5,$6,$7,$8, now()) RETURNING *`,
     [user.id, receiptId, produce, n, weight ? String(weight).slice(0, 20) : null, source, start, state],
   );
 }
 
-export async function itemAction(user, { id, op, days, qty, date, portion, trim }) {
+export async function itemAction(user, { id, op, days, qty, date, portion, trim, count, kind: kind_ }) {
+  let result = null;
   const item = await one('SELECT * FROM crisper_items WHERE id = $1 AND user_id = $2', [id, user.id]);
   if (!item) throw Object.assign(new Error('Item not found'), { status: 404 });
   switch (op) {
@@ -314,9 +321,40 @@ export async function itemAction(user, { id, op, days, qty, date, portion, trim 
       await q('UPDATE crisper_items SET trim = $1 WHERE id = $2', [TRIM_FATES.includes(trim) ? trim : null, id]);
       break;
     }
-    case 'undo':
-      await q(`UPDATE crisper_items SET state = 'active', state_at = now(), rescued = false, tossed_frac = 0, trim = NULL WHERE id = $1`, [id]);
+    case 'count': {
+      // Ate (or tossed) some of a multi-count item: "2 of the 6 apples".
+      if (item.state !== 'active') throw Object.assign(new Error('That item is already finished'), { status: 400 });
+      const kind = kind_ === 'tossed' ? 'tossed' : 'used';
+      const n = Math.max(1, parseInt(count, 10) || 1);
+      const v = kind === 'used' ? itemView(item, user, todayIn(user.tz)) : null;
+      const rescued = !!v && ['check', 'today', 'soon'].includes(v.status);
+      if (n >= item.qty) {
+        // The rest of it: finish the row itself.
+        await q('UPDATE crisper_items SET state = $1, state_at = now(), rescued = $2, tossed_frac = $3 WHERE id = $4', [kind, rescued, kind === 'tossed' ? 1 : 0, id]);
+        result = { id, left: 0 };
+      } else {
+        const child = await one(
+          `INSERT INTO crisper_items (user_id, receipt_id, parent_id, produce, qty, bought_qty, weight, source, start_date, ripening_days, state, state_at, rescued, tossed_frac, created_at)
+           VALUES ($1,$2,$3,$4,$5,$5,NULL,$6,$7,$8,$9, now(), $10, $11, $12) RETURNING id`,
+          [user.id, item.receipt_id, id, item.produce, n, item.source, toISODate(item.start_date), item.ripening_days || 0, kind, rescued, kind === 'tossed' ? 1 : 0, item.created_at],
+        );
+        await q('UPDATE crisper_items SET qty = qty - $1, bought_qty = COALESCE(bought_qty, qty) WHERE id = $2', [n, id]);
+        result = { id: child.id, left: item.qty - n };
+      }
       break;
+    }
+    case 'undo': {
+      // A split-off "ate 2" goes back into the item it came from, if that's still in the fridge.
+      const parent = item.parent_id && (item.state === 'used' || item.state === 'tossed')
+        ? await one(`SELECT id FROM crisper_items WHERE id = $1 AND user_id = $2 AND state = 'active'`, [item.parent_id, user.id]) : null;
+      if (parent) {
+        await q('UPDATE crisper_items SET qty = qty + $1 WHERE id = $2', [item.qty, parent.id]);
+        await q(`UPDATE crisper_items SET state = 'deleted', state_at = now() WHERE id = $1`, [id]);
+      } else {
+        await q(`UPDATE crisper_items SET state = 'active', state_at = now(), rescued = false, tossed_frac = 0, trim = NULL WHERE id = $1`, [id]);
+      }
+      break;
+    }
     case 'delete':
       await q(`UPDATE crisper_items SET state = 'deleted', state_at = now() WHERE id = $1`, [id]);
       break;
@@ -331,13 +369,20 @@ export async function itemAction(user, { id, op, days, qty, date, portion, trim 
     case 'edit': {
       const n = Math.max(1, Math.min(48, parseInt(qty, 10) || item.qty));
       const d = toISODate(date) || toISODate(item.start_date);
-      await q('UPDATE crisper_items SET qty = $1, start_date = $2 WHERE id = $3', [n, d, id]);
+      // bought = what's left now plus whatever was already eaten or tossed from it.
+      await q(
+        `UPDATE crisper_items SET qty = $1::int, start_date = $2,
+           bought_qty = $1::int + COALESCE((SELECT sum(c.qty) FROM crisper_items c WHERE c.parent_id = $3 AND c.state IN ('used','tossed')), 0)::int
+         WHERE id = $3`,
+        [n, d, id],
+      );
       break;
     }
     default:
       throw Object.assign(new Error(`Unknown action: ${op}`), { status: 400 });
   }
-  await logEvent(user.id, `item_${op}`, { produce: item.produce, source: item.source, ...(op === 'finish' ? { portion: Number(portion) || 0, trim: trim || null } : op === 'trim' ? { trim: trim || null } : {}) });
+  await logEvent(user.id, `item_${op}`, { produce: item.produce, source: item.source, ...(op === 'finish' ? { portion: Number(portion) || 0, trim: trim || null } : op === 'trim' ? { trim: trim || null } : op === 'count' ? { kind: kind_ === 'tossed' ? 'tossed' : 'used', count: parseInt(count, 10) || 1 } : {}) });
+  return result;
 }
 
 // ---------- receipts ----------

@@ -40,11 +40,20 @@ export function storageGuide(items, { hasKrisp = false, limit = 15 } = {}) {
   const names = new Set(items.map((i) => stem(i.name)));
   const out = [];
   let usd = 0, lb = 0;
+  // Same item on two lines ("3 carrots", "2 carrots"): add the counts up.
+  const totals = new Map();
+  for (const it of items) {
+    const t = totals.get(it.name) || { count: 0, weight: null };
+    t.count += it.count || 1;
+    t.weight = t.weight || it.weight || null;
+    totals.set(it.name, t);
+  }
   for (const it of items) {
     const c = BY_NAME[it.name];
     if (!c || seen.has(c.name)) continue;
     seen.add(c.name);
-    const w = typicalWaste({ produce: c.name, qty: it.count || 1, weight: it.weight || null });
+    const tot = totals.get(it.name);
+    const w = typicalWaste({ produce: c.name, qty: tot.count, weight: tot.weight });
     usd += w.usd; lb += w.lb;
     // Put the conflicts that are actually in this order first.
     const avoid = [...(c.avoidWith || [])].sort((a, b) => (names.has(stem(b)) ? 1 : 0) - (names.has(stem(a)) ? 1 : 0)).slice(0, 3);
@@ -52,6 +61,8 @@ export function storageGuide(items, { hasKrisp = false, limit = 15 } = {}) {
     const zone = zoneFor(c);
     out.push({
       name: c.name,
+      // How much came in the box: "2 lb" if weighed, "×3" for counts, '' for one.
+      amount: tot.weight || (tot.count > 1 ? `×${tot.count}` : ''),
       zone,
       then: thenNote(c),
       shelf_how: SHELF_HOW[c.name] || (zone === 'shelf' ? 'Middle shelf, in the vented container it came in.' : ''),
@@ -85,6 +96,6 @@ export function storageGuide(items, { hasKrisp = false, limit = 15 } = {}) {
   for (const z of zones) z.names = z.zone_items.map((i) => i.name).join(', ');
   // Kitchen map for the email: every spot present (empty arrays included) so the
   // template can draw the fridge, two drawers, counter and pantry in fixed places.
-  const kitchen = Object.fromEntries(ZONES.map((z) => [z.key, list.filter((i) => i.zone === z.key).map((i) => ({ name: i.name, image_url: i.image_url, krisp_days: i.krisp_days }))]));
+  const kitchen = Object.fromEntries(ZONES.map((z) => [z.key, list.filter((i) => i.zone === z.key).map((i) => ({ name: i.name, amount: i.amount, image_url: i.image_url, krisp_days: i.krisp_days }))]));
   return { guide_items: list, zones, kitchen, item_count: out.length, at_risk_usd: r2(usd).toFixed(2), at_risk_lb: r2(lb).toFixed(1) };
 }

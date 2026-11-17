@@ -1,6 +1,7 @@
 // POST /api/crisper/items
 //   { add: [{ produce, qty, date }] }         -> adds items by hand
-//   { id, op: used|tossed|finish|trim|undo|delete|arrived|ripening|edit, days?, qty?, date?, portion?, trim? }
+//   { id, op: used|tossed|finish|trim|undo|delete|arrived|ripening|edit|count, days?, qty?, date?, portion?, trim?, count?, kind? }
+//   count: ate (kind=used) or tossed (kind=tossed) `count` of a multi-count item; returns lastId for undo
 //   { check: true }                           -> weekly fridge check finished
 //   { add: [...], source: 'repeat' }          -> "Same as last trip"
 //   { shopDay: Fri|Sat|Sun|Mon|Thu|off }       -> before-you-shop email day
@@ -30,7 +31,8 @@ export default handle(['POST'], async (req) => {
     await q('UPDATE crisper_users SET shop_day = $1 WHERE id = $2', [b.shopDay, user.id]);
     user.shop_day = b.shopDay;
   } else if (b.id && b.op) {
-    await itemAction(user, b);
+    const r = await itemAction(user, b);
+    if (r) return { ...(await buildState(user, { touch: false })), last: r };
   } else {
     throw bad('Nothing to do.');
   }

@@ -182,6 +182,47 @@ test('finish: partial toss with trim, then edit trim', async () => {
   assert.ok(r.data.items.find((x) => x.id === it.id));
 });
 
+test('quantities: bought 6, eat 2, toss 1, undo, finish the rest', async () => {
+  const P = (body) => api('/api/crisper/items', { method: 'POST', key, body });
+  let r = await P({ add: [{ produce: 'Peach', qty: 6 }] });
+  let it = r.data.items.find((i) => i.name === 'Peach');
+  assert.equal(it.qty, 6); assert.equal(it.bought, 6); assert.equal(it.usedN, 0);
+  const used0 = r.data.stats.used30, added0 = r.data.stats.added30;
+
+  r = await P({ id: it.id, op: 'count', kind: 'used', count: 2 });
+  assert.equal(r.status, 200, JSON.stringify(r.data));
+  it = r.data.items.find((i) => i.id === it.id);
+  assert.equal(it.qty, 4); assert.equal(it.bought, 6); assert.equal(it.usedN, 2);
+  assert.equal(r.data.last.left, 4);
+  const eatId = r.data.last.id;
+  assert.notEqual(eatId, it.id);
+  assert.equal(r.data.recentDone.find((x) => x.id === eatId).qty, 2);
+  assert.equal(r.data.stats.used30, used0 + 1);
+  assert.equal(r.data.stats.added30, added0, 'eating some is not a new purchase');
+  assert.equal(r.data.lastTrip.find((x) => x.name === 'Peach').count, 6, 'last trip remembers what was bought');
+
+  r = await P({ id: it.id, op: 'count', kind: 'tossed', count: 1 });
+  it = r.data.items.find((i) => i.id === it.id);
+  assert.equal(it.qty, 3); assert.equal(it.tossedN, 1);
+
+  r = await P({ id: eatId, op: 'undo' });
+  it = r.data.items.find((i) => i.id === it.id);
+  assert.equal(it.qty, 5, 'undo puts the 2 back'); assert.equal(it.usedN, 0); assert.equal(it.bought, 6);
+  assert.ok(!r.data.recentDone.find((x) => x.id === eatId));
+
+  r = await P({ id: it.id, op: 'edit', qty: 4 });
+  it = r.data.items.find((i) => i.id === it.id);
+  assert.equal(it.qty, 4); assert.equal(it.bought, 5, 'edit keeps the tossed one in the bought count');
+
+  r = await P({ id: it.id, op: 'count', kind: 'used', count: 9 });
+  assert.ok(!r.data.items.find((i) => i.id === it.id), 'eating the rest finishes it');
+  assert.equal(r.data.last.left, 0);
+  assert.equal(r.data.recentDone.find((x) => x.id === it.id).state, 'used');
+  r = await P({ id: it.id, op: 'undo' });
+  assert.equal(r.data.items.find((i) => i.id === it.id).qty, 4);
+  r = await P({ id: it.id, op: 'delete' });
+});
+
 test('paste a receipt: preview then save', async () => {
   const p = await api('/api/crisper/receipt', { method: 'POST', key, body: { text: F.pastedReceipt.text, preview: true } });
   assert.equal(p.data.preview.items.length, 7);
