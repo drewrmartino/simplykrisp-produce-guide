@@ -80,6 +80,12 @@ const SCHEMA = [
   `ALTER TABLE crisper_items ADD COLUMN IF NOT EXISTS rescued boolean NOT NULL DEFAULT false`,
   `ALTER TABLE crisper_items ADD COLUMN IF NOT EXISTS tossed_frac real NOT NULL DEFAULT 0`,
   `ALTER TABLE crisper_items ADD COLUMN IF NOT EXISTS trim text`,
+  // Quantities: bought_qty is what came home; qty is what's left. Eating or tossing
+  // some of a multi-count item splits off a finished child row (parent_id) so
+  // impact math and history keep working per row.
+  `ALTER TABLE crisper_items ADD COLUMN IF NOT EXISTS bought_qty int`,
+  `ALTER TABLE crisper_items ADD COLUMN IF NOT EXISTS parent_id uuid`,
+  `CREATE INDEX IF NOT EXISTS crisper_items_parent ON crisper_items(parent_id) WHERE parent_id IS NOT NULL`,
   `ALTER TABLE crisper_users ADD COLUMN IF NOT EXISTS shop_status jsonb`,
   `ALTER TABLE crisper_users ADD COLUMN IF NOT EXISTS shop_checked_at timestamptz`,
   `ALTER TABLE crisper_users ADD COLUMN IF NOT EXISTS last_check_at timestamptz`,

@@ -103,6 +103,7 @@ button,input,textarea{font:inherit;color:inherit}
 .g-item{padding:9px 0;border-top:1px solid var(--border)}
 .g-item:first-of-type{border-top:0}
 .g-item .nm{font-weight:600}
+.amt{font-size:.86em;color:var(--muted-fg);font-weight:500;margin-left:3px}
 .g-item .how{font-size:14px}
 .g-item .then,.g-item .away{font-size:13px;color:var(--muted-fg)}
 .g-item .kb{margin-top:6px;font-size:13px;border-left:3px solid var(--krisp);background:var(--krisp-bg);padding:5px 9px;border-radius:0 6px 6px 0}
@@ -188,7 +189,7 @@ a.chip:hover{border-color:var(--primary)}
           <textarea id="items" spellcheck="false" placeholder="Start typing: kale, honeycrisp, carrots..." role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="acList"></textarea>
           <ul id="acList" class="ac" role="listbox" aria-label="Produce suggestions" hidden></ul>
         </div>
-        <div class="hint">Pick from the suggestions as you type, or paste your list. Varieties and quantities are fine: "2 lb Yukon Gold potatoes", "1 bunch Lacinato kale".</div>
+        <div class="hint">Pick from the suggestions as you type, or paste your list. Add a count or weight and it shows in the guide: "3 carrots", "2 lb Yukon Gold potatoes".</div>
         <div id="unmatched" class="unmatched" hidden></div>
       </div>
       <div class="actions">
@@ -303,7 +304,7 @@ const kdays = (i) => (i.krisp ? i.krisp.match(/about (\d+)–(\d+) days/) : null
 function chip(i) {
   // Days badge only where the sachet is: the drawers.
   const d = i.zone === 'high' || i.zone === 'low' ? kdays(i) : null;
-  return `<a class="chip${d ? ' k' : ''}" href="#it-${slug(i.name)}"><span class="em" aria-hidden="true">${emo(i.name)}</span>${esc(dn(i.name))}${d ? `<span class="kd" title="About ${d[1]}–${d[2]} extra days with a Simply Krisp">+${d[1]}–${d[2]} days</span>` : ''}</a>`;
+  return `<a class="chip${d ? ' k' : ''}" href="#it-${slug(i.name)}"><span class="em" aria-hidden="true">${emo(i.name)}</span>${esc(dn(i.name))}${i.amount ? `<span class="amt">${esc(i.amount)}</span>` : ''}${d ? `<span class="kd" title="About ${d[1]}–${d[2]} extra days with a Simply Krisp">+${d[1]}–${d[2]} days</span>` : ''}</a>`;
 }
 const chips = (items, empty) => (items.length ? `<div class="chips">${items.map(chip).join('')}</div>` : `<div class="none">${empty}</div>`);
 function renderKitchen(m) {
@@ -333,7 +334,7 @@ function renderGuide(m) {
       <div class="zdetail">${esc(z.detail)}</div>
       ${z.zone_items.map((i) => `
         <div class="g-item" id="it-${slug(i.name)}">
-          <div><span class="nm">${esc(dn(i.name))}</span> <span class="how">\u2014 ${esc(sent(i.shelf_how || i.how))}</span></div>
+          <div><span class="nm">${esc(dn(i.name))}</span>${i.amount ? ` <span class="amt">${esc(i.amount)}</span>` : ''} <span class="how">\u2014 ${esc(sent(i.shelf_how || i.how))}</span></div>
           ${i.then ? `<div class="then">${esc(i.then)}</div>` : ''}
           ${i.boxAway ? `<div class="away">${esc(i.boxAway)}</div>` : ''}
           ${i.krisp ? `<div class="kb">${krispLine(i)}</div>` : ''}
@@ -358,7 +359,7 @@ const EMOJI_FIX = { Beet: '\u{1F331}' };
 const emo = (n) => EMOJI_FIX[n] || BY_NAME[n].emoji || '';
 // Email version of the kitchen map: nested tables, emoji as text, no CSS classes.
 function emailKitchen(m, F, ink, mute, green) {
-  const chip = (i) => { const d = i.zone === 'high' || i.zone === 'low' ? kdays(i) : null; return `<span style="${F}display:inline-block;margin:0 4px 5px 0;padding:3px 8px;border-radius:12px;background:#ffffff;border:1px solid ${d ? '#b9d38f' : '#ddd8cc'};font-size:13px;color:${ink};white-space:nowrap;">${emo(i.name)} ${esc(dn(i.name))}${d ? ` <b style="font-size:11px;color:#fff;background:${green};border-radius:8px;padding:0 5px;">+${d[1]}–${d[2]} days</b>` : ''}</span>`; };
+  const chip = (i) => { const d = i.zone === 'high' || i.zone === 'low' ? kdays(i) : null; return `<span style="${F}display:inline-block;margin:0 4px 5px 0;padding:3px 8px;border-radius:12px;background:#ffffff;border:1px solid ${d ? '#b9d38f' : '#ddd8cc'};font-size:13px;color:${ink};white-space:nowrap;">${emo(i.name)} ${esc(dn(i.name))}${i.amount ? ` <span style="color:${mute};font-size:12px;">${esc(i.amount)}</span>` : ''}${d ? ` <b style="font-size:11px;color:#fff;background:${green};border-radius:8px;padding:0 5px;">+${d[1]}–${d[2]} days</b>` : ''}</span>`; };
   const list = (k, empty) => { const it = zoneItems(m, k); return it.length ? it.map(chip).join('') : `<span style="${F}font-size:12px;color:${mute};">${empty}</span>`; };
   const lbl = (t, sub) => `<div style="${F}font-size:14px;color:${ink};font-weight:bold;">${t}</div><div style="${F}font-size:11px;color:${mute};padding-bottom:6px;">${sub}</div>`;
   const sachet = `<div style="${F}margin-top:6px;text-align:right;"><span style="font-size:10px;font-weight:bold;color:#fff;background:${green};border-radius:4px;padding:2px 6px;letter-spacing:.5px;">KRISP SACHET</span></div>`;
@@ -385,7 +386,7 @@ function renderEmail(m) {
     <tr><td style="${F}padding:16px 0 2px;font-size:17px;color:${ink};font-weight:bold;">${esc(z.title)}${z.krisp_note && z.zone_items.some((i) => i.krisp) ? ` <span style="${F}font-size:11px;font-weight:bold;color:#fff;background:${green};padding:2px 6px;border-radius:3px;letter-spacing:.5px;">KRISP GOES HERE</span>` : ''}</td></tr>
     <tr><td style="${F}font-size:13px;color:${mute};padding-bottom:6px;">${esc(z.detail)}</td></tr>
     ${z.zone_items.map((i) => `<tr><td style="${F}border-top:1px solid ${line};padding:8px 0;font-size:14px;color:${ink};line-height:1.45;">
-      <b>${esc(dn(i.name))}</b> \u2014 ${esc(sent(i.shelf_how || i.how))}
+      <b>${esc(dn(i.name))}</b>${i.amount ? ` <span style="color:${mute};">${esc(i.amount)}</span>` : ''} \u2014 ${esc(sent(i.shelf_how || i.how))}
       ${i.then ? `<br><span style="font-size:13px;color:${mute};">${esc(i.then)}</span>` : ''}
       ${i.boxAway ? `<br><span style="font-size:13px;color:${mute};">${esc(i.boxAway)}</span>` : ''}
       ${i.krisp ? `<div style="margin-top:5px;font-size:13px;background:${greenBg};border-left:3px solid ${green};padding:5px 8px;">${krispLine(i).replace('<b>', `<b style="color:${green};">`)}</div>` : ''}
@@ -416,7 +417,7 @@ function renderPlain(m) {
   for (const z of m.g.zones) {
     out.push(`${z.title.toUpperCase()}${z.krisp_note && z.zone_items.some((i) => i.krisp) ? ' (a Krisp goes here)' : ''}`);
     for (const i of z.zone_items) {
-      out.push(`- ${dn(i.name)}${i.krisp ? ' [+Krisp]' : ''}: ${sent(i.shelf_how || i.how)}${i.then ? ' ' + i.then : ''}${i.boxAway ? ' ' + i.boxAway : ''}`);
+      out.push(`- ${dn(i.name)}${i.amount ? ` (${i.amount.replace('×', 'x')})` : ''}${i.krisp ? ' [+Krisp]' : ''}: ${sent(i.shelf_how || i.how)}${i.then ? ' ' + i.then : ''}${i.boxAway ? ' ' + i.boxAway : ''}`);
       if (i.krisp) out.push(`  ${strip(krispLine(i))}`);
     }
     out.push('');

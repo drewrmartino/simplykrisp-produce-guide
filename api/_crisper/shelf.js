@@ -107,6 +107,10 @@ export function itemView(row, user, today) {
     storage: c.storage,
     zone: zoneFor(c),
     qty: row.qty,
+    // How many came home, and what's happened to the rest so far.
+    bought: Math.max(row.qty, row.bought_qty || row.qty),
+    usedN: row.used_n || 0,
+    tossedN: row.tossed_n || 0,
     weight: row.weight,
     source: row.source,
     state: row.state,

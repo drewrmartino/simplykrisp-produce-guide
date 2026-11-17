@@ -419,6 +419,13 @@ body.has-bnav main{padding-bottom:96px}
 .pick .opt{min-width:52px;padding:8px 12px;border-radius:99px;border:1px solid var(--card-border);background:var(--card);font:inherit;font-size:15px;font-weight:600;cursor:pointer}
 .pick .opt:hover{border-color:var(--primary)}
 .pick .link{margin-left:auto}
+.pick .pqs{font-weight:400;color:var(--muted-fg);margin-left:4px}
+.pstep{display:inline-flex;align-items:center;gap:4px}
+.pstep button[data-pstep]{width:32px;height:32px;border-radius:50%;border:1px solid var(--card-border);background:var(--card);font:inherit;font-size:16px;cursor:pointer}
+.pstep input{width:48px;height:34px;text-align:center;border:1px solid var(--card-border);border-radius:8px;font:inherit;font-size:15px;-moz-appearance:textfield}
+.pstep input::-webkit-inner-spin-button,.pstep input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+.qtl{font-size:12.5px;color:var(--muted-fg);margin-top:1px}
+.km-chip .kq{font-size:11px;color:var(--muted-fg);font-weight:600;margin-left:-2px}
 .pl li.rv{display:flex;align-items:center;gap:8px}
 .rvn{flex:1;min-width:0}
 .qty{display:inline-flex;align-items:center;gap:6px}
@@ -938,6 +945,19 @@ details.sd{display:block}
   function show(id, on) { el(id).classList.toggle('hide', !on); }
   function ls(k, v) { try { if (v === undefined) return localStorage.getItem(k); if (v === null) localStorage.removeItem(k); else localStorage.setItem(k, v); } catch (e) { return null; } }
   function plural(n, w) { return n + ' ' + w + (n === 1 ? '' : 's'); }
+  // "4 of 6 left" once some are gone, "×6" before that. Items sold by weight show the weight.
+  function qtyLabel(i) {
+    if (i.bought > i.qty) return '<span class="q">' + i.qty + ' of ' + i.bought + ' left</span>';
+    return i.qty > 1 ? '<span class="q">×' + i.qty + '</span>' : (i.weight ? '<span class="q">' + esc(i.weight) + '</span>' : '');
+  }
+  function plName(name, n) {
+    var w = name.toLowerCase().replace(/\s*\(.*\)$/, '');
+    if (n === 1 || /s$/.test(w)) return w;
+    if (/[^aeiou]y$/.test(w)) return w.slice(0, -1) + 'ies';
+    if (/(ch|sh|x|potato|tomato)$/.test(w)) return w + 'es';
+    return w + 's';
+  }
+  function counted(i) { return !!i && i.qty > 1 && !i.weight; }
   function todayLocal() { var d = new Date(); return new Date(d.getTime() - d.getTimezoneOffset() * 60000).toISOString().slice(0, 10); }
   function fmtDate(iso, opts) { var d = new Date(String(iso).length === 10 ? iso + 'T12:00:00' : iso); return d.toLocaleDateString(undefined, opts || { month: 'short', day: 'numeric' }); }
   function img(name) { var c = S.byName[name]; return c ? c.imageUrl : ''; }
@@ -1248,7 +1268,7 @@ details.sd{display:block}
     var r = inDrawer ? (i.krispBoost || i.krispCould) : null;
     var when = i.status === 'check' ? 'check it' : i.status === 'today' ? 'use today' : i.leftMax + ' days left';
     return '<button type="button" class="km-chip s-' + i.status + '" data-km="' + i.id + '" title="' + esc(i.name + ' · ' + when) + '">' +
-      '<span class="d" aria-hidden="true"></span><img src="' + esc(i.imageUrl) + '" alt="" loading="lazy">' + esc(i.name) +
+      '<span class="d" aria-hidden="true"></span><img src="' + esc(i.imageUrl) + '" alt="" loading="lazy">' + esc(i.name) + (counted(i) ? '<span class="kq">×' + i.qty + '</span>' : '') +
       (r ? '<span class="kd' + (i.krispBoost ? '' : ' could') + '">+' + r[0] + '–' + r[1] + ' days</span>' : '') +
       '<span class="sr-only">, ' + esc(when) + '</span></button>';
   }
@@ -1277,8 +1297,18 @@ details.sd{display:block}
       (anyK ? '<span>+ days: ' + (on ? 'extra days from your Krisp' : 'extra days a Krisp would add') + (on && anyCould ? ' (dashed: with a fresh sachet)' : '') + '</span>' : '') + '</div>';
   }
 
+  // Multi-count items: "How many did you eat?" 1, 2, 3 ... All.
+  function countPicker(i, pk) {
+    var n = i.qty, max = Math.min(n - 1, 5), b = '';
+    for (var k = 1; k <= max; k++) b += '<button type="button" class="opt" data-pc="' + k + '" data-id="' + i.id + '" aria-label="' + k + ' of ' + n + '">' + k + '</button>';
+    if (n - 1 > 5) b += '<span class="pstep"><button type="button" data-pstep="-1" aria-label="Fewer">−</button><input type="number" inputmode="numeric" min="1" max="' + (n - 1) + '" value="6" aria-label="How many"><button type="button" data-pstep="1" aria-label="More">+</button><button type="button" class="opt" data-pc="input" data-id="' + i.id + '">OK</button></span>';
+    b += '<button type="button" class="opt" data-pc="' + n + '" data-id="' + i.id + '">All ' + n + '</button>';
+    return '<div class="pick" role="group" aria-label="' + (pk === 'used' ? 'How many were eaten' : 'How many were tossed') + '"><span class="pq">' + (pk === 'used' ? 'How many did you eat?' : 'How many got tossed?') + ' <span class="pqs">' + n + ' left</span></span>' + b +
+      '<button type="button" class="link small" data-pcancel>Cancel</button></div>';
+  }
   function itemCard(i, pending) {
-    var q = i.qty > 1 ? ' <span class="q">×' + i.qty + '</span>' : (i.weight ? ' <span class="q">' + esc(i.weight) + '</span>' : '');
+    var q = qtyLabel(i); if (q) q = ' ' + q;
+    var tally = i.bought > i.qty ? '<div class="qtl">Bought ' + i.bought + (i.usedN ? ' · ate ' + i.usedN : '') + (i.tossedN ? ' · tossed ' + i.tossedN : '') + '</div>' : '';
     var label = pending ? 'Counting starts ' + fmtDate(i.startDate) + ' · lasts ' + i.minDays + '–' + i.maxDays + ' days' : i.label;
     var tip = i.ripensFirst && i.status === 'later' && i.ripeTip ? i.ripeTip : i.tip;
     var inFridge = S.st && S.st.items ? S.st.items.map(function (x) { return stem(x.name); }) : [];
@@ -1301,14 +1331,14 @@ details.sd{display:block}
         '<button type="button" data-act="delete" data-id="' + i.id + '">Remove</button>';
     var xb = '<button class="itx" type="button" data-act="delete" data-id="' + i.id + '" aria-label="Remove ' + esc(i.name) + ' (wrong item)" title="Remove (wrong item)">×</button>';
     var pk = S.pick && S.pick.id === i.id ? S.pick.kind : null;
-    var picker = !pk ? '' : '<div class="pick" role="group" aria-label="' + (pk === 'used' ? 'How much was eaten' : 'How much was tossed') + '"><span class="pq">' + (pk === 'used' ? 'How much did you eat?' : 'How much got tossed?') + '</span>' +
+    var picker = !pk ? '' : counted(i) ? countPicker(i, pk) : '<div class="pick" role="group" aria-label="' + (pk === 'used' ? 'How much was eaten' : 'How much was tossed') + '"><span class="pq">' + (pk === 'used' ? 'How much did you eat?' : 'How much got tossed?') + '</span>' +
       [[1, 'All'], [0.75, '¾'], [0.5, '½'], [0.25, '¼']].map(function (f) { return '<button type="button" class="opt" data-pf="' + f[0] + '" data-id="' + i.id + '">' + f[1] + '</button>'; }).join('') +
       '<button type="button" class="link small" data-pcancel>Cancel</button></div>';
     var quick = pending
       ? '<div class="qb"><button class="btn ghost" type="button" data-act="arrived" data-id="' + i.id + '">Arrived</button>' + xb + '</div>'
       : '<div class="qb"><button class="btn ghost' + (pk === 'used' ? ' on' : '') + '" type="button" data-pk="used" data-id="' + i.id + '" aria-label="' + esc(i.name) + ': used it" aria-expanded="' + (pk === 'used') + '">Used</button><button class="btn ghost' + (pk === 'tossed' ? ' on' : '') + '" type="button" data-pk="tossed" data-id="' + i.id + '" aria-label="' + esc(i.name) + ': tossed" aria-expanded="' + (pk === 'tossed') + '">Tossed</button>' + xb + '</div>';
     return '<article class="it s-' + (pending ? 'pending' : i.status) + '" id="it-' + i.id + '">' +
-      '<div class="ith"><img src="' + esc(i.imageUrl) + '" alt="" loading="lazy"><div style="flex:1;min-width:0"><div class="itn">' + esc(i.name) + q + '</div><div class="itl">' + esc(label) + '</div>' + kb.chip + '</div>' + quick + '</div>' +
+      '<div class="ith"><img src="' + esc(i.imageUrl) + '" alt="" loading="lazy"><div style="flex:1;min-width:0"><div class="itn">' + esc(i.name) + q + '</div><div class="itl">' + esc(label) + '</div>' + tally + kb.chip + '</div>' + quick + '</div>' +
       picker + (pending ? '' : '<div class="bar" role="progressbar" aria-label="Freshness used" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' + Math.round(i.progress * 100) + '"><i style="width:' + Math.max(4, Math.round(i.progress * 100)) + '%"></i></div>') +
       store + kb.line +
       '<details class="itd"><summary>More</summary><div class="dbody">' + detail + (tags ? '<div class="tags">' + tags + '</div>' : '') + '<div class="mact">' + acts + '</div></div></details>' +
@@ -1391,7 +1421,7 @@ details.sd{display:block}
     }
     var it = CK.list[CK.i], zone = (ZONES.filter(function (z) { return z.k === zoneOf(it); })[0] || {}).t || '';
     box.innerHTML = '<div class="ckprog"><span>' + (CK.i + 1) + ' of ' + n + '</span><div class="bar"><i style="width:' + Math.round(CK.i / n * 100) + '%"></i></div></div>' +
-      '<div class="ckit s-' + it.status + '"><img src="' + esc(it.imageUrl) + '" alt=""><div><div class="itn">' + esc(it.name) + (it.qty > 1 ? ' <span class="q">×' + it.qty + '</span>' : '') + '</div><div class="itl">' + esc(it.label) + '</div><div class="small muted">' + esc(zone) + '</div></div></div>' +
+      '<div class="ckit s-' + it.status + '"><img src="' + esc(it.imageUrl) + '" alt=""><div><div class="itn">' + esc(it.name) + (qtyLabel(it) ? ' ' + qtyLabel(it) : '') + '</div><div class="itl">' + esc(it.label) + '</div><div class="small muted">' + esc(zone) + '</div></div></div>' +
       '<p class="ckq">Is it still in your kitchen?</p>' +
       '<div class="ckacts"><button class="btn" type="button" data-ck="good">Still good</button><button class="btn ghost" type="button" data-ck="used">Used it</button><button class="btn ghost' + (CK.partial ? ' on' : '') + '" type="button" data-ck="toss">Tossed</button></div>' +
       (CK.partial ? '<div class="pick"><span class="pq">How much got tossed?</span>' + [[1, 'All'], [0.75, '¾'], [0.5, '½'], [0.25, '¼']].map(function (f) { return '<button type="button" class="opt" data-ckt="' + f[0] + '">' + f[1] + '</button>'; }).join('') + '</div>' : '') +
@@ -1524,7 +1554,7 @@ details.sd{display:block}
       var part = r.state !== 'tossed' && r.tossedFrac > 0 ? FRAC[r.tossedFrac] + ' tossed' : '';
       var tr = r.trim ? (r.trim === 'used' ? 'scraps used' : r.trim === 'compost' ? 'scraps composted' : 'scraps trashed') : '';
       var bits = [r.state === 'tossed' ? 'tossed' : part, tr].filter(Boolean).join(' · ');
-      return '<span class="' + (r.state === 'tossed' ? 't' : part ? 'p' : '') + '" title="' + esc(r.state + ' ' + fmtDate(r.at)) + '"><img src="' + esc(r.imageUrl || img(r.name)) + '" alt="">' + esc(r.name) + (bits ? ' · ' + bits : '') +
+      return '<span class="' + (r.state === 'tossed' ? 't' : part ? 'p' : '') + '" title="' + esc(r.state + ' ' + fmtDate(r.at)) + '"><img src="' + esc(r.imageUrl || img(r.name)) + '" alt="">' + esc(r.name) + (r.qty > 1 ? ' ×' + r.qty : '') + (bits ? ' · ' + bits : '') +
         (r.scrap ? ' <button class="link small" type="button" data-fin="' + r.id + '" data-done="1" aria-label="Edit ' + esc(r.name) + '" style="margin-left:2px">edit</button>' : '') + '</span>';
     }).join('') : '<p class="muted small">Nothing yet. Tap Used or Tossed on an item when it\'s gone.</p>';
   }
@@ -1746,7 +1776,9 @@ details.sd{display:block}
     itemAct(id, 'undo');
   });
   document.addEventListener('click', function (ev) {
-    var k = ev.target.closest('[data-pk]'), f = ev.target.closest('[data-pf]'), c = ev.target.closest('[data-pcancel]');
+    var k = ev.target.closest('[data-pk]'), f = ev.target.closest('[data-pf]'), c = ev.target.closest('[data-pcancel]'), pc = ev.target.closest('[data-pc]'), ps = ev.target.closest('[data-pstep]');
+    if (ps) { var inp = ps.parentNode.querySelector('input'); inp.value = Math.max(1, Math.min(+inp.max, (+inp.value || 1) + +ps.getAttribute('data-pstep'))); return; }
+    if (pc && S.pick) { countAct(pc); return; }
     if (k) { var id = k.getAttribute('data-id'), kind = k.getAttribute('data-pk'); S.pick = S.pick && S.pick.id === id && S.pick.kind === kind ? null : { id: id, kind: kind }; renderGroups(S.st.items, S.st.pending); }
     else if (c) { S.pick = null; renderGroups(S.st.items, S.st.pending); }
     else if (f && S.pick) {
@@ -1763,6 +1795,22 @@ details.sd{display:block}
       }).catch(function (e) { toast(e.message); });
     }
   });
+  function countAct(b) {
+    var iid = b.getAttribute('data-id'), it = findItem(iid), kind = S.pick.kind, v = b.getAttribute('data-pc');
+    var n = v === 'input' ? +(b.parentNode.querySelector('input').value) : +v;
+    if (!it || !(n >= 1)) return;
+    n = Math.min(n, it.qty); S.pick = null;
+    var had = {}; ((S.st.impact || {}).badges || []).forEach(function (x) { if (x.earned) had[x.id] = 1; });
+    api('/api/crisper/items', { body: { id: iid, op: 'count', kind: kind, count: n } }).then(function (st) {
+      S.st = st; render();
+      var left = st.last ? st.last.left : it.qty - n, name = plName(it.name, n);
+      var rescue = kind === 'used' && /^(check|today|soon)$/.test(it.status);
+      var fresh = ((st.impact || {}).badges || []).filter(function (x) { return x.earned && !had[x.id]; });
+      var msg = (kind === 'used' ? 'Ate ' : 'Tossed ') + n + ' ' + name + (left ? ' · ' + left + ' left' : ' · all done') +
+        (kind === 'used' ? ' · +' + (rescue ? 2 : 1) + ' pts' : '') + (fresh.length ? ' · Badge: ' + fresh.map(function (x) { return x.name; }).join(', ') : '');
+      toast(msg, st.last ? st.last.id : iid, kind === 'used' && !left && it.scrap && it.scrap.pct >= 5 ? iid : null);
+    }).catch(function (e) { toast(e.message); });
+  }
   function itemAct(id, op, days) {
     closeMenus();
     var it = S.st.items.concat(S.st.pending).filter(function (i) { return i.id === id; })[0];
