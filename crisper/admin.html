@@ -28,12 +28,16 @@ h2{font-size:19px;margin:28px 0 10px}
 .tw{overflow-x:auto;background:var(--card);border:1px solid var(--border);border-radius:10px}
 table{border-collapse:collapse;width:100%;font-size:13.5px}
 th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--border);white-space:nowrap}
-th{font-weight:600;color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.05em}
+th{white-space:normal;vertical-align:bottom;font-weight:600;color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.05em}
 td.wrap{white-space:normal;min-width:260px}
+td.wrap.narrow{min-width:150px}
 form{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap}
 input{padding:9px 12px;border:1px solid var(--border);border-radius:8px;font:inherit;min-width:260px}
 button{padding:9px 14px;border-radius:8px;border:0;background:var(--primary);color:#fff;font:inherit;font-weight:600;cursor:pointer}
 .err{color:var(--warn);margin-top:10px;font-weight:600}
+select{padding:5px 8px;border:1px solid var(--border);border-radius:6px;font:inherit;font-size:13px;background:#fff}
+.note{font-size:13px;color:var(--muted);margin-bottom:8px;max-width:760px}
+.ok-msg{color:var(--ok);font-weight:600;margin-left:8px;font-size:13px}
 pre{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px;overflow:auto;font-size:12.5px;max-height:360px}
 </style>
 </head>
@@ -50,15 +54,51 @@ pre{background:var(--card);border:1px solid var(--border);border-radius:10px;pad
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
   function pct(a, b) { return b ? Math.round((a / b) * 100) : 0; }
   function d(x) { return x ? new Date(x).toLocaleDateString(undefined, { month: 'short', day: 'numeric' }) : ''; }
-  function table(rows, cols) {
+  // labels: optional { col: 'Header' } for short headers on wide tables.
+  function table(rows, cols, labels) {
     if (!rows || !rows.length) return '<p class="muted">None yet.</p>';
-    cols = cols || Object.keys(rows[0]);
-    return '<div class="tw"><table><thead><tr>' + cols.map(function (c) { return '<th>' + esc(c.replace(/_/g, ' ')) + '</th>'; }).join('') + '</tr></thead><tbody>' +
-      rows.map(function (r) { return '<tr>' + cols.map(function (c) { var v = r[c]; if (/_at$|week$/.test(c)) v = d(v); return '<td' + (c === 'line' || c === 'text' ? ' class="wrap"' : '') + '>' + esc(v === true ? 'yes' : v === false ? '' : v) + '</td>'; }).join('') + '</tr>'; }).join('') + '</tbody></table></div>';
+    cols = cols || Object.keys(rows[0]); labels = labels || {};
+    return '<div class="tw"><table><thead><tr>' + cols.map(function (c) { return '<th>' + esc(labels[c] || c.replace(/_/g, ' ')) + '</th>'; }).join('') + '</tr></thead><tbody>' +
+      rows.map(function (r) { return '<tr>' + cols.map(function (c) { var v = r[c]; if (/_at$|week$/.test(c)) v = d(v); return '<td' + (c === 'line' || c === 'text' ? ' class="wrap"' : c === 'reasons' ? ' class="wrap narrow"' : '') + '>' + esc(v === true ? 'yes' : v === false ? '' : v) + '</td>'; }).join('') + '</tr>'; }).join('') + '</tbody></table></div>';
   }
   function kpi(v, l, target, ok) {
     return '<div class="kpi"><div class="v">' + v + '</div><div class="l">' + l + '</div>' + (target ? '<div class="t ' + (ok ? 'good' : 'bad') + '">Target ' + target + '</div>' : '') + '</div>';
   }
+  var S = { key: null };
+  var COHORTS = [['', 'Not in a pilot'], ['baseline', 'Baseline'], ['full', 'Full'], ['holdout', 'Holdout']];
+  var PILOT_LABELS = { users_with_outcomes: 'With outcomes', tossed_share_by_count: 'Tossed (count)',
+    tossed_share_by_weight_est: 'Tossed (weight, est.)', from_rescue_card: 'Via rescue card', reasons: 'Toss reasons' };
+  function share(x) { return x == null ? '' : Math.round(x * 100) + '%'; }
+  // Per-cohort outcomes. Only items finished after joining the cohort count.
+  function pilotHtml(j) {
+    var rows = (j.pilot || []).map(function (p) {
+      var r = p.reasons || {};
+      return { period: p.period, members: p.members, users_with_outcomes: p.usersWithOutcomes, outcomes: p.outcomes,
+        tossed_share_by_count: share(p.tossedShareCount), tossed_share_by_weight_est: share(p.tossedShareWeight),
+        rescues: p.rescues, from_rescue_card: p.rescueCardRescues,
+        reasons: ['forgot', 'spoiled', 'too_much', 'disliked', 'none'].map(function (k) { return k.replace('_', ' ') + ' ' + (r[k] || 0); }).join(' · ') };
+    });
+    return '<h2>Pilot cohorts</h2><p class="note">Tossed (count) = average share tossed per finished item (a full toss is 1, half is 0.5). Tossed (weight, est.) is the estimate users see on their ring. Small groups swing a lot; read these alongside the counts.</p>' +
+      table(rows, null, PILOT_LABELS) + '<h2>Toss reasons (all users)</h2>' + table(j.reasons || []);
+  }
+  function usersTable(users) {
+    if (!users || !users.length) return '<p class="muted">None yet.</p>';
+    var cols = ['email', 'first_name', 'created_at', 'last_seen_at', 'first_email_at', 'has_krisp', 'reminder_pref', 'items', 'emails'];
+    return '<div class="tw"><table><thead><tr>' + cols.map(function (c) { return '<th>' + esc(c.replace(/_/g, ' ')) + '</th>'; }).join('') + '<th>Pilot cohort</th><th>Joined cohort</th></tr></thead><tbody>' +
+      users.map(function (u) {
+        return '<tr>' + cols.map(function (c) { var v = u[c]; if (/_at$/.test(c)) v = d(v); return '<td>' + esc(v === true ? 'yes' : v === false ? '' : v) + '</td>'; }).join('') +
+          '<td><select data-cohort="' + esc(u.email) + '" aria-label="Pilot cohort for ' + esc(u.email) + '">' + COHORTS.map(function (c) { return '<option value="' + c[0] + '"' + ((u.cohort || '') === c[0] ? ' selected' : '') + '>' + c[1] + '</option>'; }).join('') + '</select><span class="ok-msg"></span></td>' +
+          '<td>' + esc(d(u.cohort_at)) + '</td></tr>';
+      }).join('') + '</tbody></table></div>';
+  }
+  document.addEventListener('change', function (e) {
+    var sel = e.target.closest('[data-cohort]'); if (!sel || !S.key) return;
+    var msg = sel.parentNode.querySelector('.ok-msg'); msg.textContent = 'Saving…';
+    fetch('/api/crisper/admin', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ key: S.key, email: sel.getAttribute('data-cohort'), cohort: sel.value || null }) })
+      .then(function (r) { return r.json().then(function (j) { if (!r.ok) throw new Error(j.error || 'Failed'); return j; }); })
+      .then(function () { msg.textContent = 'Saved'; setTimeout(function () { load(S.key); }, 600); })
+      .catch(function (err) { msg.textContent = ''; document.getElementById('err').textContent = err.message; });
+  });
   function load(key) {
     document.getElementById('err').textContent = '';
     fetch('/api/crisper/admin?key=' + encodeURIComponent(key) + (document.getElementById('pv').checked ? '&preview=1' : ''))
@@ -80,6 +120,7 @@ pre{background:var(--card);border:1px solid var(--border);border-radius:10px;pad
           kpi(f.refills_active, 'Refills subscribed') +
           kpi(pct(f.reminders_off, s) + '%', 'Turned reminders off', '≤ 20%', pct(f.reminders_off, s) <= 20) +
           '</div>';
+        html += pilotHtml(j);
         html += '<h2>Tester feedback (' + (j.feedback || []).length + ')</h2>' + table(j.feedback || [], ['at', 'email', 'kind', 'text', 'page']);
         html += '<h2>Funnel</h2>' + table([f]);
         html += '<h2>Weekly cohorts</h2>' + table(j.retention);
@@ -87,9 +128,10 @@ pre{background:var(--card);border:1px solid var(--border);border-radius:10px;pad
         html += '<h2>Lines the parser didn\u2019t recognise</h2><p class="muted" style="margin-bottom:8px">Add aliases for real produce here to raise match rates.</p>' + table(j.unknownLines);
         html += '<h2>Top produce</h2>' + table(j.topProduce);
         html += '<h2>Item sources</h2>' + table(j.sources);
-        html += '<h2>Testers</h2>' + table(j.users);
+        html += '<h2>Testers</h2><p class="note">Pilot cohort: <b>baseline</b> = logging only for 14 days, then everything; <b>full</b> = everything; <b>holdout</b> = logging only. Changing it restarts the cohort date.</p>' + usersTable(j.users);
         if (j.reminderPreview) html += '<h2>Reminder dry-run</h2><pre>' + esc(JSON.stringify(j.reminderPreview, null, 2)) + '</pre>';
         document.getElementById('out').innerHTML = html;
+        S.key = key;
       })
       .catch(function (e) { document.getElementById('err').textContent = e.message; });
   }

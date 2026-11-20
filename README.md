@@ -179,6 +179,75 @@ How it works:
    (`Krisper Use Soon`, `Krisper Krisp Change Due`), and Klaviyo flows send the emails.
 6. `/krisper/admin` shows the pilot scorecard (needs `CRISPER_ADMIN_KEY`).
 
+Use-it-up features (the "eat it all" set):
+
+- **Rescue 1 item today.** A card at the top of the dashboard picks the item
+  closest to going bad (`pickRescue` in `api/_crisper/rescue.js`). Marking it
+  used from the card counts as a rescue (`via: 'rescue_card'` on the event). It
+  shows a daily rescue streak and the estimated value of this week's rescues
+  (`rescueStats` in `impact.js`, always labeled "estimated").
+- **Toss reasons.** After any toss (full or partial, item card, finish sheet or
+  fridge check) a sheet asks why: Forgot about it, Spoiled early, Bought too
+  much, Didn't like it, Skip. Stored on the finished row as
+  `crisper_items.toss_reason` (`forgot | spoiled | too_much | disliked`, NULL when
+  skipped or never asked). API: `{ id, op: 'reason', reason }`.
+- **Fix per reason** (`fixFor`): Forgot offers to move similar items to Eat First
+  and turn on use-soon reminders; Spoiled early shows that item's catalog storage
+  tip plus "check your crisper is 34-37°F"; Bought too much feeds the Before you
+  shop list; Didn't like it shows scrap ideas and recipe searches.
+- **Before you shop** (`shopList`): what is still on hand ("You still have 2
+  plums. Skip it?") and items to buy less of: tossed for "Bought too much", or
+  50% or more tossed, in the last 2 purchases of that item. "Same as last trip"
+  shows the same notes per row. The weekly shop email gets `buy_less_names`.
+- **Rescue options** on due or overdue items: Cook now (recipe searches), Freeze
+  it ([NCHFP blanching times](https://nchfp.uga.edu/how/freeze/freeze-general-information/blanching-times/);
+  a per-item note only where the catalog scrap ideas already say to freeze it,
+  otherwise generic; no freeze option for salad greens) and Ferment or pickle it
+  (generic tip plus NCHFP links, only for veg that are commonly pickled).
+- **Eat First zone.** Any item can be flagged Eat First (`crisper_items.eat_first`,
+  `{ id, op: 'eatfirst', on }` or bulk `{ eatFirst: [ids], on }`). Flagged items
+  sit in a highlighted zone at the top of the kitchen map and the list.
+- **Crisper thermometer.** A dashboard prompt and a Settings row store a reading
+  (`crisper_users.fridge_temp_f`, `fridge_temp_at`; `settings.fridgeTempF`,
+  20-60). Guidance: 34-37°F good, above 40°F warns (the
+  [FDA](https://www.fda.gov/consumers/consumer-updates/are-you-storing-food-safely)
+  ceiling), below 32°F freezing risk. It asks again after 30 days.
+- **Household comparison** on the Impact tab, once someone has logged 10 or more
+  outcomes: their tossed share (by estimated weight) next to the same US
+  benchmark the ring already uses (`BENCHMARK_TOSS_RATE`, about 27% of fresh
+  fruit and vegetables wasted at home,
+  [EPA 2025](https://www.epa.gov/system/files/documents/2025-04/costoffoodwastereport_508.pdf)),
+  so the Impact tab shows one US number.
+
+Copy rules: never say the app reduces waste; every dollar and CO₂ number says
+"estimated".
+
+Pilot mode (`api/_crisper/pilot.js`): each user has a `cohort` (NULL,
+`baseline`, `full`, `holdout`) and `cohort_at`. Set it on `/krisper/admin` (the
+Pilot cohort dropdown in Testers) or with
+`POST /api/crisper/admin { key, email, cohort }` (`cohort: null` clears it).
+
+| Cohort | Sees |
+| --- | --- |
+| NULL (default) | Everything |
+| `baseline` | Logging only for 14 days after `cohort_at`, then everything |
+| `full` | Everything |
+| `holdout` | Logging only |
+
+"Logging only" hides the rescue card, rescue options, fixes, Eat First, the
+thermometer prompt, the comparison and the shopping nudges. The toss-reason
+question itself shows for everyone so all groups are measured the same way.
+Features that existed before the pilot are unchanged for every cohort. The
+admin scorecard has a Pilot cohorts table (members, outcomes, tossed share by
+count and by estimated weight, rescues, rescues from the card, reasons), split
+by period, and a Toss reasons table.
+
+Database changes: all additive, run by `ensureSchema` on first request
+(`ADD COLUMN IF NOT EXISTS`), so old rows and old app builds keep working:
+`crisper_items.toss_reason text`, `crisper_items.eat_first boolean NOT NULL DEFAULT false`,
+`crisper_users.fridge_temp_f real`, `fridge_temp_at timestamptz`, `cohort text`,
+`cohort_at timestamptz`.
+
 Environment variables:
 
 | Variable | Purpose |

@@ -223,7 +223,7 @@ export function tossedShare(r) {
   return r.state === 'tossed' ? 1 : Math.max(0, Math.min(1, Number(r.tossed_frac) || 0));
 }
 
-function totals(rows) {
+export function totals(rows) {
   const t = { usedCount: 0, tossedCount: 0, partialCount: 0, usedLb: 0, tossedLb: 0, usedUsd: 0, tossedUsd: 0, usedCo2Kg: 0, tossedCo2Kg: 0, rescued: 0,
     trimLogged: 0, trimUsedLb: 0, trimCompostLb: 0, trimTrashLb: 0, trimUsed: 0, trimCompost: 0 };
   for (const r of rows) {
@@ -338,6 +338,64 @@ function streaks(rows, today, tz) {
   return { cleanWeeks: current, bestCleanWeeks: best, daysSinceToss, everTossed: !!lastToss };
 }
 
+// Daily rescue streak: consecutive local days with at least one rescue (an item
+// eaten in its last couple of days), ending today, or yesterday if today has
+// none yet so the streak doesn't look broken before breakfast. weekUsd is the
+// estimated value of the eaten part of this week's (Mon–Sun) rescues.
+function addDay(iso, n) {
+  return new Date(Date.parse(`${iso}T00:00:00Z`) + n * 86400000).toISOString().slice(0, 10);
+}
+export function rescueStats(rows, today, tz) {
+  const days = new Set();
+  const ws = weekStart(today);
+  let weekCount = 0;
+  let weekUsd = 0;
+  const todayNames = [];
+  for (const r of rows) {
+    if (r.state !== 'used' || !r.rescued) continue;
+    const d = localDate(r.state_at, tz);
+    days.add(d);
+    if (d === today) todayNames.push(r.produce);
+    if (weekStart(d) === ws && d <= today) {
+      weekCount += 1;
+      weekUsd += itemImpact(r).usd * (1 - tossedShare(r));
+    }
+  }
+  let streakDays = 0;
+  for (let d = days.has(today) ? today : addDay(today, -1); days.has(d); d = addDay(d, -1)) streakDays += 1;
+  let bestStreakDays = 0;
+  let run = 0;
+  let prev = null;
+  for (const d of [...days].sort()) {
+    run = prev && addDay(prev, 1) === d ? run + 1 : 1;
+    bestStreakDays = Math.max(bestStreakDays, run);
+    prev = d;
+  }
+  return { streakDays, bestStreakDays, today: days.has(today), todayNames, weekCount, weekUsd: r2(weekUsd), usdEstimated: true };
+}
+
+// Your tossed share next to the same US benchmark the ring and the "kept out of
+// the bin" line use (BENCHMARK_TOSS_RATE, EPA 2025), so the Impact tab has one
+// US number. Shown once there are enough logged outcomes to mean something.
+export const COMPARE = {
+  minOutcomes: 10,
+  rate: BENCHMARK_TOSS_RATE,
+  text: `US households waste about ${Math.round(BENCHMARK_TOSS_RATE * 100)}% of the fresh fruit and vegetables they buy`,
+  source: 'EPA (2025)',
+  url: 'https://www.epa.gov/system/files/documents/2025-04/costoffoodwastereport_508.pdf',
+};
+
+function compare(all) {
+  const outcomes = all.usedCount + all.tossedCount;
+  return {
+    ...COMPARE,
+    outcomes,
+    ready: outcomes >= COMPARE.minOutcomes,
+    // Same measure as the ring: share of the edible part, by estimated weight.
+    tossedShare: outcomes && all.eatenRate != null ? Math.round((1 - all.eatenRate) * 1000) / 1000 : null,
+  };
+}
+
 const LEVELS = [
   { min: 0, name: 'Sprout' },
   { min: 5, name: 'Seedling' },
@@ -396,5 +454,7 @@ export function buildImpact(rows, { today, tz, krisp }) {
     level: level(points),
     badges,
     benchmark: { tossRate: BENCHMARK_TOSS_RATE },
+    rescue: rescueStats(rows, today, tz),
+    compare: compare(all),
   };
 }

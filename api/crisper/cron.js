@@ -18,6 +18,8 @@ import { handle, bad } from '../_crisper/http.js';
 import { q, logEvent } from '../_crisper/db.js';
 import { itemView, sortViews, todayIn, krispStatus } from '../_crisper/shelf.js';
 import { dashboardUrl, listNames } from '../_crisper/core.js';
+import { pilotFor } from '../_crisper/pilot.js';
+import { buyLessFor } from '../_crisper/rescue.js';
 import { trackEvent } from '../_crisper/klaviyo.js';
 import { pushToUser, pushEnabled } from '../_crisper/push.js';
 
@@ -100,6 +102,8 @@ export async function runReminders({ dryRun = false } = {}) {
         const img = (v) => (String(v.imageUrl || '').startsWith('http') ? v.imageUrl : '');
         const skip = views.filter((v) => v.leftMax >= 3);
         const useFirst = views.filter((v) => v.leftMax < 3).slice(0, 6);
+        // "Buy less" (tossed for Bought too much, or tossed half+, in the last 2 purchases). Not for logging-only pilot cohorts.
+        const buyLess = pilotFor(user).features.shopNudges ? await buyLessFor(user) : [];
         const shopProps = {
           first_name: user.first_name || '',
           have_count: views.length,
@@ -109,6 +113,8 @@ export async function runReminders({ dryRun = false } = {}) {
           use_first_items: useFirst.map((v) => ({ name: v.name, label: v.label, image: img(v) })),
           restock_names: listNames(restock),
           restock_count: restock.length,
+          buy_less_names: listNames(buyLess.map((b) => b.name)),
+          buy_less_items: buyLess.slice(0, 8).map((b) => ({ name: b.name, suggest: b.suggest, image: img(b) })),
           check_url: dashboardUrl(user.id) + '#check',
           dashboard_url: dashboardUrl(user.id),
         };
@@ -149,6 +155,7 @@ export async function runReminders({ dryRun = false } = {}) {
       also_tracking: Math.max(0, views.length - list.length),
       dashboard_url: dashboardUrl(user.id),
       krisp_due_in_days: krisp.owned ? krisp.dueInDays : null,
+      eat_first_names: pilotFor(user).features.eatFirst ? listNames(views.filter((v) => v.eatFirst).map((v) => v.name)) : '',
     };
 
     if (send && list.length) {

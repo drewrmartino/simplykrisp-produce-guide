@@ -477,8 +477,59 @@ body.has-bnav main{padding-bottom:96px}
 .zgrp h3 .zi{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:8px;background:hsl(200 60% 94%);color:hsl(205 55% 35%);font-size:14px}
 .z-counter h3 .zi{background:hsl(40 90% 92%);color:hsl(32 80% 38%)}
 .z-pantry h3 .zi{background:hsl(30 15% 90%);color:hsl(30 15% 35%)}
+/* Rescue 1 item today */
+.rsc{margin-top:16px;border:1.5px solid hsl(38 70% 72%);background:hsl(42 90% 96%);border-radius:14px;padding:14px 16px}
+.rsc.ok{border-color:hsl(140 30% 70%);background:var(--ok-bg)}
+.rsc.quiet{border-color:var(--card-border);background:var(--card)}
+.rsh{display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap}
+.rsh b{font-family:var(--sans);font-weight:400;font-size:18px}
+.rsi{display:flex;gap:12px;align-items:center;margin-top:10px}
+.rsi img{width:44px;height:44px;border-radius:50%;object-fit:cover;background:#fff}
+.rsc .row{margin-top:12px;gap:8px}
+.rsf{display:flex;flex-wrap:wrap;gap:4px 14px;margin-top:10px;font-size:13px;color:var(--muted-fg)}
+.rsf b{color:var(--fg)}
+/* rescue options on due items */
+details.rso{background:hsl(42 90% 96%);border:1px solid hsl(38 60% 82%);border-radius:10px;padding:7px 10px}
+details.rso summary{font-size:13.5px;font-weight:700;cursor:pointer}
+.rso .ro{margin-top:8px;font-size:13.5px;line-height:1.45}
+.rso .ro b{display:block}
+.rso .ro .rol{display:flex;flex-wrap:wrap;gap:4px 12px;margin-top:2px}
+/* Eat First zone on the kitchen map */
+.km-eat{grid-column:1/-1;background:hsl(42 90% 93%);border:2px dashed var(--soon);border-radius:12px;padding:10px 10px 12px}
+.km-eat .km-zl{padding-right:0}
+.efchip{font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:hsl(32 80% 32%);background:hsl(42 90% 88%);border-radius:5px;padding:1px 6px;margin-left:6px;vertical-align:1px;white-space:nowrap;display:inline-block}
+.z-eat h3 .zi{background:hsl(42 90% 88%);color:hsl(32 80% 32%)}
+/* toss reason + fix sheet, before-you-shop, thermometer */
+.rsn{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.rsn .opt{border:1px solid var(--input);background:#fff;border-radius:99px;padding:9px 14px;font-size:14.5px;cursor:pointer;font-weight:600}
+.rsn .opt:hover{border-color:var(--primary)}
+.rsn .opt.skip{font-weight:400;color:var(--muted-fg)}
+.fixb{margin-top:16px;border-top:1px solid var(--border);padding-top:14px;display:flex;flex-direction:column;gap:8px}
+.fixb h3{font-size:18px}
+.fixb .sim{display:flex;flex-wrap:wrap;gap:6px}
+.fixb .sim label{display:inline-flex;align-items:center;gap:6px;background:var(--card);border:1px solid var(--card-border);border-radius:99px;padding:4px 10px 4px 6px;font-size:13.5px;cursor:pointer}
+.fixb .sim img{width:20px;height:20px}
+.shl{list-style:none;display:grid;gap:6px;margin-top:6px}
+.shl li{display:flex;gap:10px;align-items:center;background:var(--card);border:1px solid var(--card-border);border-radius:var(--radius);padding:8px 11px;font-size:14px;line-height:1.4}
+.shl li img{width:28px;height:28px;flex:none}
+.shl li.less{border-color:hsl(38 60% 75%);background:hsl(42 90% 96%)}
+.sheet h3.shh{font-size:13px;font-family:var(--body);font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted-fg);margin-top:16px}
+.tmp{margin-top:14px}
+.tmp.warn{background:var(--warn-bg);border-color:hsl(16 60% 80%)}
+.tgd{list-style:none;display:grid;gap:4px;font-size:13.5px;margin-top:8px}
+.tgd li{display:flex;gap:8px;align-items:baseline}
+.tgd i{display:inline-block;width:9px;height:9px;border-radius:50%;flex:none}
+.tres{border-radius:var(--radius);padding:10px 12px;font-size:14.5px;margin-top:10px}
+.tres.good{background:var(--ok-bg)}.tres.warm,.tres.cold{background:var(--soon-bg)}.tres.too_warm,.tres.freezing{background:var(--warn-bg)}
+/* household comparison on the impact view */
+.cmp{margin-top:12px;border:1px solid var(--card-border);border-radius:var(--radius);padding:10px 12px;font-size:13.5px}
+.cmp .cb{display:grid;grid-template-columns:110px 1fr 44px;gap:8px;align-items:center;margin-top:6px}
+.cmp .cb .tr{height:9px;border-radius:99px;background:var(--muted);overflow:hidden}
+.cmp .cb .tr i{display:block;height:100%;background:var(--warn);border-radius:99px}
+.cmp .cb .tr i.us{background:hsl(96 5% 55%)}
 body.has-bnav footer{padding-bottom:90px}
 body.has-bnav .toast{bottom:calc(88px + env(safe-area-inset-bottom))}
+.toast.top,body.has-bnav .toast.top{bottom:auto;top:calc(14px + env(safe-area-inset-top))}
 details.sd summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;width:100%}
 details.sd summary::-webkit-details-marker{display:none}
 details.sd{display:block}
@@ -662,7 +713,9 @@ details.sd{display:block}
         </div>
         <button class="btn addtop" type="button" data-open="choose">+ Add groceries</button>
       </div>
+      <section id="rescueCard" aria-label="Rescue 1 item today"></section>
       <div id="installCard"></div>
+      <section id="tempCard" aria-label="Crisper thermometer"></section>
       <section id="krispCard" aria-label="Your Krisp"></section>
       <section id="stake" aria-label="Store it right"></section>
       <div id="conflict" class="hide" style="margin-top:12px"></div>
@@ -697,6 +750,10 @@ details.sd{display:block}
         <div class="setrow">
           <div><b>Before-you-shop email</b><div class="note">What you still have, so you don't buy it twice.</div></div>
           <select class="inp" id="setShopDay" style="width:auto" aria-label="Before-you-shop email day"><option value="Mon">Mon</option><option value="Tue">Tue</option><option value="Wed">Wed</option><option value="Thu">Thu</option><option value="Fri">Fri</option><option value="Sat">Sat</option><option value="Sun">Sun</option><option value="off">Off</option></select>
+        </div>
+        <div class="setrow" id="setTempRow">
+          <div><b>Crisper thermometer</b><div class="note" id="setTempNote">Produce keeps best at 34-37°F.</div></div>
+          <button class="btn ghost sm" type="button" data-open="temp">Enter reading</button>
         </div>
         <div class="setrow">
           <div><b>Weekly fridge check</b><div class="note" id="setCheckNote">One minute. Keeps your list right.</div></div>
@@ -773,6 +830,7 @@ details.sd{display:block}
   <div class="sheet">
     <div class="sh"><h2 id="shChooseT">Add groceries</h2><button class="x" type="button" data-close aria-label="Close">×</button></div>
     <div class="choose">
+      <button type="button" class="ch" data-open="shop" id="chShop"><span class="ci" aria-hidden="true">&#9776;</span><span><b>Before you shop</b><small>What you still have, and what to buy less of</small></span></button>
       <button type="button" class="ch" data-open="repeat" id="chRepeat"><span class="ci" aria-hidden="true">&#8635;</span><span><b>Same as last trip</b><small id="chRepeatSub"></small></span></button>
       <button type="button" class="ch primary" data-open="photo"><span class="ci" aria-hidden="true">&#128247;</span><span><b>Snap a receipt</b><small>Paper receipt or order screenshot</small></span></button>
       <button type="button" class="ch" data-open="paste"><span class="ci" aria-hidden="true">&#128203;</span><span><b>Paste receipt text</b><small>From an order email or e-receipt</small></span></button>
@@ -786,6 +844,43 @@ details.sd{display:block}
   <div class="sheet">
     <div class="sh"><h2 id="shCheckT">Fridge check</h2><button class="x" type="button" data-close aria-label="Close">×</button></div>
     <div id="ckBody"></div>
+  </div>
+</div>
+
+<!-- toss reason + the fix for it -->
+<div class="scrim hide" id="shReason" role="dialog" aria-modal="true" aria-labelledby="shReasonT">
+  <div class="sheet">
+    <div class="sh"><h2 id="shReasonT">What happened?</h2><button class="x" type="button" data-close aria-label="Close">×</button></div>
+    <div id="rsnBody"></div>
+  </div>
+</div>
+
+<!-- before you shop -->
+<div class="scrim hide" id="shShop" role="dialog" aria-modal="true" aria-labelledby="shShopT">
+  <div class="sheet">
+    <div class="sh"><h2 id="shShopT">Before you shop</h2><button class="x" type="button" data-close aria-label="Close">×</button></div>
+    <div id="shopBody"></div>
+  </div>
+</div>
+
+<!-- crisper thermometer -->
+<div class="scrim hide" id="shTemp" role="dialog" aria-modal="true" aria-labelledby="shTempT">
+  <div class="sheet">
+    <div class="sh"><h2 id="shTempT">Crisper thermometer</h2><button class="x" type="button" data-close aria-label="Close">×</button></div>
+    <p>Put a fridge thermometer in your crisper drawer and leave it overnight. Then enter the reading.</p>
+    <ul class="tgd">
+      <li><i style="background:var(--ok)"></i><span><b>34-37°F</b> is where produce keeps best.</span></li>
+      <li><i style="background:var(--warn)"></i><span><b>Above 40°F</b> is warmer than the <a class="link" href="https://www.fda.gov/consumers/consumer-updates/are-you-storing-food-safely" target="_blank" rel="noopener">FDA</a> says a fridge should be.</span></li>
+      <li><i style="background:hsl(205 55% 45%)"></i><span><b>Below 32°F</b> and produce can freeze.</span></li>
+    </ul>
+    <div class="row" style="margin-top:14px;align-items:center">
+      <label class="small" for="tempIn">Reading</label>
+      <input class="inp" type="number" inputmode="decimal" step="0.5" min="20" max="60" id="tempIn" style="width:110px" placeholder="e.g. 36"><span>°F</span>
+      <button class="btn" type="button" id="tempSave">Save</button>
+    </div>
+    <div class="err hide" id="tempErr" role="alert"></div>
+    <div id="tempRes"></div>
+    <p class="note" style="margin-top:12px">We'll ask again in a month. Fridges drift with the seasons and how full they are.</p>
   </div>
 </div>
 
@@ -1175,8 +1270,13 @@ details.sd{display:block}
     { k: 'counter', t: 'Counter', sub: 'Room temperature, out of direct sun.' },
     { k: 'pantry', t: 'Cool, dark cupboard', sub: 'Not the fridge.' }
   ];
-  var ZONE_IC = { high: '\u2744', low: '\u2744', shelf: '\u2744', counter: '\u2600', pantry: '\u25A2' };
+  var EAT_ZONE = { k: 'eat', t: 'Eat First', sub: 'You flagged these. Keep them up front where you will see them.' };
+  var ZONE_IC = { eat: '\u2605', high: '\u2744', low: '\u2744', shelf: '\u2744', counter: '\u2600', pantry: '\u25A2' };
   function zoneOf(i) { return i.zone || (i.storage === 'pantry' ? 'pantry' : /counter/.test(i.storage) ? 'counter' : i.category === 'fruit' ? 'low' : 'high'); }
+  // Features can be off for people in a pilot's baseline or holdout group.
+  function feat(k) { return !!(S.st && S.st.features && S.st.features[k]); }
+  // Where an item shows on the map and in the list: Eat First wins over its storage spot.
+  function mapZone(i) { return i.eatFirst && feat('eatFirst') ? 'eat' : zoneOf(i); }
   function dayIndex(it) { return it.leftMax <= 0 ? 0 : it.leftMax; }
 
   function render() {
@@ -1190,6 +1290,8 @@ details.sd{display:block}
     el('summary').textContent = !items.length && !pend.length ? 'Add your groceries to get started.'
       : plural(items.length, 'item') + (urgent ? ' · ' + urgent + ' to use today' : '') + (soon ? ' · ' + soon + ' soon' : '') + (pend.length ? ' · ' + pend.length + ' on the way' : '');
 
+    renderRescue(st);
+    renderTemp(st);
     renderConflict(items);
     renderGroups(items, pend);
     renderStake(items, pend);
@@ -1279,7 +1381,7 @@ details.sd{display:block}
       '<span class="sr-only">, ' + esc(when) + '</span></button>';
   }
   function kmZone(list, k, empty) {
-    var l = list.filter(function (i) { return zoneOf(i) === k; }).sort(function (a, b) { return a.leftMax - b.leftMax; });
+    var l = list.filter(function (i) { return mapZone(i) === k; }).sort(function (a, b) { return a.leftMax - b.leftMax; });
     return l.length ? '<div class="km-chips">' + l.map(kmChip).join('') + '</div>' : '<div class="km-none">' + empty + '</div>';
   }
   function kitchenMap(list) {
@@ -1288,7 +1390,9 @@ details.sd{display:block}
     var sachet = '<span class="km-sachet' + (on ? '' : ' off') + '" title="' + (on ? 'Your Krisp sachet goes in this drawer' : 'A Krisp sachet would go in this drawer') + '"><span>K</span>' + (on ? 'Krisp' : 'No Krisp') + '</span>';
     var anyK = list.some(function (i) { return (zoneOf(i) === 'high' || zoneOf(i) === 'low') && (i.krispBoost || i.krispCould); });
     var anyCould = list.some(function (i) { return (zoneOf(i) === 'high' || zoneOf(i) === 'low') && !i.krispBoost && i.krispCould; });
-    return '<div class="km" role="group" aria-label="Where everything is">' +
+    var eat = list.some(function (i) { return mapZone(i) === 'eat'; })
+      ? '<div class="km-eat"><div class="km-zl">Eat First<small>Front of the top shelf, where you see them first</small></div>' + kmZone(list, 'eat', '') + '</div>' : '';
+    return '<div class="km" role="group" aria-label="Where everything is">' + eat +
       '<div class="km-fridge"><div class="km-fh">Fridge</div>' +
         '<div class="km-shelf"><div class="km-zl">Fridge shelf<small>Main fridge, not a drawer</small></div>' + kmZone(list, 'shelf', 'Nothing on the shelf') + '</div>' +
         '<div class="km-drawers">' +
@@ -1330,7 +1434,8 @@ details.sd{display:block}
     if (i.ripeningDays) tags += '<span class="tag">Ripening +' + i.ripeningDays + 'd</span>';
     var acts = pending
       ? '<button type="button" data-act="delete" data-id="' + i.id + '">Remove, didn\'t get it</button>'
-      : '<button type="button" data-fin="' + i.id + '">Tossed some' + (i.scrap ? ' / log the ' + esc(i.scrap.part) : '') + '</button>' +
+      : (feat('eatFirst') ? '<button type="button" data-ef="' + i.id + '" data-on="' + !i.eatFirst + '">' + (i.eatFirst ? 'Take out of Eat First' : 'Move to Eat First') + '</button>' : '') +
+        '<button type="button" data-fin="' + i.id + '">Tossed some' + (i.scrap ? ' / log the ' + esc(i.scrap.part) : '') + '</button>' +
         (i.ripensFirst ? '<button type="button" data-act="ripening" data-days="2" data-id="' + i.id + '">Still ripening</button>' : '') +
         (i.ripeningDays ? '<button type="button" data-act="ripening" data-days="-2" data-id="' + i.id + '">Ripe now</button>' : '') +
         (i.scrap ? '<button type="button" data-fin="' + i.id + '" data-mode="ideas">Scrap ideas</button>' : '') +
@@ -1344,9 +1449,9 @@ details.sd{display:block}
       ? '<div class="qb"><button class="btn ghost" type="button" data-act="arrived" data-id="' + i.id + '">Arrived</button>' + xb + '</div>'
       : '<div class="qb"><button class="btn ghost' + (pk === 'used' ? ' on' : '') + '" type="button" data-pk="used" data-id="' + i.id + '" aria-label="' + esc(i.name) + ': used it" aria-expanded="' + (pk === 'used') + '">Used</button><button class="btn ghost' + (pk === 'tossed' ? ' on' : '') + '" type="button" data-pk="tossed" data-id="' + i.id + '" aria-label="' + esc(i.name) + ': tossed" aria-expanded="' + (pk === 'tossed') + '">Tossed</button>' + xb + '</div>';
     return '<article class="it s-' + (pending ? 'pending' : i.status) + '" id="it-' + i.id + '">' +
-      '<div class="ith"><img src="' + esc(i.imageUrl) + '" alt="" loading="lazy"><div style="flex:1;min-width:0"><div class="itn">' + esc(i.name) + q + '</div><div class="itl">' + esc(label) + '</div>' + tally + kb.chip + '</div>' + quick + '</div>' +
+      '<div class="ith"><img src="' + esc(i.imageUrl) + '" alt="" loading="lazy"><div style="flex:1;min-width:0"><div class="itn">' + esc(i.name) + q + (!pending && i.eatFirst && feat('eatFirst') ? '<span class="efchip">Eat first</span>' : '') + '</div><div class="itl">' + esc(label) + '</div>' + tally + kb.chip + '</div>' + quick + '</div>' +
       picker + (pending ? '' : '<div class="bar" role="progressbar" aria-label="Freshness used" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' + Math.round(i.progress * 100) + '"><i style="width:' + Math.max(4, Math.round(i.progress * 100)) + '%"></i></div>') +
-      store + kb.line +
+      store + kb.line + (pending ? '' : rescueOpts(i)) +
       '<details class="itd"><summary>More</summary><div class="dbody">' + detail + (tags ? '<div class="tags">' + tags + '</div>' : '') + '<div class="mact">' + acts + '</div></div></details>' +
       '</article>';
   }
@@ -1385,10 +1490,11 @@ details.sd{display:block}
     var due = filtered.filter(function (i) { return i.status !== 'later'; })
       .sort(function (a, b) { return a.leftMax - b.leftMax; });
     if (due.length) html += '<p class="usefirst"><b>Use first:</b> ' + due.slice(0, 5).map(function (i) { return esc(i.name) + ' <span class="muted">(' + (i.status === 'check' ? 'check it' : i.status === 'today' ? 'today' : i.leftMax + 'd') + ')</span>'; }).join(', ') + (due.length > 5 ? ' +' + (due.length - 5) : '') + '</p>';
+    if (st_shopHas()) html += '<div class="ckban"><div><b>Before you shop</b><div class="small muted">' + esc(shopTeaser()) + '</div></div><button class="btn ghost sm" type="button" data-open="shop">See list</button></div>';
     if (checkDue()) html += '<div class="ckban"><div><b>Weekly fridge check</b><div class="small muted">One minute. Tap through what\'s left so your list stays right.</div></div><button class="btn sm" type="button" data-open="check">Start</button></div>';
     html += recipeCard(filtered);
-    ZONES.forEach(function (z) {
-      var list = filtered.filter(function (i) { return zoneOf(i) === z.k; }).sort(function (a, b) { return a.leftMax - b.leftMax; });
+    (feat('eatFirst') ? [EAT_ZONE] : []).concat(ZONES).forEach(function (z) {
+      var list = filtered.filter(function (i) { return mapZone(i) === z.k; }).sort(function (a, b) { return a.leftMax - b.leftMax; });
       if (!list.length) return;
       var kOn = list.filter(function (i) { return i.krispBoost; }).length, kCould = list.filter(function (i) { return i.krispCould; }).length;
       var kLine = (z.k === 'high' || z.k === 'low') ? (kOn ? ' <span class="gk">Your Krisp is working on ' + (kOn === list.length ? (list.length === 1 ? 'this one' : 'all ' + list.length) : kOn + ' of these') + '.</span>' : kCould ? ' <span class="muted">A Krisp would help ' + (kCould === list.length ? (list.length === 1 ? 'this one' : 'all ' + list.length) : kCould + ' of these') + '.</span>' : '') : '';
@@ -1426,6 +1532,13 @@ details.sd{display:block}
       return;
     }
     var it = CK.list[CK.i], zone = (ZONES.filter(function (z) { return z.k === zoneOf(it); })[0] || {}).t || '';
+    if (CK.ask) {
+      box.innerHTML = '<div class="ckprog"><span>' + (CK.i + 1) + ' of ' + n + '</span><div class="bar"><i style="width:' + Math.round(CK.i / n * 100) + '%"></i></div></div>' +
+        '<div class="ckit s-' + it.status + '"><img src="' + esc(it.imageUrl) + '" alt=""><div><div class="itn">' + esc(it.name) + '</div><div class="itl">Tossed</div></div></div>' +
+        (CK.ask.fix ? fixHtml(CK.ask.fix, false) + '<div class="ckfoot"><button class="btn" type="button" data-ck="next">Next item</button></div>'
+          : '<p class="ckq">What happened?</p>' + reasonChips().replace(/data-rsn=/g, 'data-ckr='));
+      return;
+    }
     box.innerHTML = '<div class="ckprog"><span>' + (CK.i + 1) + ' of ' + n + '</span><div class="bar"><i style="width:' + Math.round(CK.i / n * 100) + '%"></i></div></div>' +
       '<div class="ckit s-' + it.status + '"><img src="' + esc(it.imageUrl) + '" alt=""><div><div class="itn">' + esc(it.name) + (qtyLabel(it) ? ' ' + qtyLabel(it) : '') + '</div><div class="itl">' + esc(it.label) + '</div><div class="small muted">' + esc(zone) + '</div></div></div>' +
       '<p class="ckq">Is it still in your kitchen?</p>' +
@@ -1436,13 +1549,25 @@ details.sd{display:block}
   window.addEventListener('hashchange', function () {
     if (location.hash === '#check' && S.st) { history.replaceState(null, '', location.pathname + location.search); view('vDash'); tab('fridge'); openCheck(); }
   });
-  function ckNext(kind) { if (kind) CK[kind]++; CK.i++; CK.partial = false; CK.busy = false; renderCheck(); }
+  function ckNext(kind) { if (kind) CK[kind]++; CK.i++; CK.partial = false; CK.busy = false; CK.ask = null; renderCheck(); }
   function ckApi(body, kind) {
     CK.busy = true;
-    api('/api/crisper/items', { body: body }).then(function (st) { S.st = st; render(); ckNext(kind); }).catch(function (e) { CK.busy = false; toast(e.message); });
+    api('/api/crisper/items', { body: body }).then(function (st) {
+      S.st = st; render();
+      // Tossed: ask why before moving on.
+      if (kind === 'tossed') { CK.tossed++; CK.busy = false; CK.partial = false; CK.ask = { id: body.id, fix: null }; renderCheck(); return; }
+      ckNext(kind);
+    }).catch(function (e) { CK.busy = false; toast(e.message); });
   }
   el('ckBody').addEventListener('click', function (ev) {
-    var b = ev.target.closest('[data-ck],[data-ckt],#ckFinish'); if (!b || CK.busy) return;
+    var b = ev.target.closest('[data-ck],[data-ckt],[data-ckr],#ckFinish'); if (!b || CK.busy) return;
+    if (b.hasAttribute('data-ckr') && CK.ask) {
+      var rk = b.getAttribute('data-ckr'); CK.busy = true;
+      sendReason(CK.ask.id, rk, function (fix) { CK.busy = false; if (rk === 'skip' || !fix) return ckNext(null); CK.ask.fix = fix; renderCheck(); })
+        .catch(function (e) { CK.busy = false; toast(e.message); });
+      return;
+    }
+    if (b.getAttribute('data-ck') === 'next') return ckNext(null);
     if (b.id === 'ckFinish') {
       api('/api/crisper/items', { body: { check: true, reviewed: CK.list.length } }).then(function (st) { S.st = st; closeSheets(); render(); toast('Fridge check done. See you next week.'); }).catch(function (e) { toast(e.message); });
       return;
@@ -1597,12 +1722,27 @@ details.sd{display:block}
     var earned = im.badges.filter(function (b) { return b.earned; }).length;
     var vs = fin >= 3 && (t.avoidedUsd > 0.5 || t.avoidedCo2Kg > 0.2)
       ? '<div class="ivs">Compared with a household tossing the US-average ' + Math.round(im.benchmark.tossRate * 100) + '% of the same produce, you kept about <b>' + money(t.avoidedUsd) + '</b> and <b>' + num(t.avoidedCo2Kg / 0.4536) + ' lb CO₂e</b> out of the bin.</div>' : '';
+    // Household comparison: only once there are enough logged outcomes to mean something.
+    var cmp = im.compare, cmpH = '';
+    if (cmp && cmp.ready && cmp.tossedShare != null) {
+      var you = Math.round(cmp.tossedShare * 100), us = Math.round(cmp.rate * 100);
+      cmpH = '<div class="cmp"><b>Your tossed share vs. US households</b>' +
+        '<div class="cb"><span>You</span><span class="tr"><i style="width:' + Math.max(2, Math.min(100, you)) + '%"></i></span><b>' + you + '%</b></div>' +
+        '<div class="cb"><span>US households</span><span class="tr"><i class="us" style="width:' + us + '%"></i></span><b>' + us + '%</b></div>' +
+        '<p class="note" style="margin-top:6px">' + esc(cmp.text) + ' (<a class="link" href="' + esc(cmp.url) + '" target="_blank" rel="noopener">' + esc(cmp.source) + '</a>, the same US average as the ring). ' +
+        'Yours is the share of produce you marked tossed, by estimated weight, across ' + plural(cmp.outcomes, 'logged item') + '. It only counts what you log.</p></div>';
+    } else if (cmp && !cmp.ready) {
+      var left = Math.max(1, cmp.minOutcomes - cmp.outcomes);
+      cmpH = '<p class="note" style="margin-top:12px">Mark ' + plural(left, 'more item') + ' used or tossed to see how your tossed share compares with US households.</p>';
+    }
+    var rs = im.rescue;
+    var rsH = rs && (rs.weekCount || rs.streakDays || rs.bestStreakDays) ? rescueFoot(rs) : '';
     box.innerHTML =
       '<div class="ih"><h2>Your level<span class="lvl" title="' + lv.points + ' points">' + esc(lv.name) + '</span></h2>' +
       '<div class="tog" role="group" aria-label="Time range"><button type="button" data-range="30" aria-pressed="' + !all + '">30 days</button><button type="button" data-range="all" aria-pressed="' + all + '">All time</button></div></div>' +
       '<div class="ibody"><div class="ering">' + ring + '<div class="cap">' + cap + '</div></div>' +
       '<div class="tiles">' + tiles.map(function (x) { return '<div class="tile ' + (x.c || '') + '"><div class="v">' + x.v + '</div><div class="l">' + x.l + '</div></div>'; }).join('') + '</div></div>' +
-      vs +
+      vs + cmpH + rsH +
       scrapRow(t) +
       '<div class="lbar"><span><b style="color:var(--fg)">' + plural(lv.points, 'pt') + '</b></span><span class="track"><i style="width:' + Math.max(3, Math.round(lv.progress * 100)) + '%"></i></span><span>' +
       (lv.next ? lv.toNext + ' to ' + esc(lv.next) : 'Top level') + '</span></div>' +
@@ -1679,6 +1819,7 @@ details.sd{display:block}
         (f.trim === 'used' ? ', scraps used' : f.trim === 'compost' ? ', scraps composted' : '') + (pts ? ' · +' + pts + ' pts' : '') +
         (fresh.length ? ' · Badge: ' + fresh.map(function (b) { return b.name; }).join(', ') : '');
       toast(msg, wasDone ? null : f.id);
+      if (f.portion > 0 && !wasDone) askReason(f.id, f.name);
     }).catch(function (e) { toast(e.message); });
   });
   document.addEventListener('click', function (ev) {
@@ -1779,6 +1920,7 @@ details.sd{display:block}
   el('toastUndo').addEventListener('click', function () {
     if (!lastUndo) return;
     var id = lastUndo; lastUndo = null; show('toast', false);
+    if (RSN.id === id && !el('shReason').classList.contains('hide')) closeSheets();
     itemAct(id, 'undo');
   });
   document.addEventListener('click', function (ev) {
@@ -1797,7 +1939,8 @@ details.sd{display:block}
         var fresh = ((st.impact || {}).badges || []).filter(function (b) { return b.earned && !had[b.id]; });
         var msg = n + (portion >= 1 ? ' marked tossed' : portion > 0 ? ': ' + FRAC[1 - portion] + ' eaten, ' + FRAC[portion] + ' tossed' : rescue ? ' rescued' : ' marked used') +
           (portion < 1 ? ' · +' + (rescue ? 2 : 1) + ' pts' : '') + (fresh.length ? ' · Badge: ' + fresh.map(function (b) { return b.name; }).join(', ') : '');
-        toast(msg, iid, it && it.scrap && it.scrap.pct >= 5 ? iid : null);
+        toast(msg, iid, it && it.scrap && it.scrap.pct >= 5 && portion === 0 ? iid : null);
+        if (portion > 0) askReason(iid, n);
       }).catch(function (e) { toast(e.message); });
     }
   });
@@ -1815,6 +1958,7 @@ details.sd{display:block}
       var msg = (kind === 'used' ? 'Ate ' : 'Tossed ') + n + ' ' + name + (left ? ' · ' + left + ' left' : ' · all done') +
         (kind === 'used' ? ' · +' + (rescue ? 2 : 1) + ' pts' : '') + (fresh.length ? ' · Badge: ' + fresh.map(function (x) { return x.name; }).join(', ') : '');
       toast(msg, st.last ? st.last.id : iid, kind === 'used' && !left && it.scrap && it.scrap.pct >= 5 ? iid : null);
+      if (kind === 'tossed') askReason(st.last ? st.last.id : iid, it.name);
     }).catch(function (e) { toast(e.message); });
   }
   function itemAct(id, op, days) {
@@ -1828,7 +1972,7 @@ details.sd{display:block}
       var rescue = it && /^(check|today|soon)$/.test(it.status);
       var extra = (op === 'used' ? ' · +' + (rescue ? 2 : 1) + ' pts' : '') + (fresh.length ? ' · Badge: ' + fresh.map(function (b) { return b.name; }).join(', ') : '');
       if (op === 'used') toast(n + (rescue ? ' rescued' : ' marked used') + extra, id, it && it.scrap && it.scrap.pct >= 5 ? id : null);
-      else if (op === 'tossed') toast(n + ' marked tossed' + extra, id);
+      else if (op === 'tossed') { toast(n + ' marked tossed' + extra, id); askReason(id, n); }
       else if (op === 'delete') toast(n + ' removed', id);
       else if (op === 'arrived') toast(n + ' is now counting from today');
       else if (op === 'ripening') toast(+days > 0 ? 'Gave ' + n.toLowerCase() + ' 2 more days to ripen' : n + ' marked ripe');
@@ -1843,6 +1987,8 @@ details.sd{display:block}
     closeSheets();
     if (which === 'check') { openCheck(); return; }
     if (which === 'feedback') { openFeedback(); return; }
+    if (which === 'shop') { if (!S.st || !S.st.shopping) return; renderShop(); show('shShop', true); document.body.style.overflow = 'hidden'; return; }
+    if (which === 'temp') { if (!S.st) return; openTemp(); document.body.style.overflow = 'hidden'; return; }
     if (which === 'repeat') {
       var lt = (S.st && S.st.lastTrip) || []; if (!lt.length) return;
       S.reviewMode = 'repeat'; S.pastePreview = null;
@@ -1857,6 +2003,7 @@ details.sd{display:block}
       show('chFwd', !!(S.st && S.st.inbox.address));
       var lt2 = (S.st && S.st.lastTrip) || [];
       show('chRepeat', lt2.length > 0);
+      show('chShop', st_shopHas());
       el('chRepeatSub').textContent = lt2.slice(0, 3).map(function (i) { return i.name; }).join(', ') + (lt2.length > 3 ? ' +' + (lt2.length - 3) : '');
       show('shChoose', true);
     } else if (which === 'add') {
@@ -1873,7 +2020,7 @@ details.sd{display:block}
     document.body.style.overflow = 'hidden';
   }
   function closeSheets() {
-    show('shAdd', false); show('shPaste', false); show('shFin', false); show('shChoose', false); show('shCheck', false); show('shFeedback', false); document.body.style.overflow = '';
+    show('shAdd', false); show('shPaste', false); show('shFin', false); show('shChoose', false); show('shCheck', false); show('shFeedback', false); show('shReason', false); show('shShop', false); show('shTemp', false); el('toast').classList.remove('top'); document.body.style.overflow = '';
     if (lastFocus && lastFocus.focus) try { lastFocus.focus(); } catch (e) {}
   }
   document.querySelectorAll('.scrim').forEach(function (s) { s.addEventListener('click', function (ev) { if (ev.target === s) closeSheets(); }); });
@@ -1942,10 +2089,19 @@ details.sd{display:block}
       show('pasteStep1', false); show('pasteStep2', true);
     }
   }
+  // Same as last trip, inventory-aware: what is still on hand and what to buy less of.
+  function repeatNote(name) {
+    if (S.reviewMode !== 'repeat' || !feat('shopNudges') || !S.st.shopping) return '';
+    var x = (S.st.shopping.lastTrip || []).filter(function (l) { return l.name === name; })[0]; if (!x) return '';
+    var a = [];
+    if (x.have) a.push('you still have ' + x.have);
+    if (x.buyLess) a.push(x.buyLess === 'smaller' ? 'buy less' : 'buy less: try ' + x.buyLess);
+    return a.length ? '<br><span class="small" style="color:hsl(32 80% 32%)">' + esc(a.join(' · ')) + '</span>' : '';
+  }
   function renderReview() {
     var r = S.review || [];
     el('pasteList').innerHTML = r.map(function (i, n) {
-      return '<li class="rv"><img src="' + esc(img(i.name)) + '" alt=""><span class="rvn">' + esc(i.name) + (i.weight ? ' <span class="muted">' + esc(i.weight) + '</span>' : '') + '</span>' +
+      return '<li class="rv"><img src="' + esc(img(i.name)) + '" alt=""><span class="rvn">' + esc(i.name) + (i.weight ? ' <span class="muted">' + esc(i.weight) + '</span>' : '') + repeatNote(i.name) + '</span>' +
         '<span class="qty"><button type="button" data-rq="' + n + '" data-d="-1" aria-label="Fewer ' + esc(i.name) + '">−</button><b>' + i.count + '</b><button type="button" data-rq="' + n + '" data-d="1" aria-label="More ' + esc(i.name) + '">+</button></span>' +
         '<button type="button" class="rvx" data-rx="' + n + '" aria-label="Remove ' + esc(i.name) + '">×</button></li>';
     }).join('');
@@ -1971,6 +2127,211 @@ details.sd{display:block}
     api('/api/crisper/receipt', { body: { text: el('pasteText').value, channel: S.pasteChannel || 'paste', keep: (S.review || []).map(function (i) { return { name: i.name, count: i.count }; }) } }).then(function (r) {
       S.st = r.state; closeSheets(); ls(SKIP_LS, '1'); view('vDash'); tab('fridge'); render(); toast('Added ' + plural(r.result.added, 'item'));
     }).catch(function (e) { toast(e.message); b.disabled = false; });
+  });
+
+  // ---------- rescue 1 item today ----------
+  // The item closest to going bad. Eating it counts as a rescue; one a day keeps the streak.
+  function rescueFoot(r) {
+    return '<div class="rsf"><span>Rescue streak: <b>' + plural(r.streakDays, 'day') + '</b>' + (r.bestStreakDays > r.streakDays ? ' · best ' + r.bestStreakDays : '') + '</span>' +
+      '<span>This week: <b>' + plural(r.weekCount, 'rescue') + '</b>' + (r.weekUsd > 0 ? ' · about <b>' + money(r.weekUsd) + '</b> of produce saved (estimated)' : '') + '</span></div>';
+  }
+  function rescueBtns(it) {
+    var one = counted(it);
+    return '<div class="row"><button class="btn sm" type="button" data-rsc="' + it.id + '">' + (one ? 'Ate 1 today' : 'Used it') + '</button>' +
+      '<a class="btn ghost sm" href="' + esc(RX_SITES[0][1](rxName(it.name))) + '" target="_blank" rel="noopener">Cook ideas</a>' +
+      '<button class="btn ghost sm" type="button" data-km="' + it.id + '">Show me</button></div>';
+  }
+  function renderRescue(st) {
+    var box = el('rescueCard'), r = st.rescue;
+    if (!r || !st.items.length) { box.innerHTML = ''; return; }
+    var it = r.itemId ? st.items.filter(function (i) { return i.id === r.itemId; })[0] : null;
+    var row = it ? '<div class="rsi"><img src="' + esc(it.imageUrl) + '" alt=""><div><b>' + esc(it.name) + (qtyLabel(it) ? ' ' + qtyLabel(it) : '') + '</b><div class="itl">' + esc(it.label) + '</div></div></div>' : '';
+    if (r.today) {
+      box.innerHTML = '<div class="rsc ok"><div class="rsh"><b>Rescued today</b><span class="small muted">' + esc((r.todayNames || []).join(', ')) + '</span></div>' +
+        (it ? '<p class="small" style="margin-top:8px">Want another? This one is next.</p>' + row + rescueBtns(it) + (it.rescueOptions ? '<div style="margin-top:10px">' + rescueOpts(it) + '</div>' : '') : '<p class="small" style="margin-top:8px">Nothing else needs rescuing right now.</p>') +
+        rescueFoot(r) + '</div>';
+      return;
+    }
+    if (!it) {
+      box.innerHTML = '<div class="rsc quiet"><div class="rsh"><b>Nothing to rescue today</b>' + (r.nextUp ? '<span class="small muted">Next up: ' + esc(r.nextUp.name) + ' (' + esc(r.nextUp.label) + ')</span>' : '') + '</div>' + rescueFoot(r) + '</div>';
+      return;
+    }
+    box.innerHTML = '<div class="rsc"><div class="rsh"><b>Rescue 1 item today</b><span class="small muted">Closest to going bad</span></div>' + row +
+      rescueBtns(it) + (it.rescueOptions ? '<div style="margin-top:10px">' + rescueOpts(it) + '</div>' : '') + rescueFoot(r) + '</div>';
+  }
+  document.addEventListener('click', function (ev) {
+    var b = ev.target.closest('[data-rsc]'); if (!b || b.disabled) return;
+    var id = b.getAttribute('data-rsc'), it = findItem(id); if (!it) return;
+    var one = counted(it); b.disabled = true;
+    var body = one ? { id: id, op: 'count', kind: 'used', count: 1, via: 'rescue_card' } : { id: id, op: 'used', via: 'rescue_card' };
+    api('/api/crisper/items', { body: body }).then(function (st) {
+      S.st = st; render();
+      var r = st.rescue || {};
+      toast((one ? 'Ate 1 ' + plName(it.name, 1) : it.name) + ' rescued' + (r.streakDays ? ' · streak ' + plural(r.streakDays, 'day') : ''), one && st.last ? st.last.id : id);
+    }).catch(function (e) { b.disabled = false; toast(e.message); });
+  });
+
+  // Due or overdue: cook it, freeze it or ferment it. Freeze and ferment notes come from
+  // the server and stay generic unless the catalog has something specific.
+  function rescueOpts(i) {
+    var o = i.rescueOptions; if (!o) return '';
+    var lk = function (href, t) { return '<a class="link small" href="' + esc(href) + '" target="_blank" rel="noopener">' + t + '</a>'; };
+    var q = (o.cook && o.cook.query) || rxName(i.name);
+    var h = '<div class="ro"><b>Cook now</b><span class="rol">' + RX_SITES.map(function (r) { return lk(r[1](q), r[0]); }).join('') + '</span></div>';
+    if (o.freeze) h += '<div class="ro"><b>Freeze it</b>' + esc(o.freeze.note) + '<span class="rol">' + lk(o.freeze.blanchingUrl, 'Blanching times (NCHFP)') + (o.freeze.url && o.freeze.url !== o.freeze.blanchingUrl ? lk(o.freeze.url, 'How to freeze (NCHFP)') : '') + '</span></div>';
+    if (o.ferment) h += '<div class="ro"><b>Ferment or pickle it</b>' + esc(o.ferment.tip) + '<span class="rol">' + lk(o.ferment.url, 'Fermenting (NCHFP)') + (o.ferment.pickleUrl ? lk(o.ferment.pickleUrl, 'Pickling basics (NCHFP)') : '') + '</span></div>';
+    return '<details class="rso"><summary>Rescue it: cook' + (o.freeze ? ', freeze' : '') + (o.ferment ? ', ferment' : '') + '</summary>' + h + '</details>';
+  }
+
+  // ---------- Eat First ----------
+  document.addEventListener('click', function (ev) {
+    var b = ev.target.closest('[data-ef]'); if (!b) return;
+    closeMenus();
+    var id = b.getAttribute('data-ef'), on = b.getAttribute('data-on') === 'true', it = findItem(id);
+    api('/api/crisper/items', { body: { id: id, op: 'eatfirst', on: on } }).then(function (st) {
+      S.st = st; render();
+      toast((it ? it.name : 'Item') + (on ? ' is in Eat First' : ' is back in its usual spot'));
+    }).catch(function (e) { toast(e.message); });
+  });
+
+  // ---------- toss reason, then the fix for it ----------
+  var REASONS = [['forgot', 'Forgot about it'], ['spoiled', 'Spoiled early'], ['too_much', 'Bought too much'], ['disliked', 'Didn\'t like it']];
+  var RSN = { id: null, name: '', reason: null, fix: null, busy: false };
+  function reasonChips(sel) {
+    return '<div class="rsn" role="group" aria-label="Why it was tossed">' + REASONS.map(function (r) {
+      return '<button type="button" class="opt" data-rsn="' + r[0] + '" aria-pressed="' + (sel === r[0]) + '">' + r[1] + '</button>';
+    }).join('') + '<button type="button" class="opt skip" data-rsn="skip">Skip</button></div>';
+  }
+  function askReason(id, name) {
+    if (!id) return;
+    RSN = { id: id, name: name || 'it', reason: null, fix: null, busy: false };
+    lastFocus = document.activeElement;
+    show('shReason', true); document.body.style.overflow = 'hidden';
+    el('toast').classList.add('top'); // keep Undo visible above the sheet
+    renderReason();
+  }
+  function renderReason() {
+    el('shReasonT').textContent = RSN.fix ? RSN.fix.title || 'What helps' : 'What happened?';
+    el('rsnBody').innerHTML = RSN.fix ? fixHtml(RSN.fix, true)
+      : '<p>Why did the ' + esc(RSN.name.toLowerCase()) + ' get tossed? One tap. It helps spot what to change.</p>' + reasonChips();
+  }
+  function fixHtml(f, inSheet) {
+    var h = '<div class="fixb">' + (inSheet ? '' : '<h3>' + esc(f.title || '') + '</h3>');
+    if (f.reason === 'forgot') {
+      h += '<p>' + esc(f.text) + '</p>';
+      if ((f.similar || []).length) h += '<div class="sim">' + f.similar.map(function (x) {
+        return '<label><input type="checkbox" data-simid="' + x.id + '" checked><img src="' + esc(x.imageUrl) + '" alt="">' + esc(x.name) + ' <span class="muted small">' + esc(x.label) + '</span></label>';
+      }).join('') + '</div><div class="row"><button class="btn sm" type="button" data-efmove>Move to Eat First</button></div>';
+      h += f.remindersOn ? '<p class="note">Your use-soon reminders are on. We email you when something needs using.</p>'
+        : '<div class="row"><button class="btn ghost sm" type="button" data-remon>Remind me before things go bad</button></div>';
+    } else if (f.reason === 'spoiled') {
+      h += (f.where ? '<p><b>Where it keeps best:</b> ' + esc(f.where) + '</p>' : '') + (f.tip ? '<p>' + esc(f.tip) + '</p>' : '');
+      h += '<p>' + esc(f.text) + '</p>';
+      var t = f.temp || {};
+      h += t.f != null ? '<p class="note">Your last crisper reading: ' + t.f + '°F on ' + fmtDate(String(t.at).slice(0, 10)) + '. ' + esc(t.message || '') + '</p><div class="row"><button class="btn ghost sm" type="button" data-open="temp">Enter a new reading</button></div>'
+        : '<div class="row"><button class="btn ghost sm" type="button" data-open="temp">Enter a thermometer reading</button></div>';
+    } else if (f.reason === 'too_much') {
+      h += '<p>' + esc(f.text) + '</p>' + (S.st && S.st.shopping ? '<div class="row"><button class="btn ghost sm" type="button" data-open="shop">See Before you shop</button></div>' : '');
+    } else if (f.reason === 'disliked') {
+      h += '<p>' + esc(f.text) + '</p>';
+      if (f.scrap && (f.scrap.ideas || []).length) h += '<p class="small"><b>For the ' + esc(f.scrap.part) + ':</b></p><ul class="ideas">' + f.scrap.ideas.slice(0, 3).map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul>';
+      if (f.recipeQuery) h += '<p class="small">Recipe ideas: ' + RX_SITES.map(function (r) { return '<a class="link" href="' + esc(r[1](f.recipeQuery)) + '" target="_blank" rel="noopener">' + r[0] + '</a>'; }).join(' · ') + '</p>';
+    }
+    return h + (inSheet ? '<div class="row" style="margin-top:6px"><button class="btn" type="button" data-close>Done</button></div>' : '') + '</div>';
+  }
+  function sendReason(id, k, done) {
+    return api('/api/crisper/items', { body: { id: id, op: 'reason', reason: k } }).then(function (st) {
+      S.st = st; render(); done(st.last && st.last.fix);
+    });
+  }
+  el('rsnBody').addEventListener('click', function (ev) {
+    var b = ev.target.closest('[data-rsn]'); if (!b || RSN.busy) return;
+    var k = b.getAttribute('data-rsn'); RSN.busy = true;
+    sendReason(RSN.id, k, function (fix) {
+      RSN.busy = false; RSN.reason = k;
+      if (k === 'skip' || !fix) { closeSheets(); if (k !== 'skip') toast('Noted. Thanks.'); return; }
+      RSN.fix = fix; renderReason();
+    }).catch(function (e) { RSN.busy = false; toast(e.message); });
+  });
+  // Fix buttons work in the reason sheet and in the fridge check.
+  document.addEventListener('click', function (ev) {
+    var mv = ev.target.closest('[data-efmove]'), ro = ev.target.closest('[data-remon]');
+    if (mv) {
+      var box = mv.closest('.fixb'), ids = [].map.call(box.querySelectorAll('[data-simid]:checked'), function (c) { return c.getAttribute('data-simid'); });
+      if (!ids.length) { toast('Pick at least one'); return; }
+      mv.disabled = true;
+      api('/api/crisper/items', { body: { eatFirst: ids, on: true } }).then(function (st) {
+        S.st = st; render(); mv.textContent = 'Moved to Eat First'; toast('Moved ' + plural(ids.length, 'item') + ' to Eat First');
+      }).catch(function (e) { mv.disabled = false; toast(e.message); });
+    } else if (ro) {
+      ro.disabled = true;
+      saveSettings({ reminderPref: 'smart' }, 'Use-soon reminders on').then(function () { ro.outerHTML = '<p class="note">Use-soon reminders are on. We email you when something needs using.</p>'; });
+    }
+  });
+
+  // ---------- before you shop ----------
+  function st_shopHas() { var sh = S.st && S.st.shopping; return !!sh && ((sh.have || []).length > 0 || (sh.buyLess || []).length > 0) && feat('shopNudges'); }
+  function shopTeaser() {
+    var sh = S.st.shopping, a = [];
+    if ((sh.have || []).length) a.push('You still have ' + plural(sh.have.length, 'item'));
+    if ((sh.buyLess || []).length) a.push(sh.buyLess.length + ' to buy less of');
+    return a.join(' · ') + '.';
+  }
+  function lessLine(x) {
+    var why = x.why === 'too_much' ? 'You tossed some last time: bought too much.' : 'You tossed ' + (x.tossedShare >= 1 ? 'all' : 'half or more') + ' of it last time.';
+    return why + ' ' + (x.suggest ? 'Try ' + x.suggest + ' instead of ' + x.lastBought + '.' : 'Try a smaller amount.');
+  }
+  var MASS = /spinach|kale|lettuce|arugula|salad|cilantro|parsley|basil|mint|dill|herb|broccoli|cauliflower|asparagus|celery|okra|chard|collard/i;
+  function renderShop() {
+    var sh = S.st.shopping || {}, have = sh.have || [], less = sh.buyLess || [], h = '';
+    if (!have.length && !less.length) h = '<p class="muted">Nothing on hand and nothing to flag. Have a good trip.</p>';
+    if (have.length) h += '<h3 class="shh">Already in your kitchen</h3><ul class="shl">' + have.map(function (x) {
+      return '<li><img src="' + esc(x.imageUrl) + '" alt=""><span>You still have <b>' + x.qty + ' ' + esc(MASS.test(x.name) ? x.name.toLowerCase() : plName(x.name, x.qty)) + '</b>. Skip it? <span class="muted small">' + esc(x.label) + (x.eatFirst ? ' · in Eat First' : '') + '</span></span></li>';
+    }).join('') + '</ul>';
+    if (less.length) h += '<h3 class="shh">Buy less</h3><ul class="shl">' + less.map(function (x) {
+      return '<li class="less"><img src="' + esc(x.imageUrl) + '" alt=""><span><b>' + esc(x.name) + '.</b> ' + esc(lessLine(x)) + '</span></li>';
+    }).join('') + '</ul>';
+    if ((sh.lastTrip || []).length) h += '<div class="row" style="margin-top:14px"><button class="btn ghost" type="button" data-open="repeat">Start from Same as last trip</button></div>';
+    h += '<p class="note" style="margin-top:12px">Based on what you have marked in My Krisper. Your fridge has the final say.</p>';
+    el('shopBody').innerHTML = h;
+  }
+
+  // ---------- crisper thermometer ----------
+  var TEMP_LS = 'krisperTempSnooze';
+  function tempLine(t) { return t.f != null ? 'Last reading ' + t.f + '°F on ' + fmtDate(String(t.at).slice(0, 10)) + '.' : ''; }
+  function renderTemp(st) {
+    var box = el('tempCard'), t = st.user.fridgeTemp;
+    show('setTempRow', !!t && feat('tempCheck'));
+    if (t) el('setTempNote').textContent = t.f != null ? tempLine(t) + ' ' + (t.message || '') : 'Produce keeps best at 34-37°F.';
+    var bad = t && (t.status === 'too_warm' || t.status === 'freezing');
+    if (!t || !feat('tempCheck') || !t.recheckDue || !st.items.length || +(ls(TEMP_LS) || 0) > Date.now()) { box.innerHTML = ''; return; }
+    var head = t.never ? 'Put a thermometer in your crisper' : bad ? 'Your crisper read ' + t.f + '°F' : 'Time to re-check your crisper';
+    var body = t.never ? 'Leave a fridge thermometer in the crisper drawer overnight, then enter the reading. Produce keeps best at 34-37°F.'
+      : bad ? (t.message || '') + ' ' + tempLine(t) : tempLine(t) + ' A monthly check catches a fridge that has drifted.';
+    box.innerHTML = '<div class="card tmp' + (bad ? ' warn' : '') + '"><b>' + esc(head) + '</b><p class="small" style="margin-top:4px">' + esc(body) + '</p>' +
+      '<div class="row" style="margin-top:10px"><button class="btn sm" type="button" data-open="temp">Enter the reading</button><button class="btn ghost sm" type="button" data-tsnooze>Not now</button></div></div>';
+  }
+  document.addEventListener('click', function (ev) {
+    if (!ev.target.closest('[data-tsnooze]')) return;
+    var t = S.st.user.fridgeTemp || {}, bad = t.status === 'too_warm' || t.status === 'freezing';
+    ls(TEMP_LS, String(Date.now() + (bad ? 1 : 7) * 864e5)); renderTemp(S.st);
+  });
+  function tempRes(t) {
+    return t && t.f != null ? '<div class="tres ' + esc(t.status) + '"><b>' + t.f + '°F</b> · ' + esc(t.message || '') + (t.status === 'too_warm' ? ' <a class="link" href="' + esc(t.fdaUrl) + '" target="_blank" rel="noopener">FDA guidance</a>' : '') + '<div class="small muted">' + esc(tempLine(t)) + '</div></div>' : '';
+  }
+  function openTemp() {
+    el('tempIn').value = ''; showErr('tempErr', '');
+    el('tempRes').innerHTML = tempRes(S.st.user.fridgeTemp);
+    show('shTemp', true); setTimeout(function () { el('tempIn').focus(); }, 30);
+  }
+  el('tempSave').addEventListener('click', function () {
+    var v = parseFloat(el('tempIn').value), b = this;
+    if (!(v >= 20 && v <= 60)) { showErr('tempErr', 'Enter the reading in °F, between 20 and 60.'); return; }
+    showErr('tempErr', ''); b.disabled = true;
+    api('/api/crisper/me', { body: { settings: { fridgeTempF: v } } }).then(function (st) {
+      b.disabled = false; S.st = st; ls(TEMP_LS, null); render();
+      el('tempRes').innerHTML = tempRes(st.user.fridgeTemp);
+    }).catch(function (e) { b.disabled = false; showErr('tempErr', e.message); });
   });
 
   // ---------- installable app ----------
