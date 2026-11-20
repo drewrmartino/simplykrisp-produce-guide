@@ -5,6 +5,10 @@
 //   { check: true }                           -> weekly fridge check finished
 //   { add: [...], source: 'repeat' }          -> "Same as last trip"
 //   { shopDay: Fri|Sat|Sun|Mon|Thu|off }       -> before-you-shop email day
+//   { id, op: 'reason', reason: forgot|spoiled|too_much|disliked|skip } -> why it was tossed; returns last.fix
+//   { id, op: 'eatfirst', on: true|false }    -> flag for the Eat First zone
+//   { eatFirst: [ids], on: true|false }       -> flag several at once (the "Forgot" fix)
+//   via: 'rescue_card' on used/finish/count is logged so the pilot can count card rescues
 //   finish: portion = share of the edible part tossed (0, .25, .5, .75, 1); trim = trash|compost|used|null
 // Returns fresh dashboard state.
 
@@ -30,6 +34,12 @@ export default handle(['POST'], async (req) => {
     if (!SHOP_DAYS.includes(b.shopDay)) throw bad('Pick a day.');
     await q('UPDATE crisper_users SET shop_day = $1 WHERE id = $2', [b.shopDay, user.id]);
     user.shop_day = b.shopDay;
+  } else if (Array.isArray(b.eatFirst)) {
+    const ids = b.eatFirst.filter((x) => typeof x === 'string').slice(0, 40);
+    if (!ids.length) throw bad('Pick something first.');
+    const on = b.on !== false;
+    await q(`UPDATE crisper_items SET eat_first = $1 WHERE user_id = $2 AND id = ANY($3::uuid[]) AND state IN ('active','pending')`, [on, user.id, ids]);
+    await logEvent(user.id, 'item_eatfirst', { count: ids.length, on, bulk: true });
   } else if (b.id && b.op) {
     const r = await itemAction(user, b);
     if (r) return { ...(await buildState(user, { touch: false })), last: r };

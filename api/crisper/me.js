@@ -5,11 +5,13 @@
 // POST /api/crisper/me {pushToken, pushOff: true} -> unregisters it
 // POST /api/crisper/me {feedback: {text, kind, page}} -> saved for the admin page and
 //   emailed to the owner through the "Krisper Feedback" Klaviyo metric
+// settings.fridgeTempF: crisper thermometer reading in °F (20-60), stamped with today's date
 
 import { handle, bad } from '../_crisper/http.js';
 import { requireUser, buildState, refreshShop } from '../_crisper/core.js';
 import { q, one, logEvent } from '../_crisper/db.js';
 import { trackEvent } from '../_crisper/klaviyo.js';
+import { TEMP } from '../_crisper/rescue.js';
 
 const FEEDBACK_TO = process.env.CRISPER_FEEDBACK_EMAIL || 'drewrmartino@gmail.com';
 const KINDS = new Set(['problem', 'idea', 'other']);
@@ -76,6 +78,13 @@ export default handle(['GET', 'POST'], async (req) => {
     add('reminder_pref', s.reminderPref);
   }
   if ('dismissGmailCode' in s) add('gmail_verification', null);
+  if ('fridgeTempF' in s) {
+    const f = Number(s.fridgeTempF);
+    if (!Number.isFinite(f) || f < TEMP.min || f > TEMP.max) throw bad(`Enter the reading in °F, between ${TEMP.min} and ${TEMP.max}.`);
+    add('fridge_temp_f', Math.round(f * 10) / 10);
+    sets.push('fridge_temp_at = now()');
+    await logEvent(user.id, 'fridge_temp', { f: Math.round(f * 10) / 10 });
+  }
   if (sets.length) {
     vals.push(user.id);
     user = await one(`UPDATE crisper_users SET ${sets.join(', ')} WHERE id = $${vals.length} RETURNING *`, vals);

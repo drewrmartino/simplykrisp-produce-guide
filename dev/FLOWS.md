@@ -9,5 +9,13 @@
 - Settings: reminder pref, Krisp toggle/date, name, sign out, delete (inline confirm)
 - Lost link: resend form (generic response)
 - Why it goes bad: /produce hub → item page (symptom chips jump to cards, sources numbered) → "What went wrong?" checker (pick item → symptom → answer; ?item=&symptom= deep link); /seasonal cards link to item pages
+- Rescue card: top of the dashboard picks the item closest to going bad; Used it / Ate 1 today → streak and "this week ... (estimated)"; done-for-today state shows the next one; nothing due → "Nothing to rescue today" + next up
+- Toss reason: Tossed (All or a portion), finish sheet with a tossed portion, count picker "tossed", and the fridge check → What happened? chips → fix: Forgot (tick similar items → Move to Eat First; turn on reminders), Spoiled early (storage tip, 34-37°F, enter reading), Bought too much (link to Before you shop), Didn't like it (scrap ideas, recipe links); Skip closes; Undo toast stays visible at the top while the sheet is open
+- Rescue options: due/overdue item cards and the rescue card have "Rescue it: cook, freeze, ferment" (links open NCHFP; no freeze for salad greens; ferment only for pickling veg)
+- Eat First: item More → Move to Eat First / Take out of Eat First; zone at the top of the kitchen map and the list; chip on the card
+- Before you shop: dashboard banner and Add chooser → on-hand list ("You still have 2 plums. Skip it?") + Buy less rows → Start from Same as last trip (rows show "you still have" / "buy less")
+- Crisper thermometer: dashboard prompt (Not now snoozes 7 days, 1 day if the last reading was out of range) and Settings row → sheet → reading 20-60°F → good / cold / warm / too warm (FDA link) / freezing; prompt returns after 30 days
+- Impact: comparison with US households after 10 logged outcomes (USDA ERS link); before that "Mark N more items..."; rescue streak line
+- Pilot: /krisper/admin → Testers → Pilot cohort dropdown saves and reloads; holdout and baseline (first 14 days) users see none of the above except the toss-reason question
 - Existing pages /, /seasonal, /lab unchanged
 - CSA box guide /partners: paste list (lines or commas) → zones + Krisp notes; unmatched warning; Preview/Plain tabs; Copy for email (text/html), Copy plain text, Print; Save box / load / delete; ?partner=&code= prefill

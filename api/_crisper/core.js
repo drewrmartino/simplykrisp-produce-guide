@@ -8,6 +8,8 @@ import { trackEvent } from './klaviyo.js';
 import { shopStatus } from './shop.js';
 import { buildImpact } from './impact.js';
 import { scrapFor, STOCK_BAG_TIP, TRIM_FATES } from './scraps.js';
+import { pilotFor } from './pilot.js';
+import { isDue, pickRescue, rescueOptions, cleanReason, fixFor, tempView, shopList } from './rescue.js';
 
 // ---------- secrets & links ----------
 
@@ -185,11 +187,14 @@ export async function buildState(user, { touch = true } = {}) {
      FROM crisper_items i WHERE i.user_id = $1 AND i.state IN ('active','pending') ORDER BY i.created_at`,
     [user.id],
   );
+  const pilot = pilotFor(user);
+  const { features } = pilot;
   const active = sortViews(rows.filter((r) => r.state === 'active').map((r) => itemView(r, user, today)).filter(Boolean));
+  if (features.rescueOptions) for (const v of active) if (isDue(v)) v.rescueOptions = rescueOptions(v);
   const pending = rows.filter((r) => r.state === 'pending').map((r) => itemView(r, user, today)).filter(Boolean);
 
   const recentDone = await q(
-    `SELECT id, produce, state, state_at, qty, tossed_frac, trim FROM crisper_items WHERE user_id = $1 AND state IN ('used','tossed') ORDER BY state_at DESC LIMIT 12`,
+    `SELECT id, produce, state, state_at, qty, tossed_frac, trim, toss_reason FROM crisper_items WHERE user_id = $1 AND state IN ('used','tossed') ORDER BY state_at DESC LIMIT 12`,
     [user.id],
   );
   const stats = await one(
@@ -207,6 +212,16 @@ export async function buildState(user, { touch = true } = {}) {
   const krisp = krispStatus(user, today);
   const impact = buildImpact(finished, { today, tz: user.tz, krisp });
   const lastTrip = await lastTripFor(user);
+  // Pilot cohorts that are "logging only" don't get the nudges.
+  if (!features.compare) impact.compare = null;
+  if (!features.rescue) impact.rescue = null;
+  const pick = features.rescue ? pickRescue(active) : null;
+  const rescue = features.rescue ? {
+    itemId: pick ? pick.id : null,
+    ...impact.rescue,
+    nextUp: pick ? null : (active[0] ? { name: active[0].name, label: active[0].label } : null),
+  } : null;
+  const shopping = features.shopNudges ? await shopList(user, active, lastTrip) : null;
   const receipts = await q(
     `SELECT id, received_at, channel, retailer, kind, order_ref, subject, status, item_count, matched, skipped, unknown
        FROM crisper_receipts WHERE user_id = $1 ORDER BY received_at DESC LIMIT 10`,
@@ -224,7 +239,12 @@ export async function buildState(user, { touch = true } = {}) {
       createdAt: user.created_at,
       lastCheckAt: user.last_check_at || null,
       shopDay: user.shop_day || 'Fri',
+      fridgeTemp: tempView(user),
     },
+    pilot,
+    features,
+    rescue,
+    shopping,
     lastTrip,
     inbox: {
       address: inboxAddress(user.inbox_slug),
@@ -235,7 +255,7 @@ export async function buildState(user, { touch = true } = {}) {
     shop: shopView(user, krisp),
     items: active,
     pending,
-    recentDone: recentDone.map((r) => ({ id: r.id, name: r.produce, state: r.state, at: r.state_at, qty: r.qty, tossedFrac: Number(r.tossed_frac) || 0, trim: r.trim || null, scrap: scrapFor(r.produce), imageUrl: BY_NAME[r.produce]?.imageUrl })),
+    recentDone: recentDone.map((r) => ({ id: r.id, name: r.produce, state: r.state, at: r.state_at, qty: r.qty, tossedFrac: Number(r.tossed_frac) || 0, trim: r.trim || null, tossReason: r.toss_reason || null, scrap: scrapFor(r.produce), imageUrl: BY_NAME[r.produce]?.imageUrl })),
     stockBagTip: STOCK_BAG_TIP,
     stats,
     impact,
@@ -287,7 +307,7 @@ export async function addItem(user, { produce, qty = 1, weight = null, date, sou
   );
 }
 
-export async function itemAction(user, { id, op, days, qty, date, portion, trim, count, kind: kind_ }) {
+export async function itemAction(user, { id, op, days, qty, date, portion, trim, count, kind: kind_, reason, on, via }) {
   let result = null;
   const item = await one('SELECT * FROM crisper_items WHERE id = $1 AND user_id = $2', [id, user.id]);
   if (!item) throw Object.assign(new Error('Item not found'), { status: 404 });
@@ -297,7 +317,7 @@ export async function itemAction(user, { id, op, days, qty, date, portion, trim,
       // A "rescue" = eaten in its last couple of days (or past the usual window).
       const v = op === 'used' ? itemView(item, user, todayIn(user.tz)) : null;
       const rescued = !!v && ['check', 'today', 'soon'].includes(v.status);
-      await q('UPDATE crisper_items SET state = $1, state_at = now(), rescued = $2, tossed_frac = $3 WHERE id = $4', [op, rescued, op === 'tossed' ? 1 : 0, id]);
+      await q(`UPDATE crisper_items SET state = $1, state_at = now(), rescued = $2, tossed_frac = $3${op === 'used' ? ', toss_reason = NULL' : ''} WHERE id = $4`, [op, rescued, op === 'tossed' ? 1 : 0, id]);
       break;
     }
     case 'finish': {
@@ -313,7 +333,7 @@ export async function itemAction(user, { id, op, days, qty, date, portion, trim,
       }
       if (state === 'tossed') rescued = false;
       const keepAt = item.state === 'used' || item.state === 'tossed';
-      await q(`UPDATE crisper_items SET state = $1, tossed_frac = $2, trim = $3, rescued = $4, state_at = ${keepAt ? 'COALESCE(state_at, now())' : 'now()'} WHERE id = $5`, [state, p, t, rescued, id]);
+      await q(`UPDATE crisper_items SET state = $1, tossed_frac = $2, trim = $3, rescued = $4, state_at = ${keepAt ? 'COALESCE(state_at, now())' : 'now()'}${p === 0 ? ', toss_reason = NULL' : ''} WHERE id = $5`, [state, p, t, rescued, id]);
       break;
     }
     case 'trim': {
@@ -351,8 +371,33 @@ export async function itemAction(user, { id, op, days, qty, date, portion, trim,
         await q('UPDATE crisper_items SET qty = qty + $1 WHERE id = $2', [item.qty, parent.id]);
         await q(`UPDATE crisper_items SET state = 'deleted', state_at = now() WHERE id = $1`, [id]);
       } else {
-        await q(`UPDATE crisper_items SET state = 'active', state_at = now(), rescued = false, tossed_frac = 0, trim = NULL WHERE id = $1`, [id]);
+        await q(`UPDATE crisper_items SET state = 'active', state_at = now(), rescued = false, tossed_frac = 0, trim = NULL, toss_reason = NULL WHERE id = $1`, [id]);
       }
+      break;
+    }
+    case 'reason': {
+      // Why it was tossed: one tap after a full or partial toss. Skip = NULL.
+      const r = cleanReason(reason);
+      if (r === undefined) throw Object.assign(new Error('Unknown reason'), { status: 400 });
+      if (item.state !== 'tossed' && !(item.state === 'used' && Number(item.tossed_frac) > 0)) {
+        throw Object.assign(new Error('Only tossed items take a reason'), { status: 400 });
+      }
+      await q('UPDATE crisper_items SET toss_reason = $1 WHERE id = $2', [r, id]);
+      let fix = null;
+      if (r && pilotFor(user).features.fixes) {
+        const today = todayIn(user.tz);
+        const live = r === 'forgot'
+          ? sortViews((await q(`SELECT * FROM crisper_items WHERE user_id = $1 AND state = 'active' ORDER BY created_at`, [user.id])).map((x) => itemView(x, user, today)).filter(Boolean))
+          : [];
+        fix = fixFor(r, item.produce, { user, views: live });
+      }
+      result = { id, reason: r, fix };
+      break;
+    }
+    case 'eatfirst': {
+      if (item.state !== 'active' && item.state !== 'pending') throw Object.assign(new Error('That item is already finished'), { status: 400 });
+      await q('UPDATE crisper_items SET eat_first = $1 WHERE id = $2', [on !== false, id]);
+      result = { id, eatFirst: on !== false };
       break;
     }
     case 'delete':
@@ -381,7 +426,7 @@ export async function itemAction(user, { id, op, days, qty, date, portion, trim,
     default:
       throw Object.assign(new Error(`Unknown action: ${op}`), { status: 400 });
   }
-  await logEvent(user.id, `item_${op}`, { produce: item.produce, source: item.source, ...(op === 'finish' ? { portion: Number(portion) || 0, trim: trim || null } : op === 'trim' ? { trim: trim || null } : op === 'count' ? { kind: kind_ === 'tossed' ? 'tossed' : 'used', count: parseInt(count, 10) || 1 } : {}) });
+  await logEvent(user.id, `item_${op}`, { produce: item.produce, source: item.source, ...(via === 'rescue_card' ? { via } : {}), ...(op === 'reason' ? { reason: cleanReason(reason) ?? null, tossedFrac: item.state === 'tossed' ? 1 : Number(item.tossed_frac) || 0 } : op === 'eatfirst' ? { on: on !== false } : {}), ...(op === 'finish' ? { portion: Number(portion) || 0, trim: trim || null } : op === 'trim' ? { trim: trim || null } : op === 'count' ? { kind: kind_ === 'tossed' ? 'tossed' : 'used', count: parseInt(count, 10) || 1 } : {}) });
   return result;
 }
 

@@ -92,6 +92,17 @@ const SCHEMA = [
   `ALTER TABLE crisper_users ADD COLUMN IF NOT EXISTS shop_day text NOT NULL DEFAULT 'Fri'`,
   `ALTER TABLE crisper_users ADD COLUMN IF NOT EXISTS last_shop_email_at timestamptz`,
   `CREATE INDEX IF NOT EXISTS crisper_items_user ON crisper_items(user_id, state)`,
+  // Eat-it-all features. All nullable or defaulted so older rows and older
+  // code keep working. toss_reason sits on the finished (tossed or partly
+  // tossed) row: forgot | spoiled | too_much | disliked, NULL = not given.
+  `ALTER TABLE crisper_items ADD COLUMN IF NOT EXISTS toss_reason text`,
+  `ALTER TABLE crisper_items ADD COLUMN IF NOT EXISTS eat_first boolean NOT NULL DEFAULT false`,
+  // Crisper thermometer reading (°F) and when it was taken.
+  `ALTER TABLE crisper_users ADD COLUMN IF NOT EXISTS fridge_temp_f real`,
+  `ALTER TABLE crisper_users ADD COLUMN IF NOT EXISTS fridge_temp_at timestamptz`,
+  // Pilot mode: NULL (not in a pilot, everything on) | baseline | full | holdout.
+  `ALTER TABLE crisper_users ADD COLUMN IF NOT EXISTS cohort text`,
+  `ALTER TABLE crisper_users ADD COLUMN IF NOT EXISTS cohort_at timestamptz`,
   `CREATE TABLE IF NOT EXISTS crisper_events (
     id bigserial PRIMARY KEY,
     user_id uuid REFERENCES crisper_users(id) ON DELETE CASCADE,

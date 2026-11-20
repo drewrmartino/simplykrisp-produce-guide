@@ -114,6 +114,7 @@ export function itemView(row, user, today) {
     weight: row.weight,
     source: row.source,
     state: row.state,
+    eatFirst: !!row.eat_first,
     startDate: start,
     boughtDate: toISODate(row.start_date),
     ripeningDays: row.ripening_days || 0,

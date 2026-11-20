@@ -5,7 +5,9 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { createServer } from './server.mjs';
 import * as F from './fixtures.mjs';
-import { buildImpact, parseWeightLb, itemImpact } from '../api/_crisper/impact.js';
+import { buildImpact, parseWeightLb, itemImpact, rescueStats } from '../api/_crisper/impact.js';
+import { pilotFor, periodFor } from '../api/_crisper/pilot.js';
+import { tempView, rescueOptions } from '../api/_crisper/rescue.js';
 
 const server = createServer();
 await new Promise((r) => server.listen(0, r));
@@ -233,6 +235,9 @@ test('paste a receipt: preview then save', async () => {
 test('settings and reminders', async () => {
   const s = await api('/api/crisper/me', { method: 'POST', key, body: { settings: { reminderPref: 'smart', firstName: 'Drew' } } });
   assert.equal(s.data.user.reminderPref, 'smart');
+  // On the shop day the before-you-shop email replaces the use-soon reminder,
+  // so turn it off here or this test fails every Friday (the default shop day).
+  await api('/api/crisper/items', { method: 'POST', key, body: { shopDay: 'off' } });
   const admin = await api('/api/crisper/admin?key=dev-admin&preview=1');
   assert.equal(admin.status, 200);
   assert.equal(admin.data.funnel.signups, 1);
@@ -244,6 +249,201 @@ test('settings and reminders', async () => {
   assert.equal(again.data.sent, 0, 'no second reminder the same day');
   const noAdmin = await api('/api/crisper/admin?key=nope');
   assert.equal(noAdmin.status, 403);
+});
+
+const daysAgo = (n) => new Date(Date.now() - n * 864e5).toISOString().slice(0, 10);
+const P = (body) => api('/api/crisper/items', { method: 'POST', key, body });
+
+test('rescue card: picks the item closest to going bad; eating it counts as a rescue', async () => {
+  let me = (await api('/api/crisper/me', { key })).data;
+  assert.deepEqual(Object.values(me.features), Object.values(me.features).map(() => true), 'not in a pilot: everything on');
+  assert.ok(me.rescue, 'rescue card data present');
+  const due = me.items.filter((i) => ['today', 'soon'].includes(i.status) || (i.status === 'check' && i.leftMax >= -2));
+  assert.ok(due.length, 'fixture fridge has something due');
+  assert.equal(me.rescue.itemId, due[0].id, 'first due item in sort order');
+  assert.equal(me.rescue.today, false);
+  const r = await P({ id: me.rescue.itemId, op: 'used', via: 'rescue_card' });
+  me = r.data;
+  assert.equal(me.rescue.today, true);
+  assert.equal(me.rescue.streakDays, 1);
+  assert.ok(me.rescue.weekCount >= 1 && me.rescue.weekUsd > 0);
+  assert.equal(me.rescue.usdEstimated, true);
+  assert.notEqual(me.rescue.itemId, due[0].id, 'the next due item takes its place');
+});
+
+test('rescue streak counts consecutive days', () => {
+  const at = (d) => `${d}T15:00:00Z`;
+  const rows = [
+    { produce: 'Apple', qty: 1, state: 'used', rescued: true, state_at: at('2026-11-02') },
+    { produce: 'Apple', qty: 1, state: 'used', rescued: true, state_at: at('2026-11-03') },
+    { produce: 'Apple', qty: 1, state: 'used', rescued: true, state_at: at('2026-11-04') },
+    { produce: 'Pear', qty: 1, state: 'used', rescued: false, state_at: at('2026-11-05') },
+    { produce: 'Lettuce', qty: 1, state: 'tossed', rescued: false, state_at: at('2026-11-05') },
+  ];
+  assert.equal(rescueStats(rows, '2026-11-05', 'UTC').streakDays, 3, 'nothing yet today: streak still counts through yesterday');
+  assert.equal(rescueStats(rows, '2026-11-06', 'UTC').streakDays, 0, 'a missed day breaks it');
+  const s = rescueStats(rows, '2026-11-04', 'UTC');
+  assert.equal(s.today, true); assert.equal(s.bestStreakDays, 3); assert.equal(s.weekCount, 3);
+  assert.deepEqual(s.todayNames, ['Apple']);
+});
+
+test('rescue options: cook, freeze, ferment on due items only', async () => {
+  const me = (await api('/api/crisper/me', { key })).data;
+  for (const i of me.items) {
+    const due = ['today', 'soon'].includes(i.status) || (i.status === 'check' && i.leftMax >= -2);
+    assert.equal(!!i.rescueOptions, due, `${i.name} ${i.status}`);
+  }
+  const rasp = rescueOptions({ name: 'Raspberry' });
+  assert.equal(rasp.freeze.note, 'Freeze for smoothies'); assert.equal(rasp.freeze.fromCatalog, true);
+  assert.equal(rasp.ferment, null);
+  const cuke = rescueOptions({ name: 'Cucumber' });
+  assert.equal(cuke.freeze.url, 'https://nchfp.uga.edu/how/freeze/freeze-general-information/blanching-times/');
+  assert.equal(cuke.freeze.fromCatalog, false);
+  assert.match(cuke.ferment.tip, /tested recipe/);
+  assert.equal(rescueOptions({ name: 'Lettuce' }).freeze, null, 'no freeze advice for salad greens');
+  assert.equal(rescueOptions({ name: 'Herbs (Fresh)' }).cook.query, 'herbs');
+});
+
+test('toss reasons: stored on the finished row, fix per reason, undo clears it', async () => {
+  let r = await P({ add: [{ produce: 'Spinach', qty: 1, date: daysAgo(2) }, { produce: 'Kale', qty: 1 }] });
+  const sp = r.data.items.find((i) => i.name === 'Spinach' && i.boughtDate === daysAgo(2));
+  const kale = r.data.items.find((i) => i.name === 'Kale');
+  assert.equal((await P({ id: sp.id, op: 'reason', reason: 'spoiled' })).status, 400, 'not tossed yet');
+  await P({ id: sp.id, op: 'tossed' });
+  assert.equal((await P({ id: sp.id, op: 'reason', reason: 'meh' })).status, 400);
+  r = await P({ id: sp.id, op: 'reason', reason: 'spoiled' });
+  assert.equal(r.status, 200, JSON.stringify(r.data));
+  assert.equal(r.data.last.reason, 'spoiled');
+  assert.match(r.data.last.fix.tip, /\w/);
+  assert.match(r.data.last.fix.text, /34-37°F/);
+  assert.equal(r.data.recentDone.find((x) => x.id === sp.id).tossReason, 'spoiled');
+  r = await P({ id: sp.id, op: 'reason', reason: 'forgot' });
+  assert.ok(r.data.last.fix.similar.some((x) => x.id === kale.id), 'Kale is in the same drawer');
+  assert.equal(r.data.last.fix.remindersOn, true);
+  r = await P({ id: sp.id, op: 'reason', reason: 'disliked' });
+  assert.equal(r.data.last.fix.recipeQuery, 'spinach');
+  r = await P({ id: sp.id, op: 'reason', reason: 'skip' });
+  assert.equal(r.data.recentDone.find((x) => x.id === sp.id).tossReason, null);
+  await P({ id: sp.id, op: 'reason', reason: 'too_much' });
+  r = await P({ id: sp.id, op: 'undo' });
+  await P({ id: sp.id, op: 'tossed' });
+  r = (await api('/api/crisper/me', { key }));
+  assert.equal(r.data.recentDone.find((x) => x.id === sp.id).tossReason, null, 'undo cleared the old reason');
+  // partial toss takes a reason too
+  r = await P({ id: kale.id, op: 'finish', portion: 0.5 });
+  r = await P({ id: kale.id, op: 'reason', reason: 'too_much' });
+  assert.equal(r.data.last.fix.reason, 'too_much');
+  assert.match(r.data.last.fix.text, /less kale/);
+});
+
+test('eat first: flag one, flag several, shown on the item', async () => {
+  let me = (await api('/api/crisper/me', { key })).data;
+  const [a, b] = me.items;
+  let r = await P({ id: a.id, op: 'eatfirst', on: true });
+  assert.equal(r.data.last.eatFirst, true);
+  assert.equal(r.data.items.find((i) => i.id === a.id).eatFirst, true);
+  r = await P({ eatFirst: [a.id, b.id], on: false });
+  assert.ok(!r.data.items.find((i) => i.id === a.id).eatFirst && !r.data.items.find((i) => i.id === b.id).eatFirst);
+  r = await P({ eatFirst: [b.id] });
+  assert.equal(r.data.items.find((i) => i.id === b.id).eatFirst, true);
+});
+
+test('before you shop: still on hand and buy less', async () => {
+  let r = await P({ add: [{ produce: 'Plum', qty: 4 }] });
+  const plum = r.data.items.find((i) => i.name === 'Plum');
+  r = await P({ id: plum.id, op: 'count', kind: 'tossed', count: 2 });
+  const sh = r.data.shopping;
+  assert.ok(sh, 'shopping list present');
+  const have = sh.have.find((h) => h.name === 'Plum');
+  assert.equal(have.qty, 2, 'two plums still on hand');
+  const total = r.data.items.reduce((a, i) => a + i.qty, 0);
+  assert.equal(sh.have.reduce((a, h) => a + h.qty, 0), total);
+  const lessPlum = sh.buyLess.find((b) => b.name === 'Plum');
+  assert.equal(lessPlum.why, 'tossed_half'); assert.equal(lessPlum.lastBought, 4); assert.equal(lessPlum.suggest, 2);
+  const lessKale = sh.buyLess.find((b) => b.name === 'Kale');
+  assert.equal(lessKale.why, 'too_much'); assert.equal(lessKale.suggest, null, 'bought 1: suggest a smaller size');
+  assert.ok(!sh.buyLess.find((b) => b.name === 'Apple'), 'eaten items are not flagged');
+  const trip = sh.lastTrip.find((t) => t.name === 'Plum');
+  assert.equal(trip.have, 2); assert.equal(trip.buyLess, 2);
+});
+
+test('fridge thermometer: reading, guidance and re-check', async () => {
+  let r = await api('/api/crisper/me', { method: 'POST', key, body: { settings: { fridgeTempF: 42 } } });
+  assert.equal(r.status, 200, JSON.stringify(r.data));
+  assert.equal(r.data.user.fridgeTemp.f, 42);
+  assert.equal(r.data.user.fridgeTemp.status, 'too_warm');
+  assert.match(r.data.user.fridgeTemp.message, /FDA/);
+  r = await api('/api/crisper/me', { method: 'POST', key, body: { settings: { fridgeTempF: 36 } } });
+  assert.equal(r.data.user.fridgeTemp.status, 'good');
+  assert.equal(r.data.user.fridgeTemp.recheckDue, false);
+  assert.equal((await api('/api/crisper/me', { method: 'POST', key, body: { settings: { fridgeTempF: 'cold' } } })).status, 400);
+  assert.equal((await api('/api/crisper/me', { method: 'POST', key, body: { settings: { fridgeTempF: 75 } } })).status, 400);
+  const old = tempView({ fridge_temp_f: 35, fridge_temp_at: new Date(Date.now() - 31 * 864e5) });
+  assert.equal(old.recheckDue, true, 'monthly re-check');
+  assert.equal(tempView({ fridge_temp_f: 31, fridge_temp_at: new Date() }).status, 'freezing');
+  assert.equal(tempView({ fridge_temp_f: 33, fridge_temp_at: new Date() }).status, 'cold');
+  assert.equal(tempView({ fridge_temp_f: 39, fridge_temp_at: new Date() }).status, 'warm');
+  assert.equal(tempView({}).never, true);
+});
+
+test('household comparison shows only after 10 logged outcomes', () => {
+  const at = (d) => `${d}T15:00:00Z`;
+  const rows = Array.from({ length: 9 }, (_, i) => ({ produce: 'Apple', qty: 1, state: i < 2 ? 'tossed' : 'used', state_at: at('2026-11-02') }));
+  let im = buildImpact(rows, { today: '2026-11-05', tz: 'UTC' });
+  assert.equal(im.compare.ready, false);
+  im = buildImpact([...rows, { produce: 'Apple', qty: 1, state: 'used', state_at: at('2026-11-03') }], { today: '2026-11-05', tz: 'UTC' });
+  assert.equal(im.compare.ready, true);
+  assert.equal(im.compare.outcomes, 10);
+  assert.equal(im.compare.tossedShare, 0.2, '2 of 10 apples, by weight');
+  assert.equal(im.compare.url, 'https://primary.ers.usda.gov/data-products/food-availability-per-capita-data-system/loss-adjusted-food-availability-documentation');
+});
+
+test('pilot cohorts: admin sets them, logging-only cohorts lose the nudges, scorecard splits by cohort', async () => {
+  const A = (body) => api('/api/crisper/admin', { method: 'POST', body });
+  assert.equal((await A({ key: 'nope', email: 'drew.test@gmail.com', cohort: 'holdout' })).status, 403);
+  assert.equal((await A({ key: 'dev-admin', email: 'drew.test@gmail.com', cohort: 'treatment' })).status, 400);
+  assert.equal((await A({ key: 'dev-admin', email: 'nobody@example.com', cohort: 'full' })).status, 404);
+  let a = await A({ key: 'dev-admin', email: 'Drew.Test@gmail.com', cohort: 'holdout' });
+  assert.equal(a.status, 200, JSON.stringify(a.data));
+  assert.equal(a.data.user.cohort, 'holdout');
+
+  let me = (await api('/api/crisper/me', { key })).data;
+  assert.equal(me.pilot.cohort, 'holdout');
+  assert.ok(Object.values(me.features).every((f) => f === false), 'holdout: logging only');
+  assert.equal(me.rescue, null); assert.equal(me.shopping, null); assert.equal(me.impact.compare, null); assert.equal(me.impact.rescue, null);
+  assert.ok(me.items.every((i) => !i.rescueOptions));
+  // Logging still works, without the fix.
+  const it = me.items[me.items.length - 1];
+  await P({ id: it.id, op: 'tossed' });
+  let r = await P({ id: it.id, op: 'reason', reason: 'forgot' });
+  assert.equal(r.data.last.reason, 'forgot'); assert.equal(r.data.last.fix, null);
+
+  const adm = (await api('/api/crisper/admin?key=dev-admin')).data;
+  const hold = adm.pilot.find((p) => p.period === 'holdout');
+  assert.equal(hold.members, 1);
+  assert.equal(hold.outcomes, 1, 'only outcomes after joining count');
+  assert.equal(hold.tossedShareCount, 1); assert.equal(hold.reasons.forgot, 1);
+  assert.equal(adm.users[0].cohort, 'holdout');
+  assert.ok(adm.pilot.find((p) => p.period === 'not in a pilot'));
+
+  a = await A({ key: 'dev-admin', email: 'drew.test@gmail.com', cohort: 'baseline' });
+  me = (await api('/api/crisper/me', { key })).data;
+  assert.equal(me.pilot.phase, 'baseline');
+  assert.equal(me.features.rescue, false);
+  const days = (Date.parse(me.pilot.featuresOnAt) - Date.parse(a.data.user.cohortAt)) / 864e5;
+  assert.equal(Math.round(days), 14);
+  // After 14 days a baseline user gets everything.
+  const later = pilotFor({ cohort: 'baseline', cohort_at: new Date(Date.now() - 15 * 864e5) });
+  assert.equal(later.phase, 'full'); assert.equal(later.features.rescue, true);
+  assert.equal(periodFor({ cohort: 'baseline', cohort_at: new Date(Date.now() - 15 * 864e5) }, new Date()), 'baseline (features on)');
+  assert.equal(periodFor({ cohort: 'baseline', cohort_at: new Date(Date.now() - 15 * 864e5) }, new Date(Date.now() - 10 * 864e5)), 'baseline (first 14 days)');
+  assert.equal(pilotFor({ cohort: 'full' }).features.compare, true);
+
+  a = await A({ key: 'dev-admin', email: 'drew.test@gmail.com', cohort: null });
+  assert.equal(a.data.user.cohort, null);
+  me = (await api('/api/crisper/me', { key })).data;
+  assert.equal(me.pilot.cohort, null);
+  assert.ok(Object.values(me.features).every(Boolean), 'out of the pilot: everything back on');
 });
 
 test('store newsletters are ignored, real orders still count', async () => {
