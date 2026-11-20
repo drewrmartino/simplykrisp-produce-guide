@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updated": "2026-11-04",
+    "updated": "2026-11-20",
     "method": "Two matched containers of the same produce from the same purchase, one in a crisper drawer with a Simply Krisp case on the wall and one in a drawer without, same refrigerator, door opened on a normal household schedule. A Wyze camera photographs both containers once a day, at the same time, with its spotlight switched on by a schedule and a thermometer/hygrometer in frame. We publish every run, including the ones that show little or no difference. A home test like this shows what happened in one fridge; it does not establish a universal shelf-life number."
   },
   "runs": [
@@ -11,7 +11,7 @@
       "started": "2026-11-02",
       "produce": "Sachet media (potassium permanganate on mineral carrier)",
       "question": "The absorbent changes from purple to brown as it is used up. We are opening sachets from normal household drawers at day 30, 60 and 90 to see how much capacity is left. The result sets our swap schedule and refill plan.",
-      "result": "Day 30 photos due around November 16, 2026.",
+      "result": "Day 30 photos due around November 16, 2026. Nov 20: Run in progress. Photos will be posted when the run ends.",
       "images": []
     },
     {
@@ -21,7 +21,7 @@
       "started": "2026-11-02",
       "produce": "Broccoli",
       "question": "UC Davis reports broccoli at 50°F loses half its shelf life at 2 ppm ethylene. A first two-week attempt with broccoli alone showed no visible difference on either side, which makes sense: with no ethylene producer in the container there was little for the absorber to remove. This run adds one ripe apple to each lidded container, same variety and ripeness, so both sides face the same ethylene load and the only difference is the Simply Krisp case in one of them.",
-      "result": "Started November 2, 2026. Fresh broccoli crowns from the same bunch, one apple per container, photographed once a day under timed light with a thermometer in frame. First photos due the week of November 9.",
+      "result": "Started November 2, 2026. Fresh broccoli crowns from the same bunch, one apple per container, photographed once a day under timed light with a thermometer in frame. Nov 20: Run in progress. Photos are recorded to the camera's SD card and will be posted when the run ends.",
       "images": []
     },
     {
