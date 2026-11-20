@@ -1725,11 +1725,11 @@ details.sd{display:block}
     // Household comparison: only once there are enough logged outcomes to mean something.
     var cmp = im.compare, cmpH = '';
     if (cmp && cmp.ready && cmp.tossedShare != null) {
-      var you = Math.round(cmp.tossedShare * 100);
+      var you = Math.round(cmp.tossedShare * 100), us = Math.round(cmp.rate * 100);
       cmpH = '<div class="cmp"><b>Your tossed share vs. US households</b>' +
         '<div class="cb"><span>You</span><span class="tr"><i style="width:' + Math.max(2, Math.min(100, you)) + '%"></i></span><b>' + you + '%</b></div>' +
-        '<div class="cb"><span>US households</span><span class="tr"><i class="us" style="width:24.5%"></i></span><b>24-25%</b></div>' +
-        '<p class="note" style="margin-top:6px">' + esc(cmp.text) + ' (<a class="link" href="' + esc(cmp.url) + '" target="_blank" rel="noopener">USDA ERS</a>). ' +
+        '<div class="cb"><span>US households</span><span class="tr"><i class="us" style="width:' + us + '%"></i></span><b>' + us + '%</b></div>' +
+        '<p class="note" style="margin-top:6px">' + esc(cmp.text) + ' (<a class="link" href="' + esc(cmp.url) + '" target="_blank" rel="noopener">' + esc(cmp.source) + '</a>, the same US average as the ring). ' +
         'Yours is the share of produce you marked tossed, by estimated weight, across ' + plural(cmp.outcomes, 'logged item') + '. It only counts what you log.</p></div>';
     } else if (cmp && !cmp.ready) {
       var left = Math.max(1, cmp.minOutcomes - cmp.outcomes);

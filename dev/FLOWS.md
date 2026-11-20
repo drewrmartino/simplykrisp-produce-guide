@@ -15,7 +15,7 @@
 - Eat First: item More → Move to Eat First / Take out of Eat First; zone at the top of the kitchen map and the list; chip on the card
 - Before you shop: dashboard banner and Add chooser → on-hand list ("You still have 2 plums. Skip it?") + Buy less rows → Start from Same as last trip (rows show "you still have" / "buy less")
 - Crisper thermometer: dashboard prompt (Not now snoozes 7 days, 1 day if the last reading was out of range) and Settings row → sheet → reading 20-60°F → good / cold / warm / too warm (FDA link) / freezing; prompt returns after 30 days
-- Impact: comparison with US households after 10 logged outcomes (USDA ERS link); before that "Mark N more items..."; rescue streak line
+- Impact: comparison with US households after 10 logged outcomes (same ~27% EPA benchmark as the ring, EPA link); before that "Mark N more items..."; rescue streak line
 - Pilot: /krisper/admin → Testers → Pilot cohort dropdown saves and reloads; holdout and baseline (first 14 days) users see none of the above except the toss-reason question
 - Existing pages /, /seasonal, /lab unchanged
 - CSA box guide /partners: paste list (lines or commas) → zones + Krisp notes; unmatched warning; Preview/Plain tabs; Copy for email (text/html), Copy plain text, Print; Save box / load / delete; ?partner=&code= prefill

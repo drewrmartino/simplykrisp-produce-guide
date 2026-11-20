@@ -395,7 +395,10 @@ test('household comparison shows only after 10 logged outcomes', () => {
   assert.equal(im.compare.ready, true);
   assert.equal(im.compare.outcomes, 10);
   assert.equal(im.compare.tossedShare, 0.2, '2 of 10 apples, by weight');
-  assert.equal(im.compare.url, 'https://primary.ers.usda.gov/data-products/food-availability-per-capita-data-system/loss-adjusted-food-availability-documentation');
+  assert.equal(im.compare.rate, im.benchmark.tossRate, 'one US benchmark on the Impact tab');
+  assert.equal(im.compare.rate, 0.27);
+  assert.match(im.compare.text, /27%/);
+  assert.equal(im.compare.url, 'https://www.epa.gov/system/files/documents/2025-04/costoffoodwastereport_508.pdf');
 });
 
 test('pilot cohorts: admin sets them, logging-only cohorts lose the nudges, scorecard splits by cohort', async () => {

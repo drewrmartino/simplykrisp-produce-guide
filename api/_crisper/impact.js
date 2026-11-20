@@ -374,17 +374,15 @@ export function rescueStats(rows, today, tz) {
   return { streakDays, bestStreakDays, today: days.has(today), todayNames, weekCount, weekUsd: r2(weekUsd), usdEstimated: true };
 }
 
-// "US households lose about 24-25% of the fresh produce they buy": USDA ERS
-// Loss-Adjusted Food Availability, consumer-level loss for fresh vegetables
-// (24%) and fresh fruit (25%). Shown next to the user's own share once they
-// have logged enough outcomes for the comparison to mean something.
+// Your tossed share next to the same US benchmark the ring and the "kept out of
+// the bin" line use (BENCHMARK_TOSS_RATE, EPA 2025), so the Impact tab has one
+// US number. Shown once there are enough logged outcomes to mean something.
 export const COMPARE = {
   minOutcomes: 10,
-  low: 0.24,
-  high: 0.25,
-  text: 'US households lose about 24-25% of the fresh produce they buy',
-  source: 'USDA ERS, Loss-Adjusted Food Availability',
-  url: 'https://primary.ers.usda.gov/data-products/food-availability-per-capita-data-system/loss-adjusted-food-availability-documentation',
+  rate: BENCHMARK_TOSS_RATE,
+  text: `US households waste about ${Math.round(BENCHMARK_TOSS_RATE * 100)}% of the fresh fruit and vegetables they buy`,
+  source: 'EPA (2025)',
+  url: 'https://www.epa.gov/system/files/documents/2025-04/costoffoodwastereport_508.pdf',
 };
 
 function compare(all) {

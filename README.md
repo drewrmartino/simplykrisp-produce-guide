@@ -213,9 +213,11 @@ Use-it-up features (the "eat it all" set):
   [FDA](https://www.fda.gov/consumers/consumer-updates/are-you-storing-food-safely)
   ceiling), below 32°F freezing risk. It asks again after 30 days.
 - **Household comparison** on the Impact tab, once someone has logged 10 or more
-  outcomes: their tossed share (by estimated weight) next to "US households lose
-  about 24-25% of the fresh produce they buy", citing
-  [USDA ERS Loss-Adjusted Food Availability](https://primary.ers.usda.gov/data-products/food-availability-per-capita-data-system/loss-adjusted-food-availability-documentation).
+  outcomes: their tossed share (by estimated weight) next to the same US
+  benchmark the ring already uses (`BENCHMARK_TOSS_RATE`, about 27% of fresh
+  fruit and vegetables wasted at home,
+  [EPA 2025](https://www.epa.gov/system/files/documents/2025-04/costoffoodwastereport_508.pdf)),
+  so the Impact tab shows one US number.
 
 Copy rules: never say the app reduces waste; every dollar and CO₂ number says
 "estimated".
