@@ -61,17 +61,16 @@ export function krispStatus(user, today) {
   };
 }
 
-// Krisp only gets credit for items it measurably helps (krispTier) that sit in a
+// Krisp notes only go on ethylene-sensitive items (krispTier) that sit in a
 // closed crisper drawer, where the sachet is. Ripen-first fruit (kiwi, avocado,
 // pear) counts for its ripe-in-the-drawer phase. Shelf, counter and pantry
-// items get nothing, even if they react to ethylene.
+// items get no note, even if they react to ethylene. A Krisp never changes an
+// item's day window: there is no household test of how many days it adds
+// (scripts/krisp-tiers.mjs).
 export function krispReach(c) {
   if (!c || !c.krispTier) return false;
   const z = zoneFor(c);
   return z === 'high' || z === 'low' || c.storage === 'counter_then_fridge';
-}
-function krispApplies(c, krisp) {
-  return krisp.active && krispReach(c);
 }
 
 export function itemView(row, user, today) {
@@ -80,9 +79,8 @@ export function itemView(row, user, today) {
   const krisp = krispStatus(user, today);
   const start = addDays(toISODate(row.start_date), row.ripening_days || 0);
   const age = Math.max(0, daysBetween(start, today));
-  const boost = krispApplies(c, krisp) ? c.krispExtra : [0, 0];
-  const min = c.minDays + boost[0];
-  const max = c.maxDays + boost[1];
+  const min = c.minDays;
+  const max = c.maxDays;
   const leftMin = min - age;
   const leftMax = max - age;
 
@@ -127,9 +125,11 @@ export function itemView(row, user, today) {
     status,
     label,
     progress: Math.max(0, Math.min(1, age / Math.max(1, max))),
-    krispBoost: boost[1] > 0 ? boost : null,
-    krispCould: !boost[1] && krispReach(c) ? c.krispExtra : null,
+    // Kept for older app builds; always null now (no Krisp day counts).
+    krispBoost: null,
+    krispCould: null,
     krispTier: krispReach(c) ? c.krispTier : null,
+    krispActive: krispReach(c) && !!krisp.active,
     krispPrevents: krispReach(c) ? c.krispPrevents : '',
     krispEvidence: krispReach(c) ? c.krispEvidence : '',
     krispNoBenefit: krispReach(c) ? '' : (c.krispNoBenefit || ''),

@@ -1,7 +1,7 @@
 // Applies the Krisp tiers in scripts/krisp-tiers.mjs to /seasonal/produce.json,
 // then rebuilds the Storage Guide bundle's produce data (an embedded
 // JSON.parse(`...`) literal) from produce.json, so every page lists the same
-// items with the same storage facts and Krisp claims.
+// items with the same storage facts and Krisp notes.
 //   npm run sync   (node scripts/apply-krisp-tiers.mjs)
 // Idempotent. To add an item: add it to seasonal/produce.json, data/spoilage.json
 // and the tables this script and `npm run catalog` ask for, then run
@@ -22,7 +22,7 @@ for (const p of produce) {
     const range = p.extraDaysRange || String(p.extraDays);
     RANGE[p.name] = range;
     p.krispRecommended = true;
-    p.krispBenefit = benefitText(p.name, range, p.storageLocation);
+    p.krispBenefit = benefitText(p.name);
     delete p.noBenefitReason;
   } else {
     p.krispRecommended = false;
@@ -142,5 +142,28 @@ if (js.includes(OLD_COND)) {
 // Home page copy: herbs sit in a jar on the shelf, out of the Krisp's reach.
 js = js.replace('(greens, broccoli, herbs) a few more days', '(greens, broccoli, cucumbers) a few more days');
 
+// No Krisp day counts or "how much longer" claims anywhere in the bundle (see
+// the claims note in scripts/krisp-tiers.mjs). Each pair is [old, new]; the
+// script fails if neither is present so a bundle change can't slip past it.
+const COPY = [
+  ['A SimplyKrisp absorber in each crisper drawer pulls this gas out of the air, which buys the most sensitive produce (greens, broccoli, cucumbers) a few more days. Our day estimates are conservative ranges, and we publish our home tests in the Lab Notebook.',
+    'A SimplyKrisp absorber in each crisper drawer takes up this gas in a closed drawer, which matters most when apples, pears or bananas share the fridge. The most sensitive produce is greens, broccoli and cucumbers. We publish our home tests in the Lab Notebook.'],
+  ['children:"Extend freshness with SimplyKrisp"', 'children:"Ethylene-sensitive items in your list"'],
+  ["Here's how much longer each of your items can last with a SimplyKrisp ethylene absorber in your fridge.",
+    'These items react to ethylene. A SimplyKrisp absorber takes up ethylene in a closed crisper drawer, which matters most when apples, pears or bananas share the fridge.'],
+  ['f.jsx(Lp,{className:"w-3 h-3"}),"+",p.extraDays," days"]', 'f.jsx(Lp,{className:"w-3 h-3"}),"Ethylene-sensitive"]'],
+  ['A Krisp gives these items a few more days, which helps you eat more of it. How much it saves is what our Lab Notebook measures, and My Krisper tracks your real number.',
+    'These items react to ethylene, and a Krisp absorbs ethylene in a closed drawer. Our Lab Notebook publishes our home tests, and My Krisper tracks your real number.'],
+  ['We test how many days a Krisp adds and publish every result.', 'We test the Krisp at home and publish every result.'],
+  ['shelf life, and whether a SimplyKrisp ethylene absorber can help it last longer.', 'shelf life, and how strongly it reacts to ethylene, which a SimplyKrisp absorber takes up in a closed crisper drawer.'],
+  ['Highlighted items are affected by SimplyKrisp — adjusting their quantities updates your savings below.', 'Highlighted items react to ethylene. Adjusting their quantities updates the waste estimate below.'],
+  ['s.krispRecommended?" How a Krisp helps"', 's.krispRecommended?" Ethylene and the Krisp"'],
+  ['f.jsx(hi,{className:"w-3 h-3"})," Krisp Recommended"]', 'f.jsx(hi,{className:"w-3 h-3"})," Ethylene-sensitive"]'],
+];
+for (const [from, to] of COPY) {
+  if (js.includes(from)) js = js.split(from).join(to);
+  else if (!js.includes(to)) throw new Error(`bundle copy not found: ${from.slice(0, 60)}`);
+}
+
 writeFileSync(bundlePath, js);
-console.log(`updated ${bundleRel} and seasonal/produce.json: ${rebuilt.length} items, ${Object.keys(RANGE).length} with a Krisp claim`);
+console.log(`updated ${bundleRel} and seasonal/produce.json: ${rebuilt.length} items, ${Object.keys(RANGE).length} with a Krisp note`);

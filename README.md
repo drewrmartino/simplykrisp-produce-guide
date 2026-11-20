@@ -48,6 +48,11 @@ prevent it next time.
   `lab/runs.json`.
 - `krispHelps: true` is only allowed on items in `scripts/krisp-tiers.mjs`
   and only for ethylene or ripening failures. The test suite enforces it.
+- Krisp notes never give a day count or a strength claim ("adds N days",
+  "real difference"). There is no household test of the sachet yet; see the
+  claims ledger. They say which items react to ethylene and that a Krisp
+  absorbs it in a closed drawer. `dev/krisp-claims.test.mjs` fails on any
+  built output that attributes days to the Krisp.
 - Run `npm run pages` after any edit and commit the output. It writes
   `produce/<slug>/index.html`, `produce/index.html`,
   `produce/what-went-wrong/index.html` (symptom checker, deep-linkable with

@@ -57,7 +57,6 @@ export function storageGuide(items, { hasKrisp = false, limit = 15 } = {}) {
     usd += w.usd; lb += w.lb;
     // Put the conflicts that are actually in this order first.
     const avoid = [...(c.avoidWith || [])].sort((a, b) => (names.has(stem(b)) ? 1 : 0) - (names.has(stem(a)) ? 1 : 0)).slice(0, 3);
-    const extra = c.krispExtra || [0, 0];
     const zone = zoneFor(c);
     out.push({
       name: c.name,
@@ -72,12 +71,14 @@ export function storageGuide(items, { hasKrisp = false, limit = 15 } = {}) {
       ripe_tip: c.ripensFirst ? (c.ripeTip || '') : '',
       keep_away_from: avoid.join(', '),
       lasts: c.minDays === c.maxDays ? `about ${c.minDays} days` : `${c.minDays}–${c.maxDays} days`,
-      // Krisp sits in the crisper drawers, so only promise days for drawer items.
-      krisp: krispReach(c) && extra[1] > 0
-        ? `${hasKrisp ? 'Your Krisp adds' : 'A Krisp adds'} about ${extra[0]}–${extra[1]} days${c.storage === 'counter_then_fridge' ? ' once it is ripe and in the drawer' : ''}. ${c.krispPrevents}`.trim()
+      // Krisp sits in the crisper drawers, so only drawer items get a note. No
+      // day counts or strength claims (scripts/krisp-tiers.mjs).
+      krisp: krispReach(c)
+        ? `${c.krispPrevents} ${hasKrisp ? 'Your Krisp absorbs' : 'A Krisp absorbs'} ethylene in a closed crisper drawer, which matters most when apples, pears or bananas share the fridge.`.trim()
         : '',
       // Short badge for the kitchen map: drawer items only, same rule as krisp.
-      krisp_days: krispReach(c) && extra[1] > 0 && (zone === 'high' || zone === 'low') ? `+${extra[0]}–${extra[1]} days` : '',
+      // Prop name kept so the Klaviyo template keeps working.
+      krisp_days: krispReach(c) && (zone === 'high' || zone === 'low') ? 'Ethylene-sensitive' : '',
       typically_wasted_pct: Math.round(w.rate * 100),
       typically_wasted_usd: w.usd.toFixed(2),
     });

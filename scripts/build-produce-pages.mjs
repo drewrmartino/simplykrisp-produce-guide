@@ -5,8 +5,8 @@
 //
 // Joins each spoilage entry with what the rest of the site already says, so
 // nothing is written twice:
-//   seasonal/produce.json      storage tips, shelf life, keep-away-from, Krisp claims
-//   scripts/krisp-tiers.mjs    which items a Krisp truly helps
+//   seasonal/produce.json      storage tips, shelf life, keep-away-from, Krisp notes
+//   scripts/krisp-tiers.mjs    which items get a Krisp note (ethylene-sensitive, in a drawer)
 //   api/_crisper/scraps.js     use-it-up ideas for trimmings
 //   lab/runs.json              matching Lab Notebook runs
 //
@@ -359,10 +359,10 @@ function itemPage(e, ctx) {
     ? item.intro
     : `${Title} keep${plural ? '' : 's'} best ${whereLong[p.storageLocation]}, at about ${p.optimalTempF}°F, and last${plural ? '' : 's'} ${p.shelfLife.replace(/ \(.*\)$/, '')}. Here is how to store ${them}, what to keep ${them} away from, and how to pick good ${display}.`;
 
-  // Krisp: only where the data says it helps, otherwise the honest reason it doesn't.
+  // Krisp: a note on ethylene-sensitive items (no day counts), otherwise the honest reason it won't help.
   const anyKrisp = item ? item.failures.some((f) => f.krispHelps) : p.krispRecommended;
   const krispNote = p.krispRecommended && p.krispBenefit
-    ? `<p class="aside"><strong>Does a Krisp help?</strong> ${esc(p.krispBenefit)}${item ? '' : ` <a href="${SHOP}?${utm(e.slug + '-storage')}" target="_blank" rel="noopener">See the Double Krisp</a>`}</p>`
+    ? `<p class="aside"><strong>Ethylene and a Krisp:</strong> ${esc(p.krispBenefit)}${item ? '' : ` <a href="${SHOP}?${utm(e.slug + '-storage')}" target="_blank" rel="noopener">See the Double Krisp</a>`}</p>`
     : p.noBenefitReason ? `<p class="aside"><strong>Does a Krisp help?</strong> ${esc(p.noBenefitReason)}</p>` : '';
   const storage = `<section class="sec" id="storage"><h2>How to store ${esc(display)}</h2>
   <ul class="tips">${p.storageTips.map((t) => `<li>${esc(t)}</li>`).join('')}</ul>
@@ -709,7 +709,7 @@ function guidePage(g, ctx) {
   const p = main && main.p;
   const krisp = g.group === 'ripen' && p
     ? p.krispRecommended && p.krispBenefit
-      ? `<p class="aside"><strong>Does a Krisp help?</strong> ${esc(p.krispBenefit)} <a href="${SHOP}?${utm('howto-' + g.slug)}" target="_blank" rel="noopener">See the Double Krisp</a></p>`
+      ? `<p class="aside"><strong>Ethylene and a Krisp:</strong> ${esc(p.krispBenefit)} <a href="${SHOP}?${utm('howto-' + g.slug)}" target="_blank" rel="noopener">See the Double Krisp</a></p>`
       : p.noBenefitReason ? `<p class="aside"><strong>Does a Krisp help?</strong> ${esc(p.noBenefitReason)}</p>` : ''
     : '';
 

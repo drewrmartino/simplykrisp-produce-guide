@@ -1,7 +1,7 @@
 {
   "meta": {
     "updated": "2026-11-13",
-    "note": "Why produce goes bad: the ways each item usually fails, ranked most common first. Joined at build time with seasonal/produce.json (storage tips, shelf life, Krisp claims), api/_crisper/scraps.js (use-it-up ideas) and lab/runs.json. Every 'Is it still OK?' line is a food-safety statement: keep them conservative and sourced. Run `npm run pages` after editing."
+    "note": "Why produce goes bad: the ways each item usually fails, ranked most common first. Joined at build time with seasonal/produce.json (storage tips, shelf life, Krisp notes), api/_crisper/scraps.js (use-it-up ideas) and lab/runs.json. Every 'Is it still OK?' line is a food-safety statement: keep them conservative and sourced. Run `npm run pages` after editing."
   },
   "sources": {
     "fsis-mold": {
@@ -1519,7 +1519,7 @@
           "title": "Berries turning dark purple-red",
           "cause": "ethylene",
           "symptom": "Red raspberries darken toward purple.",
-          "why": "Ethylene can darken red raspberries to purple-red, and it can also speed up gray mold. Raspberries are too short-lived for a Krisp to make a real difference, so the fix is to keep them away from fruit and eat them fast.",
+          "why": "Ethylene can darken red raspberries to purple-red, and it can also speed up gray mold. Raspberries last only a few days anyway, so the fix is to keep them away from fruit and eat them fast.",
           "prevent": [
             "Keep raspberries away from apples, bananas and other ripening fruit"
           ],

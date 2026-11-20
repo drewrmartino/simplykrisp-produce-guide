@@ -152,10 +152,6 @@ details.method .mbody p{margin-bottom:11px}
 details.method .mbody p:last-child{margin-bottom:0}
 details.method .mbody a{color:var(--primary)}
 details.method .mbody b{color:var(--fg);font-weight:600}
-.gain{margin-top:11px;display:flex;flex-wrap:wrap;align-items:baseline;gap:7px;padding:9px 11px;border-radius:6px;background:hsl(140 40% 38% / .09);border:1px solid hsl(140 40% 38% / .2)}
-.gain .g-base{font-size:12.5px;color:var(--muted-fg)}
-.gain .g-arrow{font-size:12.5px;color:hsl(140 40% 30%)}
-.gain .g-plus{font-size:13px;font-weight:600;color:hsl(140 45% 25%)}
 summary{font-size:13px;font-weight:600;color:var(--primary);cursor:pointer;list-style:none;display:flex;align-items:center;gap:6px}
 summary::-webkit-details-marker{display:none}
 summary::after{content:"";width:6px;height:6px;border-right:1.6px solid currentColor;border-bottom:1.6px solid currentColor;transform:rotate(45deg);transition:transform .2s;margin-top:-3px}
@@ -428,10 +424,10 @@ footer p{max-width:76ch;margin-bottom:8px}
       <a class="btn" href="https://simplykrisp.com/?utm_source=produce-guide&amp;utm_medium=referral&amp;utm_campaign=seasonal-page&amp;utm_content=hero-band" target="_blank" rel="noopener">Shop Simply Krisp</a>
     </div>
 
-    <!-- Sourcing for the day estimates, on the page rather than buried, because
-         a number with no provenance is just marketing. -->
+    <!-- What the research does and doesn't say about absorbers at home. We make
+         no day claim for the Krisp: there is no household test of the sachet. -->
     <details class="method" id="method">
-      <summary>How we set these day estimates</summary>
+      <summary>What we know about ethylene absorbers at home</summary>
       <div class="mbody">
         <p>Ethylene absorbers work by removing the ripening gas that fruits and
         vegetables give off. In controlled trials, dropping ethylene from a normal
@@ -448,15 +444,23 @@ footer p{max-width:76ch;margin-bottom:8px}
         0.02 to 1.58&nbsp;ppm
         (<a href="https://postharvest.ucdavis.edu/ask-produce-docs/experiment-i-want-duplicate-ethylene-would-be-present-home-refrigerator-crisper" target="_blank" rel="noopener">UC Davis Postharvest</a>).</p>
 
-        <p>So the numbers here are deliberately smaller than the laboratory figures:
-        one to four days, for produce in a closed drawer or bag with a fresh sachet.
+        <p>So we don't put a day count on the Krisp. No one has tested this sachet in
+        home fridges yet. What the research supports: potassium permanganate removes
+        ethylene in a closed drawer
+        (<a href="https://journals.ashs.org/jashs/view/journals/jashs/129/3/article-p433.pdf" target="_blank" rel="noopener">Wills &amp; Warton, 2004</a>),
+        lower ethylene extends the storage life of many vegetables
+        (<a href="https://www.publish.csiro.au/an/EA98123" target="_blank" rel="noopener">Ku et al., 1999</a>),
+        and home fridges reach about 0.20&nbsp;ppm ethylene with apples inside versus
+        0.03&nbsp;ppm without
+        (<a href="https://www.publish.csiro.au/an/ea99125" target="_blank" rel="noopener">Warton, Wills &amp; Ku, 2000</a>),
+        so it matters most when apples, pears or bananas share the fridge.
         Sensitivity and production classes come from the
         <a href="https://postharvest.ucdavis.edu/sites/g/files/dgvnsk12711/files/inline-files/230191.pdf" target="_blank" rel="noopener">UC Davis commodity tables</a>
         and baseline shelf life from
         <a href="https://extension.umaine.edu/publications/4135e/" target="_blank" rel="noopener">University of Maine Extension Bulletin&nbsp;#4135</a>.</p>
 
-        <p><b>Where we publish a zero.</b> Twenty-five items on this list get no day
-        claim at all. Grapes, cherries, peaches, plums and nectarines showed no
+        <p><b>Where we say it won't help.</b> Most items on this list get no Krisp
+        note at all. Grapes, cherries, peaches, plums and nectarines showed no
         measurable response to continuous ethylene across three to eight weeks of cold
         storage (<a href="https://edepot.wur.nl/700757" target="_blank" rel="noopener">Wageningen University &amp; Research</a>).
         Onions and garlic are dry pantry crops, and ethylene actually
@@ -576,16 +580,15 @@ footer p{max-width:76ch;margin-bottom:8px}
   var MONTHS = ['January','February','March','April','May','June',
                 'July','August','September','October','November','December'];
 
-  // Plain-language version of the evidence tier behind each day estimate.
+  // What the ethylene evidence for an item is based on. It says nothing about
+  // the sachet itself: there is no household test of it, so no day estimate.
   var EVIDENCE = {
-    measured: 'Measured. There is a published trial on this exact item comparing ' +
-      'a normal fridge ethylene level against near-zero, so the direction and rough ' +
-      'size of the effect are established.',
-    related: 'Measured on a close relative. The trial we are drawing on tested a ' +
-      'closely related crop with the same ethylene profile, not this item itself.',
-    estimated: 'Estimated. No absorber trial exists for this item, so the figure comes ' +
-      'from its published ethylene sensitivity and production class. Treat it as the ' +
-      'least certain number on the page.'
+    measured: 'Measured. A published trial on this exact item compared a normal ' +
+      'fridge ethylene level against near-zero.',
+    related: 'Measured on a close relative. The trial tested a closely related crop ' +
+      'with the same ethylene profile, not this item itself.',
+    estimated: 'Estimated from its published ethylene sensitivity and production ' +
+      'class. No absorber trial exists for this item.'
   };
 
   var LOC_LABEL = {
@@ -636,13 +639,13 @@ footer p{max-width:76ch;margin-bottom:8px}
     });
     names.sort(function (a, b) {
       var pa = state.produce[a], pb = state.produce[b];
-      // Krisp-relevant items first, then by how many days it buys, then A-Z.
+      // Items with a Krisp note first, then by ethylene sensitivity, then A-Z.
       var ka = pa.krispRecommended ? 0 : 1, kb = pb.krispRecommended ? 0 : 1;
       if (ka !== kb) return ka - kb;
       var sa = pa.ethyleneSensitivity === 'high' ? 0 : pa.ethyleneSensitivity === 'medium' ? 1 : 2;
       var sb = pb.ethyleneSensitivity === 'high' ? 0 : pb.ethyleneSensitivity === 'medium' ? 1 : 2;
       if (sa !== sb) return sa - sb;
-      return relGain(pb) - relGain(pa) || a.localeCompare(b);
+      return a.localeCompare(b);
     });
     return { region: region, names: names };
   }
@@ -663,31 +666,6 @@ footer p{max-width:76ch;margin-bottom:8px}
     return 'https://' + s.replace(/^\/+/, '');
   }
 
-  // Parse "3-5 days (refrigerated)" / "4-8 weeks" / "1 week".
-  // Returns { lo, hi, unit } in days, plus the original unit so we only do
-  // day arithmetic on items actually measured in days.
-  function shelfDays(s) {
-    if (!s) return null;
-    var m = String(s).match(/(\d+)\s*(?:[-\u2013]\s*(\d+))?\s*(day|week|month)/i);
-    if (!m) return null;
-    var unit = m[3].toLowerCase();
-    var mult = { day: 1, week: 7, month: 30 }[unit];
-    var lo = parseInt(m[1], 10) * mult;
-    var hi = m[2] ? parseInt(m[2], 10) * mult : lo;
-    // "1-2 weeks whole, 3-5 days cut (refrigerated)" -> "1-2 weeks whole"
-    var label = String(s).replace(/\s*\([^)]*\)\s*$/, '').split(',')[0].trim();
-    return { lo: lo, hi: hi, unit: unit, label: label };
-  }
-
-  // How much a Krisp absorber changes the outcome, as a share of normal shelf life.
-  // Five extra days on broccoli matters far more than five on a cabbage.
-  function relGain(p) {
-    if (!p.krispRecommended || !p.extraDays) return -1;
-    var b = shelfDays(p.shelfLife);
-    if (!b) return 0;
-    return p.extraDays / ((b.lo + b.hi) / 2);
-  }
-
   function card(p) {
     var sens = p.ethyleneSensitivity;
     var prod = p.ethyleneProduction;
@@ -696,52 +674,25 @@ footer p{max-width:76ch;margin-bottom:8px}
     if (sens === 'high') b.push('<span class="badge sens">Ethylene-sensitive</span>');
     else if (sens === 'medium') b.push('<span class="badge sens">Somewhat sensitive</span>');
     if (prod === 'very_high' || prod === 'high') b.push('<span class="badge prod">Ethylene producer</span>');
-    // Items a Krisp helps show the day range in the gain row below.
-    if (!p.extraDays && p.noBenefitReason) {
+    if (!p.krispRecommended && p.noBenefitReason) {
       b.push('<span class="badge nokrisp">Krisp won\u2019t help here</span>');
     }
 
     var tips = (p.storageTips || []).map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('');
     var avoid = (p.avoidWith && p.avoidWith.length)
       ? '<div class="sec">Store away from</div><p class="avoid">' + esc(p.avoidWith.join(' · ')) + '</p>' : '';
-    // Only pitch the absorber where there's a day count behind it. On the
-    // zero-day items the honest reason below replaces the sales copy.
-    var kb = (p.krispBenefit && p.extraDays)
+    // Krisp note only on ethylene-sensitive drawer items, with no day count
+    // (scripts/krisp-tiers.mjs). Elsewhere the honest reason replaces it.
+    var kb = (p.krispBenefit && p.krispRecommended)
       ? '<div class="sec">With Simply Krisp</div><p class="kb">' + esc(p.krispBenefit) + '</p>' : '';
-    // Where the day estimate came from, item by item.
     var ev = '';
-    if (p.extraDays && p.evidence) {
-      ev = '<div class="sec">How confident we are</div><p>' + esc(EVIDENCE[p.evidence]) + '</p>';
+    if (p.krispRecommended && p.evidence) {
+      ev = '<div class="sec">Ethylene evidence</div><p>' + esc(EVIDENCE[p.evidence]) + '</p>';
     } else if (p.noBenefitReason) {
       ev = '<div class="sec">Why Krisp won\u2019t help here</div><p>' +
            esc(p.noBenefitReason) + '</p>';
     }
     var ripe = p.ripeTip ? '<div class="sec">Picking a good one</div><p>' + esc(p.ripeTip) + '</p>' : '';
-
-    // "3-5 days on its own -> about 8-10 days with a Krisp absorber"
-    var gain = '';
-    if (p.extraDays) {
-      var base = shelfDays(p.shelfLife);
-      var left, right;
-      // Anything up to ~3 weeks reads better as a concrete day range.
-      if (base && base.hi <= 21) {
-        // Short shelf life: spell out the new window, it's the whole point.
-        left = (base.hi !== base.lo ? base.lo + '\u2013' + base.hi : String(base.lo)) + ' days on its own';
-        right = 'about ' + (base.lo + p.extraDays) +
-                (base.hi !== base.lo ? '\u2013' + (base.hi + p.extraDays) : '') +
-                ' days with a Krisp absorber';
-      } else {
-        // Weeks or months: keep the original units, just state the gain.
-        left = (base ? base.label : 'Normal shelf life') + ' on its own';
-        right = 'about ' + (p.extraDaysRange || p.extraDays) +
-                ' days longer with a Krisp absorber';
-      }
-      gain = '<div class="gain">' +
-        '<span class="g-base">' + esc(left) + '</span>' +
-        '<span class="g-arrow" aria-hidden="true">\u2192</span>' +
-        '<span class="g-plus">' + esc(right) + '</span>' +
-      '</div>';
-    }
 
     return '<article class="pcard">' +
       '<div class="ptop">' +
@@ -749,7 +700,7 @@ footer p{max-width:76ch;margin-bottom:8px}
         '<div><h3 class="pname">' + esc(p.name) + '</h3>' +
         '<div class="pmeta">' + esc(p.shelfLife) + ' &middot; best at ' + esc(p.optimalTempF) + '&deg;F</div></div>' +
       '</div>' +
-      '<div class="badges">' + b.join('') + '</div>' + gain +
+      '<div class="badges">' + b.join('') + '</div>' +
       '<div class="tip"><span class="lbl">Store it like this</span>' + esc((p.storageTips || [''])[0]) + '</div>' +
       '<details><summary>All storage tips</summary><div class="dbody">' +
         '<div class="sec">Full guidance</div><ul>' + tips + '</ul>' + ripe + avoid + kb + ev +
@@ -790,21 +741,14 @@ footer p{max-width:76ch;margin-bottom:8px}
     }
 
     // ethylene band
-    var krispItems = all.filter(function (p) { return p.extraDays; });
+    var krispItems = all.filter(function (p) { return p.krispRecommended; });
     var band = el('band');
     if (krispItems.length) {
-      var lo = Math.min.apply(null, krispItems.map(function (p) { return p.extraDays; }));
-      var hi = Math.max.apply(null, krispItems.map(function (p) { return p.extraDays; }));
-      var best = krispItems.slice().sort(function (a, b) { return b.extraDays - a.extraDays; })[0];
-      var span = lo === hi ? String(hi) : lo + '\u2013' + (hi + 1);
+      // No day counts: there is no household test of the Krisp sachet.
       el('bandh').textContent = krispItems.length === 1
-        ? 'Krisp buys you about ' + (best.extraDaysRange || best.extraDays) +
-          ' more days on ' + best.name.toLowerCase()
-        : 'Krisp buys you about ' + span + ' more days on ' + krispItems.length +
-          ' of the ' + all.length + ' in season right now';
-      // No universal claim. The absorber only moves the needle on produce that
-      // is ethylene-sensitive and doesn't out-gas the sachet, so say so here.
-      el('bandp').textContent = 'A Krisp in the drawer removes ethylene, the ripening gas that yellows greens and broccoli. ' +
+        ? krispItems[0].name + ' reacts to ethylene'
+        : krispItems.length + ' of the ' + all.length + ' in season right now react to ethylene';
+      el('bandp').textContent = 'A Krisp absorbs ethylene in a closed crisper drawer, which matters most when apples, pears or bananas share the fridge. ' +
         'The other ' + (all.length - krispItems.length) + ' barely respond to it, and we say so on each card.';
       band.classList.remove('hide');
     } else {
@@ -1081,7 +1025,7 @@ footer p{max-width:76ch;margin-bottom:8px}
     if (sensCount) {
       var w = el('buywhy');
       w.textContent = sensCount + ' of the ' + total + ' items in season near you right now are ' +
-        'ethylene-sensitive, which is exactly what the absorber is for.';
+        'ethylene-sensitive. The absorber takes up ethylene in a closed crisper drawer.';
       w.classList.remove('hide');
     } else {
       el('buywhy').classList.add('hide');

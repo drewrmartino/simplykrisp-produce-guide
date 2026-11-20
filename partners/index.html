@@ -142,8 +142,7 @@ button,input,textarea{font:inherit;color:inherit}
 .chip{display:inline-flex;align-items:center;gap:5px;background:#fff;border:1px solid var(--border);border-radius:999px;padding:3px 9px 3px 6px;font-size:13px;text-decoration:none;color:var(--fg);line-height:1.3}
 a.chip:hover{border-color:var(--primary)}
 .chip .em{font-size:15px;line-height:1}
-.chip.k{border-color:var(--krisp-line);background:hsl(80 60% 97%)}
-.chip .kd{font-size:10.5px;font-weight:700;color:#fff;background:var(--krisp);border-radius:999px;padding:1px 6px;white-space:nowrap}
+.chip.k{border:1.5px solid var(--krisp);background:hsl(80 60% 96%)}
 .none{font-size:12.5px;color:var(--muted-fg)}
 .legend{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--muted-fg);margin-bottom:6px}
 .g-sec{font-size:18px;margin:16px 0 6px;padding-top:12px;border-top:2px solid var(--fg)}
@@ -287,24 +286,23 @@ function build() {
 function title(m) { return m.week ? `Where to store your ${esc(m.week)} box` : 'Where to store this week\u2019s box'; }
 function krispSummary(m) {
   const n = m.krispItems.length;
-  return `<b>A Simply Krisp in your crisper drawer helps ${n} of these ${n === 1 ? 'item' : 'items'} last longer:</b> ${esc(list(m.krispItems.map((i) => dn(i.name).toLowerCase())))}. It soaks up ethylene, the gas that yellows greens and softens produce. Look for the green notes below.`;
+  // No day counts or strength claims: there is no household test of the sachet.
+  return `<b>${n} of these ${n === 1 ? 'item reacts' : 'items react'} to ethylene:</b> ${esc(list(m.krispItems.map((i) => dn(i.name).toLowerCase())))}. A Simply Krisp absorbs ethylene in a closed crisper drawer, which matters most when apples, pears or bananas share the fridge. Look for the green notes below.`;
 }
 function watchText(m) {
   if (!m.producers.length || !m.sensitive.length) return '';
   return `<b>Ethylene watch:</b> the ${esc(list(m.producers.map(lc)))} in this box give off ethylene, which speeds up yellowing in the ${esc(list(m.sensitive.slice(0, 4).map(lc)))}. Keep them in separate drawers.`;
 }
 function krispLine(i) {
-  const m = i.krisp.match(/about (\d+)–(\d+) days(.*?)\.\s*(.*)$/);
-  if (!m) return esc(i.krisp);
-  return `<b>Simply Krisp helps:</b> about ${m[1]}–${m[2]} extra days${esc(m[3])}. ${esc(m[4])}`;
+  return `<b>Ethylene-sensitive:</b> ${esc(i.krisp)}`;
 }
 
 const zoneItems = (m, k) => (m.g.zones.find((z) => z.key === k) || { zone_items: [] }).zone_items;
-const kdays = (i) => (i.krisp ? i.krisp.match(/about (\d+)–(\d+) days/) : null);
+// Ethylene-sensitive items in a drawer (where the sachet is) get a green outline.
+const kdrawer = (i) => !!i.krisp && (i.zone === 'high' || i.zone === 'low');
 function chip(i) {
-  // Days badge only where the sachet is: the drawers.
-  const d = i.zone === 'high' || i.zone === 'low' ? kdays(i) : null;
-  return `<a class="chip${d ? ' k' : ''}" href="#it-${slug(i.name)}"><span class="em" aria-hidden="true">${emo(i.name)}</span>${esc(dn(i.name))}${i.amount ? `<span class="amt">${esc(i.amount)}</span>` : ''}${d ? `<span class="kd" title="About ${d[1]}–${d[2]} extra days with a Simply Krisp">+${d[1]}–${d[2]} days</span>` : ''}</a>`;
+  const d = kdrawer(i);
+  return `<a class="chip${d ? ' k' : ''}" href="#it-${slug(i.name)}"${d ? ' title="Ethylene-sensitive"' : ''}><span class="em" aria-hidden="true">${emo(i.name)}</span>${esc(dn(i.name))}${i.amount ? `<span class="amt">${esc(i.amount)}</span>` : ''}</a>`;
 }
 const chips = (items, empty) => (items.length ? `<div class="chips">${items.map(chip).join('')}</div>` : `<div class="none">${empty}</div>`);
 function renderKitchen(m) {
@@ -323,7 +321,7 @@ function renderKitchen(m) {
       <div class="pantry"><div class="knobs"><i></i><i></i></div><div class="zl">Pantry<small>Cool, dark cupboard</small></div>${chips(zoneItems(m, 'pantry'), 'Nothing for the pantry')}</div>
     </div>
   </div>
-  ${m.krispItems.length ? '<div class="legend"><span class="chip k"><span class="kd">+ days</span></span>Extra days with a Simply Krisp sachet in the drawer</div>' : ''}`;
+  ${m.krispItems.length ? '<div class="legend"><span class="chip k">Green outline</span>Reacts to ethylene. A Simply Krisp sachet in the drawer absorbs it.</div>' : ''}`;
 }
 
 function renderGuide(m) {
@@ -342,7 +340,7 @@ function renderGuide(m) {
         </div>`).join('')}
     </div>`).join('');
   return `<article class="guide">
-    <div class="g-top"><div><h2>${title(m)}</h2><div class="sub">${m.partner ? `From ${esc(m.partner)} \u00b7 ` : ''}Put it away tonight and it lasts days longer.</div></div>
+    <div class="g-top"><div><h2>${title(m)}</h2><div class="sub">${m.partner ? `From ${esc(m.partner)} \u00b7 ` : ''}Where each item goes, and how to store it tonight.</div></div>
       <div class="by"><b>Simply Krisp</b>Produce storage guide</div></div>
     ${m.krispItems.length ? `<div class="g-krisp-sum"><span class="ic" aria-hidden="true">K</span><div>${krispSummary(m)}</div></div>` : ''}
     ${watchText(m) ? `<div class="g-watch">${watchText(m)}</div>` : ''}
@@ -359,7 +357,7 @@ const EMOJI_FIX = { Beet: '\u{1F331}' };
 const emo = (n) => EMOJI_FIX[n] || BY_NAME[n].emoji || '';
 // Email version of the kitchen map: nested tables, emoji as text, no CSS classes.
 function emailKitchen(m, F, ink, mute, green) {
-  const chip = (i) => { const d = i.zone === 'high' || i.zone === 'low' ? kdays(i) : null; return `<span style="${F}display:inline-block;margin:0 4px 5px 0;padding:3px 8px;border-radius:12px;background:#ffffff;border:1px solid ${d ? '#b9d38f' : '#ddd8cc'};font-size:13px;color:${ink};white-space:nowrap;">${emo(i.name)} ${esc(dn(i.name))}${i.amount ? ` <span style="color:${mute};font-size:12px;">${esc(i.amount)}</span>` : ''}${d ? ` <b style="font-size:11px;color:#fff;background:${green};border-radius:8px;padding:0 5px;">+${d[1]}–${d[2]} days</b>` : ''}</span>`; };
+  const chip = (i) => { const d = kdrawer(i); return `<span style="${F}display:inline-block;margin:0 4px 5px 0;padding:3px 8px;border-radius:12px;background:#ffffff;border:1px solid ${d ? '#b9d38f' : '#ddd8cc'};font-size:13px;color:${ink};white-space:nowrap;">${emo(i.name)} ${esc(dn(i.name))}${i.amount ? ` <span style="color:${mute};font-size:12px;">${esc(i.amount)}</span>` : ''}</span>`; };
   const list = (k, empty) => { const it = zoneItems(m, k); return it.length ? it.map(chip).join('') : `<span style="${F}font-size:12px;color:${mute};">${empty}</span>`; };
   const lbl = (t, sub) => `<div style="${F}font-size:14px;color:${ink};font-weight:bold;">${t}</div><div style="${F}font-size:11px;color:${mute};padding-bottom:6px;">${sub}</div>`;
   const sachet = `<div style="${F}margin-top:6px;text-align:right;"><span style="font-size:10px;font-weight:bold;color:#fff;background:${green};border-radius:4px;padding:2px 6px;letter-spacing:.5px;">KRISP SACHET</span></div>`;
@@ -397,7 +395,7 @@ function renderEmail(m) {
   const cta = m.krispItems.length ? `<tr><td style="${F}padding:18px 0 4px;font-size:14px;color:${ink};">${m.partner ? `${esc(m.partner)} members` : 'Members'}${els.code.value.trim() ? ` save with code <b>${esc(els.code.value.trim())}</b>` : ' can try one in each crisper drawer'} \u2014 one sachet per drawer, changed monthly.<br><a href="${esc(storeUrl())}" style="display:inline-block;margin-top:8px;background:${green};color:#fff;padding:9px 16px;border-radius:6px;text-decoration:none;font-weight:bold;">See Simply Krisp</a></td></tr>` : '';
   return `<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="width:100%;max-width:600px;border-collapse:collapse;">
     <tr><td style="${F}font-size:22px;color:${ink};padding-bottom:4px;">${title(m)}</td></tr>
-    <tr><td style="${F}font-size:13px;color:${mute};padding-bottom:12px;border-bottom:2px solid ${ink};">${m.partner ? `From ${esc(m.partner)} \u00b7 ` : ''}Put it away tonight and it lasts days longer.</td></tr>
+    <tr><td style="${F}font-size:13px;color:${mute};padding-bottom:12px;border-bottom:2px solid ${ink};">${m.partner ? `From ${esc(m.partner)} \u00b7 ` : ''}Where each item goes, and how to store it tonight.</td></tr>
     <tr><td style="height:14px;"></td></tr>
     ${sum}${watch}
     <tr><td style="height:12px;"></td></tr>
@@ -412,12 +410,12 @@ function renderPlain(m) {
   if (!m.g.guide_items.length) return 'Add the produce in this week\u2019s box to see the guide.';
   const strip = (h) => h.replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').replace(/&#39;/g, "'").replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
   const out = [strip(title(m)).toUpperCase(), m.partner ? `From ${m.partner}` : '', ''];
-  if (m.krispItems.length) out.push(strip(krispSummary(m)).replace(' Look for the green notes below.', ' Items marked [+Krisp] are the ones it helps.'), '');
+  if (m.krispItems.length) out.push(strip(krispSummary(m)).replace(' Look for the green notes below.', ' They are marked [ethylene-sensitive] below.'), '');
   if (watchText(m)) out.push(strip(watchText(m)), '');
   for (const z of m.g.zones) {
     out.push(`${z.title.toUpperCase()}${z.krisp_note && z.zone_items.some((i) => i.krisp) ? ' (a Krisp goes here)' : ''}`);
     for (const i of z.zone_items) {
-      out.push(`- ${dn(i.name)}${i.amount ? ` (${i.amount.replace('×', 'x')})` : ''}${i.krisp ? ' [+Krisp]' : ''}: ${sent(i.shelf_how || i.how)}${i.then ? ' ' + i.then : ''}${i.boxAway ? ' ' + i.boxAway : ''}`);
+      out.push(`- ${dn(i.name)}${i.amount ? ` (${i.amount.replace('×', 'x')})` : ''}${i.krisp ? ' [ethylene-sensitive]' : ''}: ${sent(i.shelf_how || i.how)}${i.then ? ' ' + i.then : ''}${i.boxAway ? ' ' + i.boxAway : ''}`);
       if (i.krisp) out.push(`  ${strip(krispLine(i))}`);
     }
     out.push('');
