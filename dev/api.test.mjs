@@ -8,6 +8,7 @@ import * as F from './fixtures.mjs';
 import { buildImpact, parseWeightLb, itemImpact, rescueStats } from '../api/_crisper/impact.js';
 import { pilotFor, periodFor } from '../api/_crisper/pilot.js';
 import { tempView, rescueOptions } from '../api/_crisper/rescue.js';
+import { BY_NAME } from '../api/_crisper/shelf.js';
 
 const server = createServer();
 await new Promise((r) => server.listen(0, r));
@@ -73,16 +74,20 @@ test('confirmation is pending, then the final receipt replaces it', async () => 
   assert.equal(me.data.items.length, 8, 'duplicate receipt not double-counted');
 });
 
-test('items are sorted soonest first with Krisp credit on fridge items', async () => {
+test('items are sorted soonest first; a Krisp adds a note on drawer items, never days', async () => {
   const me = await api('/api/crisper/me', { key });
   const order = { check: 0, today: 1, soon: 2, week: 3, later: 4 };
   const ranks = me.data.items.map((i) => order[i.status] * 1000 + i.leftMin);
   assert.deepEqual(ranks, [...ranks].sort((a, b) => a - b), 'sorted soonest first');
   const broccoli = me.data.items.find((i) => i.name === 'Broccoli');
-  assert.deepEqual(broccoli.krispBoost, [2, 4]);
-  assert.equal(broccoli.label, '5–9 days left');
+  // No household test of the sachet, so owning one never changes the window.
+  assert.equal(broccoli.krispBoost, null);
+  assert.equal(broccoli.krispCould, null);
+  assert.equal(broccoli.krispActive, true);
+  assert.equal(broccoli.maxDays, BY_NAME.Broccoli.maxDays, 'Krisp adds no days');
+  assert.equal(broccoli.minDays, BY_NAME.Broccoli.minDays, 'Krisp adds no days');
   assert.equal(broccoli.krispTier, 'strong');
-  assert.match(broccoli.krispPrevents, /yellow/);
+  assert.match(broccoli.krispPrevents, /^Ethylene speeds .*yellow/);
   const banana = me.data.items.find((i) => i.name === 'Banana');
   assert.equal(banana.krispBoost, null, 'counter items get no Krisp credit');
   const herbs = me.data.items.find((i) => i.name === 'Cilantro');

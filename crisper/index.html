@@ -465,8 +465,6 @@ body.has-bnav main{padding-bottom:96px}
 .km-chip .d{width:7px;height:7px;border-radius:50%;flex:none;background:var(--ok)}
 .km-chip.s-today .d,.km-chip.s-check .d{background:var(--warn)}
 .km-chip.s-soon .d{background:var(--soon)}
-.km-chip .kd{font-size:10.5px;font-weight:700;color:#fff;background:var(--ok);border-radius:999px;padding:1px 6px;white-space:nowrap}
-.km-chip .kd.could{background:#fff;color:var(--ok);border:1px dashed var(--ok)}
 .km-none{font-size:12.5px;color:var(--muted-fg)}
 .km-legend{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;font-size:12px;color:var(--muted-fg);margin-top:8px}
 .km-legend i{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:4px;vertical-align:1px}
@@ -1343,7 +1341,7 @@ details.sd{display:block}
     var hasK = S.st.krisp && S.st.krisp.active;
     box.innerHTML = '<div class="banner small"><span class="ic" aria-hidden="true">⚠︎</span><div><b>Keep ' + esc(r.p.toLowerCase()) + ' apart.</b> It speeds up spoiling of ' +
       esc(r.v.slice(0, 2).join(' and ').toLowerCase()) + (r.v.length > 2 ? ' +' + (r.v.length - 2) : '') + '. Give it its own drawer or bag.' +
-      (hasK ? '' : ' <a class="link" target="_blank" rel="noopener" href="' + SHOP + 'conflict">How Krisp helps</a>') +
+      (hasK ? '' : ' <a class="link" target="_blank" rel="noopener" href="' + SHOP + 'conflict">How a Krisp works</a>') +
       '</div></div>';
     box.classList.remove('hide');
   }
@@ -1356,28 +1354,26 @@ details.sd{display:block}
     return '<p class="wst">Typically wasted: <b>' + pct + '%</b>' + (w.source === 'epa' ? ' (produce average)' : '') + ' · about <b>' + money(w.usd) + '</b> of this</p>';
   }
   function stem(x) { return String(x).toLowerCase().replace(/(oes|ies|es|s)$/, function (m) { return m === 'ies' ? 'y' : m === 'oes' ? 'o' : ''; }); }
-  // Krisp benefit on an item: a chip under the name and one plain line on what it
-  // prevents. Only for items a Krisp truly helps and that sit in a drawer.
+  // Krisp note on an item: an "Ethylene-sensitive" chip under the name and one
+  // plain line on what ethylene does to it. Only for ethylene-sensitive items in
+  // a drawer. No day counts or strength claims: there is no household test of
+  // the Krisp sachet (scripts/krisp-tiers.mjs).
+  var KRISP_HOW = 'ethylene in a closed crisper drawer, which matters most when apples, pears or bananas share the fridge.';
   function krispBits(i) {
     if (!i.krispTier) return { chip: '', line: '' };
-    var k = S.st && S.st.krisp || {};
-    var r = i.krispBoost || i.krispCould; var rng = r ? r[0] + '–' + r[1] + ' days' : '';
-    var on = !!i.krispBoost;
-    var chip = on ? '<span class="kchip">Krisp +' + rng + '</span>'
-      : '<span class="kchip could">' + (k.owned ? 'Fresh sachet: +' : 'A Krisp adds ') + rng + '</span>';
-    var lead = i.krispTier === 'strong' ? (on ? 'Your Krisp makes a real difference here.' : 'A Krisp makes a real difference here.') : (on ? 'Your Krisp helps a little here.' : 'A Krisp helps a little here.');
-    var line = '<p class="kben' + (on ? '' : ' could') + '"><b>' + lead + '</b> ' + esc(i.krispPrevents || '') + (i.krispWhen ? ' <span class="muted">(' + esc(i.krispWhen) + ')</span>' : '') + '</p>';
+    var on = !!i.krispActive;
+    var chip = '<span class="kchip' + (on ? '' : ' could') + '">Ethylene-sensitive</span>';
+    var line = '<p class="kben' + (on ? '' : ' could') + '">' + esc(i.krispPrevents || '') + ' ' + (on ? 'Your Krisp absorbs ' : 'A Krisp absorbs ') + KRISP_HOW +
+      (i.krispWhen ? ' <span class="muted">(' + esc(i.krispWhen) + ')</span>' : '') + '</p>';
     return { chip: '<div>' + chip + '</div>', line: line };
   }
 
   // Kitchen map: fridge (shelf + two drawers), counter and pantry. Chips jump to the item card.
   function kmChip(i) {
     var inDrawer = i.zone === 'high' || i.zone === 'low' || zoneOf(i) === 'high' || zoneOf(i) === 'low';
-    var r = inDrawer ? (i.krispBoost || i.krispCould) : null;
     var when = i.status === 'check' ? 'check it' : i.status === 'today' ? 'use today' : i.leftMax + ' days left';
     return '<button type="button" class="km-chip s-' + i.status + '" data-km="' + i.id + '" title="' + esc(i.name + ' · ' + when) + '">' +
       '<span class="d" aria-hidden="true"></span><img src="' + esc(i.imageUrl) + '" alt="" loading="lazy">' + esc(i.name) + (counted(i) ? '<span class="kq">×' + i.qty + '</span>' : '') +
-      (r ? '<span class="kd' + (i.krispBoost ? '' : ' could') + '">+' + r[0] + '–' + r[1] + ' days</span>' : '') +
       '<span class="sr-only">, ' + esc(when) + '</span></button>';
   }
   function kmZone(list, k, empty) {
@@ -1388,8 +1384,6 @@ details.sd{display:block}
     var k = S.st && S.st.krisp || {};
     var on = !!(k.active || k.owned);
     var sachet = '<span class="km-sachet' + (on ? '' : ' off') + '" title="' + (on ? 'Your Krisp sachet goes in this drawer' : 'A Krisp sachet would go in this drawer') + '"><span>K</span>' + (on ? 'Krisp' : 'No Krisp') + '</span>';
-    var anyK = list.some(function (i) { return (zoneOf(i) === 'high' || zoneOf(i) === 'low') && (i.krispBoost || i.krispCould); });
-    var anyCould = list.some(function (i) { return (zoneOf(i) === 'high' || zoneOf(i) === 'low') && !i.krispBoost && i.krispCould; });
     var eat = list.some(function (i) { return mapZone(i) === 'eat'; })
       ? '<div class="km-eat"><div class="km-zl">Eat First<small>Front of the top shelf, where you see them first</small></div>' + kmZone(list, 'eat', '') + '</div>' : '';
     return '<div class="km" role="group" aria-label="Where everything is">' + eat +
@@ -1403,8 +1397,7 @@ details.sd{display:block}
         '<div class="km-counter"><div class="km-zl">Counter<small>Room temp, out of the sun</small></div>' + kmZone(list, 'counter', 'Nothing on the counter') + '<div class="km-slab"></div></div>' +
         '<div class="km-pantry"><div class="km-knobs"><i></i><i></i></div><div class="km-zl">Pantry<small>Cool, dark cupboard</small></div>' + kmZone(list, 'pantry', 'Nothing in the pantry') + '</div>' +
       '</div></div>' +
-      '<div class="km-legend"><span><i style="background:var(--warn)"></i>Use today</span><span><i style="background:var(--soon)"></i>Next 2 days</span><span><i style="background:var(--ok)"></i>Later</span>' +
-      (anyK ? '<span>+ days: ' + (on ? 'extra days from your Krisp' : 'extra days a Krisp would add') + (on && anyCould ? ' (dashed: with a fresh sachet)' : '') + '</span>' : '') + '</div>';
+      '<div class="km-legend"><span><i style="background:var(--warn)"></i>Use today</span><span><i style="background:var(--soon)"></i>Next 2 days</span><span><i style="background:var(--ok)"></i>Later</span></div>';
   }
 
   // Multi-count items: "How many did you eat?" 1, 2, 3 ... All.
@@ -1426,8 +1419,8 @@ details.sd{display:block}
     var eth = (i.ethyleneProduction === 'high' || i.ethyleneProduction === 'very_high');
     var store = tip || i.storage === 'counter_then_fridge' ? '<p class="sto1">' + (i.storage === 'counter_then_fridge' ? '<b>Counter until ripe, then fridge.</b> ' : '') + esc(tip || '') + '</p>' : '';
     var detail = (avoid.length ? '<p class="sta"><b>Keep away from</b> ' + esc(avoid.join(', ')) + (eth ? ' (it gives off ethylene)' : '') + '</p>' : eth ? '<p class="sta">Gives off ethylene. Keep it away from greens.</p>' : '') +
-      (i.krispTier && i.krispEvidence ? '<p class="sta"><b>Krisp estimate:</b> ' + esc(i.krispEvidence) + '</p>' : '') +
-      (!i.krispTier && i.krispNoBenefit ? '<p class="sta"><b>Why no Krisp boost:</b> ' + esc(i.krispNoBenefit) + '</p>' : '') +
+      (i.krispTier && i.krispEvidence ? '<p class="sta"><b>Ethylene evidence:</b> ' + esc(i.krispEvidence) + '</p>' : '') +
+      (!i.krispTier && i.krispNoBenefit ? '<p class="sta"><b>Why no Krisp note:</b> ' + esc(i.krispNoBenefit) + '</p>' : '') +
       wasteLine(i);
     var kb = krispBits(i);
     var tags = '';
@@ -1496,8 +1489,9 @@ details.sd{display:block}
     (feat('eatFirst') ? [EAT_ZONE] : []).concat(ZONES).forEach(function (z) {
       var list = filtered.filter(function (i) { return mapZone(i) === z.k; }).sort(function (a, b) { return a.leftMax - b.leftMax; });
       if (!list.length) return;
-      var kOn = list.filter(function (i) { return i.krispBoost; }).length, kCould = list.filter(function (i) { return i.krispCould; }).length;
-      var kLine = (z.k === 'high' || z.k === 'low') ? (kOn ? ' <span class="gk">Your Krisp is working on ' + (kOn === list.length ? (list.length === 1 ? 'this one' : 'all ' + list.length) : kOn + ' of these') + '.</span>' : kCould ? ' <span class="muted">A Krisp would help ' + (kCould === list.length ? (list.length === 1 ? 'this one' : 'all ' + list.length) : kCould + ' of these') + '.</span>' : '') : '';
+      var kN = list.filter(function (i) { return i.krispTier; }).length, kAct = list.some(function (i) { return i.krispActive; });
+      var kWho = kN === list.length ? (list.length === 1 ? 'This one reacts' : 'All ' + list.length + ' react') : kN + ' of these react';
+      var kLine = (z.k === 'high' || z.k === 'low') && kN ? ' <span class="' + (kAct ? 'gk' : 'muted') + '">' + kWho + ' to ethylene' + (kAct ? ', and your Krisp is in this drawer' : '') + '.</span>' : '';
       html += '<div class="grp zgrp z-' + z.k + '"><h3><span class="zi" aria-hidden="true">' + ZONE_IC[z.k] + '</span>' + z.t + ' <span class="pill">' + list.length + '</span></h3><p class="gsub">' + z.sub + kLine + '</p>' +
         '<div class="items">' + list.map(function (i) { return itemCard(i, false); }).join('') + '</div></div>';
     });
@@ -1616,11 +1610,10 @@ details.sd{display:block}
 
   function renderKrisp(st) {
     var k = st.krisp, shop = st.shop || {}, box = el('krispCard');
-    // Strongest benefit first; drawer items only (ripening fruit is on the counter).
+    // Most ethylene-sensitive first; drawer items only (ripening fruit is on the counter).
     var inDrawer = function (i) { return i.zone === 'high' || i.zone === 'low'; };
     var byTier = function (a, b) { return (a.krispTier === 'strong' ? 0 : 1) - (b.krispTier === 'strong' ? 0 : 1) || a.leftMax - b.leftMax; };
-    var helped = st.items.filter(function (i) { return i.krispBoost && inDrawer(i); }).sort(byTier);
-    var could = st.items.filter(function (i) { return i.krispCould && inDrawer(i); }).sort(byTier);
+    var sens = st.items.filter(function (i) { return i.krispTier && inDrawer(i); }).sort(byTier);
     var nameList = function (list) { return list.slice(0, 4).map(function (i) { return esc(i.name); }).join(', ') + (list.length > 4 ? ' +' + (list.length - 4) + ' more' : ''); };
 
     if (!k.owned) {
@@ -1629,10 +1622,9 @@ details.sd{display:block}
         el('kOn').addEventListener('click', function () { saveSettings({ hasKrisp: true }, 'Krisp on'); });
         return;
       }
-      if (!could.length) { box.innerHTML = ''; return; }
-      var hi = 0; could.forEach(function (i) { hi = Math.max(hi, i.krispCould[1]); });
+      if (!sens.length) { box.innerHTML = ''; return; }
       box.innerHTML = '<div class="kc none"><div style="flex:1"><h2>No Krisp in your drawers</h2>' +
-        '<p class="kl">A Double Krisp would add up to ' + hi + ' days to ' + plural(could.length, 'item') + ' you have now: ' + nameList(could) + '.</p>' +
+        '<p class="kl">' + plural(sens.length, 'item') + ' you have now ' + (sens.length === 1 ? 'reacts' : 'react') + ' to ethylene: ' + nameList(sens) + '. A Krisp absorbs ethylene in a closed drawer.</p>' +
         '<div class="row" style="margin-top:10px"><a class="btn sm" target="_blank" rel="noopener" href="' + DK_URL + 'krisper-card">See the Double Krisp</a><button class="btn ghost sm" type="button" id="kHave">I already have one</button></div></div></div>';
       el('kHave').addEventListener('click', function () { saveSettings({ hasKrisp: true }, 'Krisp on'); });
       return;
@@ -1659,11 +1651,10 @@ details.sd{display:block}
     var sachet = due == null ? 'When did you put the current sachet in? We\'ll remind you when it\'s time.'
       : due > 3 ? 'Sachet changed ' + plural(age, 'day') + ' ago. About ' + plural(due, 'day') + ' left.'
       : due >= 0 ? 'Time for a fresh sachet ' + (due === 0 ? 'today' : 'in ' + plural(due, 'day')) + '.'
-      : 'Your sachet is ' + plural(-due, 'day') + ' past its 30 days.' + (k.active ? '' : ' Krisp days are off on your items until you swap it.');
+      : 'Your sachet is ' + plural(-due, 'day') + ' past its 30 days.';
 
-    var working = helped.length ? 'Working on ' + plural(helped.length, 'item') + ' in your drawers: ' + nameList(helped) + '.'
-      : could.length ? 'A fresh sachet would help ' + plural(could.length, 'item') + ': ' + nameList(could) + '.'
-      : 'Nothing in your drawers right now that a Krisp helps much. It does the most for greens, broccoli, cucumbers and carrots.';
+    var working = sens.length ? plural(sens.length, 'item') + ' in your drawers ' + (sens.length === 1 ? 'reacts' : 'react') + ' to ethylene: ' + nameList(sens) + '. ' + (k.active ? 'Your Krisp absorbs ethylene in a closed drawer.' : 'A fresh sachet absorbs ethylene in a closed drawer.')
+      : 'Nothing in your drawers right now reacts much to ethylene. Greens, broccoli, cucumbers and carrots react the most.';
 
     var waiting = shop.newPairWaiting ? '<div class="knew"><span>A fresh pair shipped ' + shortDate(shop.lastRefillOn) + '. Swapped it in?</span><button class="btn ghost sm" type="button" id="kNew">Yes, put it in</button></div>' : '';
     var needRefill = due != null && due <= 5 && !(sub && sub.status === 'active');

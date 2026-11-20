@@ -33,16 +33,18 @@ test('storage guide lists each item with where/how, shortest-lived first', () =>
   assert.ok(g.guide_items.every((i) => i.how && i.lasts && i.typically_wasted_pct > 0));
   assert.ok(Number(g.at_risk_usd) > 0);
   const lettuce = g.guide_items.find((i) => i.name === 'Lettuce');
-  assert.match(lettuce.krisp, /Your Krisp adds/);
+  assert.match(lettuce.krisp, /^Ethylene speeds .* Your Krisp absorbs ethylene in a closed crisper drawer/);
+  assert.doesNotMatch(lettuce.krisp, /\d/, 'no Krisp day counts');
   // Grouped like the Crisper Drawer Map.
   assert.deepEqual(g.zones.map((z) => z.key), ['high', 'low', 'counter']);
   assert.equal(g.zones[0].names, 'Lettuce');
   assert.equal(g.zones[1].zone_items[0].name, 'Apple');
   assert.match(g.zones[0].krisp_note, /Your Krisp/);
-  // Kitchen map: all five spots, drawer items carry the Krisp badge.
+  // Kitchen map: all five spots, ethylene-sensitive drawer items carry the badge
+  // (prop name kept for the Klaviyo template; it no longer holds a day count).
   assert.deepEqual(Object.keys(g.kitchen), ['high', 'low', 'shelf', 'counter', 'pantry']);
   assert.deepEqual(g.kitchen.shelf, []);
-  assert.match(g.kitchen.high[0].krisp_days, /^\+\d+–\d+ days$/);
+  assert.equal(g.kitchen.high[0].krisp_days, 'Ethylene-sensitive');
   assert.equal(g.kitchen.counter[0].krisp_days, '');
   const z = storageGuide([{ name: 'Peach' }, { name: 'Strawberry' }, { name: 'Onion' }, { name: 'Watermelon' }]).zones;
   assert.deepEqual(z.map((x) => x.key), ['shelf', 'counter', 'pantry']);

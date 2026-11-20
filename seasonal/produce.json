@@ -44,7 +44,7 @@
       "Store cut avocado with the pit in, sprinkled with lemon juice, wrapped tightly"
     ],
     "krispRecommended": true,
-    "krispBenefit": "A Krisp helps a little here. Once ripe and chilled, slows it going from ripe to overripe. Expect about 2–3 extra days once it is ripe and in a closed crisper drawer.",
+    "krispBenefit": "Ethylene speeds a ripe avocado going overripe. A Krisp absorbs ethylene in a closed crisper drawer, which matters most when apples, pears or bananas share the fridge.",
     "ripeTip": "Gently squeeze — a ripe avocado yields to firm pressure without being mushy. The skin darkens when ripe.",
     "avoidWith": [
       "Bananas",
@@ -201,7 +201,7 @@
       "Place near apples or bananas to speed ripening"
     ],
     "krispRecommended": true,
-    "krispBenefit": "A Krisp makes a real difference here. Ripe kiwi turns mushy fast around ethylene. This slows the softening. Expect about 2–4 extra days once it is ripe and in a closed crisper drawer.",
+    "krispBenefit": "Ethylene speeds ripe kiwi turning mushy. A Krisp absorbs ethylene in a closed crisper drawer, which matters most when apples, pears or bananas share the fridge.",
     "ripeTip": "A ripe kiwi yields to gentle pressure, similar to a ripe pear.",
     "avoidWith": [
       "Apples",
@@ -286,7 +286,7 @@
     "extraDays": 0,
     "imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f96d.png",
     "evidence": "related",
-    "noBenefitReason": "Mangoes ripen on the counter, and once ripe they have only a day or two. A Krisp adds little."
+    "noBenefitReason": "Mangoes ripen on the counter, and once ripe they have only a day or two, so they rarely share a drawer with a Krisp."
   },
   {
     "name": "Orange",
@@ -340,7 +340,7 @@
     "extraDays": 0,
     "imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f351.png",
     "evidence": "estimated",
-    "noBenefitReason": "Peaches ripen on the counter, and once ripe they have only a day or two. A Krisp adds little."
+    "noBenefitReason": "Peaches ripen on the counter, and once ripe they have only a day or two, so they rarely share a drawer with a Krisp."
   },
   {
     "name": "Pear",
@@ -358,7 +358,7 @@
       "Keep away from strong-smelling foods"
     ],
     "krispRecommended": true,
-    "krispBenefit": "A Krisp helps a little here. Once ripe and chilled, slows it going soft and mealy. Expect about 1–2 extra days once it is ripe and in a closed crisper drawer.",
+    "krispBenefit": "Ethylene speeds a ripe pear going soft and mealy. A Krisp absorbs ethylene in a closed crisper drawer, which matters most when apples, pears or bananas share the fridge.",
     "ripeTip": "Press gently near the stem. If it yields, it's ripe. Pears ripen from the inside out, so don't wait until they feel soft all over.",
     "avoidWith": [
       "Apples",
@@ -470,7 +470,7 @@
     "extraDays": 0,
     "imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f345.png",
     "evidence": "related",
-    "noBenefitReason": "Tomatoes keep their flavor best on the counter, out of reach of a Krisp in the drawer. If you move ripe ones into the fridge to hold them a couple more days, a Krisp in that drawer helps a little."
+    "noBenefitReason": "Tomatoes keep their flavor best on the counter, out of reach of a Krisp in the drawer. Ripe ones can move to the fridge for a day or two."
   },
   {
     "name": "Watermelon",
@@ -553,7 +553,7 @@
     "extraDays": 0,
     "imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f96d.png",
     "evidence": "related",
-    "noBenefitReason": "Papayas ripen on the counter, and once ripe they have only a day or two. A Krisp adds little."
+    "noBenefitReason": "Papayas ripen on the counter, and once ripe they have only a day or two, so they rarely share a drawer with a Krisp."
   },
   {
     "name": "Pomegranate",
@@ -595,7 +595,7 @@
       "Use as soon as possible for best flavor"
     ],
     "krispRecommended": true,
-    "krispBenefit": "A Krisp helps a little here. Slows the spears turning tough and woody. Expect about 1–2 extra days in a closed crisper drawer.",
+    "krispBenefit": "Ethylene speeds the spears turning tough and woody. A Krisp absorbs ethylene in a closed crisper drawer, which matters most when apples, pears or bananas share the fridge.",
     "ripeTip": "Choose firm, bright green stalks with tight, compact tips.",
     "avoidWith": [
       "Apples",
@@ -647,7 +647,7 @@
       "Use within a few days for best nutrition and flavor"
     ],
     "krispRecommended": true,
-    "krispBenefit": "A Krisp makes a real difference here. Keeps the florets green instead of yellowing. Expect about 2–4 extra days in a closed crisper drawer.",
+    "krispBenefit": "Ethylene speeds the florets yellowing. A Krisp absorbs ethylene in a closed crisper drawer, which matters most when apples, pears or bananas share the fridge.",
     "ripeTip": "Tight, dark green florets with firm stems. Avoid any yellowing.",
     "avoidWith": [
       "Apples",
@@ -676,7 +676,7 @@
       "Remove any yellowed outer leaves before storing"
     ],
     "krispRecommended": true,
-    "krispBenefit": "A Krisp makes a real difference here. Keeps the outer leaves from yellowing. Expect about 2–3 extra days in a closed crisper drawer.",
+    "krispBenefit": "Ethylene speeds the outer leaves yellowing. A Krisp absorbs ethylene in a closed crisper drawer, which matters most when apples, pears or bananas share the fridge.",
     "ripeTip": "Tight, compact heads that are bright green with no yellowing.",
     "avoidWith": [
       "Apples",
@@ -704,7 +704,7 @@
       "Outer leaves may wilt but protect the inner head"
     ],
     "krispRecommended": true,
-    "krispBenefit": "A Krisp makes a real difference here. Slows outer leaves yellowing and loosening from the head. Expect about 2–4 extra days in a closed crisper drawer.",
+    "krispBenefit": "Ethylene speeds the outer leaves yellowing and loosening from the head. A Krisp absorbs ethylene in a closed crisper drawer, which matters most when apples, pears or bananas share the fridge.",
     "ripeTip": "Choose heads that feel heavy and compact with crisp, tightly packed leaves.",
     "avoidWith": [
       "Apples",
@@ -732,7 +732,7 @@
       "Keep away from ethylene-producing fruits to prevent bitterness"
     ],
     "krispRecommended": true,
-    "krispBenefit": "A Krisp makes a real difference here. Helps keep carrots from picking up a bitter taste from ethylene. Expect about 2–3 extra days in a closed crisper drawer.",
+    "krispBenefit": "Ethylene can give carrots a bitter taste. A Krisp absorbs ethylene in a closed crisper drawer, which matters most when apples, pears or bananas share the fridge.",
     "ripeTip": "Firm, smooth, and bright orange. Avoid carrots that bend or have cracks.",
     "avoidWith": [
       "Apples"
@@ -758,7 +758,7 @@
       "Brown spots can be trimmed — the rest is still good"
     ],
     "krispRecommended": true,
-    "krispBenefit": "A Krisp makes a real difference here. Slows browning on the head and yellowing leaves. Expect about 2–3 extra days in a closed crisper drawer.",
+    "krispBenefit": "Ethylene speeds browning on the head and yellowing leaves. A Krisp absorbs ethylene in a closed crisper drawer, which matters most when apples, pears or bananas share the fridge.",
     "ripeTip": "Compact, creamy white heads with no dark spots. Leaves should be green and fresh.",
     "avoidWith": [
       "Apples",
@@ -837,7 +837,7 @@
       "Keep away from ethylene-producing fruits"
     ],
     "krispRecommended": true,
-    "krispBenefit": "A Krisp makes a real difference here. Slows yellowing and soft, watery spots. Expect about 2–3 extra days in a closed crisper drawer.",
+    "krispBenefit": "Ethylene speeds yellowing and soft, watery spots. A Krisp absorbs ethylene in a closed crisper drawer, which matters most when apples, pears or bananas share the fridge.",
     "ripeTip": "Firm, dark green, and medium-sized. Avoid soft spots or yellowing.",
     "avoidWith": [
       "Apples",
@@ -866,7 +866,7 @@
       "Do not cut until ready to cook to prevent browning"
     ],
     "krispRecommended": true,
-    "krispBenefit": "A Krisp helps a little here. Slows browning at the cap and softening. Expect about 1–2 extra days in a closed crisper drawer.",
+    "krispBenefit": "Ethylene speeds browning at the cap and softening. A Krisp absorbs ethylene in a closed crisper drawer, which matters most when apples, pears or bananas share the fridge.",
     "ripeTip": "Firm with smooth, glossy, deep purple skin. Should feel heavy for its size.",
     "avoidWith": null,
     "extraDays": 1,
@@ -914,7 +914,7 @@
       "Blanch and freeze for long-term storage"
     ],
     "krispRecommended": true,
-    "krispBenefit": "A Krisp helps a little here. Slows yellowing and browning. Expect about 2–3 extra days in a closed crisper drawer.",
+    "krispBenefit": "Ethylene speeds yellowing and browning. A Krisp absorbs ethylene in a closed crisper drawer, which matters most when apples, pears or bananas share the fridge.",
     "ripeTip": "Firm, bright green, and snap cleanly when bent. Avoid limp or spotted beans.",
     "avoidWith": [
       "Apples",
@@ -941,7 +941,7 @@
       "Can be blanched and frozen for months"
     ],
     "krispRecommended": true,
-    "krispBenefit": "A Krisp makes a real difference here. Slows the leaves yellowing. Expect about 2–3 extra days in a closed crisper drawer.",
+    "krispBenefit": "Ethylene speeds the leaves yellowing. A Krisp absorbs ethylene in a closed crisper drawer, which matters most when apples, pears or bananas share the fridge.",
     "ripeTip": "Dark green, firm leaves with no yellowing or wilting. Smaller leaves are more tender.",
     "avoidWith": [
       "Apples",
@@ -968,7 +968,7 @@
       "Never store near apples, pears, or bananas"
     ],
     "krispRecommended": true,
-    "krispBenefit": "A Krisp makes a real difference here. Slows russet spotting, the brown specks on romaine and leaf lettuce. Expect about 2–4 extra days in a closed crisper drawer.",
+    "krispBenefit": "Ethylene speeds russet spotting, the brown specks on romaine and leaf lettuce. A Krisp absorbs ethylene in a closed crisper drawer, which matters most when apples, pears or bananas share the fridge.",
     "ripeTip": "Crisp, vibrant leaves with no browning or slimy spots.",
     "avoidWith": [
       "Apples",
@@ -1048,7 +1048,7 @@
       "Blanch and freeze for long-term storage"
     ],
     "krispRecommended": true,
-    "krispBenefit": "A Krisp helps a little here. Slows the pods yellowing. Expect about 1–2 extra days in a closed crisper drawer.",
+    "krispBenefit": "Ethylene speeds the pods yellowing. A Krisp absorbs ethylene in a closed crisper drawer, which matters most when apples, pears or bananas share the fridge.",
     "ripeTip": "Bright green, plump pods that are firm to the touch.",
     "avoidWith": [
       "Apples",
@@ -1102,7 +1102,7 @@
       "Keep away from ethylene-producing fruits"
     ],
     "krispRecommended": true,
-    "krispBenefit": "A Krisp makes a real difference here. Slows the leaves yellowing. Expect about 2–3 extra days in a closed crisper drawer.",
+    "krispBenefit": "Ethylene speeds the leaves yellowing. A Krisp absorbs ethylene in a closed crisper drawer, which matters most when apples, pears or bananas share the fridge.",
     "ripeTip": "Bright, deep green leaves that are crisp and dry with no slimy or yellow patches.",
     "avoidWith": [
       "Apples",
@@ -1155,7 +1155,7 @@
       "Can be stored at cool room temperature for a few days"
     ],
     "krispRecommended": true,
-    "krispBenefit": "A Krisp helps a little here. Slows yellowing and soft spots. Expect about 1–2 extra days in a closed crisper drawer.",
+    "krispBenefit": "Ethylene speeds yellowing and soft spots. A Krisp absorbs ethylene in a closed crisper drawer, which matters most when apples, pears or bananas share the fridge.",
     "ripeTip": "Small to medium-sized with firm, glossy, dark green skin.",
     "avoidWith": [
       "Apples",
@@ -1193,7 +1193,7 @@
     "extraDays": 0,
     "imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f33f.png",
     "evidence": "measured",
-    "noBenefitReason": "In a jar on the shelf, herbs are out of the Krisp's reach. Bagged in the high-humidity drawer instead, the Krisp helps keep them from yellowing."
+    "noBenefitReason": "In a jar on the shelf, herbs are out of the Krisp's reach. Bagged in the high-humidity drawer instead, they share the drawer with the Krisp, which absorbs ethylene there."
   },
   {
     "name": "Radish",
@@ -1518,7 +1518,7 @@
     "extraDays": 0,
     "imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3MiA3MiI+PHBhdGggZD0iTTM2IDY4IEwzNiAzNiBNMzYgNTQgUTI4IDQ2IDIwIDM4IE0zNiA1NCBRNDQgNDYgNTIgMzgiIHN0cm9rZT0iIzdCQUI1NiIgc3Ryb2tlLXdpZHRoPSIyLjYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgZmlsbD0ibm9uZSIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDM2IDI0KSI+PGVsbGlwc2UgY3g9Ii04IiBjeT0iMiIgcng9IjciIHJ5PSI4IiBmaWxsPSIjNUI4QzRBIiB0cmFuc2Zvcm09InJvdGF0ZSgtMzUgLTggMikiLz48ZWxsaXBzZSBjeD0iOCIgY3k9IjIiIHJ4PSI3IiByeT0iOCIgZmlsbD0iIzVCOEM0QSIgdHJhbnNmb3JtPSJyb3RhdGUoMzUgOCAyKSIvPjxlbGxpcHNlIGN4PSIwIiBjeT0iLTUiIHJ4PSI3LjUiIHJ5PSI5IiBmaWxsPSIjNUI4QzRBIi8+PHBhdGggZD0iTTAgMTIgTDAgLTggTTAgOCBMLTggMCBNMCA4IEw4IDAiIHN0cm9rZT0iI0NGRTZBRSIgc3Ryb2tlLXdpZHRoPSIxLjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgZmlsbD0ibm9uZSIvPjwvZz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxOCAzMCkiPjxlbGxpcHNlIGN4PSItOCIgY3k9IjIiIHJ4PSI3IiByeT0iOCIgZmlsbD0iIzdCQUI1NiIgdHJhbnNmb3JtPSJyb3RhdGUoLTM1IC04IDIpIi8+PGVsbGlwc2UgY3g9IjgiIGN5PSIyIiByeD0iNyIgcnk9IjgiIGZpbGw9IiM3QkFCNTYiIHRyYW5zZm9ybT0icm90YXRlKDM1IDggMikiLz48ZWxsaXBzZSBjeD0iMCIgY3k9Ii01IiByeD0iNy41IiByeT0iOSIgZmlsbD0iIzdCQUI1NiIvPjxwYXRoIGQ9Ik0wIDEyIEwwIC04IE0wIDggTC04IDAgTTAgOCBMOCAwIiBzdHJva2U9IiNDRkU2QUUiIHN0cm9rZS13aWR0aD0iMS4yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIGZpbGw9Im5vbmUiLz48L2c+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNTQgMzApIj48ZWxsaXBzZSBjeD0iLTgiIGN5PSIyIiByeD0iNyIgcnk9IjgiIGZpbGw9IiM3QkFCNTYiIHRyYW5zZm9ybT0icm90YXRlKC0zNSAtOCAyKSIvPjxlbGxpcHNlIGN4PSI4IiBjeT0iMiIgcng9IjciIHJ5PSI4IiBmaWxsPSIjN0JBQjU2IiB0cmFuc2Zvcm09InJvdGF0ZSgzNSA4IDIpIi8+PGVsbGlwc2UgY3g9IjAiIGN5PSItNSIgcng9IjcuNSIgcnk9IjkiIGZpbGw9IiM3QkFCNTYiLz48cGF0aCBkPSJNMCAxMiBMMCAtOCBNMCA4IEwtOCAwIE0wIDggTDggMCIgc3Ryb2tlPSIjQ0ZFNkFFIiBzdHJva2Utd2lkdGg9IjEuMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBmaWxsPSJub25lIi8+PC9nPjwvc3ZnPg==",
     "evidence": "estimated",
-    "noBenefitReason": "In a jar on the shelf, cilantro is out of the Krisp's reach. Bagged in the high-humidity drawer instead, the Krisp helps keep it from yellowing."
+    "noBenefitReason": "In a jar on the shelf, cilantro is out of the Krisp's reach. Bagged in the high-humidity drawer instead, it shares the drawer with the Krisp, which absorbs ethylene there."
   },
   {
     "name": "Parsley",
@@ -1546,7 +1546,7 @@
     "extraDays": 0,
     "imageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3MiA3MiI+PHBhdGggZD0iTTM2IDY4IEwzNiAzNCBNMzYgNTYgUTI3IDQ4IDIwIDQwIE0zNiA1NiBRNDUgNDggNTIgNDAiIHN0cm9rZT0iIzVCOEM0QSIgc3Ryb2tlLXdpZHRoPSIyLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgZmlsbD0ibm9uZSIvPjxjaXJjbGUgY3g9IjQzLjkiIGN5PSIyMiIgcj0iNC45NSIgZmlsbD0iIzNBNkIzNCIvPjxjaXJjbGUgY3g9IjQxLjYiIGN5PSIyNy42IiByPSI0Ljk1IiBmaWxsPSIjM0E2QjM0Ii8+PGNpcmNsZSBjeD0iMzYiIGN5PSIyOS45IiByPSI0Ljk1IiBmaWxsPSIjM0E2QjM0Ii8+PGNpcmNsZSBjeD0iMzAuNCIgY3k9IjI3LjYiIHI9IjQuOTUiIGZpbGw9IiMzQTZCMzQiLz48Y2lyY2xlIGN4PSIyOC4xIiBjeT0iMjIiIHI9IjQuOTUiIGZpbGw9IiMzQTZCMzQiLz48Y2lyY2xlIGN4PSIzMC40IiBjeT0iMTYuNCIgcj0iNC45NSIgZmlsbD0iIzNBNkIzNCIvPjxjaXJjbGUgY3g9IjM2IiBjeT0iMTQuMSIgcj0iNC45NSIgZmlsbD0iIzNBNkIzNCIvPjxjaXJjbGUgY3g9IjQxLjYiIGN5PSIxNi40IiByPSI0Ljk1IiBmaWxsPSIjM0E2QjM0Ii8+PGNpcmNsZSBjeD0iMzYiIGN5PSIyMiIgcj0iNy43IiBmaWxsPSIjM0E2QjM0Ii8+PGNpcmNsZSBjeD0iMzkuMyIgY3k9IjIyIiByPSIxLjMiIGZpbGw9IiM2RkEzNUEiLz48Y2lyY2xlIGN4PSIzNiIgY3k9IjI1LjMiIHI9IjEuMyIgZmlsbD0iIzZGQTM1QSIvPjxjaXJjbGUgY3g9IjMyLjciIGN5PSIyMiIgcj0iMS4zIiBmaWxsPSIjNkZBMzVBIi8+PGNpcmNsZSBjeD0iMzYiIGN5PSIxOC43IiByPSIxLjMiIGZpbGw9IiM2RkEzNUEiLz48Y2lyY2xlIGN4PSIyNS44IiBjeT0iMzEiIHI9IjQuMjc1IiBmaWxsPSIjNEE3QzNGIi8+PGNpcmNsZSBjeD0iMjMuOCIgY3k9IjM1LjgiIHI9IjQuMjc1IiBmaWxsPSIjNEE3QzNGIi8+PGNpcmNsZSBjeD0iMTkiIGN5PSIzNy44IiByPSI0LjI3NSIgZmlsbD0iIzRBN0MzRiIvPjxjaXJjbGUgY3g9IjE0LjIiIGN5PSIzNS44IiByPSI0LjI3NSIgZmlsbD0iIzRBN0MzRiIvPjxjaXJjbGUgY3g9IjEyLjIiIGN5PSIzMSIgcj0iNC4yNzUiIGZpbGw9IiM0QTdDM0YiLz48Y2lyY2xlIGN4PSIxNC4yIiBjeT0iMjYuMiIgcj0iNC4yNzUiIGZpbGw9IiM0QTdDM0YiLz48Y2lyY2xlIGN4PSIxOSIgY3k9IjI0LjIiIHI9IjQuMjc1IiBmaWxsPSIjNEE3QzNGIi8+PGNpcmNsZSBjeD0iMjMuOCIgY3k9IjI2LjIiIHI9IjQuMjc1IiBmaWxsPSIjNEE3QzNGIi8+PGNpcmNsZSBjeD0iMTkiIGN5PSIzMSIgcj0iNi43IiBmaWxsPSIjNEE3QzNGIi8+PGNpcmNsZSBjeD0iMjEuOSIgY3k9IjMxIiByPSIxLjMiIGZpbGw9IiM2RkEzNUEiLz48Y2lyY2xlIGN4PSIxOSIgY3k9IjMzLjkiIHI9IjEuMyIgZmlsbD0iIzZGQTM1QSIvPjxjaXJjbGUgY3g9IjE2LjIiIGN5PSIzMSIgcj0iMS4zIiBmaWxsPSIjNkZBMzVBIi8+PGNpcmNsZSBjeD0iMTkiIGN5PSIyOC4yIiByPSIxLjMiIGZpbGw9IiM2RkEzNUEiLz48Y2lyY2xlIGN4PSI1OS44IiBjeT0iMzEiIHI9IjQuMjc1IiBmaWxsPSIjNEE3QzNGIi8+PGNpcmNsZSBjeD0iNTcuOCIgY3k9IjM1LjgiIHI9IjQuMjc1IiBmaWxsPSIjNEE3QzNGIi8+PGNpcmNsZSBjeD0iNTMiIGN5PSIzNy44IiByPSI0LjI3NSIgZmlsbD0iIzRBN0MzRiIvPjxjaXJjbGUgY3g9IjQ4LjIiIGN5PSIzNS44IiByPSI0LjI3NSIgZmlsbD0iIzRBN0MzRiIvPjxjaXJjbGUgY3g9IjQ2LjIiIGN5PSIzMSIgcj0iNC4yNzUiIGZpbGw9IiM0QTdDM0YiLz48Y2lyY2xlIGN4PSI0OC4yIiBjeT0iMjYuMiIgcj0iNC4yNzUiIGZpbGw9IiM0QTdDM0YiLz48Y2lyY2xlIGN4PSI1MyIgY3k9IjI0LjIiIHI9IjQuMjc1IiBmaWxsPSIjNEE3QzNGIi8+PGNpcmNsZSBjeD0iNTcuOCIgY3k9IjI2LjIiIHI9IjQuMjc1IiBmaWxsPSIjNEE3QzNGIi8+PGNpcmNsZSBjeD0iNTMiIGN5PSIzMSIgcj0iNi43IiBmaWxsPSIjNEE3QzNGIi8+PGNpcmNsZSBjeD0iNTUuOSIgY3k9IjMxIiByPSIxLjMiIGZpbGw9IiM2RkEzNUEiLz48Y2lyY2xlIGN4PSI1MyIgY3k9IjMzLjkiIHI9IjEuMyIgZmlsbD0iIzZGQTM1QSIvPjxjaXJjbGUgY3g9IjUwLjIiIGN5PSIzMSIgcj0iMS4zIiBmaWxsPSIjNkZBMzVBIi8+PGNpcmNsZSBjeD0iNTMiIGN5PSIyOC4yIiByPSIxLjMiIGZpbGw9IiM2RkEzNUEiLz48L3N2Zz4=",
     "evidence": "estimated",
-    "noBenefitReason": "In a jar on the shelf, parsley is out of the Krisp's reach. Bagged in the high-humidity drawer instead, the Krisp helps keep it from yellowing."
+    "noBenefitReason": "In a jar on the shelf, parsley is out of the Krisp's reach. Bagged in the high-humidity drawer instead, it shares the drawer with the Krisp, which absorbs ethylene there."
   },
   {
     "name": "Basil",
@@ -1615,7 +1615,7 @@
       "Wash between the stalks just before cooking, where grit hides"
     ],
     "krispRecommended": true,
-    "krispBenefit": "A Krisp helps a little here. Slows the leaves yellowing. Expect about 1–2 extra days in a closed crisper drawer.",
+    "krispBenefit": "Ethylene speeds the leaves yellowing. A Krisp absorbs ethylene in a closed crisper drawer, which matters most when apples, pears or bananas share the fridge.",
     "ripeTip": "Firm, white or pale green stalks and dark leaves with no yellowing, holes or brown spots.",
     "avoidWith": [
       "Apples",
@@ -1643,7 +1643,7 @@
       "Blanch and freeze what you will not cook this week"
     ],
     "krispRecommended": true,
-    "krispBenefit": "A Krisp helps a little here. Slows the leaves yellowing. Expect about 1–2 extra days in a closed crisper drawer.",
+    "krispBenefit": "Ethylene speeds the leaves yellowing. A Krisp absorbs ethylene in a closed crisper drawer, which matters most when apples, pears or bananas share the fridge.",
     "ripeTip": "Dark green, firm leaves with no yellow edges or slimy spots. Smaller leaves are more tender.",
     "avoidWith": [
       "Apples",
@@ -1671,7 +1671,7 @@
       "Cook the stems a few minutes before the leaves. They take longer"
     ],
     "krispRecommended": true,
-    "krispBenefit": "A Krisp helps a little here. Slows the leaves yellowing and browning at the edges. Expect about 1–2 extra days in a closed crisper drawer.",
+    "krispBenefit": "Ethylene speeds the leaves yellowing and browning at the edges. A Krisp absorbs ethylene in a closed crisper drawer, which matters most when apples, pears or bananas share the fridge.",
     "ripeTip": "Glossy, crisp leaves and firm, brightly colored stems. Skip bunches with yellow or brown edges.",
     "avoidWith": [
       "Apples",
@@ -1699,7 +1699,7 @@
       "Pick out yellow or slimy leaves so they do not spoil the rest"
     ],
     "krispRecommended": true,
-    "krispBenefit": "A Krisp helps a little here. Slows the leaves yellowing. Expect about 1–2 extra days in a closed crisper drawer.",
+    "krispBenefit": "Ethylene speeds the leaves yellowing. A Krisp absorbs ethylene in a closed crisper drawer, which matters most when apples, pears or bananas share the fridge.",
     "ripeTip": "Dry, bright green leaves with no yellow, dark or slimy pieces.",
     "avoidWith": [
       "Apples",
@@ -1727,7 +1727,7 @@
       "Blanch and freeze what you will not cook this week"
     ],
     "krispRecommended": true,
-    "krispBenefit": "A Krisp helps a little here. Slows the leaves yellowing. Expect about 1–2 extra days in a closed crisper drawer.",
+    "krispBenefit": "Ethylene speeds the leaves yellowing. A Krisp absorbs ethylene in a closed crisper drawer, which matters most when apples, pears or bananas share the fridge.",
     "ripeTip": "Crisp, bright green leaves with no yellowing or brown spots. Smaller leaves are milder.",
     "avoidWith": [
       "Apples",
@@ -1803,7 +1803,7 @@
       "Slice them lengthwise and rinse between the layers just before cooking"
     ],
     "krispRecommended": true,
-    "krispBenefit": "A Krisp helps a little here. Slows the softening ethylene causes. Expect about 1–2 extra days in a closed crisper drawer.",
+    "krispBenefit": "Ethylene speeds softening. A Krisp absorbs ethylene in a closed crisper drawer, which matters most when apples, pears or bananas share the fridge.",
     "ripeTip": "Firm, straight white stalks with crisp, dark green tops. Skip any with yellow or slimy leaves.",
     "avoidWith": [
       "Apples",
@@ -1960,7 +1960,7 @@
       "Scoop out and freeze the pulp of very soft persimmons for baking"
     ],
     "krispRecommended": true,
-    "krispBenefit": "A Krisp helps a little here. Slows firm persimmons going soft around ethylene. Expect about 1–2 extra days in a closed crisper drawer.",
+    "krispBenefit": "Ethylene speeds firm persimmons going soft. A Krisp absorbs ethylene in a closed crisper drawer, which matters most when apples, pears or bananas share the fridge.",
     "ripeTip": "Deep orange, glossy skin with the green cap still attached. Fuyu should be firm. Hachiya should be very soft before you eat it.",
     "avoidWith": [
       "Apples",
@@ -1989,7 +1989,7 @@
       "Peel or scrub them just before cooking"
     ],
     "krispRecommended": true,
-    "krispBenefit": "A Krisp helps a little here. Helps keep parsnips from picking up a bitter taste from ethylene. Expect about 1–2 extra days in a closed crisper drawer.",
+    "krispBenefit": "Ethylene can give parsnips a bitter taste. A Krisp absorbs ethylene in a closed crisper drawer, which matters most when apples, pears or bananas share the fridge.",
     "ripeTip": "Firm, cream-colored roots, small to medium in size. Very large ones can have a woody core.",
     "avoidWith": [
       "Apples",
