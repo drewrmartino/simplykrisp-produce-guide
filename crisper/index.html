@@ -140,14 +140,24 @@ ol.steps li::marker{color:var(--muted-fg);font-weight:700}
 .grp h3{display:flex;align-items:center;gap:8px;font-size:15px;font-family:var(--body);font-weight:700;text-transform:uppercase;letter-spacing:.06em}
 .grp h3 .pill{font-size:12px;border-radius:99px;padding:1px 8px;background:var(--muted);color:var(--muted-fg);letter-spacing:0}
 .grp .gsub{font-size:13.5px;color:var(--muted-fg);margin-bottom:10px}
-.items{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
+/* Cards at least 340px wide, so the header (name, days left, chip) has the
+   same room beside Used / Tossed as on a phone: two columns at 768-1280px. */
+.items{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(340px,100%),1fr));gap:10px}
 .it{background:var(--card);border:1px solid var(--card-border);border-left:4px solid var(--ok);border-radius:var(--radius);padding:12px 12px 10px;box-shadow:var(--shadow-sm);display:flex;flex-direction:column;gap:8px;position:relative}
 .it.s-check{border-left-color:var(--check)}
 .it.s-today{border-left-color:var(--warn)}
 .it.s-soon{border-left-color:var(--soon)}
 .it.s-week{border-left-color:hsl(80 40% 45%)}
 .it.s-pending{border-left-color:var(--input);border-style:dashed;border-left-style:solid}
-.ith{display:flex;gap:10px;align-items:flex-start}
+/* Header grid: photo | name + days left | buttons, then the chip on its own
+   row under the name so it never wraps beside the buttons. */
+.ith{display:grid;grid-template-columns:auto minmax(0,1fr) auto;column-gap:10px}
+.ith .ichip{grid-column:2 / -1}
+.ichip .kchip{white-space:nowrap}
+/* Very narrow cards (small phones): the buttons drop to their own row under
+   the chip instead of squeezing the name. */
+.it{container-type:inline-size}
+@container (max-width:290px){.ith{grid-template-columns:auto minmax(0,1fr)}.ith .ichip{grid-column:2;order:1}.ith .qb{grid-column:1 / -1;order:2;margin-top:6px}}
 .ith img{width:34px;height:34px;flex:0 0 auto}
 .itn{font-weight:700;line-height:1.25}
 .itn .q{font-weight:500;color:var(--muted-fg);font-size:13.5px}
@@ -186,7 +196,7 @@ ol.ios{margin:8px 0 0 18px;font-size:14px;line-height:1.5}
 .sta b{color:var(--fg);font-weight:600}
 .stk{font-size:12.5px;font-weight:600;color:hsl(52 60% 22%);background:hsl(52 90% 88%);border-radius:99px;padding:1px 8px;align-self:flex-start}
 .stk.off{background:var(--muted);color:var(--muted-fg);font-weight:500}
-.wst{font-size:13px;line-height:1.4;color:var(--muted-fg);display:flex;flex-direction:column;gap:1px}
+.wst{font-size:13px;line-height:1.4;color:var(--muted-fg);display:block}
 .wst b{color:var(--fg)}
 .itf{flex-wrap:wrap}
 .itf .fl{font-size:12px;color:var(--muted-fg);flex:1 0 100%;margin-bottom:-2px;text-transform:uppercase;letter-spacing:.06em;font-weight:700}
@@ -1356,6 +1366,24 @@ details.sd{display:block}
     var pct = Math.round(w.rate * 100);
     return '<p class="wst">Typically wasted: <b>' + pct + '%</b>' + (w.source === 'epa' ? ' (produce average)' : '') + ' · about <b>' + money(w.usd) + '</b> of this</p>';
   }
+  // "Keep away from" line. For ethylene producers (apples, pears, avocados,
+  // melons) it names the sensitive produce to keep away and says which item
+  // gives off the ethylene; other producers on the list only ripen it faster.
+  // Self-contained so dev/krisper-copy.test.mjs can run it.
+  // avoid: the item's avoidWith, sorted with what is in the fridge first.
+  function keepAway(i, avoid) {
+    var RIPENERS = ['appl', 'banan', 'pear', 'avocad', 'peach', 'tomat', 'plum', 'nectarin', 'apricot', 'mango', 'cantaloup', 'honeydew', 'kiwi', 'papaya'];
+    var isRipener = function (a) { var l = String(a).toLowerCase(); return RIPENERS.some(function (r) { return l.indexOf(r) === 0; }); };
+    var list = function (xs) { xs = xs.map(function (x) { return String(x).toLowerCase(); }); return xs.length < 2 ? xs.join('') : xs.slice(0, -1).join(', ') + ' and ' + xs[xs.length - 1]; };
+    var h = function (s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); };
+    var producer = i.ethyleneProducer || i.ethyleneProduction === 'high' || i.ethyleneProduction === 'very_high';
+    if (!producer) return avoid.length ? '<p class="sta"><b>Keep away from</b> ' + h(avoid.slice(0, 3).join(', ')) + '</p>' : '';
+    var who = String(i.name).toLowerCase(); if (!/s$/.test(who)) who += 's';
+    var sensitive = avoid.filter(function (a) { return !isRipener(a); }).slice(0, 3);
+    var faster = (i.avoidWith || []).filter(isRipener).slice(0, 3);
+    return '<p class="sta"><b>Keep away from</b> ' + h(list(sensitive.length ? sensitive : ['greens', 'broccoli'])) + ' \u2014 ' + h(who) + ' give off ethylene.</p>' +
+      (faster.length ? '<p class="sta">' + h(who.charAt(0).toUpperCase() + who.slice(1)) + ' ripen faster near ' + h(list(faster)) + '.</p>' : '');
+  }
   function stem(x) { return String(x).toLowerCase().replace(/(oes|ies|es|s)$/, function (m) { return m === 'ies' ? 'y' : m === 'oes' ? 'o' : ''; }); }
   // Krisp note on an item: an "Ethylene-sensitive" chip under the name and one
   // plain line on what ethylene does to it. Only for ethylene-sensitive items in
@@ -1431,10 +1459,9 @@ details.sd{display:block}
     var label = pending ? 'Counting starts ' + fmtDate(i.startDate) + ' · lasts ' + i.minDays + '–' + i.maxDays + ' days' : i.label;
     var tip = i.ripensFirst && i.status === 'later' && i.ripeTip ? i.ripeTip : i.tip;
     var inFridge = S.st && S.st.items ? S.st.items.map(function (x) { return stem(x.name); }) : [];
-    var avoid = (i.avoidWith || []).slice().sort(function (a, b) { return (inFridge.indexOf(stem(b)) >= 0) - (inFridge.indexOf(stem(a)) >= 0); }).slice(0, 3);
-    var eth = (i.ethyleneProduction === 'high' || i.ethyleneProduction === 'very_high');
+    var avoid = (i.avoidWith || []).slice().sort(function (a, b) { return (inFridge.indexOf(stem(b)) >= 0) - (inFridge.indexOf(stem(a)) >= 0); });
     var store = tip || i.storage === 'counter_then_fridge' ? '<p class="sto1">' + (i.storage === 'counter_then_fridge' ? '<b>Counter until ripe, then fridge.</b> ' : '') + esc(tip || '') + '</p>' : '';
-    var detail = (avoid.length ? '<p class="sta"><b>Keep away from</b> ' + esc(avoid.join(', ')) + (eth ? ' (it gives off ethylene)' : '') + '</p>' : eth ? '<p class="sta">Gives off ethylene. Keep it away from greens.</p>' : '') +
+    var detail = keepAway(i, avoid) +
       (i.krispTier && i.krispEvidence ? '<p class="sta"><b>Ethylene evidence:</b> ' + esc(i.krispEvidence) + (i.krispSource && /^https:\/\//.test(i.krispSource.url) ? ' <a href="' + esc(i.krispSource.url) + '" target="_blank" rel="noopener">' + esc(i.krispSource.name) + '</a>' : '') + '</p>' +
         (i.krispNearby ? '<p class="sta">' + esc(i.krispNearby) + companionLink(i) + '</p>' : '') : '') +
       (!i.krispTier && i.krispNoBenefit ? '<p class="sta"><b>' + (i.producerNote ? 'Why the fruit gets no Krisp note:' : 'Why no Krisp note:') + '</b> ' + esc(i.krispNoBenefit) + '</p>' : '') +
@@ -1459,7 +1486,9 @@ details.sd{display:block}
       ? '<div class="qb"><button class="btn ghost" type="button" data-act="arrived" data-id="' + i.id + '">Arrived</button>' + xb + '</div>'
       : '<div class="qb"><button class="btn ghost' + (pk === 'used' ? ' on' : '') + '" type="button" data-pk="used" data-id="' + i.id + '" aria-label="' + esc(i.name) + ': used it" aria-expanded="' + (pk === 'used') + '">Used</button><button class="btn ghost' + (pk === 'tossed' ? ' on' : '') + '" type="button" data-pk="tossed" data-id="' + i.id + '" aria-label="' + esc(i.name) + ': tossed" aria-expanded="' + (pk === 'tossed') + '">Tossed</button>' + xb + '</div>';
     return '<article class="it s-' + (pending ? 'pending' : i.status) + '" id="it-' + i.id + '">' +
-      '<div class="ith"><img src="' + esc(i.imageUrl) + '" alt="" loading="lazy"><div style="flex:1;min-width:0"><div class="itn">' + esc(i.name) + q + (!pending && i.eatFirst && feat('eatFirst') ? '<span class="efchip">Eat first</span>' : '') + '</div><div class="itl">' + esc(label) + '</div>' + tally + kb.chip + '</div>' + quick + '</div>' +
+      '<div class="ith"><img src="' + esc(i.imageUrl) + '" alt="" loading="lazy"><div style="flex:1;min-width:0"><div class="itn">' + esc(i.name) + q + (!pending && i.eatFirst && feat('eatFirst') ? '<span class="efchip">Eat first</span>' : '') + '</div><div class="itl">' + esc(label) + '</div>' + tally + '</div>' + quick +
+      // Chip on its own row under the name, so it never wraps beside the buttons.
+      (kb.chip ? '<div class="ichip">' + kb.chip + '</div>' : '') + '</div>' +
       picker + (pending ? '' : '<div class="bar" role="progressbar" aria-label="Freshness used" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' + Math.round(i.progress * 100) + '"><i style="width:' + Math.max(4, Math.round(i.progress * 100)) + '%"></i></div>') +
       store + kb.line + (pending ? '' : rescueOpts(i)) +
       '<details class="itd"><summary>More</summary><div class="dbody">' + detail + (tags ? '<div class="tags">' + tags + '</div>' : '') + '<div class="mact">' + acts + '</div></div></details>' +
