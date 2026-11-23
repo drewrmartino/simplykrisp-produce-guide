@@ -46,3 +46,17 @@ test('the waste line renders inline, not one piece per line', () => {
   const rule = html.match(/\.wst\{[^}]*\}/)[0];
   assert.doesNotMatch(rule, /flex|grid/, rule);
 });
+
+test('item cards are wide enough that the header never squeezes beside the buttons', () => {
+  const items = html.match(/\.items\{[^}]*\}/)[0];
+  const min = Number((items.match(/minmax\((?:min\()?(\d+)px/) || [])[1]);
+  assert.ok(min >= 320, `item cards must be at least 320px wide, got ${items}`);
+  assert.match(html, /\.it\{container-type:inline-size\}/);
+  // Header is a grid: the chip gets its own row under the name and the buttons
+  // a fixed column, so neither squeezes the name or days left.
+  assert.match(html, /\.ith\{display:grid;grid-template-columns:auto minmax\(0,1fr\) auto/);
+  assert.match(html, /\.ichip \.kchip\{white-space:nowrap\}/);
+  assert.match(html, /'<div class="ichip">' \+ kb\.chip/);
+  // Small phones: the buttons move to their own row.
+  assert.match(html, /@container \(max-width:\d+px\)\{.*\.ith \.qb\{grid-column:1 \/ -1/);
+});
