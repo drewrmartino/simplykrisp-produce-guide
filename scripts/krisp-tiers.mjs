@@ -16,40 +16,92 @@
 // (https://www.publish.csiro.au/an/EA98123); home fridges reach about 0.20 ppm
 // ethylene with apples vs 0.03 ppm without, so it matters most when apples,
 // pears or bananas share the fridge (https://www.publish.csiro.au/an/ea99125).
-// extraDays / extraDaysRange in seasonal/produce.json are legacy data and are
-// not rendered anywhere.
+// The old extraDays / extraDaysRange / krispExtra day estimates were removed
+// from every output in Nov 2026; dev/krisp-claims.test.mjs fails if they return.
 //
-// Each entry: [tier, what ethylene does to it]. The second part is one sentence.
+// Each entry: [tier, what ethylene does to it, source]. The effect is one
+// sentence. The source is the item's own entry in a published table or
+// handbook (never a "closely related" crop and never our own read), with the
+// gist of what it says (paraphrased, not a quote). Every item here must have one: dev/krisp-claims.test.mjs fails
+// otherwise.
 //
 // Nov 2026 review: Green Onion and Celery were removed. UC Davis says green
 // onions "are not sensitive to external ethylene", and celery only loses its
 // green at 10 ppm or more above 41°F, which a home drawer does not reach.
+// Nov 23 2026 source review: every item now cites its own USDA Handbook 66
+// chapter (or the UC Davis fact sheet for peas). Pear and Avocado moved to
+// ethylene producers: Handbook 66 says that once a climacteric fruit is
+// ripening, "lowering its external concentration has an insignificant effect"
+// (Ethylene Effects, PDF page 88). Bok Choy was removed: its Handbook 66 chapter says it "is not
+// overly sensitive to ethylene".
+export const HB66 = 'https://www.ars.usda.gov/arsuserfiles/oc/np/commercialstorage/commercialstorage.pdf';
+const hb = (chapter, page, note) => ({ name: `USDA Agriculture Handbook 66 (2016), ${chapter}`, url: `${HB66}#page=${page}`, note });
 export const KRISP = {
-  Broccoli: ['strong', 'Ethylene speeds the florets yellowing.'],
-  Lettuce: ['strong', 'Ethylene speeds russet spotting, the brown specks on romaine and leaf lettuce.'],
-  Spinach: ['strong', 'Ethylene speeds the leaves yellowing.'],
-  Kale: ['strong', 'Ethylene speeds the leaves yellowing.'],
-  Cabbage: ['strong', 'Ethylene speeds the outer leaves yellowing and loosening from the head.'],
-  Cucumber: ['strong', 'Ethylene speeds yellowing and soft, watery spots.'],
-  'Brussels Sprouts': ['strong', 'Ethylene speeds the outer leaves yellowing.'],
-  Cauliflower: ['strong', 'Ethylene speeds browning on the head and yellowing leaves.'],
-  Carrot: ['strong', 'Ethylene can give carrots a bitter taste.'],
-  Kiwi: ['strong', 'Ethylene speeds ripe kiwi turning mushy.'],
-  Asparagus: ['some', 'Ethylene speeds the spears turning tough and woody.'],
-  'Green Beans': ['some', 'Ethylene speeds yellowing and browning.'],
-  Peas: ['some', 'Ethylene speeds the pods yellowing.'],
-  Eggplant: ['some', 'Ethylene speeds browning at the cap and softening.'],
-  Zucchini: ['some', 'Ethylene speeds yellowing and soft spots.'],
-  Avocado: ['some', 'Ethylene speeds a ripe avocado going overripe.'],
-  Pear: ['some', 'Ethylene speeds a ripe pear going soft and mealy.'],
-  'Bok Choy': ['some', 'Ethylene speeds the leaves yellowing.'],
-  'Collard Greens': ['some', 'Ethylene speeds the leaves yellowing.'],
-  'Mustard Greens': ['some', 'Ethylene speeds the leaves yellowing.'],
-  Arugula: ['some', 'Ethylene speeds the leaves yellowing.'],
-  'Swiss Chard': ['some', 'Ethylene speeds the leaves yellowing and browning at the edges.'],
-  Leek: ['some', 'Ethylene speeds softening.'],
-  Persimmon: ['some', 'Ethylene speeds firm persimmons going soft.'],
-  Parsnip: ['some', 'Ethylene can give parsnips a bitter taste.'],
+  Broccoli: ['strong', 'Ethylene speeds the florets yellowing.',
+    hb('Broccoli', 259, 'Broccoli is extremely sensitive to ethylene, with floret yellowing being the most prevalent symptom.')],
+  Lettuce: ['strong', 'Ethylene speeds russet spotting, the brown specks on romaine and leaf lettuce.',
+    hb('Lettuce', 398, 'Exposure to ethylene can result in damage such as russet spotting and leaf yellowing.')],
+  Spinach: ['strong', 'Ethylene speeds the leaves yellowing.',
+    hb('Greens, leafy (collards, kale, spinach, mustard)', 364, 'All leafy greens are sensitive to ethylene, which accelerates senescence and leaf yellowing.')],
+  Kale: ['strong', 'Ethylene speeds the leaves yellowing.',
+    hb('Greens, leafy (collards, kale, spinach, mustard)', 364, 'All leafy greens are sensitive to ethylene, which accelerates senescence and leaf yellowing.')],
+  Cabbage: ['strong', 'Ethylene speeds the outer leaves yellowing and loosening from the head.',
+    hb('Cabbage', 267, 'Ethylene as low as 1 ppm accelerates senescence and quality loss, such as leaf yellowing, wilting and abscission.')],
+  Cucumber: ['strong', 'Ethylene speeds yellowing and decay.',
+    hb('Cucumber', 313, 'Cucumbers are very sensitive to ethylene. Exposure to 1 to 5 ppm accelerates yellowing and decay.')],
+  'Brussels Sprouts': ['strong', 'Ethylene speeds the outer leaves yellowing.',
+    hb('Brussels Sprouts', 263, 'Brussels sprouts are extremely sensitive to ethylene, with leaf yellowing and abscission being the most prevalent symptoms.')],
+  Cauliflower: ['strong', 'Ethylene speeds browning on the head and yellowing leaves.',
+    hb('Cauliflower', 282, 'Cauliflower is extremely sensitive to ethylene, with curd discoloration and leaf yellowing and abscission.')],
+  Carrot: ['strong', 'Ethylene can give carrots a bitter taste.',
+    hb('Carrots', 275, 'Exposure to ethylene (about 0.2 ppm) induces the bitter compound isocoumarin.')],
+  Kiwi: ['strong', 'Ethylene speeds kiwi softening, even in the cold.',
+    hb('Kiwifruit', 384, 'Kiwifruit in storage are extremely sensitive to ethylene; as little as 5 to 10 ppb can accelerate softening.')],
+  Asparagus: ['some', 'Ethylene speeds the spears turning tough and woody.',
+    hb('Asparagus', 221, 'Exposure to ethylene accelerated the lignification (toughening) of asparagus spears.')],
+  'Green Beans': ['some', 'Ethylene speeds yellowing and browning.',
+    hb('Beans', 241, 'Ethylene above 0.1 ppm promotes chlorophyll loss and increases browning in green beans.')],
+  Peas: ['some', 'Ethylene speeds the pods yellowing.',
+    { name: 'UC Davis Postharvest Center, Snow & Snap Pea Pods', url: 'https://postharvest.ucdavis.edu/produce-facts-sheets/peas-snow-and-snap-pod', note: 'Peas are moderately sensitive to exogenous ethylene. Accelerated yellowing and decay will result from extended exposure to low levels.' }],
+  Eggplant: ['some', 'Ethylene speeds browning and loosens the green cap.',
+    hb('Eggplant', 334, 'Eggplant has a moderate to high sensitivity to ethylene; calyx abscission and browning may result.')],
+  Zucchini: ['some', 'Ethylene can turn the skin yellow.',
+    hb('Summer Squash', 567, 'Increased yellowing may result if green-skinned summer squash are exposed to ethylene.')],
+  'Collard Greens': ['some', 'Ethylene speeds the leaves yellowing.',
+    hb('Greens, leafy (collards, kale, spinach, mustard)', 364, 'All leafy greens are sensitive to ethylene, which accelerates senescence and leaf yellowing.')],
+  'Mustard Greens': ['some', 'Ethylene speeds the leaves yellowing.',
+    hb('Greens, leafy (collards, kale, spinach, mustard)', 364, 'All leafy greens are sensitive to ethylene, which accelerates senescence and leaf yellowing.')],
+  Arugula: ['some', 'Ethylene speeds the leaves yellowing.',
+    hb('Salad Greens (including arugula)', 549, 'Salad greens are highly sensitive to ethylene exposure, which typically results in yellowing of leaves.')],
+  'Swiss Chard': ['some', 'Ethylene speeds the leaves yellowing.',
+    hb('Swiss Chard', 581, 'Sensitivity to ethylene is very high. Exposure results in yellowing and senescence.')],
+  Leek: ['some', 'Ethylene speeds softening and decay.',
+    hb('Leeks', 390, 'Leeks are moderately sensitive to ethylene. Detrimental effects include softening and increased decay.')],
+  Persimmon: ['some', 'Ethylene speeds firm persimmons going soft.',
+    hb('Persimmon', 498, 'Persimmons are very sensitive to ethylene, which accelerates softening.')],
+  Parsnip: ['some', 'Ethylene can give parsnips a bitter taste.',
+    hb('Parsnips', 467, 'Exposure to low levels of ethylene in cold storage causes bitterness.')],
+};
+// Strong ethylene producers: store them apart from sensitive produce. A Krisp
+// note never goes on these (krispNoBenefit says why instead).
+export const PRODUCERS = {
+  Apple: hb('Apples', 187, 'The apple is a climacteric fruit with autocatalytic ethylene production.'),
+  Pear: hb('Pears', 483, 'Most pear cultivars show climacteric-like ethylene production during ripening.'),
+  Avocado: hb('Avocado', 230, 'Ripe avocados produce more than 100 µL/kg/h ethylene and should not be stored with ethylene-sensitive produce.'),
+  Cantaloupe: hb('Netted Melon', 434, 'Netted melons are climacteric fruit that produce ethylene as they ripen.'),
+};
+
+// Companion notes (Nov 2026, approved by Drew). Producers stay
+// krispRecommended false: the note is about protecting the greens next to
+// them, never the fruit itself. Sensitive items get one line on when a Krisp
+// matters most. Source: household fridges averaged 0.20 ppm ethylene with
+// apples inside vs 0.029 ppm without (Warton, Wills & Ku 2000).
+export const PRODUCER_NOTE = 'Ethylene producer. Best stored apart from greens. If they share a drawer, a Krisp helps protect the greens and broccoli nearby.';
+export const NEARBY_NOTE = 'Most helpful when apples or pears are nearby.';
+export const FRIDGE_SOURCE = {
+  name: 'Warton, Wills & Ku 2000, household fridge ethylene (CSIRO)',
+  url: 'https://www.publish.csiro.au/an/ea99125',
+  note: 'Home fridges averaged 0.20 ppm ethylene with apples inside and 0.029 ppm without.',
 };
 // What a Krisp does, the same everywhere. Never add a day count or a strength word.
 export const KRISP_HOW = 'A Krisp absorbs ethylene in a closed crisper drawer, which matters most when apples, pears or bananas share the fridge.';
@@ -57,6 +109,10 @@ export const KRISP_CHIP = 'Ethylene-sensitive';
 // Why a Krisp won't help, for items people might expect it to. Items not listed
 // here keep the noBenefitReason already in seasonal/produce.json.
 export const NO_KRISP = {
+  Apple: 'Apples are one of the biggest ethylene sources in the fridge. Store them apart from greens and other sensitive produce instead.',
+  Pear: 'Pears give off ethylene as they ripen, and once a pear is ripening, less ethylene around it changes little. Store ripe pears apart from greens and other sensitive produce instead.',
+  Avocado: 'Ripe avocados give off a lot of ethylene, and once one is ripening, less ethylene around it changes little. Store ripe avocados apart from greens and other sensitive produce instead.',
+  'Bok Choy': 'Bok choy is not very sensitive to ethylene, so it gets no Krisp note. Keep it cold and bagged in the high-humidity drawer.',
   Strawberry: 'Berries barely react to ethylene. Mold is what ends them, so keep them dry and rinse just before eating.',
   Blueberry: 'Berries barely react to ethylene. Mold is what ends them, so keep them dry and rinse just before eating.',
   Orange: 'Citrus barely reacts to ethylene, so a Krisp won\'t change much. It keeps for weeks in the fridge anyway.',
@@ -75,11 +131,11 @@ export const NO_KRISP = {
   Tomato: 'Tomatoes keep their flavor best on the counter, out of reach of a Krisp in the drawer. Ripe ones can move to the fridge for a day or two.',
   Celery: 'Celery only loses its green at high ethylene levels and warm temperatures, well beyond a cold crisper drawer. It mostly fails by drying out, so wrapping it does more than a Krisp.',
 };
-export const EVIDENCE = {
-  measured: 'Published postharvest data show this item reacts to ethylene.',
-  related: 'Published data on closely related produce show it reacts to ethylene.',
-  estimated: 'Our read of how strongly it is known to react to ethylene.',
-};
+// Where the ethylene evidence for an item comes from: its own source, cited.
+export function evidenceFor(name) {
+  const t = KRISP[name];
+  return t ? { text: t[2].note, source: t[2].name, url: t[2].url } : null;
+}
 
 // One plain sentence set for the Storage Guide, /seasonal and /produce.
 // No day counts and no strength claims (see the claims note above).

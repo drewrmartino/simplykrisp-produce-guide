@@ -215,8 +215,11 @@ ol.ios{margin:8px 0 0 18px;font-size:14px;line-height:1.5}
 .knew{margin-top:8px;padding:8px 10px;border-radius:.5rem;background:hsl(52 90% 92%);border:1px solid hsl(52 60% 75%);font-size:13.5px;display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}
 .kchip{display:inline-block;margin-top:4px;font-size:12.5px;font-weight:700;border-radius:99px;padding:1px 9px;background:var(--ok-bg);color:var(--ok)}
 .kchip.could{background:transparent;border:1px dashed hsl(140 25% 60%);color:hsl(140 30% 30%);font-weight:600}
+.kchip.prod{background:hsl(38 80% 92%);color:hsl(30 70% 26%)}
 .kben{font-size:13.5px;line-height:1.4;padding:7px 10px;border-radius:.5rem;background:hsl(140 35% 96%);border-left:3px solid var(--ok)}
 .kben.could{background:hsl(140 20% 97%);border-left-color:hsl(140 20% 70%)}
+.kben.prod{background:hsl(38 80% 96%);border-left-color:hsl(30 70% 50%)}
+.kben a,.sta a{color:inherit}
 .kben b{font-weight:700}
 .gk{font-weight:600;color:var(--ok)}
 .kring{width:62px;height:62px;flex:0 0 auto}
@@ -1359,8 +1362,21 @@ details.sd{display:block}
   // a drawer. No day counts or strength claims: there is no household test of
   // the Krisp sachet (scripts/krisp-tiers.mjs).
   var KRISP_HOW = 'ethylene in a closed crisper drawer, which matters most when apples, pears or bananas share the fridge.';
+  // The household fridge ethylene study behind both companion notes.
+  function companionLink(i) {
+    var c = i.companionSource;
+    return c && /^https:\/\//.test(c.url) ? ' <a href="' + esc(c.url) + '" target="_blank" rel="noopener">' + esc(c.name) + '</a>' : '';
+  }
   function krispBits(i) {
-    if (!i.krispTier) return { chip: '', line: '' };
+    // Strong producers (apples, pears, avocados, melons) get no Krisp note for
+    // the fruit: a tag to store them apart, plus the companion note about
+    // protecting the greens nearby.
+    var prod = i.ethyleneProducer || i.ethyleneProduction === 'high' || i.ethyleneProduction === 'very_high';
+    if (!i.krispTier) return {
+      chip: prod ? '<div><span class="kchip prod" title="Store apart from sensitive produce">Ethylene producer</span></div>' : '',
+      // Companion note: about protecting the greens nearby, never the fruit.
+      line: prod && i.producerNote ? '<p class="kben prod">' + esc(i.producerNote) + companionLink(i) + '</p>' : ''
+    };
     var on = !!i.krispActive;
     var chip = '<span class="kchip' + (on ? '' : ' could') + '">Ethylene-sensitive</span>';
     var line = '<p class="kben' + (on ? '' : ' could') + '">' + esc(i.krispPrevents || '') + ' ' + (on ? 'Your Krisp absorbs ' : 'A Krisp absorbs ') + KRISP_HOW +
@@ -1419,8 +1435,9 @@ details.sd{display:block}
     var eth = (i.ethyleneProduction === 'high' || i.ethyleneProduction === 'very_high');
     var store = tip || i.storage === 'counter_then_fridge' ? '<p class="sto1">' + (i.storage === 'counter_then_fridge' ? '<b>Counter until ripe, then fridge.</b> ' : '') + esc(tip || '') + '</p>' : '';
     var detail = (avoid.length ? '<p class="sta"><b>Keep away from</b> ' + esc(avoid.join(', ')) + (eth ? ' (it gives off ethylene)' : '') + '</p>' : eth ? '<p class="sta">Gives off ethylene. Keep it away from greens.</p>' : '') +
-      (i.krispTier && i.krispEvidence ? '<p class="sta"><b>Ethylene evidence:</b> ' + esc(i.krispEvidence) + '</p>' : '') +
-      (!i.krispTier && i.krispNoBenefit ? '<p class="sta"><b>Why no Krisp note:</b> ' + esc(i.krispNoBenefit) + '</p>' : '') +
+      (i.krispTier && i.krispEvidence ? '<p class="sta"><b>Ethylene evidence:</b> ' + esc(i.krispEvidence) + (i.krispSource && /^https:\/\//.test(i.krispSource.url) ? ' <a href="' + esc(i.krispSource.url) + '" target="_blank" rel="noopener">' + esc(i.krispSource.name) + '</a>' : '') + '</p>' +
+        (i.krispNearby ? '<p class="sta">' + esc(i.krispNearby) + companionLink(i) + '</p>' : '') : '') +
+      (!i.krispTier && i.krispNoBenefit ? '<p class="sta"><b>' + (i.producerNote ? 'Why the fruit gets no Krisp note:' : 'Why no Krisp note:') + '</b> ' + esc(i.krispNoBenefit) + '</p>' : '') +
       wasteLine(i);
     var kb = krispBits(i);
     var tags = '';

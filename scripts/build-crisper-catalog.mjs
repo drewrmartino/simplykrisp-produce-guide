@@ -7,12 +7,12 @@
 //   crisper/catalog.json     — browser copy (the "add produce" picker)
 //
 // Re-run whenever seasonal/produce.json changes so shelf-life windows, tips and
-// Krisp estimates never drift from what the guide tells people.
+// Krisp notes never drift from what the guide tells people.
 
 import { readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
-import { KRISP, NO_KRISP, EVIDENCE } from './krisp-tiers.mjs';
+import { KRISP, NO_KRISP, evidenceFor, PRODUCER_NOTE, NEARBY_NOTE, FRIDGE_SOURCE } from './krisp-tiers.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const produce = JSON.parse(readFileSync(path.join(root, 'seasonal/produce.json'), 'utf8'));
@@ -119,12 +119,6 @@ function windowFor(item) {
   return [lo, hi];
 }
 
-function parseRange(r, fallback) {
-  if (!r) return fallback ? [fallback, fallback] : [0, 0];
-  const m = String(r).match(/(\d+)\s*[–-]\s*(\d+)/);
-  return m ? [Number(m[1]), Number(m[2])] : [fallback || 0, fallback || 0];
-}
-
 const names = new Set(produce.map((p) => p.name));
 for (const k of Object.keys(ALIASES)) if (!names.has(k)) throw new Error(`Alias key not in guide: ${k}`);
 for (const n of names) if (!ALIASES[n]) throw new Error(`Guide item has no aliases: ${n}`);
@@ -132,7 +126,9 @@ for (const k of [...Object.keys(KRISP), ...Object.keys(NO_KRISP)]) if (!names.ha
 
 const catalog = produce.map((p) => {
   const [minDays, maxDays] = windowFor(p);
-  const krisp = p.extraDays > 0 ? parseRange(p.extraDaysRange, p.extraDays) : [0, 0];
+  const k = KRISP[p.name];
+  const ev = evidenceFor(p.name);
+  const producer = p.ethyleneProduction === 'high' || p.ethyleneProduction === 'very_high';
   return {
     name: p.name,
     category: p.category,
@@ -143,14 +139,22 @@ const catalog = produce.map((p) => {
     minDays,
     maxDays,
     ripensFirst: p.storageLocation === 'counter_then_fridge',
-    krispRecommended: !!KRISP[p.name] && krisp[1] > 0,
-    // Legacy, never rendered and never added to an item's window: there is no
-    // household test of the Krisp, so it gets no day credit (krisp-tiers.mjs).
-    krispExtra: KRISP[p.name] ? krisp : [0, 0],
-    krispTier: KRISP[p.name] && krisp[1] > 0 ? KRISP[p.name][0] : null,
-    krispPrevents: KRISP[p.name] ? KRISP[p.name][1] : '',
-    krispEvidence: KRISP[p.name] ? (EVIDENCE[p.evidence] || '') : '',
-    krispNoBenefit: KRISP[p.name] ? '' : (NO_KRISP[p.name] || p.noBenefitReason || ''),
+    // No day counts of any kind: there is no household test of the Krisp
+    // (krisp-tiers.mjs). Every Krisp note carries the item's own source.
+    krispRecommended: !!k,
+    krispTier: k ? k[0] : null,
+    krispPrevents: k ? k[1] : '',
+    krispEvidence: ev ? ev.text : '',
+    krispSource: ev ? { name: ev.source, url: ev.url } : null,
+    krispNoBenefit: k ? '' : (NO_KRISP[p.name] || p.noBenefitReason || ''),
+    // Strong producers (apples, pears, avocados, melons): store apart from
+    // sensitive produce.
+    ethyleneProducer: producer,
+    // Companion notes (krisp-tiers.mjs): producers protect their neighbors;
+    // sensitive items say when a Krisp matters most. Both cite the fridge study.
+    producerNote: producer ? PRODUCER_NOTE : '',
+    krispNearby: k ? NEARBY_NOTE : '',
+    companionSource: producer || k ? { name: FRIDGE_SOURCE.name, url: FRIDGE_SOURCE.url } : null,
     ethyleneProduction: p.ethyleneProduction,
     ethyleneSensitivity: p.ethyleneSensitivity,
     avoidWith: p.avoidWith || [],
