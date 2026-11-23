@@ -12,7 +12,7 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
-import { KRISP, NO_KRISP, evidenceFor } from './krisp-tiers.mjs';
+import { KRISP, NO_KRISP, evidenceFor, PRODUCER_NOTE, NEARBY_NOTE, FRIDGE_SOURCE } from './krisp-tiers.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const produce = JSON.parse(readFileSync(path.join(root, 'seasonal/produce.json'), 'utf8'));
@@ -128,6 +128,7 @@ const catalog = produce.map((p) => {
   const [minDays, maxDays] = windowFor(p);
   const k = KRISP[p.name];
   const ev = evidenceFor(p.name);
+  const producer = p.ethyleneProduction === 'high' || p.ethyleneProduction === 'very_high';
   return {
     name: p.name,
     category: p.category,
@@ -148,7 +149,12 @@ const catalog = produce.map((p) => {
     krispNoBenefit: k ? '' : (NO_KRISP[p.name] || p.noBenefitReason || ''),
     // Strong producers (apples, pears, avocados, melons): store apart from
     // sensitive produce.
-    ethyleneProducer: p.ethyleneProduction === 'high' || p.ethyleneProduction === 'very_high',
+    ethyleneProducer: producer,
+    // Companion notes (krisp-tiers.mjs): producers protect their neighbors;
+    // sensitive items say when a Krisp matters most. Both cite the fridge study.
+    producerNote: producer ? PRODUCER_NOTE : '',
+    krispNearby: k ? NEARBY_NOTE : '',
+    companionSource: producer || k ? { name: FRIDGE_SOURCE.name, url: FRIDGE_SOURCE.url } : null,
     ethyleneProduction: p.ethyleneProduction,
     ethyleneSensitivity: p.ethyleneSensitivity,
     avoidWith: p.avoidWith || [],

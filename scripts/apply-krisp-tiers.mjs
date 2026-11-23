@@ -9,7 +9,7 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { KRISP, NO_KRISP, benefitText, evidenceFor } from './krisp-tiers.mjs';
+import { KRISP, NO_KRISP, benefitText, evidenceFor, PRODUCER_NOTE, NEARBY_NOTE, FRIDGE_SOURCE } from './krisp-tiers.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -23,6 +23,10 @@ for (const p of produce) {
   delete p.extraDaysRange;
   delete p.evidence;
   const ev = evidenceFor(p.name);
+  const producer = p.ethyleneProduction === 'high' || p.ethyleneProduction === 'very_high';
+  if (producer) p.producerNote = PRODUCER_NOTE; else delete p.producerNote;
+  if (ev) p.krispNearby = NEARBY_NOTE; else delete p.krispNearby;
+  if (producer || ev) p.companionSource = { name: FRIDGE_SOURCE.name, url: FRIDGE_SOURCE.url }; else delete p.companionSource;
   if (ev) {
     p.krispRecommended = true;
     p.krispBenefit = benefitText(p.name);

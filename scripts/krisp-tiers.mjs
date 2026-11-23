@@ -88,6 +88,20 @@ export const PRODUCERS = {
   Apple: hb('Apples', 187, 'The apple is a climacteric fruit with autocatalytic ethylene production.'),
   Pear: hb('Pears', 483, 'Most pear cultivars show climacteric-like ethylene production during ripening.'),
   Avocado: hb('Avocado', 230, 'Ripe avocados produce more than 100 µL/kg/h ethylene and should not be stored with ethylene-sensitive produce.'),
+  Cantaloupe: hb('Netted Melon', 434, 'Netted melons are climacteric fruit that produce ethylene as they ripen.'),
+};
+
+// Companion notes (Nov 2026, approved by Drew). Producers stay
+// krispRecommended false: the note is about protecting the greens next to
+// them, never the fruit itself. Sensitive items get one line on when a Krisp
+// matters most. Source: household fridges averaged 0.20 ppm ethylene with
+// apples inside vs 0.029 ppm without (Warton, Wills & Ku 2000).
+export const PRODUCER_NOTE = 'Ethylene producer. Best stored apart from greens. If they share a drawer, a Krisp helps protect the greens and broccoli nearby.';
+export const NEARBY_NOTE = 'Most helpful when apples or pears are nearby.';
+export const FRIDGE_SOURCE = {
+  name: 'Warton, Wills & Ku 2000, household fridge ethylene (CSIRO)',
+  url: 'https://www.publish.csiro.au/an/ea99125',
+  note: 'Home fridges averaged 0.20 ppm ethylene with apples inside and 0.029 ppm without.',
 };
 // What a Krisp does, the same everywhere. Never add a day count or a strength word.
 export const KRISP_HOW = 'A Krisp absorbs ethylene in a closed crisper drawer, which matters most when apples, pears or bananas share the fridge.';

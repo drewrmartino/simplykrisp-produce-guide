@@ -24,7 +24,12 @@
       "Leafy greens"
     ],
     "imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f34e.png",
-    "noBenefitReason": "Apples are one of the biggest ethylene sources in the fridge. Store them apart from greens and other sensitive produce instead."
+    "noBenefitReason": "Apples are one of the biggest ethylene sources in the fridge. Store them apart from greens and other sensitive produce instead.",
+    "producerNote": "Ethylene producer. Best stored apart from greens. If they share a drawer, a Krisp helps protect the greens and broccoli nearby.",
+    "companionSource": {
+      "name": "Warton, Wills & Ku 2000, household fridge ethylene (CSIRO)",
+      "url": "https://www.publish.csiro.au/an/ea99125"
+    }
   },
   {
     "name": "Avocado",
@@ -50,7 +55,12 @@
       "Peaches"
     ],
     "imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f951.png",
-    "noBenefitReason": "Ripe avocados give off a lot of ethylene, and once one is ripening, less ethylene around it changes little. Store ripe avocados apart from greens and other sensitive produce instead."
+    "noBenefitReason": "Ripe avocados give off a lot of ethylene, and once one is ripening, less ethylene around it changes little. Store ripe avocados apart from greens and other sensitive produce instead.",
+    "producerNote": "Ethylene producer. Best stored apart from greens. If they share a drawer, a Krisp helps protect the greens and broccoli nearby.",
+    "companionSource": {
+      "name": "Warton, Wills & Ku 2000, household fridge ethylene (CSIRO)",
+      "url": "https://www.publish.csiro.au/an/ea99125"
+    }
   },
   {
     "name": "Banana",
@@ -125,7 +135,12 @@
       "Cucumbers"
     ],
     "imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f348.png",
-    "noBenefitReason": "Whole melons ripen on the counter and are too big for the drawer. Once cut, wrap it and eat it within a few days."
+    "noBenefitReason": "Whole melons ripen on the counter and are too big for the drawer. Once cut, wrap it and eat it within a few days.",
+    "producerNote": "Ethylene producer. Best stored apart from greens. If they share a drawer, a Krisp helps protect the greens and broccoli nearby.",
+    "companionSource": {
+      "name": "Warton, Wills & Ku 2000, household fridge ethylene (CSIRO)",
+      "url": "https://www.publish.csiro.au/an/ea99125"
+    }
   },
   {
     "name": "Cherry",
@@ -199,6 +214,11 @@
     "ethyleneSource": {
       "name": "USDA Agriculture Handbook 66 (2016), Kiwifruit",
       "url": "https://www.ars.usda.gov/arsuserfiles/oc/np/commercialstorage/commercialstorage.pdf#page=384"
+    },
+    "krispNearby": "Most helpful when apples or pears are nearby.",
+    "companionSource": {
+      "name": "Warton, Wills & Ku 2000, household fridge ethylene (CSIRO)",
+      "url": "https://www.publish.csiro.au/an/ea99125"
     }
   },
   {
@@ -343,7 +363,12 @@
       "Bananas"
     ],
     "imageUrl": "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f350.png",
-    "noBenefitReason": "Pears give off ethylene as they ripen, and once a pear is ripening, less ethylene around it changes little. Store ripe pears apart from greens and other sensitive produce instead."
+    "noBenefitReason": "Pears give off ethylene as they ripen, and once a pear is ripening, less ethylene around it changes little. Store ripe pears apart from greens and other sensitive produce instead.",
+    "producerNote": "Ethylene producer. Best stored apart from greens. If they share a drawer, a Krisp helps protect the greens and broccoli nearby.",
+    "companionSource": {
+      "name": "Warton, Wills & Ku 2000, household fridge ethylene (CSIRO)",
+      "url": "https://www.publish.csiro.au/an/ea99125"
+    }
   },
   {
     "name": "Pineapple",
@@ -567,6 +592,11 @@
     "ethyleneSource": {
       "name": "USDA Agriculture Handbook 66 (2016), Asparagus",
       "url": "https://www.ars.usda.gov/arsuserfiles/oc/np/commercialstorage/commercialstorage.pdf#page=221"
+    },
+    "krispNearby": "Most helpful when apples or pears are nearby.",
+    "companionSource": {
+      "name": "Warton, Wills & Ku 2000, household fridge ethylene (CSIRO)",
+      "url": "https://www.publish.csiro.au/an/ea99125"
     }
   },
   {
@@ -620,6 +650,11 @@
     "ethyleneSource": {
       "name": "USDA Agriculture Handbook 66 (2016), Broccoli",
       "url": "https://www.ars.usda.gov/arsuserfiles/oc/np/commercialstorage/commercialstorage.pdf#page=259"
+    },
+    "krispNearby": "Most helpful when apples or pears are nearby.",
+    "companionSource": {
+      "name": "Warton, Wills & Ku 2000, household fridge ethylene (CSIRO)",
+      "url": "https://www.publish.csiro.au/an/ea99125"
     }
   },
   {
@@ -650,6 +685,11 @@
     "ethyleneSource": {
       "name": "USDA Agriculture Handbook 66 (2016), Brussels Sprouts",
       "url": "https://www.ars.usda.gov/arsuserfiles/oc/np/commercialstorage/commercialstorage.pdf#page=263"
+    },
+    "krispNearby": "Most helpful when apples or pears are nearby.",
+    "companionSource": {
+      "name": "Warton, Wills & Ku 2000, household fridge ethylene (CSIRO)",
+      "url": "https://www.publish.csiro.au/an/ea99125"
     }
   },
   {
@@ -680,6 +720,11 @@
     "ethyleneSource": {
       "name": "USDA Agriculture Handbook 66 (2016), Cabbage",
       "url": "https://www.ars.usda.gov/arsuserfiles/oc/np/commercialstorage/commercialstorage.pdf#page=267"
+    },
+    "krispNearby": "Most helpful when apples or pears are nearby.",
+    "companionSource": {
+      "name": "Warton, Wills & Ku 2000, household fridge ethylene (CSIRO)",
+      "url": "https://www.publish.csiro.au/an/ea99125"
     }
   },
   {
@@ -708,6 +753,11 @@
     "ethyleneSource": {
       "name": "USDA Agriculture Handbook 66 (2016), Carrots",
       "url": "https://www.ars.usda.gov/arsuserfiles/oc/np/commercialstorage/commercialstorage.pdf#page=275"
+    },
+    "krispNearby": "Most helpful when apples or pears are nearby.",
+    "companionSource": {
+      "name": "Warton, Wills & Ku 2000, household fridge ethylene (CSIRO)",
+      "url": "https://www.publish.csiro.au/an/ea99125"
     }
   },
   {
@@ -738,6 +788,11 @@
     "ethyleneSource": {
       "name": "USDA Agriculture Handbook 66 (2016), Cauliflower",
       "url": "https://www.ars.usda.gov/arsuserfiles/oc/np/commercialstorage/commercialstorage.pdf#page=282"
+    },
+    "krispNearby": "Most helpful when apples or pears are nearby.",
+    "companionSource": {
+      "name": "Warton, Wills & Ku 2000, household fridge ethylene (CSIRO)",
+      "url": "https://www.publish.csiro.au/an/ea99125"
     }
   },
   {
@@ -816,6 +871,11 @@
     "ethyleneSource": {
       "name": "USDA Agriculture Handbook 66 (2016), Cucumber",
       "url": "https://www.ars.usda.gov/arsuserfiles/oc/np/commercialstorage/commercialstorage.pdf#page=313"
+    },
+    "krispNearby": "Most helpful when apples or pears are nearby.",
+    "companionSource": {
+      "name": "Warton, Wills & Ku 2000, household fridge ethylene (CSIRO)",
+      "url": "https://www.publish.csiro.au/an/ea99125"
     }
   },
   {
@@ -842,6 +902,11 @@
     "ethyleneSource": {
       "name": "USDA Agriculture Handbook 66 (2016), Eggplant",
       "url": "https://www.ars.usda.gov/arsuserfiles/oc/np/commercialstorage/commercialstorage.pdf#page=334"
+    },
+    "krispNearby": "Most helpful when apples or pears are nearby.",
+    "companionSource": {
+      "name": "Warton, Wills & Ku 2000, household fridge ethylene (CSIRO)",
+      "url": "https://www.publish.csiro.au/an/ea99125"
     }
   },
   {
@@ -893,6 +958,11 @@
     "ethyleneSource": {
       "name": "USDA Agriculture Handbook 66 (2016), Beans",
       "url": "https://www.ars.usda.gov/arsuserfiles/oc/np/commercialstorage/commercialstorage.pdf#page=241"
+    },
+    "krispNearby": "Most helpful when apples or pears are nearby.",
+    "companionSource": {
+      "name": "Warton, Wills & Ku 2000, household fridge ethylene (CSIRO)",
+      "url": "https://www.publish.csiro.au/an/ea99125"
     }
   },
   {
@@ -922,6 +992,11 @@
     "ethyleneSource": {
       "name": "USDA Agriculture Handbook 66 (2016), Greens, leafy (collards, kale, spinach, mustard)",
       "url": "https://www.ars.usda.gov/arsuserfiles/oc/np/commercialstorage/commercialstorage.pdf#page=364"
+    },
+    "krispNearby": "Most helpful when apples or pears are nearby.",
+    "companionSource": {
+      "name": "Warton, Wills & Ku 2000, household fridge ethylene (CSIRO)",
+      "url": "https://www.publish.csiro.au/an/ea99125"
     }
   },
   {
@@ -954,6 +1029,11 @@
     "ethyleneSource": {
       "name": "USDA Agriculture Handbook 66 (2016), Lettuce",
       "url": "https://www.ars.usda.gov/arsuserfiles/oc/np/commercialstorage/commercialstorage.pdf#page=398"
+    },
+    "krispNearby": "Most helpful when apples or pears are nearby.",
+    "companionSource": {
+      "name": "Warton, Wills & Ku 2000, household fridge ethylene (CSIRO)",
+      "url": "https://www.publish.csiro.au/an/ea99125"
     }
   },
   {
@@ -1029,6 +1109,11 @@
     "ethyleneSource": {
       "name": "UC Davis Postharvest Center, Snow & Snap Pea Pods",
       "url": "https://postharvest.ucdavis.edu/produce-facts-sheets/peas-snow-and-snap-pod"
+    },
+    "krispNearby": "Most helpful when apples or pears are nearby.",
+    "companionSource": {
+      "name": "Warton, Wills & Ku 2000, household fridge ethylene (CSIRO)",
+      "url": "https://www.publish.csiro.au/an/ea99125"
     }
   },
   {
@@ -1085,6 +1170,11 @@
     "ethyleneSource": {
       "name": "USDA Agriculture Handbook 66 (2016), Greens, leafy (collards, kale, spinach, mustard)",
       "url": "https://www.ars.usda.gov/arsuserfiles/oc/np/commercialstorage/commercialstorage.pdf#page=364"
+    },
+    "krispNearby": "Most helpful when apples or pears are nearby.",
+    "companionSource": {
+      "name": "Warton, Wills & Ku 2000, household fridge ethylene (CSIRO)",
+      "url": "https://www.publish.csiro.au/an/ea99125"
     }
   },
   {
@@ -1137,6 +1227,11 @@
     "ethyleneSource": {
       "name": "USDA Agriculture Handbook 66 (2016), Summer Squash",
       "url": "https://www.ars.usda.gov/arsuserfiles/oc/np/commercialstorage/commercialstorage.pdf#page=567"
+    },
+    "krispNearby": "Most helpful when apples or pears are nearby.",
+    "companionSource": {
+      "name": "Warton, Wills & Ku 2000, household fridge ethylene (CSIRO)",
+      "url": "https://www.publish.csiro.au/an/ea99125"
     }
   },
   {
@@ -1591,6 +1686,11 @@
     "ethyleneSource": {
       "name": "USDA Agriculture Handbook 66 (2016), Greens, leafy (collards, kale, spinach, mustard)",
       "url": "https://www.ars.usda.gov/arsuserfiles/oc/np/commercialstorage/commercialstorage.pdf#page=364"
+    },
+    "krispNearby": "Most helpful when apples or pears are nearby.",
+    "companionSource": {
+      "name": "Warton, Wills & Ku 2000, household fridge ethylene (CSIRO)",
+      "url": "https://www.publish.csiro.au/an/ea99125"
     }
   },
   {
@@ -1621,6 +1721,11 @@
     "ethyleneSource": {
       "name": "USDA Agriculture Handbook 66 (2016), Swiss Chard",
       "url": "https://www.ars.usda.gov/arsuserfiles/oc/np/commercialstorage/commercialstorage.pdf#page=581"
+    },
+    "krispNearby": "Most helpful when apples or pears are nearby.",
+    "companionSource": {
+      "name": "Warton, Wills & Ku 2000, household fridge ethylene (CSIRO)",
+      "url": "https://www.publish.csiro.au/an/ea99125"
     }
   },
   {
@@ -1651,6 +1756,11 @@
     "ethyleneSource": {
       "name": "USDA Agriculture Handbook 66 (2016), Salad Greens (including arugula)",
       "url": "https://www.ars.usda.gov/arsuserfiles/oc/np/commercialstorage/commercialstorage.pdf#page=549"
+    },
+    "krispNearby": "Most helpful when apples or pears are nearby.",
+    "companionSource": {
+      "name": "Warton, Wills & Ku 2000, household fridge ethylene (CSIRO)",
+      "url": "https://www.publish.csiro.au/an/ea99125"
     }
   },
   {
@@ -1681,6 +1791,11 @@
     "ethyleneSource": {
       "name": "USDA Agriculture Handbook 66 (2016), Greens, leafy (collards, kale, spinach, mustard)",
       "url": "https://www.ars.usda.gov/arsuserfiles/oc/np/commercialstorage/commercialstorage.pdf#page=364"
+    },
+    "krispNearby": "Most helpful when apples or pears are nearby.",
+    "companionSource": {
+      "name": "Warton, Wills & Ku 2000, household fridge ethylene (CSIRO)",
+      "url": "https://www.publish.csiro.au/an/ea99125"
     }
   },
   {
@@ -1754,6 +1869,11 @@
     "ethyleneSource": {
       "name": "USDA Agriculture Handbook 66 (2016), Leeks",
       "url": "https://www.ars.usda.gov/arsuserfiles/oc/np/commercialstorage/commercialstorage.pdf#page=390"
+    },
+    "krispNearby": "Most helpful when apples or pears are nearby.",
+    "companionSource": {
+      "name": "Warton, Wills & Ku 2000, household fridge ethylene (CSIRO)",
+      "url": "https://www.publish.csiro.au/an/ea99125"
     }
   },
   {
@@ -1905,6 +2025,11 @@
     "ethyleneSource": {
       "name": "USDA Agriculture Handbook 66 (2016), Persimmon",
       "url": "https://www.ars.usda.gov/arsuserfiles/oc/np/commercialstorage/commercialstorage.pdf#page=498"
+    },
+    "krispNearby": "Most helpful when apples or pears are nearby.",
+    "companionSource": {
+      "name": "Warton, Wills & Ku 2000, household fridge ethylene (CSIRO)",
+      "url": "https://www.publish.csiro.au/an/ea99125"
     }
   },
   {
@@ -1934,6 +2059,11 @@
     "ethyleneSource": {
       "name": "USDA Agriculture Handbook 66 (2016), Parsnips",
       "url": "https://www.ars.usda.gov/arsuserfiles/oc/np/commercialstorage/commercialstorage.pdf#page=467"
+    },
+    "krispNearby": "Most helpful when apples or pears are nearby.",
+    "companionSource": {
+      "name": "Warton, Wills & Ku 2000, household fridge ethylene (CSIRO)",
+      "url": "https://www.publish.csiro.au/an/ea99125"
     }
   },
   {

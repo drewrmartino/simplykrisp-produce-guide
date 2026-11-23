@@ -62,8 +62,8 @@ export function krispStatus(user, today) {
 }
 
 // Krisp notes only go on ethylene-sensitive items (krispTier) that sit in a
-// closed crisper drawer, where the sachet is. Ripen-first fruit (kiwi, avocado,
-// pear) counts for its ripe-in-the-drawer phase. Shelf, counter and pantry
+// closed crisper drawer, where the sachet is. Ripen-first fruit (kiwi,
+// persimmon) counts for its ripe-in-the-drawer phase. Shelf, counter and pantry
 // items get no note, even if they react to ethylene. A Krisp never changes an
 // item's day window: there is no household test of how many days it adds
 // (scripts/krisp-tiers.mjs).
@@ -142,6 +142,9 @@ export function itemView(row, user, today) {
     ethyleneProduction: c.ethyleneProduction,
     ethyleneSensitivity: c.ethyleneSensitivity,
     ethyleneProducer: !!c.ethyleneProducer,
+    producerNote: c.producerNote || '',
+    krispNearby: krispReach(c) ? (c.krispNearby || '') : '',
+    companionSource: c.companionSource || null,
     krispRecommended: krispReach(c),
     waste: typicalWaste(row),
   };
