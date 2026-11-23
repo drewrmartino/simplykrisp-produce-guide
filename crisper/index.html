@@ -186,7 +186,7 @@ ol.ios{margin:8px 0 0 18px;font-size:14px;line-height:1.5}
 .sta b{color:var(--fg);font-weight:600}
 .stk{font-size:12.5px;font-weight:600;color:hsl(52 60% 22%);background:hsl(52 90% 88%);border-radius:99px;padding:1px 8px;align-self:flex-start}
 .stk.off{background:var(--muted);color:var(--muted-fg);font-weight:500}
-.wst{font-size:13px;line-height:1.4;color:var(--muted-fg);display:flex;flex-direction:column;gap:1px}
+.wst{font-size:13px;line-height:1.4;color:var(--muted-fg);display:block}
 .wst b{color:var(--fg)}
 .itf{flex-wrap:wrap}
 .itf .fl{font-size:12px;color:var(--muted-fg);flex:1 0 100%;margin-bottom:-2px;text-transform:uppercase;letter-spacing:.06em;font-weight:700}
@@ -1356,6 +1356,24 @@ details.sd{display:block}
     var pct = Math.round(w.rate * 100);
     return '<p class="wst">Typically wasted: <b>' + pct + '%</b>' + (w.source === 'epa' ? ' (produce average)' : '') + ' · about <b>' + money(w.usd) + '</b> of this</p>';
   }
+  // "Keep away from" line. For ethylene producers (apples, pears, avocados,
+  // melons) it names the sensitive produce to keep away and says which item
+  // gives off the ethylene; other producers on the list only ripen it faster.
+  // Self-contained so dev/krisper-copy.test.mjs can run it.
+  // avoid: the item's avoidWith, sorted with what is in the fridge first.
+  function keepAway(i, avoid) {
+    var RIPENERS = ['appl', 'banan', 'pear', 'avocad', 'peach', 'tomat', 'plum', 'nectarin', 'apricot', 'mango', 'cantaloup', 'honeydew', 'kiwi', 'papaya'];
+    var isRipener = function (a) { var l = String(a).toLowerCase(); return RIPENERS.some(function (r) { return l.indexOf(r) === 0; }); };
+    var list = function (xs) { xs = xs.map(function (x) { return String(x).toLowerCase(); }); return xs.length < 2 ? xs.join('') : xs.slice(0, -1).join(', ') + ' and ' + xs[xs.length - 1]; };
+    var h = function (s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); };
+    var producer = i.ethyleneProducer || i.ethyleneProduction === 'high' || i.ethyleneProduction === 'very_high';
+    if (!producer) return avoid.length ? '<p class="sta"><b>Keep away from</b> ' + h(avoid.slice(0, 3).join(', ')) + '</p>' : '';
+    var who = String(i.name).toLowerCase(); if (!/s$/.test(who)) who += 's';
+    var sensitive = avoid.filter(function (a) { return !isRipener(a); }).slice(0, 3);
+    var faster = (i.avoidWith || []).filter(isRipener).slice(0, 3);
+    return '<p class="sta"><b>Keep away from</b> ' + h(list(sensitive.length ? sensitive : ['greens', 'broccoli'])) + ' \u2014 ' + h(who) + ' give off ethylene.</p>' +
+      (faster.length ? '<p class="sta">' + h(who.charAt(0).toUpperCase() + who.slice(1)) + ' ripen faster near ' + h(list(faster)) + '.</p>' : '');
+  }
   function stem(x) { return String(x).toLowerCase().replace(/(oes|ies|es|s)$/, function (m) { return m === 'ies' ? 'y' : m === 'oes' ? 'o' : ''; }); }
   // Krisp note on an item: an "Ethylene-sensitive" chip under the name and one
   // plain line on what ethylene does to it. Only for ethylene-sensitive items in
@@ -1431,10 +1449,9 @@ details.sd{display:block}
     var label = pending ? 'Counting starts ' + fmtDate(i.startDate) + ' · lasts ' + i.minDays + '–' + i.maxDays + ' days' : i.label;
     var tip = i.ripensFirst && i.status === 'later' && i.ripeTip ? i.ripeTip : i.tip;
     var inFridge = S.st && S.st.items ? S.st.items.map(function (x) { return stem(x.name); }) : [];
-    var avoid = (i.avoidWith || []).slice().sort(function (a, b) { return (inFridge.indexOf(stem(b)) >= 0) - (inFridge.indexOf(stem(a)) >= 0); }).slice(0, 3);
-    var eth = (i.ethyleneProduction === 'high' || i.ethyleneProduction === 'very_high');
+    var avoid = (i.avoidWith || []).slice().sort(function (a, b) { return (inFridge.indexOf(stem(b)) >= 0) - (inFridge.indexOf(stem(a)) >= 0); });
     var store = tip || i.storage === 'counter_then_fridge' ? '<p class="sto1">' + (i.storage === 'counter_then_fridge' ? '<b>Counter until ripe, then fridge.</b> ' : '') + esc(tip || '') + '</p>' : '';
-    var detail = (avoid.length ? '<p class="sta"><b>Keep away from</b> ' + esc(avoid.join(', ')) + (eth ? ' (it gives off ethylene)' : '') + '</p>' : eth ? '<p class="sta">Gives off ethylene. Keep it away from greens.</p>' : '') +
+    var detail = keepAway(i, avoid) +
       (i.krispTier && i.krispEvidence ? '<p class="sta"><b>Ethylene evidence:</b> ' + esc(i.krispEvidence) + (i.krispSource && /^https:\/\//.test(i.krispSource.url) ? ' <a href="' + esc(i.krispSource.url) + '" target="_blank" rel="noopener">' + esc(i.krispSource.name) + '</a>' : '') + '</p>' +
         (i.krispNearby ? '<p class="sta">' + esc(i.krispNearby) + companionLink(i) + '</p>' : '') : '') +
       (!i.krispTier && i.krispNoBenefit ? '<p class="sta"><b>' + (i.producerNote ? 'Why the fruit gets no Krisp note:' : 'Why no Krisp note:') + '</b> ' + esc(i.krispNoBenefit) + '</p>' : '') +
