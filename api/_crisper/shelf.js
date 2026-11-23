@@ -132,6 +132,7 @@ export function itemView(row, user, today) {
     krispActive: krispReach(c) && !!krisp.active,
     krispPrevents: krispReach(c) ? c.krispPrevents : '',
     krispEvidence: krispReach(c) ? c.krispEvidence : '',
+    krispSource: krispReach(c) ? (c.krispSource || null) : null,
     krispNoBenefit: krispReach(c) ? '' : (c.krispNoBenefit || ''),
     krispWhen: krispReach(c) && c.storage === 'counter_then_fridge' ? 'once ripe, in the drawer' : '',
     tip: c.tip,
@@ -140,6 +141,7 @@ export function itemView(row, user, today) {
     avoidWith: c.avoidWith || [],
     ethyleneProduction: c.ethyleneProduction,
     ethyleneSensitivity: c.ethyleneSensitivity,
+    ethyleneProducer: !!c.ethyleneProducer,
     krispRecommended: krispReach(c),
     waste: typicalWaste(row),
   };

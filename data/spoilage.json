@@ -1268,7 +1268,7 @@
             "Make guacamole or avocado toast",
             "Blend it into a smoothie or salad dressing"
           ],
-          "krispHelps": true,
+          "krispHelps": false,
           "sources": [
             "ucd-avocado"
           ]
@@ -2347,7 +2347,7 @@
             "Simmer it into pear sauce or pear butter",
             "Bake it into muffins or a crisp"
           ],
-          "krispHelps": true,
+          "krispHelps": false,
           "sources": [
             "ucd-pear-bartlett"
           ]
@@ -4886,7 +4886,7 @@
             "Stir-fry it",
             "Add it to soup or noodles"
           ],
-          "krispHelps": true,
+          "krispHelps": false,
           "sources": [
             "ucd-bokchoy"
           ]

@@ -9,26 +9,31 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { KRISP, NO_KRISP, benefitText } from './krisp-tiers.mjs';
+import { KRISP, NO_KRISP, benefitText, evidenceFor } from './krisp-tiers.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
 // ---------- /seasonal/produce.json ----------
 const prodPath = path.join(root, 'seasonal/produce.json');
 const produce = JSON.parse(readFileSync(prodPath, 'utf8'));
-const RANGE = {};
 for (const p of produce) {
-  if (KRISP[p.name] && p.extraDays > 0) {
-    const range = p.extraDaysRange || String(p.extraDays);
-    RANGE[p.name] = range;
+  // No day counts of any kind (krisp-tiers.mjs): the old extraDays estimates
+  // and the coarse evidence label are gone; each Krisp note cites its source.
+  delete p.extraDays;
+  delete p.extraDaysRange;
+  delete p.evidence;
+  const ev = evidenceFor(p.name);
+  if (ev) {
     p.krispRecommended = true;
     p.krispBenefit = benefitText(p.name);
+    p.ethyleneEvidence = ev.text;
+    p.ethyleneSource = { name: ev.source, url: ev.url };
     delete p.noBenefitReason;
   } else {
     p.krispRecommended = false;
-    p.extraDays = 0;
-    delete p.extraDaysRange;
     p.krispBenefit = '';
+    delete p.ethyleneEvidence;
+    delete p.ethyleneSource;
     p.noBenefitReason = NO_KRISP[p.name] || p.noBenefitReason || '';
   }
 }
@@ -111,7 +116,6 @@ const rebuilt = produce.map((p) => {
     krispBenefit: p.krispRecommended ? p.krispBenefit : p.noBenefitReason || '',
     ripeTip: p.ripeTip,
     avoidWith: p.avoidWith ? JSON.stringify(p.avoidWith) : null,
-    extraDays: p.extraDays,
     avgPrice, priceUnit,
     imageUrl: p.imageUrl,
     typicalQty, qtyUnit, weightLbs, totalPrice,
@@ -166,4 +170,4 @@ for (const [from, to] of COPY) {
 }
 
 writeFileSync(bundlePath, js);
-console.log(`updated ${bundleRel} and seasonal/produce.json: ${rebuilt.length} items, ${Object.keys(RANGE).length} with a Krisp note`);
+console.log(`updated ${bundleRel} and seasonal/produce.json: ${rebuilt.length} items, ${produce.filter((p) => p.krispRecommended).length} with a Krisp note`);

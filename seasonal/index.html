@@ -580,17 +580,6 @@ footer p{max-width:76ch;margin-bottom:8px}
   var MONTHS = ['January','February','March','April','May','June',
                 'July','August','September','October','November','December'];
 
-  // What the ethylene evidence for an item is based on. It says nothing about
-  // the sachet itself: there is no household test of it, so no day estimate.
-  var EVIDENCE = {
-    measured: 'Measured. A published trial on this exact item compared a normal ' +
-      'fridge ethylene level against near-zero.',
-    related: 'Measured on a close relative. The trial tested a closely related crop ' +
-      'with the same ethylene profile, not this item itself.',
-    estimated: 'Estimated from its published ethylene sensitivity and production ' +
-      'class. No absorber trial exists for this item.'
-  };
-
   var LOC_LABEL = {
     refrigerator: 'Refrigerate',
     counter: 'Countertop',
@@ -686,8 +675,11 @@ footer p{max-width:76ch;margin-bottom:8px}
     var kb = (p.krispBenefit && p.krispRecommended)
       ? '<div class="sec">With Simply Krisp</div><p class="kb">' + esc(p.krispBenefit) + '</p>' : '';
     var ev = '';
-    if (p.krispRecommended && p.evidence) {
-      ev = '<div class="sec">Ethylene evidence</div><p>' + esc(EVIDENCE[p.evidence]) + '</p>';
+    // Each Krisp item cites its own source (scripts/krisp-tiers.mjs).
+    if (p.krispRecommended && p.ethyleneEvidence) {
+      var src = p.ethyleneSource && /^https:\/\//.test(p.ethyleneSource.url)
+        ? ' <a href="' + esc(p.ethyleneSource.url) + '" target="_blank" rel="noopener">' + esc(p.ethyleneSource.name) + '</a>' : '';
+      ev = '<div class="sec">Ethylene evidence</div><p>' + esc(p.ethyleneEvidence) + src + '</p>';
     } else if (p.noBenefitReason) {
       ev = '<div class="sec">Why Krisp won\u2019t help here</div><p>' +
            esc(p.noBenefitReason) + '</p>';

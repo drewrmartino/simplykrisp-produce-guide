@@ -9,7 +9,7 @@ import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { storageGuide } from '../api/_crisper/storage.js';
-import { benefitText, KRISP } from '../scripts/krisp-tiers.mjs';
+import { benefitText, KRISP, PRODUCERS } from '../scripts/krisp-tiers.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -90,4 +90,74 @@ test('Krisp notes and Storage Guide email props carry no day counts', () => {
   assert.deepEqual(findClaims(JSON.stringify(g2)), []);
   for (const i of g.guide_items) if (i.krisp) assert.doesNotMatch(i.krisp, /\d/, i.name);
   for (const z of Object.values(g.kitchen)) for (const i of z) assert.ok(i.krisp_days === '' || i.krisp_days === 'Ethylene-sensitive', i.krisp_days);
+});
+
+// The old hidden Krisp day estimates (krispExtra [1,2], [2,3], [2,4] in
+// crisper/catalog.json; extraDays / extraDaysRange in produce.json and the
+// Storage Guide bundle) must never come back, under any name.
+const DATA = ['crisper/catalog.json', 'api/_crisper/catalog.js', 'seasonal/produce.json', 'assets/index-sk20261105.js', 'partners/engine.js'];
+const DAY_KEY = /["']?\b(krispExtra|extraDays|extraDaysRange|krispDays|krispBoost|krispCould)\b["']?\s*:\s*([^,}\]]+|\[[^\]]*\])/g;
+
+test('no Krisp day ranges or day keys in the catalog, produce data or bundles', () => {
+  const bad = [];
+  for (const f of DATA) {
+    const s = readFileSync(path.join(root, f), 'utf8');
+    for (const m of s.matchAll(DAY_KEY)) {
+      // shelf.js keeps krispBoost/krispCould as null for old app builds; data
+      // files must not carry them at all.
+      bad.push(`${f}: ${m[0].slice(0, 80)}`);
+    }
+    for (const m of s.matchAll(/["']?krisp\w*["']?\s*:\s*\[\s*\d+\s*,\s*\d+\s*\]/gi)) bad.push(`${f}: ${m[0]}`);
+  }
+  assert.deepEqual(bad, []);
+  const cat = JSON.parse(readFileSync(path.join(root, 'crisper/catalog.json'), 'utf8'));
+  const items = Array.isArray(cat) ? cat : cat.items;
+  assert.ok(items.length > 50);
+  for (const i of items) for (const [k, v] of Object.entries(i)) {
+    if (/krisp/i.test(k)) assert.ok(!(Array.isArray(v) && v.length === 2 && v.every(Number.isFinite)), `${i.name}.${k} is a day range`);
+  }
+});
+
+test('the guard catches a krispExtra range coming back', () => {
+  const s = JSON.stringify([{ name: 'Pear', krispExtra: [1, 2] }]);
+  assert.ok([...s.matchAll(DAY_KEY)].length);
+  assert.ok([...'{"extraDays":3,"extraDaysRange":"2-4"}'.matchAll(DAY_KEY)].length === 2);
+});
+
+test('every krispRecommended item cites an https source for that item', () => {
+  for (const [name, t] of Object.entries(KRISP)) {
+    const src = t[2];
+    assert.ok(src && /^https:\/\//.test(src.url), `${name} in KRISP has no https source URL`);
+    assert.ok(src.name && src.note, `${name} source needs a name and a note`);
+    assert.doesNotMatch(`${src.name} ${src.note}`, /closely related|close relative|our read|estimated/i, `${name} source is not about the item itself`);
+  }
+  const cat = JSON.parse(readFileSync(path.join(root, 'crisper/catalog.json'), 'utf8'));
+  const items = Array.isArray(cat) ? cat : cat.items;
+  const rec = items.filter((i) => i.krispRecommended || i.krispTier);
+  assert.equal(rec.length, Object.keys(KRISP).length);
+  for (const i of rec) {
+    assert.ok(i.krispSource && /^https:\/\//.test(i.krispSource.url), `${i.name} in catalog.json has no source URL`);
+    assert.ok(i.krispEvidence, `${i.name} in catalog.json has no evidence line`);
+  }
+  for (const i of items) if (!i.krispRecommended) assert.equal(i.krispSource, null, `${i.name} has a source but no Krisp note`);
+  const produce = JSON.parse(readFileSync(path.join(root, 'seasonal/produce.json'), 'utf8'));
+  for (const p of produce) {
+    if (p.krispRecommended) assert.ok(p.ethyleneSource && /^https:\/\//.test(p.ethyleneSource.url), `${p.name} in produce.json has no source URL`);
+    assert.equal(p.evidence, undefined, `${p.name} still has the old evidence category`);
+  }
+});
+
+test('pear, avocado and apple are ethylene producers with no Krisp note', () => {
+  const cat = JSON.parse(readFileSync(path.join(root, 'crisper/catalog.json'), 'utf8'));
+  const items = Array.isArray(cat) ? cat : cat.items;
+  for (const name of Object.keys(PRODUCERS)) {
+    assert.ok(/^https:\/\//.test(PRODUCERS[name].url), `${name} producer source`);
+    const i = items.find((x) => x.name === name);
+    assert.ok(i, name);
+    assert.equal(i.ethyleneProducer, true, `${name} is tagged an ethylene producer`);
+    assert.equal(i.krispRecommended, false, `${name} has no Krisp note`);
+    assert.equal(i.krispTier, null, `${name} has no Krisp tier`);
+    assert.match(i.krispNoBenefit, /apart from greens/, `${name} says to store it apart`);
+    assert.equal(KRISP[name], undefined, `${name} is not in KRISP`);
+  }
 });

@@ -5,6 +5,7 @@ import { readFileSync, existsSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadData, validate, render } from '../scripts/build-produce-pages.mjs';
+import { KRISP } from '../scripts/krisp-tiers.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -52,13 +53,13 @@ test('Storage Guide bundle, My Krisper catalog and seasonal data agree (run `npm
     }
     assert.equal(c.storage, p.storageLocation, `${p.name} storage in My Krisper`);
     assert.equal(c.ethyleneSensitivity, p.ethyleneSensitivity, `${p.name} sensitivity in My Krisper`);
-    const claim = p.extraDays > 0;
-    assert.equal(p.krispRecommended, claim, `${p.name} krispRecommended follows extraDays`);
+    const claim = !!KRISP[p.name];
+    assert.equal(p.krispRecommended, claim, `${p.name} krispRecommended follows KRISP`);
     assert.equal(b.krispRecommended, claim, `${p.name} Krisp claim in the Storage Guide`);
     assert.equal(c.krispRecommended, claim, `${p.name} Krisp claim in My Krisper`);
     if (!claim) assert.ok(p.noBenefitReason, `${p.name} says why a Krisp won't help`);
   }
-  for (const n of ['Green Onion', 'Celery']) {
+  for (const n of ['Green Onion', 'Celery', 'Pear', 'Avocado', 'Bok Choy', 'Apple']) {
     assert.equal(produce.find((p) => p.name === n).krispRecommended, false, `${n} carries no Krisp claim`);
   }
 });

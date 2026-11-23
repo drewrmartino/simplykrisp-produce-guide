@@ -179,6 +179,10 @@ export function validateGuides({ spoilage, produce, guides = NO_GUIDES }) {
 // ---------- helpers ----------
 
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+// The item's own ethylene source (scripts/krisp-tiers.mjs), linked after its Krisp note.
+const srcLink = (p) => (p.ethyleneSource && /^https:\/\//.test(p.ethyleneSource.url)
+  ? ` <a href="${esc(p.ethyleneSource.url)}" target="_blank" rel="noopener">Source: ${esc(p.ethyleneSource.name)}</a>`
+  : '');
 const utm = (content) => `utm_source=produce-guide&utm_medium=referral&utm_campaign=why-it-goes-bad&utm_content=${encodeURIComponent(content)}`;
 const where = { refrigerator: 'Fridge', counter: 'Counter', counter_then_fridge: 'Counter, then fridge once ripe', pantry: 'Cool, dark pantry' };
 const list = (a) => (a.length < 2 ? a.join('') : a.slice(0, -1).join(', ') + ' and ' + a[a.length - 1]);
@@ -362,7 +366,7 @@ function itemPage(e, ctx) {
   // Krisp: a note on ethylene-sensitive items (no day counts), otherwise the honest reason it won't help.
   const anyKrisp = item ? item.failures.some((f) => f.krispHelps) : p.krispRecommended;
   const krispNote = p.krispRecommended && p.krispBenefit
-    ? `<p class="aside"><strong>Ethylene and a Krisp:</strong> ${esc(p.krispBenefit)}${item ? '' : ` <a href="${SHOP}?${utm(e.slug + '-storage')}" target="_blank" rel="noopener">See the Double Krisp</a>`}</p>`
+    ? `<p class="aside"><strong>Ethylene and a Krisp:</strong> ${esc(p.krispBenefit)}${srcLink(p)}${item ? '' : ` <a href="${SHOP}?${utm(e.slug + '-storage')}" target="_blank" rel="noopener">See the Double Krisp</a>`}</p>`
     : p.noBenefitReason ? `<p class="aside"><strong>Does a Krisp help?</strong> ${esc(p.noBenefitReason)}</p>` : '';
   const storage = `<section class="sec" id="storage"><h2>How to store ${esc(display)}</h2>
   <ul class="tips">${p.storageTips.map((t) => `<li>${esc(t)}</li>`).join('')}</ul>
@@ -396,7 +400,7 @@ function itemPage(e, ctx) {
     chips = `<div class="jump"><span class="lbl">What are you seeing?</span><div class="chips">${item.failures.map((f) => `<a class="chip" href="#${f.id}">${esc(f.title)}</a>`).join('')}</div></div>`;
     const cards = item.failures.map((f) => {
       const krisp = f.krispHelps && p.krispBenefit
-        ? `<div class="krisp"><span class="lbl">Where a Krisp fits</span><p>${esc(p.krispBenefit)} <a href="${SHOP}?${utm(e.slug + '-' + f.id)}" target="_blank" rel="noopener">See the Double Krisp</a></p></div>`
+        ? `<div class="krisp"><span class="lbl">Where a Krisp fits</span><p>${esc(p.krispBenefit)}${srcLink(p)} <a href="${SHOP}?${utm(e.slug + '-' + f.id)}" target="_blank" rel="noopener">See the Double Krisp</a></p></div>`
         : '';
       const rescue = f.rescue.length
         ? `<div class="blk"><span class="lbl">Use it up</span><ul>${f.rescue.map((r) => `<li>${esc(r)}</li>`).join('')}</ul></div>`
@@ -709,7 +713,7 @@ function guidePage(g, ctx) {
   const p = main && main.p;
   const krisp = g.group === 'ripen' && p
     ? p.krispRecommended && p.krispBenefit
-      ? `<p class="aside"><strong>Ethylene and a Krisp:</strong> ${esc(p.krispBenefit)} <a href="${SHOP}?${utm('howto-' + g.slug)}" target="_blank" rel="noopener">See the Double Krisp</a></p>`
+      ? `<p class="aside"><strong>Ethylene and a Krisp:</strong> ${esc(p.krispBenefit)}${srcLink(p)} <a href="${SHOP}?${utm('howto-' + g.slug)}" target="_blank" rel="noopener">See the Double Krisp</a></p>`
       : p.noBenefitReason ? `<p class="aside"><strong>Does a Krisp help?</strong> ${esc(p.noBenefitReason)}</p>` : ''
     : '';
 
